@@ -447,7 +447,7 @@ export default function Home() {
           </section>
 
           {/* ── TESTIMONIALS ──────────────────────────── */}
-          <section className="bg-dab-cream border-t border-dab-charcoal/8 py-24 md:py-36">
+          <section className="bg-dab-brown border-t border-dab-brown py-24 md:py-36">
             <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
               <FadeUp><Label index="05">Trusted to lead important work</Label></FadeUp>
               <FadeUp delay={0.08}>
@@ -460,16 +460,15 @@ export default function Home() {
                 {testimonials.map((t, i) => (
                   <FadeUp key={t.author} delay={0.08 * i}>
                     <div className="space-y-6 h-full flex flex-col">
-                      {/* Brown top rule — Palantir callout style */}
-                      <div className="h-px w-full bg-dab-brown/40" />
-                      <div className="font-mono text-[10px] tracking-[0.2em] text-dab-brown pt-1">{String(i + 1).padStart(2, '0')}</div>
-                      <p className="text-base md:text-lg text-dab-charcoal leading-relaxed flex-1">
+                      <div className="h-px w-full bg-dab-charcoal/20" />
+                      <div className="font-mono text-[10px] tracking-[0.2em] text-dab-charcoal/40 pt-1">{String(i + 1).padStart(2, '0')}</div>
+                      <p className="text-[15px] md:text-[17px] text-dab-charcoal leading-relaxed flex-1">
                         &ldquo;{t.quote}&rdquo;
                       </p>
                       <div>
                         <span className="signal-rule mb-4" />
                         <p className="font-semibold text-dab-charcoal text-[15px]">{t.author}</p>
-                        <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-dab-taupe mt-1.5">{t.title}</p>
+                        <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-dab-charcoal/50 mt-1.5">{t.title}</p>
                       </div>
                     </div>
                   </FadeUp>
