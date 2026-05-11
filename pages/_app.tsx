@@ -1,16 +1,17 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-geist",
+  display: "swap",
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${inter.variable} font-sans`} style={{ fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }}>
+    <main className={geist.variable} style={{ fontFamily: 'var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}>
       <Component {...pageProps} />
     </main>
   );

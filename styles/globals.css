@@ -8,6 +8,8 @@
   --color-dab-taupe: #8A847C;
   --color-dab-brown: #ACA195;
   --color-dab-white: #FAFAFA;
+
+  --font-sans: var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 :root {
