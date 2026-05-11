@@ -241,30 +241,30 @@ export default function Home() {
 
                 {/* Right — black dropdown panel */}
                 <FadeUp delay={0.22} className="md:col-span-5 md:col-start-8">
-                  <div className="bg-dab-charcoal text-dab-cream p-7 md:p-8">
-                    <label htmlFor="challenge" className="block font-mono text-[10px] tracking-[0.22em] uppercase text-dab-brown mb-6">
+                  <div className="bg-dab-brown text-dab-charcoal p-7 md:p-8">
+                    <label htmlFor="challenge" className="block font-mono text-[10px] tracking-[0.22em] uppercase text-dab-charcoal/50 mb-6">
                       I need to…
                     </label>
-                    <div className="relative border-b border-dab-cream/20 focus-within:border-dab-green transition-colors">
+                    <div className="relative border-b border-dab-charcoal/25 focus-within:border-dab-charcoal transition-colors">
                       <select
                         id="challenge"
                         value={selectedChallenge}
                         onChange={(e) => handleChallengeSelect(e.target.value)}
-                        className="w-full appearance-none bg-transparent text-dab-cream text-base md:text-[17px] py-3.5 pr-8 cursor-pointer focus:outline-none font-medium"
+                        className="w-full appearance-none bg-transparent text-dab-charcoal text-base md:text-[17px] py-3.5 pr-8 cursor-pointer focus:outline-none font-medium"
                       >
-                        <option value="" className="bg-dab-charcoal">Select an option</option>
+                        <option value="" className="bg-dab-brown">Select an option</option>
                         {challenges.map((c) => (
-                          <option key={c.label} value={c.label} className="bg-dab-charcoal">{c.label}</option>
+                          <option key={c.label} value={c.label} className="bg-dab-brown">{c.label}</option>
                         ))}
                       </select>
-                      <svg className="absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-dab-green" width="11" height="7" viewBox="0 0 12 7" fill="none">
+                      <svg className="absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-dab-charcoal/60" width="11" height="7" viewBox="0 0 12 7" fill="none">
                         <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
-                    <div className="mt-7 pt-6 border-t border-dab-cream/10">
-                      <a href="#contact" className="inline-flex items-center gap-2.5 group text-dab-cream/70 text-sm font-mono tracking-[0.1em] uppercase hover:text-dab-green transition">
+                    <div className="mt-7 pt-6 border-t border-dab-charcoal/15">
+                      <a href="#contact" className="inline-flex items-center gap-2.5 group text-dab-charcoal/60 text-sm font-mono tracking-[0.1em] uppercase hover:text-dab-charcoal transition">
                         <span>Start a conversation</span>
-                        <span className="text-dab-green group-hover:translate-x-1 transition-transform" aria-hidden>→</span>
+                        <span className="text-dab-charcoal group-hover:translate-x-1 transition-transform" aria-hidden>→</span>
                       </a>
                     </div>
                   </div>
