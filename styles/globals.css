@@ -2,7 +2,7 @@
 
 @theme {
   --color-dab-cream: #FAFAFA;
-  --color-dab-charcoal: #0E0E0E;
+  --color-dab-charcoal: #000000;
   --color-dab-charcoal-alt: #171717;
   --color-dab-green: #B7FF00;
   --color-dab-taupe: #8A847C;
@@ -16,7 +16,7 @@
 
 :root {
   --background: #FAFAFA;
-  --foreground: #0E0E0E;
+  --foreground: #000000;
 }
 
 * {
@@ -44,6 +44,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
   line-height: 1.05;
   font-weight: 600;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .font-mono {
@@ -62,4 +67,14 @@ h1, h2, h3, h4, h5, h6 {
   height: 2px;
   background: #B7FF00;
   display: block;
+}
+
+/* Dev: outline every div for design QA. Excluded for dev tool elements. */
+.outlines-on div {
+  outline: 1px solid #d946ef !important;
+  outline-offset: 0 !important;
+}
+.outlines-on [data-dev-tool],
+.outlines-on [data-dev-tool] * {
+  outline: none !important;
 }
