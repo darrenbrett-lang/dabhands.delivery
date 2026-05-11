@@ -41,8 +41,8 @@ section {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.022em;
+  line-height: 1.04;
   font-weight: 600;
   text-wrap: balance;
 }

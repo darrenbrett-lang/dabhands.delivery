@@ -351,14 +351,7 @@ export default function Home() {
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-dab-charcoal ${scrolled ? 'border-b border-dab-brown/15' : ''}`}>
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
             <a href="#top" className="flex items-baseline gap-3 group" aria-label="DAB hands home">
-              <motion.div
-                className="w-[14px] h-[14px] rounded-full shrink-0"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  backgroundColor: ['#B7FF00', '#CDFF4D', '#B7FF00'],
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              />
+              <span className="w-[10px] h-[10px] rounded-full shrink-0 bg-dab-cream" />
               <span className="font-semibold text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
                 <span className="font-bold">DAB</span> hands
               </span>
@@ -402,18 +395,19 @@ export default function Home() {
           {/* ── MASTHEAD LOCKUP ──────────────────────── */}
           {/* Headline + lines + circle as a single composition. Circle aligns with the */}
           {/* middle line of the wrapped headline via flex vertical centering + YMid SVG. */}
-          <section className="relative bg-dab-charcoal text-dab-cream overflow-hidden min-h-[80vh] md:min-h-[88vh] flex items-center">
+          <section className="relative bg-dab-charcoal text-dab-cream overflow-hidden min-h-[90vh] flex items-center justify-center">
 
-            <div className="hidden md:block absolute inset-0 pointer-events-none select-none">
-              <BrandMotif color="#FAFAFA" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24">
+            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-32 md:py-40 text-center">
               <FadeUp>
-                <h1 className="text-[40px] sm:text-[56px] md:text-[76px] lg:text-[92px] xl:text-[104px] font-semibold leading-[0.98] tracking-[-0.042em] -translate-x-[8px]">
+                <h1 className="text-[44px] sm:text-[64px] md:text-[88px] lg:text-[112px] xl:text-[128px] font-semibold leading-[0.98] tracking-[-0.03em] max-w-[15ch] mx-auto">
                   <span className="block">Expert digital delivery</span>
-                  <span className="block text-dab-green">for high-stakes work</span>
+                  <span className="block">for high-stakes work</span>
                 </h1>
+              </FadeUp>
+              <FadeUp delay={0.18}>
+                <p className="mt-10 md:mt-12 text-lg md:text-xl text-dab-cream/60 leading-relaxed max-w-[42ch] mx-auto">
+                  Senior-led delivery for the critical initiatives organisations cannot afford to drift.
+                </p>
               </FadeUp>
             </div>
           </section>
@@ -585,18 +579,20 @@ export default function Home() {
 
           {/* ── HOW WORK LOSES STRENGTH ───────────────── */}
           <section className="bg-dab-white text-dab-charcoal relative overflow-hidden">
-            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-36">
-              <FadeUp><Label index="04" tone="onLight">How work loses strength</Label></FadeUp>
+            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-28 md:py-40 text-center">
+              <FadeUp>
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-8">How work loses strength</p>
+              </FadeUp>
 
-              <div className="grid md:grid-cols-12 gap-8 mt-16 md:mt-20">
-                <FadeUp delay={0.08} className="md:col-span-7">
-                  <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-semibold leading-[0.98] tracking-[-0.035em]">
-                    <span className="block">Great ideas aren&apos;t the problem.</span>
-                    <span className="block">Getting them through is.</span>
-                  </h2>
-                </FadeUp>
+              <FadeUp delay={0.08}>
+                <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[22ch] mx-auto">
+                  <span className="block">Great ideas aren&apos;t the problem.</span>
+                  <span className="block">Getting them through is.</span>
+                </h2>
+              </FadeUp>
 
-                <FadeUp delay={0.18} className="md:col-span-4 md:col-start-9 space-y-6 text-[15px] md:text-[17px] text-dab-charcoal/75 leading-relaxed">
+              <FadeUp delay={0.18}>
+                <div className="mt-12 md:mt-16 space-y-6 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed max-w-[52ch] mx-auto">
                   <div className="space-y-1">
                     <p>Teams pull in different directions.</p>
                     <p>Decision-making slows down.</p>
@@ -606,8 +602,8 @@ export default function Home() {
                     <p>What started strong becomes diluted as it moves through the organisation.</p>
                     <p>By the time it reaches the customer, the outcome is weaker than it should have been.</p>
                   </div>
-                </FadeUp>
-              </div>
+                </div>
+              </FadeUp>
             </div>
           </section>
 
@@ -877,25 +873,25 @@ export default function Home() {
           </section>
 
           {/* ── MY SWEET SPOT ─────────────────────────── */}
-          <section className="bg-dab-green text-dab-charcoal py-24 md:py-32">
-            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-              <FadeUp><Label index="11" tone="onLight">Sweet spot</Label></FadeUp>
+          <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 border-t border-dab-charcoal/8">
+            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+              <FadeUp>
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-8">Sweet spot</p>
+              </FadeUp>
 
-              <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-16">
-                <FadeUp delay={0.08} className="md:col-span-7">
-                  <h2 className="text-[40px] md:text-[56px] lg:text-[64px] font-semibold leading-[1.05] tracking-[-0.032em] max-w-[12ch]">
-                    My sweet spot
-                  </h2>
-                </FadeUp>
-                <FadeUp delay={0.16} className="md:col-span-4 md:col-start-9">
-                  <p className="text-[15px] md:text-[17px] text-dab-charcoal/80 leading-relaxed md:pt-4">
-                    Digital brand experience, where strategy, ideas, product, and creative storytelling need to carry across the ecosystem and cut through in daily living.
-                  </p>
-                </FadeUp>
-              </div>
+              <FadeUp delay={0.08}>
+                <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[14ch] mx-auto">
+                  My sweet spot
+                </h2>
+              </FadeUp>
+              <FadeUp delay={0.16}>
+                <p className="mt-8 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed max-w-[52ch] mx-auto">
+                  Digital brand experience, where strategy, ideas, product, and creative storytelling need to carry across the ecosystem and cut through in daily living.
+                </p>
+              </FadeUp>
 
-              <div className="border-t border-dab-charcoal/25 pt-10 md:pt-14">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-8">
+              <div className="mt-20 md:mt-24 border-t border-dab-charcoal/15 pt-12 md:pt-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-8 text-left">
                   {['Attention.', 'Connection.', 'Conversion.'].map((item, i) => (
                     <motion.div
                       key={item}
@@ -903,7 +899,7 @@ export default function Home() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className={i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'}
+                      className={i > 0 ? 'md:border-l md:border-dab-charcoal/15 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'}
                     >
                       <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
                         {item}
@@ -916,14 +912,14 @@ export default function Home() {
           </section>
 
           {/* ── WHY ORGS BRING DAB HANDS IN ───────────── */}
-          <section className="bg-dab-white text-dab-charcoal py-20 md:py-28">
+          <section className="bg-dab-white text-dab-charcoal py-28 md:py-40">
             <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
               <FadeUp>
-                <h2 className="text-[35px] md:text-[51px] lg:text-[63px] font-semibold leading-[1] tracking-[-0.032em] max-w-[18ch] mb-14 md:mb-16">
+                <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[20ch] mx-auto text-center mb-16 md:mb-20">
                   Why organisations bring DAB hands in
                 </h2>
               </FadeUp>
-              <div className="grid md:grid-cols-2 gap-x-16 gap-y-0">
+              <div className="grid md:grid-cols-2 gap-x-16 gap-y-0 max-w-[1024px] mx-auto">
                 {reasons.map((reason, i) => (
                   <motion.div key={reason}
                     initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
@@ -941,19 +937,22 @@ export default function Home() {
           </section>
 
           {/* ── INTERVENTIONS ACCORDION ───────────────── */}
-          <section id="interventions" className="bg-dab-cream border-t border-dab-charcoal/8 py-24 md:py-36">
+          <section id="interventions" className="bg-dab-cream border-t border-dab-charcoal/8 py-28 md:py-40">
             <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-              <FadeUp><Label index="12" tone="onLight">Intervention model</Label></FadeUp>
-
-              <div className="grid md:grid-cols-12 gap-10 md:gap-16 mb-16 md:mb-20">
-                <FadeUp delay={0.08} className="md:col-span-7">
-                  <h2 className="text-[35px] md:text-[51px] lg:text-[63px] font-semibold leading-[1] tracking-[-0.032em] max-w-[14ch]">
+              <div className="text-center mb-16 md:mb-20">
+                <FadeUp>
+                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-8">Intervention model</p>
+                </FadeUp>
+                <FadeUp delay={0.08}>
+                  <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[16ch] mx-auto">
                     Ways DAB hands steps in
                   </h2>
                 </FadeUp>
-                <FadeUp delay={0.18} className="md:col-span-5 md:pt-3 space-y-4 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed">
-                  <p>Usually when important work starts drifting, slowing down, or fragmenting as it moves to market.</p>
-                  <p>DAB hands steps in to restore clarity, alignment, and quality of execution around the work.</p>
+                <FadeUp delay={0.16}>
+                  <div className="mt-8 space-y-2 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed max-w-[60ch] mx-auto">
+                    <p>Usually when important work starts drifting, slowing down, or fragmenting as it moves to market.</p>
+                    <p>DAB hands steps in to restore clarity, alignment, and quality of execution around the work.</p>
+                  </div>
                 </FadeUp>
               </div>
 
