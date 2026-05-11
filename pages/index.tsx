@@ -395,7 +395,7 @@ export default function Home() {
           {/* ── MASTHEAD LOCKUP ──────────────────────── */}
           {/* Headline + lines + circle as a single composition. Circle aligns with the */}
           {/* middle line of the wrapped headline via flex vertical centering + YMid SVG. */}
-          <section className="relative bg-dab-charcoal text-dab-cream overflow-hidden min-h-[90vh] flex items-center justify-center">
+          <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden min-h-[90vh] flex items-center justify-center">
 
             <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-32 md:py-40 text-center">
               <FadeUp>
@@ -405,7 +405,7 @@ export default function Home() {
                 </h1>
               </FadeUp>
               <FadeUp delay={0.18}>
-                <p className="mt-10 md:mt-12 text-lg md:text-xl text-dab-cream/60 leading-relaxed max-w-[42ch] mx-auto">
+                <p className="mt-10 md:mt-12 text-lg md:text-xl text-dab-charcoal/60 leading-relaxed max-w-[42ch] mx-auto">
                   Senior-led delivery for the critical initiatives organisations cannot afford to drift.
                 </p>
               </FadeUp>
