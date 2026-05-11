@@ -9,6 +9,7 @@
   --color-dab-brown: #ACA195;
   --color-dab-brown-light: #E8E3DC;
   --color-dab-white: #FAFAFA;
+  --color-dab-warm: #E8D5C5;
 
   --font-sans: var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), 'SF Mono', 'Fira Mono', monospace;

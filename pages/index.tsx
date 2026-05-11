@@ -265,6 +265,126 @@ const BrandMotif = ({ color = '#FAFAFA' }: { color?: string }) => {
   );
 };
 
+// Convergence motif: many faint curves flow from labelled sources on the left,
+// converge at a single neon-green point, then re-emerge as a few highlighted rays
+// pointing at the outcomes (Clarity / Alignment / Momentum / Impact).
+const ConvergenceMotif = () => {
+  const cx = 920;
+  const cy = 450;
+  const startX = 60;
+  const endX = 1280;
+
+  const sources = [
+    { label: 'STRATEGY', y: 90 },
+    { label: 'PRODUCT', y: 190 },
+    { label: 'TECHNOLOGY', y: 280 },
+    { label: 'DESIGN', y: 370 },
+    { label: 'DATA', y: 460 },
+    { label: 'CONTENT', y: 550 },
+    { label: 'OPERATIONS', y: 645 },
+    { label: 'CUSTOMER', y: 760 },
+  ];
+
+  const outputs = [
+    { label: 'CLARITY', y: 400 },
+    { label: 'ALIGNMENT', y: 432 },
+    { label: 'MOMENTUM', y: 464 },
+    { label: 'IMPACT', y: 496 },
+  ];
+
+  const totalCurves = 180;
+  const curveStartY = 30;
+  const curveEndY = 820;
+  const highlightIndices = new Set([18, 42, 70, 100, 125, 152, 168]);
+  // Cheap deterministic noise so curves don't look mechanically uniform.
+  const pseudo = (i: number) => ((i * 9301 + 49297) % 233280) / 233280;
+
+  return (
+    <svg viewBox="0 0 1280 900" className="w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden>
+      {/* Background curves — faint charcoal */}
+      {Array.from({ length: totalCurves }).map((_, i) => {
+        const sy = curveStartY + ((curveEndY - curveStartY) / (totalCurves - 1)) * i;
+        const isHighlighted = highlightIndices.has(i);
+        const variance = (pseudo(i) - 0.5) * 50;
+        const dx = cx - startX;
+        const cp1x = startX + dx * 0.45;
+        const cp1y = sy;
+        const cp2x = cx - dx * 0.22 + variance * 0.4;
+        const cp2y = sy + (cy - sy) * 0.42 + variance;
+        const d = `M ${startX} ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${cx} ${cy}`;
+        return (
+          <path
+            key={i}
+            d={d}
+            fill="none"
+            stroke={isHighlighted ? '#B7FF00' : '#000000'}
+            strokeWidth={isHighlighted ? 1.3 : 0.55}
+            strokeOpacity={isHighlighted ? 0.85 : 0.09}
+            strokeLinecap="round"
+          />
+        );
+      })}
+
+      {/* Output rays — emerge from the convergence point toward the right labels */}
+      {outputs.map((o, i) => (
+        <line
+          key={`ray-${i}`}
+          x1={cx}
+          y1={cy}
+          x2={endX - 200}
+          y2={o.y}
+          stroke="#B7FF00"
+          strokeWidth={1.2}
+          strokeOpacity={0.75}
+          strokeLinecap="round"
+        />
+      ))}
+
+      {/* Convergence point — halo + bright dot */}
+      <circle cx={cx} cy={cy} r={18} fill="#B7FF00" opacity={0.18} />
+      <circle cx={cx} cy={cy} r={7} fill="#B7FF00" />
+
+      {/* Source labels (left) */}
+      {sources.map((s) => (
+        <g key={`src-${s.label}`}>
+          <text
+            x={startX - 14}
+            y={s.y}
+            textAnchor="end"
+            fontFamily="ui-monospace, 'SF Mono', monospace"
+            fontSize={13}
+            letterSpacing={2.4}
+            fill="#000000"
+            fillOpacity={0.55}
+            dominantBaseline="middle"
+          >
+            {s.label}
+          </text>
+          <circle cx={startX} cy={s.y} r={2.2} fill="#000000" opacity={0.4} />
+        </g>
+      ))}
+
+      {/* Output labels (right) */}
+      {outputs.map((o) => (
+        <text
+          key={`out-${o.label}`}
+          x={endX - 188}
+          y={o.y}
+          textAnchor="start"
+          fontFamily="ui-monospace, 'SF Mono', monospace"
+          fontSize={13}
+          letterSpacing={2.4}
+          fill="#000000"
+          fillOpacity={0.75}
+          dominantBaseline="middle"
+        >
+          {o.label}
+        </text>
+      ))}
+    </svg>
+  );
+};
+
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -351,7 +471,7 @@ export default function Home() {
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-dab-charcoal ${scrolled ? 'border-b border-dab-brown/15' : ''}`}>
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
             <a href="#top" className="flex items-baseline gap-3 group" aria-label="DAB hands home">
-              <span className="w-[10px] h-[10px] rounded-full shrink-0 bg-dab-cream" />
+              <span className="w-[14px] h-[14px] rounded-full shrink-0 bg-dab-green" />
               <span className="font-semibold text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
                 <span className="font-bold">DAB</span> hands
               </span>
@@ -395,20 +515,52 @@ export default function Home() {
           {/* ── MASTHEAD LOCKUP ──────────────────────── */}
           {/* Headline + lines + circle as a single composition. Circle aligns with the */}
           {/* middle line of the wrapped headline via flex vertical centering + YMid SVG. */}
-          <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden min-h-[90vh] flex items-center justify-center">
+          <section className="relative bg-dab-warm text-dab-charcoal overflow-hidden min-h-[92vh] flex items-center">
 
-            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-32 md:py-40 text-center">
-              <FadeUp>
-                <h1 className="text-[44px] sm:text-[64px] md:text-[88px] lg:text-[112px] xl:text-[128px] font-semibold leading-[0.98] tracking-[-0.03em] max-w-[15ch] mx-auto">
-                  <span className="block">Expert digital delivery</span>
-                  <span className="block">for high-stakes work</span>
-                </h1>
-              </FadeUp>
-              <FadeUp delay={0.18}>
-                <p className="mt-10 md:mt-12 text-lg md:text-xl text-dab-charcoal/60 leading-relaxed max-w-[42ch] mx-auto">
-                  Senior-led delivery for the critical initiatives organisations cannot afford to drift.
-                </p>
-              </FadeUp>
+            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-28">
+              <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+                <div className="lg:col-span-5">
+                  <FadeUp>
+                    <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-7">
+                      Expertise. Alignment. Momentum<span className="text-dab-green">.</span>
+                    </p>
+                  </FadeUp>
+                  <FadeUp delay={0.08}>
+                    <h1 className="text-[40px] sm:text-[52px] md:text-[64px] lg:text-[60px] xl:text-[76px] 2xl:text-[88px] font-semibold leading-[0.96] tracking-[-0.028em]">
+                      Senior digital delivery for high-stakes work
+                    </h1>
+                  </FadeUp>
+                  <FadeUp delay={0.14}>
+                    <span className="block w-12 h-px bg-dab-green my-8 md:my-10" />
+                  </FadeUp>
+                  <FadeUp delay={0.18}>
+                    <p className="text-[16px] md:text-[18px] text-dab-charcoal/80 leading-relaxed max-w-[42ch]">
+                      Senior-led delivery for the critical initiatives organisations cannot afford to drift.
+                    </p>
+                  </FadeUp>
+                  <FadeUp delay={0.24}>
+                    <p className="mt-5 text-[14px] md:text-[15px] text-dab-charcoal/60 leading-relaxed max-w-[44ch]">
+                      Small senior teams built around important digital work. Helping organisations maximise the impact of critical initiatives as they move to market.
+                    </p>
+                  </FadeUp>
+                  <FadeUp delay={0.32}>
+                    <a
+                      href="mailto:db@dabhands.delivery"
+                      className="inline-flex items-center gap-3 mt-10 md:mt-12 font-mono text-[11px] tracking-[0.22em] uppercase text-dab-charcoal border-b border-dab-green pb-2 hover:opacity-70 transition-opacity"
+                    >
+                      Start a conversation
+                      <span aria-hidden>→</span>
+                    </a>
+                  </FadeUp>
+                </div>
+
+                <FadeUp delay={0.18} className="hidden lg:block lg:col-span-7 relative">
+                  <div className="aspect-[1280/900] w-full">
+                    <ConvergenceMotif />
+                  </div>
+                </FadeUp>
+              </div>
             </div>
           </section>
 
@@ -482,9 +634,9 @@ export default function Home() {
                 className="mt-16 md:mt-20"
               >
                 {[
-                  'The tools are changing.',
-                  'The problems aren’t.',
-                  'Complexity is higher than ever.',
+                  { before: 'The tools are ', accent: 'changing', after: '.' },
+                  { before: 'The problems ', accent: 'aren’t', after: '.' },
+                  { before: 'Complexity is ', accent: 'higher than ever', after: '.' },
                 ].map((line, i) => (
                   <motion.p
                     key={i}
@@ -494,7 +646,7 @@ export default function Home() {
                     }}
                     className="text-[32px] md:text-[48px] lg:text-[60px] xl:text-[72px] font-semibold leading-[1.05] tracking-[-0.035em] text-dab-cream mb-5 md:mb-7 last:mb-0"
                   >
-                    {line}
+                    {line.before}<span className="text-dab-green">{line.accent}</span>{line.after}
                   </motion.p>
                 ))}
               </motion.div>
@@ -592,16 +744,9 @@ export default function Home() {
               </FadeUp>
 
               <FadeUp delay={0.18}>
-                <div className="mt-12 md:mt-16 space-y-6 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed max-w-[52ch] mx-auto">
-                  <div className="space-y-1">
-                    <p>Teams pull in different directions.</p>
-                    <p>Decision-making slows down.</p>
-                    <p>Ownership becomes fragmented.</p>
-                  </div>
-                  <div className="space-y-1">
-                    <p>What started strong becomes diluted as it moves through the organisation.</p>
-                    <p>By the time it reaches the customer, the outcome is weaker than it should have been.</p>
-                  </div>
+                <div className="mt-12 md:mt-16 space-y-6 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed">
+                  <p className="max-w-[52ch] mx-auto">Teams pull in different directions.<br />Decision-making slows down.<br />Ownership becomes fragmented.</p>
+                  <p className="lg:whitespace-nowrap">What started strong becomes diluted as it moves through the organisation.<br />By the time it reaches the customer, the outcome is weaker than it should have been.</p>
                 </div>
               </FadeUp>
             </div>
@@ -664,9 +809,18 @@ export default function Home() {
                   </div>
                 </FadeUp>
 
-                <FadeUp delay={0.22} className="md:col-span-5 md:col-start-8 space-y-6 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed">
+                <FadeUp delay={0.22} className="md:col-span-5 md:col-start-8 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed">
+                  {/* Invisible spacer matches left col's title + space-y-8 + first-tick top padding,
+                      so "Keeping momentum..." aligns with "Bringing the right people together." */}
+                  <div aria-hidden className="hidden md:block">
+                    <p className="invisible text-xl md:text-2xl font-medium leading-[1.3] tracking-[-0.02em] max-w-[48ch]">
+                      DAB hands steps in to create clarity, alignment, and momentum around critical initiatives.
+                    </p>
+                    <div className="h-8" />
+                    <div className="h-[21px]" />
+                  </div>
                   <p>Keeping momentum high, alignment clear, and the quality of important work intact as it moves through the organisation.</p>
-                  <p>Building small senior teams around critical initiatives to increase capability, sharpen execution, and raise the level of the work.</p>
+                  <p className="mt-6">Building small senior teams around critical initiatives to increase capability, sharpen execution, and raise the level of the work.</p>
                 </FadeUp>
               </div>
             </div>
@@ -765,10 +919,10 @@ export default function Home() {
           {/* ── TESTIMONIALS ──────────────────────────── */}
           <section className="bg-dab-brown border-t border-dab-brown py-24 md:py-36">
             <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-              <FadeUp><Label index="09" tone="onBrown">Trusted to lead important work</Label></FadeUp>
+              <FadeUp><Label index="09" tone="onBrown">Trusted to lead</Label></FadeUp>
               <FadeUp delay={0.08}>
                 <h2 className="text-[35px] md:text-[51px] lg:text-[59px] font-semibold leading-[1] tracking-[-0.032em] max-w-[14ch] mb-16 md:mb-20">
-                  Trusted to lead important work
+                  Trusted to lead
                 </h2>
               </FadeUp>
 
@@ -949,9 +1103,9 @@ export default function Home() {
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.16}>
-                  <div className="mt-8 space-y-2 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed max-w-[60ch] mx-auto">
-                    <p>Usually when important work starts drifting, slowing down, or fragmenting as it moves to market.</p>
-                    <p>DAB hands steps in to restore clarity, alignment, and quality of execution around the work.</p>
+                  <div className="mt-8 space-y-2 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed">
+                    <p className="lg:whitespace-nowrap">Usually when important work starts drifting, slowing down, or fragmenting as it moves to market.</p>
+                    <p className="lg:whitespace-nowrap">DAB hands steps in to restore clarity, alignment, and quality of execution around the work.</p>
                   </div>
                 </FadeUp>
               </div>
@@ -963,20 +1117,20 @@ export default function Home() {
                     <motion.div key={i} id={`intervention-${i}`}
                       initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}
-                      className="border-t border-dab-brown/30 last:border-b last:border-b-dab-brown/30"
+                      className="border-t border-dab-brown/30 last:border-b last:border-b-dab-brown/30 -mx-6 md:-mx-10 lg:-mx-16"
                     >
                       <button
                         onClick={() => setOpenIntervention(isOpen ? null : i)}
-                        className="w-full py-7 md:py-8 flex items-center justify-between text-left group gap-8 hover:bg-dab-charcoal transition-colors duration-200"
+                        className="w-full py-7 md:py-8 px-6 md:px-10 lg:px-16 flex items-center justify-between text-left group gap-8 hover:bg-dab-green transition-colors duration-200"
                         aria-expanded={isOpen}
                       >
                         <div className="flex items-baseline gap-6 md:gap-8 flex-1">
-                          <span className="font-mono text-[10px] tabular-nums tracking-widest text-dab-brown group-hover:text-dab-cream/70 flex-shrink-0 transition-colors duration-200">{String(i + 1).padStart(2, '0')}</span>
-                          <span className="text-xl md:text-2xl lg:text-[28px] font-medium text-dab-charcoal tracking-tight leading-tight group-hover:text-dab-cream transition-colors duration-200">
+                          <span className="font-mono text-[10px] tabular-nums tracking-widest text-dab-brown group-hover:text-dab-charcoal/70 flex-shrink-0 transition-colors duration-200">{String(i + 1).padStart(2, '0')}</span>
+                          <span className="text-xl md:text-2xl lg:text-[28px] font-medium text-dab-charcoal tracking-tight leading-tight transition-colors duration-200">
                             {item.title}
                           </span>
                         </div>
-                        <span className="text-2xl text-dab-charcoal/60 group-hover:text-dab-cream flex-shrink-0 transition duration-300"
+                        <span className="text-2xl text-dab-charcoal/60 group-hover:text-dab-charcoal flex-shrink-0 transition duration-300"
                           style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }} aria-hidden>+</span>
                       </button>
 
@@ -989,8 +1143,10 @@ export default function Home() {
                             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                             className="overflow-hidden"
                           >
-                            <div className="pb-8 md:pb-10 pl-0 md:pl-[72px] pr-16 space-y-4 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed max-w-[55ch]">
-                              {item.body.map((p, j) => <p key={j}>{p}</p>)}
+                            <div className="px-6 md:px-10 lg:px-16">
+                              <div className="pb-8 md:pb-10 pl-0 md:pl-[72px] pr-16 space-y-4 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed max-w-[55ch]">
+                                {item.body.map((p, j) => <p key={j}>{p}</p>)}
+                              </div>
                             </div>
                           </motion.div>
                         )}
