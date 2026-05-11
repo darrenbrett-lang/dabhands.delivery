@@ -1,20 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dab-cream: #F5F3EE;
-  --color-dab-charcoal: #121212;
+  --color-dab-cream: #FAFAFA;
+  --color-dab-charcoal: #0E0E0E;
   --color-dab-charcoal-alt: #171717;
   --color-dab-green: #B7FF00;
   --color-dab-taupe: #8A847C;
   --color-dab-brown: #ACA195;
+  --color-dab-brown-light: #E8E3DC;
   --color-dab-white: #FAFAFA;
 
   --font-sans: var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'SF Mono', 'Fira Mono', monospace;
 }
 
 :root {
-  --background: #F5F3EE;
-  --foreground: #121212;
+  --background: #FAFAFA;
+  --foreground: #0E0E0E;
 }
 
 * {
@@ -44,7 +46,20 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-.signal-line {
-  background: linear-gradient(90deg, transparent, #B7FF00, transparent);
-  height: 1px;
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Palantir-style dot grid for dark sections */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Signal green line divider */
+.signal-rule {
+  width: 32px;
+  height: 2px;
+  background: #B7FF00;
+  display: block;
 }

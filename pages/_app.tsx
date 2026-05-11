@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -9,9 +9,19 @@ const geist = Geist({
   display: "swap",
 });
 
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={geist.variable} style={{ fontFamily: 'var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}>
+    <main
+      className={`${geist.variable} ${geistMono.variable}`}
+      style={{ fontFamily: 'var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}
+    >
       <Component {...pageProps} />
     </main>
   );
