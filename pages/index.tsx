@@ -515,52 +515,23 @@ export default function Home() {
           {/* ── MASTHEAD LOCKUP ──────────────────────── */}
           {/* Headline + lines + circle as a single composition. Circle aligns with the */}
           {/* middle line of the wrapped headline via flex vertical centering + YMid SVG. */}
-          <section className="relative bg-dab-warm text-dab-charcoal overflow-hidden min-h-[92vh] flex items-center">
+          <section className="relative bg-dab-white text-dab-charcoal overflow-hidden min-h-[100vh] flex items-center justify-center">
 
-            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-28">
-              <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32 text-center">
+              <FadeUp>
+                <h1 className="text-[40px] sm:text-[56px] md:text-[80px] lg:text-[100px] xl:text-[120px] font-semibold leading-[0.98] tracking-[-0.03em]">
+                  <span className="block">Senior digital</span>
+                  <span className="block">delivery for</span>
+                  <span className="block">high-stakes work</span>
+                </h1>
+              </FadeUp>
 
-                <div className="lg:col-span-5">
-                  <FadeUp>
-                    <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-7">
-                      Expertise. Alignment. Momentum<span className="text-dab-green">.</span>
-                    </p>
-                  </FadeUp>
-                  <FadeUp delay={0.08}>
-                    <h1 className="text-[40px] sm:text-[52px] md:text-[64px] lg:text-[60px] xl:text-[76px] 2xl:text-[88px] font-semibold leading-[0.96] tracking-[-0.028em]">
-                      Senior digital delivery for high-stakes work
-                    </h1>
-                  </FadeUp>
-                  <FadeUp delay={0.14}>
-                    <span className="block w-12 h-px bg-dab-green my-8 md:my-10" />
-                  </FadeUp>
-                  <FadeUp delay={0.18}>
-                    <p className="text-[16px] md:text-[18px] text-dab-charcoal/80 leading-relaxed max-w-[42ch]">
-                      Senior-led delivery for the critical initiatives organisations cannot afford to drift.
-                    </p>
-                  </FadeUp>
-                  <FadeUp delay={0.24}>
-                    <p className="mt-5 text-[14px] md:text-[15px] text-dab-charcoal/60 leading-relaxed max-w-[44ch]">
-                      Small senior teams built around important digital work. Helping organisations maximise the impact of critical initiatives as they move to market.
-                    </p>
-                  </FadeUp>
-                  <FadeUp delay={0.32}>
-                    <a
-                      href="mailto:db@dabhands.delivery"
-                      className="inline-flex items-center gap-3 mt-10 md:mt-12 font-mono text-[11px] tracking-[0.22em] uppercase text-dab-charcoal border-b border-dab-green pb-2 hover:opacity-70 transition-opacity"
-                    >
-                      Start a conversation
-                      <span aria-hidden>→</span>
-                    </a>
-                  </FadeUp>
+              <FadeUp delay={0.18}>
+                <div className="mt-10 md:mt-14 space-y-3 text-[15px] md:text-[17px] text-dab-charcoal/85 leading-relaxed max-w-[42ch] mx-auto">
+                  <p>Important digital work can lose momentum quickly inside complex organisations.</p>
+                  <p>DAB hands helps keep critical initiatives aligned, moving, and commercially effective.</p>
                 </div>
-
-                <FadeUp delay={0.18} className="hidden lg:block lg:col-span-7 relative">
-                  <div className="aspect-[1280/900] w-full">
-                    <ConvergenceMotif />
-                  </div>
-                </FadeUp>
-              </div>
+              </FadeUp>
             </div>
           </section>
 
@@ -576,7 +547,7 @@ export default function Home() {
                 <div className="md:col-span-8">
                   <FadeUp delay={0.08}>
                     <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-semibold leading-[1.08] tracking-[-0.03em] max-w-[22ch] mb-8 md:mb-10">
-                      Small senior teams built around important digital work that cannot afford to drift.
+                      DAB hands is small senior teams built around important digital work that cannot afford to drift.
                     </h2>
                   </FadeUp>
                   <FadeUp delay={0.14}>
@@ -868,7 +839,7 @@ export default function Home() {
               <div className="grid md:grid-cols-12 gap-10 md:gap-16">
                 <FadeUp delay={0.08} className="md:col-span-5">
                   <h2 className="text-[35px] md:text-[51px] lg:text-[59px] font-semibold leading-[1] tracking-[-0.032em]">
-                    The teams behind the work
+                    The teams behind the work we do
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.18} className="md:col-span-6 md:col-start-7 space-y-6 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed">
@@ -1035,32 +1006,67 @@ export default function Home() {
 
               <FadeUp delay={0.08}>
                 <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[14ch] mx-auto">
-                  My sweet spot
+                  We&rsquo;re built for
                 </h2>
               </FadeUp>
               <FadeUp delay={0.16}>
-                <p className="mt-8 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed max-w-[52ch] mx-auto">
-                  Digital brand experience, where strategy, ideas, product, and creative storytelling need to carry across the ecosystem and cut through in daily living.
+                <p className="mt-8 text-[16px] md:text-[18px] text-dab-charcoal/75 leading-relaxed max-w-[60ch] mx-auto">
+                  Complex digital initiatives where strategy, creative, product, platforms, and customer experience need to move together at high quality and pace.
                 </p>
               </FadeUp>
 
-              <div className="mt-20 md:mt-24 border-t border-dab-charcoal/15 pt-12 md:pt-16">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-8 text-left">
-                  {['Attention.', 'Connection.', 'Conversion.'].map((item, i) => (
-                    <motion.div
-                      key={item}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className={i > 0 ? 'md:border-l md:border-dab-charcoal/15 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'}
-                    >
-                      <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
-                        {item}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
+            </div>
+          </section>
+
+          {/* ── ATTENTION / CONNECTION / CONVERSION ───── */}
+          <section className="bg-dab-brown text-dab-charcoal py-24 md:py-32">
+            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
+                {[
+                  {
+                    label: 'Attention.',
+                    icon: (
+                      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4">
+                        <circle cx="17" cy="17" r="13" />
+                        <circle cx="17" cy="17" r="7" />
+                        <circle cx="17" cy="17" r="1.6" fill="currentColor" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: 'Connection.',
+                    icon: (
+                      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4">
+                        <circle cx="8" cy="17" r="4" />
+                        <circle cx="26" cy="17" r="4" />
+                        <line x1="12" y1="17" x2="22" y2="17" strokeLinecap="round" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: 'Conversion.',
+                    icon: (
+                      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 27 L27 7" />
+                        <path d="M14 7 L27 7 L27 20" />
+                      </svg>
+                    ),
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                    className={`flex items-center justify-center gap-4 md:gap-5 ${i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'}`}
+                  >
+                    <span className="flex-shrink-0 text-dab-charcoal">{item.icon}</span>
+                    <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
+                      {item.label}
+                    </p>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </section>
@@ -1190,45 +1196,51 @@ export default function Home() {
             </div>
           </section>
 
-          {/* ── FOOTER ────────────────────────────────── */}
-          <footer id="contact" className="bg-dab-charcoal border-t border-dab-brown/20 text-dab-cream">
-            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-10">
-              <div className="flex flex-col gap-7">
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
-                  <a href="mailto:db@dabhands.delivery" className="font-mono text-[11px] tracking-[0.15em] text-dab-cream/60 hover:text-dab-green transition">
-                    db@dabhands.delivery
-                  </a>
-                  <a href="tel:+447788711433" className="font-mono text-[11px] tracking-[0.15em] text-dab-cream/60 hover:text-dab-green transition">
-                    +44 7788 711433
-                  </a>
+          {/* ── CONTACT CTA ───────────────────────────── */}
+          <section id="contact" className="bg-dab-green text-dab-charcoal">
+            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-12">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
+                <p className="text-lg md:text-xl lg:text-[22px] font-semibold tracking-[-0.02em] leading-snug max-w-[36ch]">
+                  If something important needs to move properly, let&rsquo;s talk.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-8 font-mono text-[11px] tracking-[0.18em] uppercase">
+                  <span>Darren Brett</span>
+                  <a href="mailto:db@dabhands.delivery" className="hover:opacity-60 transition-opacity">db@dabhands.delivery</a>
+                  <a href="tel:+447788711433" className="hover:opacity-60 transition-opacity">07788 711433</a>
                 </div>
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 pt-6 border-t border-dab-brown/20">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-dab-green" />
-                    <span className="font-semibold text-[15px] tracking-[-0.02em]">
-                      <span className="font-bold">DAB</span> hands
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <a
-                      href="https://www.linkedin.com/in/darren-brett-1474403/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Darren Brett on LinkedIn"
-                      className="opacity-80 hover:opacity-100 transition-opacity"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src="/logos/linkedin.png"
-                        alt=""
-                        width={16}
-                        height={16}
-                        className="block"
-                        style={{ filter: 'brightness(0) invert(1)' }}
-                      />
-                    </a>
-                    <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 DAB hands</p>
-                  </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ── FOOTER ────────────────────────────────── */}
+          <footer className="bg-dab-charcoal text-dab-cream">
+            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-dab-green" />
+                  <span className="font-semibold text-[15px] tracking-[-0.02em]">
+                    <span className="font-bold">DAB</span> hands
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <a
+                    href="https://www.linkedin.com/in/darren-brett-1474403/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Darren Brett on LinkedIn"
+                    className="opacity-80 hover:opacity-100 transition-opacity"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/logos/linkedin.png"
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="block"
+                      style={{ filter: 'brightness(0) invert(1)' }}
+                    />
+                  </a>
+                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 DAB hands</p>
                 </div>
               </div>
             </div>
