@@ -17,27 +17,27 @@ const challenges = [
 const interventions = [
   {
     title: 'Bring critical work back under control',
-    body: ['When important work starts drifting, confidence drops quickly. Decisions slow down, ownership fragments, and momentum disappears.', 'DAB hands steps in to restore clarity, stabilise delivery, and get the work moving again.'],
+    body: ['When important work starts drifting, confidence drops quickly. Decisions slow down, ownership fragments, and momentum disappears.', 'Dab Hands steps in to restore clarity, stabilise delivery, and get the work moving again.'],
   },
   {
     title: 'Protect the quality of the work',
-    body: ['Strong work often loses strength as it moves through teams, approvals, platforms, and timelines.', 'DAB hands helps maintain alignment, execution quality, and momentum as the work moves to market.'],
+    body: ['Strong work often loses strength as it moves through teams, approvals, platforms, and timelines.', 'Dab Hands helps maintain alignment, execution quality, and momentum as the work moves to market.'],
   },
   {
     title: 'Align teams around the work',
-    body: ['Important initiatives rarely fail because people do not care. They fail because priorities, ownership, and decision-making become disconnected.', 'DAB hands creates alignment around the work so teams can move faster and execute more effectively.'],
+    body: ['Important initiatives rarely fail because people do not care. They fail because priorities, ownership, and decision-making become disconnected.', 'Dab Hands creates alignment around the work so teams can move faster and execute more effectively.'],
   },
   {
     title: 'Build the right senior team',
-    body: ['Some initiatives need additional capability at the right level.', 'DAB hands builds small senior teams around critical work to increase capability, sharpen execution, and raise the level of output.'],
+    body: ['Some initiatives need additional capability at the right level.', 'Dab Hands builds small senior teams around critical work to increase capability, sharpen execution, and raise the level of output.'],
   },
   {
     title: 'Improve how the work moves',
-    body: ['Sometimes the issue is not the strategy or creative. It is how the work is operating.', 'DAB hands reduces friction, clarifies ownership, and improves delivery flow across teams and stakeholders.'],
+    body: ['Sometimes the issue is not the strategy or creative. It is how the work is operating.', 'Dab Hands reduces friction, clarifies ownership, and improves delivery flow across teams and stakeholders.'],
   },
   {
     title: 'Get more from existing investment',
-    body: ['Most organisations already have strong people, platforms, and ideas in place.', 'DAB hands helps bring them together more effectively to increase impact and improve execution quality across the customer experience.'],
+    body: ['Most organisations already have strong people, platforms, and ideas in place.', 'Dab Hands helps bring them together more effectively to increase impact and improve execution quality across the customer experience.'],
   },
 ];
 
@@ -439,7 +439,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>DAB hands. Senior-led digital delivery for high-stakes work.</title>
+        <title>Dab Hands. Senior-led digital delivery for high-stakes work.</title>
         <meta name="description" content="Small senior teams built around critical digital initiatives. Helping organisations maximise the impact of important work as it moves to market." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -470,10 +470,10 @@ export default function Home() {
         {/* ── HEADER ────────────────────────────────── */}
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-dab-charcoal ${scrolled ? 'border-b border-dab-brown/15' : ''}`}>
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
-            <a href="#top" className="flex items-baseline gap-3 group" aria-label="DAB hands home">
+            <a href="#top" className="flex items-baseline gap-3 group" aria-label="Dab Hands home">
               <span className="w-[14px] h-[14px] rounded-full shrink-0 bg-dab-green" />
               <span className="font-semibold text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
-                <span className="font-bold">DAB</span> hands
+                <span className="font-bold">Dab</span> Hands
               </span>
             </a>
 
@@ -505,7 +505,7 @@ export default function Home() {
                   >{label}</motion.a>
                 ))}
               </nav>
-              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-brown">DAB hands. Digital Delivery, Handled</p>
+              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-brown">Dab Hands. Digital Delivery, Handled</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -529,7 +529,7 @@ export default function Home() {
               <FadeUp delay={0.18}>
                 <div className="mt-10 md:mt-14 space-y-3 text-[15px] md:text-[17px] text-dab-charcoal/85 leading-relaxed max-w-[42ch] mx-auto">
                   <p>Important digital work can lose momentum quickly inside complex organisations.</p>
-                  <p>DAB hands helps keep critical initiatives aligned, moving, and commercially effective.</p>
+                  <p>Dab Hands helps keep critical initiatives aligned, moving, and commercially effective.</p>
                 </div>
               </FadeUp>
             </div>
@@ -547,7 +547,7 @@ export default function Home() {
                 <div className="md:col-span-8">
                   <FadeUp delay={0.08}>
                     <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-semibold leading-[1.08] tracking-[-0.03em] max-w-[22ch] mb-8 md:mb-10">
-                      DAB hands is small senior teams built around important digital work that cannot afford to drift.
+                      Dab Hands is small senior teams built around important digital work that cannot afford to drift.
                     </h2>
                   </FadeUp>
                   <FadeUp delay={0.14}>
@@ -723,77 +723,55 @@ export default function Home() {
             </div>
           </section>
 
-          {/* ── WHERE IMPORTANT WORK GETS STRONGER ────── */}
-          <section className="bg-dab-cream relative border-t border-dab-charcoal/8 overflow-hidden">
-            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-36">
-              <FadeUp><Label index="05" tone="onLight">Operational truth</Label></FadeUp>
+          {/* ── HOW DAB HANDS STRENGTHENS CRITICAL WORK ── */}
+          <section className="bg-dab-cream relative border-t border-dab-charcoal/8">
+            <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-28 md:py-40 text-center">
+              <FadeUp>
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-8">Operational truth</p>
+              </FadeUp>
 
-              <div className="mt-2 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
-                <FadeUp delay={0.08} className="md:col-span-7">
-                  <h2 className="text-[39px] md:text-[66px] lg:text-[82px] font-semibold leading-[0.95] tracking-[-0.042em] max-w-[14ch]">
-                    How DAB hands strengthens critical work
-                  </h2>
-                </FadeUp>
+              <FadeUp delay={0.08}>
+                <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[14ch] mx-auto">
+                  How Dab Hands strengthens critical work
+                </h2>
+              </FadeUp>
 
-                {/* Flow image — starts at column 8, bleeds to the right viewport edge */}
-                <div
-                  aria-hidden="true"
-                  className="hidden lg:block lg:col-span-5 lg:col-start-8 relative"
-                  style={{ marginRight: 'calc((100vw - min(100vw, 1280px)) / -2 - 4rem)' }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/flow.jpeg"
-                    alt=""
-                    className="block w-full h-auto pointer-events-none select-none"
-                    draggable={false}
-                  />
+              <FadeUp delay={0.16}>
+                <p className="mt-10 md:mt-14 text-xl md:text-2xl font-medium leading-[1.3] tracking-[-0.02em] text-dab-charcoal max-w-[36ch] mx-auto">
+                  Dab Hands steps in to create clarity, alignment, and momentum around critical initiatives.
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.22}>
+                <div className="mt-14 md:mt-20 max-w-[44ch] mx-auto text-left">
+                  {[
+                    'Bringing the right people together.',
+                    'Strengthening decision-making.',
+                    'Reducing friction.',
+                    'Raising the quality of execution.',
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.07 }}
+                      className="flex items-start gap-5 py-5 border-t border-dab-charcoal/15 last:border-b last:border-dab-charcoal/15 text-dab-charcoal"
+                    >
+                      <svg className="flex-shrink-0 mt-0.5" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <p className="text-lg md:text-xl font-medium leading-tight">{item}</p>
+                    </motion.div>
+                  ))}
                 </div>
-              </div>
+              </FadeUp>
 
-              <div className="mt-20 md:mt-24 grid md:grid-cols-12 gap-10 md:gap-16">
-                <FadeUp delay={0.12} className="md:col-span-6 space-y-8">
-                  <p className="text-xl md:text-2xl font-medium text-dab-charcoal leading-[1.3] tracking-[-0.02em] max-w-[48ch]">
-                    DAB hands steps in to create clarity, alignment, and momentum around critical initiatives.
-                  </p>
-                  <div>
-                    {[
-                      'Bringing the right people together.',
-                      'Strengthening decision-making.',
-                      'Reducing friction.',
-                      'Raising the quality of execution.',
-                    ].map((item, i) => (
-                      <motion.div
-                        key={item}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.07 }}
-                        className="flex items-start gap-5 py-5 border-t border-dab-charcoal/15 text-dab-charcoal"
-                      >
-                        <svg className="flex-shrink-0 mt-0.5" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                          <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <p className="text-lg md:text-xl font-medium leading-tight">{item}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </FadeUp>
-
-                <FadeUp delay={0.22} className="md:col-span-5 md:col-start-8 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed">
-                  {/* Invisible spacer matches left col's title + space-y-8 + first-tick top padding,
-                      so "Keeping momentum..." aligns with "Bringing the right people together." */}
-                  <div aria-hidden className="hidden md:block">
-                    <p className="invisible text-xl md:text-2xl font-medium leading-[1.3] tracking-[-0.02em] max-w-[48ch]">
-                      DAB hands steps in to create clarity, alignment, and momentum around critical initiatives.
-                    </p>
-                    <div className="h-8" />
-                    <div className="h-[21px]" />
-                  </div>
-                  <p>Keeping momentum high, alignment clear, and the quality of important work intact as it moves through the organisation.</p>
-                  <p className="mt-6">Building small senior teams around critical initiatives to increase capability, sharpen execution, and raise the level of the work.</p>
-                </FadeUp>
-              </div>
+              <FadeUp delay={0.30}>
+                <p className="mt-14 md:mt-20 text-lg md:text-xl text-dab-charcoal/70 leading-relaxed max-w-[44ch] mx-auto">
+                  Keeping important work aligned, moving, and commercially effective as it goes to market.
+                </p>
+              </FadeUp>
             </div>
           </section>
 
@@ -823,8 +801,8 @@ export default function Home() {
                     <p>More than 20 years leading complex digital delivery across global brands, platforms, campaigns, and customer experience programmes.</p>
                     <p>Running an agency and owning operations, delivery, and product has shaped how I align teams, manage complexity, and keep important work moving under pressure.</p>
                     <p>A key strength is the ability to move fluidly between strategic, creative, operational, and executional thinking, bringing the right people together and raising the level of the work around critical initiatives.</p>
-                    <p>DAB hands is built around that model. Senior leadership, specialist capability, and clear accountability focused on the work itself.</p>
-                    <p className="font-medium text-dab-charcoal">Bring me in to lead delivery around a critical initiative, or scale through DAB hands to a trusted senior team built around the work.</p>
+                    <p>Dab Hands is built around that model. Senior leadership, specialist capability, and clear accountability focused on the work itself.</p>
+                    <p className="font-medium text-dab-charcoal">Bring me in to lead delivery around a critical initiative, or scale through Dab Hands to a trusted senior team built around the work.</p>
                   </div>
                 </FadeUp>
               </div>
@@ -843,7 +821,7 @@ export default function Home() {
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.18} className="md:col-span-6 md:col-start-7 space-y-6 text-[15px] md:text-[17px] text-dab-charcoal/60 leading-relaxed">
-                  <p>DAB hands is supported by a trusted network of senior operators, strategists, creatives, producers, and specialists.</p>
+                  <p>Dab Hands is supported by a trusted network of senior operators, strategists, creatives, producers, and specialists.</p>
                   <p>People I have delivered with for years. Leaders in their fields. Brought in around the initiative when needed.</p>
                   <div className="pt-4">
                     {[
@@ -1076,7 +1054,7 @@ export default function Home() {
             <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
               <FadeUp>
                 <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[20ch] mx-auto text-center mb-16 md:mb-20">
-                  Why organisations bring DAB hands in
+                  Why organisations bring Dab Hands in
                 </h2>
               </FadeUp>
               <div className="grid md:grid-cols-2 gap-x-16 gap-y-0 max-w-[1024px] mx-auto">
@@ -1105,13 +1083,13 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.08}>
                   <h2 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[16ch] mx-auto">
-                    Ways DAB hands steps in
+                    Ways Dab Hands steps in
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <div className="mt-8 space-y-2 text-[16px] md:text-[18px] text-dab-charcoal/70 leading-relaxed">
                     <p className="lg:whitespace-nowrap">Usually when important work starts drifting, slowing down, or fragmenting as it moves to market.</p>
-                    <p className="lg:whitespace-nowrap">DAB hands steps in to restore clarity, alignment, and quality of execution around the work.</p>
+                    <p className="lg:whitespace-nowrap">Dab Hands steps in to restore clarity, alignment, and quality of execution around the work.</p>
                   </div>
                 </FadeUp>
               </div>
@@ -1219,7 +1197,7 @@ export default function Home() {
                 <div className="flex items-center gap-2.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-dab-green" />
                   <span className="font-semibold text-[15px] tracking-[-0.02em]">
-                    <span className="font-bold">DAB</span> hands
+                    <span className="font-bold">Dab</span> Hands
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
@@ -1240,7 +1218,7 @@ export default function Home() {
                       style={{ filter: 'brightness(0) invert(1)' }}
                     />
                   </a>
-                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 DAB hands</p>
+                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 Dab Hands</p>
                 </div>
               </div>
             </div>
