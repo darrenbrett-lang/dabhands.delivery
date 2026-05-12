@@ -3,13 +3,15 @@ import { motion } from 'framer-motion';
 interface RibbonMotifProps {
   className?: string;
   variant?: 'hero' | 'separator';
+  tone?: 'dark' | 'light';
   animated?: boolean;
 }
 
 // The flowing signal/ribbon brand device: scattered streams on the left converge
 // toward a tight bundle on the right. Represents fragmented signals becoming aligned.
 // `hero` is the large dominant composition; `separator` is a thinner band for transitions.
-export const RibbonMotif = ({ className = '', variant = 'hero', animated = false }: RibbonMotifProps) => {
+// `tone="dark"` = dark strokes for light bg (default). `tone="light"` = light strokes for dark bg.
+export const RibbonMotif = ({ className = '', variant = 'hero', tone = 'dark', animated = false }: RibbonMotifProps) => {
   const W = 1280;
   const H = variant === 'hero' ? 560 : 200;
   const cy = H / 2;
@@ -49,7 +51,8 @@ export const RibbonMotif = ({ className = '', variant = 'hero', animated = false
         const cp2x = W * 0.72;
         const cp2y = cy + yRatio * spread * 0.18;
         const d = `M 0 ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${convergeX} ${cy}`;
-        const stroke = accent === 'green' ? '#B7FF00' : '#000000';
+        const baseStroke = tone === 'light' ? '#FAFAFA' : '#000000';
+        const stroke = accent === 'green' ? '#B7FF00' : baseStroke;
         return animated ? (
           <motion.path
             key={i}

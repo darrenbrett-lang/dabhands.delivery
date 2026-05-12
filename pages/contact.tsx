@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
+import { RibbonAccent } from '@/components/RibbonAccent';
+import { mailto } from '@/lib/mailto';
 
 export default function Contact() {
   return (
@@ -13,24 +15,26 @@ export default function Contact() {
         />
       </Head>
 
-      <Layout>
-        <section className="bg-dab-cream text-dab-charcoal pt-36 md:pt-44 pb-28 md:pb-40 min-h-[80vh]">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-8">
-                Contact
-              </p>
-            </FadeUp>
+      <Layout footerVariant="none">
+        <section className="bg-dab-cream text-dab-charcoal pt-36 md:pt-44 pb-28 md:pb-40 min-h-[80vh] relative overflow-hidden">
+          <RibbonAccent
+            variant={5}
+            className="hidden md:block absolute bottom-12 left-[-6%] w-[36%] lg:w-[24%]"
+            opacity={0.22}
+            drift={12}
+            driftDirection="left"
+          />
 
-            <FadeUp delay={0.08}>
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <FadeUp>
               <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[10ch]">
-                Let&rsquo;s talk.
+                Let&rsquo;s talk
               </h1>
             </FadeUp>
 
             <FadeUp delay={0.16}>
-              <p className="mt-10 md:mt-12 text-lg md:text-xl text-dab-charcoal/75 leading-relaxed max-w-[48ch]">
-                For critical digital initiatives that need to move properly, reach out directly. Most conversations start with one short call.
+              <p className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[48ch]">
+                For critical digital initiatives that need to move properly, reach out directly.
               </p>
             </FadeUp>
 
@@ -41,7 +45,7 @@ export default function Contact() {
                     Email
                   </p>
                   <a
-                    href="mailto:db@dabhands.delivery"
+                    href={mailto()}
                     className="text-xl md:text-2xl font-medium tracking-[-0.018em] hover:opacity-60 transition-opacity"
                   >
                     db@dabhands.delivery

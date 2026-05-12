@@ -1,25 +1,40 @@
-export const Footer = () => (
+import Link from 'next/link';
+import { Ribbon } from './Ribbon';
+import { BoxCTA } from './BoxCTA';
+import { mailto } from '@/lib/mailto';
+
+export type FooterVariant = 'default' | 'minimal' | 'none';
+
+export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => (
   <>
-    <section id="contact-cta" className="bg-dab-green text-dab-charcoal">
-      <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-12">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
-          <p className="text-lg md:text-xl lg:text-[22px] font-semibold tracking-[-0.02em] leading-snug max-w-[36ch]">
-            If something important needs to move properly, let&rsquo;s talk.
+    {/* Cream contact module */}
+    {variant !== 'none' && (
+    <section id="contact-cta" className="bg-dab-charcoal text-dab-cream relative overflow-hidden">
+      <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-7 md:py-9 text-center">
+        <div className="space-y-4 max-w-[42ch] md:max-w-none mx-auto">
+          {variant === 'default' && (
+            <p className="text-xl md:text-2xl lg:text-[26px] font-semibold tracking-[-0.022em] leading-snug">
+              We help organisations get stronger digital work out into the world.
+            </p>
+          )}
+          <p className="text-xl md:text-2xl lg:text-[26px] font-semibold tracking-[-0.022em] leading-snug">
+            If something important needs to move properly,{' '}
+            <Link href="/contact" className="text-dab-green underline underline-offset-[6px] decoration-1 hover:decoration-2 transition-all">
+              let&rsquo;s talk
+            </Link>
+            .
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-8 font-mono text-[11px] tracking-[0.18em] uppercase">
-            <span>Darren Brett</span>
-            <a href="mailto:db@dabhands.delivery" className="hover:opacity-60 transition-opacity">
-              db@dabhands.delivery
-            </a>
-            <a href="tel:+447788711433" className="hover:opacity-60 transition-opacity">
-              07788 711433
-            </a>
-          </div>
         </div>
+        {variant === 'default' && (
+          <div className="mt-10 md:mt-12 flex justify-center">
+            <BoxCTA href={mailto()} label="Start a conversation" tone="dark" />
+          </div>
+        )}
       </div>
     </section>
+    )}
 
-    <footer className="bg-dab-charcoal text-dab-cream">
+    <footer className="bg-dab-charcoal text-dab-cream border-t border-dab-cream/15">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           <div className="flex items-center gap-2.5">
@@ -38,12 +53,11 @@ export const Footer = () => (
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/logos/linkedin.png"
+                src="/images/logos/linkedin-app-white-icon.webp"
                 alt=""
                 width={16}
                 height={16}
                 className="block"
-                style={{ filter: 'brightness(0) invert(1)' }}
               />
             </a>
             <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 Dab Hands</p>

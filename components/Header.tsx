@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { mailto } from '@/lib/mailto';
 
 const navItems = [
-  { href: '/how-it-works', label: 'How it works' },
+  { href: '/where-we-step-in', label: 'Work' },
   { href: '/experience', label: 'Experience' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -33,22 +34,31 @@ export const Header = () => {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-            {navItems.map((item) => {
-              const active = router.pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`font-mono text-[10px] tracking-[0.22em] uppercase transition-colors ${
-                    active ? 'text-dab-cream' : 'text-dab-cream/55 hover:text-dab-cream'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <div className="hidden md:flex items-center gap-8 lg:gap-10">
+            <nav className="flex items-center gap-8 lg:gap-10">
+              {navItems.map((item) => {
+                const active = router.pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`font-mono text-[10px] tracking-[0.22em] uppercase transition-colors ${
+                      active ? 'text-dab-cream' : 'text-dab-cream/55 hover:text-dab-cream'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <a
+              href={mailto()}
+              className="group inline-flex items-center gap-2 border border-dab-cream/40 text-dab-cream text-[12px] font-medium tracking-tight pl-4 pr-3.5 py-1.5 rounded-full hover:bg-dab-cream hover:text-dab-charcoal hover:border-dab-cream transition-colors"
+            >
+              Start a conversation
+              <span aria-hidden className="text-dab-green group-hover:text-dab-charcoal transition-colors">→</span>
+            </a>
+          </div>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
