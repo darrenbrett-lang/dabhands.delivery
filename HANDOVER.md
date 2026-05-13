@@ -4,188 +4,171 @@ Pick this up cold. Captures the project as of the most recent session.
 
 ## Read this first
 
-The site has been restructured from a long single-page site into a **four-page editorial multi-page experience**. The previous handover described section-by-section structure for the old single-page; that's gone. See "Site structure" below.
+Multi-page site (Home / Work / Experience / Contact). The site is **on production** — `main` was force-fast-forwarded from `restructure/multi-page` at commit `b96ca9e` ("Copy, sign-off flow, mailto CTAs, asset swaps across all pages"). Further uncommitted iteration has happened since (see "Branch state" below).
 
-There are also four saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` that apply to every conversation about this codebase — read them before touching copy.
+Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` apply to every conversation — read them before touching copy or marks.
 
 ## Stack
 
 - **Next.js 16.2.6 (Pages Router)** — `AGENTS.md` warns it has breaking changes vs training data; read `node_modules/next/dist/docs/` before adding Next features.
 - **Tailwind CSS v4** (`@import "tailwindcss"` + `@theme` directive). Custom utilities at the bottom of `styles/globals.css`.
-- **Framer Motion 12** for scroll-driven fade-ups and the ribbon's slow horizontal drift.
+- **Framer Motion 12** for scroll-triggered fade-ups, ribbon drift, and hand-mark reveals.
 - **TypeScript**. Run `npx tsc --noEmit` after non-trivial edits.
 - **Fonts**: Geist + Geist Mono via `next/font/google` in `pages/_app.tsx`.
 
 ## Dev workflow
 
 - User runs `npm run dev` themselves on port 3000.
-- `.claude/launch.json` has `autoPort: false`. **The preview tool cannot take port 3000.** Skip preview verification cleanly and trust their hot reload.
-- They hard-refresh to confirm changes.
+- `.claude/launch.json` has `autoPort: false`. The preview tool can attach to port 3000 (worked during the recent session).
+- Verification via `preview_eval` / `preview_screenshot` works but the preview tab is often "hidden" — DOM measurements return 0 width/height in that state. Force a screenshot to get a real render, or just trust the class names on the elements.
 
 ## Branch state at handover
 
-- Working branch: `restructure/multi-page`
-- Main is behind (last sync was the single-page polish at `d5276d2`).
-- The restructure branch carries the full multi-page rewrite — pending review before merging to main and deploying to prod.
-- There are **uncommitted edits** on the branch at handover time (further iteration since the foundation commit `6e05db0`). User has not asked to commit/push them yet — only commit when explicitly asked.
+- **Working branch**: `restructure/multi-page`
+- **Production**: `main` is at `b96ca9e` — pushed directly via `git push origin restructure/multi-page:main` after the user said "Just push please". Vercel auto-deploys main → `https://dabhands.delivery`.
+- **Uncommitted edits** on `restructure/multi-page` since `b96ca9e` (today's iteration: hand-mark system, footer restructure, image-anchor rules, copy iterations, crown mark, grid toggle). User hasn't asked to commit/push them yet — only commit when explicitly asked.
+- `.gitignore` was updated to exclude `.claude/` (local Claude state).
 
-To ship to prod: `git checkout main && git merge restructure/multi-page && git push origin main`. Vercel auto-deploys main → `https://dabhands.delivery`.
+To ship to prod next time: `git push origin restructure/multi-page:main` (fast-forward) is what the user prefers — no PR ceremony.
 
 ## Site structure
 
-Four pages:
-
 ### `/` (home) — `pages/index.tsx`
 
-1. **Hero** (cream bg, centred) — H1 "Senior digital delivery / for high-stakes work" (forced 3-line wrap: `Senior digital` / `delivery for` / `high-stakes work`). Two body lines below. Large hero `Ribbon` at bottom (atmospheric, `opacity={0.4}`).
-2. **Where we are** (charcoal bg, left-rag) — kept eyebrow "Where we are" (the one carve-out for keeping an eyebrow). Two big statement blocks with green underline rules: "The tools are changing. / The problems aren't." and "Complexity is higher than ever." Four supporting lines below in two paragraphs.
-3. **Core Truth** (cream bg, centred — emotional truth moment) — "Great work rarely fails / at the idea stage." → "It fails as it moves through the organisation." (with `text-wrap: balance` applied) → "Teams fragment. / Momentum slows. / Execution weakens." → "What started strong arrives weaker than it should have been."
-4. **Antidote** (cream bg, left-rag) — H2 "Dab Hands meets these problems head-on" + 5 tick items: (1) "Stronger alignment around important work." (2) "Faster movement through complexity." (3) "Higher-quality execution." (4) "More impact from existing investment." (5) "Senior capability without traditional agency weight." + closer "Keeping important work aligned, moving, and commercially effective as it goes to market with impact." + BoxCTA "Where we step in" (right-aligned). `Ribbon` fragment positioned at `top-[35%] right-[8%] w-[56%] lg:w-[48%]` (hidden md:block, `opacity={0.25}`, `drift={12}`).
-5. Footer.
+1. **Hero** (cream, centred) — H1 "Senior digital / delivery for / high-stakes work" (3 forced spans). Below: "Important digital work can lose momentum quickly inside complex organisations." + "We help organisations get stronger digital work out into the world." with a **mobile-only `<br className="sm:hidden" />` before "digital"** so it breaks at "stronger / digital..." on phones. Large hero `Ribbon` repositioned `top-[15px] md:top-auto md:bottom-0` — sits at the top on mobile, bottom on desktop.
+2. **Where we are** (charcoal, left-rag) — eyebrow "Where we are". Two `<motion.div>` statement blocks: "The tools are changing. / The problems aren't." (with `md:whitespace-nowrap!` so each clause stays on one line at desktop) and "Complexity is higher than ever." Both with `block w-10 h-px bg-dab-green` rule underneath. Four supporting lines in two paragraphs with **four `<HandUnderline>` marks**: `slows` (1.2s) → `technology` (1.35s) → `attention` (1.5s) → `budget` (1.65s). Copy now reads "Inside organisations, friction slows the work. The role of new technology is still being worked out. Outside, competition for attention is relentless. // More of the right work needs to get through. And more of the budget needs to go into the work itself."
+3. **Core Truth** (**bg-white**, centred) — Has a **hand-drawn SVG crown** above the headline (3 V-peaks + base line + 3 open circles in `dab-brown`). H2 "Great work rarely fails / at the idea stage." Below: a single merged paragraph at `text-2xl md:text-3xl font-medium` — "It fails as it moves through the organisation.<br /> What started strong arrives weaker than it should have been." (the soft break is hard, intentional). The "Teams fragment / Momentum slows / Execution weakens" trio was removed.
+4. **Antidote** (cream, left-rag) — H2 "Dab Hands meets these problems head-on" + 5 tick items + closer "Keeping important work aligned, moving, and commercially effective as it goes to market with impact." + the punchy follow-up "We help organisations get stronger digital work out into the world." (at `text-[32px] md:text-[48px] lg:text-[60px] font-bold leading-[1.05]`) + BoxCTA "Where we step in" right-aligned. Antidote `Ribbon` is now wrapped in a clip container so its left edge is bounded — won't run under the headline/checklist column.
+5. Footer (variant: **minimal**).
 
-### `/where-we-step-in` — `pages/where-we-step-in.tsx`
+### `/where-we-step-in` — `pages/where-we-step-in.tsx` (nav label: "Work")
 
-1. **Hero / Built for** (cream, left-rag — consolidated module) — H1 "Where Dab Hands steps in" + two intro lines: (1) "Dab Hands is built around important work that cannot afford to drift." (2) "Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace."
-2. **Our work creates** (brown) — eyebrow "Our work creates" above 3-item icon row: Attention / Connection / Conversion.
-3. **Intervention points** (cream) — 6 expanded items (no accordion — all visible). Each is a 2-col layout: number + title left, body + mini-link "Start a conversation →" right. `Ribbon` fragment at bottom-left.
-4. **The execution gap** (charcoal) — H2 "Most businesses do not lose on ambition. They lose through execution." + 60% (Harvard Business Review) and 20–30% (McKinsey & Company) stats. Stats numbers are `text-dab-cream` (not green per the rules). `Ribbon` fragment behind stats, `tone="dark"`.
-5. **Closing statement** (cream, centred) — "We help organisations get stronger digital work out into the world." + BoxCTA "Experience" centred. `Ribbon` fragment positioned at bottom-center using fuller-ribbon.png via `imagePath` prop.
-6. Footer.
+1. **Hero** (cream, left-rag) — H1 "Where we step in" + bold subhead "We help organisations get stronger digital work out into the world." + body "Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace." `sand-ripple.jpg` image (user's own asset) anchored `right-0 bottom-0 h-[80%] w-auto max-w-none` — fills 80% of section height across all breakpoints, right + bottom anchored, no off-screen bleed.
+2. **When strong work survives the system** (**bg-white**) — eyebrow "The outcome" + H2 + 3-item icon row: Attention / Connection / Conversion. Background changed from brown to white per the user.
+3. **If any of this feels familiar** (cream) — was "Intervention points". 6 expanded numbered items (no accordion). Each card's inline "Start a conversation →" link uses `mailto()` with **the intervention title as the subject** (e.g. `?subject=Critical%20work%20drifting`). `Ribbon` fragment now anchored **bottom-right** (was bottom-left).
+4. **Why expert delivery matters** (charcoal) — was "The execution gap". H2 with paired statements: "Technology is accelerating quickly. / Human systems are not." (mb-10 gap separator) then "Most businesses do not lose on `ambition`. / They lose through `execution`." with `<HandUnderline>` on **ambition** and **execution** only (Technology and systems are not underlined per latest iteration). Each line uses `<span className="block mb-4 md:mb-5">` for controlled spacing. Below: 60% (HBR) and 20–30% (McKinsey) stat blocks with `<HandUnderline>` on **successfully realised** and **execution inefficiencies**.
+5. **Closing statement** (cream, centred) — "Backed by 20 years of senior digital delivery." (big) + "We help organisations get stronger digital work out into the world." (smaller, charcoal/75) + BoxCTA "Experience".
+6. Footer (variant: **minimal**).
 
 ### `/experience` — `pages/experience.tsx`
 
-1. **Hero** (cream, left-rag) — eyebrow "Where I've come from" + H1 "Experience built under pressure" + intro "More than 20 years leading complex digital delivery across platforms, campaigns, and customer experience for global brands."
-2. **Worked at scale on** (charcoal, left-rag) — eyebrow "Worked at scale on" + scrolling logo carousel (Framer Motion, `duration: 40`, `repeat: Infinity`). Displays 10 clients as repeated tiles: Nike, Volkswagen, Audi, Hugo Boss, Tommy Hilfiger, Unilever, Johnson & Johnson, Royal Mail, Parcelforce, Palantir. Logos are PNG files in `/public/images/logos/` with filename mapping (e.g., `hugoboss` slug → `hugo-boss.png` filename). Images have `onError` handler to hide broken links. Height fixed at `h-10 md:h-14` with `object-scale-down` to maintain aspect ratios.
-3. **Darren Brett** (brown) — 12-col grid: portrait image (`/images/IMG_0064.jpeg`) in `md:col-span-3`, biography text in `md:col-span-8 md:col-start-5`. Bio includes heading "Hi, I'm Darren Brett" + 6 paragraphs covering experience, agency leadership, role breadth, DAB Hands model, and call-to-action. `RibbonAccent` variant 4 hidden on mobile, positioned bottom-right with `opacity={0.25}`, `drift={12}`.
-4. **The teams behind the work** (cream) — H2 + body + 3 tick items (Small senior teams / Clear accountability / Built around the work itself).
-5. **Trusted to lead important work** (brown) — H2 + 3-column testimonial layout (data in `testimonials` array with 3 quotes from Joel Sinnott / Anthony Mahon / Meher Mumtaz).
-6. **Where I've worked** (charcoal) — H2 "Where I've worked" + intro copy + 5-col icon grid: Platform and e-commerce / Digital brand experience / Campaigns and launches / Membership and lifecycle / Cross-functional delivery leadership. Includes a `BoxCTA href="/contact"` "Start a conversation" (`tone="dark"`) right-aligned at the bottom.
-7. Footer.
+1. **Hero** (cream, left-rag) — eyebrow "Where I've come from" + H1 "Experience built under pressure" + intro "Large-scale digital delivery experience shaped across global brands, complex platforms, campaigns, and customer experience programmes." (`under-pressure.png` image right-anchored: `right-0 top-0 bottom-0 h-full w-auto max-w-none` — full section height, anchored right at every breakpoint. Opacity `40 / 65 / 90` across mobile / sm / md+ + a `mask-image: linear-gradient(to top left, full 30%, 20% 100%)` to fade the upper-left where text overlaps, preserving WCAG contrast.)
+2. **I've worked at scale for** (charcoal, left-rag) — was "Worked at scale on". Scrolling client logo carousel (10 PNGs from `/public/images/logos/`, rendered at native colour — the logos are already white-on-transparent). No CSS filter applied.
+3. **With deep experience across** (charcoal) — was "Where I've worked", now **moved up** to sit directly below the logo ticker. Single H2 (with `md:whitespace-nowrap!` so it stays one line on desktop, wraps on mobile) + 5-col icon grid. The mid-page "Start a conversation" CTA was removed.
+4. **Darren Brett "Who am I"** (brown) — eyebrow "Who am I" + heading "Hi, I'm Darren" (no surname now) + 12-col grid: portrait `IMG_0064 _ sq.jpeg` (square crop) in `md:col-span-4` with **a `dab-brown` mix-blend-multiply overlay at 40% opacity** to harmonise tone, bio in `md:col-span-7 md:col-start-6`. Bio now ends with "Understanding how people, systems, and emerging technologies work together under pressure, and helping strong work stay strong as it moves to market." (replaced "Bringing the right people together..."). RibbonAccent removed.
+5. **The teams behind the work** (cream) — H2 + 3 separated paragraphs ("People I have delivered with for years." / "Leaders in their fields." / "Brought in around the initiative when needed.") + 3 tick items.
+6. **Trusted to lead important work** (brown) — H2 + 3 testimonials.
+7. **Closing** (cream, centred) — "Let's get important work `moving properly`." with `<HandUnderline stroke="var(--color-dab-charcoal)">` on "moving properly" (charcoal on cream — most accessible). Uses `text-wrap: balance` (via inline `style` since globals.css `p { text-wrap: pretty }` overrides Tailwind utility) + a non-breaking space inside the HandUnderline children so "moving properly" never widows. BoxCTA "Start a conversation" → `mailto()`.
+8. Footer (variant: **minimal**).
 
 ### `/contact` — `pages/contact.tsx`
 
-1. **Hero** (cream, left-rag) — H1 "Let's talk" + intro + 3-card grid: Email / Phone / LinkedIn. `RibbonAccent` variant 5 bottom-left.
-2. Footer.
+1. **Hero** (cream, left-rag) — H1 "Let's talk" + intro "For critical digital initiatives that need to move properly, reach out directly." + Email / Phone / LinkedIn link grid. RibbonAccent variant 5 bottom-left.
+2. Footer (variant: **none**) — the cream contact module is **entirely hidden** on /contact so the page doesn't duplicate the contact details. Only the small charcoal copyright bar shows.
 
 ## Components (`/components`)
 
-- **`Layout.tsx`** — wraps every page; renders `<Header>` + `<main id="top">{children}</main>` + `<Footer>`. Imported in each page.
-- **`Header.tsx`** — fixed top, `bg-dab-charcoal`, green dot logo + "Dab Hands" wordmark left, desktop nav right (`/where-we-step-in` · `/experience` · `/contact`), mobile hamburger. Active route gets `text-dab-cream` (vs `text-dab-cream/55`).
-- **`Footer.tsx`** — two stacked modules: (1) cream contact module "If something important needs to move properly, let's talk." + name/email/phone row + `Ribbon` fragment at bottom-center using `imagePath="/images/fuller-ribbon.png"` (every page). (2) dark bottom strip with wordmark, LinkedIn icon, copyright. The green CTA bar has been removed.
+- **`Layout.tsx`** — wraps every page. `<Header>` + `<main>` + `<Footer variant={footerVariant}>` + `<GridToggle>`. Accepts a `footerVariant?: FooterVariant` prop.
+- **`Header.tsx`** — fixed top, `bg-dab-charcoal`. Logo left, desktop nav center-right (`Work` · `Experience` · `Contact`), **"Start a conversation" pill CTA** to the right of the nav (`mailto()` href, cream border, green arrow, cream-fill on hover). Mobile hamburger menu unchanged.
+- **`Footer.tsx`** — Two stacked modules:
+  - **Cream contact module**: bg now `bg-dab-charcoal` (was cream then green then back). Renders "If something important needs to move properly, **let's talk**." — "let's talk" is an internal `<Link href="/contact">` with `text-dab-green underline underline-offset-[6px]`. Padding `py-7 md:py-9` (compact). Contact details (Darren / email / phone) are **removed** from the footer module — the "let's talk" link now drives to /contact instead.
+  - **Charcoal copyright bar**: has `border-t border-dab-cream/15` hairline above. Wordmark + LinkedIn icon (`/images/logos/linkedin-app-white-icon.webp`) + © text.
+  - **Footer variants**: `'default' | 'minimal' | 'none'`.
+    - `default`: shows "We help organisations…" line + "Start a conversation" BoxCTA above the "let's talk" line.
+    - `minimal`: only the "let's talk" line (used on Home, Work, Experience).
+    - `none`: hides the entire cream contact module (used on Contact). Only the copyright bar remains.
 - **`FadeUp.tsx`** — `motion.div` with scroll-triggered fade + 18px rise. `delay` and `className` props.
-- **`LogoMark.tsx`** — brand-logo `<img>` that tries `/images/logos/{slug}.svg` first, falls back to `cdn.simpleicons.org/{slug}/ffffff`, then renders null. Uses `filter: brightness(0) invert(1)` to force white. Used only on `/experience` proof strip.
-- **`BoxCTA.tsx`** — pill-shaped page-to-page CTA. `tone="light"` (default, for cream/light sections): charcoal border + charcoal text + charcoal arrow → on hover, fills charcoal with cream text and the arrow turns green (signal moment on dark). `tone="dark"` (for charcoal sections): cream border + cream text + green arrow at rest → on hover, fills cream with charcoal text and arrow.
-- **`Ribbon.tsx`** — large/medium atmospheric ribbon (defaults to `/images/ribbon.png`, can be customized via `imagePath` prop). Uses `mix-blend-multiply` on light bgs so the JPEG's white background drops out and only the soft greyscale ribbon + green tip show. `tone="dark"` inverts the image and hue-rotates (preserves green tip) + `mix-blend-lighten` so it works on charcoal bgs. Motion is a subtle scroll-tied horizontal drift (`drift` px, no loops, no parallax-heavy). Props: `className`, `opacity` (default 0.45), `flip`, `drift` (default 24), `driftDirection` (`'right'` | `'left'`), `tone`, `imagePath` (default `/images/ribbon.png`).
-- **`RibbonAccent.tsx`** — smaller secondary accents. Crops `/images/ribbon_accents.png` (a 2×3 grid of 6 strands) via CSS `background-size: 200% 300%` + `background-position`. Variant prop `1`–`6` maps to the cells (`1`=tl, `2`=tr, `3`=ml, `4`=mr, `5`=bl, `6`=br). Default aspect ratio `2.3/1`. Same `tone`/`flip`/`drift` controls as `Ribbon`. Default opacity `0.3`.
-- **`RibbonMotif.tsx`** — older SVG-based motif (procedurally drawn 13 ribbon paths converging to a green dot). **Currently unused** — kept as a fallback. The image-based `Ribbon` superseded it.
+- **`LogoMark.tsx`** — brand-logo `<img>` with SVG/CDN fallback. Used only on `/experience` proof strip (the imported but unused-pattern — the logo carousel uses inline `<img>` not this component).
+- **`BoxCTA.tsx`** — pill-shaped CTA. `tone="light"` (default) + `tone="dark"`. Accepts any `href` (works with `mailto:` strings).
+- **`Ribbon.tsx`** — large atmospheric ribbon. Default `/images/ribbon.png`, customisable via `imagePath`. Props: `className`, `opacity` (default 0.45), `flip`, `drift` (default 24), `driftDirection`, `tone` (`'light'` | `'dark'`), `imagePath`.
+- **`RibbonAccent.tsx`** — smaller secondary accents from `ribbon_accents.png` (2×3 grid, variants 1–6).
+- **`RibbonMotif.tsx`** — UNUSED legacy SVG motif. Kept as a fallback only.
+- **`HandUnderline.tsx`** — **new**. Renders a hand-drawn SVG underline beneath its children. Props:
+  - `delay` (seconds, default 1.2) — reveal delay after viewport entry
+  - `variant` (1–4) — 4 different path shapes for natural variation across instances
+  - `tone` (`'dark'` | `'light'`, default `'dark'`) — `dark` = `dab-green` on charcoal/brown bgs, `light` = `dab-brown` on cream/white bgs
+  - `stroke` (string) — full override, takes precedence over `tone`
+  - **Smart offset rule**: if the resolved stroke is `dab-charcoal` (same colour as body text), the underline auto-offsets to `-bottom-[8px]` instead of the default `-bottom-[3px]` so descenders don't visually touch the line. Encoded inside the component.
+  - SVG is `viewBox="0 0 100 8" preserveAspectRatio="none"` so it stretches to match word width.
+- **`GridToggle.tsx`** — **new dev tool**. Fixed-position pill button bottom-right of every page ("GRID · OFF" / "GRID · ON"). Click toggles a 12-column overlay that matches the site container (`max-w-screen-xl` + responsive padding + `gap-4 md:gap-6 lg:gap-8`). Columns rendered as faint `dab-green/10` blocks. Mounted in `Layout.tsx` so it's always available.
+
+## `lib/mailto.ts` — **new**
+
+Centralises the "Start a conversation" mailto pattern.
+
+```ts
+mailto()                                  // → default subject + body
+mailto({ subject: 'Critical work drifting' })  // override subject
+```
+
+Defaults: `subject = "Starting a conversation"`, `body = "I want to get stronger digital work into the world."`, recipient = `db@dabhands.delivery`.
+
+Used by: Header CTA, Experience closing CTA, all 6 WWSI intervention CTAs (each carries its own intervention title as the subject), Contact page email link, Footer default-variant CTA + email link.
 
 ## Brand tokens (`styles/globals.css` `@theme`)
 
 | Token | Hex | Role |
 |---|---|---|
-| `dab-cream` / `dab-white` | `#F3F0EA` | Warm off-white. Primary background (≈80–85% of site). |
-| `dab-charcoal` | `#111111` | Soft deep charcoal. Primary text + dark section bg. **Not pure black.** |
-| `dab-charcoal-alt` | `#171717` | (Largely unused.) |
-| `dab-green` | `#B6FF00` | Signal/acid accent. **Very sparing.** |
-| `dab-taupe` | `#8E877D` | Warm grey secondary. Separators, supporting UI. |
-| `dab-brown` | `#ACA195` | Medium warm brown. Used for portrait section, testimonials, Attention/Connection/Conversion. |
-| `dab-brown-light` | `#E8E3DC` | Mostly unused. |
-| `dab-warm` | `#E8D5C5` | Peach cream from the portrait halo. Currently unused. |
-
-Defaults: `--background: #F3F0EA`, `--foreground: #111111`.
-
-The legacy `.signal-rule` CSS class on line 69 of `globals.css` still hard-codes `#B7FF00` (old green). Inconsistent with the token — fix if you touch it.
+| `dab-cream` / `dab-white` | `#F3F0EA` | Primary background |
+| `dab-charcoal` | `#111111` | Primary text + dark sections (not pure black) |
+| `dab-charcoal-alt` | `#171717` | Footer copyright bar hover state |
+| `dab-green` | `#B6FF00` | Signal/acid accent — very sparing |
+| `dab-taupe` | `#8E877D` | Mostly unused |
+| `dab-brown` | `#ACA195` | Brown sections + light-bg hand underlines |
+| `dab-brown-light` | `#E8E3DC` | Used briefly on the carousel experiment; now unused |
+| `dab-warm` | `#E8D5C5` | Unused |
 
 ## Hard rules (saved to memory)
 
-1. **No em dashes (—) in user-facing copy.** Use commas, full stops, or restructure. (`feedback_no_em_dashes.md`)
-2. **No neon green text on light backgrounds — ever.** Strictly enforced. The `BoxCTA` variant system encodes this: green elements only appear when the background is dark (charcoal or brown). On cream/white, green can appear as decorative **lines** (signal hairlines, statement underline rules) but never as text. (`feedback_no_green_text_on_white.md`)
-3. **Brand is "Dab Hands"** — capital D, capital H, lowercase rest. Wordmark in the header/footer is styled `<span class="font-bold">Dab</span> Hands`. Apply to every user-facing string. File paths, code identifiers, and the Tailwind color tokens (`dab-cream`, `dab-charcoal`, etc.) are exempt. (`feedback_dab_hands_titlecase.md`)
-4. **Geist sans throughout.** No display fonts, no serifs. **Label headings have no full stops** ("A senior-led delivery model", "Let's talk", "Where we step in", "Trusted to lead important work"). **Truth-statement headings keep periods** for cadence ("Great work rarely fails at the idea stage.", "Complexity is higher than ever.", "Teams fragment."). (`feedback_typography_principles.md`)
+1. **No em dashes (—) in user-facing copy.**
+2. **No neon green text on light backgrounds — ever.** Includes hover states (`hover:text-dab-green` on cream is also forbidden). The memory file explicitly notes the contact-page hover failure that established this rule.
+3. **Brand is "Dab Hands"** — capital D, capital H, lowercase rest. File paths and Tailwind tokens are exempt.
+4. **Geist sans throughout.** Label headings no full stops; truth-statement headings keep periods.
+5. **Hand markup is "proof of care", not decoration.** Tertiary visual layer after typography and ribbon atmosphere. Editorial/technical tone (architectural notation, editorial markup) — never sketchbook / agency / expressive. Use sparingly. On mobile, favour underlines + brackets + directional gestures over precise word circles. `dab-green` on dark, `dab-brown` on light (or `dab-charcoal` for max contrast when the brief calls for accessibility).
 
-## Alignment system
+## Hand-mark system
 
-Hybrid:
+The site uses two kinds of hand marks now:
 
-- **Centred**: hero sections, emotional truth statements, cinematic pauses, large positioning statements, final CTA modules, closing statements.
-- **Left-aligned**: operational content, accordion-style lists, proof points, testimonials, capability sections, supporting copy.
+- **HandUnderline**: applied to specific words/phrases for emphasis. Active instances:
+  - Home WHERE WE ARE: `slows` · `technology` · `attention` · `budget` (green, sequential 1.2s → 1.65s reveal)
+  - WWSI Why expert delivery matters H2: `ambition` · `execution` (green)
+  - WWSI stats: `successfully realised` · `execution inefficiencies` (green)
+  - Experience closing: `moving properly` (charcoal — most accessible on cream)
+- **One-off mark (crown)**: hand-drawn SVG above "Great work rarely fails / at the idea stage." (home Core Truth section). `dab-brown` stroke, slightly imperfect 3-peak zigzag with base line + 3 open peak circles. Animates in with the existing headline FadeUp.
 
-Concretely: home hero + Core Truth + Where We Step In closing statement + Experience section headings + cream footer contact module are centred. Everything else is left-rag.
+Animation rule: marks animate **after** the copy lands (fade-in + small lift, no draw-on stroke animation — that reads as agency/illustrative). Most underlines use a 1.2s delay (≈ FadeUp 0.5s + ~0.7s pause).
 
-## Typography
+## Image-anchor rules
 
-- Body text: `text-xl` (20px) at all viewports, full `text-dab-charcoal` / `text-dab-cream` (no opacity dimming).
-- Eyebrows: `font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60` (or `cream/55` on dark). Currently active eyebrows: "Where we are" (home), "Where I've come from" (experience hero), "Worked at scale on" (experience logo ticker), "Our work creates" (where-we-step-in attention/connection/conversion), and "The execution gap" (where-we-step-in stats section).
-- Headings: `font-semibold`, tight tracking (`-0.022em` to `-0.03em` depending on size), `leading-[1.02]` to `[1.04]`. No full stops on labels (see rule 4).
+Two hero images now follow the **same simple rule** at every breakpoint:
 
-## Ribbon system
+- **`sand-ripple.jpg` on /where-we-step-in hero**: `absolute right-0 bottom-0 h-[80%] w-auto max-w-none` + opacity progression `50 / 75 / 100`. Fills 80% of section height, anchored right + bottom.
+- **`under-pressure.png` on /experience hero**: `absolute right-0 top-0 bottom-0 h-full w-auto max-w-none` + opacity `40 / 65 / 90` + `mask-image: linear-gradient(to top left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.2) 100%)`. Fills full section height, right-anchored, with mask fading upper-left where text overlaps for accessibility.
 
-The flowing ribbon is the core atmospheric brand device. Use sparingly. The site should remain mostly typography and whitespace. Ribbons should feel *"movement continuing quietly underneath the system"* — never decorative, never wallpaper.
+**Important Tailwind v4 gotcha**: `img` has `max-width: 100%` via preflight. You MUST add `max-w-none` for any image wider than its container (which both of these are).
 
-Current placements:
-- Home hero — `Ribbon` (large, bottom, `opacity={0.4}`)
-- Home Antidote — `Ribbon` (fragment, positioned `top-[35%] right-[8%] w-[56%] lg:w-[48%]`, `opacity={0.25}`, `drift={12}`)
-- Where We Step In Intervention points → Execution gap transition — `Ribbon` fragment
-- Where We Step In Execution gap (behind stats) — `Ribbon` fragment, `tone="dark"`
-- Where We Step In Closing statement — `Ribbon` (bottom-center, `imagePath="/images/fuller-ribbon.png"`)
-- Experience logo ticker — no ribbon
-- Experience Darren Brett — `RibbonAccent` variant 4 (hidden md:block, `opacity={0.25}`, `drift={12}`)
-- Contact (bottom) — `RibbonAccent` variant 5
-- Footer cream contact module — `Ribbon` (bottom-center, `imagePath="/images/fuller-ribbon.png"`, every page)
+## Typography gotchas
 
-When adding more: hide on mobile (`hidden md:block`), use very low opacity (0.18–0.35), crop off the section edge, and avoid symmetrical placement.
+- `globals.css` sets `h1–h6 { text-wrap: balance }` and `p { text-wrap: pretty }` unlayered → these win over Tailwind utilities. Use **inline style** (`style={{ textWrap: 'balance' }}`) or `!important` modifier (`md:whitespace-nowrap!`) to override.
+- For widow control on closing lines: use **inline `text-wrap: balance` + non-breaking space** (`{' '}` or `&nbsp;`) between the last two words. Belt-and-braces.
+- `<br className="sm:hidden" />` is the pattern for mobile-only forced breaks.
 
-## File map
+## Common gotchas (cont'd)
 
-```
-pages/
-  index.tsx                    Home
-  where-we-step-in.tsx         (was how-it-works.tsx — renamed)
-  experience.tsx
-  contact.tsx
-  _app.tsx                     Font wiring + Layout
-  _document.tsx
-
-components/
-  Layout.tsx                   Header + main + Footer wrapper
-  Header.tsx                   Fixed nav + mobile menu
-  Footer.tsx                   Green CTA bar + cream contact + dark strip
-  FadeUp.tsx                   Scroll-triggered fade animation
-  LogoMark.tsx                 Brand logo with SVG/CDN fallback
-  BoxCTA.tsx                   Page-to-page pill CTA (light/dark tones)
-  Ribbon.tsx                   Main atmospheric ribbon (ribbon.png)
-  RibbonAccent.tsx             Secondary accents (ribbon_accents.png, 6 variants)
-  RibbonMotif.tsx              UNUSED — SVG-based legacy motif
-
-public/images/
-  IMG_0064.jpeg                Darren Brett portrait (current, B&W)
-  IMG_3912.jpeg                Old Darren portrait (replaced — keep for now)
-  flow.jpeg                    Original ribbon photo (unused now)
-  ribbon.png                   User-supplied ribbon for Ribbon component (default)
-  fuller-ribbon.png            User-supplied fuller ribbon for footer / closing sections
-  ribbon_accents.png           User-supplied 2×3 sheet for RibbonAccent
-  logos/                       Brand logo PNG files (Nike, VW, Audi, Hugo Boss, Tommy Hilfiger, Unilever, J&J, Royal Mail, Parcelforce, Palantir)
-
-public/logos/
-  linkedin.png                 Black LinkedIn glyph (used in dark footer, white via filter)
-
-styles/globals.css             @theme tokens + h1–h6 rules + .signal-rule, .dot-grid
-.claude/launch.json            Local dev port config (port 3000, autoPort: false)
-```
-
-## Common gotchas
-
-- The page `<title>` and mobile menu footer text reference "Dab Hands. Digital Delivery, Handled." Update those if you change brand styling.
-- `text-wrap: balance` is set on h1–h6 and `text-wrap: pretty` on `p` globally — don't fight these with explicit `<br/>` unless you want to override the balanced wrap.
+- The page `<title>` and mobile menu footer text still reference "Dab Hands. Digital Delivery, Handled." Update those if you change brand styling.
 - `RibbonMotif` is defined but unused; if you delete it, make sure nothing else imports it (currently nothing does).
-- The `clients` array (brand logos for `/experience` logo ticker) lives at the top of `pages/experience.tsx` and contains 10 brands with structure `{ name, slug, filename }`. The `filename` property maps to actual PNG files in `/public/images/logos/` (e.g., slug `hugoboss` → filename `hugo-boss.png`). Logos have `onError` handlers that hide broken links. Supported brands: Nike, Volkswagen, Audi, Hugo Boss, Tommy Hilfiger, Unilever, Johnson & Johnson, Royal Mail, Parcelforce, Palantir.
-- Brown sections (Darren Brett, testimonials, Attention/Connection/Conversion) use charcoal text — green text on brown is *technically* allowed by the rule but in practice we don't do it. Use the `BoxCTA` `tone="light"` variant on brown (charcoal pill).
-- The dev grid + outlines toggles from the old single-page site are gone. Don't try to reuse those state hooks.
+- The `clients` array (brand logos) lives at the top of `pages/experience.tsx`. Logos are white-on-transparent PNGs in `/public/images/logos/` — no filter applied (they're already white).
+- LinkedIn icon: `/images/logos/linkedin-app-white-icon.webp` (no filter needed; native white).
+- Image sizing > 100% width requires `max-w-none` due to Tailwind v4 preflight.
+- The grid toggle button is always visible on every page in dev AND production. If you want it dev-only later, gate it on `process.env.NODE_ENV === 'development'` inside `Layout.tsx`.
+- Preview tab often "hidden" — DOM measurements return 0. Force `preview_screenshot` to render, or just trust the class names.
 
 ## Working style
 
 - User iterates fast in small, specific edits. Don't pre-emptively redesign neighbouring sections when they ask about one thing.
-- Single source of truth on copy lives in the page files — no CMS, no draft system.
-- Each page has a BoxCTA pointing to the next page in the flow: Home ("Where we step in") → Where we step in ("Experience") → Experience ("Start a conversation" to contact section). Contact is terminal with footer ribbon and contact info.
-- When the user shares a design system / typography / colour document, treat it as a reference refresher — *most of it will already be implemented*. Diff it against the current build and flag only the drifts.
-- Be honest about what you can and can't do. If a request needs external assets, set up the wiring and ask them to supply the file rather than guessing or inventing.
+- Each page has a sign-off + CTA to the next page in the flow: Home → Work → Experience → Contact. Contact is terminal.
+- Footer variants stay coordinated with the sign-off flow — `minimal` on pages that have their own CTA, `none` on /contact itself.
+- When the user shares a design system / typography / colour document, treat it as a reference refresher. Diff it against the current build and flag only the drifts.
+- Be honest about what you can and can't do. If a request needs external assets (real brand SVG logos, photographs, etc.), wire the structure and ask them to supply the file.
+- For exploratory questions ("what do you think?"), respond in 2–3 sentences with a recommendation + main tradeoff. Don't implement until they agree.

@@ -1,22 +1,26 @@
-import Head from 'next/head';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
+import { Ribbon } from '@/components/Ribbon';
 import { RibbonAccent } from '@/components/RibbonAccent';
+import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
 export default function Contact() {
   return (
     <>
-      <Head>
-        <title>Contact — Dab Hands</title>
-        <meta
-          name="description"
-          content="Get in touch with Dab Hands. Senior-led digital delivery for high-stakes work."
-        />
-      </Head>
+      <SeoMeta
+        title="Contact — Dab Hands"
+        description="Get in touch with Dab Hands. Senior-led digital delivery for high-stakes work."
+        path="/contact"
+      />
 
       <Layout footerVariant="none">
         <section className="bg-dab-cream text-dab-charcoal pt-36 md:pt-44 pb-28 md:pb-40 min-h-[80vh] relative overflow-hidden">
+          <Ribbon
+            className="absolute inset-x-0 bottom-0 w-full"
+            opacity={0.4}
+            drift={28}
+          />
           <RibbonAccent
             variant={5}
             className="hidden md:block absolute bottom-12 left-[-6%] w-[36%] lg:w-[24%]"
@@ -28,13 +32,14 @@ export default function Contact() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[10ch]">
-                Let&rsquo;s talk
+                What needs moving?
               </h1>
             </FadeUp>
 
             <FadeUp delay={0.16}>
               <p className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[48ch]">
-                For critical digital initiatives that need to move properly, reach out directly.
+                For critical digital initiatives that need to move properly,<br className="hidden md:block" />
+                {' '}reach out directly.
               </p>
             </FadeUp>
 

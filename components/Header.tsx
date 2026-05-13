@@ -28,7 +28,7 @@ export const Header = () => {
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
           <Link href="/" className="flex items-baseline gap-3 group" aria-label="Dab Hands home">
-            <span className="w-[14px] h-[14px] rounded-full shrink-0 bg-dab-green" />
+            <span className="brand-dot w-[14px] h-[14px] rounded-full shrink-0" />
             <span className="font-semibold text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
               <span className="font-bold">Dab</span> Hands
             </span>

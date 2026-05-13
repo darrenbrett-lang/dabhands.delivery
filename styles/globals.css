@@ -4,9 +4,11 @@
   --color-dab-cream: #F3F0EA;
   --color-dab-charcoal: #111111;
   --color-dab-charcoal-alt: #171717;
+  --color-dab-charcoal-soft: #4A4744;
   --color-dab-green: #B6FF00;
   --color-dab-taupe: #8E877D;
   --color-dab-brown: #ACA195;
+  --color-dab-brown-lighter: #C0B5A9;
   --color-dab-brown-light: #E8E3DC;
   --color-dab-white: #F3F0EA;
   --color-dab-warm: #E8D5C5;
@@ -17,7 +19,7 @@
 
 :root {
   --background: #F3F0EA;
-  --foreground: #111111;
+  --foreground: #4A4744;
 }
 
 * {
@@ -41,11 +43,14 @@ section {
   scroll-margin-top: 80px;
 }
 
+/* Optical alignment: nudge display type left to compensate for glyph side-bearing,
+   so headlines align with body copy. Scales with font-size via em. */
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.022em;
   line-height: 1.04;
-  font-weight: 600;
+  font-weight: 500 !important;
   text-wrap: balance;
+  margin-left: -0.04em;
 }
 
 p {
@@ -68,6 +73,65 @@ p {
   height: 2px;
   background: #B7FF00;
   display: block;
+}
+
+/* Focus visible: clear keyboard indicator across all interactive elements.
+   Uses the brand green at low opacity so it sits cleanly on both cream and charcoal backgrounds. */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-dab-green);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip-to-content link: hidden until focused, then anchors top-left. */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--color-dab-charcoal);
+  color: var(--color-dab-cream);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transform: translateY(-150%);
+  transition: transform 0.18s ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-dab-green);
+  outline-offset: 3px;
+}
+
+/* Brand dot: soft breathing pulse — scale tied to cap height, colour drifts vibrant↔soft.
+   Cycle ≈ resting human breath (~13/min). */
+@keyframes brand-dot-breathe {
+  0%, 100% {
+    transform: scale(1);
+    background-color: var(--color-dab-green);
+  }
+  50% {
+    transform: scale(1.14);
+    background-color: #D9E89A;
+  }
+}
+.brand-dot {
+  background-color: var(--color-dab-green);
+  animation: brand-dot-breathe 4.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, background-color;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-dot {
+    animation: none;
+  }
 }
 
 /* Dev: outline every div for design QA. Excluded for dev tool elements. */

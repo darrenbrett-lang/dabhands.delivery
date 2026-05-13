@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import Head from "next/head";
 import type { AppProps } from "next/app";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -18,11 +19,16 @@ const geistMono = Geist_Mono({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main
-      className={`${geist.variable} ${geistMono.variable}`}
-      style={{ fontFamily: 'var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}
-    >
-      <Component {...pageProps} />
-    </main>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      </Head>
+      <main
+        className={`${geist.variable} ${geistMono.variable}`}
+        style={{ fontFamily: 'var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}
+      >
+        <Component {...pageProps} />
+      </main>
+    </>
   );
 }

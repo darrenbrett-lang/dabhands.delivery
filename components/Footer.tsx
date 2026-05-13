@@ -38,7 +38,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           <div className="flex items-center gap-2.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-dab-green" />
+            <div className="brand-dot w-2.5 h-2.5 rounded-full" />
             <span className="font-semibold text-[15px] tracking-[-0.02em]">
               <span className="font-bold">Dab</span> Hands
             </span>

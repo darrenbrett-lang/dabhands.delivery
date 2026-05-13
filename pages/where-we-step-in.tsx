@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
@@ -6,6 +5,9 @@ import { FadeUp } from '@/components/FadeUp';
 import { BoxCTA } from '@/components/BoxCTA';
 import { Ribbon } from '@/components/Ribbon';
 import { RibbonAccent } from '@/components/RibbonAccent';
+import { HandUnderline } from '@/components/HandUnderline';
+import { StatPopover } from '@/components/StatPopover';
+import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
 const cccItems = [
@@ -88,13 +90,11 @@ const SoftLines = ({ text }: { text: string }) => (
 export default function WhereWeStepIn() {
   return (
     <>
-      <Head>
-        <title>Where Dab Hands steps in</title>
-        <meta
-          name="description"
-          content="Dab Hands is built around critical digital initiatives that cannot afford to drift. We help organisations get stronger digital work out into the world."
-        />
-      </Head>
+      <SeoMeta
+        title="Where Dab Hands steps in"
+        description="Dab Hands is built around critical digital initiatives that cannot afford to drift. We help organisations get stronger digital work out into the world."
+        path="/where-we-step-in"
+      />
 
       <Layout footerVariant="minimal">
         {/* HERO */}
@@ -105,17 +105,17 @@ export default function WhereWeStepIn() {
             alt=""
             aria-hidden
             draggable={false}
-            className="pointer-events-none select-none absolute right-[-20%] sm:right-[-15%] md:right-[-10%] lg:right-[-5%] top-1/2 -translate-y-1/2 w-[120%] sm:w-[95%] md:w-[80%] lg:w-[70%] h-auto opacity-50 sm:opacity-75 md:opacity-100"
+            className="pointer-events-none select-none absolute right-0 bottom-0 h-[80%] w-auto max-w-none opacity-50 sm:opacity-75 md:opacity-100"
           />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[18ch]">
+              <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch]">
                 Where we step in
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
               <div className="mt-10 md:mt-12 space-y-6 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
-                <p className="text-[28px] md:text-[32px] font-semibold">
+                <p className="text-[28px] md:text-[32px] font-semibold leading-tight">
                   We help organisations get stronger digital work out into the world.
                 </p>
                 <p>Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace.</p>
@@ -130,51 +130,52 @@ export default function WhereWeStepIn() {
             <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
               The outcome
             </p>
-            <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[18ch] mb-14 md:mb-20">
+            <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-14 md:mb-20">
               When strong work survives the system
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
+            <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-0 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
               {cccItems.map((item, i) => (
-                <motion.div
+                <motion.li
                   key={item.label}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className={`flex items-center gap-4 md:gap-5 ${
+                  className={`md:col-span-4 flex items-center gap-4 md:gap-5 ${
                     i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
                   }`}
                 >
-                  <span className="flex-shrink-0 text-dab-charcoal">{item.icon}</span>
+                  <span className="flex-shrink-0 text-dab-charcoal" aria-hidden>{item.icon}</span>
                   <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
                     {item.label}
                   </p>
-                </motion.div>
+                </motion.li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
 
         {/* INTERVENTION POINTS */}
         <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 border-t border-dab-charcoal/10 relative overflow-hidden">
-          <Ribbon
-            className="hidden md:block absolute bottom-0 right-[-12%] w-[55%] lg:w-[45%]"
-            opacity={0.22}
-            drift={30}
-            driftDirection="right"
-            flip
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/sand-ripple.jpg"
+            alt=""
+            aria-hidden
+            draggable={false}
+            className="pointer-events-none select-none absolute right-0 bottom-0 h-[40%] w-auto max-w-none opacity-50 sm:opacity-75 md:opacity-100"
           />
 
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-semibold leading-[1.02] tracking-[-0.028em] max-w-[18ch] mb-16 md:mb-20">
+              <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-16 md:mb-20">
                 If any of this feels familiar
               </h2>
             </FadeUp>
 
-            <div>
+            <ol className="list-none p-0 m-0">
               {interventions.map((item, i) => (
-                <motion.div
+                <motion.li
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -182,7 +183,7 @@ export default function WhereWeStepIn() {
                   transition={{ duration: 0.5, delay: 0.04 * i }}
                   className="border-t border-dab-charcoal/15 last:border-b last:border-dab-charcoal/15 py-12 md:py-16 lg:py-20"
                 >
-                  <div className="grid md:grid-cols-12 gap-8 md:gap-12">
+                  <div className="grid md:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
                     <div className="md:col-span-4">
                       <p className="font-mono text-[24px] md:text-[28px] text-dab-charcoal/40 tabular-nums mb-4 md:mb-6">
                         {String(i + 1).padStart(2, '0')}
@@ -207,22 +208,24 @@ export default function WhereWeStepIn() {
                       </a>
                     </div>
                   </div>
-                </motion.div>
+                </motion.li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         {/* THE EXECUTION GAP */}
-        <section className="bg-dab-charcoal text-dab-cream py-28 md:py-40 relative overflow-hidden">
+        <section className="bg-dab-charcoal text-dab-cream py-28 md:py-40 relative">
           <div className="absolute top-0 left-0 right-0 h-px bg-dab-brown/30" />
-          <Ribbon
-            className="hidden md:block absolute bottom-[-10%] right-[-10%] w-[55%] lg:w-[45%]"
-            opacity={0.32}
-            drift={28}
-            tone="dark"
-            flip
-          />
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <Ribbon
+              className="hidden md:block absolute bottom-[-10%] right-[-10%] w-[55%] lg:w-[45%]"
+              opacity={0.32}
+              drift={28}
+              tone="dark"
+              flip
+            />
+          </div>
 
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
@@ -231,34 +234,48 @@ export default function WhereWeStepIn() {
               </p>
             </FadeUp>
             <FadeUp delay={0.08}>
-              <h2 className="text-[36px] md:text-[56px] lg:text-[72px] font-semibold leading-[1.04] tracking-[-0.028em] max-w-[20ch]">
-                Most businesses do not lose on ambition.
-                <br />
-                They lose through execution.
+              <h2 className="text-[36px] md:text-[56px] lg:text-[72px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[20ch]">
+                <span className="block mb-4 md:mb-5">
+                  Technology is accelerating quickly.
+                </span>
+                <span className="block mb-10 md:mb-12">
+                  Human systems are not.
+                </span>
+                <span className="block mb-4 md:mb-5">
+                  Most businesses do not lose on <HandUnderline delay={1.2} variant={3}>ambition</HandUnderline>.
+                </span>
+                <span className="block">
+                  They lose through <HandUnderline delay={1.4} variant={2}>execution</HandUnderline>.
+                </span>
               </h2>
             </FadeUp>
 
-            <div className="mt-20 md:mt-24 grid md:grid-cols-2 gap-0 border-t border-dab-brown/20">
-              <FadeUp delay={0.08}>
-                <div className="py-12 md:py-16 md:pr-16 md:border-r border-dab-brown/20">
-                  <p className="text-[72px] md:text-[96px] font-semibold leading-none tracking-[-0.04em] text-dab-cream">
-                    60<span className="text-[48px] md:text-[64px]">%</span>
-                  </p>
+            <div className="mt-20 md:mt-24 grid md:grid-cols-12 gap-4 md:gap-6 lg:gap-8 border-t border-dab-brown/20">
+              <FadeUp delay={0.08} className="md:col-span-6">
+                <div className="py-12 md:py-16 md:border-r border-dab-brown/20 md:pr-6 lg:pr-8">
+                  <StatPopover
+                    number={<>60<span className="text-[48px] md:text-[64px]">%</span></>}
+                    content="Research published by Harvard Business Review found that organisations typically realise only around 60% of the potential value of their strategies. The gap is rarely caused by ambition alone. It is more often the result of breakdowns in planning, alignment, communication, ownership, and execution as work moves through complex systems and organisations."
+                    source="— Harvard Business Review"
+                  />
                   <p className="text-xl text-dab-cream leading-relaxed max-w-[36ch] mt-6">
-                    Only around 60% of strategic targets are successfully realised.
+                    Most companies realise only around 60% of the <HandUnderline delay={1.1} variant={1}>potential value</HandUnderline> of their strategies.
                   </p>
                   <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-brown mt-5">
                     — Harvard Business Review
                   </p>
                 </div>
               </FadeUp>
-              <FadeUp delay={0.18}>
-                <div className="py-12 md:py-16 md:pl-16 border-t md:border-t-0 border-dab-brown/20">
-                  <p className="text-[72px] md:text-[96px] font-semibold leading-none tracking-[-0.04em] text-dab-cream">
-                    20<span className="text-[48px] md:text-[64px]">–</span>30<span className="text-[48px] md:text-[64px]">%</span>
-                  </p>
+              <FadeUp delay={0.18} className="md:col-span-6">
+                <div className="py-12 md:py-16 border-t md:border-t-0 border-dab-brown/20">
+                  <StatPopover
+                    number={<>20<span className="text-[48px] md:text-[64px]">–</span>30<span className="text-[48px] md:text-[64px]">%</span></>}
+                    content="McKinsey research across operations and enterprise transformation repeatedly highlights the cost of fragmented systems, duplicated effort, unclear ownership, rework, slow decision-making, and operational inefficiency. As organisations grow, complexity increases faster than alignment, creating measurable waste across time, resources, and execution quality."
+                    source="— McKinsey & Company"
+                    align="end"
+                  />
                   <p className="text-xl text-dab-cream leading-relaxed max-w-[36ch] mt-6">
-                    Estimated annual revenue lost through execution inefficiencies.
+                    Estimated <HandUnderline delay={1.3} variant={4}>operational waste</HandUnderline> caused by inefficiency, rework, and fragmented systems.
                   </p>
                   <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-brown mt-5">
                     — McKinsey &amp; Company
@@ -271,16 +288,20 @@ export default function WhereWeStepIn() {
 
         {/* CLOSING STATEMENT */}
         <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 relative overflow-hidden">
-          <Ribbon
-            className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[50%] lg:w-[40%]"
-            opacity={0.18}
-            drift={20}
-            imagePath="/images/fuller-ribbon.png"
-          />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <p className="text-[28px] md:text-[40px] lg:text-[52px] font-semibold leading-[1.05] tracking-[-0.026em] max-w-[24ch] mx-auto">
-                Backed by 20 years of senior digital delivery.
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/dab-hands-crown-mark.svg"
+                alt=""
+                aria-hidden
+                draggable={false}
+                className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
+              />
+            </FadeUp>
+            <FadeUp>
+              <p className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto">
+                Backed by 20+ years of senior digital delivery.
               </p>
             </FadeUp>
             <FadeUp delay={0.12}>
