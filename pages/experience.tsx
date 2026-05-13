@@ -2,23 +2,29 @@ import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { LogoMark } from '@/components/LogoMark';
+import { TickerLogo } from '@/components/TickerLogo';
 import { BoxCTA } from '@/components/BoxCTA';
 import { Ribbon } from '@/components/Ribbon';
 import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
-const clients: Array<{ name: string; slug: string; filename: string }> = [
-  { name: 'Nike', slug: 'nike', filename: 'nike' },
-  { name: 'Volkswagen', slug: 'volkswagen', filename: 'volkswagen' },
-  { name: 'Audi', slug: 'audi', filename: 'audi' },
-  { name: 'Hugo Boss', slug: 'hugoboss', filename: 'hugo-boss' },
-  { name: 'Tommy Hilfiger', slug: 'tommyhilfiger', filename: 'tommy-hilfiger' },
-  { name: 'Unilever', slug: 'unilever', filename: 'unilever' },
-  { name: 'Johnson & Johnson', slug: 'johnsonandjohnson', filename: 'j-and-j' },
-  { name: 'Royal Mail', slug: 'royalmail', filename: 'Royal-Mail' },
-  { name: 'Parcelforce', slug: 'parcelforce', filename: 'parcelforce' },
-  { name: 'Palantir', slug: 'palantir', filename: 'palantir' },
+// `slug` = Simple Icons brand slug if available, otherwise null
+// (we render the brand name as text in that case).
+const clients: Array<{ name: string; slug: string | null }> = [
+  { name: 'Nike', slug: 'nike' },
+  { name: 'Volkswagen', slug: 'volkswagen' },
+  { name: 'Audi', slug: 'audi' },
+  { name: 'Hugo Boss', slug: null },
+  { name: 'Tommy Hilfiger', slug: null },
+  { name: 'Unilever', slug: 'unilever' },
+  { name: 'Johnson & Johnson', slug: null },
+  { name: 'Royal Mail', slug: null },
+  { name: 'Parcelforce', slug: null },
+  { name: 'Palantir', slug: 'palantir' },
+  { name: 'Post Office', slug: null },
+  { name: 'Fortnum & Mason', slug: null },
+  { name: 'Falabella', slug: null },
 ];
 
 const testimonials = [
@@ -152,16 +158,9 @@ export default function Experience() {
                   {[...clients, ...clients, ...clients].map((c, i) => (
                     <div
                       key={`${c.slug}-${i}`}
-                      className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center"
+                      className="flex-shrink-0 w-24 h-20 md:w-28 md:h-24 flex items-center justify-center"
                     >
-                      <img
-                        src={`/images/logos/${c.filename}.png`}
-                        alt={c.name}
-                        className="h-10 md:h-14 object-scale-down opacity-70 hover:opacity-100 transition-opacity"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
+                      <TickerLogo name={c.name} slug={c.slug} />
                     </div>
                   ))}
                 </motion.div>

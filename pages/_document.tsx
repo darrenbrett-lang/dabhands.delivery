@@ -25,6 +25,7 @@ export default function Document() {
     <Html lang="en" data-scroll-behavior="smooth">
       <Head>
         <meta name="theme-color" content="#111111" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="manifest" href="/site.webmanifest" />
         <script

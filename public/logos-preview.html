@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Logos preview</title>
+  <style>
+    html, body { margin: 0; padding: 24px; background: #111111; color: #ccc; font-family: -apple-system, system-ui, sans-serif; }
+    h1 { color: #B6FF00; font-size: 14px; margin: 0 0 20px; letter-spacing: 0.2em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; }
+    .cell { background: #000; border: 1px solid #333; padding: 16px; }
+    .cell h3 { color: #aaa; font-size: 11px; margin: 0 0 12px; font-family: ui-monospace, monospace; }
+    .cell .img { height: 100px; display: flex; align-items: center; justify-content: center; }
+    .cell .img img { max-width: 100%; max-height: 100px; filter: brightness(0) invert(1); }
+    .cell .img object { max-width: 100%; max-height: 100px; }
+  </style>
+</head>
+<body>
+  <h1>SVG (traced) vs PNG (source)</h1>
+  <div class="grid">
+    <script>
+      const names = ['audi','hugo-boss','j-and-j','palantir','parcelforce','Royal-Mail','tommy-hilfiger','unilever','volkswagen'];
+      const html = names.map(n => `
+        <div class="cell">
+          <h3>${n} — SVG</h3>
+          <div class="img"><img src="/images/logos/${n}.svg" alt=""></div>
+        </div>
+        <div class="cell">
+          <h3>${n} — PNG</h3>
+          <div class="img"><img src="/images/logos/${n}.png" alt=""></div>
+        </div>
+      `).join('');
+      document.write(html);
+    </script>
+  </div>
+</body>
+</html>

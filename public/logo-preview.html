@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dab Hands — OG preview</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #1a1a1a;
+      min-height: 100%;
+      font-family: 'Geist', 'Geist Fallback', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+    .og {
+      width: 1200px;
+      height: 630px;
+      background: #B6FF00;
+      position: relative;
+      overflow: hidden;
+      color: #111111;
+      letter-spacing: -0.02em;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.4);
+    }
+    .ribbon {
+      position: absolute;
+      right: -10%;
+      bottom: -30%;
+      width: 135%;
+      height: auto;
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .logo {
+      position: absolute;
+      top: 56px;
+      left: 64px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 18px;
+      z-index: 2;
+    }
+    /* Dot height matches cap-height of the wordmark "D".
+       Geist cap-height ≈ 0.71em → at 46px font, cap ≈ 33px.
+       align-items: baseline puts the dot's bottom edge on the text baseline,
+       so dot top lands exactly at the cap-top of the "D". */
+    .logo-dot {
+      width: 33px;
+      height: 33px;
+      border-radius: 50%;
+      background: #111111;
+      display: inline-block;
+    }
+    .logo-word {
+      font-size: 46px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .logo-word .b { font-weight: 800; }
+    .headline {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 72px;
+      font-size: 132px;
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      max-width: 12ch;
+      text-wrap: balance;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <img class="ribbon" src="/images/fuller-ribbon.png" alt="">
+    <div class="logo">
+      <span class="logo-dot" aria-hidden="true"></span>
+      <span class="logo-word"><span class="b">Dab</span> Hands</span>
+    </div>
+    <div class="headline">Keeping important work moving</div>
+  </div>
+</body>
+</html>

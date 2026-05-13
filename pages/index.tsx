@@ -259,7 +259,7 @@ export default function Home() {
             </FadeUp>
 
             <FadeUp delay={0.48}>
-              <div className="mt-12 md:mt-16 flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-12 lg:gap-16">
+              <div className="mt-20 md:mt-28 flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-12 lg:gap-16">
                 <p className="text-[32px] md:text-[48px] lg:text-[60px] font-bold leading-[1.05] tracking-[-0.028em] text-dab-charcoal max-w-[20ch]">
                   We help organisations get stronger digital work out into the world.
                 </p>

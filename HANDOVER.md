@@ -4,7 +4,9 @@ Pick this up cold. Captures the project as of the most recent session.
 
 ## Read this first
 
-Multi-page site (Home / Work / Experience / Contact). The site is **on production** — `main` was force-fast-forwarded from `restructure/multi-page` at commit `b96ca9e` ("Copy, sign-off flow, mailto CTAs, asset swaps across all pages"). Further uncommitted iteration has happened since (see "Branch state" below).
+Multi-page site (Home / Work / Experience / Contact). The site is **on production at `https://dabhands.delivery`** via Vercel's standard GitHub integration — every push to `main` auto-deploys. Most recent prod commit: `228e464` "Site refinement pass: SEO/a11y/perf hardening, brand micro-animations, new modules and copy".
+
+There are **local uncommitted changes** on `main` (today's iteration: og-image, favicon, ticker rebuild, brand additions, homepage spacing). User has NOT been asked to commit/push these — they'll say "push" when ready.
 
 Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` apply to every conversation — read them before touching copy or marks.
 
@@ -12,163 +14,186 @@ Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-H
 
 - **Next.js 16.2.6 (Pages Router)** — `AGENTS.md` warns it has breaking changes vs training data; read `node_modules/next/dist/docs/` before adding Next features.
 - **Tailwind CSS v4** (`@import "tailwindcss"` + `@theme` directive). Custom utilities at the bottom of `styles/globals.css`.
-- **Framer Motion 12** for scroll-triggered fade-ups, ribbon drift, and hand-mark reveals.
-- **TypeScript**. Run `npx tsc --noEmit` after non-trivial edits.
+- **Framer Motion 12** for scroll-triggered fade-ups, ribbon drift, hand-mark reveals, brand-dot breathing, popover transitions, logo ticker.
+- **TypeScript**. Run `npx tsc --noEmit` after non-trivial edits. `npm run build` for the full check (clean as of last session).
 - **Fonts**: Geist + Geist Mono via `next/font/google` in `pages/_app.tsx`.
 
 ## Dev workflow
 
 - User runs `npm run dev` themselves on port 3000.
-- `.claude/launch.json` has `autoPort: false`. The preview tool can attach to port 3000 (worked during the recent session).
-- Verification via `preview_eval` / `preview_screenshot` works but the preview tab is often "hidden" — DOM measurements return 0 width/height in that state. Force a screenshot to get a real render, or just trust the class names on the elements.
+- `.claude/launch.json` has `autoPort: false`. The preview tool attaches to port 3000.
+- The preview tool's screenshot is **unreliable for deep-scrolled sections** (often returns blank cream). Prefer DOM measurements via `preview_eval` for verification; only use screenshots for the homepage/top sections or after a fresh `window.location.href` navigation.
+- Strict mode is on (`reactStrictMode: true`) — useEffect / state hooks run twice in dev. Don't rely on side-effect-only mounts; use cleanup functions.
 
 ## Branch state at handover
 
-- **Working branch**: `restructure/multi-page`
-- **Production**: `main` is at `b96ca9e` — pushed directly via `git push origin restructure/multi-page:main` after the user said "Just push please". Vercel auto-deploys main → `https://dabhands.delivery`.
-- **Uncommitted edits** on `restructure/multi-page` since `b96ca9e` (today's iteration: hand-mark system, footer restructure, image-anchor rules, copy iterations, crown mark, grid toggle). User hasn't asked to commit/push them yet — only commit when explicitly asked.
-- `.gitignore` was updated to exclude `.claude/` (local Claude state).
+- **Working branch**: `main` (the user pushed `restructure/multi-page` → `main` fast-forward during a prior session; we're working directly on `main` locally now).
+- **Production**: `main` at `228e464`. Vercel auto-deploys main → `https://dabhands.delivery`.
+- **Uncommitted local edits** to ship next push (today's session — ticker overhaul, OG image, favicon, brand additions, homepage spacing):
+  - `M components/SeoMeta.tsx` (defaults to `/og-image.png` + width/height/alt metadata)
+  - `M pages/_document.tsx` (favicon.svg added)
+  - `M pages/experience.tsx` (clients array + TickerLogo wiring)
+  - `M pages/index.tsx` (homepage tick-list → bold copy spacing)
+  - `M package.json` / `package-lock.json` (added `potrace` devDep — see Cleanup TODO)
+  - `?? components/TickerLogo.tsx` (new)
+  - `?? public/favicon.svg` (charcoal square + green dot)
+  - `?? public/og-image.png` (1200×630 brand card, see Assets)
+  - `?? public/images/logos/{audi,Royal-Mail,parcelforce,tommy-hilfiger,volkswagen}.svg` (auto-traced via `scripts/trace-logos.js`; **no longer used** by ticker — can be deleted)
+  - `?? public/logo-preview.html` + `?? public/logos-preview.html` (temp visual sandbox files; **safe to delete**)
+  - `?? scripts/` (trace-logos.js — one-off, kept for reference)
 
-To ship to prod next time: `git push origin restructure/multi-page:main` (fast-forward) is what the user prefers — no PR ceremony.
+To ship to prod next time: `git add -A && git commit && git push origin main`. Vercel rebuilds in ~1–2 min.
 
 ## Site structure
 
 ### `/` (home) — `pages/index.tsx`
 
-1. **Hero** (cream, centred) — H1 "Senior digital / delivery for / high-stakes work" (3 forced spans). Below: "Important digital work can lose momentum quickly inside complex organisations." + "We help organisations get stronger digital work out into the world." with a **mobile-only `<br className="sm:hidden" />` before "digital"** so it breaks at "stronger / digital..." on phones. Large hero `Ribbon` repositioned `top-[15px] md:top-auto md:bottom-0` — sits at the top on mobile, bottom on desktop.
-2. **Where we are** (charcoal, left-rag) — eyebrow "Where we are". Two `<motion.div>` statement blocks: "The tools are changing. / The problems aren't." (with `md:whitespace-nowrap!` so each clause stays on one line at desktop) and "Complexity is higher than ever." Both with `block w-10 h-px bg-dab-green` rule underneath. Four supporting lines in two paragraphs with **four `<HandUnderline>` marks**: `slows` (1.2s) → `technology` (1.35s) → `attention` (1.5s) → `budget` (1.65s). Copy now reads "Inside organisations, friction slows the work. The role of new technology is still being worked out. Outside, competition for attention is relentless. // More of the right work needs to get through. And more of the budget needs to go into the work itself."
-3. **Core Truth** (**bg-white**, centred) — Has a **hand-drawn SVG crown** above the headline (3 V-peaks + base line + 3 open circles in `dab-brown`). H2 "Great work rarely fails / at the idea stage." Below: a single merged paragraph at `text-2xl md:text-3xl font-medium` — "It fails as it moves through the organisation.<br /> What started strong arrives weaker than it should have been." (the soft break is hard, intentional). The "Teams fragment / Momentum slows / Execution weakens" trio was removed.
-4. **Antidote** (cream, left-rag) — H2 "Dab Hands meets these problems head-on" + 5 tick items + closer "Keeping important work aligned, moving, and commercially effective as it goes to market with impact." + the punchy follow-up "We help organisations get stronger digital work out into the world." (at `text-[32px] md:text-[48px] lg:text-[60px] font-bold leading-[1.05]`) + BoxCTA "Where we step in" right-aligned. Antidote `Ribbon` is now wrapped in a clip container so its left edge is bounded — won't run under the headline/checklist column.
-5. Footer (variant: **minimal**).
+1. **Hero (P1)** (cream, centred) — H1 "**Keeping important work moving**" (single h2, `text-wrap: balance` wraps to "Keeping important / work moving" at desktop). Sub-paragraph beneath: "Important digital work can quickly lose momentum within complex organisations." + "We help **modern** brands get stronger digital work out into the world." Hero `Ribbon` (default `/images/ribbon.png`) positioned `top-[15px] md:top-auto md:bottom-0 w-full` — top on mobile, bottom on desktop.
+2. **Often brought in around** (white) — eyebrow + 4-item icon grid (`builtForItems`): "Critical launches under pressure." / "Customer experiences fragmented across channels." / "Cross-functional initiatives losing momentum." / "Strategy and execution drifting apart." Icons: stopwatch / scattered dots / descending bars / diverging lines. 2×2 grid on desktop (md:col-span-6). Rendered as `<ul>` / `<li>`.
+3. **Where we are** (charcoal, left-rag) — eyebrow + two statement blocks + supporting paragraph with 4 `<HandUnderline>` marks: `slows` · `technology` · `attention` · `budget`.
+4. **Core Truth** (white, centred) — flashing-dot crown SVG above "Great work rarely fails at the idea stage." (See Brand marks.)
+5. **Antidote** (cream, left-rag) — eyebrow "Where we help" + H2 "Dab Hands meets these problems head-on" + 6-tick list (rendered as `<ul>` / `<li>`, last item is "Commercially effective as it reaches market.") + **bold callout copy** "We help organisations get stronger digital work out into the world." with `BoxCTA "Where we step in"` to the right (stacks below on mobile). Spacing: `mt-20 md:mt-28` between tick list and bold copy; button uses `md:items-start` so it aligns to the top of the wrapped copy.
+6. Footer (variant: **minimal**).
 
 ### `/where-we-step-in` — `pages/where-we-step-in.tsx` (nav label: "Work")
 
-1. **Hero** (cream, left-rag) — H1 "Where we step in" + bold subhead "We help organisations get stronger digital work out into the world." + body "Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace." `sand-ripple.jpg` image (user's own asset) anchored `right-0 bottom-0 h-[80%] w-auto max-w-none` — fills 80% of section height across all breakpoints, right + bottom anchored, no off-screen bleed.
-2. **When strong work survives the system** (**bg-white**) — eyebrow "The outcome" + H2 + 3-item icon row: Attention / Connection / Conversion. Background changed from brown to white per the user.
-3. **If any of this feels familiar** (cream) — was "Intervention points". 6 expanded numbered items (no accordion). Each card's inline "Start a conversation →" link uses `mailto()` with **the intervention title as the subject** (e.g. `?subject=Critical%20work%20drifting`). `Ribbon` fragment now anchored **bottom-right** (was bottom-left).
-4. **Why expert delivery matters** (charcoal) — was "The execution gap". H2 with paired statements: "Technology is accelerating quickly. / Human systems are not." (mb-10 gap separator) then "Most businesses do not lose on `ambition`. / They lose through `execution`." with `<HandUnderline>` on **ambition** and **execution** only (Technology and systems are not underlined per latest iteration). Each line uses `<span className="block mb-4 md:mb-5">` for controlled spacing. Below: 60% (HBR) and 20–30% (McKinsey) stat blocks with `<HandUnderline>` on **successfully realised** and **execution inefficiencies**.
-5. **Closing statement** (cream, centred) — "Backed by 20 years of senior digital delivery." (big) + "We help organisations get stronger digital work out into the world." (smaller, charcoal/75) + BoxCTA "Experience".
+1. **Hero** (cream, left-rag) — H1 "Where we step in" + bold sub + body + `sand-ripple.jpg` hard-anchored right + bottom (`h-[80%]`).
+2. **When strong work survives the system** (white) — eyebrow "The outcome" + H2 + 3-item icon row (Attention / Connection / Conversion). Rendered as `<ul>` / `<li>`.
+3. **If any of this feels familiar** (cream) — H2 + 6 numbered intervention items (rendered as `<ol>` / `<li>`). Each card's "Start a conversation →" link uses `mailto()` with the intervention title as the subject. **`sand-ripple.jpg` hard-anchored bottom-right at `h-[40%]`** (also bookends the page's hero motif; the previous Ribbon here was removed).
+4. **Why expert delivery matters** (charcoal) — H2 with paired statements + `<HandUnderline>` on `ambition` · `execution`. Below: two stat blocks rendered as **`StatPopover`** components. Clicking/hovering the **60%** or **20–30%** number opens a popover with the richer HBR / McKinsey context. (`60%` copy: "Most companies realise only around 60% of the **potential value** of their strategies." / `20–30%` copy: "Estimated **operational waste** caused by inefficiency, rework, and fragmented systems.") The section's Ribbon is now wrapped in an `overflow-hidden` div so the section itself can stay `overflow-visible` and let the popover escape its bounds. Stats use a 12-col grid (`md:col-span-6` each) so the numbers sit on column 1 and column 7 lines of the page's underlying 12-col grid.
+5. **Closing statement** (cream, centred) — `dab-hands-crown-mark.svg` (flashing 3 dots — see Brand marks) above "Backed by **20+** years of senior digital delivery." + subhead + BoxCTA "Experience".
 6. Footer (variant: **minimal**).
 
 ### `/experience` — `pages/experience.tsx`
 
-1. **Hero** (cream, left-rag) — eyebrow "Where I've come from" + H1 "Experience built under pressure" + intro "Large-scale digital delivery experience shaped across global brands, complex platforms, campaigns, and customer experience programmes." (`under-pressure.png` image right-anchored: `right-0 top-0 bottom-0 h-full w-auto max-w-none` — full section height, anchored right at every breakpoint. Opacity `40 / 65 / 90` across mobile / sm / md+ + a `mask-image: linear-gradient(to top left, full 30%, 20% 100%)` to fade the upper-left where text overlaps, preserving WCAG contrast.)
-2. **I've worked at scale for** (charcoal, left-rag) — was "Worked at scale on". Scrolling client logo carousel (10 PNGs from `/public/images/logos/`, rendered at native colour — the logos are already white-on-transparent). No CSS filter applied.
-3. **With deep experience across** (charcoal) — was "Where I've worked", now **moved up** to sit directly below the logo ticker. Single H2 (with `md:whitespace-nowrap!` so it stays one line on desktop, wraps on mobile) + 5-col icon grid. The mid-page "Start a conversation" CTA was removed.
-4. **Darren Brett "Who am I"** (brown) — eyebrow "Who am I" + heading "Hi, I'm Darren" (no surname now) + 12-col grid: portrait `IMG_0064 _ sq.jpeg` (square crop) in `md:col-span-4` with **a `dab-brown` mix-blend-multiply overlay at 40% opacity** to harmonise tone, bio in `md:col-span-7 md:col-start-6`. Bio now ends with "Understanding how people, systems, and emerging technologies work together under pressure, and helping strong work stay strong as it moves to market." (replaced "Bringing the right people together..."). RibbonAccent removed.
-5. **The teams behind the work** (cream) — H2 + 3 separated paragraphs ("People I have delivered with for years." / "Leaders in their fields." / "Brought in around the initiative when needed.") + 3 tick items.
-6. **Trusted to lead important work** (brown) — H2 + 3 testimonials.
-7. **Closing** (cream, centred) — "Let's get important work `moving properly`." with `<HandUnderline stroke="var(--color-dab-charcoal)">` on "moving properly" (charcoal on cream — most accessible). Uses `text-wrap: balance` (via inline `style` since globals.css `p { text-wrap: pretty }` overrides Tailwind utility) + a non-breaking space inside the HandUnderline children so "moving properly" never widows. BoxCTA "Start a conversation" → `mailto()`.
-8. Footer (variant: **minimal**).
+1. **Hero** (cream, left-rag) — H1 "Experience built under pressure" + `under-pressure.png` right-anchored full height.
+2. **I've worked at scale for** (**charcoal**, left-rag) — scrolling client ticker. **Uses the new `<TickerLogo>` component** (not the legacy inline img / `LogoMark`). Clients array sets `slug: string | null` per brand:
+   - **Simple Icons coverage** (renders a cream `/F3F0EA` SVG from `cdn.simpleicons.org`): Nike, Volkswagen, Audi, Unilever, Palantir.
+   - **No Simple Icons (renders as styled text)**: Hugo Boss, Tommy Hilfiger, Johnson & Johnson, Royal Mail, Parcelforce, Post Office, Fortnum & Mason, Falabella.
+   - All on charcoal bg with cream text/icons. No fallback chain — `slug = null` means text from the start, no 404s, no flicker.
+3. **With deep experience across** (charcoal) — H2 + 5-col icon grid.
+4. **"Hi, I'm Darren"** (brown) — eyebrow "Who am I" + portrait + bio.
+5. **The teams behind the work** (cream) — eyebrow "Scaled when needed" + H2 + 3 body paragraphs + 3-tick list.
+6. **Engagement shape** (charcoal, left-rag) — eyebrow + headline-styled statement "Brought in around critical launches, platform work, operational resets, and embedded delivery leadership." (renders as h2, max-w-[36ch], no icon/dot, standard left-aligned module).
+7. **Trusted to lead important work** (brown) — H2 + 3 testimonials.
+8. **Closing** (cream, centred) — "Let's get important work moving properly." + BoxCTA "Start a conversation".
+9. Footer (variant: **minimal**).
 
 ### `/contact` — `pages/contact.tsx`
 
-1. **Hero** (cream, left-rag) — H1 "Let's talk" + intro "For critical digital initiatives that need to move properly, reach out directly." + Email / Phone / LinkedIn link grid. RibbonAccent variant 5 bottom-left.
-2. Footer (variant: **none**) — the cream contact module is **entirely hidden** on /contact so the page doesn't duplicate the contact details. Only the small charcoal copyright bar shows.
+1. **Hero** (cream, left-rag) — H1 "**What needs moving?**" (was "Let's talk") + intro "For critical digital initiatives that need to move properly, reach out directly." (the second clause has a soft `<br className="hidden md:block" />` — single line on mobile, two lines on desktop). Email / Phone / LinkedIn link grid. Hero `Ribbon` (default `ribbon.png`) configured **identically to homepage P1** — `inset-x-0 bottom-0 w-full`, opacity 0.4. (Earlier attempts with `fuller-ribbon.png` and `top-1/2 -translate-y-1/2` were reverted because the Tailwind transform combined with framer-motion's transform broke `mix-blend-multiply` and showed a white box at smaller widths.)
+2. Footer (variant: **none**) — only the small charcoal copyright bar shows.
 
 ## Components (`/components`)
 
-- **`Layout.tsx`** — wraps every page. `<Header>` + `<main>` + `<Footer variant={footerVariant}>` + `<GridToggle>`. Accepts a `footerVariant?: FooterVariant` prop.
-- **`Header.tsx`** — fixed top, `bg-dab-charcoal`. Logo left, desktop nav center-right (`Work` · `Experience` · `Contact`), **"Start a conversation" pill CTA** to the right of the nav (`mailto()` href, cream border, green arrow, cream-fill on hover). Mobile hamburger menu unchanged.
-- **`Footer.tsx`** — Two stacked modules:
-  - **Cream contact module**: bg now `bg-dab-charcoal` (was cream then green then back). Renders "If something important needs to move properly, **let's talk**." — "let's talk" is an internal `<Link href="/contact">` with `text-dab-green underline underline-offset-[6px]`. Padding `py-7 md:py-9` (compact). Contact details (Darren / email / phone) are **removed** from the footer module — the "let's talk" link now drives to /contact instead.
-  - **Charcoal copyright bar**: has `border-t border-dab-cream/15` hairline above. Wordmark + LinkedIn icon (`/images/logos/linkedin-app-white-icon.webp`) + © text.
-  - **Footer variants**: `'default' | 'minimal' | 'none'`.
-    - `default`: shows "We help organisations…" line + "Start a conversation" BoxCTA above the "let's talk" line.
-    - `minimal`: only the "let's talk" line (used on Home, Work, Experience).
-    - `none`: hides the entire cream contact module (used on Contact). Only the copyright bar remains.
-- **`FadeUp.tsx`** — `motion.div` with scroll-triggered fade + 18px rise. `delay` and `className` props.
-- **`LogoMark.tsx`** — brand-logo `<img>` with SVG/CDN fallback. Used only on `/experience` proof strip (the imported but unused-pattern — the logo carousel uses inline `<img>` not this component).
-- **`BoxCTA.tsx`** — pill-shaped CTA. `tone="light"` (default) + `tone="dark"`. Accepts any `href` (works with `mailto:` strings).
-- **`Ribbon.tsx`** — large atmospheric ribbon. Default `/images/ribbon.png`, customisable via `imagePath`. Props: `className`, `opacity` (default 0.45), `flip`, `drift` (default 24), `driftDirection`, `tone` (`'light'` | `'dark'`), `imagePath`.
-- **`RibbonAccent.tsx`** — smaller secondary accents from `ribbon_accents.png` (2×3 grid, variants 1–6).
-- **`RibbonMotif.tsx`** — UNUSED legacy SVG motif. Kept as a fallback only.
-- **`HandUnderline.tsx`** — **new**. Renders a hand-drawn SVG underline beneath its children. Props:
-  - `delay` (seconds, default 1.2) — reveal delay after viewport entry
-  - `variant` (1–4) — 4 different path shapes for natural variation across instances
-  - `tone` (`'dark'` | `'light'`, default `'dark'`) — `dark` = `dab-green` on charcoal/brown bgs, `light` = `dab-brown` on cream/white bgs
-  - `stroke` (string) — full override, takes precedence over `tone`
-  - **Smart offset rule**: if the resolved stroke is `dab-charcoal` (same colour as body text), the underline auto-offsets to `-bottom-[8px]` instead of the default `-bottom-[3px]` so descenders don't visually touch the line. Encoded inside the component.
-  - SVG is `viewBox="0 0 100 8" preserveAspectRatio="none"` so it stretches to match word width.
-- **`GridToggle.tsx`** — **new dev tool**. Fixed-position pill button bottom-right of every page ("GRID · OFF" / "GRID · ON"). Click toggles a 12-column overlay that matches the site container (`max-w-screen-xl` + responsive padding + `gap-4 md:gap-6 lg:gap-8`). Columns rendered as faint `dab-green/10` blocks. Mounted in `Layout.tsx` so it's always available.
+- **`Layout.tsx`** — `<a href="#top" className="skip-link">Skip to content</a>` + `<Header>` + `<main id="top">` + `<Footer variant={footerVariant}>` + `<GridToggle>`.
+- **`Header.tsx`** — fixed top, charcoal. Logo (animated breathing dot — see Brand marks) + nav + "Start a conversation" pill.
+- **`Footer.tsx`** — Two stacked modules. Cream contact module renders "If something important needs to move properly, **let's talk**." (linked to /contact, green underline). Variants: `'default' | 'minimal' | 'none'`.
+- **`FadeUp.tsx`** — scroll-triggered fade + 18px rise.
+- **`LogoMark.tsx`** — legacy brand-logo `<img>` with simpleicons CDN fallback. Was used by the experience ticker; **superseded by `TickerLogo`** for the ticker. Still imported but unused there. Could be deleted.
+- **`BoxCTA.tsx`** — pill-shaped CTA. `tone="light"` / `tone="dark"`.
+- **`Ribbon.tsx`** — atmospheric ribbon. Default `/images/ribbon.png`, customisable `imagePath`.
+- **`RibbonAccent.tsx`** — smaller secondary accents from `ribbon_accents.png` (2×3 sprite). Used on /contact bottom-left.
+- **`HandUnderline.tsx`** — hand-drawn SVG underline for emphasis on specific words.
+- **`GridToggle.tsx`** — fixed-position dev tool, toggles 12-col overlay matching site container (gap-4 md:gap-6 lg:gap-8).
+- **`StatPopover.tsx`** (NEW) — wraps a giant stat number as a button with green text + underline. Opens a popover with richer copy on hover (desktop, with 150ms close delay to allow crossing the gap) or click (touch — detected via `window.matchMedia('(hover: hover)')`). `align="start" | "end"` controls anchor edge. Click-outside + Escape close.
+- **`SeoMeta.tsx`** (NEW) — per-page `<Head>` helper. Title, description, canonical, OG (title/desc/image/url/type/site_name), Twitter card, og:image:width=1200 / height=630 / alt. Defaults `image` to `/og-image.png`.
+- **`TickerLogo.tsx`** (NEW) — renders a brand mark for the experience ticker. `slug` prop: if truthy, renders `<img src="https://cdn.simpleicons.org/${slug}/F3F0EA">` (cream monochrome on the dark ticker); if null, renders the brand name as styled text. No fallback chain, no dynamic source swapping.
 
-## `lib/mailto.ts` — **new**
+## `lib/mailto.ts`
 
-Centralises the "Start a conversation" mailto pattern.
-
-```ts
-mailto()                                  // → default subject + body
-mailto({ subject: 'Critical work drifting' })  // override subject
-```
-
-Defaults: `subject = "Starting a conversation"`, `body = "I want to get stronger digital work into the world."`, recipient = `db@dabhands.delivery`.
-
-Used by: Header CTA, Experience closing CTA, all 6 WWSI intervention CTAs (each carries its own intervention title as the subject), Contact page email link, Footer default-variant CTA + email link.
+Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabhands.delivery?subject=…&body=…`. Used by Header CTA, intervention "Start a conversation" links, Experience closing CTA, Contact email link.
 
 ## Brand tokens (`styles/globals.css` `@theme`)
 
 | Token | Hex | Role |
 |---|---|---|
 | `dab-cream` / `dab-white` | `#F3F0EA` | Primary background |
-| `dab-charcoal` | `#111111` | Primary text + dark sections (not pure black) |
-| `dab-charcoal-alt` | `#171717` | Footer copyright bar hover state |
-| `dab-green` | `#B6FF00` | Signal/acid accent — very sparing |
-| `dab-taupe` | `#8E877D` | Mostly unused |
+| `dab-charcoal` | `#111111` | Primary text + dark sections |
+| `dab-charcoal-alt` | `#171717` | Hover state |
+| `dab-charcoal-soft` | `#4A4744` | Body text base in `:root` |
+| `dab-green` | `#B6FF00` | Signal accent — sparing |
 | `dab-brown` | `#ACA195` | Brown sections + light-bg hand underlines |
-| `dab-brown-light` | `#E8E3DC` | Used briefly on the carousel experiment; now unused |
+| `dab-brown-lighter` | `#C0B5A9` | Darren bio section |
+| `dab-brown-light` | `#E8E3DC` | Unused |
+| `dab-taupe` | `#8E877D` | Unused |
 | `dab-warm` | `#E8D5C5` | Unused |
 
 ## Hard rules (saved to memory)
 
 1. **No em dashes (—) in user-facing copy.**
-2. **No neon green text on light backgrounds — ever.** Includes hover states (`hover:text-dab-green` on cream is also forbidden). The memory file explicitly notes the contact-page hover failure that established this rule.
+2. **No neon green text on light backgrounds — ever.** Includes hover states.
 3. **Brand is "Dab Hands"** — capital D, capital H, lowercase rest. File paths and Tailwind tokens are exempt.
 4. **Geist sans throughout.** Label headings no full stops; truth-statement headings keep periods.
-5. **Hand markup is "proof of care", not decoration.** Tertiary visual layer after typography and ribbon atmosphere. Editorial/technical tone (architectural notation, editorial markup) — never sketchbook / agency / expressive. Use sparingly. On mobile, favour underlines + brackets + directional gestures over precise word circles. `dab-green` on dark, `dab-brown` on light (or `dab-charcoal` for max contrast when the brief calls for accessibility).
+5. **Hand markup is "proof of care", not decoration.** Editorial/technical tone — never sketchbook / agency / expressive. `dab-green` on dark, `dab-brown` or `dab-charcoal` on light.
+
+## Brand marks & micro-animations
+
+- **Brand dot** — the green dot in the "Dab Hands" wordmark (Header, Footer logo, plus any standalone usage). Uses `.brand-dot` class from `globals.css`:
+  - Pulsing breathing animation `brand-dot-breathe` — 4.5s ease-in-out infinite. Scales 1 → 1.14, colour drifts vibrant `var(--color-dab-green)` ↔ softer `#D9E89A`.
+  - `prefers-reduced-motion: reduce` → animation disabled.
+  - Locked to **14px** everywhere (matches the header logo's resting size).
+- **Crown mark** (`/public/images/dab-hands-crown-mark.svg`) — line-art crown. Used on home Core Truth section + where-we-step-in closing. The 3 accent dots have **SMIL `<animate>` flash** on opacity 1 → 0.2 → 1 over 1.8s, all three in sync. Colour stays inherited from `currentColor` (charcoal in context).
+- **Calibration mark** (`/public/images/dab-hands-calibration-mark.svg`) — alternate registration-style mark. Currently unused on pages; available as a sibling option.
+- **Compass mark** (`/public/images/dab-hands-compass-mark.svg`) — experimental, currently unused.
 
 ## Hand-mark system
 
-The site uses two kinds of hand marks now:
+`HandUnderline` instances (delay seconds shown in parens; all reveal AFTER the copy lands — fade-in, not draw-on):
 
-- **HandUnderline**: applied to specific words/phrases for emphasis. Active instances:
-  - Home WHERE WE ARE: `slows` · `technology` · `attention` · `budget` (green, sequential 1.2s → 1.65s reveal)
-  - WWSI Why expert delivery matters H2: `ambition` · `execution` (green)
-  - WWSI stats: `successfully realised` · `execution inefficiencies` (green)
-  - Experience closing: `moving properly` (charcoal — most accessible on cream)
-- **One-off mark (crown)**: hand-drawn SVG above "Great work rarely fails / at the idea stage." (home Core Truth section). `dab-brown` stroke, slightly imperfect 3-peak zigzag with base line + 3 open peak circles. Animates in with the existing headline FadeUp.
+- **Home WHERE WE ARE**: `slows` (1.2) · `technology` (1.35) · `attention` (1.5) · `budget` (1.65) — green on charcoal.
+- **WWSI Why expert delivery matters H2**: `ambition` (1.2) · `execution` (1.4) — green.
+- **WWSI stats**: `potential value` (1.1) · `operational waste` (1.3) — green.
+- **Experience closing**: `moving properly` — currently NOT underlined (was previously, removed in iteration).
 
-Animation rule: marks animate **after** the copy lands (fade-in + small lift, no draw-on stroke animation — that reads as agency/illustrative). Most underlines use a 1.2s delay (≈ FadeUp 0.5s + ~0.7s pause).
+## Optical alignment rule
+
+`styles/globals.css` adds `margin-left: -0.04em` to all `h1–h6`. Geist at large display sizes has noticeable side-bearing on letters like "E" / "W" — this nudges every heading visually left to align with the body copy column. Scales naturally with font-size via `em`.
+
+## SEO + a11y + perf infrastructure (audit pass — shipped at 228e464)
+
+- **Per-page `<SeoMeta>`** wraps `<Head>` for title, description, canonical (`https://dabhands.delivery${path}`), OG (image defaults to `/og-image.png`), Twitter card, og:image dimensions/alt.
+- **JSON-LD Organization schema** in `_document.tsx` (founder, contactPoint, logo).
+- `/public/robots.txt` — references sitemap.
+- `/public/sitemap.xml` — 4 routes.
+- `/public/llms.txt` — LLM/agent-readable manifest.
+- `/public/site.webmanifest` — PWA manifest (theme/icons/start_url).
+- `/public/favicon.svg` — charcoal square + dab-green dot (32×32 viewBox, r=9). Linked alongside `favicon.ico` fallback in `_document.tsx`.
+- `/public/og-image.png` — 1200×630 social share card (cream-on-green, "Keeping important work moving" + Dab Hands logo + fuller-ribbon motif). Generated via headless Chrome from an export HTML; the source HTML has been deleted.
+- `<a className="skip-link" href="#top">Skip to content</a>` in Layout. Style in `globals.css` — hidden until focused.
+- **Global `:focus-visible`** rule in globals.css — 2px `dab-green` ring + 3px offset. Covers every focusable element.
+- `data-scroll-behavior="smooth"` on `<html>` (clears Next.js 16 warning).
+- **Semantic lists**: builtForItems, antidotePoints, cccItems → `<ul>/<li>`; interventions → `<ol>/<li>`. Decorative icons inside lists wrapped with `aria-hidden`.
+- **`next.config.ts`**: `compress: true`, `poweredByHeader: false`, image formats `avif, webp`, security headers (X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy), immutable cache-control on `/images/*` and static asset extensions.
 
 ## Image-anchor rules
 
-Two hero images now follow the **same simple rule** at every breakpoint:
-
-- **`sand-ripple.jpg` on /where-we-step-in hero**: `absolute right-0 bottom-0 h-[80%] w-auto max-w-none` + opacity progression `50 / 75 / 100`. Fills 80% of section height, anchored right + bottom.
-- **`under-pressure.png` on /experience hero**: `absolute right-0 top-0 bottom-0 h-full w-auto max-w-none` + opacity `40 / 65 / 90` + `mask-image: linear-gradient(to top left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.2) 100%)`. Fills full section height, right-anchored, with mask fading upper-left where text overlaps for accessibility.
-
-**Important Tailwind v4 gotcha**: `img` has `max-width: 100%` via preflight. You MUST add `max-w-none` for any image wider than its container (which both of these are).
+- **`sand-ripple.jpg`** appears in two places now:
+  - WWSI **hero** — `right-0 bottom-0 h-[80%] w-auto max-w-none`, opacity `50/75/100`.
+  - WWSI **intervention section bottom** — `right-0 bottom-0 h-[40%] w-auto max-w-none`, opacity `50/75/100`. Half the height of the hero — bookends the page.
+- **`under-pressure.png`** on /experience hero — `right-0 top-0 bottom-0 h-full w-auto max-w-none`, opacity `40/65/90`, plus a `mask-image: linear-gradient(to top left, ...)` fading the upper-left so headline text stays readable.
+- **Tailwind v4 preflight** gives `img { max-width: 100% }`. For wider-than-container images, **MUST add `max-w-none`**.
 
 ## Typography gotchas
 
-- `globals.css` sets `h1–h6 { text-wrap: balance }` and `p { text-wrap: pretty }` unlayered → these win over Tailwind utilities. Use **inline style** (`style={{ textWrap: 'balance' }}`) or `!important` modifier (`md:whitespace-nowrap!`) to override.
-- For widow control on closing lines: use **inline `text-wrap: balance` + non-breaking space** (`{' '}` or `&nbsp;`) between the last two words. Belt-and-braces.
-- `<br className="sm:hidden" />` is the pattern for mobile-only forced breaks.
+- `globals.css` sets `h1–h6 { text-wrap: balance }` and `p { text-wrap: pretty }` **unlayered** — these win over Tailwind utilities. Override via inline `style={{ textWrap: 'balance' }}` or `!important` modifier.
+- For widow control: inline `text-wrap: balance` + non-breaking space (`{' '}` JSX prefix or `&nbsp;`) between last two words.
+- `<br className="sm:hidden" />` for mobile-only breaks. `<br className="hidden md:block" />` for desktop-only breaks (used on /contact intro).
 
-## Common gotchas (cont'd)
+## Cleanup TODO (not yet done — pending user direction)
 
-- The page `<title>` and mobile menu footer text still reference "Dab Hands. Digital Delivery, Handled." Update those if you change brand styling.
-- `RibbonMotif` is defined but unused; if you delete it, make sure nothing else imports it (currently nothing does).
-- The `clients` array (brand logos) lives at the top of `pages/experience.tsx`. Logos are white-on-transparent PNGs in `/public/images/logos/` — no filter applied (they're already white).
-- LinkedIn icon: `/images/logos/linkedin-app-white-icon.webp` (no filter needed; native white).
-- Image sizing > 100% width requires `max-w-none` due to Tailwind v4 preflight.
-- The grid toggle button is always visible on every page in dev AND production. If you want it dev-only later, gate it on `process.env.NODE_ENV === 'development'` inside `Layout.tsx`.
-- Preview tab often "hidden" — DOM measurements return 0. Force `preview_screenshot` to render, or just trust the class names.
+- **Delete unused traced SVGs**: `/public/images/logos/{audi,Royal-Mail,parcelforce,tommy-hilfiger,volkswagen}.svg`. TickerLogo doesn't load them.
+- **Delete trace script**: `/scripts/trace-logos.js`. One-off, no longer relevant now that ticker uses Simple Icons + text.
+- **Uninstall `potrace` devDep** from `package.json`. Used only by the now-deleted trace script.
+- **Delete temp HTML files**: `/public/logo-preview.html`, `/public/logos-preview.html` — sandbox files for visualisation, no longer needed.
+- **Maybe delete `components/LogoMark.tsx`** — superseded by `TickerLogo` and not imported anywhere meaningfully.
 
 ## Working style
 
-- User iterates fast in small, specific edits. Don't pre-emptively redesign neighbouring sections when they ask about one thing.
+- User iterates fast in small, specific edits. Don't pre-emptively redesign neighbouring sections.
 - Each page has a sign-off + CTA to the next page in the flow: Home → Work → Experience → Contact. Contact is terminal.
-- Footer variants stay coordinated with the sign-off flow — `minimal` on pages that have their own CTA, `none` on /contact itself.
-- When the user shares a design system / typography / colour document, treat it as a reference refresher. Diff it against the current build and flag only the drifts.
-- Be honest about what you can and can't do. If a request needs external assets (real brand SVG logos, photographs, etc.), wire the structure and ask them to supply the file.
-- For exploratory questions ("what do you think?"), respond in 2–3 sentences with a recommendation + main tradeoff. Don't implement until they agree.
+- Footer variants stay coordinated with sign-off flow — `minimal` on pages with their own CTA, `none` on /contact.
+- For exploratory questions, respond in 2–3 sentences with a recommendation + main tradeoff. Don't implement until they agree.
+- Be honest about source-data limits. Several brand PNG sources in `/public/images/logos/` have transparency-checker patterns baked into RGB (Hugo Boss, J&J, Palantir, Unilever) — they cannot be cleanly auto-traced without re-sourcing. The ticker now sidesteps the problem entirely by rendering those brand names as text instead of attempting to render a broken silhouette.
+- Preview tool screenshot is unreliable for deep-scrolled sections. Use DOM measurements (`preview_eval`) for verification.
+- StrictMode is on (double-renders in dev). Avoid DOM mutations that bypass React state — use useState + setters.
