@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
-import { LogoMark } from '@/components/LogoMark';
 import { TickerLogo } from '@/components/TickerLogo';
 import { BoxCTA } from '@/components/BoxCTA';
 import { Ribbon } from '@/components/Ribbon';
@@ -9,22 +8,24 @@ import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
-// `slug` = Simple Icons brand slug if available, otherwise null
-// (we render the brand name as text in that case).
-const clients: Array<{ name: string; slug: string | null }> = [
-  { name: 'Nike', slug: 'nike' },
-  { name: 'Volkswagen', slug: 'volkswagen' },
-  { name: 'Audi', slug: 'audi' },
-  { name: 'Hugo Boss', slug: null },
-  { name: 'Tommy Hilfiger', slug: null },
-  { name: 'Unilever', slug: 'unilever' },
-  { name: 'Johnson & Johnson', slug: null },
-  { name: 'Royal Mail', slug: null },
-  { name: 'Parcelforce', slug: null },
-  { name: 'Palantir', slug: 'palantir' },
-  { name: 'Post Office', slug: null },
-  { name: 'Fortnum & Mason', slug: null },
-  { name: 'Falabella', slug: null },
+// All client logos are self-hosted under /public/images/logos/svg/.
+// `kind: 'icon'` → square-ish brand mark, sits at full row height.
+// `kind: 'wordmark'` → horizontal wordmark, height-capped so icons aren't dwarfed.
+// `boost: true` → lift a short wordmark up to icon scale.
+const clients: Array<{ name: string; src: string; kind?: 'icon' | 'wordmark'; boost?: boolean }> = [
+  { name: 'Nike', src: '/images/logos/svg/nike.svg', kind: 'icon' },
+  { name: 'Volkswagen', src: '/images/logos/svg/volkswagen.svg', kind: 'icon' },
+  { name: 'Audi', src: '/images/logos/svg/audi.svg', kind: 'icon' },
+  { name: 'Hugo Boss', src: '/images/logos/svg/hugo-boss.svg' },
+  { name: 'Tommy Hilfiger', src: '/images/logos/svg/tommy-hilfiger-mono.png', boost: true },
+  { name: 'Unilever', src: '/images/logos/svg/unilever.svg', kind: 'icon' },
+  { name: 'Johnson & Johnson', src: '/images/logos/svg/johnson-and-johnson.svg' },
+  { name: 'Royal Mail', src: '/images/logos/svg/royal-mail-mono.png' },
+  { name: 'Parcelforce', src: '/images/logos/svg/parcelforce.svg' },
+  { name: 'Palantir', src: '/images/logos/svg/palantir.svg', kind: 'icon' },
+  { name: 'Post Office', src: '/images/logos/svg/post-office.svg', boost: true },
+  { name: 'Fortnum & Mason', src: '/images/logos/svg/fortnum-and-mason.svg' },
+  { name: 'Falabella', src: '/images/logos/svg/falabella.svg' },
 ];
 
 const testimonials = [
@@ -97,6 +98,8 @@ const experienceAreas = [
 ];
 
 export default function Experience() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <>
       <SeoMeta
@@ -139,38 +142,8 @@ export default function Experience() {
           </div>
         </section>
 
-        {/* WORKED AT SCALE ON — logo ticker */}
-        <section className="bg-dab-charcoal text-dab-cream pt-20 md:pt-28 pb-12 md:pb-14 relative">
-          <div className="absolute top-0 left-0 right-0 h-px bg-dab-brown/20" />
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-12 md:mb-16">
-                I've worked at scale for
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.08}>
-              <div className="w-full overflow-hidden">
-                <motion.div
-                  animate={{ x: [-0, -2000] }}
-                  transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                  className="flex gap-12 md:gap-16 lg:gap-20"
-                >
-                  {[...clients, ...clients, ...clients].map((c, i) => (
-                    <div
-                      key={`${c.slug}-${i}`}
-                      className="flex-shrink-0 w-24 h-20 md:w-28 md:h-24 flex items-center justify-center"
-                    >
-                      <TickerLogo name={c.name} slug={c.slug} />
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-            </FadeUp>
-          </div>
-        </section>
-
         {/* EXPERIENCE AREAS */}
-        <section className="bg-dab-charcoal text-dab-cream pt-12 md:pt-16 pb-24 md:pb-32">
+        <section className="bg-dab-charcoal text-dab-cream pt-20 md:pt-28 pb-24 md:pb-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp delay={0.08}>
               <h2 className="text-[40px] md:text-[56px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] mb-14 md:mb-16 md:whitespace-nowrap!">
@@ -198,6 +171,37 @@ export default function Experience() {
               </div>
             </div>
 
+          </div>
+        </section>
+
+        {/* WORKED AT SCALE FOR — logo ticker (light) */}
+        <section className="bg-white text-dab-charcoal pt-20 md:pt-28 pb-20 md:pb-24 relative">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <FadeUp>
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-12 md:mb-16">
+                I've worked at scale for
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.08}>
+              <div className="w-full overflow-hidden">
+                <motion.ul
+                  aria-label="Clients I've worked with at scale"
+                  animate={reduceMotion ? undefined : { x: ['0%', '-33.3333%'] }}
+                  transition={reduceMotion ? undefined : { duration: 60, repeat: Infinity, ease: 'linear' }}
+                  className="flex gap-12 md:gap-16 lg:gap-20 w-max list-none p-0 m-0"
+                >
+                  {[...clients, ...clients, ...clients].map((c, i) => (
+                    <li
+                      key={`${c.name}-${i}`}
+                      aria-hidden={i >= clients.length}
+                      className="flex-shrink-0 h-20 md:h-24 flex items-center justify-center"
+                    >
+                      <TickerLogo name={c.name} src={c.src} kind={c.kind} boost={c.boost} />
+                    </li>
+                  ))}
+                </motion.ul>
+              </div>
+            </FadeUp>
           </div>
         </section>
 
@@ -245,7 +249,7 @@ export default function Experience() {
         </section>
 
         {/* TEAMS BEHIND THE WORK */}
-        <section className="bg-dab-cream text-dab-charcoal py-24 md:py-32 border-t border-dab-charcoal/8">
+        <section className="bg-white text-dab-charcoal py-24 md:py-32 border-t border-dab-charcoal/8">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <div className="grid md:grid-cols-12 gap-10 md:gap-16">
               <FadeUp className="md:col-span-5">

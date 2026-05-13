@@ -4,9 +4,9 @@ Pick this up cold. Captures the project as of the most recent session.
 
 ## Read this first
 
-Multi-page site (Home / Work / Experience / Contact). The site is **on production at `https://dabhands.delivery`** via Vercel's standard GitHub integration — every push to `main` auto-deploys. Most recent prod commit: `228e464` "Site refinement pass: SEO/a11y/perf hardening, brand micro-animations, new modules and copy".
+Multi-page site (Home / Where we step in / Experience / Contact). The site is **on production at `https://dabhands.delivery`** via Vercel's standard GitHub integration — every push to `main` auto-deploys. Most recent prod commit: `32f36eb` "Add og-image, favicon, logo ticker, and brand refinements".
 
-There are **local uncommitted changes** on `main` (today's iteration: og-image, favicon, ticker rebuild, brand additions, homepage spacing). User has NOT been asked to commit/push these — they'll say "push" when ready.
+There are **local uncommitted changes** on `main` (current session: client carousel restructure on /experience, mono-silhouette logo system, tidy pass — see "Branch state at handover" below). User confirms with "push" when ready.
 
 Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` apply to every conversation — read them before touching copy or marks.
 
@@ -27,20 +27,18 @@ Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-H
 
 ## Branch state at handover
 
-- **Working branch**: `main` (the user pushed `restructure/multi-page` → `main` fast-forward during a prior session; we're working directly on `main` locally now).
-- **Production**: `main` at `228e464`. Vercel auto-deploys main → `https://dabhands.delivery`.
-- **Uncommitted local edits** to ship next push (today's session — ticker overhaul, OG image, favicon, brand additions, homepage spacing):
-  - `M components/SeoMeta.tsx` (defaults to `/og-image.png` + width/height/alt metadata)
-  - `M pages/_document.tsx` (favicon.svg added)
-  - `M pages/experience.tsx` (clients array + TickerLogo wiring)
-  - `M pages/index.tsx` (homepage tick-list → bold copy spacing)
-  - `M package.json` / `package-lock.json` (added `potrace` devDep — see Cleanup TODO)
-  - `?? components/TickerLogo.tsx` (new)
-  - `?? public/favicon.svg` (charcoal square + green dot)
-  - `?? public/og-image.png` (1200×630 brand card, see Assets)
-  - `?? public/images/logos/{audi,Royal-Mail,parcelforce,tommy-hilfiger,volkswagen}.svg` (auto-traced via `scripts/trace-logos.js`; **no longer used** by ticker — can be deleted)
-  - `?? public/logo-preview.html` + `?? public/logos-preview.html` (temp visual sandbox files; **safe to delete**)
-  - `?? scripts/` (trace-logos.js — one-off, kept for reference)
+- **Working branch**: `main`.
+- **Production**: `main` at `32f36eb`. Vercel auto-deploys main → `https://dabhands.delivery`.
+- **Uncommitted local edits** to ship next push (current session — carousel restructure, mono-logo system, tidy pass):
+  - `M pages/experience.tsx` — carousel section moved below "With deep experience across", changed to white bg; "Teams behind the work" changed to white bg; new self-hosted logos via `src` + `kind` + `boost`; semantic `<ul aria-label>` ticker; `useReducedMotion` guard; seamless `0% → -33.3333%` loop.
+  - `M components/Header.tsx` — nav label `Work` → `Where we step in`.
+  - `M components/TickerLogo.tsx` — refactored: single `src` prop (no more CDN slug), `kind: 'icon' | 'wordmark'`, `boost?: boolean`, always renders `<img>` with `brightness(0)` filter + `loading="lazy"` + `decoding="async"`.
+  - `M package.json` / `package-lock.json` — removed `potrace` devDep.
+  - `D components/LogoMark.tsx` — superseded by TickerLogo, removed.
+  - `D scripts/trace-logos.js` (folder removed) — auto-tracing no longer used.
+  - `D public/logo-preview.html` + `public/logos-preview.html` — temp sandbox files.
+  - `D ~20 unused files in /public/images/logos/` — the auto-traced SVGs, old colour PNGs, and source artwork superseded by the colour-keyed mono PNGs in `/svg/`.
+  - `?? public/images/logos/svg/*` — the active mono logo set (see "Client ticker logo system" below).
 
 To ship to prod next time: `git add -A && git commit && git push origin main`. Vercel rebuilds in ~1–2 min.
 
@@ -55,7 +53,7 @@ To ship to prod next time: `git add -A && git commit && git push origin main`. V
 5. **Antidote** (cream, left-rag) — eyebrow "Where we help" + H2 "Dab Hands meets these problems head-on" + 6-tick list (rendered as `<ul>` / `<li>`, last item is "Commercially effective as it reaches market.") + **bold callout copy** "We help organisations get stronger digital work out into the world." with `BoxCTA "Where we step in"` to the right (stacks below on mobile). Spacing: `mt-20 md:mt-28` between tick list and bold copy; button uses `md:items-start` so it aligns to the top of the wrapped copy.
 6. Footer (variant: **minimal**).
 
-### `/where-we-step-in` — `pages/where-we-step-in.tsx` (nav label: "Work")
+### `/where-we-step-in` — `pages/where-we-step-in.tsx` (nav label: "Where we step in")
 
 1. **Hero** (cream, left-rag) — H1 "Where we step in" + bold sub + body + `sand-ripple.jpg` hard-anchored right + bottom (`h-[80%]`).
 2. **When strong work survives the system** (white) — eyebrow "The outcome" + H2 + 3-item icon row (Attention / Connection / Conversion). Rendered as `<ul>` / `<li>`.
@@ -67,17 +65,26 @@ To ship to prod next time: `git add -A && git commit && git push origin main`. V
 ### `/experience` — `pages/experience.tsx`
 
 1. **Hero** (cream, left-rag) — H1 "Experience built under pressure" + `under-pressure.png` right-anchored full height.
-2. **I've worked at scale for** (**charcoal**, left-rag) — scrolling client ticker. **Uses the new `<TickerLogo>` component** (not the legacy inline img / `LogoMark`). Clients array sets `slug: string | null` per brand:
-   - **Simple Icons coverage** (renders a cream `/F3F0EA` SVG from `cdn.simpleicons.org`): Nike, Volkswagen, Audi, Unilever, Palantir.
-   - **No Simple Icons (renders as styled text)**: Hugo Boss, Tommy Hilfiger, Johnson & Johnson, Royal Mail, Parcelforce, Post Office, Fortnum & Mason, Falabella.
-   - All on charcoal bg with cream text/icons. No fallback chain — `slug = null` means text from the start, no 404s, no flicker.
-3. **With deep experience across** (charcoal) — H2 + 5-col icon grid.
+2. **With deep experience across** (charcoal) — H2 + 5-col icon grid.
+3. **I've worked at scale for** (**white**, left-rag) — scrolling client ticker. **Uses `<TickerLogo>`** with self-hosted SVGs/PNGs from `/public/images/logos/svg/` (no external CDN). See "Client ticker logo system" below for the full architecture.
 4. **"Hi, I'm Darren"** (brown) — eyebrow "Who am I" + portrait + bio.
-5. **The teams behind the work** (cream) — eyebrow "Scaled when needed" + H2 + 3 body paragraphs + 3-tick list.
+5. **The teams behind the work** (**white**) — eyebrow "Scaled when needed" + H2 + 3 body paragraphs + 3-tick list.
 6. **Engagement shape** (charcoal, left-rag) — eyebrow + headline-styled statement "Brought in around critical launches, platform work, operational resets, and embedded delivery leadership." (renders as h2, max-w-[36ch], no icon/dot, standard left-aligned module).
 7. **Trusted to lead important work** (brown) — H2 + 3 testimonials.
 8. **Closing** (cream, centred) — "Let's get important work moving properly." + BoxCTA "Start a conversation".
 9. Footer (variant: **minimal**).
+
+#### Client ticker logo system
+
+All 13 client logos are **self-hosted** under `/public/images/logos/svg/`. No external CDN dependency. `TickerLogo` always renders an `<img>` with `style={{ filter: 'brightness(0)' }}` so the source artwork is forced to a charcoal silhouette regardless of its original colour.
+
+**Sourcing path per brand:**
+- 5 from Simple Icons (downloaded once via `cdn.simpleicons.org/{slug}/111111`): Nike, Volkswagen, Audi, Unilever, Palantir → small square marks, `kind: 'icon'`, render at h=56.
+- 4 clean SVGs from Wikimedia Commons: Hugo Boss, Johnson & Johnson, Fortnum & Mason, Falabella → wordmarks, `kind: 'wordmark'`, render at h=36 max-w=180.
+- 2 surgically edited SVGs (red rectangle background removed, white wordmark left for `brightness(0)`): Parcelforce, Post Office. Post Office's viewBox was also tightened from the full canvas down to just the wordmark area, and uses `boost: true` to render at h=56 alongside the icons.
+- 2 PNGs extracted via colour-key from the user's brand-asset PNGs: `royal-mail-mono.png` (yellow letters keyed out, optimized to 24KB), `tommy-hilfiger-mono.png` (black blocks keyed out so knockout letters become transparent). Tommy uses `boost: true` because its aspect is square-ish and reads small without it.
+
+**Ticker animation** — Framer Motion `<motion.ul>`, `animate={{ x: ['0%', '-33.3333%'] }}` with 3× duplicated `<li>` children and `w-max` parent so the animation distance exactly equals one set's width — produces a seamless infinite loop, no flick on wrap. 60s linear duration. Wrapped in `useReducedMotion()` — animation is dropped entirely when the user prefers reduced motion. Duplicated `<li>` items carry `aria-hidden="true"` so screen readers see exactly 13 client names.
 
 ### `/contact` — `pages/contact.tsx`
 
@@ -90,7 +97,6 @@ To ship to prod next time: `git add -A && git commit && git push origin main`. V
 - **`Header.tsx`** — fixed top, charcoal. Logo (animated breathing dot — see Brand marks) + nav + "Start a conversation" pill.
 - **`Footer.tsx`** — Two stacked modules. Cream contact module renders "If something important needs to move properly, **let's talk**." (linked to /contact, green underline). Variants: `'default' | 'minimal' | 'none'`.
 - **`FadeUp.tsx`** — scroll-triggered fade + 18px rise.
-- **`LogoMark.tsx`** — legacy brand-logo `<img>` with simpleicons CDN fallback. Was used by the experience ticker; **superseded by `TickerLogo`** for the ticker. Still imported but unused there. Could be deleted.
 - **`BoxCTA.tsx`** — pill-shaped CTA. `tone="light"` / `tone="dark"`.
 - **`Ribbon.tsx`** — atmospheric ribbon. Default `/images/ribbon.png`, customisable `imagePath`.
 - **`RibbonAccent.tsx`** — smaller secondary accents from `ribbon_accents.png` (2×3 sprite). Used on /contact bottom-left.
@@ -98,7 +104,7 @@ To ship to prod next time: `git add -A && git commit && git push origin main`. V
 - **`GridToggle.tsx`** — fixed-position dev tool, toggles 12-col overlay matching site container (gap-4 md:gap-6 lg:gap-8).
 - **`StatPopover.tsx`** (NEW) — wraps a giant stat number as a button with green text + underline. Opens a popover with richer copy on hover (desktop, with 150ms close delay to allow crossing the gap) or click (touch — detected via `window.matchMedia('(hover: hover)')`). `align="start" | "end"` controls anchor edge. Click-outside + Escape close.
 - **`SeoMeta.tsx`** (NEW) — per-page `<Head>` helper. Title, description, canonical, OG (title/desc/image/url/type/site_name), Twitter card, og:image:width=1200 / height=630 / alt. Defaults `image` to `/og-image.png`.
-- **`TickerLogo.tsx`** (NEW) — renders a brand mark for the experience ticker. `slug` prop: if truthy, renders `<img src="https://cdn.simpleicons.org/${slug}/F3F0EA">` (cream monochrome on the dark ticker); if null, renders the brand name as styled text. No fallback chain, no dynamic source swapping.
+- **`TickerLogo.tsx`** — renders a brand mark for the experience ticker. Props: `src` (local path to SVG or PNG), `kind: 'icon' | 'wordmark'`, optional `boost`. Always renders `<img loading="lazy" decoding="async" style={{ filter: 'brightness(0)' }}>`. Sizing: icons + boosted wordmarks at `h-14`, regular wordmarks at `h-9 max-w-[180px] object-contain`.
 
 ## `lib/mailto.ts`
 
@@ -180,13 +186,9 @@ Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabh
 - For widow control: inline `text-wrap: balance` + non-breaking space (`{' '}` JSX prefix or `&nbsp;`) between last two words.
 - `<br className="sm:hidden" />` for mobile-only breaks. `<br className="hidden md:block" />` for desktop-only breaks (used on /contact intro).
 
-## Cleanup TODO (not yet done — pending user direction)
+## Cleanup TODO
 
-- **Delete unused traced SVGs**: `/public/images/logos/{audi,Royal-Mail,parcelforce,tommy-hilfiger,volkswagen}.svg`. TickerLogo doesn't load them.
-- **Delete trace script**: `/scripts/trace-logos.js`. One-off, no longer relevant now that ticker uses Simple Icons + text.
-- **Uninstall `potrace` devDep** from `package.json`. Used only by the now-deleted trace script.
-- **Delete temp HTML files**: `/public/logo-preview.html`, `/public/logos-preview.html` — sandbox files for visualisation, no longer needed.
-- **Maybe delete `components/LogoMark.tsx`** — superseded by `TickerLogo` and not imported anywhere meaningfully.
+All previous cleanup items are done (auto-traced SVGs deleted, `scripts/trace-logos.js` removed, `potrace` devDep uninstalled, temp preview HTMLs deleted, `LogoMark.tsx` removed). The active logo set lives at `/public/images/logos/svg/`.
 
 ## Working style
 
@@ -194,6 +196,6 @@ Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabh
 - Each page has a sign-off + CTA to the next page in the flow: Home → Work → Experience → Contact. Contact is terminal.
 - Footer variants stay coordinated with sign-off flow — `minimal` on pages with their own CTA, `none` on /contact.
 - For exploratory questions, respond in 2–3 sentences with a recommendation + main tradeoff. Don't implement until they agree.
-- Be honest about source-data limits. Several brand PNG sources in `/public/images/logos/` have transparency-checker patterns baked into RGB (Hugo Boss, J&J, Palantir, Unilever) — they cannot be cleanly auto-traced without re-sourcing. The ticker now sidesteps the problem entirely by rendering those brand names as text instead of attempting to render a broken silhouette.
+- Be honest about source-data limits. Many off-the-shelf brand PNGs have transparency-checker patterns baked into RGB or use coloured-rectangle compositions where the visible identity comes from colour contrast (not from transparent areas around letters). For mono silhouette via `brightness(0)`, those need either Wikimedia Commons SVGs with transparent backgrounds, or colour-key extraction (see `/public/images/logos/svg/royal-mail-mono.png` and `tommy-hilfiger-mono.png` for examples — extracted with PIL by keeping pixels of a target colour and dropping the rest).
 - Preview tool screenshot is unreliable for deep-scrolled sections. Use DOM measurements (`preview_eval`) for verification.
 - StrictMode is on (double-renders in dev). Avoid DOM mutations that bypass React state — use useState + setters.

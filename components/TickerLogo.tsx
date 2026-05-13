@@ -1,29 +1,30 @@
 interface TickerLogoProps {
   name: string;
-  /** Simple Icons slug. If null, renders the brand name as text instead. */
-  slug: string | null;
+  /** Local image path (SVG or PNG). Rendered via brightness(0) to force a charcoal silhouette. */
+  src: string;
+  /** Icon-shaped marks render at icon height; wordmarks are capped shorter so icons aren't overshadowed.
+   *  `boost` lifts a too-small wordmark up to icon scale. */
+  kind?: 'icon' | 'wordmark';
+  boost?: boolean;
 }
 
-// Renders a brand mark in cream (#F3F0EA) on the dark ticker.
-// Either a Simple Icons monochrome SVG, or the brand name as styled text.
-export const TickerLogo = ({ name, slug }: TickerLogoProps) => {
-  if (slug) {
-    return (
-      /* eslint-disable-next-line @next/next/no-img-element */
-      <img
-        src={`https://cdn.simpleicons.org/${slug}/F3F0EA`}
-        alt={name}
-        className="h-10 md:h-14 w-auto opacity-80 hover:opacity-100 transition-opacity"
-      />
-    );
-  }
+export const TickerLogo = ({ name, src, kind = 'wordmark', boost = false }: TickerLogoProps) => {
+  const sizeClasses =
+    kind === 'icon'
+      ? 'h-12 md:h-14 w-auto'
+      : boost
+        ? 'h-11 md:h-14 w-auto max-w-[180px]'
+        : 'h-7 md:h-9 w-auto max-w-[140px] md:max-w-[180px]';
 
   return (
-    <span
-      aria-label={name}
-      className="text-[20px] md:text-[24px] font-semibold tracking-[-0.022em] text-dab-cream opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap"
-    >
-      {name}
-    </span>
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={src}
+      alt={name}
+      loading="lazy"
+      decoding="async"
+      style={{ filter: 'brightness(0)' }}
+      className={`${sizeClasses} object-contain opacity-70 hover:opacity-100 transition-opacity`}
+    />
   );
 };
