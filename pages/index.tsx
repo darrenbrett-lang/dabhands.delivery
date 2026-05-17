@@ -176,14 +176,14 @@ export default function Home() {
 
             <FadeUp delay={0.32}>
               <div className="mt-24 md:mt-32 space-y-6 max-w-[60ch] text-xl text-dab-cream leading-relaxed">
-                <p>
-                  Inside organisations, friction <HandUnderline delay={1.2} variant={3}>slows</HandUnderline> the work.<br />
-                  The role of new <HandUnderline delay={1.35} variant={1}>technology</HandUnderline> is still being worked out.<br />
-                  Outside, competition for <HandUnderline delay={1.5} variant={2}>attention</HandUnderline> is relentless.
+                <p className="space-y-3">
+                  <span className="block">Inside organisations, friction <HandUnderline delay={1.2} variant={3}>slows</HandUnderline> the work.</span>
+                  <span className="block">The role of new <HandUnderline delay={1.35} variant={1}>technology</HandUnderline> is still being worked out.</span>
+                  <span className="block">Outside, competition for <HandUnderline delay={1.5} variant={2}>attention</HandUnderline> is relentless.</span>
                 </p>
-                <p>
-                  More of the right work needs to get through.<br />
-                  And more of the <HandUnderline delay={1.65} variant={4}>budget</HandUnderline> needs to go into the work itself.
+                <p className="space-y-3">
+                  <span className="block">More of the right work needs to get through.</span>
+                  <span className="block">And more of the <HandUnderline delay={1.65} variant={4}>budget</HandUnderline> needs to go into the work itself.</span>
                 </p>
               </div>
             </FadeUp>

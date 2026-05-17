@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
@@ -99,6 +100,15 @@ const experienceAreas = [
 
 export default function Experience() {
   const reduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+  const tickerDuration = isMobile ? 23.5 : 60;
 
   return (
     <>
@@ -185,9 +195,10 @@ export default function Experience() {
             <FadeUp delay={0.08}>
               <div className="w-full overflow-hidden">
                 <motion.ul
+                  key={isMobile ? 'mobile' : 'desktop'}
                   aria-label="Clients I've worked with at scale"
                   animate={reduceMotion ? undefined : { x: ['0%', '-33.3333%'] }}
-                  transition={reduceMotion ? undefined : { duration: 60, repeat: Infinity, ease: 'linear' }}
+                  transition={reduceMotion ? undefined : { duration: tickerDuration, repeat: Infinity, ease: 'linear' }}
                   className="flex gap-12 md:gap-16 lg:gap-20 w-max list-none p-0 m-0"
                 >
                   {[...clients, ...clients, ...clients].map((c, i) => (
@@ -257,7 +268,7 @@ export default function Experience() {
                   Scaled when needed
                 </p>
                 <h2 className="text-[35px] md:text-[48px] lg:text-[56px] font-medium leading-[1.02] tracking-[-0.03em]">
-                  The teams behind the work
+                  Built around the work
                 </h2>
               </FadeUp>
               <FadeUp delay={0.16} className="md:col-span-6 md:col-start-7">
@@ -305,8 +316,13 @@ export default function Experience() {
                 className="text-[26px] md:text-[36px] lg:text-[44px] font-medium leading-[1.1] tracking-[-0.022em] text-dab-cream max-w-[36ch]"
                 style={{ textWrap: 'balance' }}
               >
-                Brought in around critical launches, platform work, operational resets, and embedded delivery leadership.
+                Brought in when important work needs stronger alignment, experienced leadership, and faster movement through complexity.
               </h2>
+            </FadeUp>
+            <FadeUp delay={0.16}>
+              <p className="mt-6 md:mt-8 text-lg md:text-xl font-normal leading-relaxed text-dab-cream/60 max-w-[44ch]">
+                From focused interventions to longer-running strategic support.
+              </p>
             </FadeUp>
           </div>
         </section>

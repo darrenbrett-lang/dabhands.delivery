@@ -114,10 +114,7 @@ export default function WhereWeStepIn() {
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
-              <div className="mt-10 md:mt-12 space-y-6 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
-                <p className="text-[28px] md:text-[32px] font-semibold leading-tight">
-                  We help organisations get stronger digital work out into the world.
-                </p>
+              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
                 <p>Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace.</p>
               </div>
             </FadeUp>
@@ -131,7 +128,7 @@ export default function WhereWeStepIn() {
               The outcome
             </p>
             <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-14 md:mb-20">
-              When strong work survives the system
+              When important work moves together more effectively
             </h2>
             <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-0 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
               {cccItems.map((item, i) => (
@@ -169,7 +166,7 @@ export default function WhereWeStepIn() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-16 md:mb-20">
-                If any of this feels familiar
+                Common pressure points
               </h2>
             </FadeUp>
 
