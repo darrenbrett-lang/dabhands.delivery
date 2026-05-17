@@ -7,7 +7,6 @@ import { BoxCTA } from '@/components/BoxCTA';
 import { Ribbon } from '@/components/Ribbon';
 import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
-import { mailto } from '@/lib/mailto';
 
 // All client logos are self-hosted under /public/images/logos/svg/.
 // `kind: 'icon'` → square-ish brand mark, sits at full row height.
@@ -369,12 +368,12 @@ export default function Experience() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               <p style={{ textWrap: 'balance' }} className="text-[28px] md:text-[40px] lg:text-[52px] font-semibold leading-[1.05] tracking-[-0.026em] max-w-[24ch] mx-auto">
-                Let&rsquo;s get important work moving properly.
+                Get stronger digital work out into the world.
               </p>
             </FadeUp>
             <FadeUp delay={0.16}>
               <div className="mt-14 md:mt-20 flex justify-center">
-                <BoxCTA href={mailto()} label="Start a conversation" />
+                <BoxCTA href="/contact" label="Start a conversation" />
               </div>
             </FadeUp>
           </div>
