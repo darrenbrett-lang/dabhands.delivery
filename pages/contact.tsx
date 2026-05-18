@@ -53,7 +53,7 @@ export default function Contact() {
                     href={mailto({ subject: 'Important work needs to move properly' })}
                     className="text-xl md:text-2xl font-medium tracking-[-0.018em] hover:opacity-60 transition-opacity"
                   >
-                    db@dabhands.delivery
+                    darren@dabhands.delivery
                   </a>
                 </div>
                 <div>

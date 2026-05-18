@@ -1,4 +1,4 @@
-const EMAIL = 'db@dabhands.delivery';
+const EMAIL = 'darren@dabhands.delivery';
 const DEFAULT_SUBJECT = 'Starting a conversation';
 const DEFAULT_BODY = 'I want to get stronger digital work into the world.';
 
