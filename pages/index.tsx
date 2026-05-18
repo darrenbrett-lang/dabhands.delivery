@@ -69,7 +69,7 @@ export default function Home() {
   return (
     <>
       <SeoMeta
-        title="Dab Hands — Senior digital delivery for high-stakes work"
+        title="Dab Hands | Senior digital delivery for high-stakes work"
         description="Dab Hands is a senior-led delivery model for critical digital initiatives. Keeping important work aligned, moving, and commercially effective."
         path="/"
       />

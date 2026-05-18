@@ -112,7 +112,7 @@ export default function Experience() {
   return (
     <>
       <SeoMeta
-        title="Experience — Dab Hands"
+        title="Experience | Dab Hands"
         description="Senior-led digital delivery experience across platform, brand, campaigns, and customer experience. Trusted to lead important work."
         path="/experience"
       />

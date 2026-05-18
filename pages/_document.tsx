@@ -7,7 +7,7 @@ const orgJsonLd = {
   url: 'https://dabhands.delivery',
   logo: 'https://dabhands.delivery/images/dab-hands-crown-mark.svg',
   description:
-    'Senior digital delivery for high-stakes work. We help modern brands get stronger digital work out into the world — keeping important work aligned, moving, and commercially effective inside complex organisations.',
+    'Senior digital delivery for high-stakes work. We help modern brands get stronger digital work out into the world, keeping important work aligned, moving, and commercially effective inside complex organisations.',
   founder: {
     '@type': 'Person',
     name: 'Darren Brett',
@@ -15,7 +15,7 @@ const orgJsonLd = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    email: 'db@dabhands.delivery',
+    email: 'darren@dabhands.delivery',
     contactType: 'business',
   },
 };
@@ -25,8 +25,8 @@ export default function Document() {
     <Html lang="en" data-scroll-behavior="smooth">
       <Head>
         <meta name="theme-color" content="#111111" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"

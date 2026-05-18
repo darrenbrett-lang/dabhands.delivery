@@ -92,7 +92,7 @@ export default function WhereWeStepIn() {
     <>
       <SeoMeta
         title="Where Dab Hands steps in"
-        description="Dab Hands is built around critical digital initiatives that cannot afford to drift. We help organisations get stronger digital work out into the world."
+        description="Dab Hands is built around critical digital initiatives that cannot afford to drift. Senior-led delivery for complex work that needs to move together at pace."
         path="/where-we-step-in"
       />
 
@@ -106,6 +106,10 @@ export default function WhereWeStepIn() {
             aria-hidden
             draggable={false}
             className="pointer-events-none select-none absolute right-0 bottom-0 h-[80%] w-auto max-w-none opacity-50 sm:opacity-75 md:opacity-100"
+            style={{
+              maskImage: 'linear-gradient(to top left, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 60%)',
+              WebkitMaskImage: 'linear-gradient(to top left, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 60%)',
+            }}
           />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
@@ -161,6 +165,10 @@ export default function WhereWeStepIn() {
             aria-hidden
             draggable={false}
             className="pointer-events-none select-none absolute right-0 bottom-0 h-[40%] w-auto max-w-none opacity-50 sm:opacity-75 md:opacity-100"
+            style={{
+              maskImage: 'linear-gradient(to top left, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 60%)',
+              WebkitMaskImage: 'linear-gradient(to top left, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 60%)',
+            }}
           />
 
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
