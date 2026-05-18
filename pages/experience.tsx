@@ -278,8 +278,9 @@ export default function Experience() {
                   <div className="pt-4">
                     {[
                       'Small senior teams.',
-                      'Clear accountability.',
+                      'Experienced operators who get on with the work.',
                       'Built for momentum around important work.',
+                      'One point of accountability.',
                     ].map((line, i) => (
                       <motion.div
                         key={line}
@@ -319,6 +320,11 @@ export default function Experience() {
               </h2>
             </FadeUp>
             <FadeUp delay={0.16}>
+              <p className="mt-6 md:mt-8 text-lg md:text-xl leading-relaxed text-dab-cream max-w-[44ch]">
+                Small senior teams. Minimal activation overhead. Designed to integrate quickly around the work.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.24}>
               <p className="mt-6 md:mt-8 text-lg md:text-xl font-normal leading-relaxed text-dab-cream/60 max-w-[44ch]">
                 From focused interventions to longer-running strategic support.
               </p>

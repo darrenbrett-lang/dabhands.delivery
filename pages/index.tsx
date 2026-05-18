@@ -9,10 +9,11 @@ import { SeoMeta } from '@/components/SeoMeta';
 const antidotePoints = [
   'Stronger alignment around important work.',
   'Faster movement through complexity.',
-  'Higher-quality execution.',
+  'Strong work staying strong as it moves to market.',
   'More impact from existing investment.',
-  'Senior capability without traditional agency weight.',
-  'Commercially effective as it reaches market.',
+  'Senior capability without heavy operational overhead.',
+  'Built to perform in market.',
+  'Fast to align and activate.',
 ];
 
 const builtForItems = [
