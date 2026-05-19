@@ -39,8 +39,8 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           <div className="flex items-center gap-2.5">
             <div className="brand-dot w-2.5 h-2.5 rounded-full" />
-            <span className="font-semibold text-[15px] tracking-[-0.02em]">
-              <span className="font-bold">Dab</span> Hands
+            <span className="font-medium text-[15px] tracking-[-0.02em]">
+              <span className="font-medium">DAB</span> hands
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -60,7 +60,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
                 className="block"
               />
             </a>
-            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 Dab Hands</p>
+            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-dab-brown">© 2026 DAB hands</p>
           </div>
         </div>
       </div>

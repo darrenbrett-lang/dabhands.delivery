@@ -112,7 +112,7 @@ export default function Experience() {
   return (
     <>
       <SeoMeta
-        title="Experience | Dab Hands"
+        title="Experience | DAB hands"
         description="Senior-led digital delivery experience across platform, brand, campaigns, and customer experience. Trusted to lead important work."
         path="/experience"
       />
@@ -234,6 +234,8 @@ export default function Experience() {
                     alt="Darren Brett"
                     className="absolute inset-0 w-full h-full object-cover"
                     draggable={false}
+                    loading="eager"
+                    fetchPriority="high"
                   />
                   <div aria-hidden className="absolute inset-0 bg-dab-brown-lighter mix-blend-multiply opacity-60 pointer-events-none" />
                 </div>
@@ -251,7 +253,7 @@ export default function Experience() {
                   <p>Running an agency while leading operations, delivery, and product has shaped how I manage complexity, align teams, and keep important work moving under pressure.</p>
                   <p>A big part of the role is moving fluidly between strategy, creative, platforms, operations, and execution. Understanding how people, systems, and emerging technologies work together under pressure, and helping strong work stay strong as it moves to market.</p>
                   <p>I'm obsessed with how great work survives modern organisational systems and work hard to help them improve their outcomes.</p>
-                  <p>Bring me in to lead delivery around a critical initiative, or scale through Dab Hands to a trusted senior team built around the work.</p>
+                  <p>Bring me in to lead delivery around a critical initiative, or scale through DAB hands to a trusted senior team built around the work.</p>
                 </div>
               </FadeUp>
             </div>
@@ -272,7 +274,7 @@ export default function Experience() {
               </FadeUp>
               <FadeUp delay={0.16} className="md:col-span-6 md:col-start-7">
                 <div className="space-y-6 text-xl text-dab-charcoal leading-relaxed">
-                  <p>Dab Hands is supported by a trusted network of senior specialists brought in around the initiative when needed.</p>
+                  <p>DAB hands is supported by a trusted network of senior specialists brought in around the initiative when needed.</p>
                   <p>Capability across strategy, creative, production, platforms, ecommerce, CRM, content, operations, and delivery.</p>
                   <p>People I have delivered with for years. Leaders in their fields. Built for momentum around important work.</p>
                   <div className="pt-4">

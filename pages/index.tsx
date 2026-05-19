@@ -69,8 +69,8 @@ export default function Home() {
   return (
     <>
       <SeoMeta
-        title="Dab Hands | Senior digital delivery for high-stakes work"
-        description="Dab Hands is a senior-led delivery model for critical digital initiatives. Keeping important work aligned, moving, and commercially effective."
+        title="DAB hands | Senior digital delivery for high-stakes work"
+        description="DAB hands is a senior-led delivery model for critical digital initiatives. Keeping important work aligned, moving, and commercially effective."
         path="/"
       />
 
@@ -235,7 +235,7 @@ export default function Home() {
             </FadeUp>
             <FadeUp delay={0.08}>
               <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-                Dab Hands meets these problems head-on
+                DAB hands meets these problems head-on
               </h2>
             </FadeUp>
 

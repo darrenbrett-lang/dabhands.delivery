@@ -27,10 +27,10 @@ export const Header = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-dab-charcoal ${scrolled ? 'border-b border-dab-brown/15' : ''}`}
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
-          <Link href="/" className="flex items-baseline gap-3 group" aria-label="Dab Hands home">
+          <Link href="/" className="flex items-baseline gap-3 group" aria-label="DAB hands home">
             <span className="brand-dot w-[14px] h-[14px] rounded-full shrink-0" />
-            <span className="font-semibold text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
-              <span className="font-bold">Dab</span> Hands
+            <span className="font-medium text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
+              <span className="font-medium">DAB</span> hands
             </span>
           </Link>
 
@@ -100,7 +100,7 @@ export const Header = () => {
               ))}
             </nav>
             <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-brown">
-              Dab Hands. Digital Delivery, Handled
+              DAB hands. Digital Delivery, Handled
             </p>
           </motion.div>
         )}
