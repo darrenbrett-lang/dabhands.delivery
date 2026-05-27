@@ -72,12 +72,12 @@ export default function Contact() {
                     LinkedIn
                   </p>
                   <a
-                    href="https://www.linkedin.com/in/darren-brett-1474403/"
+                    href="https://www.linkedin.com/company/dab-hands-delivery/about/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xl md:text-2xl font-medium tracking-[-0.018em] hover:opacity-60 transition-opacity"
                   >
-                    Darren Brett
+                    /dab-hands-delivery
                   </a>
                 </div>
               </div>
