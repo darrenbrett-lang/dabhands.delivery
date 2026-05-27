@@ -58,7 +58,8 @@ export const RibbonAccent = ({
       <div
         className="w-full h-full"
         style={{
-          backgroundImage: 'url(/images/ribbon_accents.png)',
+          // WebP only — atmospheric decoration, aria-hidden. 97%+ browser support; older browsers gracefully lose the ribbon.
+          backgroundImage: 'url(/images/ribbon_accents.webp)',
           backgroundSize: '200% 300%',
           backgroundPosition: `${cell.x}% ${cell.y}%`,
           backgroundRepeat: 'no-repeat',

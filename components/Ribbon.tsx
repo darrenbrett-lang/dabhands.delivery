@@ -40,6 +40,15 @@ export const Ribbon = ({
   const range = driftDirection === 'right' ? [-drift / 2, drift / 2] : [drift / 2, -drift / 2];
   const x = useTransform(scrollYProgress, [0, 1], range);
 
+  // Derive a sibling .webp path so modern browsers fetch the much smaller WebP
+  // while older browsers fall back to the PNG via <picture>.
+  const webpPath = imagePath.replace(/\.png$/i, '.webp');
+  const imgClass = `w-full h-auto block ${tone === 'dark' ? 'mix-blend-lighten' : 'mix-blend-multiply'} ${flip ? 'scale-x-[-1]' : ''}`;
+  const imgStyle = {
+    opacity,
+    ...(tone === 'dark' && { filter: 'invert(1) hue-rotate(180deg)' }),
+  };
+
   return (
     <motion.div
       ref={ref}
@@ -47,17 +56,19 @@ export const Ribbon = ({
       className={`pointer-events-none select-none ${className}`}
       style={{ x }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imagePath}
-        alt=""
-        className={`w-full h-auto block ${tone === 'dark' ? 'mix-blend-lighten' : 'mix-blend-multiply'} ${flip ? 'scale-x-[-1]' : ''}`}
-        style={{
-          opacity,
-          ...(tone === 'dark' && { filter: 'invert(1) hue-rotate(180deg)' }),
-        }}
-        draggable={false}
-      />
+      <picture>
+        <source srcSet={webpPath} type="image/webp" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={imagePath}
+          alt=""
+          width={1536}
+          height={1024}
+          className={imgClass}
+          style={imgStyle}
+          draggable={false}
+        />
+      </picture>
     </motion.div>
   );
 };
