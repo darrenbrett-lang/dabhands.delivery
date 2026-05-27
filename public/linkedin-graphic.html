@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAB Hands — LinkedIn Graphic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Geist', sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 1080px;
+            height: 1080px;
+            background: #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .circle {
+            width: 320px;
+            height: 320px;
+            background: #B6FF00;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: breathe 4.5s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: circle(50%);
+        }
+        @keyframes breathe {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.08);
+                opacity: 0.95;
+            }
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 30px;
+            max-width: 260px;
+            max-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .statement {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 0.95;
+            color: #111111;
+            letter-spacing: -0.02em;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 100vw;
+                height: 100vw;
+                max-width: 1080px;
+                max-height: 1080px;
+            }
+            .circle {
+                width: 240px;
+                height: 240px;
+            }
+            .statement {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circle"></div>
+        <div class="content">
+            <h1 class="statement">Good ideas are not the problem.</h1>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DAB Hands — Logo (black on white)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 810px; height: 262px; }
+    body {
+      background: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+    .row { display: flex; align-items: baseline; gap: 40px; }
+    /* Dot height tracks the wordmark's cap height (1cap) so it always
+       spans baseline -> top of the capital "D". */
+    .dot {
+      font-size: 110px;
+      width: 1cap;
+      height: 1cap;
+      border-radius: 50%;
+      background: #B6FF00;
+      flex-shrink: 0;
+    }
+    .wordmark {
+      font-size: 110px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #111111;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .wordmark b { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <span class="dot"></span>
+    <span class="wordmark"><b>Dab</b> Hands</span>
+  </div>
+</body>
+</html>

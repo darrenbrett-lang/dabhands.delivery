@@ -3,7 +3,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DAB hands',
+  name: 'DAB Hands',
   url: 'https://dabhands.delivery',
   logo: 'https://dabhands.delivery/images/dab-hands-crown-mark.svg',
   description:

@@ -110,28 +110,9 @@ p {
   outline-offset: 3px;
 }
 
-/* Brand dot: soft breathing pulse — scale tied to cap height, colour drifts vibrant↔soft.
-   Cycle ≈ resting human breath (~13/min). */
-@keyframes brand-dot-breathe {
-  0%, 100% {
-    transform: scale(1);
-    background-color: var(--color-dab-green);
-  }
-  50% {
-    transform: scale(1.14);
-    background-color: var(--color-dab-brown-lighter);
-  }
-}
+/* Brand dot: static neon green, cap-height sized in JSX. */
 .brand-dot {
   background-color: var(--color-dab-green);
-  animation: brand-dot-breathe 4.5s ease-in-out infinite;
-  transform-origin: center;
-  will-change: transform, background-color;
-}
-@media (prefers-reduced-motion: reduce) {
-  .brand-dot {
-    animation: none;
-  }
 }
 
 /* Dev: outline every div for design QA. Excluded for dev tool elements. */

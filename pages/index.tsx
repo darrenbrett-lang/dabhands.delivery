@@ -7,13 +7,12 @@ import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
 
 const antidotePoints = [
-  'Stronger alignment around important work.',
-  'Faster movement through complexity.',
-  'Strong work staying strong as it moves to market.',
-  'More impact from existing investment.',
   'Senior capability without heavy operational overhead.',
-  'Built to perform in market.',
+  'Senior judgement around important work.',
   'Fast to align and activate.',
+  'Faster movement through complexity.',
+  'Smooth integration across agencies, partners and internal teams.',
+  'More value from existing investment.',
 ];
 
 const builtForItems = [
@@ -69,8 +68,8 @@ export default function Home() {
   return (
     <>
       <SeoMeta
-        title="DAB hands | Senior digital delivery for high-stakes work"
-        description="DAB hands is a senior-led delivery model for critical digital initiatives. Keeping important work aligned, moving, and commercially effective."
+        title="DAB Hands | Senior digital delivery for high-stakes work"
+        description="DAB Hands is a senior-led delivery model for critical digital initiatives. Keeping important work aligned, moving, and commercially effective."
         path="/"
       />
 
@@ -235,7 +234,7 @@ export default function Home() {
             </FadeUp>
             <FadeUp delay={0.08}>
               <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-                DAB hands meets these problems head-on
+                DAB Hands meets these problems head-on
               </h2>
             </FadeUp>
 

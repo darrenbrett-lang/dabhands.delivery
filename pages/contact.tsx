@@ -9,8 +9,8 @@ export default function Contact() {
   return (
     <>
       <SeoMeta
-        title="Contact | DAB hands"
-        description="Get in touch with DAB hands. Senior-led digital delivery for high-stakes work."
+        title="Contact | DAB Hands"
+        description="Get in touch with DAB Hands. Senior-led digital delivery for high-stakes work."
         path="/contact"
       />
 

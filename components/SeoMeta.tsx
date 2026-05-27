@@ -10,7 +10,7 @@ interface SeoMetaProps {
 }
 
 const SITE_URL = 'https://dabhands.delivery';
-const SITE_NAME = 'DAB hands';
+const SITE_NAME = 'DAB Hands';
 
 export const SeoMeta = ({ title, description, path, image = '/og-image.png' }: SeoMetaProps) => {
   const url = `${SITE_URL}${path}`;

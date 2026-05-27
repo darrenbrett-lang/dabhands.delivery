@@ -46,27 +46,27 @@ const interventions: Array<{ title: string; lead: string; outro: string }> = [
   {
     title: 'Critical work drifting',
     lead: 'Momentum slows.\nOwnership fragments.\nExecution weakens.',
-    outro: 'DAB hands restores clarity, alignment, and momentum around the work.',
+    outro: 'DAB Hands restores clarity, alignment, and momentum around the work.',
   },
   {
     title: 'Quality starting to weaken',
     lead: 'Strong ideas often lose strength during execution.',
-    outro: 'DAB hands helps protect the quality of the work as it moves to market.',
+    outro: 'DAB Hands helps protect the quality of the work as it moves to market.',
   },
   {
     title: 'Teams no longer aligned',
     lead: 'Different priorities create friction around important work.',
-    outro: 'DAB hands reconnects teams around shared momentum and execution quality.',
+    outro: 'DAB Hands reconnects teams around shared momentum and execution quality.',
   },
   {
     title: 'The initiative needs stronger capability',
     lead: 'Some initiatives need more senior capability around the work.',
-    outro: 'DAB hands builds lean senior teams designed for quality, speed, and focus.',
+    outro: 'DAB Hands builds lean senior teams designed for quality, speed, and focus.',
   },
   {
     title: 'Friction slowing the work',
     lead: 'Slow decisions and fragmented ownership weaken execution.',
-    outro: 'DAB hands reduces operational drag and helps the work move properly again.',
+    outro: 'DAB Hands reduces operational drag and helps the work move properly again.',
   },
   {
     title: 'Existing investment underperforming',
@@ -91,8 +91,8 @@ export default function WhereWeStepIn() {
   return (
     <>
       <SeoMeta
-        title="Where DAB hands steps in"
-        description="DAB hands is built around critical digital initiatives that cannot afford to drift. Senior-led delivery for complex work that needs to move together at pace."
+        title="Where DAB Hands steps in"
+        description="DAB Hands is built around critical digital initiatives that cannot afford to drift. Senior-led delivery for complex work that needs to move together at pace."
         path="/where-we-step-in"
       />
 
@@ -118,8 +118,9 @@ export default function WhereWeStepIn() {
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
-              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
+              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch] space-y-6">
                 <p>Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace.</p>
+                <p>Experienced operating across client teams, agency partners, technology partners, and specialist collaborators to help important work move together more effectively.</p>
               </div>
             </FadeUp>
           </div>
