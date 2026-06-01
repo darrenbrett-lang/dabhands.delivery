@@ -45,10 +45,10 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="https://www.linkedin.com/in/darren-brett-1474403/"
+              href="https://www.linkedin.com/company/dab-hands-delivery/about/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Darren Brett on LinkedIn"
+              aria-label="DAB Hands on LinkedIn"
               className="opacity-80 hover:opacity-100 transition-opacity"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
