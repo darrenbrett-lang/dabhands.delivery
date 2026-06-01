@@ -10,7 +10,7 @@ export default function Contact() {
     <>
       <SeoMeta
         title="Contact | DAB Hands"
-        description="Get in touch with DAB Hands. Senior-led digital delivery for high-stakes work."
+        description="Start a conversation with DAB Hands. We help important work move properly through complex organisations."
         path="/contact"
       />
 
@@ -44,7 +44,7 @@ export default function Contact() {
             </FadeUp>
 
             <FadeUp delay={0.24}>
-              <div className="mt-16 md:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-4xl">
+              <div className="mt-16 md:mt-24 flex flex-col sm:flex-row sm:flex-wrap gap-y-10 gap-x-16 md:gap-x-20">
                 <div>
                   <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-charcoal/55 mb-3">
                     Email

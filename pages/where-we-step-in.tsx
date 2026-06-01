@@ -10,29 +10,78 @@ import { StatPopover } from '@/components/StatPopover';
 import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
+const builtForItems = [
+  {
+    label: 'Critical launches under pressure.',
+    icon: (
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="17" cy="19" r="9" />
+        <line x1="14" y1="4" x2="20" y2="4" />
+        <line x1="17" y1="4" x2="17" y2="8" />
+        <line x1="17" y1="19" x2="17" y2="12" />
+        <line x1="17" y1="19" x2="21" y2="23" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Customer experiences fragmented across channels.',
+    icon: (
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <circle cx="10" cy="11" r="2" fill="currentColor" />
+        <circle cx="22" cy="8" r="2" fill="currentColor" />
+        <circle cx="17" cy="17" r="2" fill="currentColor" />
+        <circle cx="25" cy="23" r="2" fill="currentColor" />
+        <circle cx="8" cy="25" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Cross-functional initiatives losing momentum.',
+    icon: (
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="4" y1="27" x2="30" y2="27" />
+        <line x1="8" y1="27" x2="8" y2="9" />
+        <line x1="15" y1="27" x2="15" y2="14" />
+        <line x1="22" y1="27" x2="22" y2="19" />
+        <line x1="29" y1="27" x2="29" y2="23" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Complex delivery ecosystems lacking coordination.',
+    icon: (
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="10" cy="10" r="3" />
+        <circle cx="24" cy="10" r="3" />
+        <circle cx="17" cy="22" r="3" />
+        <line x1="12.5" y1="12" x2="15" y2="20" />
+        <line x1="21.5" y1="12" x2="19" y2="20" />
+      </svg>
+    ),
+  },
+];
+
 const cccItems = [
   {
-    label: 'Attention.',
+    label: 'Stronger customer experiences',
     icon: (
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4">
-        <circle cx="17" cy="17" r="13" />
-        <circle cx="17" cy="17" r="7" />
-        <circle cx="17" cy="17" r="1.6" fill="currentColor" />
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="6" />
+        <circle cx="22" cy="12" r="6" />
+        <circle cx="17" cy="22" r="6" />
       </svg>
     ),
   },
   {
-    label: 'Connection.',
+    label: 'Better execution quality',
     icon: (
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4">
-        <circle cx="8" cy="17" r="4" />
-        <circle cx="26" cy="17" r="4" />
-        <line x1="12" y1="17" x2="22" y2="17" strokeLinecap="round" />
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 18 L13 25 L28 10" />
       </svg>
     ),
   },
   {
-    label: 'Conversion.',
+    label: 'More commercial impact',
     icon: (
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M7 27 L27 7" />
@@ -44,34 +93,34 @@ const cccItems = [
 
 const interventions: Array<{ title: string; lead: string; outro: string }> = [
   {
-    title: 'Critical work drifting',
-    lead: 'Momentum slows.\nOwnership fragments.\nExecution weakens.',
-    outro: 'DAB Hands restores clarity, alignment, and momentum around the work.',
+    title: 'Complex ecosystems needing orchestration',
+    lead: 'Multiple teams, partners, platforms, and stakeholders are involved, but movement is becoming fragmented.',
+    outro: 'DAB Hands helps reconnect the ecosystem around shared outcomes.',
   },
   {
-    title: 'Quality starting to weaken',
-    lead: 'Strong ideas often lose strength during execution.',
-    outro: 'DAB Hands helps protect the quality of the work as it moves to market.',
+    title: 'Important work losing momentum',
+    lead: 'The initiative is moving, but not fast enough. Decisions slow, ownership fragments, and progress becomes harder to maintain.',
+    outro: 'DAB Hands restores clarity, momentum, and forward movement.',
   },
   {
-    title: 'Teams no longer aligned',
-    lead: 'Different priorities create friction around important work.',
-    outro: 'DAB Hands reconnects teams around shared momentum and execution quality.',
+    title: 'Strong work losing strength',
+    lead: 'The original intent is becoming diluted as the work moves through teams, channels, and delivery.',
+    outro: 'DAB Hands helps keep strong work strong as it moves to market.',
   },
   {
-    title: 'The initiative needs stronger capability',
-    lead: 'Some initiatives need more senior capability around the work.',
-    outro: 'DAB Hands builds lean senior teams designed for quality, speed, and focus.',
+    title: 'The initiative needs experienced leadership',
+    lead: 'The work has become too important to leave to chance.',
+    outro: 'DAB Hands brings experienced leadership around the initiative where and when it is needed.',
   },
   {
-    title: 'Friction slowing the work',
-    lead: 'Slow decisions and fragmented ownership weaken execution.',
-    outro: 'DAB Hands reduces operational drag and helps the work move properly again.',
+    title: 'Operational drag slowing progress',
+    lead: 'The work is being slowed by friction, unclear ownership, and delivery complexity.',
+    outro: 'DAB Hands reduces drag and helps the work move properly again.',
   },
   {
     title: 'Existing investment underperforming',
-    lead: 'Most organisations already have strong people, ideas, and platforms.',
-    outro: 'The challenge is getting them moving together effectively.',
+    lead: 'The business already has strong people, platforms, and ideas.\nThe challenge is helping them move together more effectively.',
+    outro: 'DAB Hands helps unlock more value from what already exists.',
   },
 ];
 
@@ -119,32 +168,30 @@ export default function WhereWeStepIn() {
             </FadeUp>
             <FadeUp delay={0.16}>
               <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch] space-y-6">
-                <p>Built for complex initiatives where strategy, creative, product, platforms, and customer experience need to move together at pace.</p>
-                <p>Experienced operating across client teams, agency partners, technology partners, and specialist collaborators to help important work move together more effectively.</p>
+                <p>Important work rarely fails because of ambition.</p>
+                <p>It weakens as it moves through increasingly complex systems of people, platforms, partners, and processes.</p>
+                <p>DAB Hands helps important work stay strong through that complexity, bringing clarity, composure, and momentum as it moves towards the customer.</p>
               </div>
             </FadeUp>
           </div>
         </section>
 
-        {/* ATTENTION / CONNECTION / CONVERSION */}
+        {/* OFTEN BROUGHT IN AROUND */}
         <section className="bg-white text-dab-charcoal py-24 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
-              The outcome
+              Often brought in when
             </p>
-            <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-14 md:mb-20">
-              When important work moves together more effectively
-            </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-0 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
-              {cccItems.map((item, i) => (
+            <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-12 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
+              {builtForItems.map((item, i) => (
                 <motion.li
                   key={item.label}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className={`md:col-span-4 flex items-center gap-4 md:gap-5 ${
-                    i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className={`md:col-span-6 flex items-center gap-4 md:gap-5 ${
+                    i % 2 === 1 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
                   }`}
                 >
                   <span className="flex-shrink-0 text-dab-charcoal" aria-hidden>{item.icon}</span>
@@ -187,7 +234,7 @@ export default function WhereWeStepIn() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.5, delay: 0.04 * i }}
-                  className="border-t border-dab-charcoal/15 last:border-b last:border-dab-charcoal/15 py-12 md:py-16 lg:py-20"
+                  className="py-12 md:py-16 lg:py-20 border-t border-dab-charcoal/10"
                 >
                   <div className="grid md:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
                     <div className="md:col-span-4">
@@ -217,6 +264,37 @@ export default function WhereWeStepIn() {
                 </motion.li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        {/* ATTENTION / CONNECTION / CONVERSION */}
+        <section className="bg-white text-dab-charcoal py-24 md:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
+              The outcome
+            </p>
+            <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-14 md:mb-20">
+              When important work moves together more effectively
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-0 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
+              {cccItems.map((item, i) => (
+                <motion.li
+                  key={item.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className={`md:col-span-4 flex items-center gap-4 md:gap-5 ${
+                    i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
+                  }`}
+                >
+                  <span className="flex-shrink-0 text-dab-charcoal" aria-hidden>{item.icon}</span>
+                  <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
+                    {item.label}
+                  </p>
+                </motion.li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -307,7 +385,7 @@ export default function WhereWeStepIn() {
             </FadeUp>
             <FadeUp>
               <p className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto">
-                Backed by 20+ years of senior digital delivery.
+                Backed by 20+ years helping strong work stay strong as it moves to market.
               </p>
             </FadeUp>
             <FadeUp delay={0.12}>

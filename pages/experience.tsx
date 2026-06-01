@@ -48,36 +48,27 @@ const testimonials = [
 
 const experienceAreas = [
   {
-    label: 'Platform and\ne-commerce.',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
-        <path d="M20 5 L5 13 L20 21 L35 13 Z" />
-        <path d="M5 20 L20 28 L35 20" />
-        <path d="M5 27 L20 35 L35 27" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Digital brand experience.',
+    label: 'Digital experiences',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4">
-        <rect x="6" y="6" width="22" height="22" />
-        <rect x="14" y="14" width="22" height="22" />
+        <rect x="6" y="8" width="28" height="20" rx="2" />
+        <line x1="12" y1="32" x2="28" y2="32" />
+        <line x1="18" y1="32" x2="18" y2="28" />
       </svg>
     ),
   },
   {
-    label: 'Campaigns and launches.',
+    label: 'Campaigns and launches',
     icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4">
-        <circle cx="20" cy="20" r="14" />
-        <circle cx="20" cy="20" r="8" />
-        <circle cx="20" cy="20" r="2" fill="currentColor" />
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 20 L20 8 L32 20 L28 32 L12 32 Z" />
+        <path d="M20 14 L20 26" />
+        <path d="M14 20 L26 20" />
       </svg>
     ),
   },
   {
-    label: 'Membership and lifecycle.',
+    label: 'Membership and lifecycle',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M32 18 A12 12 0 1 0 31 25" />
@@ -86,12 +77,12 @@ const experienceAreas = [
     ),
   },
   {
-    label: 'Cross-functional delivery leadership.',
+    label: 'Platform and ecommerce',
     icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4">
-        <line x1="20" y1="6" x2="20" y2="34" />
-        <line x1="6" y1="20" x2="34" y2="20" />
-        <circle cx="20" cy="20" r="6" />
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
+        <path d="M20 5 L5 13 L20 21 L35 13 Z" />
+        <path d="M5 20 L20 28 L35 20" />
+        <path d="M5 27 L20 35 L35 27" />
       </svg>
     ),
   },
@@ -113,7 +104,7 @@ export default function Experience() {
     <>
       <SeoMeta
         title="Experience | DAB Hands"
-        description="Senior-led digital delivery experience across platform, brand, campaigns, and customer experience. Trusted to lead important work."
+        description="Twenty years helping strong work stay strong as it moves through complex organizational systems. Understanding how people, systems, and technology work together under pressure."
         path="/experience"
       />
 
@@ -140,12 +131,12 @@ export default function Experience() {
             </FadeUp>
             <FadeUp delay={0.08}>
               <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch]">
-                Experience built under pressure
+                Experience shaped where important work meets organisational reality
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
               <p className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
-                Large-scale digital delivery experience shaped across global brands, complex platforms, campaigns, and customer experience programmes.
+                Enough time spent inside global brands, agencies, platforms, and delivery ecosystems to know that the quality of the work is only half the challenge. The system carrying it matters just as much.
               </p>
             </FadeUp>
           </div>
@@ -156,12 +147,12 @@ export default function Experience() {
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp delay={0.08}>
               <h2 className="text-[40px] md:text-[56px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] mb-14 md:mb-16 md:whitespace-nowrap!">
-                With deep experience across
+                Applied across
               </h2>
             </FadeUp>
 
-            <div className="border-t border-dab-cream/15 pt-10 md:pt-14">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-12 gap-x-6 lg:gap-x-8">
+            <div className="pt-10 md:pt-14">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-6 md:gap-x-8">
                 {experienceAreas.map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -249,12 +240,12 @@ export default function Experience() {
                     </p>
                     <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren</p>
                   </div>
-                  <p>More than 20 years leading complex digital delivery across global brands, platforms, campaigns, and customer experience programmes.</p>
-                  <p>Running an agency while leading operations, delivery, and product has shaped how I manage complexity, align teams, and keep important work moving under pressure.</p>
+                  <p>For more than 20 years I've helped important digital work move through complex organisations.</p>
                   <p>A big part of the role is moving fluidly between strategy, creative, platforms, operations, and execution. Understanding how people, systems, and emerging technologies work together under pressure, and helping strong work stay strong as it moves to market.</p>
                   <p>Experienced working across complex client, agency, technology, and partner ecosystems, helping teams move together more effectively around important work.</p>
-                  <p>I'm obsessed with how great work survives modern organisational systems and work hard to help them improve their outcomes.</p>
-                  <p>Bring me in to lead delivery around a critical initiative, or scale through DAB Hands to a trusted senior team built around the work.</p>
+                  <p>Running an agency while leading operations, delivery, and product has shaped how I manage complexity, align teams, and bring clarity, composure, and momentum to critical initiatives.</p>
+                  <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes.</p>
+                  <p>Bring me in to bring clarity, composure, and momentum to a critical initiative, or scale through DAB Hands to a trusted senior team built around the work.</p>
                 </div>
               </FadeUp>
             </div>
@@ -281,7 +272,7 @@ export default function Experience() {
                   <div className="pt-4">
                     {[
                       'Small senior teams.',
-                      'Experienced operators who get on with the work.',
+                      'Experienced operators who know how to move the work forward.',
                       'Built for momentum around important work.',
                       'You have one point of accountability.',
                     ].map((line, i) => (
@@ -319,7 +310,7 @@ export default function Experience() {
                 className="text-[26px] md:text-[36px] lg:text-[44px] font-medium leading-[1.1] tracking-[-0.022em] text-dab-cream max-w-[36ch]"
                 style={{ textWrap: 'balance' }}
               >
-                Brought in when important work needs stronger alignment, experienced leadership, and faster movement through complexity.
+                Bringing clarity, composure and momentum to important digital work.
               </h2>
             </FadeUp>
             <FadeUp delay={0.16}>
@@ -376,8 +367,19 @@ export default function Experience() {
           />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
+              <div className="mb-8 md:mb-10">
+                <img
+                  src="/images/dab-hands-crown-mark.svg"
+                  alt=""
+                  aria-hidden
+                  draggable={false}
+                  className="mx-auto w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
+                />
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.08}>
               <p style={{ textWrap: 'balance' }} className="text-[28px] md:text-[40px] lg:text-[52px] font-semibold leading-[1.05] tracking-[-0.026em] max-w-[24ch] mx-auto">
-                Get stronger digital work out into the world.
+                Keep important work moving
               </p>
             </FadeUp>
             <FadeUp delay={0.16}>

@@ -15,55 +15,6 @@ const antidotePoints = [
   'More value from existing investment.',
 ];
 
-const builtForItems = [
-  {
-    label: 'Critical launches under pressure.',
-    icon: (
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="17" cy="19" r="9" />
-        <line x1="14" y1="4" x2="20" y2="4" />
-        <line x1="17" y1="4" x2="17" y2="8" />
-        <line x1="17" y1="19" x2="17" y2="12" />
-        <line x1="17" y1="19" x2="21" y2="23" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Customer experiences fragmented across channels.',
-    icon: (
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-        <circle cx="10" cy="11" r="2" fill="currentColor" />
-        <circle cx="22" cy="8" r="2" fill="currentColor" />
-        <circle cx="17" cy="17" r="2" fill="currentColor" />
-        <circle cx="25" cy="23" r="2" fill="currentColor" />
-        <circle cx="8" cy="25" r="2" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Cross-functional initiatives losing momentum.',
-    icon: (
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="4" y1="27" x2="30" y2="27" />
-        <line x1="8" y1="27" x2="8" y2="9" />
-        <line x1="15" y1="27" x2="15" y2="14" />
-        <line x1="22" y1="27" x2="22" y2="19" />
-        <line x1="29" y1="27" x2="29" y2="23" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Strategy and execution drifting apart.',
-    icon: (
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M5 17 L29 7" />
-        <path d="M5 17 L29 27" />
-        <circle cx="5" cy="17" r="1.8" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-];
-
 export default function Home() {
   return (
     <>
@@ -97,34 +48,6 @@ export default function Home() {
                 </div>
               </FadeUp>
             </div>
-          </div>
-        </section>
-
-        {/* ── BUILT FOR ─────────────────────────────── */}
-        <section className="bg-white text-dab-charcoal py-24 md:py-32">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
-              Often brought in around
-            </p>
-            <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-12 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
-              {builtForItems.map((item, i) => (
-                <motion.li
-                  key={item.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className={`md:col-span-6 flex items-center gap-4 md:gap-5 ${
-                    i % 2 === 1 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
-                  }`}
-                >
-                  <span className="flex-shrink-0 text-dab-charcoal" aria-hidden>{item.icon}</span>
-                  <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
-                    {item.label}
-                  </p>
-                </motion.li>
-              ))}
-            </ul>
           </div>
         </section>
 
