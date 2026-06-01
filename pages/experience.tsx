@@ -152,7 +152,7 @@ export default function Experience() {
             </FadeUp>
 
             <div className="pt-10 md:pt-14">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-6 md:gap-x-8">
+              <div className="grid grid-cols-2 gap-y-12 gap-x-6 md:gap-x-8">
                 {experienceAreas.map((item, i) => (
                   <motion.div
                     key={item.label}
