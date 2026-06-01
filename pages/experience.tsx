@@ -152,7 +152,7 @@ export default function Experience() {
             </FadeUp>
 
             <div className="pt-10 md:pt-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-y-10 gap-x-8 md:gap-x-10 lg:gap-x-12">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-y-12 md:gap-y-0 gap-x-8 md:gap-x-6 lg:gap-x-8">
                 {experienceAreas.map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -160,7 +160,7 @@ export default function Experience() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.07 }}
-                    className={`flex items-start gap-4 md:flex-col md:gap-0 ${i % 2 === 1 ? 'md:border-l border-dab-cream/15 md:pl-6 lg:pl-10' : 'md:pr-6 lg:pr-10'}`}
+                    className={`flex items-start gap-4 md:flex-col md:gap-5 ${i > 0 ? 'md:border-l border-dab-cream/15 md:pl-6' : ''}`}
                   >
                     <div className="text-dab-green flex-shrink-0 md:mb-6 [&_svg]:w-10 [&_svg]:h-10 md:[&_svg]:w-12 md:[&_svg]:h-12">{item.icon}</div>
                     <p style={{ whiteSpace: 'pre-line' }} className="text-xl md:text-2xl lg:text-3xl font-medium leading-tight text-dab-cream max-w-[18ch]">
