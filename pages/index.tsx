@@ -37,7 +37,7 @@ export default function Home() {
             <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
               <FadeUp>
                 <h1 className="text-[56px] sm:text-[68px] md:text-[80px] lg:text-[104px] xl:text-[120px] font-medium leading-[0.96] tracking-[-0.03em] max-w-[16ch] mx-auto">
-                  Keeping important work moving
+                  Hannah has arrived
                 </h1>
               </FadeUp>
 
