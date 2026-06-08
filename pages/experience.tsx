@@ -239,11 +239,11 @@ export default function Experience() {
                     </p>
                     <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren</p>
                   </div>
-                  <p>For more than 20 years I've helped important digital work move through complex organisations.</p>
-                  <p>A big part of the role is moving fluidly between strategy, creative, platforms, operations, and execution. Understanding how people, systems, and emerging technologies work together under pressure, and helping strong work stay strong as it moves to market.</p>
-                  <p>Experienced working across complex client, agency, technology, and partner ecosystems, helping teams move together more effectively around important work.</p>
-                  <p>Running an agency while leading operations, delivery, and product has shaped how I manage complexity, align teams, and bring clarity, composure, and momentum to critical initiatives.</p>
-                  <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes.</p>
+                  <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
+                  <p>I've always been drawn to the spaces between disciplines. The places where strategy meets execution, creativity meets practicality, and ambiguity needs to become action. Much of the value I bring comes from helping people make sense of complexity, align around what matters, and move forward with confidence.</p>
+                  <p>Experienced working across complex client, agency, technology, and partner ecosystems, I've spent much of my career helping different teams, perspectives, and priorities work together more effectively around important work.</p>
+                  <p>Running an agency while leading operations, delivery, and product has shaped how I manage complexity, bring clarity to difficult decisions, and create the conditions for strong work to succeed. My role is often less about owning a single discipline and more about helping multiple disciplines move together with greater cohesion, momentum, and purpose.</p>
+                  <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes. The challenge is rarely a lack of ambition, talent, or ideas. More often, it's helping those things stay connected as they move through the organisation.</p>
                   <p>Bring me in to bring clarity, composure, and momentum to a critical initiative, or scale through DAB Hands to a trusted senior team built around the work.</p>
                 </div>
               </FadeUp>
