@@ -131,7 +131,7 @@ export default function Experience() {
             </FadeUp>
             <FadeUp delay={0.08}>
               <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch]">
-                Experience shaped by complex organisations
+                Trusted with work that matters
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
