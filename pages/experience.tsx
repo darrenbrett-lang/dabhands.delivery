@@ -294,35 +294,6 @@ export default function Experience() {
           </div>
         </section>
 
-        {/* TEAMS — ENGAGEMENT SHAPE */}
-        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-24">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-6 md:mb-8">
-                Engagement shape
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.08}>
-              <h2
-                className="text-[26px] md:text-[36px] lg:text-[44px] font-medium leading-[1.1] tracking-[-0.022em] text-dab-cream max-w-[36ch]"
-                style={{ textWrap: 'balance' }}
-              >
-                Bringing clarity, composure and momentum to important digital work.
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.16}>
-              <p className="mt-6 md:mt-8 text-lg md:text-xl leading-relaxed text-dab-cream max-w-[44ch]">
-                Lean activation. Minimal operational overhead. Designed to integrate quickly around the work.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.24}>
-              <p className="mt-6 md:mt-8 text-lg md:text-xl font-normal leading-relaxed text-dab-cream/60 max-w-[44ch]">
-                From focused interventions to longer-running strategic support.
-              </p>
-            </FadeUp>
-          </div>
-        </section>
-
         {/* TESTIMONIALS — TRUSTED TO LEAD IMPORTANT WORK */}
         <section className="bg-dab-brown-lighter text-dab-charcoal py-24 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
