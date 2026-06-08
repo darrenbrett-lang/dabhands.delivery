@@ -259,7 +259,7 @@ export default function Experience() {
                   Scaled when needed
                 </p>
                 <h2 className="text-[35px] md:text-[48px] lg:text-[56px] font-medium leading-[1.02] tracking-[-0.03em]">
-                  Built around the work
+                  Bringing the right capability around the work
                 </h2>
               </FadeUp>
               <FadeUp delay={0.16} className="md:col-span-6 md:col-start-7">
