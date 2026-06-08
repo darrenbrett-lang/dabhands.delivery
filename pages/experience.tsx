@@ -126,7 +126,7 @@ export default function Experience() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
-                Where I've come from
+                Track record
               </p>
             </FadeUp>
             <FadeUp delay={0.08}>
