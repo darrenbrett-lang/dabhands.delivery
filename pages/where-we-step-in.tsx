@@ -168,7 +168,7 @@ export default function WhereWeStepIn() {
             </FadeUp>
             <FadeUp delay={0.16}>
               <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
-                <p>Helping important work stay strong as it moves through complexity.</p>
+                <p>Making sure strong work stays strong as it moves from idea to market.</p>
               </div>
             </FadeUp>
           </div>
