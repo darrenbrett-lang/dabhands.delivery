@@ -131,12 +131,12 @@ export default function Experience() {
             </FadeUp>
             <FadeUp delay={0.08}>
               <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch]">
-                Experience shaped where important work meets organisational reality
+                Experience shaped by complex organisations
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
               <p className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
-                Enough time spent inside global brands, agencies, platforms, and delivery ecosystems to know that the quality of the work is only half the challenge. The system carrying it matters just as much.
+                I've spent enough time around large brands to know that great work isn't just about the idea. It's about what happens to that idea as it moves through people, teams, deadlines, priorities, and decisions.
               </p>
             </FadeUp>
           </div>
