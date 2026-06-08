@@ -167,10 +167,8 @@ export default function WhereWeStepIn() {
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
-              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch] space-y-6">
-                <p>Important work rarely fails because of ambition.</p>
-                <p>It weakens as it moves through increasingly complex systems of people, platforms, partners, and processes.</p>
-                <p>DAB Hands helps important work stay strong through that complexity, bringing clarity, composure, and momentum as it moves towards the customer.</p>
+              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
+                <p>Helping important work stay strong as it moves through complexity.</p>
               </div>
             </FadeUp>
           </div>
