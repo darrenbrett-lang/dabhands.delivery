@@ -244,7 +244,6 @@ export default function Experience() {
                   <p>Experienced working across complex client, agency, technology, and partner ecosystems, I've spent much of my career helping different teams, perspectives, and priorities work together more effectively around important work.</p>
                   <p>Running an agency while leading operations, delivery, and product has shaped how I manage complexity, bring clarity to difficult decisions, and create the conditions for strong work to succeed. My role is often less about owning a single discipline and more about helping multiple disciplines move together with greater cohesion, momentum, and purpose.</p>
                   <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes. The challenge is rarely a lack of ambition, talent, or ideas. More often, it's helping those things stay connected as they move through the organisation.</p>
-                  <p>Bring me in to bring clarity, composure, and momentum to a critical initiative, or scale through DAB Hands to a trusted senior team built around the work.</p>
                 </div>
               </FadeUp>
             </div>
