@@ -265,7 +265,7 @@ export default function Experience() {
               <FadeUp delay={0.16} className="md:col-span-6 md:col-start-7">
                 <div className="space-y-6 text-xl text-dab-charcoal leading-relaxed">
                   <p>DAB Hands is supported by a trusted network of senior specialists brought in around the initiative when needed.</p>
-                  <p>Capability across strategy, creative, digital experience, platforms, operations, and delivery.</p>
+                  <p>Capability across strategy, creative, experience, design, words and delivery.</p>
                   <div className="pt-4">
                     {[
                       'People I’ve delivered with for years',
