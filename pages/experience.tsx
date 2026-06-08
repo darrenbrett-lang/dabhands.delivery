@@ -147,7 +147,7 @@ export default function Experience() {
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp delay={0.08}>
               <h2 className="text-[40px] md:text-[56px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] mb-14 md:mb-16 md:whitespace-nowrap! pb-5 md:pb-7 border-b border-dab-cream/20">
-                Including
+                Proven across
               </h2>
             </FadeUp>
 
