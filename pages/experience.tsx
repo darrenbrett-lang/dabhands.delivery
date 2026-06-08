@@ -221,14 +221,13 @@ export default function Experience() {
                 <div className="aspect-square bg-dab-charcoal relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/darren-portrait.jpeg"
+                    src="/images/darren-brett_colour_headshot.jpeg"
                     alt="Darren Brett"
                     className="absolute inset-0 w-full h-full object-cover"
                     draggable={false}
                     loading="eager"
                     fetchPriority="high"
                   />
-                  <div aria-hidden className="absolute inset-0 bg-dab-brown-lighter mix-blend-multiply opacity-60 pointer-events-none" />
                 </div>
               </FadeUp>
 
