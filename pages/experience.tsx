@@ -136,7 +136,7 @@ export default function Experience() {
             </FadeUp>
             <FadeUp delay={0.16}>
               <p className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
-                I've spent enough time around large brands to know that great work isn't just about the idea. It's about what happens to that idea as it moves through people, teams, deadlines, priorities, and decisions.
+                I've spent enough time around large brands and inside big agencies to know that great work isn't just about the idea. It's about what happens to that idea as it moves through the organisation.
               </p>
             </FadeUp>
           </div>
