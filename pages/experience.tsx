@@ -58,6 +58,16 @@ const experienceAreas = [
     ),
   },
   {
+    label: 'Platform and ecommerce',
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
+        <path d="M20 5 L5 13 L20 21 L35 13 Z" />
+        <path d="M5 20 L20 28 L35 20" />
+        <path d="M5 27 L20 35 L35 27" />
+      </svg>
+    ),
+  },
+  {
     label: 'Campaigns and launches',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -73,16 +83,6 @@ const experienceAreas = [
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M32 18 A12 12 0 1 0 31 25" />
         <path d="M32 11 L32 18 L25 18" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Platform and ecommerce',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
-        <path d="M20 5 L5 13 L20 21 L35 13 Z" />
-        <path d="M5 20 L20 28 L35 20" />
-        <path d="M5 27 L20 35 L35 27" />
       </svg>
     ),
   },
