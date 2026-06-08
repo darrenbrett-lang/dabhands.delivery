@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Fragment } from 'react';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { BoxCTA } from '@/components/BoxCTA';
@@ -16,6 +17,8 @@ const antidotePoints = [
 ];
 
 export default function Home() {
+  const reduceMotion = useReducedMotion();
+  const headlineWords = ['Keeping', 'important', 'work', 'moving'];
   return (
     <>
       <SeoMeta
@@ -35,11 +38,37 @@ export default function Home() {
 
           <div className="relative z-10 flex-1 flex items-center justify-center pt-28 pb-12 md:pt-32 md:pb-20">
             <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-              <FadeUp>
-                <h1 className="text-[56px] sm:text-[68px] md:text-[80px] lg:text-[104px] xl:text-[120px] font-medium leading-[0.96] tracking-[-0.03em] max-w-[16ch] mx-auto">
-                  Keeping important work moving
-                </h1>
-              </FadeUp>
+              <motion.h1
+                className="text-[56px] sm:text-[68px] md:text-[80px] lg:text-[104px] xl:text-[120px] font-medium leading-[0.96] tracking-[-0.03em] max-w-[16ch] mx-auto"
+                aria-label="Keeping important work moving"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: { staggerChildren: reduceMotion ? 0 : 0.14, delayChildren: 0.08 },
+                  },
+                }}
+              >
+                {headlineWords.map((word, i) => (
+                  <Fragment key={word}>
+                    {i > 0 && ' '}
+                    <motion.span
+                      className="inline-block"
+                      variants={{
+                        hidden: { opacity: 0, y: reduceMotion ? 0 : '0.5em' },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  </Fragment>
+                ))}
+              </motion.h1>
 
               <FadeUp delay={0.16}>
                 <div className="mt-12 md:mt-16 space-y-3 text-xl text-dab-charcoal leading-relaxed max-w-[44ch] md:max-w-none mx-auto">
