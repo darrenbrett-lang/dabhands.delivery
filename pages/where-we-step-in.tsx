@@ -221,9 +221,14 @@ export default function WhereWeStepIn() {
 
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-16 md:mb-20">
+              <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-6 md:mb-8">
                 Common pressure points
               </h2>
+            </FadeUp>
+            <FadeUp delay={0.08}>
+              <p className="text-xl text-dab-charcoal leading-relaxed max-w-[48ch] mb-16 md:mb-20">
+                From focused interventions to longer-running strategic support.
+              </p>
             </FadeUp>
 
             <ol className="list-none p-0 m-0">
