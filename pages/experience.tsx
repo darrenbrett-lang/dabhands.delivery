@@ -267,14 +267,27 @@ export default function Experience() {
                 <div className="space-y-6 text-xl text-dab-charcoal leading-relaxed">
                   <p>DAB Hands is supported by a trusted network of senior specialists brought in around the initiative when needed.</p>
                   <p>Capability across strategy, creative, digital experience, platforms, operations, and delivery.</p>
-                  <p>People I have delivered with for years. Leaders in their fields. Experienced operators who know how to move the work forward.</p>
                   <div className="pt-4">
-                    <div className="flex items-start gap-5 py-5 border-t border-dab-charcoal/15 text-dab-charcoal">
-                      <svg className="flex-shrink-0 mt-0.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12l5 5 9-9" />
-                      </svg>
-                      <p className="text-xl font-medium leading-tight text-dab-charcoal">A single point of accountability.</p>
-                    </div>
+                    {[
+                      'People I’ve delivered with for years',
+                      'Leaders in their fields',
+                      'Experienced operators who know how to move the work forward',
+                      'A single point of accountability',
+                    ].map((line, i) => (
+                      <motion.div
+                        key={line}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.07 }}
+                        className="flex items-start gap-5 py-5 border-t border-dab-charcoal/15 last:border-b last:border-dab-charcoal/15 text-dab-charcoal"
+                      >
+                        <svg className="flex-shrink-0 mt-0.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12l5 5 9-9" />
+                        </svg>
+                        <p className="text-xl font-medium leading-tight text-dab-charcoal">{line}</p>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
               </FadeUp>
