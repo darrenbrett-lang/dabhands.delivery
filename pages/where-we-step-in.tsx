@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
@@ -12,7 +11,7 @@ import { mailto } from '@/lib/mailto';
 
 const builtForItems = [
   {
-    label: 'Critical launches under pressure.',
+    label: 'Critical launches are under pressure',
     icon: (
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="17" cy="19" r="9" />
@@ -24,7 +23,7 @@ const builtForItems = [
     ),
   },
   {
-    label: 'Customer experiences fragmented across channels.',
+    label: 'Customer experiences feel fragmented',
     icon: (
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
         <circle cx="10" cy="11" r="2" fill="currentColor" />
@@ -36,7 +35,7 @@ const builtForItems = [
     ),
   },
   {
-    label: 'Cross-functional initiatives losing momentum.',
+    label: 'Cross-functional initiatives lose momentum',
     icon: (
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <line x1="4" y1="27" x2="30" y2="27" />
@@ -48,7 +47,7 @@ const builtForItems = [
     ),
   },
   {
-    label: 'Complex delivery ecosystems lacking coordination.',
+    label: 'Complexity starts getting in the way',
     icon: (
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="3" />
@@ -91,50 +90,24 @@ const cccItems = [
   },
 ];
 
-const interventions: Array<{ title: string; lead: string; outro: string }> = [
+const reasons: Array<{ label: string; body: string }> = [
   {
-    title: 'Complex ecosystems needing orchestration',
-    lead: 'Multiple teams, partners, platforms, and stakeholders are involved, but movement is becoming fragmented.',
-    outro: 'DAB Hands helps reconnect the ecosystem around shared outcomes.',
+    label: 'Get it moving',
+    body: 'When important work is slowing down and needs help getting over the line.',
   },
   {
-    title: 'Important work losing momentum',
-    lead: 'The initiative is moving, but not fast enough. Decisions slow, ownership fragments, and progress becomes harder to maintain.',
-    outro: 'DAB Hands restores clarity, momentum, and forward movement.',
+    label: 'Bring it together',
+    body: 'When lots of teams, partners, and moving parts need to work as one.',
   },
   {
-    title: 'Strong work losing strength',
-    lead: 'The original intent is becoming diluted as the work moves through teams, channels, and delivery.',
-    outro: 'DAB Hands helps keep strong work strong as it moves to market.',
+    label: 'Strengthen it',
+    body: 'When the work needs experienced leadership and trusted capability around it.',
   },
   {
-    title: 'The initiative needs experienced leadership',
-    lead: 'The work has become too important to leave to chance.',
-    outro: 'DAB Hands brings experienced leadership around the initiative where and when it is needed.',
-  },
-  {
-    title: 'Operational drag slowing progress',
-    lead: 'The work is being slowed by friction, unclear ownership, and delivery complexity.',
-    outro: 'DAB Hands reduces drag and helps the work move properly again.',
-  },
-  {
-    title: 'Existing investment underperforming',
-    lead: 'The business already has strong people, platforms, and ideas.\nThe challenge is helping them move together more effectively.',
-    outro: 'DAB Hands helps unlock more value from what already exists.',
+    label: 'Get more from it',
+    body: 'When good people, good partners, and good ideas could be working together more effectively.',
   },
 ];
-
-// Render soft-break lines inside a single <p>
-const SoftLines = ({ text }: { text: string }) => (
-  <>
-    {text.split('\n').map((line, i, arr) => (
-      <Fragment key={i}>
-        {line}
-        {i < arr.length - 1 && <br />}
-      </Fragment>
-    ))}
-  </>
-);
 
 export default function WhereWeStepIn() {
   return (
@@ -221,14 +194,14 @@ export default function WhereWeStepIn() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-16 md:mb-20">
-                Common pressure points
+                Common reasons people get in touch
               </h2>
             </FadeUp>
 
             <ol className="list-none p-0 m-0">
-              {interventions.map((item, i) => (
+              {reasons.map((item, i) => (
                 <motion.li
-                  key={i}
+                  key={item.label}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
@@ -237,22 +210,16 @@ export default function WhereWeStepIn() {
                 >
                   <div className="grid md:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
                     <div className="md:col-span-4">
-                      <p className="font-mono text-[24px] md:text-[28px] text-dab-charcoal/40 tabular-nums mb-4 md:mb-6">
-                        {String(i + 1).padStart(2, '0')}
-                      </p>
                       <h3 className="text-2xl md:text-3xl lg:text-[34px] font-semibold tracking-[-0.022em] leading-tight max-w-[14ch]">
-                        {item.title}
+                        {item.label}
                       </h3>
                     </div>
                     <div className="md:col-span-7 md:col-start-6">
-                      <div className="space-y-5 text-xl text-dab-charcoal leading-relaxed max-w-[52ch]">
-                        <p>
-                          <SoftLines text={item.lead} />
-                        </p>
-                        <p>{item.outro}</p>
-                      </div>
+                      <p className="text-xl text-dab-charcoal leading-relaxed max-w-[52ch]">
+                        {item.body}
+                      </p>
                       <a
-                        href={mailto({ subject: item.title })}
+                        href={mailto({ subject: item.label })}
                         className="group inline-flex items-center gap-2 mt-8 md:mt-10 font-mono text-[11px] tracking-[0.18em] uppercase text-dab-charcoal border-b border-dab-charcoal/30 hover:border-dab-charcoal pb-1 transition-colors"
                       >
                         Start a conversation
@@ -272,8 +239,8 @@ export default function WhereWeStepIn() {
             <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
               The outcome
             </p>
-            <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-14 md:mb-20">
-              When important work moves together more effectively
+            <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[20ch] mb-14 md:mb-20">
+              When important work moves together more effectively, you get:
             </h2>
             <ul className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-0 md:gap-x-6 lg:gap-x-8 list-none p-0 m-0">
               {cccItems.map((item, i) => (
@@ -313,7 +280,7 @@ export default function WhereWeStepIn() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-10 md:mb-14">
-                Why expert delivery matters
+                Why experienced delivery matters
               </p>
             </FadeUp>
             <FadeUp delay={0.08}>
@@ -325,7 +292,7 @@ export default function WhereWeStepIn() {
                   Human systems are not.
                 </span>
                 <span className="block mb-4 md:mb-5">
-                  Most businesses do not lose on <HandUnderline delay={1.2} variant={3}>ambition</HandUnderline>.
+                  Most organisations do not lose on <HandUnderline delay={1.2} variant={3}>ambition</HandUnderline>.
                 </span>
                 <span className="block">
                   They lose through <HandUnderline delay={1.4} variant={2}>execution</HandUnderline>.
@@ -385,11 +352,6 @@ export default function WhereWeStepIn() {
             <FadeUp>
               <p className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto">
                 Backed by 20+ years helping strong work stay strong as it moves to market.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.12}>
-              <p className="mt-8 md:mt-10 text-xl md:text-2xl text-dab-charcoal/75 leading-relaxed max-w-[34ch] mx-auto">
-                We help organisations get stronger digital work out into the world.
               </p>
             </FadeUp>
             <FadeUp delay={0.24}>
