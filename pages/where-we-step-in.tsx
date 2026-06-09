@@ -250,7 +250,7 @@ export default function WhereWeStepIn() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className={`md:col-span-4 flex flex-col items-start gap-4 md:gap-5 ${
+                  className={`md:col-span-4 flex items-center md:flex-col md:items-start gap-4 md:gap-5 ${
                     i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
                   }`}
                 >
