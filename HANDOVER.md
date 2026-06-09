@@ -1,48 +1,41 @@
-# Dab Hands Website — Handover
+# DAB Hands Website — Handover
 
 Pick this up cold. Captures the project as of the most recent session.
 
 ---
 
-## ⏳ SESSION CHECKPOINT — preview-only work, NOT pushed (read first)
+## ✅ LIVE — last shipped this session (read first)
 
-A large batch of work is **committed on branch `review/content-accordion-og`** and **deliberately NOT pushed** (so nothing is live yet). `main` = remote `main` = production. The owner reviews on localhost/preview and says **"push"** when ready.
+Everything below is **merged to `main` and deployed**. Production is `https://dabhands.delivery` via Vercel (every push to `main` auto-deploys). Most recent prod commit: `6432d37` "Update both closing statements to '20+ years helping global brands keep important digital work moving.'". `main` = `origin/main`, working tree clean.
 
-**To go live when approved:** `git checkout main && git merge review/content-accordion-og && git push` (then refresh social OG caches).
+**Deploy flow:** work on a branch, the owner reviews on localhost, says **"push"** → `git checkout main && git merge <branch> && git push origin main`. After an OG-image change, refresh social caches (LinkedIn Post Inspector + FB Sharing Debugger).
 
-**What changed this session (all preview-only):**
+**The big shift this session — a three-colour block system.** Backgrounds are now **Charcoal, Sand, White** only (target weighting ~ White 50 / Charcoal 25 / Sand 25). **Mushroom (`dab-brown-lighter`) is retired** — not used as a section background anywhere. White is the connective canvas; colour is punctuation, not a patchwork. `dab-warm` (#E8D5C5) was a mistaken one-off and is gone. See the saved memory `feedback_colour_vocabulary` ("sand" = `dab-cream`).
 
-- **Homepage (`pages/index.tsx`)**
-  - Hero headline animates (per-word staggered rise, `useReducedMotion` guard). Mobile hero capped `min-h-[78vh] md:min-h-[100vh]`.
-  - Philosophy reworked → H2 "Great work rarely struggles because of a lack of ambition." + quieter line "More often, the challenge is helping it stay strong as it moves through the organisation."
-  - **NEW "How DAB Hands helps"** — 2×2 charcoal doorway module (green icons; labels: Get it moving / Bring it together / Strengthen it / Get more from it; body ranges left under icon). Each arrow deep-links to `/where-we-step-in#<id>`.
-  - **Removed** the old "Why DAB Hands" antidote section (6 bullets + callout) entirely.
-  - **NEW "Led by Darren Brett"** signal on brown-lighter (sand): square headshot top-aligned with headline; headline sized to match footer line (`text-xl md:text-2xl lg:text-[26px]`); Experience CTA.
+**Page rhythms now:**
+- **Home:** sand (hero) → charcoal (Where we are) → white (Core Truth) → white (doorways) → sand (closing) → charcoal footer.
+- **When To Bring Us In:** sand (hero) → white (accordions) → charcoal (Ways) → white (outcome) → sand (closing) → charcoal footer.
+- **Experience:** sand → charcoal → white (ticker) → sand (Darren bio) → white → white → sand.
 
-- **Where We Step In (`pages/where-we-step-in.tsx`)** — biggest change. Now uses `useState`/`useEffect` (client).
-  - Hero = one line. Removed "Often brought in when" + HBR/McKinsey stats section.
-  - **"Common reasons people get in touch" = ACCORDION.** Closed: charcoal, green doorway icon, title, summary, **"Learn more +"** under the copy, **no CTA**. Open: unified **white** panel, charcoal icon, detail paragraphs (last one emphasised) + "Start a conversation →". Single-open; **deep-link auto-opens** the matching `#id`; **panel content always mounted** (height-animated, `inert` when closed) for SEO + selectable; `last:border-b-0` + section `pt-` only (no bottom dead-space). Accordion copy weaves in "protecting integrity / keeping strong work strong".
-  - "Engagement models" eyebrow + "Ways clients typically work with DAB Hands" on **mushroom (brown-lighter)**: **Leadership & Advisory** / **Trusted Capability** + "The shape depends on the challenge." Closing line → "Backed by 20+ years helping important work move through complex organisations."
-  - Section rhythm: cream → charcoal(accordions) → mushroom(ways) → white(outcome) → cream(closing).
+**Nav rename:** the second page's nav label, homepage closing CTA, page `<title>`/OG, and `llms.txt` now read **"When To Bring Us In"**. The **route is still `/where-we-step-in`** (unchanged — deep links from the homepage doorways and canonicals stay intact). Only the *display label + metadata* changed.
 
-- **Experience (`pages/experience.tsx`)** — eyebrow "Track record", H1 "Trusted with work that matters"; Proven across reordered (Digital experiences / Platform and ecommerce / Campaigns and launches / Membership and lifecycle); bio refined; "Trusted people around the work" + "Bringing together trusted specialists across…"; closing CTA line removed.
+**Doorways (Home "How DAB Hands helps"):** now **white** bg, charcoal icons/labels/arrows (no green on light). Four situation-led recognition prompts (Get it moving / Bring it together / Strengthen it / Get more from it), each deep-linking to `/where-we-step-in#<id>`.
 
-- **OG image (`public/og-image.png`)** — recreated 1200×630: green field, dark **feathered ribbon** (fuller-ribbon via `mix-blend-mode: multiply`), uppercase **uniform-bold "DAB Hands"** wordmark, headline. Rebuilt via headless Chrome (Chrome.app) at 2× from a temp `public/og-builder.html` (deleted after). Old image backed up at `/tmp/og-image-backup.png`. `SeoMeta` already points at `/og-image.png` — no code change.
+**Accordion (When To Bring Us In):** white section, charcoal icons/labels/borders. **Mushroom-on-open is gone → open row + panel lift to SAND** (`isOpen ? 'bg-dab-cream' : 'bg-white'`); the warm lift signals the active row. Single-open, deep-link auto-opens, panel always mounted (`inert` when closed). Copy broadened beyond projects to programmes/operations/teams/orgs.
 
-**Open items / decisions to confirm with owner:**
-- Accordion + doorway labels are **sentence case** ("Get it moving"), not the caps in some briefs.
-- Kept Outcome heading "…more effectively**, you get:**" and stats wording "**organisations**" (vs a later brief showing them without). Owner hasn't re-confirmed.
-- Accordion prompt wording is "**Learn more / Close**".
+**Closing modules (Home + When To Bring Us In):** identical treatment — crown mark, centred statement **"20+ years helping global brands keep important digital work moving."**, then a **compact `<LogoTicker>` brand carousel**, then the CTA. Home CTA → "When To Bring Us In" (`/where-we-step-in`); page-2 CTA → "Experience". The centred `<h2>` needs inline `marginLeft/Right: 'auto'` to beat the global optical `-0.04em` heading nudge.
+
+**`<LogoTicker>` (NEW shared component, `components/LogoTicker.tsx`):** single source of truth for the 13-client list + the seamless marquee (3× duplicated `<li>`, `w-max`, `reduceMotion` guard, mobile/desktop duration). Props: `ariaLabel`, `compact` (smaller row for the closing modules). Used on Experience ("I've worked at scale for") and both closing modules. Renders `<TickerLogo>` (charcoal silhouettes via `brightness(0)`).
+
+**Perf/semantics fixes shipped:** `_app.tsx` font wrapper changed `<main>`→`<div>` (was producing **two `<main>` landmarks** per page); below-fold decorative images lazy-loaded (crowns, footer icon) while the hero ribbon stays eager for LCP; `html { position: relative }` added to clear Framer's dev-only `useScroll` container warning (the scroll container was static). Verified: clean prod build, one `<main>`/one `<h1>` per page, 0 imgs without alt, console clean.
 
 ---
 
 ## Read this first
 
-Multi-page site (Home / Where we step in / Experience / Contact). The site is **on production at `https://dabhands.delivery`** via Vercel's standard GitHub integration — every push to `main` auto-deploys. Most recent prod commit: `32f36eb` "Add og-image, favicon, logo ticker, and brand refinements".
+Multi-page site (Home / When To Bring Us In / Experience / Contact). On production at `https://dabhands.delivery` via Vercel's GitHub integration — every push to `main` auto-deploys. `main` = `origin/main` = `6432d37`; working tree clean.
 
-There are **local uncommitted changes** on `main` (current session: client carousel restructure on /experience, mono-silhouette logo system, tidy pass — see "Branch state at handover" below). User confirms with "push" when ready.
-
-Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` apply to every conversation — read them before touching copy or marks.
+Saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` apply to every conversation — read them (and `MEMORY.md`) before touching copy, colour, or marks. Notably: no em dashes; no green text on light backgrounds; "DAB Hands" wordmark; three-colour palette (sand = `dab-cream`, mushroom retired).
 
 ## Stack
 
@@ -61,52 +54,46 @@ Five saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-H
 
 ## Branch state at handover
 
-- **Working branch**: `main`.
-- **Production**: `main` at `32f36eb`. Vercel auto-deploys main → `https://dabhands.delivery`.
-- **Uncommitted local edits** to ship next push (current session — carousel restructure, mono-logo system, tidy pass):
-  - `M pages/experience.tsx` — carousel section moved below "With deep experience across", changed to white bg; "Teams behind the work" changed to white bg; new self-hosted logos via `src` + `kind` + `boost`; semantic `<ul aria-label>` ticker; `useReducedMotion` guard; seamless `0% → -33.3333%` loop.
-  - `M components/Header.tsx` — nav label `Work` → `Where we step in`.
-  - `M components/TickerLogo.tsx` — refactored: single `src` prop (no more CDN slug), `kind: 'icon' | 'wordmark'`, `boost?: boolean`, always renders `<img>` with `brightness(0)` filter + `loading="lazy"` + `decoding="async"`.
-  - `M package.json` / `package-lock.json` — removed `potrace` devDep.
-  - `D components/LogoMark.tsx` — superseded by TickerLogo, removed.
-  - `D scripts/trace-logos.js` (folder removed) — auto-tracing no longer used.
-  - `D public/logo-preview.html` + `public/logos-preview.html` — temp sandbox files.
-  - `D ~20 unused files in /public/images/logos/` — the auto-traced SVGs, old colour PNGs, and source artwork superseded by the colour-keyed mono PNGs in `/svg/`.
-  - `?? public/images/logos/svg/*` — the active mono logo set (see "Client ticker logo system" below).
-
-To ship to prod next time: `git add -A && git commit && git push origin main`. Vercel rebuilds in ~1–2 min.
+- **Working branch**: `main` (clean), in sync with `origin/main` at `6432d37`.
+- **Production**: `main` → Vercel auto-deploys `https://dabhands.delivery`.
+- Nothing uncommitted, nothing pending. Start the next change on a fresh branch off `main`; the owner reviews on localhost and says **"push"** to go live.
 
 ## Site structure
 
 ### `/` (home) — `pages/index.tsx`
 
-1. **Hero (P1)** (cream, centred) — H1 "**Keeping important work moving**" (single h2, `text-wrap: balance` wraps to "Keeping important / work moving" at desktop). Sub-paragraph beneath: "Important digital work can quickly lose momentum within complex organisations." + "We help **modern** brands get stronger digital work out into the world." Hero `Ribbon` (default `/images/ribbon.png`) positioned `top-[15px] md:top-auto md:bottom-0 w-full` — top on mobile, bottom on desktop.
-2. **Often brought in around** (white) — eyebrow + 4-item icon grid (`builtForItems`): "Critical launches under pressure." / "Customer experiences fragmented across channels." / "Cross-functional initiatives losing momentum." / "Strategy and execution drifting apart." Icons: stopwatch / scattered dots / descending bars / diverging lines. 2×2 grid on desktop (md:col-span-6). Rendered as `<ul>` / `<li>`.
-3. **Where we are** (charcoal, left-rag) — eyebrow + two statement blocks + supporting paragraph with 4 `<HandUnderline>` marks: `slows` · `technology` · `attention` · `budget`.
-4. **Core Truth** (white, centred) — flashing-dot crown SVG above "Great work rarely fails at the idea stage." (See Brand marks.)
-5. **Antidote** (cream, left-rag) — eyebrow "Where we help" + H2 "Dab Hands meets these problems head-on" + 6-tick list (rendered as `<ul>` / `<li>`, last item is "Commercially effective as it reaches market.") + **bold callout copy** "We help organisations get stronger digital work out into the world." with `BoxCTA "Where we step in"` to the right (stacks below on mobile). Spacing: `mt-20 md:mt-28` between tick list and bold copy; button uses `md:items-start` so it aligns to the top of the wrapped copy.
+Rhythm: sand → charcoal → white → white → sand.
+
+1. **Hero (P1)** (sand, centred) — H1 "**Keeping important work moving**" with per-word staggered rise animation (`useReducedMotion` guard). Sub-paragraphs: "Important digital work can quickly lose momentum within complex organisations." + "We help **modern** brands get stronger digital work out into the world." Hero `Ribbon` (`top-[32px] md:bottom-0`, top on mobile / bottom on desktop). Hero height `min-h-[78vh] md:min-h-[100vh]`.
+2. **Where we are** (charcoal, left-rag) — eyebrow + two statement blocks ("The tools are changing. The problems aren't." / "Complexity is higher than ever.") + supporting paragraph with 4 `<HandUnderline>` marks: `slows` · `technology` · `attention` · `budget`.
+3. **Core Truth** (white, centred) — crown SVG above H2 "Great work rarely struggles because of a lack of ambition." + quieter line "More often, the challenge is helping it stay strong as it moves through the organisation."
+4. **How DAB Hands helps** (white, left-rag) — H2 + 2×2 grid of four **doorways** (`<motion.a>` cards): Get it moving / Bring it together / Strengthen it / Get more from it — charcoal icon + label + arrow, situation-led blurb, each deep-linking to `/where-we-step-in#<id>`.
+5. **Closing** (sand, centred, `py-16 md:py-32`) — crown mark + centred H2 "20+ years helping global brands keep important digital work moving." (needs inline `marginLeft/Right:'auto'` to beat the optical heading nudge) + **`<LogoTicker compact>`** + BoxCTA "When To Bring Us In" (→ `/where-we-step-in`).
 6. Footer (variant: **minimal**).
 
-### `/where-we-step-in` — `pages/where-we-step-in.tsx` (nav label: "Where we step in")
+### `/where-we-step-in` — `pages/where-we-step-in.tsx` (nav label: **"When To Bring Us In"**; route unchanged)
 
-1. **Hero** (cream, left-rag) — H1 "Where we step in" + bold sub + body + `sand-ripple.jpg` hard-anchored right + bottom (`h-[80%]`).
-2. **When strong work survives the system** (white) — eyebrow "The outcome" + H2 + 3-item icon row (Attention / Connection / Conversion). Rendered as `<ul>` / `<li>`.
-3. **If any of this feels familiar** (cream) — H2 + 6 numbered intervention items (rendered as `<ol>` / `<li>`). Each card's "Start a conversation →" link uses `mailto()` with the intervention title as the subject. **`sand-ripple.jpg` hard-anchored bottom-right at `h-[40%]`** (also bookends the page's hero motif; the previous Ribbon here was removed).
-4. **Why expert delivery matters** (charcoal) — H2 with paired statements + `<HandUnderline>` on `ambition` · `execution`. Below: two stat blocks rendered as **`StatPopover`** components. Clicking/hovering the **60%** or **20–30%** number opens a popover with the richer HBR / McKinsey context. (`60%` copy: "Most companies realise only around 60% of the **potential value** of their strategies." / `20–30%` copy: "Estimated **operational waste** caused by inefficiency, rework, and fragmented systems.") The section's Ribbon is now wrapped in an `overflow-hidden` div so the section itself can stay `overflow-visible` and let the popover escape its bounds. Stats use a 12-col grid (`md:col-span-6` each) so the numbers sit on column 1 and column 7 lines of the page's underlying 12-col grid.
-5. **Closing statement** (cream, centred) — `dab-hands-crown-mark.svg` (flashing 3 dots — see Brand marks) above "Backed by **20+** years of senior digital delivery." + subhead + BoxCTA "Experience".
+Client component (`useState`/`useEffect` for the accordion). Rhythm: sand → white → charcoal → white → sand.
+
+1. **Hero** (sand, left-rag) — H1 "We believe strong work deserves to stay strong." + two body paragraphs (the proposition: ideas survive complexity; DAB Hands moves the right work from idea to market). `sand-ripple.jpg` anchored right+bottom (`h-[80%]`, masked).
+2. **Common reasons people get in touch** (white) — H2 + the **ACCORDION** (4 items: Get it moving / Bring it together / Strengthen it / Get more from it). Closed: white row, charcoal icon/title/summary + "Learn more +". Open: row + panel **lift to sand** (`isOpen ? 'bg-dab-cream' : 'bg-white'`), detail paragraphs (last emphasised) + "Start a conversation →" (`mailto()` with the item label as subject). Single-open; **deep-link auto-opens** `#id`; panel always mounted (height-animated, `inert` when closed) for SEO/select; `last:border-b-0`, section `pt-` only.
+3. **Ways clients typically work with DAB Hands** (charcoal — the page's one weight moment) — eyebrow "Engagement models" + H2 + Leadership & Advisory / Trusted Capability + "The shape depends on the challenge."
+4. **The outcome** (white) — H2 "When important work moves together more effectively, you get:" + 3-item `<ul>` (Stronger customer experiences / Better execution quality / More commercial impact). Labels `md:ml-6 lg:ml-8` indented from the top-aligned icons.
+5. **Closing** (sand, centred, `py-16 md:py-32`) — crown mark + "20+ years helping global brands keep important digital work moving." + **`<LogoTicker compact>`** + BoxCTA "Experience".
 6. Footer (variant: **minimal**).
 
 ### `/experience` — `pages/experience.tsx`
 
-1. **Hero** (cream, left-rag) — H1 "Experience built under pressure" + `under-pressure.png` right-anchored full height.
-2. **With deep experience across** (charcoal) — H2 + 5-col icon grid.
-3. **I've worked at scale for** (**white**, left-rag) — scrolling client ticker. **Uses `<TickerLogo>`** with self-hosted SVGs/PNGs from `/public/images/logos/svg/` (no external CDN). See "Client ticker logo system" below for the full architecture.
-4. **"Hi, I'm Darren"** (brown) — eyebrow "Who am I" + portrait + bio.
-5. **The teams behind the work** (**white**) — eyebrow "Scaled when needed" + H2 + 3 body paragraphs + 3-tick list.
-6. **Engagement shape** (charcoal, left-rag) — eyebrow + headline-styled statement "Brought in around critical launches, platform work, operational resets, and embedded delivery leadership." (renders as h2, max-w-[36ch], no icon/dot, standard left-aligned module).
-7. **Trusted to lead important work** (brown) — H2 + 3 testimonials.
-8. **Closing** (cream, centred) — "Let's get important work moving properly." + BoxCTA "Start a conversation".
-9. Footer (variant: **minimal**).
+Rhythm: sand → charcoal → white → sand (bio) → white → white → sand.
+
+1. **Hero** (sand, left-rag) — eyebrow "Track record" + H1 "Trusted with work that matters" + `under-pressure.png` right-anchored full height.
+2. **Proven across** (charcoal) — H2 + icon grid (Digital experiences / Platform and ecommerce / Campaigns and launches / Membership and lifecycle).
+3. **I've worked at scale for** (**white**, left-rag) — eyebrow + **`<LogoTicker>`** (full size). Self-hosted logos from `/public/images/logos/svg/`. See "Client ticker logo system" below.
+4. **"Hi, I'm Darren"** (**sand**) — eyebrow "Who am I" + portrait + bio.
+5. **The teams behind the work** (**white**) — eyebrow + H2 + body + tick list.
+6. **Trusted to lead important work** (**white**) — H2 + 3 testimonials (charcoal accent rule — was `dab-green`, fixed for the no-green-on-light rule).
+7. **Closing** (sand, centred) — "Let's get important work moving properly." + BoxCTA "Start a conversation" (→ /contact).
+8. Footer (variant: **minimal**).
 
 #### Client ticker logo system
 
@@ -132,13 +119,14 @@ All 13 client logos are **self-hosted** under `/public/images/logos/svg/`. No ex
 - **`Footer.tsx`** — Two stacked modules. Cream contact module renders "If something important needs to move properly, **let's talk**." (linked to /contact, green underline). Variants: `'default' | 'minimal' | 'none'`.
 - **`FadeUp.tsx`** — scroll-triggered fade + 18px rise.
 - **`BoxCTA.tsx`** — pill-shaped CTA. `tone="light"` / `tone="dark"`.
-- **`Ribbon.tsx`** — atmospheric ribbon. Default `/images/ribbon.png`, customisable `imagePath`.
+- **`Ribbon.tsx`** — atmospheric ribbon. Default `/images/ribbon.png`, customisable `imagePath`. Scroll-tied horizontal drift via `useScroll` (target = its own absolute element). Note: the dev `useScroll` "non-static container" warning is fixed globally by `html { position: relative }` in `globals.css` — don't remove that.
 - **`RibbonAccent.tsx`** — smaller secondary accents from `ribbon_accents.png` (2×3 sprite). Used on /contact bottom-left.
 - **`HandUnderline.tsx`** — hand-drawn SVG underline for emphasis on specific words.
 - **`GridToggle.tsx`** — fixed-position dev tool, toggles 12-col overlay matching site container (gap-4 md:gap-6 lg:gap-8).
 - **`StatPopover.tsx`** (NEW) — wraps a giant stat number as a button with green text + underline. Opens a popover with richer copy on hover (desktop, with 150ms close delay to allow crossing the gap) or click (touch — detected via `window.matchMedia('(hover: hover)')`). `align="start" | "end"` controls anchor edge. Click-outside + Escape close.
 - **`SeoMeta.tsx`** (NEW) — per-page `<Head>` helper. Title, description, canonical, OG (title/desc/image/url/type/site_name), Twitter card, og:image:width=1200 / height=630 / alt. Defaults `image` to `/og-image.png`.
-- **`TickerLogo.tsx`** — renders a brand mark for the experience ticker. Props: `src` (local path to SVG or PNG), `kind: 'icon' | 'wordmark'`, optional `boost`. Always renders `<img loading="lazy" decoding="async" style={{ filter: 'brightness(0)' }}>`. Sizing: icons + boosted wordmarks at `h-14`, regular wordmarks at `h-9 max-w-[180px] object-contain`.
+- **`TickerLogo.tsx`** — renders a single brand mark. Props: `src` (local path to SVG or PNG), `kind: 'icon' | 'wordmark'`, optional `boost`. Always `<img loading="lazy" decoding="async" style={{ filter: 'brightness(0)' }}>` (charcoal silhouette), `opacity-70 hover:opacity-100`. Sizing: icons `h-12 md:h-14`, boosted wordmarks `h-11 md:h-14`, regular wordmarks `h-7 md:h-9 max-w-[140px] md:max-w-[180px]`.
+- **`LogoTicker.tsx`** (NEW — shared) — the seamless brand marquee + the canonical 13-client `clients` array (single source of truth; exported). Props: `ariaLabel`, `compact` (smaller row + tighter gap for the closing modules). 3× duplicated `<li>` (`w-max`) for a no-flick infinite loop; `useReducedMotion` drops the animation; mobile/desktop durations. Used on Experience and both closing modules. Renders `<TickerLogo>` per client.
 
 ## `lib/mailto.ts`
 
@@ -152,20 +140,23 @@ Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabh
 | `dab-charcoal` | `#111111` | Primary text + dark sections |
 | `dab-charcoal-alt` | `#171717` | Hover state |
 | `dab-charcoal-soft` | `#4A4744` | Body text base in `:root` |
-| `dab-green` | `#B6FF00` | Signal accent — sparing |
-| `dab-brown` | `#ACA195` | Brown sections + light-bg hand underlines |
-| `dab-brown-lighter` | `#C0B5A9` | Darren bio section |
+| `dab-green` | `#B6FF00` | Signal accent — sparing; on **dark only** (never on light) |
+| `dab-brown` | `#ACA195` | Light-bg hand underlines (not a block bg) |
+| `dab-brown-lighter` | `#C0B5A9` | **Retired** (was "mushroom") — do not use as a block colour |
 | `dab-brown-light` | `#E8E3DC` | Unused |
 | `dab-taupe` | `#8E877D` | Unused |
-| `dab-warm` | `#E8D5C5` | Unused |
+| `dab-warm` | `#E8D5C5` | Unused (mistaken one-off — do not use) |
+
+**The block-colour system is three colours only: Charcoal, Sand (`dab-cream`), White** (target ~ White 50 / Charcoal 25 / Sand 25). White is the canvas; charcoal = one weight moment per page + footer; sand = warm bookends, in-page warm moments, and the accordion open-state. See memory `feedback_colour_vocabulary`.
 
 ## Hard rules (saved to memory)
 
-1. **No em dashes (—) in user-facing copy.**
-2. **No neon green text on light backgrounds — ever.** Includes hover states.
-3. **Brand is "Dab Hands"** — capital D, capital H, lowercase rest. File paths and Tailwind tokens are exempt.
+1. **No em dashes (—) in user-facing copy.** (Code comments are fine.)
+2. **No neon green text/marks on light backgrounds — ever.** Includes hover states; on light, icons/arrows/rules are charcoal.
+3. **Brand wordmark is "DAB Hands"** — uppercase DAB, capital-H Hands. File paths and Tailwind tokens are exempt.
 4. **Geist sans throughout.** Label headings no full stops; truth-statement headings keep periods.
 5. **Hand markup is "proof of care", not decoration.** Editorial/technical tone — never sketchbook / agency / expressive. `dab-green` on dark, `dab-brown` or `dab-charcoal` on light.
+6. **Block colours are Charcoal, Sand, White only.** Mushroom retired; don't invent tokens. "Sand" = `dab-cream`.
 
 ## Brand marks & micro-animations
 
