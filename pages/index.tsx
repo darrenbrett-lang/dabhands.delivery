@@ -216,7 +216,7 @@ export default function Home() {
         </section>
 
         {/* ── DOORWAYS — HOW DAB HANDS HELPS ────────── */}
-        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
+        <section className="bg-dab-brown-lighter text-dab-charcoal py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch] mb-14 md:mb-20">
@@ -232,26 +232,26 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group block border-t border-dab-cream/15 pt-8 md:pt-10"
+                  className="group block border-t border-dab-charcoal/15 pt-8 md:pt-10"
                 >
                   <div className="flex items-center gap-5 md:gap-6">
                     <span
-                      className="text-dab-green flex-shrink-0 [&_svg]:w-9 [&_svg]:h-9 md:[&_svg]:w-10 md:[&_svg]:h-10"
+                      className="text-dab-charcoal flex-shrink-0 [&_svg]:w-9 [&_svg]:h-9 md:[&_svg]:w-10 md:[&_svg]:h-10"
                       aria-hidden
                     >
                       {d.icon}
                     </span>
-                    <h3 className="flex-1 text-2xl md:text-3xl font-medium tracking-[-0.022em] text-dab-cream">
+                    <h3 className="flex-1 text-2xl md:text-3xl font-medium tracking-[-0.022em] text-dab-charcoal">
                       {d.label}
                     </h3>
                     <span
                       aria-hidden
-                      className="text-dab-green text-2xl leading-none transition-transform group-hover:translate-x-1"
+                      className="text-dab-charcoal text-2xl leading-none transition-transform group-hover:translate-x-1"
                     >
                       &rarr;
                     </span>
                   </div>
-                  <p className="mt-4 md:mt-5 text-lg md:text-xl leading-relaxed text-dab-cream/70 max-w-[46ch]">
+                  <p className="mt-4 md:mt-5 text-lg md:text-xl leading-relaxed text-dab-charcoal/70 max-w-[46ch]">
                     {d.blurb}
                   </p>
                 </motion.a>

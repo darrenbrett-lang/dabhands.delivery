@@ -171,7 +171,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* COMMON REASONS PEOPLE GET IN TOUCH — ACCORDIONS */}
-        <section className="bg-dab-charcoal text-dab-cream pt-14 md:pt-32">
+        <section className="bg-dab-brown-lighter text-dab-charcoal pt-14 md:pt-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-10 md:mb-14">
@@ -180,56 +180,42 @@ export default function WhereWeStepIn() {
             </FadeUp>
           </div>
 
-          <FadeUp className="max-w-screen-xl mx-auto border-t border-dab-cream/15">
+          <FadeUp className="max-w-screen-xl mx-auto border-t border-dab-charcoal/15">
             {reasons.map((item) => {
               const isOpen = openId === item.id;
               return (
                 <div
                   key={item.id}
                   id={item.id}
-                  className="scroll-mt-28 md:scroll-mt-32 border-b border-dab-cream/15 last:border-b-0"
+                  className="scroll-mt-28 md:scroll-mt-32 border-b border-dab-charcoal/15 last:border-b-0"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenId(isOpen ? null : item.id)}
                     aria-expanded={isOpen}
                     className={`w-full text-left px-6 md:px-10 lg:px-16 py-8 md:py-10 transition-colors duration-300 ${
-                      isOpen ? 'bg-white' : 'bg-dab-charcoal'
+                      isOpen ? 'bg-white' : 'bg-dab-brown-lighter'
                     }`}
                   >
                     <div className="flex items-start gap-5 md:gap-6">
                       <span
                         aria-hidden
-                        className={`flex-shrink-0 mt-1 transition-colors duration-300 [&_svg]:w-8 [&_svg]:h-8 md:[&_svg]:w-9 md:[&_svg]:h-9 ${
-                          isOpen ? 'text-dab-charcoal' : 'text-dab-green'
-                        }`}
+                        className="flex-shrink-0 mt-1 text-dab-charcoal [&_svg]:w-8 [&_svg]:h-8 md:[&_svg]:w-9 md:[&_svg]:h-9"
                       >
                         {item.icon}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <h3
-                          className={`text-2xl md:text-3xl lg:text-[34px] font-medium tracking-[-0.022em] select-text transition-colors duration-300 ${
-                            isOpen ? 'text-dab-charcoal' : 'text-dab-cream'
-                          }`}
-                        >
+                        <h3 className="text-2xl md:text-3xl lg:text-[34px] font-medium tracking-[-0.022em] select-text text-dab-charcoal">
                           {item.label}
                         </h3>
-                        <p
-                          className={`mt-2 md:mt-3 text-lg md:text-xl leading-relaxed max-w-[52ch] select-text transition-colors duration-300 ${
-                            isOpen ? 'text-dab-charcoal/70' : 'text-dab-cream/55'
-                          }`}
-                        >
+                        <p className="mt-2 md:mt-3 text-lg md:text-xl leading-relaxed max-w-[52ch] select-text text-dab-charcoal/70">
                           {item.summary}
                         </p>
-                        <span
-                          className={`mt-5 md:mt-6 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-300 ${
-                            isOpen ? 'text-dab-charcoal/70' : 'text-dab-cream/70'
-                          }`}
-                        >
+                        <span className="mt-5 md:mt-6 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.2em] uppercase text-dab-charcoal/70">
                           {isOpen ? 'Close' : 'Learn more'}
                           <span
                             aria-hidden
-                            className={`relative w-4 h-4 ${isOpen ? 'text-dab-charcoal' : 'text-dab-green'}`}
+                            className="relative w-4 h-4 text-dab-charcoal"
                           >
                             <span className="absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-current" />
                             <span
@@ -282,10 +268,10 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* WAYS CLIENTS WORK WITH DAB HANDS */}
-        <section className="bg-dab-brown-lighter text-dab-charcoal py-14 md:py-32">
+        <section className="bg-dab-charcoal text-dab-cream py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-6 md:mb-8">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-6 md:mb-8">
                 Engagement models
               </p>
             </FadeUp>
@@ -297,27 +283,27 @@ export default function WhereWeStepIn() {
             <div className="grid md:grid-cols-2 gap-y-10 md:gap-y-0 md:gap-x-10 lg:gap-x-16">
               <FadeUp delay={0.08}>
                 <div className="md:pr-8 lg:pr-12">
-                  <h3 className="text-2xl md:text-[28px] font-semibold tracking-[-0.02em] text-dab-charcoal mb-4 md:mb-5">
+                  <h3 className="text-2xl md:text-[28px] font-semibold tracking-[-0.02em] text-dab-cream mb-4 md:mb-5">
                     Leadership &amp; Advisory
                   </h3>
-                  <p className="text-lg md:text-xl leading-relaxed text-dab-charcoal/70 max-w-[42ch]">
+                  <p className="text-lg md:text-xl leading-relaxed text-dab-cream/70 max-w-[42ch]">
                     Experienced leadership around important work. Helping organisations navigate complexity, make better decisions, and move forward with confidence.
                   </p>
                 </div>
               </FadeUp>
               <FadeUp delay={0.16}>
-                <div className="md:border-l md:border-dab-charcoal/15 md:pl-10 lg:pl-16">
-                  <h3 className="text-2xl md:text-[28px] font-semibold tracking-[-0.02em] text-dab-charcoal mb-4 md:mb-5">
+                <div className="md:border-l md:border-dab-cream/15 md:pl-10 lg:pl-16">
+                  <h3 className="text-2xl md:text-[28px] font-semibold tracking-[-0.02em] text-dab-cream mb-4 md:mb-5">
                     Trusted Capability
                   </h3>
-                  <p className="text-lg md:text-xl leading-relaxed text-dab-charcoal/70 max-w-[42ch]">
+                  <p className="text-lg md:text-xl leading-relaxed text-dab-cream/70 max-w-[42ch]">
                     Trusted specialists assembled around projects, launches, campaigns, and digital initiatives. Small senior teams built around the work, with a single point of accountability.
                   </p>
                 </div>
               </FadeUp>
             </div>
             <FadeUp delay={0.28}>
-              <p className="mt-12 md:mt-16 text-xl md:text-2xl font-medium leading-snug tracking-[-0.015em] text-dab-charcoal max-w-[36ch]">
+              <p className="mt-12 md:mt-16 text-xl md:text-2xl font-medium leading-snug tracking-[-0.015em] text-dab-cream max-w-[36ch]">
                 The shape depends on the challenge.
               </p>
             </FadeUp>
