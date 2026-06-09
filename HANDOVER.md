@@ -2,6 +2,40 @@
 
 Pick this up cold. Captures the project as of the most recent session.
 
+---
+
+## ⏳ SESSION CHECKPOINT — preview-only work, NOT pushed (read first)
+
+A large batch of work is **committed on branch `review/content-accordion-og`** and **deliberately NOT pushed** (so nothing is live yet). `main` = remote `main` = production. The owner reviews on localhost/preview and says **"push"** when ready.
+
+**To go live when approved:** `git checkout main && git merge review/content-accordion-og && git push` (then refresh social OG caches).
+
+**What changed this session (all preview-only):**
+
+- **Homepage (`pages/index.tsx`)**
+  - Hero headline animates (per-word staggered rise, `useReducedMotion` guard). Mobile hero capped `min-h-[78vh] md:min-h-[100vh]`.
+  - Philosophy reworked → H2 "Great work rarely struggles because of a lack of ambition." + quieter line "More often, the challenge is helping it stay strong as it moves through the organisation."
+  - **NEW "How DAB Hands helps"** — 2×2 charcoal doorway module (green icons; labels: Get it moving / Bring it together / Strengthen it / Get more from it; body ranges left under icon). Each arrow deep-links to `/where-we-step-in#<id>`.
+  - **Removed** the old "Why DAB Hands" antidote section (6 bullets + callout) entirely.
+  - **NEW "Led by Darren Brett"** signal on brown-lighter (sand): square headshot top-aligned with headline; headline sized to match footer line (`text-xl md:text-2xl lg:text-[26px]`); Experience CTA.
+
+- **Where We Step In (`pages/where-we-step-in.tsx`)** — biggest change. Now uses `useState`/`useEffect` (client).
+  - Hero = one line. Removed "Often brought in when" + HBR/McKinsey stats section.
+  - **"Common reasons people get in touch" = ACCORDION.** Closed: charcoal, green doorway icon, title, summary, **"Learn more +"** under the copy, **no CTA**. Open: unified **white** panel, charcoal icon, detail paragraphs (last one emphasised) + "Start a conversation →". Single-open; **deep-link auto-opens** the matching `#id`; **panel content always mounted** (height-animated, `inert` when closed) for SEO + selectable; `last:border-b-0` + section `pt-` only (no bottom dead-space). Accordion copy weaves in "protecting integrity / keeping strong work strong".
+  - "Engagement models" eyebrow + "Ways clients typically work with DAB Hands" on **mushroom (brown-lighter)**: **Leadership & Advisory** / **Trusted Capability** + "The shape depends on the challenge." Closing line → "Backed by 20+ years helping important work move through complex organisations."
+  - Section rhythm: cream → charcoal(accordions) → mushroom(ways) → white(outcome) → cream(closing).
+
+- **Experience (`pages/experience.tsx`)** — eyebrow "Track record", H1 "Trusted with work that matters"; Proven across reordered (Digital experiences / Platform and ecommerce / Campaigns and launches / Membership and lifecycle); bio refined; "Trusted people around the work" + "Bringing together trusted specialists across…"; closing CTA line removed.
+
+- **OG image (`public/og-image.png`)** — recreated 1200×630: green field, dark **feathered ribbon** (fuller-ribbon via `mix-blend-mode: multiply`), uppercase **uniform-bold "DAB Hands"** wordmark, headline. Rebuilt via headless Chrome (Chrome.app) at 2× from a temp `public/og-builder.html` (deleted after). Old image backed up at `/tmp/og-image-backup.png`. `SeoMeta` already points at `/og-image.png` — no code change.
+
+**Open items / decisions to confirm with owner:**
+- Accordion + doorway labels are **sentence case** ("Get it moving"), not the caps in some briefs.
+- Kept Outcome heading "…more effectively**, you get:**" and stats wording "**organisations**" (vs a later brief showing them without). Owner hasn't re-confirmed.
+- Accordion prompt wording is "**Learn more / Close**".
+
+---
+
 ## Read this first
 
 Multi-page site (Home / Where we step in / Experience / Contact). The site is **on production at `https://dabhands.delivery`** via Vercel's standard GitHub integration — every push to `main` auto-deploys. Most recent prod commit: `32f36eb` "Add og-image, favicon, logo ticker, and brand refinements".

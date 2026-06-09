@@ -7,13 +7,59 @@ import { Ribbon } from '@/components/Ribbon';
 import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
 
-const antidotePoints = [
-  'Experienced leadership around important work',
-  'Clearer decisions in complex environments',
-  'Fast to understand, align and get moving',
-  'Smooth working across teams, agencies and partners',
-  'Senior capability without agency overhead',
-  'Unlocking more value from what’s already in place',
+const doorways = [
+  {
+    label: 'Get it moving',
+    blurb: 'Projects that are slowing down and need experienced support to get over the line.',
+    href: '/where-we-step-in#get-it-moving',
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 20 H30" />
+        <path d="M23 13 L30 20 L23 27" />
+        <path d="M5 14 H9" />
+        <path d="M5 20 H8" />
+        <path d="M5 26 H9" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Bring it together',
+    blurb: 'Complex initiatives involving multiple teams, partners, and moving parts.',
+    href: '/where-we-step-in#bring-it-together',
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="8" cy="9" r="2.4" />
+        <circle cx="32" cy="9" r="2.4" />
+        <circle cx="20" cy="33" r="2.4" />
+        <circle cx="20" cy="20" r="2.4" />
+        <path d="M9.7 10.7 L18.3 18.4" />
+        <path d="M30.3 10.7 L21.7 18.4" />
+        <path d="M20 22.4 L20 30.6" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Strengthen it',
+    blurb: 'Work that has become too important to leave unsupported.',
+    href: '/where-we-step-in#strengthen-it',
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 5 L31 9 V19 C31 26 20 31 20 31 C20 31 9 26 9 19 V9 Z" />
+        <path d="M15 19 L18.5 22.5 L26 14.5" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Get more from it',
+    blurb: 'Good people, good partners, and good ideas that could be working together more effectively.',
+    href: '/where-we-step-in#get-more-from-it',
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 26 L16 16 L22 22 L34 10" />
+        <path d="M27 10 H34 V17" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Home() {
@@ -162,61 +208,83 @@ export default function Home() {
             </FadeUp>
 
             <FadeUp delay={0.16}>
-              <p className="mt-10 md:mt-14 text-2xl md:text-3xl font-medium leading-snug tracking-[-0.018em] text-dab-charcoal max-w-[44ch] mx-auto">
-                More often, the challenge is helping it stay strong<br />
-                as it moves through the organisation.
+              <p className="mt-8 md:mt-10 text-xl md:text-2xl font-normal leading-relaxed tracking-[-0.01em] text-dab-charcoal max-w-[42ch] mx-auto">
+                More often, the challenge is helping it stay strong as it moves through the organisation.
               </p>
             </FadeUp>
           </div>
         </section>
 
-        {/* ── ANTIDOTE ──────────────────────────────── */}
-        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40 border-t border-dab-charcoal/8 relative overflow-hidden">
-          <Ribbon
-            className="hidden md:block absolute inset-x-0 top-[28%] w-full"
-            opacity={0.2}
-            drift={24}
-          />
-
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+        {/* ── DOORWAYS — HOW DAB HANDS HELPS ────────── */}
+        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-6 md:mb-8">
-                Where we help
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.08}>
-              <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
-                DAB Hands meets these problems head-on
+              <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch] mb-14 md:mb-20">
+                How DAB Hands helps
               </h2>
             </FadeUp>
+            <div className="grid md:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10 md:gap-y-14">
+              {doorways.map((d, i) => (
+                <motion.a
+                  key={d.label}
+                  href={d.href}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="group block border-t border-dab-cream/15 pt-8 md:pt-10"
+                >
+                  <div className="flex items-center gap-5 md:gap-6">
+                    <span
+                      className="text-dab-green flex-shrink-0 [&_svg]:w-9 [&_svg]:h-9 md:[&_svg]:w-10 md:[&_svg]:h-10"
+                      aria-hidden
+                    >
+                      {d.icon}
+                    </span>
+                    <h3 className="flex-1 text-2xl md:text-3xl font-medium tracking-[-0.022em] text-dab-cream">
+                      {d.label}
+                    </h3>
+                    <span
+                      aria-hidden
+                      className="text-dab-green text-2xl leading-none transition-transform group-hover:translate-x-1"
+                    >
+                      &rarr;
+                    </span>
+                  </div>
+                  <p className="mt-4 md:mt-5 text-lg md:text-xl leading-relaxed text-dab-cream/70 max-w-[46ch]">
+                    {d.blurb}
+                  </p>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <FadeUp delay={0.22}>
-              <ul className="mt-14 md:mt-20 max-w-[44ch] list-none p-0 m-0">
-                {antidotePoints.map((item, i) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.07 }}
-                    className="flex items-start gap-5 py-5 border-t border-dab-charcoal/15 last:border-b last:border-dab-charcoal/15 text-dab-charcoal"
-                  >
-                    <svg aria-hidden className="flex-shrink-0 mt-0.5" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <p className="text-xl font-medium leading-tight text-dab-charcoal">{item}</p>
-                  </motion.li>
-                ))}
-              </ul>
-            </FadeUp>
-
-            <FadeUp delay={0.48}>
-              <div className="mt-20 md:mt-28 flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-12 lg:gap-16">
-                <p className="text-[32px] md:text-[48px] lg:text-[60px] font-medium leading-[1.05] tracking-[-0.028em] text-dab-charcoal max-w-[20ch]">
-                  We help organisations get stronger digital work out into the world.
-                </p>
-                <div className="flex-shrink-0 md:pt-2">
-                  <BoxCTA href="/where-we-step-in" label="Where we step in" />
+        {/* ── LED BY DARREN ─────────────────────────── */}
+        <section className="bg-dab-brown-lighter text-dab-charcoal py-16 md:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <FadeUp>
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-8 md:mb-10">
+                Led by Darren Brett
+              </p>
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-12">
+                <div className="flex items-start gap-5 md:gap-7">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/darren-brett_colour_headshot.jpeg"
+                    alt="Darren Brett"
+                    width={96}
+                    height={96}
+                    draggable={false}
+                    loading="lazy"
+                    className="flex-shrink-0 mt-1.5 md:mt-2 w-20 h-20 md:w-24 md:h-24 object-cover"
+                  />
+                  <p className="max-w-[36ch] text-xl md:text-2xl lg:text-[26px] font-medium leading-snug tracking-[-0.02em]">
+                    20+ years helping global brands move important digital work through complexity.
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <BoxCTA href="/experience" label="Experience" />
                 </div>
               </div>
             </FadeUp>
