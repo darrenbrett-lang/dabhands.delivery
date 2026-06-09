@@ -10,7 +10,7 @@ import { SeoMeta } from '@/components/SeoMeta';
 const doorways = [
   {
     label: 'Get it moving',
-    blurb: 'Projects that are slowing down and need experienced support to get over the line.',
+    blurb: 'Important initiatives that are slowing down and need help getting over the line.',
     href: '/where-we-step-in#get-it-moving',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -24,7 +24,7 @@ const doorways = [
   },
   {
     label: 'Bring it together',
-    blurb: 'Complex initiatives involving multiple teams, partners, and moving parts.',
+    blurb: 'Complex work involving multiple teams, partners, and moving parts.',
     href: '/where-we-step-in#bring-it-together',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -40,7 +40,7 @@ const doorways = [
   },
   {
     label: 'Strengthen it',
-    blurb: 'Work that has become too important to leave unsupported.',
+    blurb: 'When an important challenge needs additional leadership, capability, or support.',
     href: '/where-we-step-in#strengthen-it',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">

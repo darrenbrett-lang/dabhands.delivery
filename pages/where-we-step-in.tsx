@@ -40,7 +40,7 @@ const reasons = [
   {
     id: 'get-it-moving',
     label: 'Get it moving',
-    summary: 'When important work is slowing down and needs help getting over the line.',
+    summary: 'Important initiatives that are slowing down and need help getting over the line.',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M13 20 H30" />
@@ -51,16 +51,16 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      'Projects rarely fall behind because people stop caring.',
-      'More often, priorities shift, decisions become harder to make, and momentum starts to fade.',
-      'As that happens, strong work can begin to lose its shape. A launch slips, a programme loses focus, and what started strong arrives weaker than it should.',
-      'DAB Hands helps restore clarity, ownership, and momentum, keeping important work strong as it moves forward.',
+      'Important initiatives rarely slow down because the people involved don't care about the outcome.',
+      'More often, competing priorities emerge, decision-making becomes harder, and momentum starts to fade. Launches slip. Programmes lose focus. What started as strong work begins to lose its shape as it moves through the organisation.',
+      'These moments of hesitation or delay are often signals that the system carrying the work needs attention—not because the work itself isn't strong, but because the conditions around it have become harder to navigate.',
+      'DAB Hands helps restore clarity, ownership, and momentum. We bring fresh perspective to the obstacles slowing things down, and help important work stay strong as it moves forward.',
     ],
   },
   {
     id: 'bring-it-together',
     label: 'Bring it together',
-    summary: 'When lots of teams, partners, and moving parts need to work as one.',
+    summary: 'Complex work involving multiple teams, partners, and moving parts.',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="8" cy="9" r="2.4" />
@@ -73,15 +73,16 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      'The bigger the initiative, the more difficult coordination becomes.',
-      'Different teams bring different priorities. Agencies, partners, and stakeholders all play important roles, but without clear alignment even strong work can fragment and lose its strength.',
-      'DAB Hands helps create the conditions for teams to move together around shared outcomes, while protecting the integrity of the work itself.',
+      'The bigger and more complex the challenge, the harder coordination becomes. Different teams bring different priorities. Multiple agencies, partners, and stakeholders all play important roles, but each comes with their own success metrics, timelines, and constraints.',
+      'Without clear alignment around shared outcomes, even strong work can fragment and lose its strength as it moves through the system. Ownership becomes unclear. Decisions get held up. The original intent gets diluted.',
+      'These are the moments when the system itself becomes the problem—not the capability of the people involved, but the conditions that prevent them from moving together.',
+      'DAB Hands helps create the conditions for teams to move together around shared outcomes, while protecting the integrity and intent of the work itself.',
     ],
   },
   {
     id: 'strengthen-it',
     label: 'Strengthen it',
-    summary: 'When the work has become too important to leave unsupported.',
+    summary: 'When an important challenge needs additional leadership, capability, or support.',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20 5 L31 9 V19 C31 26 20 31 20 31 C20 31 9 26 9 19 V9 Z" />
@@ -89,15 +90,16 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      'Some initiatives carry more visibility, more pressure, or more commercial importance than others.',
-      'In these moments, experienced hands around the work help in two ways: sharpening the decisions that need to be made, and protecting the original intent as the work moves forward.',
-      'DAB Hands brings experienced leadership and trusted capability where it matters most, helping important work stay strong under pressure.',
+      'Some challenges carry more visibility, more pressure, or more commercial importance than others. These might be critical initiatives, delivery challenges, operational problems, or organisational transformation. Some are about protecting a specific project. Others are about strengthening a whole function or team.',
+      'When the stakes are high and the challenge is complex, experienced hands around the work serve two purposes: sharpening the decisions that need to be made, and protecting the original intent and quality of what's being delivered as it moves forward.',
+      'Leadership, capability, and support take many forms depending on what the challenge actually needs. Sometimes it's bringing in senior experience to navigate complexity. Sometimes it's adding delivery rigour. Sometimes it's protecting a team's focus while the system around them becomes clearer.',
+      'DAB Hands brings experienced leadership and trusted capability where it matters most, helping important work—and important teams—stay strong under pressure.',
     ],
   },
   {
-    id: 'get-more-from-it',
-    label: 'Get more from it',
-    summary: 'When good people, good partners, and good ideas could be working together more effectively.',
+    id: ‘get-more-from-it’,
+    label: ‘Get more from it’,
+    summary: ‘Good people, good partners, and good ideas that could be working together more effectively.’,
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M6 26 L16 16 L22 22 L34 10" />
@@ -105,10 +107,10 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      'Most organisations already have talented people, capable partners, and significant investment in place.',
-      'The challenge is rarely a lack of capability.',
-      'More often, it’s helping those assets work together so that stronger work emerges from what is already there.',
-      'DAB Hands helps unlock more value, and better work, from what already exists.',
+      ‘Most organisations already have talented people in place. Good partners and agencies. Significant investment in existing systems and capabilities. The challenge is rarely a shortage of any of these things.’,
+      ‘More often, the opportunity lies in how those assets are being coordinated, understood, and deployed together. Small misalignments in how decisions get made. Unclear ownership. Systems that work in isolation instead of in concert. Teams with good intentions that aren’t quite moving together.’,
+      ‘These gaps don’t usually signal a need for more capability. They signal a need for clearer decision-making, better coordination, and sharper alignment around what matters.’,
+      ‘DAB Hands helps unlock more value, and stronger work, from what already exists. By bringing clarity to the system carrying the work, we help good people, good partners, and good ideas move together more effectively.’,
     ],
   },
 ];
