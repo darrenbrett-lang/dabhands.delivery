@@ -342,7 +342,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* CLOSING STATEMENT */}
-        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-32 relative overflow-hidden">
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
