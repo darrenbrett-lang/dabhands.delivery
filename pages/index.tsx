@@ -156,15 +156,15 @@ export default function Home() {
                 className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
               />
               <h2 className="text-[44px] md:text-[72px] lg:text-[96px] xl:text-[108px] font-medium leading-[1.02] tracking-[-0.03em]">
-                <span className="block">Great work rarely fails</span>
-                <span className="block">at the idea stage.</span>
+                <span className="block">Great work rarely struggles</span>
+                <span className="block">because of a lack of ambition.</span>
               </h2>
             </FadeUp>
 
             <FadeUp delay={0.16}>
               <p className="mt-10 md:mt-14 text-2xl md:text-3xl font-medium leading-snug tracking-[-0.018em] text-dab-charcoal max-w-[44ch] mx-auto">
-                It fails as it moves through the organisation.<br />
-                What started strong arrives weaker than it should have been.
+                More often, the challenge is helping it stay strong<br />
+                as it moves through the organisation.
               </p>
             </FadeUp>
           </div>
