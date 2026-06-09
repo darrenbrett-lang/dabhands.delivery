@@ -207,7 +207,7 @@ export default function Experience() {
         </section>
 
         {/* DARREN BRETT */}
-        <section id="about" className="bg-dab-brown-lighter text-dab-charcoal relative overflow-hidden">
+        <section id="about" className="bg-dab-cream text-dab-charcoal relative overflow-hidden">
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-14 md:py-32">
             <FadeUp className="md:hidden mb-6">
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-4">
