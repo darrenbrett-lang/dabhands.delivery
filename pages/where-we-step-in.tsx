@@ -339,7 +339,7 @@ export default function WhereWeStepIn() {
                   }`}
                 >
                   <span className="flex-shrink-0 text-dab-charcoal" aria-hidden>{item.icon}</span>
-                  <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal">
+                  <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal md:ml-6 lg:ml-8">
                     {item.label}
                   </p>
                 </motion.li>
