@@ -108,10 +108,10 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      'Most organisations already have talented people in place. Good partners and agencies. Significant investment in existing systems and capabilities. The challenge is rarely a shortage of any of these things.',
+      'Most organisations already have talented people in place. Good partners and agencies. Significant investment in existing brand systems and capabilities. The challenge is rarely a shortage of any of these things.',
       'More often, the opportunity lies in how those assets are being coordinated, understood, and deployed together. Small misalignments in how decisions get made. Unclear ownership. Systems that work in isolation instead of in concert. Teams with good intentions that aren\'t quite moving together.',
       'These gaps don\'t usually signal a need for more capability. They signal a need for clearer decision-making, better coordination, and sharper alignment around what matters.',
-      'DAB Hands helps unlock more value, and stronger work, from what already exists. By bringing clarity to the system carrying the work, we help good people, good partners, and good ideas move together more effectively.',
+      'DAB Hands helps unlock more value and stronger work from what already exists. By bringing clarity to the system carrying the work and maximising the storytelling through the assets you already have, we help good people, good partners, and good ideas move together more effectively.',
     ],
   },
 ];
