@@ -343,7 +343,7 @@ export default function WhereWeStepIn() {
                     i > 0 ? 'md:border-l md:border-dab-charcoal/25 md:pl-6 lg:pl-8' : 'md:pr-6 lg:pr-8'
                   }`}
                 >
-                  <span className="flex-shrink-0 text-dab-charcoal" aria-hidden>{item.icon}</span>
+                  <span className="flex-shrink-0 md:self-start text-dab-charcoal" aria-hidden>{item.icon}</span>
                   <p className="text-[24px] md:text-[30px] lg:text-[36px] font-semibold leading-tight tracking-[-0.025em] text-dab-charcoal md:ml-6 lg:ml-8">
                     {item.label}
                   </p>
