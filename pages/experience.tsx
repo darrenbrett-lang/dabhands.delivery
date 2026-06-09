@@ -165,6 +165,11 @@ export default function Experience() {
                 Who am I
               </p>
               <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren</p>
+              <p className="mt-4 text-lg font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
+                A senior digital systems specialist.<br />
+                Equally at home in the practical, the creative, and the conceptual.<br />
+                Comfortable in ambiguity. Driven to make sense of it.
+              </p>
             </FadeUp>
 
             <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
@@ -189,6 +194,11 @@ export default function Experience() {
                       Who am I
                     </p>
                     <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren</p>
+                    <p className="mt-4 md:mt-5 text-lg md:text-xl font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
+                      A senior digital systems specialist.<br />
+                      Equally at home in the practical, the creative, and the conceptual.<br />
+                      Comfortable in ambiguity. Driven to make sense of it.
+                    </p>
                   </div>
                   <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
                   <p>I've always been drawn to the spaces between disciplines. The places where strategy meets execution, creativity meets practicality, and ambiguity needs to become action. Much of the value I bring comes from helping people make sense of complexity, align around what matters, and move forward with confidence.</p>
