@@ -359,7 +359,7 @@ export default function WhereWeStepIn() {
             </FadeUp>
             <FadeUp>
               <p className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto">
-                Backed by 20+ years helping important work move through complex organisations.
+                20+ years helping global brands keep important digital work moving.
               </p>
             </FadeUp>
             <FadeUp delay={0.16}>
