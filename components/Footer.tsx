@@ -57,6 +57,8 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
                 alt=""
                 width={16}
                 height={16}
+                loading="lazy"
+                decoding="async"
                 className="block"
               />
             </a>

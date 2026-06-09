@@ -351,6 +351,8 @@ export default function WhereWeStepIn() {
                 alt=""
                 aria-hidden
                 draggable={false}
+                loading="lazy"
+                decoding="async"
                 className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
               />
             </FadeUp>

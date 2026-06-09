@@ -199,6 +199,8 @@ export default function Home() {
                 alt=""
                 aria-hidden
                 draggable={false}
+                loading="lazy"
+                decoding="async"
                 className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
               />
               <h2 className="text-[44px] md:text-[72px] lg:text-[96px] xl:text-[108px] font-medium leading-[1.02] tracking-[-0.03em]">
@@ -270,6 +272,8 @@ export default function Home() {
                 alt=""
                 aria-hidden
                 draggable={false}
+                loading="lazy"
+                decoding="async"
                 className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
               />
             </FadeUp>

@@ -23,12 +23,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
-      <main
+      <div
         className={`${geist.variable} ${geistMono.variable}`}
         style={{ fontFamily: 'var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}
       >
         <Component {...pageProps} />
-      </main>
+      </div>
     </>
   );
 }
