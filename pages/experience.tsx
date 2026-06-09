@@ -182,10 +182,10 @@ export default function Experience() {
                       Who am I
                     </p>
                     <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
-                    <div className="mt-4 md:mt-5 text-lg md:text-xl font-semibold leading-snug tracking-[-0.01em] text-dab-charcoal space-y-3 md:space-y-0">
-                      <span className="block">A digital operator with a systems view of the world.</span>
-                      <span className="block">Equally at home in the practical, the creative, and the philosophical.</span>
-                      <span className="block">Comfortable in ambiguity but driven to make sense of it.</span>
+                    <div className="mt-4 md:mt-5 text-lg md:text-xl font-semibold leading-snug tracking-[-0.01em] text-dab-charcoal">
+                      <span className="inline md:block">A digital operator with a systems view of the world.</span>{' '}
+                      <span className="inline md:block">Equally at home in the practical, the creative, and the philosophical.</span>{' '}
+                      <span className="inline md:block">Comfortable in ambiguity but driven to make sense of it.</span>
                     </div>
                   </div>
                   <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
