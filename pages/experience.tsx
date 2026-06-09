@@ -242,7 +242,7 @@ export default function Experience() {
                   <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
                   <p>I've always been drawn to the spaces between disciplines. The places where strategy meets execution, creativity meets practicality, and ambiguity needs to become action. Much of the value I bring comes from helping people make sense of complexity, align around what matters, and move forward with confidence.</p>
                   <p>Experienced working across complex client, agency, technology, and partner ecosystems, I've spent much of my career helping different teams, perspectives, and priorities work together more effectively around important work.</p>
-                  <p>Running an agency has reinforced something I&rsquo;ve seen throughout my career: strong work rarely succeeds because of a single discipline. More often, success comes from helping strategy, creative, technology, operations, and delivery move together effectively around a common objective.</p>
+                  <p>Running an agency has reinforced something I&rsquo;ve seen throughout my career: strong work rarely succeeds because of a single discipline. More often, it comes from helping different disciplines work well together around a shared goal.</p>
                   <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes.</p>
                 </div>
               </FadeUp>
@@ -259,13 +259,13 @@ export default function Experience() {
                   Scaled when needed
                 </p>
                 <h2 className="text-[35px] md:text-[48px] lg:text-[56px] font-medium leading-[1.02] tracking-[-0.03em]">
-                  Bringing the right capability around the work
+                  Trusted people around the work
                 </h2>
               </FadeUp>
               <FadeUp delay={0.16} className="md:col-span-6 md:col-start-7">
                 <div className="space-y-6 text-xl text-dab-charcoal leading-relaxed">
-                  <p>DAB Hands is supported by a trusted network of senior specialists brought in around the initiative when needed.</p>
-                  <p>Capability across strategy, creative, experience, design, copy and delivery.</p>
+                  <p>DAB Hands is supported by a network of senior specialists brought in around the initiative when needed.</p>
+                  <p>Bringing together trusted specialists across strategy, creative, experience, design, copy, and delivery.</p>
                   <div className="pt-4">
                     {[
                       'People I’ve delivered with for years',
