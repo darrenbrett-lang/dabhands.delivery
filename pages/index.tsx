@@ -216,7 +216,7 @@ export default function Home() {
         </section>
 
         {/* ── DOORWAYS — HOW DAB HANDS HELPS ────────── */}
-        <section className="bg-dab-brown-lighter text-dab-charcoal py-16 md:py-40">
+        <section className="bg-white text-dab-charcoal py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch] mb-14 md:mb-20">
@@ -260,9 +260,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── LED BY DARREN ─────────────────────────── */}
-        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+        {/* ── CLOSING STATEMENT ─────────────────────── */}
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-32 relative overflow-hidden">
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -272,13 +272,15 @@ export default function Home() {
                 draggable={false}
                 className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
               />
-              <h2 className="text-[32px] md:text-[48px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[28ch] mx-auto">
+            </FadeUp>
+            <FadeUp>
+              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto">
                 20+ years helping global brands move important digital work through complexity.
               </h2>
             </FadeUp>
-            <FadeUp delay={0.16}>
-              <div className="mt-12 md:mt-16 flex justify-center">
-                <BoxCTA href="/experience" label="Experience" />
+            <FadeUp delay={0.24}>
+              <div className="mt-14 md:mt-20 flex justify-center">
+                <BoxCTA href="/where-we-step-in" label="Where we step in" />
               </div>
             </FadeUp>
           </div>
