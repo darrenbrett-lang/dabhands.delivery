@@ -194,7 +194,7 @@ export default function WhereWeStepIn() {
                     onClick={() => setOpenId(isOpen ? null : item.id)}
                     aria-expanded={isOpen}
                     className={`w-full text-left px-6 md:px-10 lg:px-16 py-8 md:py-10 transition-colors duration-300 ${
-                      isOpen ? 'bg-dab-brown-lighter' : 'bg-white'
+                      isOpen ? 'bg-dab-cream' : 'bg-white'
                     }`}
                   >
                     <div className="flex items-start gap-5 md:gap-6">
@@ -232,7 +232,7 @@ export default function WhereWeStepIn() {
                     initial={false}
                     animate={{ height: isOpen ? 'auto' : 0 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden bg-dab-brown-lighter"
+                    className="overflow-hidden bg-dab-cream"
                   >
                     <div
                       inert={!isOpen || undefined}
