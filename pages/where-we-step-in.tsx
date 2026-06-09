@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { BoxCTA } from '@/components/BoxCTA';
+import { LogoTicker } from '@/components/LogoTicker';
 import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
@@ -131,8 +132,8 @@ export default function WhereWeStepIn() {
   return (
     <>
       <SeoMeta
-        title="Where DAB Hands steps in"
-        description="DAB Hands is built around critical digital initiatives that cannot afford to drift. Senior-led delivery for complex work that needs to move together at pace."
+        title="When To Bring Us In | DAB Hands"
+        description="When to bring DAB Hands in: critical digital initiatives that cannot afford to drift. Senior-led delivery for complex work that needs to move together at pace."
         path="/where-we-step-in"
       />
 
@@ -361,8 +362,13 @@ export default function WhereWeStepIn() {
                 Backed by 20+ years helping important work move through complex organisations.
               </p>
             </FadeUp>
+            <FadeUp delay={0.16}>
+              <div className="mt-12 md:mt-16">
+                <LogoTicker ariaLabel="Brands DAB Hands has worked with" compact />
+              </div>
+            </FadeUp>
             <FadeUp delay={0.24}>
-              <div className="mt-14 md:mt-20 flex justify-center">
+              <div className="mt-12 md:mt-16 flex justify-center">
                 <BoxCTA href="/experience" label="Experience" />
               </div>
             </FadeUp>

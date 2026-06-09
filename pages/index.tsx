@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { BoxCTA } from '@/components/BoxCTA';
+import { LogoTicker } from '@/components/LogoTicker';
 import { Ribbon } from '@/components/Ribbon';
 import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
@@ -282,9 +283,14 @@ export default function Home() {
                 20+ years helping global brands move important digital work through complexity.
               </h2>
             </FadeUp>
+            <FadeUp delay={0.16}>
+              <div className="mt-12 md:mt-16">
+                <LogoTicker ariaLabel="Brands I've worked with" compact />
+              </div>
+            </FadeUp>
             <FadeUp delay={0.24}>
-              <div className="mt-14 md:mt-20 flex justify-center">
-                <BoxCTA href="/where-we-step-in" label="Where we step in" />
+              <div className="mt-12 md:mt-16 flex justify-center">
+                <BoxCTA href="/where-we-step-in" label="When To Bring Us In" />
               </div>
             </FadeUp>
           </div>

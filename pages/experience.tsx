@@ -1,32 +1,11 @@
-import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
-import { TickerLogo } from '@/components/TickerLogo';
+import { LogoTicker } from '@/components/LogoTicker';
 import { BoxCTA } from '@/components/BoxCTA';
 import { Ribbon } from '@/components/Ribbon';
 import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
-
-// All client logos are self-hosted under /public/images/logos/svg/.
-// `kind: 'icon'` → square-ish brand mark, sits at full row height.
-// `kind: 'wordmark'` → horizontal wordmark, height-capped so icons aren't dwarfed.
-// `boost: true` → lift a short wordmark up to icon scale.
-const clients: Array<{ name: string; src: string; kind?: 'icon' | 'wordmark'; boost?: boolean }> = [
-  { name: 'Nike', src: '/images/logos/svg/nike.svg', kind: 'icon' },
-  { name: 'Volkswagen', src: '/images/logos/svg/volkswagen.svg', kind: 'icon' },
-  { name: 'Audi', src: '/images/logos/svg/audi.svg', kind: 'icon' },
-  { name: 'Hugo Boss', src: '/images/logos/svg/hugo-boss.svg' },
-  { name: 'Tommy Hilfiger', src: '/images/logos/svg/tommy-hilfiger-mono.png', boost: true },
-  { name: 'Unilever', src: '/images/logos/svg/unilever.svg', kind: 'icon' },
-  { name: 'Johnson & Johnson', src: '/images/logos/svg/johnson-and-johnson.svg' },
-  { name: 'Royal Mail', src: '/images/logos/svg/royal-mail-mono.png' },
-  { name: 'Parcelforce', src: '/images/logos/svg/parcelforce.svg' },
-  { name: 'Palantir', src: '/images/logos/svg/palantir.svg', kind: 'icon' },
-  { name: 'Post Office', src: '/images/logos/svg/post-office.svg', boost: true },
-  { name: 'Fortnum & Mason', src: '/images/logos/svg/fortnum-and-mason.svg' },
-  { name: 'Falabella', src: '/images/logos/svg/falabella.svg' },
-];
 
 const testimonials = [
   {
@@ -89,16 +68,6 @@ const experienceAreas = [
 ];
 
 export default function Experience() {
-  const reduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)');
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-  const tickerDuration = isMobile ? 23.5 : 60;
 
   return (
     <>
@@ -183,25 +152,7 @@ export default function Experience() {
               </p>
             </FadeUp>
             <FadeUp delay={0.08}>
-              <div className="w-full overflow-hidden">
-                <motion.ul
-                  key={isMobile ? 'mobile' : 'desktop'}
-                  aria-label="Clients I've worked with at scale"
-                  animate={reduceMotion ? undefined : { x: ['0%', '-33.3333%'] }}
-                  transition={reduceMotion ? undefined : { duration: tickerDuration, repeat: Infinity, ease: 'linear' }}
-                  className="flex gap-12 md:gap-16 lg:gap-20 w-max list-none p-0 m-0"
-                >
-                  {[...clients, ...clients, ...clients].map((c, i) => (
-                    <li
-                      key={`${c.name}-${i}`}
-                      aria-hidden={i >= clients.length}
-                      className="flex-shrink-0 h-20 md:h-24 flex items-center justify-center"
-                    >
-                      <TickerLogo name={c.name} src={c.src} kind={c.kind} boost={c.boost} />
-                    </li>
-                  ))}
-                </motion.ul>
-              </div>
+              <LogoTicker />
             </FadeUp>
           </div>
         </section>

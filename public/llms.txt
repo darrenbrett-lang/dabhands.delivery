@@ -7,7 +7,7 @@ DAB Hands is a senior-led delivery model for critical digital initiatives. Broug
 ## Pages
 
 - [Home](https://dabhands.delivery/): Overview of the DAB Hands proposition: senior digital delivery for high-stakes work, the problems we meet head-on, and the pressure points we are typically brought in around.
-- [Where we step in](https://dabhands.delivery/where-we-step-in): The intervention points: where DAB Hands is brought in when critical digital work is drifting, quality is weakening, teams are misaligned, capability is needed, friction is slowing the work, or existing investment is underperforming.
+- [When To Bring Us In](https://dabhands.delivery/where-we-step-in): The intervention points: when DAB Hands is brought in for critical digital work that is drifting, weakening in quality, with teams misaligned, capability needed, friction slowing the work, or existing investment underperforming.
 - [Experience](https://dabhands.delivery/experience): Experience built under pressure. Large-scale digital delivery shaped across global brands, complex platforms, campaigns, and customer experience programmes. Built around the work.
 - [Contact](https://dabhands.delivery/contact): Reach out directly for critical digital initiatives that need to move properly.
 

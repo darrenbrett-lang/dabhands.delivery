@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { mailto } from '@/lib/mailto';
 
 const navItems = [
-  { href: '/where-we-step-in', label: 'Where we step in' },
+  { href: '/where-we-step-in', label: 'When To Bring Us In' },
   { href: '/experience', label: 'Experience' },
   { href: '/contact', label: 'Contact' },
 ];
