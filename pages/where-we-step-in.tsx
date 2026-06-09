@@ -167,8 +167,9 @@ export default function WhereWeStepIn() {
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
-              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch]">
+              <div className="mt-10 md:mt-12 text-xl text-dab-charcoal leading-relaxed max-w-[58ch] space-y-6">
                 <p>Making sure strong work stays strong as it moves from idea to market.</p>
+                <p>Whether that&rsquo;s a critical initiative, a complex programme of work, or a moment that needs experienced leadership, DAB Hands is designed to integrate quickly and help the work move forward.</p>
               </div>
             </FadeUp>
           </div>
