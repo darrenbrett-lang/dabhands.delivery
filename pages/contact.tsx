@@ -15,7 +15,7 @@ export default function Contact() {
       />
 
       <Layout footerVariant="none">
-        <section className="bg-dab-cream text-dab-charcoal pt-36 md:pt-44 pb-28 md:pb-40 min-h-[80vh] relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal pt-32 md:pt-44 pb-16 md:pb-40 min-h-[80vh] relative overflow-hidden">
           <Ribbon
             className="absolute inset-x-0 bottom-0 w-full"
             opacity={0.4}

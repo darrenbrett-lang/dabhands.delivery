@@ -120,7 +120,7 @@ export default function WhereWeStepIn() {
 
       <Layout footerVariant="minimal">
         {/* HERO */}
-        <section className="bg-dab-cream text-dab-charcoal pt-36 md:pt-44 pb-24 md:pb-32 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal pt-32 md:pt-44 pb-16 md:pb-32 relative overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/sand-ripple.jpg"
@@ -149,7 +149,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* OFTEN BROUGHT IN AROUND */}
-        <section className="bg-white text-dab-charcoal py-24 md:py-32">
+        <section className="bg-white text-dab-charcoal py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
               Often brought in when
@@ -177,7 +177,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* INTERVENTION POINTS */}
-        <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 border-t border-dab-charcoal/10 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40 border-t border-dab-charcoal/10 relative overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/sand-ripple.jpg"
@@ -234,7 +234,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* ATTENTION / CONNECTION / CONVERSION */}
-        <section className="bg-white text-dab-charcoal py-24 md:py-32">
+        <section className="bg-white text-dab-charcoal py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
               The outcome
@@ -265,7 +265,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* THE EXECUTION GAP */}
-        <section className="bg-dab-charcoal text-dab-cream py-28 md:py-40 relative">
+        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40 relative">
           <div className="absolute top-0 left-0 right-0 h-px bg-dab-brown/30" />
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <Ribbon
@@ -337,7 +337,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* CLOSING STATEMENT */}
-        <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40 relative overflow-hidden">
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}

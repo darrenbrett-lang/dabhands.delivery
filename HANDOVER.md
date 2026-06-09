@@ -156,6 +156,23 @@ Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabh
 
 `styles/globals.css` adds `margin-left: -0.04em` to all `h1–h6`. Geist at large display sizes has noticeable side-bearing on letters like "E" / "W" — this nudges every heading visually left to align with the body copy column. Scales naturally with font-size via `em`.
 
+## Vertical spacing scale (section padding)
+
+Sections use a fixed 3-step scale. **Mobile is deliberately ~⅓ tighter than desktop** — mobile screens are ~3× narrower, so desktop-scale padding reads as cavernous on a phone. Keep desktop values; do not let the mobile value creep back up toward the desktop one.
+
+| Role | Class | Mobile | Desktop |
+|---|---|---|---|
+| Standard content section | `py-14 md:py-32` | 56px | 128px |
+| Breather section | `py-16 md:py-40` | 64px | 160px |
+| Big statement moment | `py-20 md:py-48` | 80px | 192px |
+| Hero top (header clearance) | `pt-32 md:pt-44` | 128px | 176px |
+
+Split top/bottom paddings follow the same mobile steps (`pt-14`/`pb-14` = 56, `pb-16` = 64). Rules:
+- **New sections must use one of these steps** — don't invent ad-hoc values.
+- Hero top stays `pt-32` minimum so content clears the fixed header.
+- Hero height on `/` is `min-h-[78vh] md:min-h-[100vh]` (content centred; full-height hero only on desktop, else mobile leaves a tall empty band).
+- List-item paddings (e.g. WWSI reasons `py-12 md:py-16 lg:py-20`) and internal component padding (StatPopover columns) are **out of scope** — leave them.
+
 ## SEO + a11y + perf infrastructure (audit pass — shipped at 228e464)
 
 - **Per-page `<SeoMeta>`** wraps `<Head>` for title, description, canonical (`https://dabhands.delivery${path}`), OG (image defaults to `/og-image.png`), Twitter card, og:image dimensions/alt.

@@ -81,7 +81,7 @@ export default function Home() {
         </section>
 
         {/* ── WHERE WE ARE ──────────────────────────── */}
-        <section className="bg-dab-charcoal text-dab-cream py-28 md:py-40 relative min-h-[90vh] flex flex-col justify-center">
+        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40 relative min-h-[90vh] flex flex-col justify-center">
           <div className="absolute top-0 left-0 right-0 h-px bg-dab-brown/30" />
 
           <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
@@ -144,7 +144,7 @@ export default function Home() {
         </section>
 
         {/* ── CORE TRUTH ────────────────────────────── */}
-        <section className="bg-white text-dab-charcoal py-32 md:py-48">
+        <section className="bg-white text-dab-charcoal py-20 md:py-48">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -171,7 +171,7 @@ export default function Home() {
         </section>
 
         {/* ── ANTIDOTE ──────────────────────────────── */}
-        <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 border-t border-dab-charcoal/8 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40 border-t border-dab-charcoal/8 relative overflow-hidden">
           <Ribbon
             className="hidden md:block absolute inset-x-0 top-[28%] w-full"
             opacity={0.2}

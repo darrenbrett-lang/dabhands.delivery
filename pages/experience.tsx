@@ -110,7 +110,7 @@ export default function Experience() {
 
       <Layout footerVariant="minimal">
         {/* HERO */}
-        <section className="bg-dab-cream text-dab-charcoal pt-36 md:pt-44 pb-20 md:pb-28 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal pt-32 md:pt-44 pb-14 md:pb-28 relative overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/under-pressure.png"
@@ -143,7 +143,7 @@ export default function Experience() {
         </section>
 
         {/* EXPERIENCE AREAS */}
-        <section className="bg-dab-charcoal text-dab-cream pt-20 md:pt-28 pb-24 md:pb-32">
+        <section className="bg-dab-charcoal text-dab-cream pt-14 md:pt-28 pb-16 md:pb-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp delay={0.08}>
               <h2 className="text-[40px] md:text-[56px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] mb-14 md:mb-16 md:whitespace-nowrap! pb-5 md:pb-7 border-b border-dab-cream/20">
@@ -175,7 +175,7 @@ export default function Experience() {
         </section>
 
         {/* WORKED AT SCALE FOR — logo ticker (light) */}
-        <section className="bg-white text-dab-charcoal pt-20 md:pt-28 pb-20 md:pb-24 relative">
+        <section className="bg-white text-dab-charcoal pt-14 md:pt-28 pb-14 md:pb-24 relative">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-12 md:mb-16">
@@ -208,7 +208,7 @@ export default function Experience() {
 
         {/* DARREN BRETT */}
         <section id="about" className="bg-dab-brown-lighter text-dab-charcoal relative overflow-hidden">
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-14 md:py-32">
             <FadeUp className="md:hidden mb-6">
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-4">
                 Who am I
@@ -251,7 +251,7 @@ export default function Experience() {
         </section>
 
         {/* TEAMS BEHIND THE WORK */}
-        <section className="bg-white text-dab-charcoal py-24 md:py-32 border-t border-dab-charcoal/8">
+        <section className="bg-white text-dab-charcoal py-14 md:py-32 border-t border-dab-charcoal/8">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <div className="grid md:grid-cols-12 gap-10 md:gap-16">
               <FadeUp className="md:col-span-5">
@@ -295,7 +295,7 @@ export default function Experience() {
         </section>
 
         {/* TESTIMONIALS — TRUSTED TO LEAD IMPORTANT WORK */}
-        <section className="bg-dab-brown-lighter text-dab-charcoal py-24 md:py-32">
+        <section className="bg-dab-brown-lighter text-dab-charcoal py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[35px] md:text-[51px] lg:text-[59px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-16 md:mb-20">
@@ -327,7 +327,7 @@ export default function Experience() {
         </section>
 
         {/* CLOSING STATEMENT */}
-        <section className="bg-dab-cream text-dab-charcoal py-28 md:py-40 relative overflow-hidden">
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40 relative overflow-hidden">
           <Ribbon
             className="absolute inset-x-0 top-0 w-full"
             opacity={0.22}
