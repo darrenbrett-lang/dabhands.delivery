@@ -166,7 +166,7 @@ export default function Experience() {
               </p>
               <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
               <p className="mt-4 text-lg font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
-                A senior digital specialist.<br />
+                A digital operator with a systems view of the world.<br />
                 Equally at home in the practical, the creative, and the philosophical.<br />
                 Comfortable in ambiguity but driven to make sense of it.
               </p>
@@ -195,7 +195,7 @@ export default function Experience() {
                     </p>
                     <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
                     <p className="mt-4 md:mt-5 text-lg md:text-xl font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
-                      A senior digital specialist.<br />
+                      A digital operator with a systems view of the world.<br />
                       Equally at home in the practical, the creative, and the philosophical.<br />
                       Comfortable in ambiguity but driven to make sense of it.
                     </p>
