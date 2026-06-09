@@ -160,18 +160,6 @@ export default function Experience() {
         {/* DARREN BRETT */}
         <section id="about" className="bg-dab-cream text-dab-charcoal relative overflow-hidden">
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-14 md:py-32">
-            <FadeUp className="md:hidden mb-6">
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-4">
-                Who am I
-              </p>
-              <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
-              <p className="mt-4 text-lg font-semibold leading-snug tracking-[-0.01em] text-dab-charcoal">
-                A digital operator with a systems view of the world.<br />
-                Equally at home in the practical, the creative, and the philosophical.<br />
-                Comfortable in ambiguity but driven to make sense of it.
-              </p>
-            </FadeUp>
-
             <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
               <FadeUp delay={0.08} className="md:col-span-5">
                 <div className="aspect-square bg-dab-charcoal relative overflow-hidden">
@@ -189,16 +177,16 @@ export default function Experience() {
 
               <FadeUp delay={0.18} className="md:col-span-7 md:col-start-6">
                 <div className="space-y-6 text-xl text-dab-charcoal leading-relaxed max-w-[52ch]">
-                  <div className="hidden md:block">
+                  <div>
                     <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
                       Who am I
                     </p>
                     <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
-                    <p className="mt-4 md:mt-5 text-lg md:text-xl font-semibold leading-snug tracking-[-0.01em] text-dab-charcoal">
-                      A digital operator with a systems view of the world.<br />
-                      Equally at home in the practical, the creative, and the philosophical.<br />
-                      Comfortable in ambiguity but driven to make sense of it.
-                    </p>
+                    <div className="mt-4 md:mt-5 text-lg md:text-xl font-semibold leading-snug tracking-[-0.01em] text-dab-charcoal space-y-3 md:space-y-0">
+                      <span className="block">A digital operator with a systems view of the world.</span>
+                      <span className="block">Equally at home in the practical, the creative, and the philosophical.</span>
+                      <span className="block">Comfortable in ambiguity but driven to make sense of it.</span>
+                    </div>
                   </div>
                   <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
                   <p>I've spent much of my career working across brands, agencies, platforms, and delivery ecosystems, helping different teams, perspectives, and priorities move together around important work.</p>
