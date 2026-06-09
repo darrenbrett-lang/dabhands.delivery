@@ -51,9 +51,9 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      'Important initiatives rarely slow down because the people involved don't care about the outcome.',
+      'Important initiatives rarely slow down because the people involved don\'t care about the outcome.',
       'More often, competing priorities emerge, decision-making becomes harder, and momentum starts to fade. Launches slip. Programmes lose focus. What started as strong work begins to lose its shape as it moves through the organisation.',
-      'These moments of hesitation or delay are often signals that the system carrying the work needs attention—not because the work itself isn't strong, but because the conditions around it have become harder to navigate.',
+      'These moments of hesitation or delay are often signals that the system carrying the work needs attention - not because the work itself isn\'t strong, but because the conditions around it have become harder to navigate.',
       'DAB Hands helps restore clarity, ownership, and momentum. We bring fresh perspective to the obstacles slowing things down, and help important work stay strong as it moves forward.',
     ],
   },
