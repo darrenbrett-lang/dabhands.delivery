@@ -262,30 +262,18 @@ export default function Home() {
 
         {/* ── LED BY DARREN ─────────────────────────── */}
         <section className="bg-dab-brown-lighter text-dab-charcoal py-16 md:py-40">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-8 md:mb-12">
                 Led by Darren Brett
               </p>
-              <div className="flex flex-col md:flex-row md:items-start gap-10 md:gap-12 lg:gap-16">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/darren-brett_colour_headshot.jpeg"
-                  alt="Darren Brett"
-                  width={160}
-                  height={160}
-                  draggable={false}
-                  loading="lazy"
-                  className="flex-shrink-0 w-40 h-40 object-cover"
-                />
-                <div className="flex flex-col gap-8 md:gap-10">
-                  <p className="max-w-[42ch] text-xl md:text-2xl lg:text-[26px] font-medium leading-snug tracking-[-0.02em]">
-                    20+ years helping global brands move important digital work through complexity.
-                  </p>
-                  <div className="flex-shrink-0">
-                    <BoxCTA href="/experience" label="Experience" />
-                  </div>
-                </div>
+              <h2 className="text-[32px] md:text-[48px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[28ch] mx-auto">
+                20+ years helping global brands move important digital work through complexity.
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.16}>
+              <div className="mt-12 md:mt-16 flex justify-center">
+                <BoxCTA href="/experience" label="Experience" />
               </div>
             </FadeUp>
           </div>
