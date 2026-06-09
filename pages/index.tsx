@@ -29,7 +29,7 @@ export default function Home() {
 
       <Layout footerVariant="minimal">
         {/* ── HERO ──────────────────────────────────── */}
-        <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden min-h-[100vh] flex flex-col">
+        <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden min-h-[78vh] md:min-h-[100vh] flex flex-col">
           <Ribbon
             className="absolute right-0 top-[32px] md:top-auto md:bottom-0 w-[120%] md:w-full"
             opacity={0.4}
