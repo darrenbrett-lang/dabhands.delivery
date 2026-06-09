@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { BoxCTA } from '@/components/BoxCTA';
@@ -66,6 +66,19 @@ const doorways = [
 export default function Home() {
   const reduceMotion = useReducedMotion();
   const headlineWords = ['Keeping', 'important', 'work', 'moving'];
+  // After the headline words land + a short beat, the last word ("moving")
+  // leans into an italic oblique — the word literally moves.
+  const [landed, setLanded] = useState(false);
+  const [leanIn, setLeanIn] = useState(false);
+  useEffect(() => {
+    if (!landed) return;
+    if (reduceMotion) {
+      setLeanIn(true);
+      return;
+    }
+    const t = setTimeout(() => setLeanIn(true), 450);
+    return () => clearTimeout(t);
+  }, [landed, reduceMotion]);
   return (
     <>
       <SeoMeta
@@ -90,6 +103,7 @@ export default function Home() {
                 aria-label="Keeping important work moving"
                 initial="hidden"
                 animate="visible"
+                onAnimationComplete={() => setLanded(true)}
                 variants={{
                   hidden: {},
                   visible: {
@@ -97,24 +111,38 @@ export default function Home() {
                   },
                 }}
               >
-                {headlineWords.map((word, i) => (
-                  <Fragment key={word}>
-                    {i > 0 && ' '}
-                    <motion.span
-                      className="inline-block"
-                      variants={{
-                        hidden: { opacity: 0, y: reduceMotion ? 0 : '0.5em' },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
-                        },
-                      }}
-                    >
-                      {word}
-                    </motion.span>
-                  </Fragment>
-                ))}
+                {headlineWords.map((word, i) => {
+                  const isLast = i === headlineWords.length - 1;
+                  return (
+                    <Fragment key={word}>
+                      {i > 0 && ' '}
+                      <motion.span
+                        className="inline-block"
+                        variants={{
+                          hidden: { opacity: 0, y: reduceMotion ? 0 : '0.5em' },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+                          },
+                        }}
+                      >
+                        {isLast ? (
+                          <motion.span
+                            className="inline-block"
+                            style={{ transformOrigin: 'bottom center' }}
+                            animate={{ skewX: leanIn ? -10 : 0 }}
+                            transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+                          >
+                            {word}
+                          </motion.span>
+                        ) : (
+                          word
+                        )}
+                      </motion.span>
+                    </Fragment>
+                  );
+                })}
               </motion.h1>
 
               <FadeUp delay={0.16}>

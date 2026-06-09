@@ -308,6 +308,11 @@ export default function WhereWeStepIn() {
                 The shape depends on the challenge.
               </p>
             </FadeUp>
+            <FadeUp delay={0.36}>
+              <p className="mt-5 md:mt-6 text-lg md:text-xl leading-relaxed text-dab-cream/70 max-w-[60ch]">
+                Enough experience across functions, partners, and disciplines to know where to add value, where to bring others in, and when to get out of the way.
+              </p>
+            </FadeUp>
           </div>
         </section>
 
