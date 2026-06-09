@@ -164,11 +164,11 @@ export default function Experience() {
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-4">
                 Who am I
               </p>
-              <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren</p>
+              <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
               <p className="mt-4 text-lg font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
-                A senior digital systems specialist.<br />
-                Equally at home in the practical, the creative, and the conceptual.<br />
-                Comfortable in ambiguity. Driven to make sense of it.
+                A senior digital specialist.<br />
+                Equally at home in the practical, the creative, and the philosophical.<br />
+                Comfortable in ambiguity and driven to make sense of it.
               </p>
             </FadeUp>
 
@@ -193,11 +193,11 @@ export default function Experience() {
                     <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/60 mb-6 md:mb-8">
                       Who am I
                     </p>
-                    <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren</p>
+                    <p className="text-2xl md:text-3xl font-semibold">Hi, I'm Darren.</p>
                     <p className="mt-4 md:mt-5 text-lg md:text-xl font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
-                      A senior digital systems specialist.<br />
-                      Equally at home in the practical, the creative, and the conceptual.<br />
-                      Comfortable in ambiguity. Driven to make sense of it.
+                      A senior digital specialist.<br />
+                      Equally at home in the practical, the creative, and the philosophical.<br />
+                      Comfortable in ambiguity and driven to make sense of it.
                     </p>
                   </div>
                   <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
