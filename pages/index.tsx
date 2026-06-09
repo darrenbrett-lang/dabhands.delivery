@@ -261,7 +261,7 @@ export default function Home() {
         </section>
 
         {/* ── LED BY DARREN ─────────────────────────── */}
-        <section className="bg-dab-warm text-dab-charcoal py-16 md:py-40">
+        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
