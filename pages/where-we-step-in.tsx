@@ -75,7 +75,7 @@ const reasons = [
     paragraphs: [
       'The bigger and more complex the challenge, the harder coordination becomes. Different teams bring different priorities. Multiple agencies, partners, and stakeholders all play important roles, but each comes with their own success metrics, timelines, and constraints.',
       'Without clear alignment around shared outcomes, even strong work can fragment and lose its strength as it moves through the system. Ownership becomes unclear. Decisions get held up. The original intent gets diluted.',
-      'These are the moments when the system itself becomes the problem—not the capability of the people involved, but the conditions that prevent them from moving together.',
+      'These are the moments when the system itself becomes the problem, not the capability of the people involved, but the conditions that prevent them from moving together.',
       'DAB Hands helps create the conditions for teams to move together around shared outcomes, while protecting the integrity and intent of the work itself.',
     ],
   },
@@ -91,15 +91,15 @@ const reasons = [
     ),
     paragraphs: [
       'Some challenges carry more visibility, more pressure, or more commercial importance than others. These might be critical initiatives, delivery challenges, operational problems, or organisational transformation. Some are about protecting a specific project. Others are about strengthening a whole function or team.',
-      'When the stakes are high and the challenge is complex, experienced hands around the work serve two purposes: sharpening the decisions that need to be made, and protecting the original intent and quality of what's being delivered as it moves forward.',
-      'Leadership, capability, and support take many forms depending on what the challenge actually needs. Sometimes it's bringing in senior experience to navigate complexity. Sometimes it's adding delivery rigour. Sometimes it's protecting a team's focus while the system around them becomes clearer.',
-      'DAB Hands brings experienced leadership and trusted capability where it matters most, helping important work—and important teams—stay strong under pressure.',
+      'When the stakes are high and the challenge is complex, experienced hands around the work serve two purposes: sharpening the decisions that need to be made, and protecting the original intent and quality of what is being delivered as it moves forward.',
+      'Leadership, capability, and support take many forms depending on what the challenge actually needs. Sometimes it is bringing in senior experience to navigate complexity. Sometimes it is adding delivery rigour. Sometimes it is protecting a team\'s focus while the system around them becomes clearer.',
+      'DAB Hands brings experienced leadership and trusted capability where it matters most, helping important work, and important teams, stay strong under pressure.',
     ],
   },
   {
-    id: ‘get-more-from-it’,
-    label: ‘Get more from it’,
-    summary: ‘Good people, good partners, and good ideas that could be working together more effectively.’,
+    id: 'get-more-from-it',
+    label: 'Get more from it',
+    summary: 'Good people, good partners, and good ideas that could be working together more effectively.',
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M6 26 L16 16 L22 22 L34 10" />
@@ -107,10 +107,10 @@ const reasons = [
       </svg>
     ),
     paragraphs: [
-      ‘Most organisations already have talented people in place. Good partners and agencies. Significant investment in existing systems and capabilities. The challenge is rarely a shortage of any of these things.’,
-      ‘More often, the opportunity lies in how those assets are being coordinated, understood, and deployed together. Small misalignments in how decisions get made. Unclear ownership. Systems that work in isolation instead of in concert. Teams with good intentions that aren’t quite moving together.’,
-      ‘These gaps don’t usually signal a need for more capability. They signal a need for clearer decision-making, better coordination, and sharper alignment around what matters.’,
-      ‘DAB Hands helps unlock more value, and stronger work, from what already exists. By bringing clarity to the system carrying the work, we help good people, good partners, and good ideas move together more effectively.’,
+      'Most organisations already have talented people in place. Good partners and agencies. Significant investment in existing systems and capabilities. The challenge is rarely a shortage of any of these things.',
+      'More often, the opportunity lies in how those assets are being coordinated, understood, and deployed together. Small misalignments in how decisions get made. Unclear ownership. Systems that work in isolation instead of in concert. Teams with good intentions that aren\'t quite moving together.',
+      'These gaps don\'t usually signal a need for more capability. They signal a need for clearer decision-making, better coordination, and sharper alignment around what matters.',
+      'DAB Hands helps unlock more value, and stronger work, from what already exists. By bringing clarity to the system carrying the work, we help good people, good partners, and good ideas move together more effectively.',
     ],
   },
 ];
