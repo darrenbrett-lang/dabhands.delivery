@@ -261,12 +261,17 @@ export default function Home() {
         </section>
 
         {/* ── LED BY DARREN ─────────────────────────── */}
-        <section className="bg-dab-brown-lighter text-dab-charcoal py-16 md:py-40">
+        <section className="bg-dab-warm text-dab-charcoal py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-8 md:mb-12">
-                Led by Darren Brett
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/dab-hands-crown-mark.svg"
+                alt=""
+                aria-hidden
+                draggable={false}
+                className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
+              />
               <h2 className="text-[32px] md:text-[48px] lg:text-[64px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[28ch] mx-auto">
                 20+ years helping global brands move important digital work through complexity.
               </h2>
