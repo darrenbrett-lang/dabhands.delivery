@@ -152,12 +152,17 @@ export default function WhereWeStepIn() {
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch]">
-                Where we step in
+                We believe strong work deserves to stay strong.
               </h1>
             </FadeUp>
             <FadeUp delay={0.16}>
-              <p className="mt-10 md:mt-12 text-xl md:text-2xl text-dab-charcoal leading-relaxed max-w-[40ch]">
-                Making sure strong work stays strong as it moves from idea to market.
+              <p className="mt-10 md:mt-12 text-xl md:text-2xl text-dab-charcoal leading-relaxed max-w-[50ch]">
+                There is rarely a shortage of good ideas. More often, the challenge is helping those ideas survive the complexity of modern organisations.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.24}>
+              <p className="mt-6 md:mt-8 text-xl md:text-2xl text-dab-charcoal leading-relaxed max-w-[50ch]">
+                DAB Hands helps the right work move from idea to market without losing what made it strong in the first place.
               </p>
             </FadeUp>
           </div>
