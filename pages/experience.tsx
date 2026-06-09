@@ -168,7 +168,7 @@ export default function Experience() {
               <p className="mt-4 text-lg font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
                 A senior digital specialist.<br />
                 Equally at home in the practical, the creative, and the philosophical.<br />
-                Comfortable in ambiguity and driven to make sense of it.
+                Comfortable in ambiguity but driven to make sense of it.
               </p>
             </FadeUp>
 
@@ -197,7 +197,7 @@ export default function Experience() {
                     <p className="mt-4 md:mt-5 text-lg md:text-xl font-medium leading-snug tracking-[-0.01em] text-dab-charcoal">
                       A senior digital specialist.<br />
                       Equally at home in the practical, the creative, and the philosophical.<br />
-                      Comfortable in ambiguity and driven to make sense of it.
+                      Comfortable in ambiguity but driven to make sense of it.
                     </p>
                   </div>
                   <p>For more than 20 years, I've helped important digital work move through complex organisations.</p>
