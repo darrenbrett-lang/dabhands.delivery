@@ -8,12 +8,12 @@ import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
 
 const antidotePoints = [
-  'Senior capability without heavy operational overhead.',
-  'Senior judgement around important work.',
-  'Fast to align and activate.',
-  'Faster movement through complexity.',
-  'Smooth integration across agencies, partners and internal teams.',
-  'More value from existing investment.',
+  'Experienced leadership around important work',
+  'Clearer decisions in complex environments',
+  'Fast to understand, align and get moving',
+  'Smooth working across teams, agencies and partners',
+  'Senior capability without agency overhead',
+  'Unlocking more value from what’s already in place',
 ];
 
 export default function Home() {
