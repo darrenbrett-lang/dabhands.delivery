@@ -37,6 +37,9 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* Non-static so Framer Motion's useScroll can measure the document scroll
+     container offset cleanly (otherwise it dev-warns about a static container). */
+  position: relative;
 }
 
 section {
