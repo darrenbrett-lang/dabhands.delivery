@@ -243,7 +243,7 @@ export default function Experience() {
                   <p>I've always been drawn to the spaces between disciplines. The places where strategy meets execution, creativity meets practicality, and ambiguity needs to become action. Much of the value I bring comes from helping people make sense of complexity, align around what matters, and move forward with confidence.</p>
                   <p>Experienced working across complex client, agency, technology, and partner ecosystems, I've spent much of my career helping different teams, perspectives, and priorities work together more effectively around important work.</p>
                   <p>Running an agency has reinforced something I&rsquo;ve seen throughout my career: strong work rarely succeeds because of a single discipline. More often, success comes from helping strategy, creative, technology, operations, and delivery move together effectively around a common objective.</p>
-                  <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes. The challenge is rarely a lack of ambition, talent, or ideas. More often, it's helping those things stay connected as they move through the organisation.</p>
+                  <p>I'm fascinated by how great work survives modern organisational systems, and how those systems can be improved to create better outcomes.</p>
                 </div>
               </FadeUp>
             </div>
