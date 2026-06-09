@@ -274,7 +274,7 @@ export default function Home() {
               />
             </FadeUp>
             <FadeUp>
-              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto">
+              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                 20+ years helping global brands move important digital work through complexity.
               </h2>
             </FadeUp>
