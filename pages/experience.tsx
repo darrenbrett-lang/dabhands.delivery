@@ -295,7 +295,7 @@ export default function Experience() {
         </section>
 
         {/* TESTIMONIALS — TRUSTED TO LEAD IMPORTANT WORK */}
-        <section className="bg-dab-brown-lighter text-dab-charcoal py-14 md:py-32">
+        <section className="bg-white text-dab-charcoal py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[35px] md:text-[51px] lg:text-[59px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-16 md:mb-20">
@@ -315,7 +315,7 @@ export default function Experience() {
                       &ldquo;{t.quote}&rdquo;
                     </p>
                     <div>
-                      <span className="block w-8 h-px bg-dab-green mb-4" />
+                      <span className="block w-8 h-px bg-dab-charcoal mb-4" />
                       <p className="font-semibold text-dab-charcoal text-[15px]">{t.author}</p>
                       <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-dab-charcoal/50 mt-1.5">{t.title}</p>
                     </div>

@@ -171,7 +171,7 @@ export default function WhereWeStepIn() {
         </section>
 
         {/* COMMON REASONS PEOPLE GET IN TOUCH — ACCORDIONS */}
-        <section className="bg-dab-brown-lighter text-dab-charcoal pt-14 md:pt-32">
+        <section className="bg-white text-dab-charcoal pt-14 md:pt-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h2 className="text-[36px] md:text-[52px] lg:text-[64px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[18ch] mb-10 md:mb-14">
@@ -194,7 +194,7 @@ export default function WhereWeStepIn() {
                     onClick={() => setOpenId(isOpen ? null : item.id)}
                     aria-expanded={isOpen}
                     className={`w-full text-left px-6 md:px-10 lg:px-16 py-8 md:py-10 transition-colors duration-300 ${
-                      isOpen ? 'bg-white' : 'bg-dab-brown-lighter'
+                      isOpen ? 'bg-dab-brown-lighter' : 'bg-white'
                     }`}
                   >
                     <div className="flex items-start gap-5 md:gap-6">
@@ -232,7 +232,7 @@ export default function WhereWeStepIn() {
                     initial={false}
                     animate={{ height: isOpen ? 'auto' : 0 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden bg-white"
+                    className="overflow-hidden bg-dab-brown-lighter"
                   >
                     <div
                       inert={!isOpen || undefined}
