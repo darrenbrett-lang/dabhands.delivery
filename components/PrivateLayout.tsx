@@ -25,12 +25,12 @@ export const PrivateLayout = ({ children }: PrivateLayoutProps) => (
     <main id="top">{children}</main>
     <div className="bg-dab-charcoal py-6">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between gap-4">
-        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-cream/40">
+        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-cream/60">
           &copy; {new Date().getFullYear()} DAB Hands.
         </p>
         <a
           href="/"
-          className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-cream/40 hover:text-dab-cream transition-colors"
+          className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-cream/60 hover:text-dab-cream transition-colors"
         >
           dabhands.delivery
         </a>

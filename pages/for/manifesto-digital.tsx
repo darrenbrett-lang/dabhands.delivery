@@ -305,7 +305,7 @@ export default function ManifestoDigital() {
             </FadeUp>
             <FadeUp delay={0.16}>
               <p className="mt-8 md:mt-12 text-xl leading-relaxed max-w-[58ch]">
-                A perspective on how Manifesto can strengthen delivery excellence today while building the operational foundations, capabilities and conditions required for tomorrow.
+                How Manifesto can strengthen delivery excellence today while building the operational foundations, capabilities and conditions required for tomorrow.
               </p>
             </FadeUp>
           </div>
@@ -388,7 +388,7 @@ export default function ManifestoDigital() {
             {/* Desktop matrix (lg+) */}
             <div className="hidden lg:block mt-16 md:mt-24">
               <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-x-10 pb-5 border-b border-dab-cream/20">
-                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-cream/40">
+                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-cream/60">
                   Altitude / time
                 </p>
                 {phases.map((phase) => (
