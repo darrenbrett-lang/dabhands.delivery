@@ -6,34 +6,33 @@ Pick this up cold. Captures the project as of the most recent session.
 
 ## ✅ LIVE — last shipped this session (read first)
 
-Everything below is **merged to `main` and deployed**. Production is `https://dabhands.delivery` via Vercel (every push to `main` auto-deploys). Most recent prod commit: `6432d37` "Update both closing statements to '20+ years helping global brands keep important digital work moving.'". `main` = `origin/main`, working tree clean.
+Everything below is **merged to `main` and deployed**. Production is `https://dabhands.delivery` via Vercel (every push to `main` auto-deploys). Most recent prod commit: `701144a` "Darken section eyebrows for legibility (55% to 75%)". `main` = `origin/main`, working tree clean (HANDOVER edit pending commit).
 
 **Deploy flow:** work on a branch, the owner reviews on localhost, says **"push"** → `git checkout main && git merge <branch> && git push origin main`. After an OG-image change, refresh social caches (LinkedIn Post Inspector + FB Sharing Debugger).
 
-**The big shift this session — a three-colour block system.** Backgrounds are now **Charcoal, Sand, White** only (target weighting ~ White 50 / Charcoal 25 / Sand 25). **Mushroom (`dab-brown-lighter`) is retired** — not used as a section background anywhere. White is the connective canvas; colour is punctuation, not a patchwork. `dab-warm` (#E8D5C5) was a mistaken one-off and is gone. See the saved memory `feedback_colour_vocabulary` ("sand" = `dab-cream`).
+**The big addition this session — private/unlisted pitch pages under `/for/<company>`.** A new page class for sending tailored point-of-view pages to specific people (the first is a job-conversation pitch). Convention:
 
-**Page rhythms now:**
-- **Home:** sand (hero) → charcoal (Where we are) → white (Core Truth) → white (doorways) → sand (closing) → charcoal footer.
-- **When To Bring Us In:** sand (hero) → white (accordions) → charcoal (Ways) → white (outcome) → sand (closing) → charcoal footer.
-- **Experience:** sand → charcoal → white (ticker) → sand (Darren bio) → white → white → sand.
+- **Route:** one file per company at `pages/for/<company>.tsx` → `dabhands.delivery/for/<company>`. Each page can have a completely different layout; they share brand components.
+- **Hidden three ways:** no nav links anywhere on the site, `<SeoMeta noindex />` (renders `robots: noindex, nofollow`), and NOT added to `sitemap.xml`. Do not add these routes to the sitemap or nav.
+- **`<PrivateLayout>`** (`components/PrivateLayout.tsx`): minimal chrome — DAB Hands wordmark (not a link) in a fixed charcoal header, no nav, no Footer; closes with a slim charcoal bar: `© <year> DAB Hands.` left + `dabhands.delivery` link (→ `/`) right. The only way off the page.
+- **`SeoMeta` gained a `noindex?: boolean` prop** — the only site-wide code change.
 
-**Nav rename:** the second page's nav label, homepage closing CTA, page `<title>`/OG, and `llms.txt` now read **"When To Bring Us In"**. The **route is still `/where-we-step-in`** (unchanged — deep links from the homepage doorways and canonicals stay intact). Only the *display label + metadata* changed.
+**First private page: `/for/manifesto-digital`** ("Manifesto Digital 2027: Building a modern delivery operating system" — pitch for Rebecca Hull). Section flow (bg rhythm): sand hero (eyebrow "Prepared by Darren Brett for Rebecca Hull, Manifesto Digital" → kicker "Manifesto Digital" → H1 → subtitle "A perspective on the journey to 2027" → intro) → **white manifesto statement** ("Every operational decision should reinforce our strategy…", centred, with a charcoal-lozenge flow visual: MANIFESTO STRATEGY → CLIENT IMPERATIVES → DELIVERY OPERATING SYSTEM, green text on charcoal pills, vertical with ↓ on mobile) → **white "The forces in play"** (13-item `ChipExplorer`) → **sand thesis** ("The role of Delivery Operations… To translate strategy into execution…") → **charcoal 3×3 framework matrix** (see below) → **sand "Manifesto 2027" destination** (crown mark + statement) → **white "Characteristics of a high-performing system"** (10-item `ChipExplorer`) → **charcoal Outcomes** (6 cards with green icons) → **white "Beneath the System"** (two-systems comparison: visible system = bordered white card / invisible system = charcoal card with green eyebrow; closing statement with `HandUnderline tone="light"` on "together") → **sand closing** ("Perhaps it's simply a case of connecting the dots." + "Compare notes" CTA → mailto subject "Comparing Notes" with pre-filled body).
 
-**Doorways (Home "How DAB Hands helps"):** now **white** bg, charcoal icons/labels/arrows (no green on light). Four situation-led recognition prompts (Get it moving / Bring it together / Strengthen it / Get more from it), each deep-linking to `/where-we-step-in#<id>`.
+**Patterns built inside that page** (all local to `pages/for/manifesto-digital.tsx`):
+- **`ChipExplorer`** — chip selector + reading panel (replaces an earlier tooltip approach, which was retired/deleted). Pills in a flex-wrap; active pill = `bg-dab-charcoal text-dab-green`; panel below lifts to sand (`bg-dab-cream rounded-xl`) showing label eyebrow + description; first item selected on load; `AnimatePresence mode="wait"` fade; `aria-pressed` + `aria-live="polite"`; `panelMinHClass` prop absorbs the longest copy so the page doesn't jump.
+- **3×3 matrix responsive strategy:** desktop (lg+) = 4-col grid (`[1.1fr_1fr_1fr_1fr]`), columns Q1 SEE / Q2 IMPROVE / Q3+ EVOLVE the system, rows = altitudes with green icon + label + green theme word + tagline. Below lg = stacked by altitude: header block then three phase cards (`bg-white/[0.04] border-dab-cream/10 rounded-xl` — the subtle lift groups cards under their header). `PhaseHeading` renders Q-label + verb in green, "the system" muted cream.
+- Eyebrows on this page are `/75` opacity (darkened from /55 for legibility).
 
-**Accordion (When To Bring Us In):** white section, charcoal icons/labels/borders. **Mushroom-on-open is gone → open row + panel lift to SAND** (`isOpen ? 'bg-dab-cream' : 'bg-white'`); the warm lift signals the active row. Single-open, deep-link auto-opens, panel always mounted (`inert` when closed). Copy broadened beyond projects to programmes/operations/teams/orgs.
+**Icon set (NEW, `/public/images/icon-*.svg`):** 11 stroke icons in the site's line style (40×40 viewBox, stroke `#B6FF00`, `stroke-width 1.4`, round caps/joins, transparent bg) — run/improve/evolve-the-business, growth, scale, innovation, client-confidence, people-culture, future-relevance, outcomes, business-context. **Neon green strokes = dark backgrounds only.** Gotcha learned: standalone SVG files need kebab-case attributes (`stroke-width`), not JSX camelCase.
 
-**Closing modules (Home + When To Bring Us In):** identical treatment — crown mark, centred statement **"20+ years helping global brands keep important digital work moving."**, then a **compact `<LogoTicker>` brand carousel**, then the CTA. Home CTA → "When To Bring Us In" (`/where-we-step-in`); page-2 CTA → "Experience". The centred `<h2>` needs inline `marginLeft/Right: 'auto'` to beat the global optical `-0.04em` heading nudge.
-
-**`<LogoTicker>` (NEW shared component, `components/LogoTicker.tsx`):** single source of truth for the 13-client list + the seamless marquee (3× duplicated `<li>`, `w-max`, `reduceMotion` guard, mobile/desktop duration). Props: `ariaLabel`, `compact` (smaller row for the closing modules). Used on Experience ("I've worked at scale for") and both closing modules. Renders `<TickerLogo>` (charcoal silhouettes via `brightness(0)`).
-
-**Perf/semantics fixes shipped:** `_app.tsx` font wrapper changed `<main>`→`<div>` (was producing **two `<main>` landmarks** per page); below-fold decorative images lazy-loaded (crowns, footer icon) while the hero ribbon stays eager for LCP; `html { position: relative }` added to clear Framer's dev-only `useScroll` container warning (the scroll container was static). Verified: clean prod build, one `<main>`/one `<h1>` per page, 0 imgs without alt, console clean.
+**Standing context from the previous session** (still true): three-colour block system (White ~50 / Charcoal 25 / Sand 25, mushroom retired); nav label "When To Bring Us In" with route still `/where-we-step-in`; accordion open-state lifts to sand; both closing modules share crown + statement + compact `<LogoTicker>`; one `<main>`/`<h1>` per page, clean prod build.
 
 ---
 
 ## Read this first
 
-Multi-page site (Home / When To Bring Us In / Experience / Contact). On production at `https://dabhands.delivery` via Vercel's GitHub integration — every push to `main` auto-deploys. `main` = `origin/main` = `6432d37`; working tree clean.
+Multi-page site (Home / When To Bring Us In / Experience / Contact) plus **unlisted `/for/<company>` pitch pages** (currently `/for/manifesto-digital`). On production at `https://dabhands.delivery` via Vercel's GitHub integration — every push to `main` auto-deploys. `main` = `origin/main` = `701144a`.
 
 Saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` apply to every conversation — read them (and `MEMORY.md`) before touching copy, colour, or marks. Notably: no em dashes; no green text on light backgrounds; "DAB Hands" wordmark; three-colour palette (sand = `dab-cream`, mushroom retired).
 
@@ -54,9 +53,10 @@ Saved memory rules at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-
 
 ## Branch state at handover
 
-- **Working branch**: `main` (clean), in sync with `origin/main` at `6432d37`.
+- **Working branch**: `main`, in sync with `origin/main` at `701144a` (apart from this HANDOVER edit).
+- A local `private-pages` branch exists (already merged into `main`); safe to delete.
 - **Production**: `main` → Vercel auto-deploys `https://dabhands.delivery`.
-- Nothing uncommitted, nothing pending. Start the next change on a fresh branch off `main`; the owner reviews on localhost and says **"push"** to go live.
+- Start the next change on a fresh branch off `main`; the owner reviews on localhost and says **"push"** to go live. (Late in the last session the owner said "push" directly on small `main` commits — both flows are in use.)
 
 ## Site structure
 
@@ -112,6 +112,10 @@ All 13 client logos are **self-hosted** under `/public/images/logos/svg/`. No ex
 1. **Hero** (cream, left-rag) — H1 "**What needs moving?**" (was "Let's talk") + intro "For critical digital initiatives that need to move properly, reach out directly." (the second clause has a soft `<br className="hidden md:block" />` — single line on mobile, two lines on desktop). Email / Phone / LinkedIn link grid. Hero `Ribbon` (default `ribbon.png`) configured **identically to homepage P1** — `inset-x-0 bottom-0 w-full`, opacity 0.4. (Earlier attempts with `fuller-ribbon.png` and `top-1/2 -translate-y-1/2` were reverted because the Tailwind transform combined with framer-motion's transform broke `mix-blend-multiply` and showed a white box at smaller widths.)
 2. Footer (variant: **none**) — only the small charcoal copyright bar shows.
 
+### `/for/manifesto-digital` — `pages/for/manifesto-digital.tsx` (UNLISTED — do not add to nav or sitemap)
+
+Private pitch page, full anatomy in the "LIVE — last shipped this session" block at the top of this file. Uses `<PrivateLayout>` + `<SeoMeta noindex>`. Contains its own local components (`ChipExplorer`, `PhaseHeading`, `ActivityList`) and all content as data arrays (`contextForces`, `altitudes`, `characteristics`, `outcomes`). The CTA mailto subject is "Comparing Notes" with a pre-filled body. To make the next pitch page, copy the conventions (not necessarily the layout): new file in `pages/for/`, `PrivateLayout`, `SeoMeta noindex`, keep out of sitemap.
+
 ## Components (`/components`)
 
 - **`Layout.tsx`** — `<a href="#top" className="skip-link">Skip to content</a>` + `<Header>` + `<main id="top">` + `<Footer variant={footerVariant}>` + `<GridToggle>`.
@@ -124,7 +128,8 @@ All 13 client logos are **self-hosted** under `/public/images/logos/svg/`. No ex
 - **`HandUnderline.tsx`** — hand-drawn SVG underline for emphasis on specific words.
 - **`GridToggle.tsx`** — fixed-position dev tool, toggles 12-col overlay matching site container (gap-4 md:gap-6 lg:gap-8).
 - **`StatPopover.tsx`** (NEW) — wraps a giant stat number as a button with green text + underline. Opens a popover with richer copy on hover (desktop, with 150ms close delay to allow crossing the gap) or click (touch — detected via `window.matchMedia('(hover: hover)')`). `align="start" | "end"` controls anchor edge. Click-outside + Escape close.
-- **`SeoMeta.tsx`** (NEW) — per-page `<Head>` helper. Title, description, canonical, OG (title/desc/image/url/type/site_name), Twitter card, og:image:width=1200 / height=630 / alt. Defaults `image` to `/og-image.png`.
+- **`SeoMeta.tsx`** — per-page `<Head>` helper. Title, description, canonical, OG (title/desc/image/url/type/site_name), Twitter card, og:image:width=1200 / height=630 / alt. Defaults `image` to `/og-image.png`. `noindex` prop adds `robots: noindex, nofollow` (used by `/for/` pages).
+- **`PrivateLayout.tsx`** (NEW) — layout for unlisted `/for/<company>` pages. Fixed charcoal header with the DAB Hands wordmark (deliberately not a link), `<main id="top">`, slim charcoal bottom bar (`© <year> DAB Hands.` + right-aligned `dabhands.delivery` link to `/`). No Header/Footer components, no nav.
 - **`TickerLogo.tsx`** — renders a single brand mark. Props: `src` (local path to SVG or PNG), `kind: 'icon' | 'wordmark'`, optional `boost`. Always `<img loading="lazy" decoding="async" style={{ filter: 'brightness(0)' }}>` (charcoal silhouette), `opacity-70 hover:opacity-100`. Sizing: icons `h-12 md:h-14`, boosted wordmarks `h-11 md:h-14`, regular wordmarks `h-7 md:h-9 max-w-[140px] md:max-w-[180px]`.
 - **`LogoTicker.tsx`** (NEW — shared) — the seamless brand marquee + the canonical 13-client `clients` array (single source of truth; exported). Props: `ariaLabel`, `compact` (smaller row + tighter gap for the closing modules). 3× duplicated `<li>` (`w-max`) for a no-flick infinite loop; `useReducedMotion` drops the animation; mobile/desktop durations. Used on Experience and both closing modules. Renders `<TickerLogo>` per client.
 
@@ -164,7 +169,8 @@ Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabh
   - Pulsing breathing animation `brand-dot-breathe` — 4.5s ease-in-out infinite. Scales 1 → 1.14, colour drifts vibrant `var(--color-dab-green)` ↔ softer `#D9E89A`.
   - `prefers-reduced-motion: reduce` → animation disabled.
   - Locked to **14px** everywhere (matches the header logo's resting size).
-- **Crown mark** (`/public/images/dab-hands-crown-mark.svg`) — line-art crown. Used on home Core Truth section + where-we-step-in closing. The 3 accent dots have **SMIL `<animate>` flash** on opacity 1 → 0.2 → 1 over 1.8s, all three in sync. Colour stays inherited from `currentColor` (charcoal in context).
+- **Crown mark** (`/public/images/dab-hands-crown-mark.svg`) — line-art crown. Used on home Core Truth section, where-we-step-in closing, and the `/for/manifesto-digital` "Manifesto 2027" destination section. The 3 accent dots have **SMIL `<animate>` flash** on opacity 1 → 0.2 → 1 over 1.8s, all three in sync. Colour stays inherited from `currentColor` (charcoal in context).
+- **Topic icon set** (`/public/images/icon-*.svg`, 11 files) — stroke line icons matching the site's icon style (40×40, `#B6FF00` stroke hardcoded, 1.4 weight, round caps, transparent bg). **Dark backgrounds only** (neon green). Nine are used on `/for/manifesto-digital` (3 matrix altitudes + 6 outcomes); `icon-outcomes.svg` and `icon-business-context.svg` are unused spares. Standalone SVG files must use kebab-case attributes (`stroke-width`), not JSX camelCase.
 - **Calibration mark** (`/public/images/dab-hands-calibration-mark.svg`) — alternate registration-style mark. Currently unused on pages; available as a sibling option.
 - **Compass mark** (`/public/images/dab-hands-compass-mark.svg`) — experimental, currently unused.
 
@@ -176,6 +182,7 @@ Centralises mailto generation. `mailto({ subject?, body? })` → `mailto:db@dabh
 - **WWSI Why expert delivery matters H2**: `ambition` (1.2) · `execution` (1.4) — green.
 - **WWSI stats**: `potential value` (1.1) · `operational waste` (1.3) — green.
 - **Experience closing**: `moving properly` — currently NOT underlined (was previously, removed in iteration).
+- **/for/manifesto-digital "Beneath the System" closing**: `together` (1.0, variant 2, `tone="light"` → dab-brown on white) — the page's only hand mark, saved for its most important line.
 
 ## Optical alignment rule
 
