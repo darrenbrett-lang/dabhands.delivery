@@ -248,7 +248,7 @@ const ChipExplorer = ({
 
 const PhaseHeading = ({ phase, className = '' }: { phase: (typeof phases)[number]; className?: string }) => (
   <p className={`font-mono text-[10px] tracking-[0.22em] uppercase ${className}`}>
-    <span className="text-dab-cream/55">{phase.q}</span>{' '}
+    <span className="text-dab-green">{phase.q}</span>{' '}
     <span className="text-dab-green">{phase.verb}</span>{' '}
     <span className="text-dab-cream/55">{phase.rest}</span>
   </p>
@@ -432,7 +432,7 @@ export default function ManifestoDigital() {
                     </p>
                     <div className="mt-7 space-y-4">
                       {altitude.phases.map((items, i) => (
-                        <div key={phases[i].q} className="border border-dab-cream/15 rounded-xl p-5">
+                        <div key={phases[i].q} className="bg-white/[0.04] border border-dab-cream/10 rounded-xl p-5">
                           <PhaseHeading phase={phases[i]} className="mb-4" />
                           <ActivityList items={items} />
                         </div>
