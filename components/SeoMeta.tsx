@@ -7,12 +7,14 @@ interface SeoMetaProps {
   path: string;
   /** Absolute or root-relative path to the share image. Defaults to the 1200×630 brand OG card. */
   image?: string;
+  /** Private/unlisted page — tells search engines not to index it. */
+  noindex?: boolean;
 }
 
 const SITE_URL = 'https://dabhands.delivery';
 const SITE_NAME = 'DAB Hands';
 
-export const SeoMeta = ({ title, description, path, image = '/og-image.png' }: SeoMetaProps) => {
+export const SeoMeta = ({ title, description, path, image = '/og-image.png', noindex = false }: SeoMetaProps) => {
   const url = `${SITE_URL}${path}`;
   const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
@@ -20,6 +22,7 @@ export const SeoMeta = ({ title, description, path, image = '/og-image.png' }: S
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
       <link rel="canonical" href={url} />
 
       {/* Open Graph */}
