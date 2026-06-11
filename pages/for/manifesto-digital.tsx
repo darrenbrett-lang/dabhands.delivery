@@ -178,9 +178,9 @@ const outcomes = [
     copy: 'Ready for change. Future-focused capability. Competitive relevance.',
   },
   {
-    label: 'Culture',
+    label: 'People & Culture',
     icon: '/images/icon-people-culture.svg',
-    copy: 'Ownership. Trust. Continuous improvement.',
+    copy: 'Engaged teams. Shared ownership. Continuous improvement.',
   },
 ];
 
@@ -319,7 +319,7 @@ export default function ManifestoDigital() {
                 We lead with strategy
               </p>
               <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[1.06] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
-                Every operational decision should reinforce our strategy and strengthen our ability to meet the future needs of our clients.
+                Every operational and delivery decision should reinforce our strategy and strengthen our ability to meet the evolving needs of our clients.
               </h2>
             </FadeUp>
             <FadeUp delay={0.18}>
@@ -600,12 +600,56 @@ export default function ManifestoDigital() {
           </div>
         </section>
 
+        {/* ── A PAUSE FOR THOUGHT (charcoal, atmospheric) ── */}
+        <section className="relative bg-dab-charcoal text-dab-cream py-20 md:py-48 overflow-hidden">
+          <Ribbon className="absolute right-0 bottom-0 w-[140%] md:w-full" opacity={0.16} drift={24} />
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+            <FadeUp>
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-12 md:mb-16">
+                A pause for thought
+              </p>
+            </FadeUp>
+            <div className="max-w-[52ch] mx-auto space-y-6 md:space-y-8 text-xl md:text-2xl leading-relaxed text-dab-cream/80">
+              <FadeUp>
+                <p>
+                  Digital experiences have always done three things for purpose-led brands: inform people, help them discover, and make it easy to act.
+                </p>
+              </FadeUp>
+              <FadeUp>
+                <p>
+                  AI is quietly rewriting all three. Questions are answered before a website is visited. Options are weighed before a journey begins. Transactions happen wherever the conversation is.
+                </p>
+              </FadeUp>
+              <FadeUp>
+                <p>
+                  If information becomes abundant and transactions become frictionless, perhaps the role of a digital experience is no longer to inform or convert.
+                </p>
+              </FadeUp>
+            </div>
+            <FadeUp>
+              <h2 className="mt-12 md:mt-16 text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[18ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                Perhaps it is to create belief.
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.14}>
+              <p className="mt-8 md:mt-10 text-xl md:text-2xl leading-relaxed text-dab-cream/80 max-w-[44ch] mx-auto">
+                To deepen conviction. To strengthen people&rsquo;s commitment to the causes, communities and movements they choose to participate in.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <p className="mt-16 md:mt-24 text-[26px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[1.12] tracking-[-0.03em] text-dab-green max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
+                When AI answers everything, what will people still come to a brand to feel?
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+
         {/* ── CLOSING (sand) ────────────────────────── */}
         <section className="bg-dab-cream text-dab-charcoal py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
               <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
-                Perhaps it&rsquo;s simply a case of connecting the dots.
+                The dots are already here. Perhaps it&rsquo;s simply a case of connecting them.
               </h2>
             </FadeUp>
             <FadeUp delay={0.16}>
