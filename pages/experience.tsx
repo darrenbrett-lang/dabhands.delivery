@@ -294,11 +294,11 @@ export default function Experience() {
             <FadeUp>
               <div className="mb-8 md:mb-10">
                 <img
-                  src="/images/dab-hands-crown-mark.svg"
+                  src="/images/dab-hands-crown-mark.svg?v=2"
                   alt=""
                   aria-hidden
                   draggable={false}
-                  className="mx-auto w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
+                  className="mx-auto w-[60px] sm:w-[72px] md:w-[88px] lg:w-[100px] h-auto"
                 />
               </div>
             </FadeUp>

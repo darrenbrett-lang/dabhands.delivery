@@ -1,20 +1,22 @@
 <svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DAB Hands crown mark">
   <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Crown base -->
-    <path d="M40 85 L50 50 L60 70 L80 40 L100 70 L120 50 L130 85"/>
-    <!-- Crown band -->
-    <path d="M38 85 L132 85"/>
-    <path d="M40 95 L130 95" opacity="0.4"/>
+    <!-- Crown outline: steeper sides so the silhouette closes into the band -->
+    <path d="M46 85 L52 50 L66 68 L80 40 L94 68 L108 50 L114 85"/>
+    <!-- Crown band: closed and solid (the faded lower line read as a ground shadow) -->
+    <path d="M40 85 L120 85"/>
+    <path d="M40 93 L120 93"/>
+    <path d="M40 85 L40 93"/>
+    <path d="M120 85 L120 93"/>
   </g>
-  <!-- Accent points — flash in soft pulse -->
+  <!-- Jewels seated on all three points — flash in soft pulse -->
   <g fill="currentColor">
-    <circle cx="50" cy="50" r="2">
+    <circle cx="52" cy="50" r="2.4">
       <animate attributeName="opacity" values="1;0.2;1" keyTimes="0;0.5;1" dur="1.8s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="80" cy="40" r="2">
+    <circle cx="80" cy="40" r="2.4">
       <animate attributeName="opacity" values="1;0.2;1" keyTimes="0;0.5;1" dur="1.8s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="110" cy="50" r="2">
+    <circle cx="108" cy="50" r="2.4">
       <animate attributeName="opacity" values="1;0.2;1" keyTimes="0;0.5;1" dur="1.8s" repeatCount="indefinite"/>
     </circle>
   </g>

@@ -318,20 +318,20 @@ export default function ManifestoDigital() {
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 We lead with strategy
               </p>
-              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[1.06] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 Every operational and delivery decision should reinforce our strategy and strengthen our ability to meet the evolving needs of our clients.
               </h2>
             </FadeUp>
             <FadeUp delay={0.18}>
-              <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
-                {['Manifesto strategy', 'Client imperatives', 'Delivery operating system'].map((step, i) => (
+              <div className="mt-12 md:mt-16 flex flex-col xl:flex-row items-center justify-center gap-3 xl:gap-4">
+                {['Manifesto strategy', 'Client imperatives', 'Future consumer & technology shifts', 'Delivery operating system'].map((step, i) => (
                   <Fragment key={step}>
                     {i > 0 && (
-                      <span aria-hidden className="text-dab-charcoal/40 text-xl md:text-2xl leading-none rotate-90 md:rotate-0">
+                      <span aria-hidden className="text-dab-charcoal/40 text-xl xl:text-2xl leading-none rotate-90 xl:rotate-0">
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-full px-5 py-3">
+                    <span className="font-mono text-[10px] xl:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-full px-5 py-3 text-center">
                       {step}
                     </span>
                   </Fragment>
@@ -366,7 +366,7 @@ export default function ManifestoDigital() {
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 The role of Delivery Operations
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[28ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[28ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 To translate strategy into execution by creating the visibility, coherence and capability required for the business to perform today and evolve tomorrow.
               </h2>
             </FadeUp>
@@ -380,7 +380,7 @@ export default function ManifestoDigital() {
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
                 A framework for the next 12 months
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[26ch]">
+              <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[26ch]">
                 How to strengthen the system that delivers today&rsquo;s work while building the capabilities required for tomorrow&rsquo;s opportunities.
               </h2>
             </FadeUp>
@@ -460,18 +460,18 @@ export default function ManifestoDigital() {
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/dab-hands-crown-mark.svg"
+                src="/images/dab-hands-crown-mark.svg?v=2"
                 alt=""
                 aria-hidden
                 draggable={false}
                 loading="lazy"
                 decoding="async"
-                className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] h-auto"
+                className="mx-auto mb-8 md:mb-10 w-[60px] sm:w-[72px] md:w-[88px] h-auto"
               />
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 Manifesto 2027
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[30ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[30ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 A modern delivery operating system that provides the clarity, coordination and capability required to scale confidently, adapt continuously and deliver exceptional outcomes for clients and teams.
               </h2>
             </FadeUp>
@@ -485,7 +485,7 @@ export default function ManifestoDigital() {
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 Characteristics of a high-performing system
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[1.06] tracking-[-0.03em] max-w-[22ch]">
+              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[22ch]">
                 What it feels like when it&rsquo;s working.
               </h2>
             </FadeUp>
@@ -507,7 +507,7 @@ export default function ManifestoDigital() {
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
                 Outcomes
               </p>
-              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[18ch]">
+              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[18ch]">
                 What the work makes possible.
               </h2>
             </FadeUp>
@@ -538,7 +538,7 @@ export default function ManifestoDigital() {
                 <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                   Beneath the system
                 </p>
-                <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                   Every organisation has two operating systems.
                 </h2>
               </FadeUp>
@@ -591,7 +591,7 @@ export default function ManifestoDigital() {
                 </p>
               </FadeUp>
               <FadeUp delay={0.14}>
-                <p className="mt-6 md:mt-8 text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
+                <p className="mt-6 md:mt-8 text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
                   Sustainable performance emerges when both systems evolve{' '}
                   <HandUnderline delay={1.0} variant={2} tone="light">together</HandUnderline>.
                 </p>
@@ -609,36 +609,41 @@ export default function ManifestoDigital() {
                 A pause for thought
               </p>
             </FadeUp>
-            <div className="max-w-[52ch] mx-auto space-y-6 md:space-y-8 text-xl md:text-2xl leading-relaxed text-dab-cream/80">
+            <div className="max-w-[42ch] mx-auto space-y-7 md:space-y-9">
               <FadeUp>
-                <p>
-                  Digital experiences have always done three things for purpose-led brands: inform people, help them discover, and make it easy to act.
+                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
+                  Much of this document focuses on strengthening the system that delivers today&rsquo;s work.
                 </p>
               </FadeUp>
               <FadeUp>
-                <p>
-                  AI is quietly rewriting all three. Questions are answered before a website is visited. Options are weighed before a journey begins. Transactions happen wherever the conversation is.
+                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
+                  But there is a bigger question worth asking.
                 </p>
               </FadeUp>
               <FadeUp>
-                <p>
-                  If information becomes abundant and transactions become frictionless, perhaps the role of a digital experience is no longer to inform or convert.
+                <p className="text-2xl md:text-[32px] font-medium leading-snug tracking-[-0.022em] text-dab-cream">
+                  As AI increasingly reshapes how people discover, evaluate and transact, why will people visit our clients&rsquo; digital destinations at all?
+                </p>
+              </FadeUp>
+              <FadeUp>
+                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
+                  If the reasons people come change, then the experiences we design, the technologies we invest in and the capabilities we build may need to change too.
+                </p>
+              </FadeUp>
+              <FadeUp>
+                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
+                  Perhaps one of our responsibilities as a strategic partner is not simply to optimise the digital experiences of today.
+                </p>
+              </FadeUp>
+              <FadeUp>
+                <p className="text-2xl md:text-[32px] font-medium leading-snug tracking-[-0.022em] text-dab-cream">
+                  Perhaps it is to help define the digital experiences our clients will need tomorrow.
                 </p>
               </FadeUp>
             </div>
-            <FadeUp>
-              <h2 className="mt-12 md:mt-16 text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[18ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                Perhaps it is to create belief.
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.14}>
-              <p className="mt-8 md:mt-10 text-xl md:text-2xl leading-relaxed text-dab-cream/80 max-w-[44ch] mx-auto">
-                To deepen conviction. To strengthen people&rsquo;s commitment to the causes, communities and movements they choose to participate in.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.2}>
+            <FadeUp delay={0.15}>
               <p className="mt-16 md:mt-24 text-[26px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[1.12] tracking-[-0.03em] text-dab-green max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
-                When AI answers everything, what will people still come to a brand to feel?
+                If AI changes why people come, how should we change what we build?
               </p>
             </FadeUp>
           </div>
@@ -648,7 +653,7 @@ export default function ManifestoDigital() {
         <section className="bg-dab-cream text-dab-charcoal py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 The dots are already here. Perhaps it&rsquo;s simply a case of connecting them.
               </h2>
             </FadeUp>

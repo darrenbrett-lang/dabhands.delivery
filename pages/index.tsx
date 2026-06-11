@@ -224,13 +224,13 @@ export default function Home() {
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/dab-hands-crown-mark.svg"
+                src="/images/dab-hands-crown-mark.svg?v=2"
                 alt=""
                 aria-hidden
                 draggable={false}
                 loading="lazy"
                 decoding="async"
-                className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
+                className="mx-auto mb-8 md:mb-10 w-[60px] sm:w-[72px] md:w-[88px] lg:w-[100px] h-auto"
               />
               <h2 className="text-[44px] md:text-[72px] lg:text-[96px] xl:text-[108px] font-medium leading-[1.02] tracking-[-0.03em]">
                 <span className="block">Great work rarely struggles</span>
@@ -297,13 +297,13 @@ export default function Home() {
             <FadeUp>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/dab-hands-crown-mark.svg"
+                src="/images/dab-hands-crown-mark.svg?v=2"
                 alt=""
                 aria-hidden
                 draggable={false}
                 loading="lazy"
                 decoding="async"
-                className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] lg:w-[200px] h-auto"
+                className="mx-auto mb-8 md:mb-10 w-[60px] sm:w-[72px] md:w-[88px] lg:w-[100px] h-auto"
               />
             </FadeUp>
             <FadeUp>
