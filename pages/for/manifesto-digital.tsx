@@ -322,7 +322,7 @@ export default function ManifestoDigital() {
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase border border-dab-charcoal/25 rounded-full px-5 py-3 text-dab-charcoal/80">
+                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-full px-5 py-3">
                       {step}
                     </span>
                   </Fragment>
