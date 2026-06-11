@@ -233,7 +233,7 @@ const ChipExplorer = ({
             transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
             className={panelMinHClass}
           >
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-charcoal/55">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-charcoal/75">
               {item.label}
             </p>
             <p className="mt-3 text-lg leading-relaxed text-dab-charcoal/85 max-w-[65ch]">
@@ -281,7 +281,7 @@ export default function ManifestoDigital() {
           <Ribbon className="absolute right-0 bottom-0 w-[120%] md:w-full" opacity={0.3} drift={28} />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-8 md:mb-12">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-8 md:mb-12">
                 Prepared by Darren Brett for Rebecca Hull, Manifesto Digital
               </p>
               <p className="text-xl md:text-2xl font-medium tracking-[-0.022em] mb-4 md:mb-6">
@@ -306,7 +306,7 @@ export default function ManifestoDigital() {
         <section className="bg-white text-dab-charcoal py-20 md:py-48">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 We lead with strategy
               </p>
               <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[1.06] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
@@ -336,7 +336,7 @@ export default function ManifestoDigital() {
         <section className="bg-white text-dab-charcoal pb-14 md:pb-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-6 md:mb-8">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-6 md:mb-8">
                 The forces in play
               </p>
               <p className="text-xl leading-relaxed text-dab-charcoal/80 max-w-[56ch] mb-10 md:mb-12">
@@ -354,7 +354,7 @@ export default function ManifestoDigital() {
         <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 The role of Delivery Operations
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[28ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
@@ -368,7 +368,7 @@ export default function ManifestoDigital() {
         <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
                 A framework for the next 12 months
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[26ch]">
@@ -459,7 +459,7 @@ export default function ManifestoDigital() {
                 decoding="async"
                 className="mx-auto mb-8 md:mb-10 w-[120px] sm:w-[144px] md:w-[176px] h-auto"
               />
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 Manifesto 2027
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[1.08] tracking-[-0.03em] max-w-[30ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
@@ -473,7 +473,7 @@ export default function ManifestoDigital() {
         <section className="bg-white text-dab-charcoal py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                 Characteristics of a high-performing system
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[1.06] tracking-[-0.03em] max-w-[22ch]">
@@ -495,7 +495,7 @@ export default function ManifestoDigital() {
         <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
                 Outcomes
               </p>
               <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[18ch]">
@@ -526,7 +526,7 @@ export default function ManifestoDigital() {
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <div className="text-center">
               <FadeUp>
-                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55 mb-10 md:mb-14">
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
                   Beneath the system
                 </p>
                 <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[1.04] tracking-[-0.03em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
@@ -539,7 +539,7 @@ export default function ManifestoDigital() {
               {/* The visible system: rendered visibly. Crisp, bordered, technical. */}
               <FadeUp delay={0.1}>
                 <div className="h-full border border-dab-charcoal/20 rounded-2xl p-7 md:p-9">
-                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/55">
+                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75">
                     01 &middot; The visible system
                   </p>
                   <ul className="mt-6 md:mt-8">
