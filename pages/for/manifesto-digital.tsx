@@ -281,9 +281,18 @@ export default function ManifestoDigital() {
           <Ribbon className="absolute right-0 bottom-0 w-[120%] md:w-full" opacity={0.3} drift={28} />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-8 md:mb-12">
-                Prepared by Darren Brett for Rebecca Hull, Manifesto Digital
-              </p>
+              <div className="flex items-center gap-3.5 md:gap-4 mb-8 md:mb-12">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/darren-brett_colour_headshot.jpeg"
+                  alt="Darren Brett"
+                  draggable={false}
+                  className="w-11 h-11 md:w-13 md:h-13 rounded-full object-cover shrink-0"
+                />
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75">
+                  Prepared by Darren Brett for Rebecca Hull, Manifesto Digital
+                </p>
+              </div>
               <p className="text-xl md:text-2xl font-medium tracking-[-0.022em] mb-4 md:mb-6">
                 Manifesto Digital
               </p>
