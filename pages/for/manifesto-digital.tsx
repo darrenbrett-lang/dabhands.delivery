@@ -67,14 +67,13 @@ const contextForces = [
 
 const phases = [
   { q: 'Q1', verb: 'See', rest: 'the system' },
-  { q: 'Q2', verb: 'Improve', rest: 'the system' },
-  { q: 'Q3+', verb: 'Evolve', rest: 'the system' },
+  { q: 'Q2', verb: 'Strengthen', rest: 'the system' },
+  { q: 'Q3+', verb: 'Scale', rest: 'the system' },
 ];
 
 const altitudes = [
   {
     label: 'Run the business',
-    theme: 'Delivery',
     tagline: 'Keep the work moving. Deliver excellence.',
     icon: '/images/icon-run-the-business.svg',
     phases: [
@@ -85,7 +84,6 @@ const altitudes = [
   },
   {
     label: 'Improve the business',
-    theme: 'Coherence',
     tagline: 'Create flow, alignment and shared capability.',
     icon: '/images/icon-improve-the-business.svg',
     phases: [
@@ -96,7 +94,6 @@ const altitudes = [
   },
   {
     label: 'Evolve the business',
-    theme: 'Future',
     tagline: 'Build future capability and innovate.',
     icon: '/images/icon-evolve-the-business.svg',
     phases: [
@@ -246,10 +243,8 @@ const ChipExplorer = ({
 };
 
 const PhaseHeading = ({ phase, className = '' }: { phase: (typeof phases)[number]; className?: string }) => (
-  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase ${className}`}>
-    <span className="text-dab-green">{phase.q}</span>{' '}
-    <span className="text-dab-green">{phase.verb}</span>{' '}
-    <span className="text-dab-cream/55">{phase.rest}</span>
+  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase text-dab-green ${className}`}>
+    {phase.q} {phase.verb} {phase.rest}
   </p>
 );
 
@@ -326,7 +321,7 @@ export default function ManifestoDigital() {
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-full px-5 py-3 text-center">
+                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-lg px-5 py-3 text-center">
                       {step}
                     </span>
                   </Fragment>
@@ -362,7 +357,7 @@ export default function ManifestoDigital() {
                 The plan
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[26ch]">
-                A frame for the next 12 months
+                A framework for the next 12 months
               </h2>
             </FadeUp>
 
@@ -385,9 +380,6 @@ export default function ManifestoDigital() {
                       <h3 className="text-2xl xl:text-[28px] font-medium tracking-[-0.022em] leading-tight">
                         {altitude.label}
                       </h3>
-                      <p className="mt-2 font-mono text-[10px] tracking-[0.22em] uppercase text-dab-green">
-                        {altitude.theme}
-                      </p>
                       <p className="mt-4 text-[15px] leading-relaxed text-dab-cream/65 max-w-[22ch]">
                         {altitude.tagline}
                       </p>
@@ -404,7 +396,7 @@ export default function ManifestoDigital() {
                 three altitudes at once. Reading order matches how a plan is
                 consumed: pick the quarter, see the whole business. */}
             <div className="lg:hidden mt-12">
-              <div className="grid grid-cols-3 gap-2" role="group" aria-label="Choose a quarter">
+              <div className="grid grid-cols-3 gap-1.5 min-[400px]:gap-2" role="group" aria-label="Choose a quarter">
                 {phases.map((phase, i) => {
                   const active = i === activeQuarter;
                   return (
@@ -413,7 +405,7 @@ export default function ManifestoDigital() {
                       type="button"
                       onClick={() => setActiveQuarter(i)}
                       aria-pressed={active}
-                      className={`font-mono text-[10px] tracking-[0.18em] uppercase rounded-full px-2 py-3 border transition-colors ${
+                      className={`font-mono text-[9px] min-[400px]:text-[10px] tracking-[0.14em] uppercase whitespace-nowrap rounded-full px-1 py-3 border transition-colors ${
                         active
                           ? 'bg-dab-green border-dab-green text-dab-charcoal'
                           : 'border-dab-cream/25 text-dab-cream/70'
@@ -443,9 +435,6 @@ export default function ManifestoDigital() {
                           <h3 className="text-lg font-medium tracking-[-0.022em] leading-tight">
                             {altitude.label}
                           </h3>
-                          <span className="ml-auto font-mono text-[10px] tracking-[0.18em] uppercase text-dab-green">
-                            {altitude.theme}
-                          </span>
                         </div>
                         <ActivityList items={altitude.phases[activeQuarter]} />
                       </div>
@@ -565,14 +554,8 @@ export default function ManifestoDigital() {
 
             <div className="mt-14 md:mt-20 text-center">
               <FadeUp>
-                <p className="text-xl md:text-2xl leading-relaxed text-dab-charcoal/70 max-w-[42ch] mx-auto">
-                  The first is easier to see.<br className="sm:hidden" /> The second is just as important.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.14}>
-                <p className="mt-6 md:mt-8 text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[1] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
-                  The strongest organisations evolve{' '}
-                  <HandUnderline delay={1.0} variant={2} tone="light">both</HandUnderline>.
+                <p className="text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[1] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
+                  <HandUnderline delay={1.0} variant={2} tone="light">Both</HandUnderline> deserve attention.
                 </p>
               </FadeUp>
             </div>
