@@ -265,6 +265,8 @@ const ActivityList = ({ items }: { items: string[] }) => (
 );
 
 export default function ManifestoDigital() {
+  const [activeQuarter, setActiveQuarter] = useState(0);
+  const reduceMotion = useReducedMotion();
   return (
     <>
       <SeoMeta
@@ -398,43 +400,59 @@ export default function ManifestoDigital() {
               ))}
             </div>
 
-            {/* Mobile / tablet: one block per altitude, phases stacked */}
-            <div className="lg:hidden mt-14 space-y-14">
-              {altitudes.map((altitude) => (
-                <FadeUp key={altitude.label}>
-                  <div className="border-t border-dab-cream/20 pt-8">
-                    <div className="flex items-start gap-4">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={altitude.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-9 h-9 shrink-0" />
-                      <div>
-                        <h3 className="text-2xl font-medium tracking-[-0.022em] leading-tight">
-                          {altitude.label}
-                        </h3>
-                        <p className="mt-1.5 font-mono text-[10px] tracking-[0.22em] uppercase text-dab-green">
-                          {altitude.theme}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-[15px] leading-relaxed text-dab-cream/65">
-                      {altitude.tagline}
-                    </p>
-                    {/* Time axis runs horizontally: swipe right through the quarters.
-                        Next card peeks in from the edge so the gesture is discoverable. */}
-                    <div
-                      className="mt-7 -mx-6 px-6 flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                      role="group"
-                      aria-label={`${altitude.label}: quarter by quarter`}
+            {/* Mobile / tablet: quarter switcher — one quarter across all
+                three altitudes at once. Reading order matches how a plan is
+                consumed: pick the quarter, see the whole business. */}
+            <div className="lg:hidden mt-12">
+              <div className="grid grid-cols-3 gap-2" role="group" aria-label="Choose a quarter">
+                {phases.map((phase, i) => {
+                  const active = i === activeQuarter;
+                  return (
+                    <button
+                      key={phase.q}
+                      type="button"
+                      onClick={() => setActiveQuarter(i)}
+                      aria-pressed={active}
+                      className={`font-mono text-[10px] tracking-[0.18em] uppercase rounded-full px-2 py-3 border transition-colors ${
+                        active
+                          ? 'bg-dab-green border-dab-green text-dab-charcoal'
+                          : 'border-dab-cream/25 text-dab-cream/70'
+                      }`}
                     >
-                      {altitude.phases.map((items, i) => (
-                        <div key={phases[i].q} className="snap-start shrink-0 w-[84%] sm:w-[60%] md:w-[44%] bg-white/[0.04] border border-dab-cream/10 rounded-xl p-5">
-                          <PhaseHeading phase={phases[i]} className="mb-4" />
-                          <ActivityList items={items} />
+                      {phase.q} {phase.verb}
+                    </button>
+                  );
+                })}
+              </div>
+              <div aria-live="polite">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={activeQuarter}
+                    initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 0 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="mt-5 space-y-4"
+                  >
+                    <PhaseHeading phase={phases[activeQuarter]} className="pt-1" />
+                    {altitudes.map((altitude) => (
+                      <div key={altitude.label} className="bg-white/[0.04] border border-dab-cream/10 rounded-xl p-5">
+                        <div className="flex items-center gap-3 mb-4">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={altitude.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-7 h-7 shrink-0" />
+                          <h3 className="text-lg font-medium tracking-[-0.022em] leading-tight">
+                            {altitude.label}
+                          </h3>
+                          <span className="ml-auto font-mono text-[10px] tracking-[0.18em] uppercase text-dab-green">
+                            {altitude.theme}
+                          </span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </FadeUp>
-              ))}
+                        <ActivityList items={altitude.phases[activeQuarter]} />
+                      </div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </section>
