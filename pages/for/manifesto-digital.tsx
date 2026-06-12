@@ -4,7 +4,6 @@ import { PrivateLayout } from '@/components/PrivateLayout';
 import { SeoMeta } from '@/components/SeoMeta';
 import { FadeUp } from '@/components/FadeUp';
 import { HandUnderline } from '@/components/HandUnderline';
-import { Ribbon } from '@/components/Ribbon';
 import { mailto } from '@/lib/mailto';
 
 /*
@@ -278,7 +277,6 @@ export default function ManifestoDigital() {
       <PrivateLayout>
         {/* ── HERO ──────────────────────────────────── */}
         <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden pt-32 md:pt-44 pb-14 md:pb-32">
-          <Ribbon className="absolute right-0 bottom-0 w-[120%] md:w-full" opacity={0.3} drift={28} />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <div className="flex items-center gap-3.5 md:gap-4 mb-8 md:mb-12">
@@ -303,11 +301,6 @@ export default function ManifestoDigital() {
                 A perspective on the journey to 2027
               </p>
             </FadeUp>
-            <FadeUp delay={0.16}>
-              <p className="mt-8 md:mt-12 text-xl leading-relaxed max-w-[58ch]">
-                How Manifesto can strengthen delivery excellence today while building the operational foundations, capabilities and conditions required for tomorrow.
-              </p>
-            </FadeUp>
           </div>
         </section>
 
@@ -323,15 +316,15 @@ export default function ManifestoDigital() {
               </h2>
             </FadeUp>
             <FadeUp delay={0.18}>
-              <div className="mt-12 md:mt-16 flex flex-col xl:flex-row items-center justify-center gap-3 xl:gap-4">
-                {['Manifesto strategy', 'Client imperatives', 'Future consumer & technology shifts', 'Delivery operating system'].map((step, i) => (
+              <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
+                {['Manifesto strategy', 'Client imperatives', 'Delivery operating system'].map((step, i) => (
                   <Fragment key={step}>
                     {i > 0 && (
-                      <span aria-hidden className="text-dab-charcoal/40 text-xl xl:text-2xl leading-none rotate-90 xl:rotate-0">
+                      <span aria-hidden className="text-dab-charcoal/40 text-xl md:text-2xl leading-none rotate-90 md:rotate-0">
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] xl:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-full px-5 py-3 text-center">
+                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-full px-5 py-3 text-center">
                       {step}
                     </span>
                   </Fragment>
@@ -359,29 +352,15 @@ export default function ManifestoDigital() {
           </div>
         </section>
 
-        {/* ── THE ROLE OF DELIVERY OPERATIONS (sand) ── */}
-        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-40">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-            <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
-                The role of Delivery Operations
-              </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[28ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
-                To translate strategy into execution by creating the visibility, coherence and capability required for the business to perform today and evolve tomorrow.
-              </h2>
-            </FadeUp>
-          </div>
-        </section>
-
         {/* ── THE SYSTEM (charcoal, 3x3) ────────────── */}
         <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
-                A framework for the next 12 months
+                The plan
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[26ch]">
-                How to strengthen the system that delivers today&rsquo;s work while building the capabilities required for tomorrow&rsquo;s opportunities.
+                A frame for the next 12 months
               </h2>
             </FadeUp>
 
@@ -439,9 +418,15 @@ export default function ManifestoDigital() {
                     <p className="mt-4 text-[15px] leading-relaxed text-dab-cream/65">
                       {altitude.tagline}
                     </p>
-                    <div className="mt-7 space-y-4">
+                    {/* Time axis runs horizontally: swipe right through the quarters.
+                        Next card peeks in from the edge so the gesture is discoverable. */}
+                    <div
+                      className="mt-7 -mx-6 px-6 flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                      role="group"
+                      aria-label={`${altitude.label}: quarter by quarter`}
+                    >
                       {altitude.phases.map((items, i) => (
-                        <div key={phases[i].q} className="bg-white/[0.04] border border-dab-cream/10 rounded-xl p-5">
+                        <div key={phases[i].q} className="snap-start shrink-0 w-[84%] sm:w-[60%] md:w-[44%] bg-white/[0.04] border border-dab-cream/10 rounded-xl p-5">
                           <PhaseHeading phase={phases[i]} className="mb-4" />
                           <ActivityList items={items} />
                         </div>
@@ -454,39 +439,15 @@ export default function ManifestoDigital() {
           </div>
         </section>
 
-        {/* ── MANIFESTO 2027 — THE DESTINATION (sand) ── */}
-        <section className="bg-dab-cream text-dab-charcoal py-20 md:py-48">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-            <FadeUp>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/dab-hands-crown-mark.svg?v=2"
-                alt=""
-                aria-hidden
-                draggable={false}
-                loading="lazy"
-                decoding="async"
-                className="mx-auto mb-8 md:mb-10 w-[60px] sm:w-[72px] md:w-[88px] h-auto"
-              />
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
-                Manifesto 2027
-              </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[30ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
-                A modern delivery operating system that provides the clarity, coordination and capability required to scale confidently, adapt continuously and deliver exceptional outcomes for clients and teams.
-              </h2>
-            </FadeUp>
-          </div>
-        </section>
-
         {/* ── OPERATING MODEL CHARACTERISTICS (white) ── */}
         <section className="bg-white text-dab-charcoal py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
-                Characteristics of a high-performing system
+                What we&rsquo;re building towards
               </p>
               <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[22ch]">
-                What it feels like when it&rsquo;s working.
+                Characteristics of a high-performing system
               </h2>
             </FadeUp>
             <FadeUp delay={0.16}>
@@ -508,7 +469,7 @@ export default function ManifestoDigital() {
                 Outcomes
               </p>
               <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[18ch]">
-                What the work makes possible.
+                What success looks like
               </h2>
             </FadeUp>
             <div className="mt-14 md:mt-20 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-12 md:gap-y-16">
@@ -587,65 +548,16 @@ export default function ManifestoDigital() {
             <div className="mt-14 md:mt-20 text-center">
               <FadeUp>
                 <p className="text-xl md:text-2xl leading-relaxed text-dab-charcoal/70 max-w-[42ch] mx-auto">
-                  Most transformation efforts focus on the first system.
+                  The first is easier to see.<br className="sm:hidden" /> The second is just as important.
                 </p>
               </FadeUp>
               <FadeUp delay={0.14}>
-                <p className="mt-6 md:mt-8 text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
-                  Sustainable performance emerges when both systems evolve{' '}
-                  <HandUnderline delay={1.0} variant={2} tone="light">together</HandUnderline>.
+                <p className="mt-6 md:mt-8 text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[1] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
+                  The strongest organisations evolve{' '}
+                  <HandUnderline delay={1.0} variant={2} tone="light">both</HandUnderline>.
                 </p>
               </FadeUp>
             </div>
-          </div>
-        </section>
-
-        {/* ── A PAUSE FOR THOUGHT (charcoal, atmospheric) ── */}
-        <section className="relative bg-dab-charcoal text-dab-cream py-20 md:py-48 overflow-hidden">
-          <Ribbon className="absolute right-0 bottom-0 w-[140%] md:w-full" opacity={0.16} drift={24} />
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-            <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-12 md:mb-16">
-                A pause for thought
-              </p>
-            </FadeUp>
-            <div className="max-w-[42ch] mx-auto space-y-7 md:space-y-9">
-              <FadeUp>
-                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
-                  Much of this document focuses on strengthening the system that delivers today&rsquo;s work.
-                </p>
-              </FadeUp>
-              <FadeUp>
-                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
-                  But there is a bigger question worth asking.
-                </p>
-              </FadeUp>
-              <FadeUp>
-                <p className="text-2xl md:text-[32px] font-medium leading-snug tracking-[-0.022em] text-dab-cream">
-                  As AI increasingly reshapes how people discover, evaluate and transact, why will people visit our clients&rsquo; digital destinations at all?
-                </p>
-              </FadeUp>
-              <FadeUp>
-                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
-                  If the reasons people come change, then the experiences we design, the technologies we invest in and the capabilities we build may need to change too.
-                </p>
-              </FadeUp>
-              <FadeUp>
-                <p className="text-xl md:text-2xl leading-relaxed text-dab-cream/80">
-                  Perhaps one of our responsibilities as a strategic partner is not simply to optimise the digital experiences of today.
-                </p>
-              </FadeUp>
-              <FadeUp>
-                <p className="text-2xl md:text-[32px] font-medium leading-snug tracking-[-0.022em] text-dab-cream">
-                  Perhaps it is to help define the digital experiences our clients will need tomorrow.
-                </p>
-              </FadeUp>
-            </div>
-            <FadeUp delay={0.15}>
-              <p className="mt-16 md:mt-24 text-[26px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[1.12] tracking-[-0.03em] text-dab-green max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
-                If AI changes why people come, how should we change what we build?
-              </p>
-            </FadeUp>
           </div>
         </section>
 
