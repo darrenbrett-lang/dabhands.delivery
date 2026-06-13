@@ -75,7 +75,7 @@ const altitudes = [
   {
     label: 'Run the business',
     tagline: 'Keep the work moving. Deliver excellence.',
-    icon: '/images/icon-run-the-business.svg',
+    icon: '/images/icon-run-the-business.svg?v=2',
     phases: [
       ['Delivery health assessment', 'PM capability review', 'Resource planning visibility', 'Governance audit', 'Client confidence baseline'],
       ['Standardise delivery practices', 'Improve forecasting & planning', 'Increase utilisation visibility', 'Strengthen governance', 'Improve client confidence'],
@@ -85,7 +85,7 @@ const altitudes = [
   {
     label: 'Improve the business',
     tagline: 'Create flow, alignment and shared capability.',
-    icon: '/images/icon-improve-the-business.svg',
+    icon: '/images/icon-improve-the-business.svg?v=2',
     phases: [
       ['Map organisational friction', 'Identify bottlenecks', 'Assess pod consistency', 'Understand decision pathways', 'Visibility & data assessment'],
       ['Establish shared standards', 'Implement shared tooling', 'Create cross-pod visibility', 'Build accountability rhythms', 'Enable shared learning loops'],
@@ -95,7 +95,7 @@ const altitudes = [
   {
     label: 'Evolve the business',
     tagline: 'Build future capability and innovate.',
-    icon: '/images/icon-evolve-the-business.svg',
+    icon: '/images/icon-evolve-the-business.svg?v=2',
     phases: [
       ['AI opportunity assessment', 'Technology capability review', 'Future skills & capability mapping', 'CTO alignment & conversations', 'Understand tech landscape'],
       ['Pilot AI-enabled workflows', 'Develop future capabilities', 'Strengthen tech alignment', 'Upskill teams', 'Test, learn, iterate'],
@@ -150,32 +150,32 @@ const characteristics = [
 const outcomes = [
   {
     label: 'Client Confidence',
-    icon: '/images/icon-client-confidence.svg',
+    icon: '/images/icon-client-confidence.svg?v=2',
     copy: 'Trusted delivery. Stronger relationships. Consistent outcomes.',
   },
   {
     label: 'Growth',
-    icon: '/images/icon-growth.svg',
+    icon: '/images/icon-growth.svg?v=2',
     copy: 'Greater capacity. New opportunities. Stronger performance.',
   },
   {
     label: 'Scale',
-    icon: '/images/icon-scale.svg',
+    icon: '/images/icon-scale.svg?v=2',
     copy: 'Shared capability. Consistent execution. Sustainable growth.',
   },
   {
     label: 'Innovation',
-    icon: '/images/icon-innovation.svg',
+    icon: '/images/icon-innovation.svg?v=2',
     copy: 'Space to experiment. Learn faster. Create new value.',
   },
   {
     label: 'Adaptability',
-    icon: '/images/icon-future-relevance.svg',
+    icon: '/images/icon-future-relevance.svg?v=2',
     copy: 'Ready for change. Future-focused capability. Competitive relevance.',
   },
   {
     label: 'People & Culture',
-    icon: '/images/icon-people-culture.svg',
+    icon: '/images/icon-people-culture.svg?v=2',
     copy: 'Engaged teams. Shared ownership. Continuous improvement.',
   },
 ];
@@ -209,8 +209,8 @@ const ChipExplorer = ({
                 aria-pressed={active}
                 className={`text-[13px] md:text-[14px] leading-none tracking-tight px-4 py-2.5 rounded-full border transition-colors ${
                   active
-                    ? 'bg-dab-charcoal border-dab-charcoal text-dab-green'
-                    : 'border-dab-charcoal/25 text-dab-charcoal/80 hover:border-dab-charcoal/60 hover:text-dab-charcoal'
+                    ? 'bg-plum border-ink text-lavender'
+                    : 'border-ink/25 text-ink/80 hover:border-ink/60 hover:text-ink'
                 }`}
               >
                 {f.label}
@@ -219,7 +219,7 @@ const ChipExplorer = ({
           );
         })}
       </ul>
-      <div className="mt-6 md:mt-8 bg-dab-cream rounded-xl px-6 py-6 md:px-8 md:py-7" aria-live="polite">
+      <div className="mt-6 md:mt-8 bg-bone rounded-xl px-6 py-6 md:px-8 md:py-7" aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={item.label}
@@ -229,10 +229,10 @@ const ChipExplorer = ({
             transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
             className={panelMinHClass}
           >
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-charcoal/75">
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-ink/75">
               {item.label}
             </p>
-            <p className="mt-3 text-lg leading-relaxed text-dab-charcoal/85 max-w-[65ch]">
+            <p className="mt-3 text-lg leading-relaxed text-ink/85 max-w-[65ch]">
               {item.description}
             </p>
           </motion.div>
@@ -243,7 +243,7 @@ const ChipExplorer = ({
 };
 
 const PhaseHeading = ({ phase, className = '' }: { phase: (typeof phases)[number]; className?: string }) => (
-  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase text-dab-green ${className}`}>
+  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase text-lavender ${className}`}>
     {phase.q} {phase.verb} {phase.rest}
   </p>
 );
@@ -251,8 +251,8 @@ const PhaseHeading = ({ phase, className = '' }: { phase: (typeof phases)[number
 const ActivityList = ({ items }: { items: string[] }) => (
   <ul className="space-y-2.5">
     {items.map((item) => (
-      <li key={item} className="flex items-start gap-3 text-[15px] leading-snug text-dab-cream/80">
-        <span aria-hidden className="mt-[0.6em] block w-3 h-px bg-dab-green/70 shrink-0" />
+      <li key={item} className="flex items-start gap-3 text-[15px] leading-snug text-bone/80">
+        <span aria-hidden className="mt-[0.6em] block w-3 h-px bg-lavender/70 shrink-0" />
         {item}
       </li>
     ))}
@@ -273,7 +273,7 @@ export default function ManifestoDigital() {
 
       <PrivateLayout>
         {/* ── HERO ──────────────────────────────────── */}
-        <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden pt-32 md:pt-44 pb-14 md:pb-32">
+        <section className="relative bg-bone text-ink overflow-hidden pt-32 md:pt-44 pb-14 md:pb-32">
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <div className="flex items-center gap-3.5 md:gap-4 mb-8 md:mb-12">
@@ -284,7 +284,7 @@ export default function ManifestoDigital() {
                   draggable={false}
                   className="w-11 h-11 md:w-13 md:h-13 rounded-full object-cover shrink-0"
                 />
-                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75">
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75">
                   Prepared by Darren Brett for Rebecca Hull, Manifesto Digital
                 </p>
               </div>
@@ -294,7 +294,7 @@ export default function ManifestoDigital() {
               <h1 className="text-[44px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
                 Building a modern delivery operating system
               </h1>
-              <p className="mt-5 md:mt-7 text-xl md:text-2xl font-medium tracking-[-0.022em] text-dab-charcoal/75">
+              <p className="mt-5 md:mt-7 text-xl md:text-2xl font-medium tracking-[-0.022em] text-ink/75">
                 A perspective on the journey to 2027
               </p>
             </FadeUp>
@@ -302,13 +302,13 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── THE MANIFESTO LINE (white, centred) ───── */}
-        <section className="bg-white text-dab-charcoal py-20 md:py-48">
+        <section className="bg-paper text-ink py-20 md:py-48">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-10 md:mb-14">
                 We lead with strategy
               </p>
-              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 Every operational and delivery decision should reinforce our strategy and strengthen our ability to meet the evolving needs of our clients.
               </h2>
             </FadeUp>
@@ -317,11 +317,11 @@ export default function ManifestoDigital() {
                 {['Manifesto strategy', 'Client imperatives', 'Delivery operating system'].map((step, i) => (
                   <Fragment key={step}>
                     {i > 0 && (
-                      <span aria-hidden className="text-dab-charcoal/40 text-xl md:text-2xl leading-none rotate-90 md:rotate-0">
+                      <span aria-hidden className="text-ink/40 text-xl md:text-2xl leading-none rotate-90 md:rotate-0">
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-dab-charcoal text-dab-green rounded-lg px-5 py-3 text-center">
+                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-plum text-lavender rounded-lg px-5 py-3 text-center">
                       {step}
                     </span>
                   </Fragment>
@@ -332,13 +332,13 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── THE FORCES IN PLAY (white) ────────────── */}
-        <section className="bg-white text-dab-charcoal pb-14 md:pb-32">
+        <section className="bg-paper text-ink pb-14 md:pb-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-6 md:mb-8">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-6 md:mb-8">
                 The forces in play
               </p>
-              <p className="text-xl leading-relaxed text-dab-charcoal/80 max-w-[56ch] mb-10 md:mb-12">
+              <p className="text-xl leading-relaxed text-ink/80 max-w-[56ch] mb-10 md:mb-12">
                 The operating system does not exist in isolation. It is shaped by a number of forces acting on both the business and the wider market.
               </p>
               <ChipExplorer
@@ -350,21 +350,21 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── THE SYSTEM (charcoal, 3x3) ────────────── */}
-        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
+        <section className="bg-plum text-bone py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-bone/75 mb-10 md:mb-14">
                 The plan
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[26ch]">
+              <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[26ch]">
                 A framework for the next 12 months
               </h2>
             </FadeUp>
 
             {/* Desktop matrix (lg+) */}
             <div className="hidden lg:block mt-16 md:mt-24">
-              <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-x-10 pb-5 border-b border-dab-cream/20">
-                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-dab-cream/60">
+              <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-x-10 pb-5 border-b border-bone/20">
+                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-bone/60">
                   Altitude / time
                 </p>
                 {phases.map((phase) => (
@@ -373,14 +373,14 @@ export default function ManifestoDigital() {
               </div>
               {altitudes.map((altitude) => (
                 <FadeUp key={altitude.label}>
-                  <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-x-10 py-10 xl:py-12 border-b border-dab-cream/15">
+                  <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-x-10 py-10 xl:py-12 border-b border-bone/15">
                     <div className="pr-6">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={altitude.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-9 h-9 mb-5" />
                       <h3 className="text-2xl xl:text-[28px] font-medium tracking-[-0.022em] leading-tight">
                         {altitude.label}
                       </h3>
-                      <p className="mt-4 text-[15px] leading-relaxed text-dab-cream/65 max-w-[22ch]">
+                      <p className="mt-4 text-[15px] leading-relaxed text-bone/65 max-w-[22ch]">
                         {altitude.tagline}
                       </p>
                     </div>
@@ -407,8 +407,8 @@ export default function ManifestoDigital() {
                       aria-pressed={active}
                       className={`font-mono text-[9px] min-[400px]:text-[10px] tracking-[0.14em] uppercase whitespace-nowrap rounded-full px-1 py-3 border transition-colors ${
                         active
-                          ? 'bg-dab-green border-dab-green text-dab-charcoal'
-                          : 'border-dab-cream/25 text-dab-cream/70'
+                          ? 'bg-lavender border-lavender text-ink'
+                          : 'border-bone/25 text-bone/70'
                       }`}
                     >
                       {phase.q} {phase.verb}
@@ -428,7 +428,7 @@ export default function ManifestoDigital() {
                   >
                     <PhaseHeading phase={phases[activeQuarter]} className="pt-1" />
                     {altitudes.map((altitude) => (
-                      <div key={altitude.label} className="bg-white/[0.04] border border-dab-cream/10 rounded-xl p-5">
+                      <div key={altitude.label} className="bg-paper/[0.04] border border-bone/10 rounded-xl p-5">
                         <div className="flex items-center gap-3 mb-4">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={altitude.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-7 h-7 shrink-0" />
@@ -447,13 +447,13 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── OPERATING MODEL CHARACTERISTICS (white) ── */}
-        <section className="bg-white text-dab-charcoal py-14 md:py-32">
+        <section className="bg-paper text-ink py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-10 md:mb-14">
                 What we&rsquo;re building towards
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[22ch]">
+              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[22ch]">
                 Characteristics of a high-performing system
               </h2>
             </FadeUp>
@@ -469,26 +469,26 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── OUTCOMES (charcoal) ───────────────────── */}
-        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40">
+        <section className="bg-plum text-bone py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/75 mb-10 md:mb-14">
+              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-bone/75 mb-10 md:mb-14">
                 Outcomes
               </p>
-              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[18ch]">
+              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[18ch]">
                 What success looks like
               </h2>
             </FadeUp>
             <div className="mt-14 md:mt-20 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-12 md:gap-y-16">
               {outcomes.map((outcome, i) => (
                 <FadeUp key={outcome.label} delay={i * 0.06}>
-                  <div className="border-t border-dab-cream/15 pt-7">
+                  <div className="border-t border-bone/15 pt-7">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={outcome.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-9 h-9 mb-5" />
-                    <h3 className="font-mono text-[11px] tracking-[0.22em] uppercase text-dab-green">
+                    <h3 className="font-mono text-[11px] tracking-[0.22em] uppercase text-lavender">
                       {outcome.label}
                     </h3>
-                    <p className="mt-3.5 text-lg leading-relaxed text-dab-cream/80 max-w-[30ch]">
+                    <p className="mt-3.5 text-lg leading-relaxed text-bone/80 max-w-[30ch]">
                       {outcome.copy}
                     </p>
                   </div>
@@ -499,14 +499,14 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── BENEATH THE SYSTEM (white) ────────────── */}
-        <section className="bg-white text-dab-charcoal py-16 md:py-40">
+        <section className="bg-paper text-ink py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <div className="text-center">
               <FadeUp>
-                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75 mb-10 md:mb-14">
+                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-10 md:mb-14">
                   Beneath the system
                 </p>
-                <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                   Every organisation has two operating systems.
                 </h2>
               </FadeUp>
@@ -515,15 +515,15 @@ export default function ManifestoDigital() {
             <div className="mt-14 md:mt-20 grid md:grid-cols-2 gap-5 md:gap-8 max-w-5xl mx-auto">
               {/* The visible system: rendered visibly. Crisp, bordered, technical. */}
               <FadeUp delay={0.1}>
-                <div className="h-full border border-dab-charcoal/20 rounded-2xl p-7 md:p-9">
-                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-charcoal/75">
+                <div className="h-full border border-ink/20 rounded-2xl p-7 md:p-9">
+                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75">
                     01 &middot; The visible system
                   </p>
                   <ul className="mt-6 md:mt-8">
                     {['Structures', 'Processes', 'Governance', 'Technology', 'Delivery'].map((word) => (
                       <li
                         key={word}
-                        className="border-t border-dab-charcoal/10 py-3 md:py-3.5 text-xl md:text-2xl font-medium tracking-[-0.022em]"
+                        className="border-t border-ink/10 py-3 md:py-3.5 text-xl md:text-2xl font-medium tracking-[-0.022em]"
                       >
                         {word}
                       </li>
@@ -534,15 +534,15 @@ export default function ManifestoDigital() {
 
               {/* The invisible system: rendered dark. The underlying current. */}
               <FadeUp delay={0.22}>
-                <div className="h-full bg-dab-charcoal text-dab-cream rounded-2xl p-7 md:p-9">
-                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-green">
+                <div className="h-full bg-plum text-bone rounded-2xl p-7 md:p-9">
+                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-lavender">
                     02 &middot; The invisible system
                   </p>
                   <ul className="mt-6 md:mt-8 grid grid-cols-2 gap-x-6 md:gap-x-8">
                     {['Trust', 'Relationships', 'Ownership', 'Confidence', 'Energy', 'Incentives', 'Habits', 'Culture'].map((word) => (
                       <li
                         key={word}
-                        className="border-t border-dab-cream/15 py-3 md:py-3.5 text-xl md:text-2xl font-medium tracking-[-0.022em]"
+                        className="border-t border-bone/15 py-3 md:py-3.5 text-xl md:text-2xl font-medium tracking-[-0.022em]"
                       >
                         {word}
                       </li>
@@ -563,10 +563,10 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── CLOSING (sand) ────────────────────────── */}
-        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-32">
+        <section className="bg-bone text-ink py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[0.8] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 The dots are already here. Perhaps it&rsquo;s simply a case of connecting them.
               </h2>
             </FadeUp>
@@ -577,7 +577,7 @@ export default function ManifestoDigital() {
                     subject: 'Comparing Notes',
                     body: "Hi Darren,\n\nI've been reading your perspective on building a modern delivery operating system.\n\nA few thoughts came to mind...",
                   })}
-                  className="group inline-flex items-center gap-2 border border-dab-charcoal text-dab-charcoal text-[14px] font-medium tracking-tight px-6 py-3 rounded-full hover:bg-dab-charcoal hover:text-dab-cream transition-colors"
+                  className="group inline-flex items-center gap-2 border border-ink text-ink text-[14px] font-medium tracking-tight px-6 py-3 rounded-full hover:bg-plum hover:text-bone transition-colors"
                 >
                   Compare notes
                   <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>

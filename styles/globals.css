@@ -1,6 +1,36 @@
 @import "tailwindcss";
 
 @theme {
+  /* ── v2.0 palette (Visual Style Guide v2.0) ──────────────────────────
+     Ratio target: ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach,
+     ~2% coral/sky. Accents are punctuation, never the canvas. */
+
+  /* Core neutrals */
+  --color-bone: #F5F1EA;       /* primary background */
+  --color-paper: #FBF8F3;      /* secondary background */
+  --color-ink: #1F1F1D;        /* primary text + headlines */
+  --color-graphite: #5C5C58;   /* secondary / body text */
+  --color-stone: #D8D2C8;      /* borders + dividers */
+
+  /* Momentum palette (accents — used sparingly) */
+  --color-lavender: #B8A2D8;       /* primary accent */
+  --color-lavender-soft: #E6D6EE;  /* gradient mid + soft halo glow */
+  --color-peach: #E6B39A;          /* secondary accent / warmth — Marketing leaders */
+  --color-sage: #B8C2A3;           /* movement accent — Creators & founders */
+  --color-sky: #AFCFE0;            /* supporting accent */
+  --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
+
+  /* Dark palette */
+  --color-plum: #352E44;       /* deep sections, footer, final CTA */
+  --color-aubergine: #4A3D59;  /* supporting dark */
+
+  /* Fonts */
+  --font-serif: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-manrope), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: var(--font-manrope), -apple-system, system-ui, sans-serif;
+
+  /* ── Legacy v1 tokens — retained so un-migrated pages still build.
+     Removed once nothing references them. Do not use in new work. ── */
   --color-dab-cream: #F3F0EA;
   --color-dab-charcoal: #111111;
   --color-dab-charcoal-alt: #171717;
@@ -12,14 +42,11 @@
   --color-dab-brown-light: #E8E3DC;
   --color-dab-white: #F3F0EA;
   --color-dab-warm: #E8D5C5;
-
-  --font-sans: var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), 'SF Mono', 'Fira Mono', monospace;
 }
 
 :root {
-  --background: #F3F0EA;
-  --foreground: #4A4744;
+  --background: #F5F1EA;
+  --foreground: #5C5C58;
 }
 
 * {
@@ -30,9 +57,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
   font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  line-height: 1.6;
+  letter-spacing: -0.006em;
 }
 
 html {
@@ -46,45 +74,64 @@ section {
   scroll-margin-top: 80px;
 }
 
-/* Optical alignment: nudge display type left to compensate for glyph side-bearing,
-   so headlines align with body copy. Scales with font-size via em. */
+/* Display type: Instrument Serif. Elegant, confident, allowed to breathe.
+   Single weight (400). Colour defaults to ink; override with text-* on dark. */
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.022em;
-  line-height: 1.04;
-  font-weight: 500 !important;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.06;
   text-wrap: balance;
-  margin-left: -0.04em;
 }
 
 p {
   text-wrap: pretty;
 }
 
-.font-mono {
-  font-family: var(--font-mono);
+/* Section label / eyebrow — Manrope, uppercase, tracked.
+   Replaces the old monospace eyebrow. Colour set per use. */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-/* Palantir-style dot grid for dark sections */
+.font-serif { font-family: var(--font-serif); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Signature gradient — bone → lavender → peach. Occasional hero/image moments. */
+.signature-gradient {
+  background-image: linear-gradient(135deg, #F5F1EA 0%, #E6D6EE 55%, #E6B39A 100%);
+}
+
+/* Soft halo glow — radial lavender, for the brand mark and portrait treatment. */
+.halo-glow {
+  background-image: radial-gradient(closest-side, rgba(184,162,216,0.55), rgba(184,162,216,0.12) 70%, transparent 100%);
+}
+
+/* Soft dot grid for dark (plum) sections. */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(245,241,234,0.06) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Signal green line divider */
+/* Thin accent rule (replaces the old green signal rule). */
 .signal-rule {
   width: 32px;
   height: 2px;
-  background: #B7FF00;
+  background: var(--color-lavender);
   display: block;
 }
 
-/* Focus visible: clear keyboard indicator across all interactive elements.
-   Uses the brand green at low opacity so it sits cleanly on both cream and charcoal backgrounds. */
+/* Focus visible: coral ring, readable on both bone and plum. */
 :focus {
   outline: none;
 }
 :focus-visible {
-  outline: 2px solid var(--color-dab-green);
+  outline: 2px solid var(--color-coral);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -96,10 +143,11 @@ p {
   left: 12px;
   z-index: 200;
   padding: 0.6rem 1rem;
-  background: var(--color-dab-charcoal);
-  color: var(--color-dab-cream);
-  font-family: var(--font-mono);
+  background: var(--color-plum);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   border-radius: 4px;
@@ -109,13 +157,13 @@ p {
 .skip-link:focus,
 .skip-link:focus-visible {
   transform: translateY(0);
-  outline: 2px solid var(--color-dab-green);
+  outline: 2px solid var(--color-coral);
   outline-offset: 3px;
 }
 
-/* Brand dot: static neon green, cap-height sized in JSX. */
+/* Brand dot retained for legacy references; now lavender, not green. */
 .brand-dot {
-  background-color: var(--color-dab-green);
+  background-color: var(--color-lavender);
 }
 
 /* Dev: outline every div for design QA. Excluded for dev tool elements. */

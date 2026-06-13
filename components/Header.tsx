@@ -1,77 +1,154 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { mailto } from '@/lib/mailto';
 
-const navItems = [
-  { href: '/where-we-step-in', label: 'When To Bring Us In' },
-  { href: '/experience', label: 'Experience' },
-  { href: '/contact', label: 'Contact' },
+// The three destination pages live under "Who I help".
+export const audiences = [
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders' },
+  { href: '/marketing-leaders', label: 'Marketing leaders' },
+  { href: '/creators-and-founders', label: 'Creators & founders' },
 ];
 
 export const Header = () => {
   const router = useRouter();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // mobile sheet
+  const [whoOpen, setWhoOpen] = useState(false); // desktop dropdown
   const [scrolled, setScrolled] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close both menus whenever we navigate.
+  useEffect(() => {
+    const close = () => {
+      setMenuOpen(false);
+      setWhoOpen(false);
+    };
+    router.events.on('routeChangeStart', close);
+    return () => router.events.off('routeChangeStart', close);
+  }, [router.events]);
+
+  // Escape closes the desktop dropdown.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setWhoOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const openWho = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setWhoOpen(true);
+  };
+  const closeWhoDelayed = () => {
+    closeTimer.current = setTimeout(() => setWhoOpen(false), 120);
+  };
+
+  const whoActive = audiences.some((a) => router.pathname === a.href);
+  const contactActive = router.pathname === '/contact';
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-dab-charcoal ${scrolled ? 'border-b border-dab-brown/15' : ''}`}
+        className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${
+          scrolled ? 'bg-bone/85 backdrop-blur-md border-b border-stone/70' : 'bg-transparent'
+        }`}
       >
-        <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
-          <Link href="/" className="flex items-baseline gap-3 group" aria-label="DAB Hands home">
-            <span className="brand-dot w-[14px] h-[14px] rounded-full shrink-0" />
-            <span className="font-medium text-[19px] tracking-[-0.02em] text-dab-cream leading-none">
-              <span className="font-medium">DAB</span> Hands
-            </span>
+        <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
+          <Link
+            href="/"
+            className="font-serif text-ink text-[22px] md:text-[26px] leading-none tracking-[-0.01em]"
+            aria-label="DAB Hands, home"
+          >
+            DAB Hands
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 lg:gap-10">
-            <nav className="flex items-center gap-8 lg:gap-10">
-              {navItems.map((item) => {
-                const active = router.pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`font-mono text-[10px] tracking-[0.22em] uppercase transition-colors ${
-                      active ? 'text-dab-cream' : 'text-dab-cream/55 hover:text-dab-cream'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-            <a
-              href={mailto()}
-              className="group inline-flex items-center gap-2 border border-dab-cream/40 text-dab-cream text-[12px] font-medium tracking-tight pl-4 pr-3.5 py-1.5 rounded-full hover:bg-dab-cream hover:text-dab-charcoal hover:border-dab-cream transition-colors"
-            >
-              Start a conversation
-              <span aria-hidden className="text-dab-green group-hover:text-dab-charcoal transition-colors">→</span>
-            </a>
-          </div>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-9 lg:gap-11">
+            <div className="relative" onMouseEnter={openWho} onMouseLeave={closeWhoDelayed}>
+              <button
+                type="button"
+                aria-haspopup="true"
+                aria-expanded={whoOpen}
+                onClick={() => setWhoOpen((v) => !v)}
+                className={`inline-flex items-center gap-1.5 text-[14px] tracking-[-0.01em] transition-colors ${
+                  whoActive ? 'text-ink' : 'text-graphite hover:text-ink'
+                }`}
+              >
+                Who I help
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  className={`transition-transform duration-300 ${whoOpen ? 'rotate-180' : ''}`}
+                  aria-hidden
+                >
+                  <path d="M3 4.5 L6 7.5 L9 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
 
+              <AnimatePresence>
+                {whoOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute right-0 top-full pt-3"
+                    role="menu"
+                  >
+                    <div className="w-[264px] bg-paper border border-stone rounded-2xl p-2 shadow-[0_18px_40px_-24px_rgba(31,31,29,0.45)]">
+                      {audiences.map((a) => (
+                        <Link
+                          key={a.href}
+                          href={a.href}
+                          role="menuitem"
+                          className={`block rounded-xl px-4 py-3 text-[14.5px] leading-snug transition-colors ${
+                            router.pathname === a.href ? 'bg-bone text-ink' : 'text-ink/75 hover:bg-bone hover:text-ink'
+                          }`}
+                        >
+                          {a.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <Link
+              href="/contact"
+              className={`text-[14px] tracking-[-0.01em] transition-colors ${
+                contactActive ? 'text-ink' : 'text-graphite hover:text-ink'
+              }`}
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Mobile toggle */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
-            className="md:hidden w-8 h-8 flex flex-col items-end justify-center gap-[6px]"
+            aria-expanded={menuOpen}
+            className="md:hidden w-9 h-9 flex flex-col items-end justify-center gap-[6px] text-ink"
           >
-            <span className={`block h-px bg-dab-cream transition-all duration-300 ${menuOpen ? 'w-7 rotate-45 translate-y-[7px]' : 'w-7'}`} />
-            <span className={`block h-px bg-dab-cream transition-all duration-300 ${menuOpen ? 'opacity-0 w-7' : 'w-5'}`} />
-            <span className={`block h-px bg-dab-cream transition-all duration-300 ${menuOpen ? 'w-7 -rotate-45 -translate-y-[7px]' : 'w-7'}`} />
+            <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'w-7 rotate-45 translate-y-[7px]' : 'w-7'}`} />
+            <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'opacity-0 w-7' : 'w-5'}`} />
+            <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'w-7 -rotate-45 -translate-y-[7px]' : 'w-7'}`} />
           </button>
         </div>
       </header>
 
+      {/* Mobile sheet */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -79,29 +156,39 @@ export const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-dab-charcoal text-dab-cream pt-28 px-8 md:hidden flex flex-col justify-between pb-12"
+            className="fixed inset-0 z-40 bg-bone text-ink pt-28 px-8 md:hidden flex flex-col justify-between pb-12"
           >
-            <nav className="flex flex-col gap-2">
-              {navItems.map((item, i) => (
-                <motion.span
-                  key={item.href}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 + i * 0.06 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block text-3xl font-semibold tracking-tight py-3 border-b border-dab-brown/20 hover:text-dab-green transition"
+            <nav className="flex flex-col">
+              <p className="eyebrow text-graphite mb-5">Who I help</p>
+              <div className="flex flex-col mb-8">
+                {audiences.map((a, i) => (
+                  <motion.span
+                    key={a.href}
+                    initial={{ opacity: 0, x: 14 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.06 + i * 0.05 }}
                   >
-                    {item.label}
-                  </Link>
-                </motion.span>
-              ))}
+                    <Link href={a.href} onClick={() => setMenuOpen(false)} className="block font-serif text-[30px] leading-[1.18] py-1.5">
+                      {a.label}
+                    </Link>
+                  </motion.span>
+                ))}
+              </div>
+              <motion.span
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.06 + audiences.length * 0.05 }}
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block font-serif text-[30px] leading-[1.18] py-1.5 border-t border-stone pt-6"
+                >
+                  Contact
+                </Link>
+              </motion.span>
             </nav>
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-dab-brown">
-              DAB Hands. Digital Delivery, Handled
-            </p>
+            <p className="eyebrow text-graphite">DAB Hands</p>
           </motion.div>
         )}
       </AnimatePresence>

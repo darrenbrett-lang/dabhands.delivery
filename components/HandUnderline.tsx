@@ -7,8 +7,8 @@ interface HandUnderlineProps {
   delay?: number;
   /** Alternative path data for natural variation between instances. */
   variant?: 1 | 2 | 3 | 4;
-  /** 'dark' (default) uses dab-green on charcoal/brown backgrounds.
-   *  'light' uses dab-brown on cream/white backgrounds (neon green has no contrast there). */
+  /** 'dark' (default) uses lavender on plum/dark backgrounds.
+   *  'light' uses coral on bone/paper backgrounds. */
   tone?: 'dark' | 'light';
   /** Stroke colour override. Takes precedence over `tone`. */
   stroke?: string;
@@ -22,8 +22,8 @@ const PATHS: Record<NonNullable<HandUnderlineProps['variant']>, string> = {
 };
 
 const TONE_STROKE: Record<NonNullable<HandUnderlineProps['tone']>, string> = {
-  dark: 'var(--color-dab-green)',
-  light: 'var(--color-dab-brown)',
+  dark: 'var(--color-lavender)',
+  light: 'var(--color-coral)',
 };
 
 export const HandUnderline = ({
@@ -36,7 +36,7 @@ export const HandUnderline = ({
   const resolvedStroke = stroke ?? TONE_STROKE[tone];
   // When the underline is the same colour as the body text (charcoal on cream),
   // push it down a few extra pixels so it doesn't read as a descender.
-  const sameColourAsText = resolvedStroke === 'var(--color-dab-charcoal)';
+  const sameColourAsText = resolvedStroke === 'var(--color-ink)';
   const offsetClass = sameColourAsText ? '-bottom-[8px]' : '-bottom-[3px]';
   return (
     <span className="relative inline-block">

@@ -1,326 +1,231 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
+import Link from 'next/link';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
-import { BoxCTA } from '@/components/BoxCTA';
-import { LogoTicker } from '@/components/LogoTicker';
-import { Ribbon } from '@/components/Ribbon';
-import { HandUnderline } from '@/components/HandUnderline';
 import { SeoMeta } from '@/components/SeoMeta';
+import { HandUnderline } from '@/components/HandUnderline';
+import { LogoTicker } from '@/components/LogoTicker';
+import { Figure } from '@/components/Figure';
+import { mailto } from '@/lib/mailto';
 
-const doorways = [
+const DRUMBEAT = [
+  'The challenge isn’t creating more.',
+  'It’s helping what already exists move together.',
+  'Because somewhere between idea and market, work gets diluted.',
+  'Momentum slips.',
+  'Complexity takes hold.',
+];
+
+// The single path becomes three rooms. Each carries its own movement accent.
+const TURNSTILE = [
   {
-    label: 'Get it moving',
-    blurb: 'Important initiatives that are slowing down and need help getting over the line.',
-    href: '/where-we-step-in#get-it-moving',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 20 H30" />
-        <path d="M23 13 L30 20 L23 27" />
-        <path d="M5 14 H9" />
-        <path d="M5 20 H8" />
-        <path d="M5 26 H9" />
-      </svg>
-    ),
+    label: 'Business & agency leaders',
+    diagnosis: 'The work matters. Complexity is getting in the way.',
+    support:
+      'You need experienced operational leadership that understands delivery, commercial realities, people, and how organisations actually work.',
+    href: '/business-and-agency-leaders',
+    dot: 'bg-lavender',
   },
   {
-    label: 'Bring it together',
-    blurb: 'Complex work involving multiple teams, partners, and moving parts.',
-    href: '/where-we-step-in#bring-it-together',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="8" cy="9" r="2.4" />
-        <circle cx="32" cy="9" r="2.4" />
-        <circle cx="20" cy="33" r="2.4" />
-        <circle cx="20" cy="20" r="2.4" />
-        <path d="M9.7 10.7 L18.3 18.4" />
-        <path d="M30.3 10.7 L21.7 18.4" />
-        <path d="M20 22.4 L20 30.6" />
-      </svg>
-    ),
+    label: 'Marketing leaders',
+    diagnosis: 'The idea isn’t the problem. Getting it to market intact is.',
+    support:
+      'You need campaigns, launches, experiences, and agencies moving together without losing momentum, quality, or impact along the way.',
+    href: '/marketing-leaders',
+    dot: 'bg-peach',
   },
   {
-    label: 'Strengthen it',
-    blurb: 'When an important challenge needs additional leadership, capability, or support.',
-    href: '/where-we-step-in#strengthen-it',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 5 L31 9 V19 C31 26 20 31 20 31 C20 31 9 26 9 19 V9 Z" />
-        <path d="M15 19 L18.5 22.5 L26 14.5" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Get more from it',
-    blurb: 'Good people, good partners, and good ideas that could be working together more effectively.',
-    href: '/where-we-step-in#get-more-from-it',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 26 L16 16 L22 22 L34 10" />
-        <path d="M27 10 H34 V17" />
-      </svg>
-    ),
+    label: 'Creators & founders',
+    diagnosis: 'Growth creates complexity. Complexity creates drag.',
+    support:
+      'You need operational strength around the business without losing the energy, creativity, and ambition that made it successful in the first place.',
+    href: '/creators-and-founders',
+    dot: 'bg-sage',
   },
 ];
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
-  const headlineWords = ['Keeping', 'important', 'work', 'moving'];
-  // After the headline words land + a short beat, the last word ("moving")
-  // leans into an italic oblique — the word literally moves.
-  const [landed, setLanded] = useState(false);
-  const [leanIn, setLeanIn] = useState(false);
-  useEffect(() => {
-    if (!landed) return;
-    if (reduceMotion) {
-      setLeanIn(true);
-      return;
-    }
-    const t = setTimeout(() => setLeanIn(true), 450);
-    return () => clearTimeout(t);
-  }, [landed, reduceMotion]);
+  const headlineWords = ['Keeping', 'important', 'work', 'moving.'];
+
   return (
     <>
       <SeoMeta
-        title="DAB Hands | Senior digital delivery for high-stakes work"
-        description="DAB Hands is a senior-led delivery model for critical digital initiatives. Keeping important work aligned, moving, and commercially effective."
+        title="DAB Hands | Keeping important work moving"
+        description="I help digital-forward businesses get their best work into the world, intact. Senior operational leadership for important work moving through complex organisations."
         path="/"
       />
 
-      <Layout footerVariant="minimal">
-        {/* ── HERO ──────────────────────────────────── */}
-        <section className="relative bg-dab-cream text-dab-charcoal overflow-hidden min-h-[78vh] md:min-h-[100vh] flex flex-col">
-          <Ribbon
-            className="absolute right-0 top-[32px] md:top-auto md:bottom-0 w-[120%] md:w-full"
-            opacity={0.4}
-            drift={28}
-          />
+      <Layout footerVariant="none">
+        {/* ── HERO ─────────────────────────────────── */}
+        <section className="bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+            <motion.h1
+              className="text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px] leading-[1.03] max-w-[15ch] mx-auto"
+              aria-label="Keeping important work moving."
+              initial="hidden"
+              animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.1, delayChildren: 0.1 } } }}
+            >
+              {headlineWords.map((word, i) => (
+                <Fragment key={word}>
+                  {i > 0 && ' '}
+                  <motion.span
+                    className="inline-block"
+                    variants={{
+                      hidden: { opacity: 0, y: reduceMotion ? 0 : '0.4em' },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                </Fragment>
+              ))}
+            </motion.h1>
 
-          <div className="relative z-10 flex-1 flex items-center justify-center pt-28 pb-12 md:pt-32 md:pb-20">
-            <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-              <motion.h1
-                className="text-[56px] sm:text-[68px] md:text-[80px] lg:text-[104px] xl:text-[120px] font-medium leading-[0.96] tracking-[-0.03em] max-w-[16ch] mx-auto"
-                aria-label="Keeping important work moving"
-                initial="hidden"
-                animate="visible"
-                onAnimationComplete={() => setLanded(true)}
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: { staggerChildren: reduceMotion ? 0 : 0.14, delayChildren: 0.08 },
-                  },
-                }}
-              >
-                {headlineWords.map((word, i) => {
-                  const isLast = i === headlineWords.length - 1;
-                  return (
-                    <Fragment key={word}>
-                      {i > 0 && ' '}
-                      <motion.span
-                        className="inline-block"
-                        variants={{
-                          hidden: { opacity: 0, y: reduceMotion ? 0 : '0.5em' },
-                          visible: {
-                            opacity: 1,
-                            y: 0,
-                            transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
-                          },
-                        }}
-                      >
-                        {isLast ? (
-                          <motion.span
-                            className="inline-block"
-                            style={{ transformOrigin: 'bottom center' }}
-                            animate={{ skewX: leanIn ? -10 : 0 }}
-                            transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
-                          >
-                            {word}
-                          </motion.span>
-                        ) : (
-                          word
-                        )}
-                      </motion.span>
-                    </Fragment>
-                  );
-                })}
-              </motion.h1>
+            <FadeUp delay={0.4}>
+              <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[40ch] mx-auto">
+                I help digital-forward businesses get their best work into the world, intact.
+              </p>
+            </FadeUp>
+          </div>
+        </section>
 
-              <FadeUp delay={0.16}>
-                <div className="mt-12 md:mt-16 space-y-3 text-xl text-dab-charcoal leading-relaxed max-w-[44ch] md:max-w-none mx-auto">
-                  <p>Important digital work can quickly lose momentum within complex organisations.</p>
-                  <p>We help modern brands get stronger<br className="sm:hidden" /> digital work out into the world.</p>
-                </div>
-              </FadeUp>
+        {/* ── DARREN ───────────────────────────────── */}
+        <section className="bg-paper text-ink py-16 md:py-28 border-t border-stone/60">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <div className="grid md:grid-cols-[auto_1fr] gap-10 md:gap-14 lg:gap-20 items-center">
+              <Figure
+                mobile="/images/darren-portrait.jpeg"
+                alt="Darren Brett"
+                className="w-56 md:w-72 lg:w-80 aspect-[4/5] rounded-2xl mx-auto md:mx-0"
+              />
+
+              <div>
+                <FadeUp>
+                  <p className="eyebrow text-graphite mb-6">Darren</p>
+                  <p className="text-lg md:text-xl text-graphite mb-5">Hi, I’m Darren.</p>
+                </FadeUp>
+                <FadeUp delay={0.08}>
+                  <p className="font-serif text-[28px] md:text-[40px] lg:text-[46px] leading-[1.1] text-ink max-w-[20ch]">
+                    I’m the person who walks toward the part everyone else is avoiding, because I can already see what’s holding it up.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-7 md:mt-9 text-lg text-graphite leading-relaxed max-w-[46ch]">
+                    For more than 20 years, I’ve helped important work move through complex organisations.
+                  </p>
+                </FadeUp>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── WHERE WE ARE ──────────────────────────── */}
-        <section className="bg-dab-charcoal text-dab-cream py-16 md:py-40 relative min-h-[90vh] flex flex-col justify-center">
-          <div className="absolute top-0 left-0 right-0 h-px bg-dab-brown/30" />
-
-          <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-dab-cream/55 mb-16 md:mb-24">
-                Where we are
-              </p>
-            </FadeUp>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.16, delayChildren: 0.05 } } }}
-              className="space-y-16 md:space-y-20 lg:space-y-28"
-            >
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 14 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className="md:max-w-[65%]"
-              >
-                <h2 className="text-[36px] sm:text-[48px] md:text-[60px] lg:text-[76px] xl:text-[88px] font-medium leading-[1.04] tracking-[-0.03em] md:whitespace-nowrap!">
-                  The tools are changing.<br />
-                  The problems aren&rsquo;t.
-                </h2>
-                <span className="block w-10 h-px bg-dab-green mt-5 md:mt-7" />
-              </motion.div>
-
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 14 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className="md:max-w-[65%]"
-              >
-                <h2 className="text-[36px] sm:text-[48px] md:text-[60px] lg:text-[76px] xl:text-[88px] font-medium leading-[1.04] tracking-[-0.03em]">
-                  Complexity is higher than ever.
-                </h2>
-                <span className="block w-10 h-px bg-dab-green mt-5 md:mt-7" />
-              </motion.div>
-            </motion.div>
-
-            <FadeUp delay={0.32}>
-              <div className="mt-24 md:mt-32 space-y-6 max-w-[60ch] text-xl text-dab-cream leading-relaxed">
-                <p className="space-y-3">
-                  <span className="block">Inside organisations, friction <HandUnderline delay={1.2} variant={3}>slows</HandUnderline> the work.</span>
-                  <span className="block">The role of new <HandUnderline delay={1.35} variant={1}>technology</HandUnderline> is still being worked out.</span>
-                  <span className="block">Outside, competition for <HandUnderline delay={1.5} variant={2}>attention</HandUnderline> is relentless.</span>
-                </p>
-                <p className="space-y-3">
-                  <span className="block">More of the right work needs to get through.</span>
-                  <span className="block">And more of the <HandUnderline delay={1.65} variant={4}>budget</HandUnderline> needs to go into the work itself.</span>
-                </p>
-              </div>
-            </FadeUp>
-
-          </div>
-        </section>
-
-        {/* ── CORE TRUTH ────────────────────────────── */}
-        <section className="bg-white text-dab-charcoal py-20 md:py-48">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-            <FadeUp>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/dab-hands-crown-mark.svg?v=2"
-                alt=""
-                aria-hidden
-                draggable={false}
-                loading="lazy"
-                decoding="async"
-                className="mx-auto mb-8 md:mb-10 w-[60px] sm:w-[72px] md:w-[88px] lg:w-[100px] h-auto"
-              />
-              <h2 className="text-[44px] md:text-[72px] lg:text-[96px] xl:text-[108px] font-medium leading-[1.02] tracking-[-0.03em]">
-                <span className="block">Great work rarely struggles</span>
-                <span className="block">because of a lack of ambition.</span>
-              </h2>
-            </FadeUp>
-
-            <FadeUp delay={0.16}>
-              <p className="mt-8 md:mt-10 text-xl md:text-2xl font-normal leading-relaxed tracking-[-0.01em] text-dab-charcoal max-w-[42ch] mx-auto">
-                More often, the challenge is helping it stay strong as it moves through the organisation.
-              </p>
-            </FadeUp>
-          </div>
-        </section>
-
-        {/* ── DOORWAYS — HOW DAB HANDS HELPS ────────── */}
-        <section className="bg-white text-dab-charcoal py-16 md:py-40">
+        {/* ── POINT OF VIEW ────────────────────────── */}
+        <section className="bg-bone text-ink py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h2 className="text-[40px] md:text-[60px] lg:text-[76px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch] mb-14 md:mb-20">
-                How DAB Hands helps
+              <p className="eyebrow text-graphite mb-8 md:mb-10">Point of view</p>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <h2 className="text-[34px] sm:text-[46px] md:text-[60px] lg:text-[72px] leading-[1.04] max-w-[16ch]">
+                The tools are changing. The problems aren’t.
               </h2>
             </FadeUp>
-            <div className="grid md:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10 md:gap-y-14">
-              {doorways.map((d, i) => (
-                <motion.a
-                  key={d.label}
-                  href={d.href}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group block border-t border-dab-charcoal/15 pt-8 md:pt-10"
-                >
-                  <div className="flex items-center gap-5 md:gap-6">
-                    <span
-                      className="text-dab-charcoal flex-shrink-0 [&_svg]:w-9 [&_svg]:h-9 md:[&_svg]:w-10 md:[&_svg]:h-10"
-                      aria-hidden
-                    >
-                      {d.icon}
-                    </span>
-                    <h3 className="flex-1 text-2xl md:text-3xl font-medium tracking-[-0.022em] text-dab-charcoal">
-                      {d.label}
-                    </h3>
-                    <span
-                      aria-hidden
-                      className="text-dab-charcoal text-2xl leading-none transition-transform group-hover:translate-x-1"
-                    >
-                      &rarr;
-                    </span>
-                  </div>
-                  <p className="mt-4 md:mt-5 text-lg md:text-xl leading-relaxed text-dab-charcoal/70 max-w-[46ch]">
-                    {d.blurb}
-                  </p>
-                </motion.a>
+            <FadeUp delay={0.12}>
+              <p className="mt-7 md:mt-9 text-lg md:text-xl text-graphite max-w-[48ch]">Most organisations already have what they need.</p>
+            </FadeUp>
+            <FadeUp delay={0.16}>
+              <p className="mt-7 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
+                Strategy. Creative ambition. Investment. Capability. Good people.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <div className="mt-12 md:mt-16 space-y-2.5 text-lg md:text-xl text-ink/85 max-w-[42ch]">
+                {DRUMBEAT.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.26}>
+              <p className="mt-12 md:mt-16 font-serif text-[30px] md:text-[48px] leading-[1.08] text-ink max-w-[18ch]">
+                It deserves to arrive{' '}
+                <HandUnderline delay={0.6} variant={3} stroke="var(--color-lavender)">
+                  as intended
+                </HandUnderline>
+                .
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+
+        {/* ── PROOF ────────────────────────────────── */}
+        <section className="bg-paper text-ink py-16 md:py-28 border-y border-stone/60">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <FadeUp>
+              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work</p>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <LogoTicker ariaLabel="Brands I’ve worked with" />
+            </FadeUp>
+            <FadeUp delay={0.12}>
+              <figure className="mt-16 md:mt-24 max-w-[60ch] mx-auto text-center">
+                <blockquote className="font-serif italic text-[24px] md:text-[34px] leading-[1.3] text-ink">
+                  “He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.”
+                </blockquote>
+                <figcaption className="mt-6 text-[14px] text-graphite">Anthony Mahon, Global Membership Director, Hugo Boss</figcaption>
+              </figure>
+            </FadeUp>
+          </div>
+        </section>
+
+        {/* ── TURNSTILE ────────────────────────────── */}
+        <section className="bg-bone text-ink py-16 md:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <FadeUp>
+              <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-12 md:mb-16 max-w-[16ch]">What’s getting in the way?</h2>
+            </FadeUp>
+            <div className="grid md:grid-cols-3 gap-5 lg:gap-7">
+              {TURNSTILE.map((t, i) => (
+                <Link key={t.label} href={t.href} className="group block">
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex h-full flex-col rounded-2xl border border-stone bg-paper p-7 md:p-8 transition-colors duration-300 hover:border-ink/30 hover:bg-white"
+                  >
+                    <span aria-hidden className={`mb-7 block h-2.5 w-2.5 rounded-full ${t.dot}`} />
+                    <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
+                    <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
+                    <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── CLOSING STATEMENT ─────────────────────── */}
-        <section className="bg-dab-cream text-dab-charcoal py-16 md:py-32 relative overflow-hidden">
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
-            <FadeUp>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/dab-hands-crown-mark.svg?v=2"
-                alt=""
-                aria-hidden
-                draggable={false}
-                loading="lazy"
-                decoding="async"
-                className="mx-auto mb-8 md:mb-10 w-[60px] sm:w-[72px] md:w-[88px] lg:w-[100px] h-auto"
-              />
-            </FadeUp>
-            <FadeUp>
-              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[1.05] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                20+ years helping global brands keep important digital work moving.
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.16}>
-              <div className="mt-12 md:mt-16">
-                <LogoTicker ariaLabel="Brands I've worked with" compact />
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.24}>
-              <div className="mt-12 md:mt-16 flex justify-center">
-                <BoxCTA href="/where-we-step-in" label="When To Bring Us In" />
-              </div>
-            </FadeUp>
+        {/* ── FINAL CTA (the decision) ─────────────── */}
+        <section className="bg-plum text-bone py-20 md:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+              <FadeUp>
+                <h2 className="text-[34px] md:text-[52px] lg:text-[60px] leading-[1.04] text-bone max-w-[16ch]">
+                  If something important needs to move properly, let’s talk.
+                </h2>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <a
+                  href={mailto({ subject: 'Starting a conversation' })}
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full border border-bone/40 px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-bone hover:text-ink"
+                >
+                  Start a conversation
+                  <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                </a>
+              </FadeUp>
+            </div>
           </div>
         </section>
       </Layout>
