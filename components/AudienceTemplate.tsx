@@ -392,18 +392,25 @@ const SectionLabel = ({ children, onDark = false }: { children: string; onDark?:
   <p className={`eyebrow mb-6 md:mb-8 ${onDark ? 'text-bone/55' : 'text-graphite'}`}>{children}</p>
 );
 
-// Progressive disclosure: a coloured bold text trigger (no button chrome), depth on demand.
+// Progressive disclosure. A generic "Expand" label renders as a + toggle (rotates to ×);
+// a descriptive label renders as coloured bold text. No button chrome either way.
 const Disclosure = ({ label, body, triggerClass }: Disc & { triggerClass: string }) => {
   const [open, setOpen] = useState(false);
+  const iconOnly = label === 'Expand';
   return (
     <div className="mt-6">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className={`text-[15px] font-semibold tracking-tight transition-opacity hover:opacity-70 ${triggerClass}`}
+        aria-label={iconOnly ? (open ? 'Collapse' : 'Expand') : undefined}
+        className={`transition-opacity hover:opacity-70 ${triggerClass} ${iconOnly ? '' : 'text-[15px] font-semibold tracking-tight'}`}
       >
-        {label}
+        {iconOnly ? (
+          <span aria-hidden className={`inline-block text-[26px] leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
+        ) : (
+          label
+        )}
       </button>
       <AnimatePresence initial={false}>
         {open && (
