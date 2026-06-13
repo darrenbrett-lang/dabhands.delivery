@@ -361,10 +361,19 @@ const bgClass = (bg?: Bg) => (bg === 'paper' ? 'bg-paper' : 'bg-bone');
 
 // Movement accent per room. `trigger` is the deepened, legible accent used for
 // the coloured bold expand text (the pale token fails contrast as text on bone).
-const ACCENT: Record<Accent, { dot: string; cardBorder: string; cardBg: string; cardDivide: string; trigger: string }> = {
-  lavender: { dot: 'bg-lavender', cardBorder: 'border-lavender/30', cardBg: 'bg-lavender/[0.08]', cardDivide: 'border-lavender/25', trigger: 'text-[#6E5A86]' },
-  peach: { dot: 'bg-peach', cardBorder: 'border-peach/30', cardBg: 'bg-peach/[0.08]', cardDivide: 'border-peach/25', trigger: 'text-[#9E5B3A]' },
-  sage: { dot: 'bg-sage', cardBorder: 'border-sage/30', cardBg: 'bg-sage/[0.10]', cardDivide: 'border-sage/25', trigger: 'text-[#5E6B3F]' },
+const ACCENT: Record<Accent, { dot: string; cardBorder: string; cardBg: string; cardDivide: string; trigger: string; heroWash: string }> = {
+  lavender: {
+    dot: 'bg-lavender', cardBorder: 'border-lavender/30', cardBg: 'bg-lavender/[0.08]', cardDivide: 'border-lavender/25', trigger: 'text-[#6E5A86]',
+    heroWash: 'linear-gradient(to bottom, rgba(184,162,216,0.18), rgba(184,162,216,0) 72%)',
+  },
+  peach: {
+    dot: 'bg-peach', cardBorder: 'border-peach/30', cardBg: 'bg-peach/[0.08]', cardDivide: 'border-peach/25', trigger: 'text-[#9E5B3A]',
+    heroWash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0) 72%)',
+  },
+  sage: {
+    dot: 'bg-sage', cardBorder: 'border-sage/30', cardBg: 'bg-sage/[0.10]', cardDivide: 'border-sage/25', trigger: 'text-[#5E6B3F]',
+    heroWash: 'linear-gradient(to bottom, rgba(184,194,163,0.22), rgba(184,194,163,0) 72%)',
+  },
 };
 
 const CtaLink = ({ subject }: { subject: string }) => (
@@ -597,17 +606,18 @@ const SectionView = ({ section, accent }: { section: Section; accent: Accent }) 
 
 export const AudienceTemplate = ({ slug }: { slug: AudienceSlug }) => {
   const c = CONTENT[slug];
+  const a = ACCENT[c.accent];
 
   return (
     <>
       <SeoMeta title={`${c.navLabel} | DAB Hands`} description={c.hero.subline} path={`/${c.slug}`} />
 
       <Layout footerVariant="none">
-        {/* ── HERO ─────────────────────────────────── */}
-        <section className="bg-bone text-ink pt-32 md:pt-44 pb-14 md:pb-20 text-center">
+        {/* ── HERO (room atmosphere: accent wash fading into bone) ── */}
+        <section className="bg-bone text-ink pt-32 md:pt-44 pb-14 md:pb-20 text-center" style={{ backgroundImage: a.heroWash }}>
           <div className={COL}>
             <FadeUp>
-              <p className="eyebrow text-graphite mb-7">{c.eyebrow}</p>
+              <p className={`eyebrow mb-7 ${a.trigger}`}>{c.eyebrow}</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <h1 className="text-[38px] sm:text-[48px] md:text-[58px] leading-[1.08] max-w-[20ch] mx-auto">{c.hero.headline}</h1>

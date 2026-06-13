@@ -57,7 +57,7 @@ Rhythm bone → paper → bone → paper → bone → plum. Copy is locked by th
 6. **Final CTA** (Midnight Plum) — "If something important needs to move properly, let's talk." + bone-outline CTA. `footerVariant="none"`.
 
 ### The three rooms — `components/AudienceTemplate.tsx`
-All three are **built with full copy** and **section-driven**: a `CONTENT` map keyed by slug holds `{ navLabel, eyebrow, hero, accent, sections[], close }`. They share the visual kit and rhythm but **compose differently** (not a fixed spine). `footerVariant="none"`.
+All three are **built with full copy** and **section-driven**: a `CONTENT` map keyed by slug holds `{ navLabel, eyebrow, hero, accent, sections[], close }`. They share the visual kit and rhythm but **compose differently** (not a fixed spine). `footerVariant="none"`. **Each room's hero carries a subtle accent atmosphere** (a top-down `heroWash` from the `ACCENT` map, fading into bone) **and an accent-coloured eyebrow** (the deepened `trigger` shade), so entering a room is a quiet shift in atmosphere while the rest of the page stays the neutral house.
 
 Section kit (each optional-field-driven): `drumbeat` (stacked lines + optional bridge/pivot/disclosure), `blocks` (sub-statements, each heading+para+optional disclosure), `twoSystems` (visible/invisible cards), `statement` (serif heading + optional visible `body[]` + optional disclosure), `outcomes` (heading + bullet list + optional `close[]`), `experience` (line + optional `body[]` + `<LogoTicker>` all 13), `testimonial` (plum), `plumStatement` (plum heading + sub), `workCards` (engagement models + note). The single plum section per page is the one deep beat.
 
