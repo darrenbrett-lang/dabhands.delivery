@@ -1,59 +1,79 @@
 # DAB Hands Website — Handover
 
-Pick this up cold. Captures the project after the **Style Guide v2.0 refresh** (June 2026).
+Pick this up cold. Captures the project after the **Style Guide v2.0 refresh** and the **"marks of skilled hands" mastery recentre** (June 2026).
 
 ---
 
 ## Status (read first)
 
-- **Branch:** `refresh/style-guide-v2` (cut from `main` @ `efaa863`). The whole v2.0 refresh lives here. **Not yet pushed, not deployed.** Production (`https://dabhands.delivery`, Vercel auto-deploys on push to `main`) is still v1 until the owner reviews on localhost and says **"push"**.
+- **Working branch: `staging`** (committed at `74677f9`, pushed to `origin/staging`). `refresh/style-guide-v2` is a local snapshot at the same commit. The whole v2.0 + mastery build lives here.
+- **Production is untouched.** `main` is still the old v1 site (`efaa863`) serving `https://dabhands.delivery`. Nothing of the new build is on `main` yet.
+- **Staging preview:** `https://dabhands-delivery-git-staging-darren-brett-s-projects.vercel.app` (Vercel preview of the `staging` branch, rebuilds on every push). It currently returns **401 "Authentication Required"** because Vercel Deployment Protection is on by default. To open it: Vercel → `dabhands-delivery` project → Settings → Deployment Protection → Vercel Authentication → Disabled. (Or keep it on and use a Password / Shareable Link for specified people.)
+- **localhost:3000** is the local `npm run dev` server. It hot-reloads edits to this repo, so it always shows the latest on whatever branch is checked out (currently `staging`). Keep it running in a terminal; preview-tool servers launched from inside a session are ephemeral and get reaped.
 - **Build:** `npm run build` is clean (TypeScript passes). Routes: `/`, `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`, `/contact`, `/for/manifesto-digital`, plus `/404` and `/api/hello`.
-- **Deploy flow:** owner reviews localhost (`npm run dev`, port 3000) → says "push" → `git checkout main && git merge refresh/style-guide-v2 && git push origin main`. After any OG-image change, refresh social caches (LinkedIn Post Inspector + FB Sharing Debugger).
 
-## What v2.0 is
+### Deploy flow (staging + production)
+- **Work on `staging`.** Edit → localhost hot-reloads → commit + push `staging` → Vercel rebuilds the staging preview. Standing practice: keep both in sync as you go.
+- **Promote to production only when the owner explicitly says so:** `git checkout main && git merge staging && git push origin main` → Vercel deploys `dabhands.delivery`. After any OG-image change, refresh social caches (LinkedIn Post Inspector + FB Sharing Debugger).
+- Repo: `git@github.com:darrenbrett-lang/dabhands.delivery.git`. Vercel project `dabhands-delivery` under team `darren-brett-s-projects`, GitHub-integration auto-deploys.
 
-The refresh brief from the owner (plus a GPT style guide and a visual mockup) is the **source of truth**. The site is the digital home of **Darren** (first person, "I"), a senior digital operator with the heart of a creative. Not a consultancy, agency, or transformation practice. Editorial, not corporate (Apple / Monocle / A24 / Kinfolk). Target feel: **60% trusted operator / 40% creative perspective**. Core thread through all copy: the work isn't the problem, the journey is, and Darren protects it. Preserve the link words **intact** (hero), **as intended** (point of view), **integrity / protects** (testimonial).
+## The brand direction (source of truth)
+
+Two owner briefs stack: the **Style Guide v2.0** brief, then a **visual recentre** that supersedes anything leaning into consultancy, abstract art, decorative brushwork, or polished Apple-minimalism.
+
+- **Visual centre: "the marks left behind by skilled hands."** A mastery brand. The feeling: *somebody capable has been here.* It is the digital home of **Darren** (first person, "I"), a senior digital operator with the heart of a creative. Not a consultancy, agency, or technology brand.
+- **Central tension: Darren is still, the work moves.** He is calm, judgement, experience, scar tissue. The marks create movement, alignment, momentum around and through the page.
+- **One journey, not many marks.** A single quiet trajectory through the site (enters hero → behind Darren → converges at point of view → straightens at proof → splits three ways at the turnstile → rejoins at the CTA). Momentum without clutter. Reduce motifs ~60%; make the few that remain work harder. Typography does most of the work.
+- **Copy thread:** the work isn't the problem, the journey is, and Darren protects it. Preserve the link words **intact** (hero), **as intended** (point of view), **integrity / protects** (testimonial). First person, warm, senior, no buzzwords.
+- References: Apple (reduction), Rapha (craft), Nike (momentum), plus Darren's scar tissue. **Retired in the recentre: halos, decorative gradient atmospheres, pill/lozenge tags.**
 
 ## Stack
 
-- **Next.js 16.2.6** (Pages Router, Turbopack). `AGENTS.md` warns it differs from training data, read `node_modules/next/dist/docs/` before adding Next features.
-- **Tailwind CSS v4** (`@import "tailwindcss"` + `@theme` in `styles/globals.css`).
-- **Framer Motion 12** (subtle reveals, momentum, halo breathe). `FadeUp` is the shared scroll-reveal.
-- **TypeScript.** `npm run build` is the gate.
+- **Next.js 16.2.6** (Pages Router, Turbopack). `AGENTS.md`: read `node_modules/next/dist/docs/` before adding Next features.
+- **Tailwind v4** (`@import "tailwindcss"` + `@theme` in `styles/globals.css`).
+- **Framer Motion 12** (subtle reveals via `FadeUp`, gentle transitions, disclosure height-animations).
+- **TypeScript.** `npm run build` is the gate. Note: `next build` conflicts with a running `next dev` over `.next`, so stop dev (or just push and let Vercel's build be the check).
 - **Fonts:** Instrument Serif (display) + Manrope (UI) via `next/font/google` in `pages/_app.tsx`.
 
-### Two gotchas worth knowing
-1. **Font vars must live at `:root`.** `@theme` sets `--font-serif: var(--font-instrument-serif), ...`. Custom properties resolve where they're declared (`:root`), so the next/font variables have to be visible at `:root`, not just on a wrapper div, or `--font-serif` collapses to empty and headings silently fall back to sans. `_app.tsx` injects `<style>:root{--font-instrument-serif:…;--font-manrope:…}</style>` from `font.style.fontFamily` to guarantee this. Do not remove it.
-2. **Turbopack stale `@theme` CSS.** Editing colour/font tokens in `globals.css` sometimes does not hot-reload (the old CSS keeps being served). Fix: stop dev, `rm -rf .next`, restart.
+### Two gotchas
+1. **Font vars must live at `:root`.** `@theme` sets `--font-serif: var(--font-instrument-serif), ...`; custom properties resolve where declared, so `_app.tsx` injects `<style>:root{--font-instrument-serif:…;--font-manrope:…}</style>` from `font.style.fontFamily`. Without it, `--font-serif` collapses to empty and headings fall back to sans. Do not remove it.
+2. **Turbopack stale `@theme` CSS.** Editing colour/font tokens sometimes does not hot-reload. Fix: stop dev, `rm -rf .next`, restart.
 
 ## Information architecture
 
-Nav is **DAB Hands (home) · Who I help (dropdown) · Contact** — nothing else. No persistent "Start a conversation" button; CTAs live inside page content.
-
-- "Who I help" dropdown → three flat destination routes: `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`.
-- **Deleted:** `pages/experience.tsx` and `pages/where-we-step-in.tsx` (scrubbed from `sitemap.xml` and `llms.txt`). The three destination pages replace About / Services / Experience.
+Nav: **DAB Hands (home) · Who I help (dropdown) · Contact.** No persistent "Start a conversation" button; CTAs live in content.
+- "Who I help" → three **flat** routes: `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`.
+- **Deleted:** `pages/experience.tsx`, `pages/where-we-step-in.tsx` (scrubbed from `sitemap.xml`, `llms.txt`). The three rooms replace About / Services / Experience.
 
 ## Pages
 
 ### `/` — `pages/index.tsx`
-Rhythm: bone → paper → bone → paper → bone → plum. Six sections, all copy locked by the brief:
-1. **Hero** (bone, centred) — halo brand mark (lavender ring + glow, gentle breathe) + Instrument Serif "Keeping important work moving." (per-word stagger on mount) + Manrope subline "I help digital-forward businesses get their best work into the world, intact."
-2. **Darren** (paper) — halo portrait (`/images/darren-portrait.jpeg`, circular, soft lavender glow) + eyebrow "Darren" + "Hi, I'm Darren." + serif statement "I'm the person who walks toward the part everyone else is avoiding…" + support line. Two columns desktop, stacks on mobile.
-3. **Point of view** (bone) — eyebrow + "The tools are changing. The problems aren't." + "Most organisations already have what they need." + five soft pills (Strategy / Creative ambition / Investment / Capability / Good people) + the drumbeat lines + serif close "It deserves to arrive **as intended**." (`HandUnderline` in lavender). Soft lavender/peach atmosphere on the right (lg+).
-4. **Proof** (paper) — eyebrow "Trusted with important work" + a static centred row of 7 logos (Nike, Volkswagen, Audi, Unilever, Hugo Boss, Royal Mail, Johnson & Johnson, via `TickerLogo` charcoal silhouettes) + Hugo Boss testimonial in Instrument Serif italic.
-5. **Turnstile** (bone) — "What's getting in the way?" + three cards (tinted circle glyph in lavender / peach / sky, title, diagnosis, support) each linking to its destination page.
-6. **Final CTA** (Midnight Plum, the one deep moment) — "If something important needs to move properly, let's talk." + understated bone-outline "Start a conversation" (mailto). `footerVariant="none"`.
+Rhythm bone → paper → bone → paper → bone → plum. Copy is locked by the brief. Sections:
+1. **Hero** (bone, centred) — Instrument Serif "Keeping important work moving." (per-word stagger on mount) + Manrope subline. **No halo mark** (removed in the recentre); space left for the entering trajectory.
+2. **Darren** (paper) — editorial portrait via `<Figure>` (rounded-rectangle, 4:5, **no halo**), eyebrow "Darren", "Hi, I'm Darren.", the serif "walks toward the part everyone else is avoiding" statement, support line. The portrait asset (`/images/darren-portrait.jpeg`) is a placeholder, see TODO.
+3. **Point of view** (bone) — "The tools are changing. The problems aren't." + "Most organisations already have what they need." + the ingredients as a **plain text line** ("Strategy. Creative ambition. Investment. Capability. Good people.", no pills) + drumbeat lines + serif close "It deserves to arrive **as intended**." (`HandUnderline`, lavender). No decorative gradient.
+4. **Proof** (paper) — "Trusted with important work" + `<LogoTicker>` (**all 13 clients**, seamless marquee) + Hugo Boss testimonial in serif italic.
+5. **Turnstile** (bone) — "What's getting in the way?" + three cards, each a small **accent dot** (lavender / peach / sage, the three room colours), title, diagnosis, support. No glyphs, no arrows. Each links to its room.
+6. **Final CTA** (Midnight Plum) — "If something important needs to move properly, let's talk." + bone-outline CTA. `footerVariant="none"`.
 
-### `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders` — shared `components/AudienceTemplate.tsx`
-Three thin flat route files feed a slug into the template. **Fixed 8-section spine for all three** (from the owner's wireframe): hero (eyebrow "For <audience>" + serif headline + subline), The situation (drumbeat + "Explore the challenge" disclosure), What needs to change (the two operating systems, visible/invisible, + "How change happens" disclosure), What good looks like (outcomes + "See what changes" disclosure), Relevant experience (line + logos), Trusted to lead important work (the single plum testimonial), How we might work together (three engagement models + "The shape depends on the challenge"), Close (serif statement + subline + CTA). Sections 2 to 4 use a collapsed-by-default progressive `Disclosure`. Content is data-driven via the `CONTENT` map. **Business & agency leaders is filled verbatim from the wireframe. Marketing leaders and Creators & founders share the structure and render hero + a holding note until their copy lands.** `footerVariant="none"`.
+### The three rooms — `components/AudienceTemplate.tsx`
+All three are **built with full copy** and **section-driven**: a `CONTENT` map keyed by slug holds `{ navLabel, eyebrow, hero, accent, sections[], close }`. They share the visual kit and rhythm but **compose differently** (not a fixed spine). `footerVariant="none"`.
+
+Section kit (each optional-field-driven): `drumbeat` (stacked lines + optional bridge/pivot/disclosure), `blocks` (sub-statements, each heading+para+optional disclosure), `twoSystems` (visible/invisible cards), `statement` (serif heading + optional visible `body[]` + optional disclosure), `outcomes` (heading + bullet list + optional `close[]`), `experience` (line + optional `body[]` + `<LogoTicker>` all 13), `testimonial` (plum), `plumStatement` (plum heading + sub), `workCards` (engagement models + note). The single plum section per page is the one deep beat.
+
+- **Business & agency leaders** (accent **lavender**): situation drumbeat → "What needs to change" two-systems → "What good looks like" outcomes → "Relevant experience" → plum testimonial (Joel Sinnott, Nike) → "How we might work together" workCards → close. Three disclosures.
+- **Marketing leaders** (accent **peach**): "The situation" three blocks (each Expand) → "Where I come in" statement (Expand) → "What good looks like" outcomes (Expand) → "Relevant experience" → plum testimonial (Anthony Mahon, Hugo Boss) → "How we might work together" statement (Expand) → close.
+- **Creators & founders** (accent **sage**): "The moment" blocks → "The real challenge" statement → "This might sound familiar" drumbeat → "What changes things" statement → "Where I come in" statement → "What good looks like" outcomes (+close lines) → "A familiar problem" experience (+body, logos) → **"The partnership" plumStatement** (its deep beat, no testimonial) → close. No disclosures (the supplied copy was continuous prose).
+
+**Disclosure** (progressive "expand"): **coloured bold text only, no button/pill.** Uses the room's accent deepened to a legible shade (`ACCENT[accent].trigger`: lavender→`#6E5A86`, peach→`#9E5B3A`, sage→`#5E6B3F`). Collapsed by default; reveals a left-ruled body.
 
 ### `/contact` — `pages/contact.tsx`
-Bone hero "What needs moving?" (serif) + intro + Email / Phone / LinkedIn channels (Manrope, `hover:opacity-60`) + soft lavender/peach atmosphere. `footerVariant="none"`.
+Bone hero "What needs moving?" (serif) + intro + Email / Phone / LinkedIn channels (Manrope, `hover:opacity-60`). No decorative gradient. `footerVariant="none"`.
 
-### `/for/manifesto-digital` — `pages/for/manifesto-digital.tsx` (UNLISTED)
-Private pitch page for Rebecca Hull. Now on v2.0 (plum/aubergine dark sections, lavender accents, no green). Uses `PrivateLayout` (plum chrome, serif wordmark) + `<SeoMeta noindex>`. Keep out of nav and sitemap. Local components: `ChipExplorer`, `PhaseHeading`, `ActivityList`. Topic icons (`/images/icon-*.svg`) were recoloured to lavender and are referenced with `?v=2` (the `/images/*` immutable cache means any future icon edit needs a fresh `?v=N`).
+### `/for/manifesto-digital` (UNLISTED)
+Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no green). `PrivateLayout` (plum chrome, serif wordmark) + `<SeoMeta noindex>`. Keep out of nav and sitemap. Local components `ChipExplorer` / `PhaseHeading` / `ActivityList`. Topic icons `/images/icon-*.svg` recoloured to lavender, referenced `?v=2` (immutable cache → bump version on any edit).
 
-## Visual system (v2.0)
+## Visual system
 
 | Role | Token | Hex |
 |---|---|---|
@@ -62,48 +82,49 @@ Private pitch page for Rebecca Hull. Now on v2.0 (plum/aubergine dark sections, 
 | Primary text / headlines (ink) | `ink` | `#1F1F1D` |
 | Secondary / body text | `graphite` | `#5C5C58` |
 | Borders / dividers | `stone` | `#D8D2C8` |
-| Primary accent | `lavender` | `#B8A2D8` |
-| Gradient mid / halo glow | `lavender-soft` | `#E6D6EE` |
-| Secondary accent | `peach` | `#E6B39A` |
+| Movement accent — Business | `lavender` | `#B8A2D8` |
+| Gradient mid / soft tint | `lavender-soft` | `#E6D6EE` |
+| Movement accent — Marketing | `peach` | `#E6B39A` |
+| Movement accent — Creators | `sage` | `#B8C2A3` |
 | Supporting accent | `sky` | `#AFCFE0` |
 | Highlight / hover / focus | `coral` | `#D98773` |
 | Deep sections / footer / CTA | `plum` | `#352E44` |
 | Supporting dark | `aubergine` | `#4A3D59` |
 
-Ratio target ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% coral/sky. Tokens are in `styles/globals.css @theme`. Useful utilities there: `.eyebrow` (Manrope uppercase label), `.halo-glow` (radial lavender), `.signature-gradient`, `.font-serif`. Focus ring is coral. **Legacy `dab-*` tokens are still defined in `@theme` but nothing live uses them, see TODO.**
+Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky. **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`, `.halo-glow` (now unused). Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
 
 ## Components (`/components`)
 
-- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (no green dot) + "Who I help" dropdown (opens on hover, also click/keyboard; Escape + route-change close) + "Contact". Mobile hamburger → bone sheet.
-- **`Footer.tsx`** — plum. `variant` `'default' | 'minimal' | 'none'`; every page currently uses `none` (just the slim plum bar: serif wordmark + LinkedIn + "© 2026 DAB Hands"). The contact module (default/minimal) is recoloured to v2.0 but unused.
-- **`BoxCTA.tsx`** — understated pill. `tone='light'` (ink outline → fills ink) / `'dark'` (bone outline → fills bone). Arrow inherits colour, no green.
-- **`AudienceTemplate.tsx`** — the shared destination-page engine: the fixed 8-section spine + a `CONTENT` map keyed by slug + a collapsed-by-default `Disclosure`. Business filled from the wireframe; the other two render hero + holding note.
-- **`HandUnderline.tsx`** — restrained hand mark. `tone='dark'` → lavender, `'light'` → coral; `stroke` overrides.
-- **`SeoMeta.tsx`** — per-page Head (title, desc, canonical, OG, Twitter, `noindex`). OG image defaults to `/og-image.png`.
-- **`PrivateLayout.tsx`** — plum chrome for `/for/<company>` pages.
-- **`LogoTicker.tsx` / `TickerLogo.tsx`** — the marquee + the canonical 13-client `clients` array (single source of truth, exported). `TickerLogo` forces `brightness(0)` charcoal silhouettes. The homepage Proof row reuses `TickerLogo` statically with 7 of the clients.
-- **`FadeUp.tsx`**, **`Layout.tsx`** (skip-link + Header + `<main id="top">` + Footer).
-- **Unused / prunable v1 artifacts** (nothing imports them): `Ribbon.tsx`, `RibbonAccent.tsx`, `RibbonMotif.tsx`, `StatPopover.tsx`, `GridToggle.tsx`. Crown/calibration/compass marks in `/public/images` are no longer used either.
+- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (no dot), "Who I help" dropdown (hover + click/keyboard; Escape + route-change close), "Contact". Mobile hamburger → bone sheet.
+- **`AudienceTemplate.tsx`** — the section-driven engine (kit + `CONTENT` map + `ACCENT` map + `Disclosure`). See "The three rooms" above.
+- **`Figure.tsx`** — **art-directed, mobile-first imagery.** `<picture>` with the mobile crop as the `<img>` base and an optional `desktop` `<source media="(min-width:768px)">`. Props: `mobile`, `desktop?`, `alt`, `className` (wrapper sizing/shape), `priority?`. Use this for striking imagery so desktop and mobile carry different framing.
+- **`Footer.tsx`** — plum. `variant 'default'|'minimal'|'none'`; every page uses `none` (slim plum bar: serif wordmark + LinkedIn + "© 2026 DAB Hands"). The contact module exists for default/minimal but is unused.
+- **`BoxCTA.tsx`** — understated rounded-full pill, `tone 'light'|'dark'`. NOTE: still a pill; see the open CTA question in TODO.
+- **`HandUnderline.tsx`** — restrained hand mark; `tone 'dark'`→lavender, `'light'`→coral; `stroke` override.
+- **`LogoTicker.tsx` / `TickerLogo.tsx`** — seamless marquee + the canonical **13-client** `clients` array (single source of truth). `brightness(0)` charcoal silhouettes. Used on the homepage Proof and every room's experience section (all 13).
+- **`SeoMeta.tsx`**, **`FadeUp.tsx`**, **`Layout.tsx`** (skip-link + Header + `<main id="top">` + Footer), **`PrivateLayout.tsx`**.
+- **Unused / prunable v1 artifacts** (no imports): `Ribbon.tsx`, `RibbonAccent.tsx`, `RibbonMotif.tsx`, `StatPopover.tsx`, `GridToggle.tsx`. Crown/calibration/compass marks + green `icon-*` originals unused on the main site.
 
 ## Hard rules
 
-1. **No em dashes** in user-facing copy (code comments fine). Use full stops, commas, colons.
-2. **Brand wordmark is "DAB Hands"** (uppercase DAB, capital-H Hands). File paths / tokens exempt.
-3. **v2.0 palette only** (table above). **Neon green is fully retired.** Accents are low-contrast on bone, so never use them as text on light, keep coloured text to dark backgrounds or use accents as decorative marks; on light, link hovers use `hover:opacity-60`.
-4. **Type:** Instrument Serif for display/statements/quotes, Manrope for everything else. Don't force weight on the serif (single 400 weight). Label headings no full stops; truth-statements keep periods.
-5. **Motion = momentum, not novelty.** Subtle reveals, gentle transitions, `useReducedMotion` guards.
+1. **No em dashes** in user-facing copy (code comments fine).
+2. **Brand wordmark is "DAB Hands"** (uppercase DAB, capital-H Hands). Tokens/paths exempt.
+3. **v2.0 palette only; neon green fully retired.** Accents are low-contrast on bone, so never use a pale accent as text on light: deepen it (as the disclosure triggers do) or keep coloured text to dark backgrounds; link hovers on light use `hover:opacity-60`.
+4. **Type:** Instrument Serif for display/statements/quotes; Manrope for everything else. Never force weight on the serif (single 400). Label headings no full stops; truth-statements keep periods.
+5. **Mastery marks, not decoration.** One journey/trajectory, confident and economical. No halos, no decorative gradients, no pill/lozenge tags, no hand/tool icons. Motion communicates momentum, not novelty.
 
 ## Open items / TODO
 
-- **Destination-page copy** is placeholder only. Write it (Business & agency leaders first). Each page is "what am I buying" in one sentence (the spine line already in the template).
-- **`/public/og-image.png`** is still the v1 green social card. It is the SeoMeta default OG image AND the `_document.tsx` JSON-LD `logo`. Regenerate for v2.0.
-- **`/public/favicon.svg`** is still the v1 charcoal + green dot. Update to v2.0 (e.g. plum + lavender). `theme-color` is already bone.
-- **Darren portrait** on the homepage uses the B&W `darren-portrait.jpeg`. The mockup showed a colour halo portrait (`darren-brett_colour_headshot.jpeg` exists). Owner's call which to use.
+- **Imagery (owner is creating the visuals).** `Figure` is ready for art-directed striking imagery (desktop crop + mobile crop). Still to decide *where* striking images live, then build those slots and do the grid/gutter/headline "make space" pass against them. The single "trajectory" host layers (positioned section containers behind the type for the owner's SVG marks) are not built yet.
+- **CTA shape — owner decision pending.** The CTAs are still rounded-full pills (the only lozenge-shaped element left after the no-lozenge rule). Options offered: text link with a quiet arrow (recommended), squared/underlined button, or keep as pills. Apply consistently once chosen.
+- **Vercel staging is protected (401).** Toggle Deployment Protection off for the open link the owner wants, or use Password/Shareable Link for specified-people access.
+- **Darren portrait is a placeholder** (B&W `darren-portrait.jpeg`). Owner to supply the real editorial portrait: lifelike, calm, white sunglasses where appropriate, **no halo**, not AI-looking. Drop mobile + desktop crops into `Figure`.
+- **`og-image.png` and `favicon.svg` are still v1 green.** Regenerate for v2.0 (`og-image.png` is the SeoMeta default + the `_document` JSON-LD logo; `theme-color` is already bone).
 - **Prune** legacy `dab-*` tokens from `globals.css` and delete the unused v1 components once confirmed.
 
 ## Working style
 
-- Owner iterates fast in small, specific edits. For exploratory questions, answer in 2-3 sentences with a recommendation + main tradeoff before implementing.
-- Each page signs off into the next step (home → destinations → contact). Contact is terminal.
-- Preview-tool **screenshots are unreliable for deep-scrolled sections** (they capture from the top); use DOM measurements via `preview_eval` to verify below the fold. A very tall viewport (`preview_resize` height ~3000-4900) captures more in one shot.
-- React Strict Mode is on (double-renders in dev). Saved memory rules at `~/.claude/projects/.../memory/` apply every session, read `MEMORY.md` first.
+- Owner iterates fast in small, specific edits. For exploratory questions, answer in 2-3 sentences with a recommendation + the main tradeoff before implementing. Don't pre-emptively redesign neighbouring work.
+- **Verification:** preview-tool screenshots are unreliable for deep-scrolled sections (they capture from the top) and `FadeUp` content sits at opacity 0 until revealed, so a fresh screenshot often looks blank mid-animation. Use `preview_eval` DOM measurements to confirm below the fold; a tall viewport (`preview_resize` height ~3000-4900) captures more at once. `gh` and the `vercel` CLI are not installed; the unauthenticated GitHub API (via `curl`/`python3`) can read Vercel commit-status URLs.
+- React Strict Mode is on (double-renders in dev).
+- **Saved memory rules** live at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` and apply every session — read `MEMORY.md` first. Current rules: no em dashes; "DAB Hands" wordmark; colour system v2.0 (+ per-audience accents); typography (Instrument Serif + Manrope); the "marks of skilled hands" visual centre (no halos/decoration/lozenges); portrait direction; the v2.0 refresh + the "too restrained, push brand energy" feedback.
