@@ -95,11 +95,11 @@ export default function Home() {
         {/* ── DARREN ───────────────────────────────── */}
         <section className="bg-paper text-ink py-16 md:py-28 border-t border-stone/60">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <div className="grid md:grid-cols-[auto_1fr] gap-10 md:gap-14 lg:gap-20 items-center">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
               <Figure
-                mobile="/images/darren-portrait.jpeg"
+                mobile="/images/darren_jesus.jpeg"
                 alt="Darren Brett"
-                className="w-56 md:w-72 lg:w-80 aspect-[4/5] rounded-2xl mx-auto md:mx-0"
+                className="w-full aspect-[3/2] rounded-2xl"
               />
 
               <div>
