@@ -364,15 +364,15 @@ const bgClass = (bg?: Bg) => (bg === 'paper' ? 'bg-paper' : 'bg-bone');
 const ACCENT: Record<Accent, { dot: string; cardBorder: string; cardBg: string; cardDivide: string; trigger: string; heroWash: string }> = {
   lavender: {
     dot: 'bg-lavender', cardBorder: 'border-lavender/30', cardBg: 'bg-lavender/[0.08]', cardDivide: 'border-lavender/25', trigger: 'text-[#6E5A86]',
-    heroWash: 'linear-gradient(to bottom, rgba(184,162,216,0.18), rgba(184,162,216,0) 72%)',
+    heroWash: 'linear-gradient(to bottom, rgba(184,162,216,0.22), rgba(184,162,216,0.22) 60%, rgba(184,162,216,0) 100%)',
   },
   peach: {
     dot: 'bg-peach', cardBorder: 'border-peach/30', cardBg: 'bg-peach/[0.08]', cardDivide: 'border-peach/25', trigger: 'text-[#9E5B3A]',
-    heroWash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0) 72%)',
+    heroWash: 'linear-gradient(to bottom, rgba(230,179,154,0.26), rgba(230,179,154,0.26) 60%, rgba(230,179,154,0) 100%)',
   },
   sage: {
     dot: 'bg-sage', cardBorder: 'border-sage/30', cardBg: 'bg-sage/[0.10]', cardDivide: 'border-sage/25', trigger: 'text-[#5E6B3F]',
-    heroWash: 'linear-gradient(to bottom, rgba(184,194,163,0.22), rgba(184,194,163,0) 72%)',
+    heroWash: 'linear-gradient(to bottom, rgba(184,194,163,0.26), rgba(184,194,163,0.26) 60%, rgba(184,194,163,0) 100%)',
   },
 };
 
