@@ -125,9 +125,9 @@ const CONTENT: Record<string, AudienceContent> = {
         label: 'How we might work together',
         bg: 'bone',
         models: [
-          { title: 'Focused support', blurb: 'A critical challenge that needs moving.' },
-          { title: 'Fractional leadership', blurb: 'Experienced operational leadership without a full-time hire.' },
-          { title: 'Capability development', blurb: 'Strengthening the systems, teams, and operating model for what’s next.' },
+          { title: 'Focused Intervention', blurb: 'When something important is stuck, slipping, or struggling to move.' },
+          { title: 'Fractional Leadership', blurb: 'Experienced operational leadership without the commitment of a full-time hire.' },
+          { title: 'Capability Building', blurb: 'Creating the systems, rhythms, and visibility required for sustainable growth.' },
         ],
         note: 'The shape depends on the challenge.',
       },
