@@ -36,10 +36,10 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
       </section>
     )}
 
-    <footer className="bg-plum text-bone/80 border-t border-bone/10">
+    <footer className="bg-paper text-graphite border-t border-stone">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <Link href="/" className="font-serif text-bone text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">
+          <Link href="/" className="font-serif text-ink text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">
             DAB Hands
           </Link>
           <div className="flex items-center gap-5">
@@ -48,12 +48,12 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
               target="_blank"
               rel="noopener noreferrer"
               aria-label="DAB Hands on LinkedIn"
-              className="opacity-75 hover:opacity-100 transition-opacity"
+              className="opacity-55 hover:opacity-100 transition-opacity"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logos/linkedin-app-white-icon.webp" alt="" width={16} height={16} loading="lazy" decoding="async" className="block" />
+              <img src="/images/logos/linkedin-app-white-icon.webp" alt="" width={16} height={16} loading="lazy" decoding="async" className="block" style={{ filter: 'brightness(0)' }} />
             </a>
-            <p className="text-[11px] tracking-[0.16em] text-bone/55">© 2026 DAB Hands</p>
+            <p className="text-[11px] tracking-[0.16em] text-graphite/70">© 2026 DAB Hands</p>
           </div>
         </div>
       </div>
