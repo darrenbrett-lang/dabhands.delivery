@@ -22,7 +22,7 @@ export interface OperatorContent {
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
   outcomes: { heading: string; paras: string[] };
   transition: { heading: string; subline: string };
-  help: { heading: string; situations: { heading: string; body: string }[] };
+  help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[] };
   close: { heading: string; line?: string };
 }
@@ -147,8 +147,20 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 4 ── OUTCOMES: what changes when it moves again ── */}
+        {/* 4 ── TRANSITION: the space between strategy and execution / where I step in ── */}
         <section className="bg-paper text-ink py-16 md:py-24 border-t border-stone/50">
+          <div className={COL}>
+            <FadeUp>
+              <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <p className="mt-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">{c.transition.subline}</p>
+            </FadeUp>
+          </div>
+        </section>
+
+        {/* 5 ── OUTCOMES: what changes when it moves ── */}
+        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.outcomes.heading}</h2>
@@ -165,39 +177,40 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 5 ── TRANSITION: that's where I step in ── */}
-        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/50">
-          <div className={COL}>
-            <FadeUp>
-              <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[16ch]">{c.transition.heading}</h2>
-            </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">{c.transition.subline}</p>
-            </FadeUp>
-          </div>
-        </section>
-
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
         <section className="bg-paper text-ink py-16 md:py-24 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
             </FadeUp>
-            <div className="mt-9 grid gap-5 md:grid-cols-3">
-              {c.help.situations.map((s, i) => (
-                <motion.div
-                  key={s.heading}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 transition-colors duration-300 hover:border-ink/30"
-                >
-                  <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
-                  <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
-                </motion.div>
-              ))}
-            </div>
+            {c.help.situations && (
+              <div className="mt-9 grid gap-5 md:grid-cols-3">
+                {c.help.situations.map((s, i) => (
+                  <motion.div
+                    key={s.heading}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 transition-colors duration-300 hover:border-ink/30"
+                  >
+                    <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
+                    <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+            {c.help.statement && (
+              <FadeUp delay={0.06}>
+                <div className="mt-6 space-y-4 text-lg text-graphite leading-[1.7] max-w-[56ch]">
+                  {c.help.statement.map((p, i) => (
+                    <p key={i} className={i === c.help.statement!.length - 1 ? 'text-ink' : undefined}>
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              </FadeUp>
+            )}
           </div>
         </section>
 

@@ -6,49 +6,36 @@ const content: OperatorContent = {
   eyebrow: 'For marketing leaders',
   accent: 'peach',
   hero: {
-    headline: 'The idea isn’t the problem. Getting its full value into market is.',
-    subline: 'Helping marketing teams protect momentum from strategy through to execution.',
+    headline: 'When the work matters too much to get lost on the way.',
+    subline: 'Helping brands get more of the original ambition into market.',
     trust: 'Twenty years helping Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever turn ambitious thinking into work that lands.',
   },
   validation: {
     heading: 'You’ve already done the hard part.',
-    intro: 'The thinking exists. The investment exists. The ambition exists. The challenge is getting the full value out of it.',
-    paras: [
-      'Campaigns rarely lose impact because the original idea wasn’t strong enough. They lose impact because the journey becomes complicated. More stakeholders. More channels. More dependencies. More decisions. The work starts losing some of what made it powerful in the first place.',
-    ],
+    intro: 'The thinking exists. The investment is committed. The work matters.',
+    paras: ['Now it has to survive the journey to market.'],
   },
   diagnosis: {
-    heading: 'What I see happening.',
+    heading: 'Complexity doesn’t kill work overnight. It dilutes it.',
     paras: [
-      'A strategy becomes a plan. A plan becomes a briefing. A briefing becomes production. Production becomes adaptation. Adaptation becomes deployment. At every stage, something is added, something is removed, something is reinterpreted. Nobody intends to dilute the work. But complexity has a habit of getting involved.',
-      'The challenge isn’t creating great work. It’s helping great work survive the journey.',
-    ],
-  },
-  outcomes: {
-    heading: 'What changes when everything starts moving together.',
-    paras: [
-      'The work feels more connected. Channels reinforce each other. Teams pull in the same direction. Agencies stop operating in isolation. Momentum builds rather than resets. More of the original thinking reaches the customer. More value reaches the market. More value reaches the business. The work doesn’t just launch. It lands.',
+      'A compromise here. A delay there. Another approval. Another interpretation. Until the thing that launches isn’t quite the thing you started with.',
     ],
   },
   transition: {
-    heading: 'That’s where I step in.',
-    subline: 'Into the messy middle between strategy and execution. Where campaigns become real. Where plans meet constraints. Where momentum is either protected or lost.',
+    heading: 'This is where campaigns become real.',
+    subline:
+      'Between strategy and execution. Between agencies and teams. Between the plan and the market. This is where momentum is either protected or lost.',
+  },
+  outcomes: {
+    heading: 'The work arrives intact.',
+    paras: [
+      'The original ambition remains visible. The ecosystem works together. The customer understands it. The investment works harder.',
+    ],
   },
   help: {
-    heading: 'Where I tend to help.',
-    situations: [
-      {
-        heading: 'A campaign needs to move.',
-        body: 'A launch, activation, membership programme, retail moment, or platform initiative needs experienced leadership to bring everything together and keep it moving.',
-      },
-      {
-        heading: 'Too many moving parts.',
-        body: 'Multiple agencies. Multiple channels. Multiple stakeholders. One outcome that still needs to reach the customer intact. I help keep that outcome clear as everything moves.',
-      },
-      {
-        heading: 'The work deserves more value.',
-        body: 'The strategy is strong. The investment is significant. The opportunity is real. The challenge is helping more of that value survive the journey and reach the customer intact.',
-      },
+    heading: 'The right people. The right challenge. The right moment.',
+    statement: [
+      'Small senior teams assembled around important work. Clear ownership. Less drag. No unnecessary layers.',
     ],
   },
   proof: {
@@ -58,8 +45,8 @@ const content: OperatorContent = {
     role: 'Global Membership Director, HUGO BOSS',
   },
   close: {
-    heading: 'Great work rarely fails because of the idea.',
-    line: 'More often, it loses momentum on the journey.',
+    heading: 'Great work rarely fails on ambition.',
+    line: 'More often, it gets diluted on the journey.',
   },
 };
 
