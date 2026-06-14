@@ -66,8 +66,8 @@ const content: OperatorContent = {
     role: 'Senior Digital Lead, Nike',
   },
   close: {
-    heading: 'If something important needs to move, let’s talk.',
-    line: 'No pitch. A straight conversation about what’s stuck and how to move it.',
+    heading: 'Great organisations don’t succeed because they have fewer challenges.',
+    line: 'They succeed because they can keep moving through them.',
   },
 };
 

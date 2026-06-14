@@ -27,13 +27,16 @@ export interface OperatorContent {
   close: { heading: string; line?: string };
 }
 
-const ACCENT: Record<Accent, { text: string; border: string; tintBg: string; rule: string }> = {
-  lavender: { text: 'text-[#6E5A86]', border: 'border-lavender/40', tintBg: 'bg-lavender/[0.10]', rule: 'border-lavender/60' },
-  peach: { text: 'text-[#9E5B3A]', border: 'border-peach/40', tintBg: 'bg-peach/[0.10]', rule: 'border-peach/60' },
-  sage: { text: 'text-[#5E6B3F]', border: 'border-sage/40', tintBg: 'bg-sage/[0.12]', rule: 'border-sage/60' },
+const ACCENT: Record<Accent, { text: string; border: string; tintBg: string; rule: string; wash: string }> = {
+  lavender: { text: 'text-[#6E5A86]', border: 'border-lavender/40', tintBg: 'bg-lavender/[0.10]', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.16), rgba(184,162,216,0) 72%)' },
+  peach: { text: 'text-[#9E5B3A]', border: 'border-peach/40', tintBg: 'bg-peach/[0.10]', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.18), rgba(230,179,154,0) 72%)' },
+  sage: { text: 'text-[#5E6B3F]', border: 'border-sage/40', tintBg: 'bg-sage/[0.12]', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(184,194,163,0.18), rgba(184,194,163,0) 72%)' },
 };
 
-const COL = 'mx-auto max-w-5xl px-6 md:px-10';
+// Authored, not a blog. Hero a touch wider; body narrow; the card grid in between.
+const COL = 'mx-auto max-w-[800px] px-6 md:px-10';
+const COL_HERO = 'mx-auto max-w-[960px] px-6 md:px-10';
+const COL_WIDE = 'mx-auto max-w-[940px] px-6 md:px-10';
 
 const Cta = ({ label = 'Start a conversation', full = false }: { label?: string; full?: boolean }) => (
   <a
@@ -69,8 +72,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
       <Layout footerVariant="none">
         {/* 1 ── HERO: recognition + trust + primary CTA, above the fold ── */}
-        <section className="bg-bone text-ink pt-32 md:pt-40 pb-16 md:pb-20">
-          <div className={COL}>
+        <section className="bg-bone text-ink pt-32 md:pt-40 pb-16 md:pb-20" style={{ backgroundImage: a.wash }}>
+          <div className={COL_HERO}>
             <FadeUp>
               <p className={`eyebrow mb-6 ${a.text}`}>{c.eyebrow}</p>
             </FadeUp>
@@ -179,7 +182,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
         <section className="bg-paper text-ink py-16 md:py-24 border-t border-stone/50">
-          <div className={COL}>
+          <div className={c.help.situations ? COL_WIDE : COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
             </FadeUp>
