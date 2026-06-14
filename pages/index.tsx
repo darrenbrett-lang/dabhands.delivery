@@ -104,7 +104,6 @@ export default function Home() {
 
               <div>
                 <FadeUp>
-                  <p className="eyebrow text-graphite mb-6">Darren</p>
                   <p className="text-lg md:text-xl text-graphite mb-5">Hi, I’m Darren.</p>
                 </FadeUp>
                 <FadeUp delay={0.08}>
