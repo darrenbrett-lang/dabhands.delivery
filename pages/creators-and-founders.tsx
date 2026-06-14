@@ -27,9 +27,9 @@ const content: OperatorContent = {
   outcomes: {
     heading: 'The business doesn’t need more hustle. It needs more capacity.',
     paras: [
-      'The challenge isn’t creating momentum. You’ve already done that. The challenge is helping momentum move through the business without depending on you every step of the way.',
-      'Decisions become clearer. Ownership becomes stronger. The team becomes more capable. The business becomes easier to run. Growth becomes less dependent on your time, attention, and energy.',
-      'You stop carrying the entire operation on your shoulders. The business starts moving under its own momentum.',
+      'You’ve already created the momentum. Now the business needs a way to carry it without everything depending on you.',
+      'Decisions become clearer. Ownership becomes stronger. The team becomes more capable.',
+      'The business becomes easier to run.',
     ],
   },
   transition: {
@@ -55,9 +55,11 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Built for founder-led growth.',
-    quote:
-      'He understands that the founder carrying everything isn’t a long-term strategy. He knows how to help you stay in the business you’re building while stepping out of the operation you’re running.',
+    heading: 'Momentum needs a system.',
+    statement: [
+      'The scale changes. The challenge doesn’t.',
+      'For twenty years, I’ve helped organisations bridge the gap between ambition and execution. Nike. HUGO BOSS. Volkswagen. Royal Mail. Different scale. Same problem.',
+    ],
   },
   close: {
     heading: 'You created the momentum.',
