@@ -144,42 +144,44 @@ export default function Home() {
         {/* ── POINT OF VIEW ────────────────────────── */}
         <section className="bg-bone text-ink py-16 md:py-28">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <div className="grid md:grid-cols-2 gap-y-9 md:gap-x-14 lg:gap-x-20 md:items-start">
-              {/* Left: the thesis + the lavender trajectory mark beneath it */}
+            {/* Thesis leads */}
+            <FadeUp delay={0.06}>
+              <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[17ch]">
+                The tools are changing. The problems aren’t.
+              </h2>
+            </FadeUp>
+
+            {/* The journey through complexity — the full-width visual argument:
+                work enters as one line, passes through the tangle, arrives clean. */}
+            <FadeUp delay={0.12}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/complexity.png"
+                alt="A single line of work entering a tangle of complexity and emerging as one clear, directed path."
+                className="pointer-events-none select-none mx-auto mt-2 md:mt-4 w-full max-w-[1040px] max-h-[460px] object-cover object-center"
+              />
+            </FadeUp>
+
+            {/* The argument that unfolds, to the “as intended” close */}
+            <div className="mt-4 md:mt-8 grid md:grid-cols-2 gap-y-8 md:gap-x-16 lg:gap-x-24 md:items-start">
               <div>
                 <FadeUp delay={0.06}>
-                  <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
-                    The tools are changing. The problems aren’t.
-                  </h2>
-                </FadeUp>
-                <FadeUp delay={0.14}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/dawb_lavender.png"
-                    alt=""
-                    aria-hidden
-                    className="pointer-events-none select-none mt-8 md:mt-10 w-full max-w-[460px]"
-                  />
-                </FadeUp>
-              </div>
-
-              {/* Right: the argument that unfolds, to the “as intended” close */}
-              <div>
-                <FadeUp delay={0.12}>
                   <p className="text-lg md:text-xl text-graphite max-w-[44ch]">Most organisations already have what they need.</p>
                 </FadeUp>
-                <FadeUp delay={0.16}>
+                <FadeUp delay={0.1}>
                   <p className="mt-5 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
                     Strategy. Creative ambition. Investment. Capability. Good people.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-9 md:mt-10 text-lg md:text-xl text-ink/85 leading-relaxed max-w-[42ch]">
+              </div>
+              <div>
+                <FadeUp delay={0.14}>
+                  <p className="text-lg md:text-xl text-ink/85 leading-relaxed max-w-[42ch]">
                     {DRUMBEAT.join(' ')}
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.26}>
-                  <p className="mt-9 md:mt-12 font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.1] text-ink max-w-[20ch]">
+                <FadeUp delay={0.2}>
+                  <p className="mt-8 md:mt-10 font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.1] text-ink max-w-[20ch]">
                     It deserves to arrive{' '}
                     <HandUnderline delay={0.6} variant={3} stroke="var(--color-lavender)">
                       as intended
