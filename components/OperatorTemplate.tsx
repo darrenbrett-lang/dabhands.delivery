@@ -23,7 +23,7 @@ export interface OperatorContent {
   outcomes: { heading: string; paras: string[] };
   transition: { heading: string; subline: string };
   help: { heading: string; situations: { heading: string; body: string }[] };
-  proof: { heading: string; quote: string; name: string; role: string };
+  proof: { heading: string; quote: string; name?: string; role?: string };
   close: { heading: string; line?: string };
 }
 
@@ -210,9 +210,12 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <FadeUp delay={0.08}>
               <blockquote className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
                 <p className="font-serif italic text-[24px] md:text-[32px] leading-[1.3] text-white">“{c.proof.quote}”</p>
-                <footer className="mt-6 text-[14px] not-italic text-white/65">
-                  {c.proof.name}, {c.proof.role}
-                </footer>
+                {c.proof.name && (
+                  <footer className="mt-6 text-[14px] not-italic text-white/65">
+                    {c.proof.name}
+                    {c.proof.role ? `, ${c.proof.role}` : ''}
+                  </footer>
+                )}
               </blockquote>
             </FadeUp>
           </div>
