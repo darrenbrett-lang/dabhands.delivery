@@ -55,7 +55,7 @@ const CONTENT: Record<string, AudienceContent> = {
         bridge: 'Yet somehow progress feels slower than it should.',
         pivot: 'The challenge is rarely strategy. It’s helping the organisation move together.',
         disclosure: {
-          label: 'Explore the challenge',
+          label: 'The challenge',
           body: [
             'Most organisations already have what they need. Capable people. Clear ambition. Important work.',
             'The strain appears elsewhere. Teams evolve at different speeds. Priorities compete. Technology moves faster than capability. Decisions take longer than they should. The same conversations happen in different rooms. More energy goes into coordination. Less energy goes into progress.',
@@ -398,13 +398,13 @@ const Disclosure = ({ label, body, triggerClass }: Disc & { triggerClass: string
   const [open, setOpen] = useState(false);
   const iconOnly = label === 'Expand';
   return (
-    <div className="mt-6">
+    <div className={`mt-5 ${iconOnly ? '' : 'md:ml-8'}`}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-label={iconOnly ? (open ? 'Collapse' : 'Expand') : undefined}
-        className={`transition-opacity hover:opacity-70 ${triggerClass} ${iconOnly ? '' : 'text-[15px] font-semibold tracking-tight'}`}
+        className={`transition-opacity hover:opacity-70 ${triggerClass} ${iconOnly ? '' : 'text-[15px] font-bold tracking-tight'}`}
       >
         {iconOnly ? (
           <span aria-hidden className={`inline-block text-[26px] leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
