@@ -132,40 +132,47 @@ export default function Home() {
         </section>
 
         {/* ── POINT OF VIEW ────────────────────────── */}
-        <section className="bg-bone text-ink py-16 md:py-32">
+        <section className="bg-bone text-ink py-16 md:py-28">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="eyebrow text-graphite mb-8 md:mb-10">Point of view</p>
+              <p className="eyebrow text-graphite mb-8 md:mb-12">Point of view</p>
             </FadeUp>
-            <FadeUp delay={0.06}>
-              <h2 className="text-[34px] sm:text-[46px] md:text-[60px] lg:text-[72px] leading-[1.04] max-w-[16ch]">
-                The tools are changing. The problems aren’t.
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.12}>
-              <p className="mt-7 md:mt-9 text-lg md:text-xl text-graphite max-w-[48ch]">Most organisations already have what they need.</p>
-            </FadeUp>
-            <FadeUp delay={0.16}>
-              <p className="mt-7 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
-                Strategy. Creative ambition. Investment. Capability. Good people.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.2}>
-              <div className="mt-12 md:mt-16 space-y-2.5 text-lg md:text-xl text-ink/85 max-w-[42ch]">
-                {DRUMBEAT.map((line) => (
-                  <p key={line}>{line}</p>
-                ))}
+            <div className="grid md:grid-cols-2 gap-y-9 md:gap-x-14 lg:gap-x-20 md:items-start">
+              {/* Left: the thesis */}
+              <FadeUp delay={0.06}>
+                <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
+                  The tools are changing. The problems aren’t.
+                </h2>
+              </FadeUp>
+
+              {/* Right: the argument that unfolds, to the “as intended” close */}
+              <div>
+                <FadeUp delay={0.12}>
+                  <p className="text-lg md:text-xl text-graphite max-w-[44ch]">Most organisations already have what they need.</p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-5 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
+                    Strategy. Creative ambition. Investment. Capability. Good people.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <div className="mt-9 md:mt-10 space-y-2.5 text-lg md:text-xl text-ink/85 max-w-[42ch]">
+                    {DRUMBEAT.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                </FadeUp>
+                <FadeUp delay={0.26}>
+                  <p className="mt-9 md:mt-12 font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.1] text-ink max-w-[20ch]">
+                    It deserves to arrive{' '}
+                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-lavender)">
+                      as intended
+                    </HandUnderline>
+                    .
+                  </p>
+                </FadeUp>
               </div>
-            </FadeUp>
-            <FadeUp delay={0.26}>
-              <p className="mt-12 md:mt-16 font-serif text-[30px] md:text-[48px] leading-[1.08] text-ink max-w-[18ch]">
-                It deserves to arrive{' '}
-                <HandUnderline delay={0.6} variant={3} stroke="var(--color-lavender)">
-                  as intended
-                </HandUnderline>
-                .
-              </p>
-            </FadeUp>
+            </div>
           </div>
         </section>
 
