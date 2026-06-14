@@ -62,7 +62,7 @@ export const Header = () => {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${
-          scrolled ? 'bg-lavender-soft/90 backdrop-blur-md border-b border-lavender/25' : 'bg-transparent'
+          scrolled ? 'bg-bone/85 backdrop-blur-md border-b border-stone/70' : 'bg-transparent'
         }`}
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
