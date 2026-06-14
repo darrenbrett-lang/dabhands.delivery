@@ -19,7 +19,7 @@ export interface OperatorContent {
   accent: Accent;
   hero: { headline: string; subline: string; trust: string };
   validation: { heading: string; intro: string; paras: string[] };
-  diagnosis: { heading: string; intro: string; cards: { heading: string; body: string }[] };
+  diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
   outcomes: { heading: string; paras: string[] };
   transition: { heading: string; subline: string };
   help: { heading: string; situations: { heading: string; body: string }[] };
@@ -116,19 +116,34 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.diagnosis.heading}</h2>
             </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-5 text-lg text-graphite leading-relaxed max-w-[56ch]">{c.diagnosis.intro}</p>
-            </FadeUp>
-            <div className="mt-9 max-w-[66ch]">
-              {c.diagnosis.cards.map((card, i) => (
-                <FadeUp key={i} delay={0.1 + i * 0.05}>
-                  <div className={`py-6 ${i < c.diagnosis.cards.length - 1 ? 'border-b border-stone/60' : ''}`}>
-                    <h3 className="text-xl md:text-2xl text-ink leading-[1.2]">{card.heading}</h3>
-                    <p className="mt-2.5 text-graphite leading-relaxed max-w-[56ch]">{card.body}</p>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
+            {c.diagnosis.intro && (
+              <FadeUp delay={0.06}>
+                <p className="mt-5 text-lg text-graphite leading-relaxed max-w-[56ch]">{c.diagnosis.intro}</p>
+              </FadeUp>
+            )}
+            {c.diagnosis.cards && (
+              <div className="mt-9 max-w-[66ch]">
+                {c.diagnosis.cards.map((card, i) => (
+                  <FadeUp key={i} delay={0.1 + i * 0.05}>
+                    <div className={`py-6 ${i < c.diagnosis.cards!.length - 1 ? 'border-b border-stone/60' : ''}`}>
+                      <h3 className="text-xl md:text-2xl text-ink leading-[1.2]">{card.heading}</h3>
+                      <p className="mt-2.5 text-graphite leading-relaxed max-w-[56ch]">{card.body}</p>
+                    </div>
+                  </FadeUp>
+                ))}
+              </div>
+            )}
+            {c.diagnosis.paras && (
+              <FadeUp delay={0.08}>
+                <div className="mt-6 space-y-4 text-lg text-graphite leading-[1.7] max-w-[58ch]">
+                  {c.diagnosis.paras.map((p, i) => (
+                    <p key={i} className={i === c.diagnosis.paras!.length - 1 ? 'text-ink' : undefined}>
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              </FadeUp>
+            )}
           </div>
         </section>
 
