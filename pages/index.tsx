@@ -6,7 +6,6 @@ import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
 import { HandUnderline } from '@/components/HandUnderline';
 import { LogoTicker } from '@/components/LogoTicker';
-import { Figure } from '@/components/Figure';
 import { Trajectory } from '@/components/Trajectory';
 import { mailto } from '@/lib/mailto';
 
@@ -97,30 +96,31 @@ export default function Home() {
         </section>
 
         {/* ── DARREN ───────────────────────────────── */}
-        <section className="bg-paper text-ink py-16 md:py-28 border-t border-stone/60">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <div className="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
-              <Figure
-                mobile="/images/darren_jesus.jpeg"
-                alt="Darren Brett"
-                className="w-full aspect-[3/2] rounded-2xl"
-              />
-
-              <div>
-                <FadeUp>
-                  <p className="text-lg md:text-xl text-graphite mb-5">Hi, I’m Darren.</p>
-                </FadeUp>
-                <FadeUp delay={0.08}>
-                  <p className="font-serif text-[28px] md:text-[40px] lg:text-[46px] leading-[1.1] text-ink max-w-[20ch]">
-                    I’m the person who walks toward the part everyone else is avoiding, because I can see what’s holding it up.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.16}>
-                  <p className="mt-7 md:mt-9 text-lg text-graphite leading-relaxed max-w-[46ch]">
-                    For more than 20 years, I’ve helped important work move through complex organisations.
-                  </p>
-                </FadeUp>
-              </div>
+        {/* Full-bleed cloud field, copy on the left. Darren's cut-out portrait
+            gets composited on the right later; for now the clouds carry it. */}
+        <section className="relative isolate overflow-hidden text-ink">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/clouds.png"
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-12 md:py-16">
+            <div className="max-w-[30rem] lg:max-w-[34rem]">
+              <FadeUp>
+                <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
+              </FadeUp>
+              <FadeUp delay={0.08}>
+                <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
+                  I’m the person who walks toward the part everyone else is avoiding, because I can see what’s holding it up.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.16}>
+                <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
+                  For more than 20 years, I’ve helped important work move through complex organisations.
+                </p>
+              </FadeUp>
             </div>
           </div>
         </section>
