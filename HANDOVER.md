@@ -23,9 +23,9 @@ Two owner briefs stack: the **Style Guide v2.0** brief, then a **visual recentre
 
 - **Visual centre: "the marks left behind by skilled hands."** A mastery brand. The feeling: *somebody capable has been here.* It is the digital home of **Darren** (first person, "I"), a senior digital operator with the heart of a creative. Not a consultancy, agency, or technology brand.
 - **Central tension: Darren is still, the work moves.** He is calm, judgement, experience, scar tissue. The marks create movement, alignment, momentum around and through the page.
-- **One journey, not many marks.** A single quiet trajectory through the site (enters hero → behind Darren → converges at point of view → straightens at proof → splits three ways at the turnstile → rejoins at the CTA). Momentum without clutter. Reduce motifs ~60%; make the few that remain work harder. Typography does most of the work.
+- **One journey, not many marks.** The trajectory is the **core visual language**: a single, slightly imperfect, confident line (a racing line / conductor's gesture) built as `Trajectory.tsx`. It enters the hero and passes *behind* the headline, drawing on at load so it reads as already-in-motion (momentum, not speed), and **reappears at the turnstile, dividing into the three doors** (lavender / peach / sage). Paired with the **DAB mark** (`DabMark.tsx`) beside the wordmark, the same hand. Momentum without clutter. Reduce motifs ~60%; make the few that remain work harder. Typography does most of the work.
 - **Copy thread:** the work isn't the problem, the journey is, and Darren protects it. Preserve the link words **intact** (hero), **as intended** (point of view), **integrity / protects** (testimonial). First person, warm, senior, no buzzwords.
-- References: Apple (reduction), Rapha (craft), Nike (momentum), plus Darren's scar tissue. **Retired in the recentre: halos, decorative gradient atmospheres, pill/lozenge tags.**
+- References: Apple (reduction), Rapha (craft), Nike (momentum), plus Darren's scar tissue. **Retired: the halo motif (the `.halo-glow` class is now removed), decorative gradient atmospheres, pill/lozenge tags.** The test for any addition: feels like a consultancy → simplify; like software → humanise; like art → remove decoration; like *movement through complexity* → keep.
 
 ## Stack
 
@@ -50,11 +50,11 @@ Nav: **DAB Hands (home) · Who I help (dropdown) · Contact.** No persistent "St
 
 ### `/` — `pages/index.tsx`
 Rhythm bone → paper → bone → paper → bone → plum. Copy is locked by the brief. Sections:
-1. **Hero** (bone, centred) — Instrument Serif "Keeping important work moving." (per-word stagger on mount) + Manrope subline. **No halo mark** (removed in the recentre); space left for the entering trajectory.
+1. **Hero** (bone, centred) — Instrument Serif "Keeping important work moving." (per-word stagger on mount) + Manrope subline. The **`Trajectory`** enters from the left and passes *behind* the headline, drawing on at load (lavender, low opacity, fades at both ends). Section is `relative overflow-hidden`; content sits above the line at `z-10`.
 2. **Darren** (paper) — editorial portrait via `<Figure>` (landscape 3:2, rounded-2xl, side-by-side with the copy on desktop, full-width banner on mobile), eyebrow "Darren", "Hi, I'm Darren.", the serif "walks toward the part everyone else is avoiding" statement, support line. Portrait asset: `/images/darren_jesus.jpeg` (owner-supplied; halo + pink sky, which diverges from the earlier no-halo direction, kept at owner's request).
 3. **Point of view** (bone) — "The tools are changing. The problems aren't." + "Most organisations already have what they need." + the ingredients as a **plain text line** ("Strategy. Creative ambition. Investment. Capability. Good people.", no pills) + drumbeat lines + serif close "It deserves to arrive **as intended**." (`HandUnderline`, lavender). No decorative gradient.
 4. **Proof** (paper) — "Trusted with important work" + `<LogoTicker>` (**all 13 clients**, seamless marquee) + Hugo Boss testimonial in serif italic.
-5. **Turnstile** (bone) — "What's getting in the way?" + three cards, each a small **accent dot** (lavender / peach / sage, the three room colours), title, diagnosis, support. No glyphs, no arrows. Each links to its room.
+5. **Turnstile** (bone) — "What's getting in the way?" + three cards, each a small **accent dot** (lavender / peach / sage, the three room colours), title, diagnosis, support. No glyphs, no arrows. Each links to its room. **Desktop adds a trajectory reprise above the cards**: one line divides into three faint branches in the room colours, each landing over its column (`hidden md:block`).
 6. **Final CTA** (Midnight Plum) — "If something important needs to move properly, let's talk." + CTA. White text on plum, the page's one deep moment. `footerVariant="none"`.
 
 ### The three rooms — `components/AudienceTemplate.tsx`
@@ -92,16 +92,18 @@ Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no gr
 | Deep sections / footer / CTA | `plum` | `#352E44` |
 | Supporting dark | `aubergine` | `#4A3D59` |
 
-Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky. **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`, `.halo-glow` (now unused). Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
+Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky. **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`. (`.halo-glow` removed — halo motif retired.) Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
 
 ## Components (`/components`)
 
-- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (no dot), "Who I help" dropdown (hover + click/keyboard; Escape + route-change close), "Contact". Mobile hamburger → bone sheet.
+- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark **preceded by the `DabMark`** (nudges right on hover). **"Who I help" now reads as a choice of paths** (hover + click/keyboard; Escape + route-change close): each option has a fine **pathway-colour lead** (`audiences[].tint`) that extends on hover, label stays ink; desktop is a light paper/blur panel, the mobile sheet shows the same leads before each serif name. "Contact". Mobile hamburger → bone sheet.
 - **`AudienceTemplate.tsx`** — the section-driven engine (kit + `CONTENT` map + `ACCENT` map + `Disclosure`). See "The three rooms" above.
 - **`Figure.tsx`** — **art-directed, mobile-first imagery.** `<picture>` with the mobile crop as the `<img>` base and an optional `desktop` `<source media="(min-width:768px)">`. Props: `mobile`, `desktop?`, `alt`, `className` (wrapper sizing/shape), `priority?`. Use this for striking imagery so desktop and mobile carry different framing.
-- **`Footer.tsx`** — plum slim bar with **white text**: serif wordmark + white LinkedIn icon + "© 2026 DAB Hands", `border-t border-bone/10`. Global (same on every page). `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
+- **`Footer.tsx`** — plum slim bar with **white text**: `DabMark` + serif wordmark + white LinkedIn icon + "© 2026 DAB Hands", `border-t border-bone/10`. Global (same on every page). `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
 - **`BoxCTA.tsx`** — understated rounded-full pill, `tone 'light'|'dark'`. NOTE: still a pill; see the open CTA question in TODO.
 - **`HandUnderline.tsx`** — restrained hand mark; `tone 'dark'`→lavender, `'light'`→coral; `stroke` override.
+- **`Trajectory.tsx`** — the brand's core gesture. One canonical SVG path, drawn on via framer `pathLength` (decelerating ease = settling momentum), gradient-faded at both ends, `vectorEffect=non-scaling-stroke`, reduced-motion aware. Props: `stroke` (default lavender), `opacity`, `delay`, `duration`, `strokeWidth`. Placed absolutely behind content (hero); the turnstile reprise is an inline three-branch SVG built from the same idea.
+- **`DabMark.tsx`** — the signature: one confident stroke (`currentColor`, draws on mount), beside the wordmark in Header + Footer. Not an icon; a mark left by a hand.
 - **`LogoTicker.tsx` / `TickerLogo.tsx`** — seamless marquee + the canonical **13-client** `clients` array (single source of truth). `brightness(0)` charcoal silhouettes. Used on the homepage Proof and every room's experience section (all 13).
 - **`SeoMeta.tsx`**, **`FadeUp.tsx`**, **`Layout.tsx`** (skip-link + Header + `<main id="top">` + Footer), **`PrivateLayout.tsx`**.
 - **Unused / prunable v1 artifacts** (no imports): `Ribbon.tsx`, `RibbonAccent.tsx`, `RibbonMotif.tsx`, `StatPopover.tsx`, `GridToggle.tsx`. Crown/calibration/compass marks + green `icon-*` originals unused on the main site.

@@ -14,7 +14,7 @@
 
   /* Momentum palette (accents — used sparingly) */
   --color-lavender: #B8A2D8;       /* primary accent */
-  --color-lavender-soft: #E6D6EE;  /* gradient mid + soft halo glow */
+  --color-lavender-soft: #E6D6EE;  /* gradient mid + soft accent wash */
   --color-peach: #E6B39A;          /* secondary accent / warmth — Marketing leaders */
   --color-sage: #B8C2A3;           /* movement accent — Creators & founders */
   --color-sky: #AFCFE0;            /* supporting accent */
@@ -109,10 +109,8 @@ p {
   background-image: linear-gradient(135deg, #F5F1EA 0%, #E6D6EE 55%, #E6B39A 100%);
 }
 
-/* Soft halo glow — radial lavender, for the brand mark and portrait treatment. */
-.halo-glow {
-  background-image: radial-gradient(closest-side, rgba(184,162,216,0.55), rgba(184,162,216,0.12) 70%, transparent 100%);
-}
+/* Halo motif retired (v2.1): momentum is now carried by the trajectory line,
+   not a glow. The earlier .halo-glow class lived here. */
 
 /* Soft dot grid for dark (plum) sections. */
 .dot-grid {

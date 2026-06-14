@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BoxCTA } from './BoxCTA';
+import { DabMark } from './DabMark';
 import { mailto } from '@/lib/mailto';
 
 export type FooterVariant = 'default' | 'minimal' | 'none';
@@ -39,8 +40,9 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
     <footer className="bg-plum text-white/80 border-t border-bone/10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <Link href="/" className="font-serif text-white text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">
-            DAB Hands
+          <Link href="/" className="group flex items-center gap-2 text-white" aria-label="DAB Hands, home">
+            <DabMark className="h-[13px] w-[20px] text-white/65 transition-transform duration-500 ease-out group-hover:translate-x-1" />
+            <span className="font-serif text-[18px] tracking-[-0.01em]">DAB Hands</span>
           </Link>
           <div className="flex items-center gap-5">
             <a

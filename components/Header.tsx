@@ -2,12 +2,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { DabMark } from './DabMark';
 
-// The three destination pages live under "Who I help".
+// The three destination pages live under "Who I help". Each carries its own
+// pathway colour, expressed in the nav as a subtle leading trajectory — never
+// as a coloured label.
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders' },
-  { href: '/marketing-leaders', label: 'Marketing leaders' },
-  { href: '/creators-and-founders', label: 'Creators & founders' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#B8A2D8' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A' },
+  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#B8C2A3' },
 ];
 
 export const Header = () => {
@@ -64,10 +67,11 @@ export const Header = () => {
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
           <Link
             href="/"
-            className="font-serif text-ink text-[22px] md:text-[26px] leading-none tracking-[-0.01em]"
+            className="group flex items-center gap-2.5 text-ink"
             aria-label="DAB Hands, home"
           >
-            DAB Hands
+            <DabMark className="h-[15px] w-[24px] md:h-[17px] md:w-[28px] text-ink/65 transition-transform duration-500 ease-out group-hover:translate-x-1" />
+            <span className="font-serif text-[22px] md:text-[26px] leading-none tracking-[-0.01em]">DAB Hands</span>
           </Link>
 
           {/* Desktop nav */}
@@ -105,19 +109,35 @@ export const Header = () => {
                     className="absolute right-0 top-full pt-3"
                     role="menu"
                   >
-                    <div className="w-[264px] bg-paper border border-stone rounded-2xl p-2 shadow-[0_18px_40px_-24px_rgba(31,31,29,0.45)]">
-                      {audiences.map((a) => (
-                        <Link
-                          key={a.href}
-                          href={a.href}
-                          role="menuitem"
-                          className={`block rounded-xl px-4 py-3 text-[14.5px] leading-snug transition-colors ${
-                            router.pathname === a.href ? 'bg-bone text-ink' : 'text-ink/75 hover:bg-bone hover:text-ink'
-                          }`}
-                        >
-                          {a.label}
-                        </Link>
-                      ))}
+                    <div className="w-[300px] rounded-2xl border border-stone/70 bg-paper/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
+                      {audiences.map((a) => {
+                        const active = router.pathname === a.href;
+                        return (
+                          <Link
+                            key={a.href}
+                            href={a.href}
+                            role="menuitem"
+                            className="group/path flex items-center rounded-xl px-3 py-3 transition-colors hover:bg-bone/70"
+                          >
+                            {/* Pathway trajectory: a fine line in the audience
+                                colour that extends as the path opens on hover. */}
+                            <span
+                              aria-hidden
+                              className={`block h-px shrink-0 rounded-full transition-all duration-300 ease-out ${
+                                active ? 'w-7 opacity-100' : 'w-3 opacity-50 group-hover/path:w-7 group-hover/path:opacity-100'
+                              }`}
+                              style={{ backgroundColor: a.tint }}
+                            />
+                            <span
+                              className={`ml-3 text-[14.5px] leading-snug transition-colors ${
+                                active ? 'text-ink' : 'text-ink/70 group-hover/path:text-ink'
+                              }`}
+                            >
+                              {a.label}
+                            </span>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </motion.div>
                 )}
@@ -168,8 +188,9 @@ export const Header = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.06 + i * 0.05 }}
                   >
-                    <Link href={a.href} onClick={() => setMenuOpen(false)} className="block font-serif text-[30px] leading-[1.18] py-1.5">
-                      {a.label}
+                    <Link href={a.href} onClick={() => setMenuOpen(false)} className="flex items-center gap-4 py-1.5">
+                      <span aria-hidden className="block h-px w-6 shrink-0 rounded-full" style={{ backgroundColor: a.tint }} />
+                      <span className="font-serif text-[30px] leading-[1.18]">{a.label}</span>
                     </Link>
                   </motion.span>
                 ))}

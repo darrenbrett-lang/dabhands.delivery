@@ -7,6 +7,7 @@ import { SeoMeta } from '@/components/SeoMeta';
 import { HandUnderline } from '@/components/HandUnderline';
 import { LogoTicker } from '@/components/LogoTicker';
 import { Figure } from '@/components/Figure';
+import { Trajectory } from '@/components/Trajectory';
 import { mailto } from '@/lib/mailto';
 
 const DRUMBEAT = [
@@ -59,8 +60,11 @@ export default function Home() {
 
       <Layout footerVariant="none">
         {/* ── HERO ─────────────────────────────────── */}
-        <section className="bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+        <section className="relative overflow-hidden bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
+          {/* The trajectory enters the page and passes behind the headline:
+              something is already in motion before the visitor arrives. */}
+          <Trajectory className="pointer-events-none absolute inset-0 h-full w-full" opacity={0.6} />
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <motion.h1
               className="text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px] leading-[1.03] max-w-[15ch] mx-auto"
               aria-label="Keeping important work moving."
@@ -183,8 +187,34 @@ export default function Home() {
         <section className="bg-bone text-ink py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-12 md:mb-16 max-w-[16ch]">What’s getting in the way?</h2>
+              <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[16ch]">What’s getting in the way?</h2>
             </FadeUp>
+            {/* The path reappears: a single line entering and dividing into the
+                three doors below (lavender / peach / sage), matching each card's
+                accent. Desktop only — on mobile the cards stack with their dots. */}
+            <div aria-hidden className="hidden md:block mb-6 -mt-2">
+              <svg viewBox="0 0 1200 110" preserveAspectRatio="none" fill="none" className="h-16 lg:h-20 w-full">
+                {[
+                  { d: 'M -40 28 C 180 40, 250 80, 200 110', c: 'var(--color-lavender)' },
+                  { d: 'M -40 28 C 320 42, 560 82, 600 110', c: 'var(--color-peach)' },
+                  { d: 'M -40 28 C 560 46, 940 82, 1000 110', c: 'var(--color-sage)' },
+                ].map((b, i) => (
+                  <motion.path
+                    key={b.c}
+                    d={b.d}
+                    stroke={b.c}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                    opacity={0.5}
+                    initial={reduceMotion ? { pathLength: 1 } : { pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 1.1, delay: 0.1 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                ))}
+              </svg>
+            </div>
             <div className="grid md:grid-cols-3 gap-5 lg:gap-7">
               {TURNSTILE.map((t, i) => (
                 <Link key={t.label} href={t.href} className="group block">
