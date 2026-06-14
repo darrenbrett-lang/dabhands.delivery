@@ -35,9 +35,10 @@ Two owner briefs stack: the **Style Guide v2.0** brief, then a **visual recentre
 - **TypeScript.** `npm run build` is the gate. Note: `next build` conflicts with a running `next dev` over `.next`, so stop dev (or just push and let Vercel's build be the check).
 - **Fonts:** Instrument Serif (display) + Manrope (UI) via `next/font/google` in `pages/_app.tsx`.
 
-### Two gotchas
+### Gotchas
 1. **Font vars must live at `:root`.** `@theme` sets `--font-serif: var(--font-instrument-serif), ...`; custom properties resolve where declared, so `_app.tsx` injects `<style>:root{--font-instrument-serif:…;--font-manrope:…}</style>` from `font.style.fontFamily`. Without it, `--font-serif` collapses to empty and headings fall back to sans. Do not remove it.
 2. **Turbopack stale `@theme` CSS.** Editing colour/font tokens sometimes does not hot-reload. Fix: stop dev, `rm -rf .next`, restart.
+3. **Heading colour is inherited, not forced.** The `h1`-`h6` rule in `globals.css` deliberately sets no `color`: it is unlayered, so a `color` there beats the Tailwind `text-*` utilities and would force every heading dark (invisible on plum). Set the colour on the **section** (`text-ink` on light, `text-bone` / `text-white` on dark) and headings inherit it.
 
 ## Information architecture
 
@@ -54,7 +55,7 @@ Rhythm bone → paper → bone → paper → bone → plum. Copy is locked by th
 3. **Point of view** (bone) — "The tools are changing. The problems aren't." + "Most organisations already have what they need." + the ingredients as a **plain text line** ("Strategy. Creative ambition. Investment. Capability. Good people.", no pills) + drumbeat lines + serif close "It deserves to arrive **as intended**." (`HandUnderline`, lavender). No decorative gradient.
 4. **Proof** (paper) — "Trusted with important work" + `<LogoTicker>` (**all 13 clients**, seamless marquee) + Hugo Boss testimonial in serif italic.
 5. **Turnstile** (bone) — "What's getting in the way?" + three cards, each a small **accent dot** (lavender / peach / sage, the three room colours), title, diagnosis, support. No glyphs, no arrows. Each links to its room.
-6. **Final CTA** — "If something important needs to move properly, let's talk." + CTA. On the light canvas (paper), not plum (owner's call), so the homepage has no dark block. `footerVariant="none"`.
+6. **Final CTA** (Midnight Plum) — "If something important needs to move properly, let's talk." + CTA. White text on plum, the page's one deep moment. `footerVariant="none"`.
 
 ### The three rooms — `components/AudienceTemplate.tsx`
 All three are **built with full copy** and **section-driven**: a `CONTENT` map keyed by slug holds `{ navLabel, eyebrow, hero, accent, sections[], close }`. They share the visual kit and rhythm but **compose differently** (not a fixed spine). `footerVariant="none"`. **Each room's hero carries a subtle accent atmosphere** (a top-down `heroWash` from the `ACCENT` map, fading into bone) **and an accent-coloured eyebrow** (the deepened `trigger` shade), so entering a room is a quiet shift in atmosphere while the rest of the page stays the neutral house.
@@ -88,7 +89,7 @@ Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no gr
 | Movement accent — Creators | `sage` | `#B8C2A3` |
 | Supporting accent | `sky` | `#AFCFE0` |
 | Highlight / hover / focus | `coral` | `#D98773` |
-| Deep moments (room testimonial / partnership), manifesto | `plum` | `#352E44` |
+| Deep sections / footer / CTA | `plum` | `#352E44` |
 | Supporting dark | `aubergine` | `#4A3D59` |
 
 Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky. **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`, `.halo-glow` (now unused). Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
@@ -98,7 +99,7 @@ Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky
 - **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (no dot), "Who I help" dropdown (hover + click/keyboard; Escape + route-change close), "Contact". Mobile hamburger → bone sheet.
 - **`AudienceTemplate.tsx`** — the section-driven engine (kit + `CONTENT` map + `ACCENT` map + `Disclosure`). See "The three rooms" above.
 - **`Figure.tsx`** — **art-directed, mobile-first imagery.** `<picture>` with the mobile crop as the `<img>` base and an optional `desktop` `<source media="(min-width:768px)">`. Props: `mobile`, `desktop?`, `alt`, `className` (wrapper sizing/shape), `priority?`. Use this for striking imagery so desktop and mobile carry different framing.
-- **`Footer.tsx`** — light (paper) slim bar: serif wordmark + LinkedIn (white asset darkened via `brightness(0)`) + "© 2026 DAB Hands", `border-t border-stone`. Global, so the footer is light on every page. `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
+- **`Footer.tsx`** — plum slim bar with **white text**: serif wordmark + white LinkedIn icon + "© 2026 DAB Hands", `border-t border-bone/10`. Global (same on every page). `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
 - **`BoxCTA.tsx`** — understated rounded-full pill, `tone 'light'|'dark'`. NOTE: still a pill; see the open CTA question in TODO.
 - **`HandUnderline.tsx`** — restrained hand mark; `tone 'dark'`→lavender, `'light'`→coral; `stroke` override.
 - **`LogoTicker.tsx` / `TickerLogo.tsx`** — seamless marquee + the canonical **13-client** `clients` array (single source of truth). `brightness(0)` charcoal silhouettes. Used on the homepage Proof and every room's experience section (all 13).

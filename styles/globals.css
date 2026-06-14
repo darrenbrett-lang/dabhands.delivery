@@ -75,11 +75,13 @@ section {
 }
 
 /* Display type: Instrument Serif. Elegant, confident, allowed to breathe.
-   Single weight (400). Colour defaults to ink; override with text-* on dark. */
+   Single weight (400). Colour is INHERITED from the section (text-ink on light,
+   text-bone / text-white on dark). Do NOT set `color` here: this rule is
+   unlayered, so it would beat the Tailwind text-* utilities and force every
+   heading dark (invisible on plum sections). */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 400;
-  color: var(--color-ink);
   letter-spacing: -0.01em;
   line-height: 1.06;
   text-wrap: balance;
