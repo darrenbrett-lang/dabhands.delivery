@@ -237,11 +237,11 @@ export default function Home() {
         </section>
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section className="bg-plum text-white py-20 md:py-32">
+        <section className="bg-plum text-white py-14 md:py-20">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
-                <h2 className="text-[34px] md:text-[52px] lg:text-[60px] leading-[1.04] text-white max-w-[16ch]">
+                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-white max-w-[30ch]">
                   If something important needs to move properly, let’s talk.
                 </h2>
               </FadeUp>

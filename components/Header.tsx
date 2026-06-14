@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DabMark } from './DabMark';
 
 // The three destination pages live under "Who I help". Each carries its own
 // pathway colour, expressed in the nav as a subtle leading trajectory — never
@@ -67,11 +66,10 @@ export const Header = () => {
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
           <Link
             href="/"
-            className="group flex items-center gap-2.5 text-ink"
+            className="font-serif text-ink text-[22px] md:text-[26px] leading-none tracking-[-0.01em]"
             aria-label="DAB Hands, home"
           >
-            <DabMark className="h-[15px] w-[24px] md:h-[17px] md:w-[28px] text-ink/65 transition-transform duration-500 ease-out group-hover:translate-x-1" />
-            <span className="font-serif text-[22px] md:text-[26px] leading-none tracking-[-0.01em]">DAB Hands</span>
+            DAB Hands
           </Link>
 
           {/* Desktop nav */}
