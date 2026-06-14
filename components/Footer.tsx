@@ -36,7 +36,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
       </section>
     )}
 
-    <footer className="bg-plum text-white/80 border-t border-bone/10">
+    <footer className="bg-charcoal text-white/75 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           <Link href="/" className="font-serif text-white text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">

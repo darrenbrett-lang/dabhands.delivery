@@ -21,8 +21,9 @@
   --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
 
   /* Dark palette */
-  --color-plum: #352E44;       /* deep sections, footer, final CTA */
+  --color-plum: #352E44;       /* deep sections, final CTA */
   --color-aubergine: #4A3D59;  /* supporting dark */
+  --color-charcoal: #262420;   /* footer base — warm charcoal, near-neutral */
 
   /* Fonts */
   --font-serif: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;

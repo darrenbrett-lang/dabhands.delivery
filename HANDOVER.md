@@ -89,7 +89,8 @@ Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no gr
 | Movement accent — Creators | `sage` | `#B8C2A3` |
 | Supporting accent | `sky` | `#AFCFE0` |
 | Highlight / hover / focus | `coral` | `#D98773` |
-| Deep sections / footer / CTA | `plum` | `#352E44` |
+| Deep sections / final CTA | `plum` | `#352E44` |
+| Footer base (warm charcoal) | `charcoal` | `#262420` |
 | Supporting dark | `aubergine` | `#4A3D59` |
 
 Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky. **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`. (`.halo-glow` removed — halo motif retired.) Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
@@ -99,7 +100,7 @@ Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky
 - **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (just the font, no mark or dot). **"Who I help" now reads as a choice of paths** (hover + click/keyboard; Escape + route-change close): each option has a fine **pathway-colour lead** (`audiences[].tint`) that extends on hover, label stays ink; desktop is a light paper/blur panel, the mobile sheet shows the same leads before each serif name. "Contact". Mobile hamburger → bone sheet.
 - **`AudienceTemplate.tsx`** — the section-driven engine (kit + `CONTENT` map + `ACCENT` map + `Disclosure`). See "The three rooms" above.
 - **`Figure.tsx`** — **art-directed, mobile-first imagery.** `<picture>` with the mobile crop as the `<img>` base and an optional `desktop` `<source media="(min-width:768px)">`. Props: `mobile`, `desktop?`, `alt`, `className` (wrapper sizing/shape), `priority?`. Use this for striking imagery so desktop and mobile carry different framing.
-- **`Footer.tsx`** — plum slim bar with **white text**: serif wordmark + white LinkedIn icon + "© 2026 DAB Hands", `border-t border-bone/10`. Global (same on every page). `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
+- **`Footer.tsx`** — charcoal slim bar (`bg-charcoal`) with **white text**: serif wordmark + white LinkedIn icon + "© 2026 DAB Hands", `border-t border-bone/10`. Global (same on every page). `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
 - **`BoxCTA.tsx`** — understated rounded-full pill, `tone 'light'|'dark'`. NOTE: still a pill; see the open CTA question in TODO.
 - **`HandUnderline.tsx`** — restrained hand mark; `tone 'dark'`→lavender, `'light'`→coral; `stroke` override.
 - **`Trajectory.tsx`** — the brand's core gesture. One canonical SVG path, drawn on via framer `pathLength` (decelerating ease = settling momentum), gradient-faded at both ends, `vectorEffect=non-scaling-stroke`, reduced-motion aware. Props: `stroke` (default lavender), `opacity`, `delay`, `duration`, `strokeWidth`. Placed absolutely behind content (hero); the turnstile reprise is an inline three-branch SVG built from the same idea. (A `DabMark` signature stroke was tried beside the wordmark, then removed — the logo is just the font.)
