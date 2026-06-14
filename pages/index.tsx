@@ -96,8 +96,8 @@ export default function Home() {
         </section>
 
         {/* ── DARREN ───────────────────────────────── */}
-        {/* Full-bleed cloud field, copy on the left. Darren's cut-out portrait
-            gets composited on the right later; for now the clouds carry it. */}
+        {/* Full-bleed cloud field with the copy on the left and Darren's
+            cut-out portrait anchored bottom-right over the clouds. */}
         <section className="relative isolate overflow-hidden text-ink">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -105,6 +105,12 @@ export default function Home() {
             alt=""
             aria-hidden
             className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/darren_new-image.png"
+            alt="Darren Brett"
+            className="pointer-events-none select-none absolute bottom-0 z-[5] hidden w-auto lg:block lg:right-[-3%] lg:h-[80%] xl:right-[2%] xl:h-[94%]"
           />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-12 md:py-16">
             <div className="max-w-[30rem] lg:max-w-[34rem]">
