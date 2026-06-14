@@ -196,7 +196,7 @@ export default function Home() {
         <section className="bg-paper text-ink py-16 md:py-28 border-y border-stone/60">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work</p>
+              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work by</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />
