@@ -13,7 +13,7 @@ type Disc = { label: string; body: string[] };
 // Section-driven: each door composes from this shared kit, so the pages share
 // the visual system and rhythm without being locked to an identical skeleton.
 type Section =
-  | { kind: 'drumbeat'; label: string; bg?: Bg; drumbeat: string[]; bridge?: string; pivot?: string; disclosure?: Disc }
+  | { kind: 'drumbeat'; label: string; bg?: Bg; drumbeat: string[]; inline?: boolean; bridge?: string; pivot?: string; disclosure?: Disc }
   | { kind: 'blocks'; label: string; bg?: Bg; blocks: { heading: string; para: string; disclosure?: Disc }[] }
   | { kind: 'twoSystems'; label: string; bg?: Bg; pivot: string; intro: string; visible: string[]; invisible: string[]; close: string; disclosure?: Disc }
   | { kind: 'statement'; label: string; bg?: Bg; heading: string; body?: string[]; disclosure?: Disc }
@@ -52,6 +52,7 @@ const CONTENT: Record<string, AudienceContent> = {
         label: 'The situation',
         bg: 'bone',
         drumbeat: ['Good people.', 'Strong ambition.', 'No shortage of initiatives.', 'Everyone’s busy.', 'Everyone’s trying.'],
+        inline: true,
         bridge: 'Yet somehow progress feels slower than it should.',
         pivot: 'The challenge is rarely strategy. It’s helping the organisation move together.',
         disclosure: {
@@ -392,25 +393,20 @@ const SectionLabel = ({ children, onDark = false }: { children: string; onDark?:
   <p className={`eyebrow mb-6 md:mb-8 ${onDark ? 'text-bone/55' : 'text-graphite'}`}>{children}</p>
 );
 
-// Progressive disclosure. A generic "Expand" label renders as a + toggle (rotates to ×);
-// a descriptive label renders as coloured bold text. No button chrome either way.
+// Progressive disclosure. Every trigger is a + toggle (accent-coloured, rotates
+// to × on open); the label is kept only as the accessible name. No button chrome.
 const Disclosure = ({ label, body, triggerClass }: Disc & { triggerClass: string }) => {
   const [open, setOpen] = useState(false);
-  const iconOnly = label === 'Expand';
   return (
-    <div className={`mt-5 ${iconOnly ? '' : 'md:ml-8'}`}>
+    <div className="mt-5">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        aria-label={iconOnly ? (open ? 'Collapse' : 'Expand') : undefined}
-        className={`transition-opacity hover:opacity-70 ${triggerClass} ${iconOnly ? '' : 'text-[15px] font-bold tracking-tight'}`}
+        aria-label={`${open ? 'Collapse' : 'Expand'}${label && label !== 'Expand' ? ` — ${label}` : ''}`}
+        className={`transition-opacity hover:opacity-70 ${triggerClass}`}
       >
-        {iconOnly ? (
-          <span aria-hidden className={`inline-block text-[26px] leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
-        ) : (
-          label
-        )}
+        <span aria-hidden className={`inline-block text-[26px] leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       <AnimatePresence initial={false}>
         {open && (
@@ -457,11 +453,17 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
     case 'drumbeat':
       return (
         <>
-          <div className="space-y-1.5 text-xl md:text-2xl text-ink max-w-[34ch]">
-            {section.drumbeat.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
+          {section.inline ? (
+            <p className="text-xl md:text-2xl text-ink leading-relaxed max-w-[46ch]">
+              {section.drumbeat.map((l) => l.replace(/\.$/, '')).join(' · ')}
+            </p>
+          ) : (
+            <div className="space-y-1.5 text-xl md:text-2xl text-ink max-w-[34ch]">
+              {section.drumbeat.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+          )}
           {section.bridge && <p className="mt-6 text-lg text-graphite">{section.bridge}</p>}
           {section.pivot && <h2 className="mt-9 text-[26px] md:text-[36px] leading-[1.15] max-w-[24ch]">{section.pivot}</h2>}
           {section.disclosure && <Disclosure {...section.disclosure} triggerClass={a.trigger} />}
@@ -570,6 +572,11 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
   }
 };
 
+// These section labels read like deck/agenda headings; the owner asked to drop
+// them and let the content lead. The label stays in the data (it's the
+// disclosure's accessible name and a potential anchor).
+const HIDDEN_LABELS = new Set(['The situation', 'What good looks like', 'Relevant experience', 'How we might work together']);
+
 const SectionView = ({ section, accent }: { section: Section; accent: Accent }) => {
   if (section.kind === 'testimonial') {
     return (
@@ -603,7 +610,7 @@ const SectionView = ({ section, accent }: { section: Section; accent: Accent }) 
     <section className={`${bgClass(section.bg)} text-ink py-14 md:py-20 border-t border-stone/50`}>
       <div className={COL}>
         <FadeUp>
-          <SectionLabel>{section.label}</SectionLabel>
+          {!HIDDEN_LABELS.has(section.label) && <SectionLabel>{section.label}</SectionLabel>}
           <SectionInner section={section} accent={accent} />
         </FadeUp>
       </div>

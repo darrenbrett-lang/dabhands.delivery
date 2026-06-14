@@ -135,16 +135,24 @@ export default function Home() {
         {/* ── POINT OF VIEW ────────────────────────── */}
         <section className="bg-bone text-ink py-16 md:py-28">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <FadeUp>
-              <p className="eyebrow text-graphite mb-8 md:mb-12">Point of view</p>
-            </FadeUp>
             <div className="grid md:grid-cols-2 gap-y-9 md:gap-x-14 lg:gap-x-20 md:items-start">
-              {/* Left: the thesis */}
-              <FadeUp delay={0.06}>
-                <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
-                  The tools are changing. The problems aren’t.
-                </h2>
-              </FadeUp>
+              {/* Left: the thesis + the lavender trajectory mark beneath it */}
+              <div>
+                <FadeUp delay={0.06}>
+                  <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
+                    The tools are changing. The problems aren’t.
+                  </h2>
+                </FadeUp>
+                <FadeUp delay={0.14}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/dawb_lavender.png"
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none select-none mt-8 md:mt-10 w-full max-w-[460px]"
+                  />
+                </FadeUp>
+              </div>
 
               {/* Right: the argument that unfolds, to the “as intended” close */}
               <div>
