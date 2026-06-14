@@ -114,7 +114,7 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.08}>
                 <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                  I’m the person who walks toward the part everyone else is avoiding, because I can see what’s holding it up.
+                  I’m the person who walks toward the part everyone else is avoiding, because that’s often where things start moving again.
                 </p>
               </FadeUp>
               <FadeUp delay={0.16}>
