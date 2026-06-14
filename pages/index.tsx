@@ -96,8 +96,9 @@ export default function Home() {
         </section>
 
         {/* ── DARREN ───────────────────────────────── */}
-        {/* Full-bleed cloud field with the copy on the left and Darren's
-            cut-out portrait anchored bottom-right over the clouds. */}
+        {/* Full-bleed cloud field. Copy on the left; Darren's cut-out portrait
+            is anchored bottom-right on desktop and stacked beneath the copy on
+            mobile/tablet — grounded on the banner's bottom edge either way. */}
         <section className="relative isolate overflow-hidden text-ink">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -106,13 +107,7 @@ export default function Home() {
             aria-hidden
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/darren_new-image.png"
-            alt="Darren Brett"
-            className="pointer-events-none select-none absolute bottom-0 z-[5] hidden w-auto lg:block lg:right-[-3%] lg:h-[80%] xl:right-[2%] xl:h-[94%]"
-          />
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-12 md:py-16">
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 pt-12 md:pt-16 lg:pb-16">
             <div className="max-w-[30rem] lg:max-w-[34rem]">
               <FadeUp>
                 <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
@@ -129,6 +124,12 @@ export default function Home() {
               </FadeUp>
             </div>
           </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/darren_new-image.png"
+            alt="Darren Brett"
+            className="pointer-events-none select-none relative z-[5] mx-auto mt-6 block w-[min(88%,400px)] lg:absolute lg:bottom-0 lg:mx-0 lg:mt-0 lg:w-auto lg:right-[-3%] lg:h-[80%] xl:right-[2%] xl:h-[94%]"
+          />
         </section>
 
         {/* ── POINT OF VIEW ────────────────────────── */}
@@ -156,11 +157,9 @@ export default function Home() {
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
-                  <div className="mt-9 md:mt-10 space-y-2.5 text-lg md:text-xl text-ink/85 max-w-[42ch]">
-                    {DRUMBEAT.map((line) => (
-                      <p key={line}>{line}</p>
-                    ))}
-                  </div>
+                  <p className="mt-9 md:mt-10 text-lg md:text-xl text-ink/85 leading-relaxed max-w-[42ch]">
+                    {DRUMBEAT.join(' ')}
+                  </p>
                 </FadeUp>
                 <FadeUp delay={0.26}>
                   <p className="mt-9 md:mt-12 font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.1] text-ink max-w-[20ch]">
