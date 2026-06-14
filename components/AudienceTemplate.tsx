@@ -56,7 +56,7 @@ const CONTENT: Record<string, AudienceContent> = {
         bridge: 'Yet somehow progress feels slower than it should.',
         pivot: 'The challenge is rarely strategy. It’s helping the organisation move together.',
         disclosure: {
-          label: 'The challenge',
+          label: 'Explore the challenge',
           body: [
             'Most organisations already have what they need. Capable people. Clear ambition. Important work.',
             'The strain appears elsewhere. Teams evolve at different speeds. Priorities compete. Technology moves faster than capability. Decisions take longer than they should. The same conversations happen in different rooms. More energy goes into coordination. Less energy goes into progress.',
@@ -159,7 +159,7 @@ const CONTENT: Record<string, AudienceContent> = {
             heading: 'You’ve already done the hard part.',
             para: 'The strategy exists. The investment is committed. The work matters. Now it has to survive the journey to market.',
             disclosure: {
-              label: 'Expand',
+              label: 'The gap between ambition and execution',
               body: [
                 'Most marketing challenges don’t start with a lack of ideas. They start with the gap between ambition and execution. The bigger the initiative, the more opportunities there are for momentum to slow, decisions to drift, and value to leak from the system.',
               ],
@@ -169,7 +169,7 @@ const CONTENT: Record<string, AudienceContent> = {
             heading: 'Complexity doesn’t kill work overnight. It dilutes it.',
             para: 'A compromise here. A delay there. Another approval. Another interpretation. Until the thing that launches isn’t quite the thing you started with.',
             disclosure: {
-              label: 'Expand',
+              label: 'How work gets diluted',
               body: [
                 'Nobody intends this to happen. It’s simply what complexity does. More teams. More channels. More stakeholders. More dependencies. The challenge isn’t usually creating better work. It’s helping the right work arrive as intended.',
               ],
@@ -179,7 +179,7 @@ const CONTENT: Record<string, AudienceContent> = {
             heading: 'The value is already there.',
             para: 'The question is whether it reaches the customer.',
             disclosure: {
-              label: 'Expand',
+              label: 'Getting the full value',
               body: [
                 'The campaign. The programme. The platform. The experience. The partnership. The investment has already been made. The opportunity is getting the full value from it. Helping customers understand it. Helping channels connect. Helping the ecosystem work as one.',
               ],
@@ -193,7 +193,7 @@ const CONTENT: Record<string, AudienceContent> = {
         bg: 'bone',
         heading: 'I help important work survive contact with reality.',
         disclosure: {
-          label: 'Expand',
+          label: 'Where I step in',
           body: [
             'Sometimes that means bringing clarity to a situation that has become difficult to navigate. Sometimes it means assembling a small senior team around a challenge. Sometimes it means helping an initiative regain momentum before it drifts further off course.',
             'The shape changes. The principle doesn’t. Protect the value. Help it move. Help it land.',
@@ -237,7 +237,7 @@ const CONTENT: Record<string, AudienceContent> = {
         bg: 'bone',
         heading: 'The right people. The right challenge. The right moment.',
         disclosure: {
-          label: 'Expand',
+          label: 'How the team works',
           body: [
             'DAB Hands is deliberately lean. Senior specialists assembled around the challenge. No unnecessary layers. No inflated teams. Just the capability required to help important work move.',
           ],
@@ -393,20 +393,32 @@ const SectionLabel = ({ children, onDark = false }: { children: string; onDark?:
   <p className={`eyebrow mb-6 md:mb-8 ${onDark ? 'text-bone/55' : 'text-graphite'}`}>{children}</p>
 );
 
-// Progressive disclosure. Every trigger is a + toggle (accent-coloured, rotates
-// to × on open); the label is kept only as the accessible name. No button chrome.
-const Disclosure = ({ label, body, triggerClass }: Disc & { triggerClass: string }) => {
+// Progressive disclosure (accordion). The trigger is an accent-tinted pill:
+// a short descriptive label + a chevron that rotates 180° on open. Each is
+// independent (multiple can be open; none open by default). The body nests under
+// a left rule with a weighted lead paragraph. Semantic <button>, aria-expanded,
+// 44px touch target, smooth ease-in-out height + chevron animation.
+const Disclosure = ({ label, body, accent }: Disc & { accent: (typeof ACCENT)[Accent] }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mt-5">
+    <div className="mt-6">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        aria-label={`${open ? 'Collapse' : 'Expand'}${label && label !== 'Expand' ? ` — ${label}` : ''}`}
-        className={`transition-opacity hover:opacity-70 ${triggerClass}`}
+        className={`group inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-medium tracking-tight transition-[filter] duration-200 hover:brightness-95 ${accent.cardBg} ${accent.cardBorder} ${accent.trigger}`}
       >
-        <span aria-hidden className={`inline-block text-[26px] leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
+        <span>{label}</span>
+        <svg
+          aria-hidden
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          className={`transition-transform duration-300 ease-in-out ${open ? 'rotate-180' : ''}`}
+        >
+          <path d="M3 4.5 L6 7.5 L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
       <AnimatePresence initial={false}>
         {open && (
@@ -415,12 +427,15 @@ const Disclosure = ({ label, body, triggerClass }: Disc & { triggerClass: string
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="mt-5 border-l border-stone pl-5 md:pl-6 space-y-4 text-graphite leading-relaxed max-w-[62ch]">
+            <div className={`mt-4 border-l-2 py-1 pl-5 max-w-[60ch] ${accent.cardBorder}`}>
               {body.map((p, i) => (
-                <p key={i} className={i === body.length - 1 && body.length > 1 ? 'text-ink' : undefined}>
+                <p
+                  key={i}
+                  className={`text-[15px] leading-[1.65] ${i === 0 ? 'font-medium text-ink' : 'text-graphite'} ${i < body.length - 1 ? 'mb-3' : ''}`}
+                >
                   {p}
                 </p>
               ))}
@@ -466,7 +481,7 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
           )}
           {section.bridge && <p className="mt-6 text-lg text-graphite">{section.bridge}</p>}
           {section.pivot && <h2 className="mt-9 text-[26px] md:text-[36px] leading-[1.15] max-w-[24ch]">{section.pivot}</h2>}
-          {section.disclosure && <Disclosure {...section.disclosure} triggerClass={a.trigger} />}
+          {section.disclosure && <Disclosure {...section.disclosure} accent={a} />}
         </>
       );
     case 'blocks':
@@ -477,13 +492,13 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
               <div key={i}>
                 <h2 className="text-[26px] md:text-[34px] leading-[1.18] max-w-[26ch]">{b.heading}</h2>
                 <p className="mt-4 text-lg text-graphite leading-relaxed max-w-[58ch]">{b.para}</p>
-                {b.disclosure && <Disclosure {...b.disclosure} triggerClass={a.trigger} />}
+                {b.disclosure && <Disclosure {...b.disclosure} accent={a} />}
               </div>
             ) : (
               <div key={i}>
                 <h3 className="text-[21px] md:text-[27px] leading-[1.2] max-w-[28ch]">{b.heading}</h3>
                 <p className="mt-4 text-lg text-graphite leading-relaxed max-w-[58ch]">{b.para}</p>
-                {b.disclosure && <Disclosure {...b.disclosure} triggerClass={a.trigger} />}
+                {b.disclosure && <Disclosure {...b.disclosure} accent={a} />}
               </div>
             ),
           )}
@@ -499,7 +514,7 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
             <SystemCard label="The invisible system" items={section.invisible} accent={a} />
           </div>
           <p className="mt-9 font-serif text-[24px] md:text-[32px] leading-[1.15] text-ink max-w-[24ch]">{section.close}</p>
-          {section.disclosure && <Disclosure {...section.disclosure} triggerClass={a.trigger} />}
+          {section.disclosure && <Disclosure {...section.disclosure} accent={a} />}
         </>
       );
     case 'statement':
@@ -513,7 +528,7 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
               ))}
             </div>
           )}
-          {section.disclosure && <Disclosure {...section.disclosure} triggerClass={a.trigger} />}
+          {section.disclosure && <Disclosure {...section.disclosure} accent={a} />}
         </>
       );
     case 'outcomes':
@@ -535,7 +550,7 @@ const SectionInner = ({ section, accent }: { section: LightSection; accent: Acce
               ))}
             </div>
           )}
-          {section.disclosure && <Disclosure {...section.disclosure} triggerClass={a.trigger} />}
+          {section.disclosure && <Disclosure {...section.disclosure} accent={a} />}
         </>
       );
     case 'experience':
