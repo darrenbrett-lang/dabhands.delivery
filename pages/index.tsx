@@ -28,7 +28,7 @@ const TURNSTILE = [
     bg: 'bg-lavender/[0.14]',
     border: 'border-lavender/35',
     hover: 'hover:border-lavender/60',
-    accentText: 'text-[#6E5A86]',
+    accentText: 'text-lavender-deep',
   },
   {
     label: 'Marketing leaders',
@@ -39,7 +39,7 @@ const TURNSTILE = [
     bg: 'bg-peach/[0.16]',
     border: 'border-peach/35',
     hover: 'hover:border-peach/60',
-    accentText: 'text-[#9E5B3A]',
+    accentText: 'text-peach-deep',
   },
   {
     label: 'Creators & founders',
@@ -50,7 +50,7 @@ const TURNSTILE = [
     bg: 'bg-sage/[0.18]',
     border: 'border-sage/40',
     hover: 'hover:border-sage/60',
-    accentText: 'text-[#5E6B3F]',
+    accentText: 'text-sage-deep',
   },
 ];
 

@@ -88,16 +88,18 @@ Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no gr
 | Secondary / body text | `graphite` | `#5C5C58` |
 | Borders / dividers | `stone` | `#D8D2C8` |
 | Movement accent — Business | `lavender` | `#B8A2D8` |
-| Gradient mid / soft tint | `lavender-soft` | `#E6D6EE` |
 | Movement accent — Marketing | `peach` | `#E6B39A` |
-| Movement accent — Creators | `sage` | `#B8C2A3` |
+| Movement accent — Creators | `sage` | `#A8B5A2` |
+| Light wash (section highlights) — B / M / C | `lavender-wash` / `peach-wash` / `sage-wash` | `#E9E1F4` / `#F4E0D4` / `#DDE4D8` |
+| Dark accent (eyebrow, links, quote detail) — B / M / C | `lavender-deep` / `peach-deep` / `sage-deep` | `#6E5A86` / `#B97D62` / `#6F7D69` |
+| Gradient mid / soft tint | `lavender-soft` | `#E6D6EE` |
 | Supporting accent | `sky` | `#AFCFE0` |
 | Highlight / hover / focus | `coral` | `#D98773` |
 | Deep sections / final CTA | `plum` | `#352E44` |
 | Footer base (warm charcoal) | `charcoal` | `#262420` |
 | Supporting dark | `aubergine` | `#4A3D59` |
 
-Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky. **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`. (`.halo-glow` removed — halo motif retired.) Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
+Ratio ~75% bone/paper, ~20% ink/graphite/stone, ~5% audience accent (lavender/peach/sage) — per **Colour System v2** (colour is meaning, not decoration). **Audience rooms shift one accent each** (Business lavender, Marketing peach, Creators sage); each room's **hero wash** follows the spec Hero Treatment exactly — the primary accent at `0.22`, held to `60%`, fading to `0` at `100%` (`ACCENT[accent].wash` in `OperatorTemplate`). Same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`. (`.halo-glow` removed — halo motif retired.) Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
 
 ## Components (`/components`)
 
@@ -116,7 +118,7 @@ Ratio ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach, ~2% sage/coral/sky
 
 1. **No em dashes** in user-facing copy (code comments fine).
 2. **Brand wordmark is "DAB Hands"** (uppercase DAB, capital-H Hands). Tokens/paths exempt.
-3. **v2.0 palette only; neon green fully retired.** Accents are low-contrast on bone, so never use a pale accent as text on light: deepen it (as the disclosure triggers do) or keep coloured text to dark backgrounds; link hovers on light use `hover:opacity-60`.
+3. **v2.0 palette only; neon green fully retired.** Accents are low-contrast on bone, so never use a pale accent as text on light: use the **`*-deep` dark-accent tokens** (`lavender-deep #6E5A86`, `peach-deep #B97D62`, `sage-deep #6F7D69`) or keep coloured text to dark backgrounds; link hovers on light use `hover:opacity-60`. NB the spec's `peach-deep` / `sage-deep` sit **below WCAG AA as small text on bone** (~3.0:1 / ~3.9:1); kept to match Colour System v2 — deepen if AA is needed.
 4. **Type:** Instrument Serif for display/statements/quotes; Manrope for everything else. Never force weight on the serif (single 400). Label headings no full stops; truth-statements keep periods.
 5. **Mastery marks, not decoration.** One journey/trajectory, confident and economical. No halos, no decorative gradients, no pill/lozenge tags, no hand/tool icons. Motion communicates momentum, not novelty.
 

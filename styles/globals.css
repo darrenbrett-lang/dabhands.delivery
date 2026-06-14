@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── v2.0 palette (Visual Style Guide v2.0) ──────────────────────────
-     Ratio target: ~70% bone/paper, ~20% ink/graphite, ~8% lavender/peach,
-     ~2% coral/sky. Accents are punctuation, never the canvas. */
+  /* ── v2.0 palette (Visual Style Guide v2.0 + Colour System v2) ────────
+     Balance: ~75% bone/paper, ~20% ink/graphite/stone, ~5% audience accent
+     (lavender / peach / sage). Colour is meaning, not decoration — accents
+     are punctuation, never the canvas. */
 
   /* Core neutrals */
   --color-bone: #F5F1EA;       /* primary background */
@@ -16,9 +17,19 @@
   --color-lavender: #B8A2D8;       /* primary accent */
   --color-lavender-soft: #E6D6EE;  /* gradient mid + soft accent wash */
   --color-peach: #E6B39A;          /* secondary accent / warmth — Marketing leaders */
-  --color-sage: #B8C2A3;           /* movement accent — Creators & founders */
+  --color-sage: #A8B5A2;           /* primary accent — Creators & founders (Colour System v2) */
   --color-sky: #AFCFE0;            /* supporting accent */
   --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
+
+  /* Audience light washes — section highlights (Colour System v2) */
+  --color-lavender-wash: #E9E1F4;  /* Business & agency leaders */
+  --color-peach-wash: #F4E0D4;     /* Marketing leaders */
+  --color-sage-wash: #DDE4D8;      /* Creators & founders */
+
+  /* Audience dark accents — accent text, quote details, interactive (Colour System v2) */
+  --color-lavender-deep: #6E5A86;  /* Business & agency leaders */
+  --color-peach-deep: #B97D62;     /* Marketing leaders */
+  --color-sage-deep: #6F7D69;      /* Creators & founders */
 
   /* Dark palette */
   --color-plum: #352E44;       /* deep sections, final CTA */

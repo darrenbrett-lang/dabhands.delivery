@@ -9,8 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 // lead); `lead` is its legible text shade — the same colour as the room's eyebrow.
 export const audiences = [
   { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#B8A2D8', lead: '#6E5A86' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', lead: '#9E5B3A' },
-  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#B8C2A3', lead: '#5E6B3F' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', lead: '#B97D62' },
+  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#A8B5A2', lead: '#6F7D69' },
 ];
 
 export const Header = () => {

@@ -28,10 +28,12 @@ export interface OperatorContent {
   close: { heading: string; line?: string };
 }
 
-const ACCENT: Record<Accent, { text: string; border: string; tintBg: string; rule: string; wash: string; traj: string }> = {
-  lavender: { text: 'text-[#6E5A86]', border: 'border-lavender/40', tintBg: 'bg-lavender/[0.10]', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.16), rgba(184,162,216,0) 72%)', traj: 'var(--color-lavender)' },
-  peach: { text: 'text-[#9E5B3A]', border: 'border-peach/40', tintBg: 'bg-peach/[0.10]', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.18), rgba(230,179,154,0) 72%)', traj: 'var(--color-peach)' },
-  sage: { text: 'text-[#5E6B3F]', border: 'border-sage/40', tintBg: 'bg-sage/[0.12]', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(184,194,163,0.18), rgba(184,194,163,0) 72%)', traj: 'var(--color-sage)' },
+// Hero washes follow the Colour System v2 Hero Treatments exactly: the primary
+// accent at 0.22, held to 60%, fading to 0 at 100%. Text uses the dark accent.
+const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash: string; traj: string }> = {
+  lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.22), rgba(184,162,216,0.22) 60%, rgba(184,162,216,0) 100%)', traj: 'var(--color-lavender)' },
+  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0.22) 60%, rgba(230,179,154,0) 100%)', traj: 'var(--color-peach)' },
+  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(168,181,162,0.22), rgba(168,181,162,0.22) 60%, rgba(168,181,162,0) 100%)', traj: 'var(--color-sage)' },
 };
 
 // Authored, not a blog. Hero a touch wider; body narrow; the card grid in between.
