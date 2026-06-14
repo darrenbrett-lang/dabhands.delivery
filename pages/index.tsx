@@ -139,27 +139,25 @@ export default function Home() {
               <p className="eyebrow text-graphite mb-8 md:mb-12">Point of view</p>
             </FadeUp>
             <div className="grid md:grid-cols-2 gap-y-9 md:gap-x-14 lg:gap-x-20 md:items-start">
-              {/* Left: the thesis + the premise it rests on */}
-              <div>
-                <FadeUp delay={0.06}>
-                  <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
-                    The tools are changing. The problems aren’t.
-                  </h2>
-                </FadeUp>
-                <FadeUp delay={0.12}>
-                  <p className="mt-7 md:mt-9 text-lg md:text-xl text-graphite max-w-[40ch]">Most organisations already have what they need.</p>
-                </FadeUp>
-                <FadeUp delay={0.16}>
-                  <p className="mt-5 text-lg md:text-xl text-ink leading-relaxed max-w-[36ch]">
-                    Strategy. Creative ambition. Investment. Capability. Good people.
-                  </p>
-                </FadeUp>
-              </div>
+              {/* Left: the thesis */}
+              <FadeUp delay={0.06}>
+                <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
+                  The tools are changing. The problems aren’t.
+                </h2>
+              </FadeUp>
 
               {/* Right: the argument that unfolds, to the “as intended” close */}
               <div>
+                <FadeUp delay={0.12}>
+                  <p className="text-lg md:text-xl text-graphite max-w-[44ch]">Most organisations already have what they need.</p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-5 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
+                    Strategy. Creative ambition. Investment. Capability. Good people.
+                  </p>
+                </FadeUp>
                 <FadeUp delay={0.2}>
-                  <p className="text-lg md:text-xl text-ink/85 leading-relaxed max-w-[42ch]">
+                  <p className="mt-9 md:mt-10 text-lg md:text-xl text-ink/85 leading-relaxed max-w-[42ch]">
                     {DRUMBEAT.join(' ')}
                   </p>
                 </FadeUp>
