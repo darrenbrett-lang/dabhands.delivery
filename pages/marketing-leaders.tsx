@@ -8,7 +8,7 @@ const content: OperatorContent = {
   hero: {
     headline: 'When the work matters too much to get lost on the way.',
     subline: 'Helping brands get more of the original ambition into market.',
-    trust: 'Twenty years helping Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever turn ambitious thinking into work that lands.',
+    trust: 'A challenge I’ve spent twenty years seeing inside organisations like Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever.',
   },
   validation: {
     heading: 'You’ve already done the hard part.',

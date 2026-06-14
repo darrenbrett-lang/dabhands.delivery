@@ -25,10 +25,10 @@ const TURNSTILE = [
     support:
       'You need experienced operational leadership that understands delivery, commercial realities, people, and how organisations actually work.',
     href: '/business-and-agency-leaders',
-    dot: 'bg-lavender',
     bg: 'bg-lavender/[0.14]',
     border: 'border-lavender/35',
     hover: 'hover:border-lavender/60',
+    accentText: 'text-[#6E5A86]',
   },
   {
     label: 'Marketing leaders',
@@ -36,10 +36,10 @@ const TURNSTILE = [
     support:
       'You need campaigns, launches, experiences, and agencies moving together without losing momentum, quality, or impact along the way.',
     href: '/marketing-leaders',
-    dot: 'bg-peach',
     bg: 'bg-peach/[0.16]',
     border: 'border-peach/35',
     hover: 'hover:border-peach/60',
+    accentText: 'text-[#9E5B3A]',
   },
   {
     label: 'Creators & founders',
@@ -47,10 +47,10 @@ const TURNSTILE = [
     support:
       'You need operational strength around the business without losing the energy, creativity, and ambition that made it successful in the first place.',
     href: '/creators-and-founders',
-    dot: 'bg-sage',
     bg: 'bg-sage/[0.18]',
     border: 'border-sage/40',
     hover: 'hover:border-sage/60',
+    accentText: 'text-[#5E6B3F]',
   },
 ];
 
@@ -254,10 +254,13 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className={`flex h-full flex-col rounded-2xl border ${t.border} ${t.bg} p-7 md:p-8 transition-colors duration-300 ${t.hover}`}
                   >
-                    <span aria-hidden className={`mb-7 block h-2.5 w-2.5 rounded-full ${t.dot}`} />
                     <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
                     <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
+                    <span className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold ${t.accentText}`}>
+                      Explore
+                      <span aria-hidden className="text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </span>
                   </motion.div>
                 </Link>
               ))}

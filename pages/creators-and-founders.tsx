@@ -8,7 +8,7 @@ const content: OperatorContent = {
   hero: {
     headline: 'Everything depends on you. Until it can’t.',
     subline: 'Helping founder-led businesses build the capability required for their next stage of growth.',
-    trust: 'I’ve spent twenty years helping organisations navigate the space between ambition and execution. The scale changes. The challenge doesn’t.',
+    trust: 'A challenge I’ve spent twenty years seeing inside organisations like Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever.',
   },
   validation: {
     heading: 'You’ve already created momentum.',

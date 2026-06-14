@@ -86,12 +86,14 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <FadeUp delay={0.12}>
               <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[44ch]">{c.hero.subline}</p>
             </FadeUp>
-            <FadeUp delay={0.18}>
-              <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+            <FadeUp delay={0.16}>
+              <p className={`mt-8 border-l-2 ${a.border} pl-4 text-[14px] leading-relaxed text-graphite max-w-[48ch]`}>
+                {c.hero.trust}
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.22}>
+              <div className="mt-8">
                 <Cta />
-                <p className={`rounded-2xl border ${a.border} ${a.tintBg} px-4 py-2.5 text-[13px] leading-snug text-graphite max-w-[42ch]`}>
-                  {c.hero.trust}
-                </p>
               </div>
             </FadeUp>
           </div>
