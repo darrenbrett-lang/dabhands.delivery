@@ -23,10 +23,11 @@ const content: OperatorContent = {
   diagnosis: {
     heading: 'What I see from the middle.',
     paras: [
-      'I’ve been in these rooms long enough to know what matters.',
-      'The organisation doesn’t have a strategy problem. The people aren’t the issue.',
-      'What’s happening is the gap between intention and execution is getting wider.',
-      'And nobody’s job description includes closing it.',
+      'I’ve been in these rooms long enough to know the problem is rarely one big thing. More often, it’s a series of small points of drag.',
+      'A decision that takes too long. A priority that means different things to different teams. A handoff that loses context. A meeting that creates more noise than clarity.',
+      'Individually, none of it looks fatal. Together, it slows the whole system down.',
+      'That’s where orchestration matters. Not more process. Not more noise. The right adjustments, in the right places, so the organisation can move with less drag and more confidence.',
+      'Small points of drag become big limits on progress.',
     ],
   },
   outcomes: {
