@@ -7,46 +7,33 @@ const content: OperatorContent = {
   accent: 'lavender',
   hero: {
     headline: 'The organisation hasn’t lost its way. It’s simply become harder to move.',
-    subline: 'Helping organisations keep important work moving.',
-    trust: '20 years inside Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever.',
+    subline: 'Helping organisations keep important work moving when complexity starts getting in the way.',
+    trust: 'Twenty years inside Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever, sitting in the middle of complexity, helping important work move.',
   },
   validation: {
     heading: 'You’ve done the hard part already.',
-    intro: 'You know where you want to go. You have the people, the ambition, and the investment to get there.',
+    intro: 'You know where you want to go. You have the right people. The strategy is clear.',
     paras: [
-      'What’s changed isn’t the strategy. The organisation has grown faster than the systems holding it together.',
-      'Teams that used to move as one now move at different speeds. A decision that once took a conversation now takes three meetings and two follow-ups. The same point gets discussed in four rooms, and the work waits while everyone catches up.',
-      'None of this is failure. It’s what happens when a good organisation gets bigger and more is riding on every move.',
+      'But somewhere between the decision and the delivery, friction builds.',
+      'The same priority gets discussed in three different rooms. A decision gets made, but doesn’t move the way it should. People are working hard, but important things aren’t moving as fast as they should.',
+      'It’s not that people don’t care. It’s not that the strategy is wrong.',
+      'It’s that keeping everything moving together when there’s this much happening is harder than it used to be.',
     ],
   },
   diagnosis: {
     heading: 'What I see from the middle.',
-    intro: 'After twenty years sitting between leadership and delivery, the pattern is usually the same. It’s rarely any one team. It’s the space between them.',
-    cards: [
-      {
-        heading: 'Strategy and execution stop speaking the same language.',
-        body: 'The plan is clear at the top. By the time it reaches the work, it has been reinterpreted four times. Everyone is busy. Not everyone is building the same thing.',
-      },
-      {
-        heading: 'Coordination quietly becomes the job.',
-        body: 'More of every week goes into aligning, chasing, and clarifying. Less goes into the work itself. Momentum leaks through the gaps between teams.',
-      },
-      {
-        heading: 'Your best people get stretched thin.',
-        body: 'The capable ones get pulled into everything. They hold it together through effort and goodwill, until the load starts to show and the important work slows.',
-      },
-      {
-        heading: 'Nobody owns the space in between.',
-        body: 'Each team owns its part. No one owns the handover between them. That gap is where important work stalls, and it rarely sits on anyone’s remit.',
-      },
+    paras: [
+      'I’ve been in these rooms long enough to know what matters.',
+      'The organisation doesn’t have a strategy problem. The people aren’t the issue.',
+      'What’s happening is the gap between intention and execution is getting wider.',
+      'And nobody’s job description includes closing it.',
     ],
   },
   outcomes: {
-    heading: 'What changes when it moves again.',
+    heading: 'The organisation starts moving together again.',
     paras: [
-      'Strategy and execution start speaking the same language. What leadership intends is what reaches the work, without losing shape on the way down.',
-      'Decisions get made closer to where the work happens. Leadership spends less time coordinating and more time leading.',
-      'The organisation doesn’t feel different. It moves differently. The same people, the same ambition, far less getting in the way.',
+      'People understand what matters. Teams pull in the same direction. Decisions move faster. Leadership spends less time connecting dots and more time leading.',
+      'The organisation doesn’t feel different. But it moves differently.',
     ],
   },
   transition: {
@@ -58,15 +45,15 @@ const content: OperatorContent = {
     situations: [
       {
         heading: 'Something important is stuck.',
-        body: 'A priority that should be moving isn’t. I find where it’s caught and get it moving again, without upending everything around it.',
+        body: 'A strategic priority, launch or initiative isn’t moving the way it should.',
       },
       {
         heading: 'You need an operator in the middle.',
-        body: 'Senior capacity in the space between strategy and delivery. I hold the work together so your team can stay focused on theirs.',
+        body: 'Someone who speaks both strategy and execution, and can help teams move together.',
       },
       {
-        heading: 'You’re building for the next stage.',
-        body: 'Growth is coming and today’s ways of working won’t carry it. I help strengthen the systems, rhythms, and ownership before the strain shows.',
+        heading: 'You’re preparing for the next growth stage.',
+        body: 'Building the systems, rhythms and capability that allow the organisation to move without constant intervention.',
       },
     ],
   },
