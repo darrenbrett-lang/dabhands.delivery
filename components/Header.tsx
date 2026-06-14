@@ -4,18 +4,20 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // The three destination pages live under "Who I help". Each carries its own
-// pathway colour, expressed in the nav as a subtle leading trajectory — never
-// as a coloured label.
+// pathway colour. In the desktop dropdown the label takes that colour on hover
+// (and when active). `tint` is the light accent (still used for the mobile
+// lead); `lead` is its legible text shade — the same colour as the room's eyebrow.
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#B8A2D8' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A' },
-  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#B8C2A3' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#B8A2D8', lead: '#6E5A86' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', lead: '#9E5B3A' },
+  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#B8C2A3', lead: '#5E6B3F' },
 ];
 
 export const Header = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false); // mobile sheet
   const [whoOpen, setWhoOpen] = useState(false); // desktop dropdown
+  const [hoveredWho, setHoveredWho] = useState<string | null>(null); // dropdown item under cursor
   const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -110,26 +112,21 @@ export const Header = () => {
                     <div className="w-[300px] rounded-2xl border border-stone/70 bg-paper/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
                       {audiences.map((a) => {
                         const active = router.pathname === a.href;
+                        const lit = active || hoveredWho === a.href;
                         return (
                           <Link
                             key={a.href}
                             href={a.href}
                             role="menuitem"
-                            className="group/path flex items-center rounded-xl px-3 py-3 transition-colors hover:bg-bone/70"
+                            onMouseEnter={() => setHoveredWho(a.href)}
+                            onMouseLeave={() => setHoveredWho(null)}
+                            className="block rounded-xl px-3 py-2.5"
                           >
-                            {/* Pathway trajectory: a fine line in the audience
-                                colour that extends as the path opens on hover. */}
+                            {/* The label takes the target page's lead colour on
+                                hover (and when active); ink otherwise. */}
                             <span
-                              aria-hidden
-                              className={`block h-px shrink-0 rounded-full transition-all duration-300 ease-out ${
-                                active ? 'w-7 opacity-100' : 'w-3 opacity-50 group-hover/path:w-7 group-hover/path:opacity-100'
-                              }`}
-                              style={{ backgroundColor: a.tint }}
-                            />
-                            <span
-                              className={`ml-3 text-[14.5px] leading-snug transition-colors ${
-                                active ? 'text-ink' : 'text-ink/70 group-hover/path:text-ink'
-                              }`}
+                              className={`text-[14.5px] leading-snug transition-colors duration-200 ${lit ? '' : 'text-ink/75'}`}
+                              style={{ color: lit ? a.lead : undefined }}
                             >
                               {a.label}
                             </span>
