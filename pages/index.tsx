@@ -158,7 +158,7 @@ export default function Home() {
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
-                  <p className="mt-10 md:mt-12 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[22ch]">
+                  <p className="mt-10 md:mt-12 text-lg md:text-xl leading-relaxed text-ink max-w-[40ch]">
                     The challenge isn’t creating more. It’s helping what already exists{' '}
                     <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
                       move together
@@ -172,7 +172,7 @@ export default function Home() {
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.32}>
-                  <p className="mt-9 md:mt-10 font-serif text-[24px] md:text-[30px] leading-[1.2] text-ink/90 max-w-[26ch]">
+                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[22ch]">
                     It deserves to arrive as intended.
                   </p>
                 </FadeUp>
