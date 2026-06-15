@@ -269,18 +269,18 @@ export default function Home() {
         </section>
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section className="bg-plum text-white py-14 md:py-20">
+        <section className="bg-plum text-bone py-14 md:py-20">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
-                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-white max-w-[30ch]">
+                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-bone max-w-[30ch]">
                   If something important needs to move properly, let’s talk.
                 </h2>
               </FadeUp>
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Starting a conversation' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full border border-white/40 px-7 py-3.5 text-[15px] font-medium text-white transition-colors duration-300 hover:bg-white hover:text-ink"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full border border-white/40 px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-white hover:text-ink"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>

@@ -36,10 +36,10 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
       </section>
     )}
 
-    <footer className="bg-charcoal text-white/75 border-t border-white/10">
+    <footer className="bg-charcoal text-bone/75 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <Link href="/" className="font-serif text-white text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">
+          <Link href="/" className="font-serif text-bone text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">
             DAB Hands
           </Link>
           <div className="flex items-center gap-5">
@@ -53,7 +53,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/logos/linkedin-app-white-icon.webp" alt="" width={16} height={16} loading="lazy" decoding="async" className="block" />
             </a>
-            <p className="text-[11px] tracking-[0.16em] text-white/65">© 2026 DAB Hands</p>
+            <p className="text-[11px] tracking-[0.16em] text-bone/65">© 2026 DAB Hands</p>
           </div>
         </div>
       </div>

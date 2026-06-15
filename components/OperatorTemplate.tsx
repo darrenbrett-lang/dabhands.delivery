@@ -45,7 +45,7 @@ const COL_WIDE = 'mx-auto max-w-[940px] px-6 md:px-10';
 const Cta = ({ label = 'Start a conversation', full = false }: { label?: string; full?: boolean }) => (
   <a
     href={mailto()}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-white transition-colors duration-300 hover:bg-ink ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-ink ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -226,17 +226,17 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
-        <section className="bg-plum text-white py-16 md:py-24">
+        <section className="bg-plum text-bone py-16 md:py-24">
           <div className={COL}>
             <FadeUp>
-              <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-white/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
+              <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-bone/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
             </FadeUp>
             <FadeUp delay={0.08}>
               {c.proof.quote ? (
                 <blockquote className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
-                  <p className="font-serif italic text-[24px] md:text-[32px] leading-[1.3] text-white">“{c.proof.quote}”</p>
+                  <p className="font-serif italic text-[24px] md:text-[32px] leading-[1.3] text-bone">“{c.proof.quote}”</p>
                   {c.proof.name && (
-                    <footer className="mt-6 text-[14px] not-italic text-white/65">
+                    <footer className="mt-6 text-[14px] not-italic text-bone/65">
                       {c.proof.name}
                       {c.proof.role ? `, ${c.proof.role}` : ''}
                     </footer>
@@ -248,7 +248,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     {c.proof.statement.map((p, i) => (
                       <p
                         key={i}
-                        className={i === 0 ? 'font-serif text-[24px] md:text-[30px] leading-[1.3] text-white' : 'mt-5 text-lg text-white/80 leading-relaxed'}
+                        className={i === 0 ? 'font-serif text-[24px] md:text-[30px] leading-[1.3] text-bone' : 'mt-5 text-lg text-bone/80 leading-relaxed'}
                       >
                         {p}
                       </p>
@@ -287,7 +287,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         >
           <a
             href={mailto()}
-            className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-charcoal text-[15px] font-medium text-white"
+            className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-charcoal text-[15px] font-medium text-bone"
           >
             Start a conversation
             <span aria-hidden>→</span>
