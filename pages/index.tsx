@@ -158,7 +158,7 @@ export default function Home() {
                     src="/images/fold.png"
                     alt=""
                     aria-hidden
-                    className="pointer-events-none select-none mt-8 md:mt-10 w-full max-w-[460px]"
+                    className="pointer-events-none select-none mt-8 md:mt-10 w-full max-w-[460px] xl:w-[600px] xl:max-w-none xl:-ml-10"
                   />
                 </FadeUp>
               </div>
