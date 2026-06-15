@@ -6,8 +6,8 @@ const content: OperatorContent = {
   eyebrow: 'For business & agency leaders',
   accent: 'moss',
   hero: {
-    headline: 'The organisation hasn’t lost its way. It’s simply become harder to move.',
-    subline: 'Helping organisations keep important work moving when complexity starts getting in the way.',
+    headline: 'As organisations grow, keeping everything moving becomes harder.',
+    subline: 'I help leadership teams maintain momentum when complexity starts getting in the way.',
     trust: 'A challenge I’ve spent over twenty years seeing inside organisations like Nike, Volkswagen and HUGO BOSS.',
   },
   validation: {
