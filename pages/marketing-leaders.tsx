@@ -32,7 +32,7 @@ const content: OperatorContent = {
     ],
   },
   help: {
-    heading: 'Where I tend to help.',
+    heading: 'Where I tend to help',
     situations: [
       {
         heading: 'A major launch is approaching.',

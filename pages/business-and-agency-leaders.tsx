@@ -11,56 +11,71 @@ const content: OperatorContent = {
   },
   validation: {
     heading: 'All the blocks are in place.',
-    intro: 'You know where you want to go. You have capable people. The ambition is clear.',
+    intro: 'The direction is clear. The people are capable. The work matters.',
     paras: [
+      'From the outside, everything appears to be there.',
       'Yet progress feels slower than it should.',
-      'As organisations grow, complexity creates distance.',
-      'Between teams. Between priorities. Between decisions and action.',
-      'The challenge isn’t deciding what to do next.',
-      'It’s helping the organisation move together.',
+      'Not because people aren’t working hard. Not because the strategy is wrong.',
+      'As organisations grow, more teams become involved. More priorities compete for attention. More decisions need to travel further before anything happens.',
+      'The challenge is rarely deciding what to do next. More often, it’s helping the organisation move together.',
     ],
   },
   diagnosis: {
-    heading: 'What I see from the middle.',
+    heading: 'What gets in the way',
     paras: [
-      'I’ve been in these rooms long enough to know the problem is rarely one big thing. More often, it’s a series of small points of drag.',
-      'A decision that takes too long. A priority that means different things to different teams. A handoff that loses context. A meeting that creates more noise than clarity.',
-      'Today, technology is accelerating change even further. New tools create new opportunities, but they also change how decisions are made, how work flows, and where accountability sits.',
-      'Individually, none of it looks fatal. Together, it slows the whole system down.',
-      'That’s where orchestration matters. Not more process. Not more noise. The right adjustments, in the right places, so the organisation can move with less drag and more confidence.',
+      'I’ve been around organisations long enough to know that momentum rarely disappears all at once. It gets lost in small places.',
+      'A decision that takes longer than it should. A priority that means different things to different teams. Information that isn’t where people need it. A handoff that loses context. A meeting that creates more noise than clarity.',
+      'Individually, none of these things look particularly serious. Together, they make progress harder than it needs to be.',
+      'Technology is adding another layer. New tools are creating new opportunities, but they’re also changing how work flows, how decisions get made and where accountability sits.',
+      'The result is often the same. The organisation has everything it needs, but struggles to move at the pace it’s capable of.',
     ],
   },
+  transition: {
+    heading: 'That’s where I step in.',
+    subline: 'Into the space between strategy and execution. Where momentum is either protected or lost.',
+  },
   outcomes: {
-    heading: 'I help organisations regain operational flow.',
+    heading: 'I help organisations move together.',
     paras: [
-      'I work across teams, priorities, processes and people to identify what’s slowing progress, strengthen the points that matter, and help important work keep moving.',
-      'Priorities become clearer. Decisions move faster. Accountability strengthens. Teams spend less time navigating friction and more time creating value.',
-      'Leadership gains confidence that important work will move from ambition to execution without constant intervention.',
+      'By identifying what’s slowing progress and strengthening the connections between people, priorities and execution.',
+      'The goal isn’t more process. It’s making it easier for good people to do good work.',
+      'Priorities become clearer. Decisions move faster. Accountability becomes stronger. Leadership spends less time connecting dots and more time leading.',
+      'The organisation doesn’t need to work harder. It simply needs less friction.',
     ],
   },
   help: {
-    heading: 'Where I tend to help.',
+    heading: 'Where I tend to help',
     situations: [
       {
-        heading: 'Something important is stuck.',
-        body: 'A strategic priority, launch or initiative isn’t moving the way it should.',
+        heading: 'A strategic priority isn’t moving.',
+        body: 'The direction is clear. The intent is understood. Yet progress feels slower than it should and momentum is becoming harder to maintain.',
       },
       {
-        heading: 'You need an operator in the middle.',
-        body: 'Someone who speaks both strategy and execution, and can help teams move together.',
+        heading: 'The organisation has become harder to coordinate.',
+        body: 'More teams, stakeholders and dependencies create friction between decision-making and execution.',
       },
       {
-        heading: 'You’re preparing for the next growth stage.',
-        body: 'Building the systems, rhythms and capability that allow the organisation to move without constant intervention.',
+        heading: 'Leadership has become the operating system.',
+        body: 'Too much progress depends on a small number of people continually aligning teams, removing blockers and keeping important work moving.',
       },
     ],
   },
   proof: {
-    heading: 'Trusted to protect what matters.',
-    quote:
-      'Darren brought a level of operational leadership and organisational change that Tribal hadn’t seen before. He created and implemented our first agency-wide ways-of-working framework, helping teams align around a common approach to delivery while strengthening consistency, accountability and performance across the business.',
-    name: 'Tom Roberts',
-    role: 'CEO, Tribal Worldwide London',
+    heading: 'Trusted by leaders',
+    testimonials: [
+      {
+        quote:
+          'Darren’s influence extended far beyond the delivery function. He created and implemented Tribal’s first agency-wide ways-of-working framework, helping teams align around a common approach while strengthening consistency, accountability and performance across the business.',
+        name: 'Tom Roberts',
+        role: 'CEO, Tribal Worldwide London',
+      },
+      {
+        quote:
+          'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
+        name: 'Gary Shannon',
+        role: 'Managing Partner',
+      },
+    ],
   },
   close: {
     heading: 'Great organisations don’t succeed because they have fewer challenges.',

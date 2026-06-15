@@ -125,7 +125,7 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.22}>
                 <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
-                  Over that time, I’ve built businesses, led transformation, and helped organisations execute at scale.
+                  I’ve spent my career helping organisations navigate growth, change, and the challenge of keeping important work moving.
                 </p>
               </FadeUp>
             </div>
