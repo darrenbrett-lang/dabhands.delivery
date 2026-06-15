@@ -123,7 +123,7 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.08}>
                 <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                  I spend most of my time working in the space between ambition and execution, because that’s where organisations tend to feel complexity most acutely.
+                  I spend most of my time working in the space between ambition and execution, because that’s where organisations tend to feel complexity most.
                 </p>
               </FadeUp>
               <FadeUp delay={0.16}>
