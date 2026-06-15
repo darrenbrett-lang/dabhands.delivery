@@ -9,14 +9,6 @@ import { LogoTicker } from '@/components/LogoTicker';
 import { Trajectory } from '@/components/Trajectory';
 import { mailto } from '@/lib/mailto';
 
-const DRUMBEAT = [
-  'The challenge isn’t creating more.',
-  'It’s helping what already exists move together.',
-  'Because somewhere between idea and market, work gets diluted.',
-  'Momentum slips.',
-  'Complexity takes hold.',
-];
-
 // The single path becomes three rooms. Each carries its own movement accent.
 const TURNSTILE = [
   {
@@ -163,26 +155,21 @@ export default function Home() {
                 </FadeUp>
               </div>
 
-              {/* Right: the argument that unfolds, to the “as intended” close */}
+              {/* Right: the argument, resolving to a single confident line */}
               <div>
                 <FadeUp delay={0.12}>
                   <p className="text-lg md:text-xl text-graphite max-w-[44ch]">Most organisations already have what they need.</p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
-                    Strategy. Creative ambition. Investment. Capability. Good people.
+                    Strategy. Creative ambition. Investment. Good people. Trusted partners.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-9 md:mt-10 text-lg md:text-xl text-ink/85 leading-relaxed max-w-[42ch]">
-                    {DRUMBEAT.join(' ')}
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.26}>
-                  <p className="mt-9 md:mt-12 font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.1] text-ink max-w-[20ch]">
-                    It deserves to arrive{' '}
+                <FadeUp delay={0.22}>
+                  <p className="mt-9 md:mt-12 font-serif text-[26px] md:text-[34px] lg:text-[40px] leading-[1.15] text-ink max-w-[24ch]">
+                    The challenge isn’t creating more. It’s helping what already exists{' '}
                     <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
-                      as intended
+                      move together
                     </HandUnderline>
                     .
                   </p>
