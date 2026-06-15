@@ -123,12 +123,12 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.08}>
                 <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                  I spend most of my time working in the space between ambition and execution, because that’s where organisations tend to feel complexity most acutely.
+                  I spend most of my time working in the space between ambition and execution, because that’s where organisations either gain or lose momentum.
                 </p>
               </FadeUp>
               <FadeUp delay={0.16}>
                 <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
-                  For more than twenty years, I’ve helped leadership teams turn strategy into action inside some of the world’s largest organisations.
+                  For more than twenty years, I’ve helped leaders turn strategy into action and impact inside some of the world’s largest organisations.
                 </p>
               </FadeUp>
             </div>
