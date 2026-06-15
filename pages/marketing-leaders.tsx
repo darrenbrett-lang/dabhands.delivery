@@ -42,7 +42,7 @@ const content: OperatorContent = {
   help: {
     heading: 'The right people. The right challenge. The right moment.',
     statement: [
-      'Small senior teams assembled around important work. Clear ownership. Less drag. No unnecessary layers.',
+      'Small senior teams assembled around important work. Top craft. Clear ownership. Less drag. No unnecessary layers.',
     ],
   },
   proof: {

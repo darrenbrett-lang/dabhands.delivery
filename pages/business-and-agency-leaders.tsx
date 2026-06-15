@@ -69,9 +69,9 @@ const content: OperatorContent = {
   proof: {
     heading: 'Trusted to protect what matters.',
     quote:
-      'Darren brings control to complex situations quickly. He aligns teams, simplifies decisions, and gets the work moving again without losing what made it strong.',
-    name: 'Joel Sinnott',
-    role: 'Senior Digital Lead, Nike',
+      'Darren brought a level of operational leadership and organisational change that Tribal hadn’t seen before. He created and implemented our first agency-wide ways-of-working framework, helping teams align around a common approach to delivery while strengthening consistency, accountability and performance across the business.',
+    name: 'Tom Roberts',
+    role: 'CEO, Tribal Worldwide London',
   },
   close: {
     heading: 'Great organisations don’t succeed because they have fewer challenges.',
