@@ -156,7 +156,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 2 ── VALIDATION: you've done the hard part ── */}
-        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section data-spine="The situation" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.validation.heading}</h2>
@@ -175,7 +175,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 3 ── DIAGNOSIS: what I see from the middle (4 cards) ── */}
-        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section data-spine="The challenge" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.diagnosis.heading}</h2>
@@ -214,7 +214,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         {/* 4 ── TRANSITION (optional): the messy middle / where I step in.
             Renders a single subline, or a fuller set of paragraphs. ── */}
         {c.transition && (
-          <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+          <section data-spine="Where I step in" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
             <div className={COL}>
               <FadeUp>
                 <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
@@ -240,7 +240,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         )}
 
         {/* 5 ── OUTCOMES: what changes when it moves ── */}
-        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section data-spine="What changes" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em] max-w-[20ch]">{c.outcomes.heading}</h2>
@@ -258,7 +258,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
-        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section data-spine="Where I help" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={c.help.situations ? COL_WIDE : COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
@@ -295,7 +295,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
-        <section className="bg-plum text-bone py-20 md:py-28 lg:py-32">
+        <section data-spine="Trusted" data-spine-tone="dark" className="bg-plum text-bone py-20 md:py-28 lg:py-32">
           <div className={COL}>
             <FadeUp>
               <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-bone/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
@@ -332,7 +332,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 8 ── CLOSE: simple, confident invitation ── */}
-        <section className="bg-paper text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
+        <section data-spine="Let’s talk" className="bg-paper text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
           <div className={`${COL} text-center`}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>

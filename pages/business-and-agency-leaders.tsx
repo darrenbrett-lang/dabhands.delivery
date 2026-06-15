@@ -23,11 +23,13 @@ const content: OperatorContent = {
   diagnosis: {
     heading: 'What gets in the way',
     paras: [
-      'I’ve been around organisations long enough to know that momentum rarely disappears all at once. It gets lost in small places.',
+      'I’ve been around organisations long enough to know that momentum rarely disappears all at once.',
+      'It gets lost in small places.',
       'A decision that takes longer than it should. A priority that means different things to different teams. Information that isn’t where people need it. A handoff that loses context. A meeting that creates more noise than clarity.',
-      'Individually, none of these things look particularly serious. Together, they make progress harder than it needs to be.',
-      'Technology is adding another layer. New tools are creating new opportunities, but they’re also changing how work flows, how decisions get made and where accountability sits.',
-      'The result is often the same. The organisation has everything it needs, but struggles to move at the pace it’s capable of.',
+      'Individually, none of these things look particularly serious.',
+      'Together, they make progress harder than it needs to be.',
+      'The organisation has everything it needs.',
+      'It just struggles to move at the pace it’s capable of.',
     ],
   },
   outcomes: {

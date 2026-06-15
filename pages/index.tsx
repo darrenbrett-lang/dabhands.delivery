@@ -17,30 +17,18 @@ const TURNSTILE = [
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
-    bg: 'bg-moss/[0.06]',
-    border: 'border-stone/70',
-    hover: 'group-hover:border-moss/55',
-    accentText: 'text-moss',
   },
   {
     label: 'Marketing leaders',
     diagnosis: 'Great work loses power on the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
-    bg: 'bg-peach/[0.08]',
-    border: 'border-stone/70',
-    hover: 'group-hover:border-peach/55',
-    accentText: 'text-peach-deep',
   },
   {
     label: 'Creators & founders',
     diagnosis: 'Everything depends on you. Until it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
-    bg: 'bg-sage/[0.08]',
-    border: 'border-stone/70',
-    hover: 'group-hover:border-sage/55',
-    accentText: 'text-sage-deep',
   },
 ];
 
@@ -101,7 +89,7 @@ export default function Home() {
         {/* Full-bleed cloud field. Copy on the left; Darren's cut-out portrait
             is anchored bottom-right on desktop and stacked beneath the copy on
             mobile/tablet — grounded on the banner's bottom edge either way. */}
-        <section className="relative isolate overflow-hidden text-ink">
+        <section data-spine="Darren" className="relative isolate overflow-hidden text-ink">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/clouds.png"
@@ -141,7 +129,7 @@ export default function Home() {
 
         {/* ── POINT OF VIEW (two columns — a commanding thesis, an argument
             that builds; typography carries it, no image) ───────────────── */}
-        <section className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
+        <section data-spine="Point of view" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
             <div className="u-grid gap-y-12 lg:items-start">
               {/* Left: the thesis — large, commanding, fills the column */}
@@ -188,10 +176,10 @@ export default function Home() {
         </section>
 
         {/* ── PROOF ────────────────────────────────── */}
-        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-y border-stone/60">
+        <section data-spine="Trusted by" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-y border-stone/60">
           <div className="u-container">
             <FadeUp>
-              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">I’ve been trusted with important work by</p>
+              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work by</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />
@@ -200,7 +188,7 @@ export default function Home() {
         </section>
 
         {/* ── TURNSTILE ────────────────────────────── */}
-        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+        <section data-spine="Who I help" className="bg-bone text-ink py-20 md:py-28 lg:py-32">
           <div className="u-container">
             <FadeUp>
               <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
@@ -213,12 +201,12 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className={`flex h-full flex-col rounded-2xl border ${t.border} ${t.bg} p-7 md:p-8 shadow-[0_1px_3px_rgba(31,31,29,0.04)] transition-[border-color,box-shadow] duration-300 ${t.hover} group-hover:shadow-[0_16px_34px_-18px_rgba(31,31,29,0.20)]`}
+                    className={`flex h-full flex-col rounded-2xl border border-stone bg-paper p-7 md:p-8 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_12px_30px_-14px_rgba(31,31,29,0.16)] transition-[border-color,box-shadow] duration-300 group-hover:border-ink/25 group-hover:shadow-[0_2px_6px_rgba(31,31,29,0.06),0_20px_44px_-18px_rgba(31,31,29,0.24)]`}
                   >
                     <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
                     <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
-                    <span className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold ${t.accentText}`}>
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold text-ink">
                       Explore
                       <span aria-hidden className="text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </span>
@@ -230,7 +218,7 @@ export default function Home() {
         </section>
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section className="bg-plum text-bone py-14 md:py-20">
+        <section data-spine="Let’s talk" data-spine-tone="dark" className="bg-plum text-bone py-14 md:py-20">
           <div className="u-container">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
