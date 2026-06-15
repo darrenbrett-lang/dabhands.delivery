@@ -123,7 +123,7 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.08}>
                 <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                  For more than twenty years, I’ve helped leaders turn strategy into action inside some of the world’s largest organisations.
+                  For more than twenty years, I’ve helped leaders turn strategy into action across some of the world’s largest organisations.
                 </p>
               </FadeUp>
               <FadeUp delay={0.16}>
