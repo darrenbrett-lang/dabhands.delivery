@@ -216,7 +216,7 @@ export default function Home() {
         <section className="bg-bone text-ink py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[16ch]">What’s getting in the way?</h2>
+              <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
             </FadeUp>
             {/* The path reappears: a single line entering and dividing into the
                 three doors below (moss / peach / sage), matching each card's
