@@ -133,59 +133,51 @@ export default function Home() {
           />
         </section>
 
-        {/* ── POINT OF VIEW (manifesto — a centred crescendo) ─────────
-            Provocation -> "you already have it" -> a single form under
-            tension -> the insight -> the stakes -> a calm resolution. */}
-        <section className="bg-bone text-ink py-24 md:py-36">
-          <div className="mx-auto max-w-[880px] px-6 md:px-10 text-center">
-            <FadeUp>
-              <h2 className="font-serif text-[36px] sm:text-[52px] md:text-[64px] lg:text-[72px] leading-[1.04] tracking-[-0.01em] text-balance">
-                The tools are changing. The problems aren’t.
-              </h2>
-            </FadeUp>
+        {/* ── POINT OF VIEW (two columns — a commanding thesis, an argument
+            that builds; typography carries it, no image) ───────────────── */}
+        <section className="bg-bone text-ink py-20 md:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+            <div className="grid lg:grid-cols-[1.15fr_1fr] gap-y-12 lg:gap-x-20 xl:gap-x-28 lg:items-center">
+              {/* Left: the thesis — large, commanding, fills the column */}
+              <FadeUp>
+                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
+                  The tools are changing.<br />The problems aren’t.
+                </h2>
+              </FadeUp>
 
-            <FadeUp delay={0.1}>
-              <p className="mt-12 md:mt-16 text-xl md:text-2xl leading-[1.45] text-ink max-w-[30ch] mx-auto">
-                Most organisations already have what they need.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.16}>
-              <p className="mt-4 text-base md:text-lg text-graphite max-w-[48ch] mx-auto">
-                Strategy. Creative ambition. Investment. Good people. Trusted partners.
-              </p>
-            </FadeUp>
-
-            <FadeUp delay={0.2}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/fold.png"
-                alt=""
-                aria-hidden
-                className="pointer-events-none select-none mx-auto my-12 md:my-16 w-full max-w-[300px] md:max-w-[340px]"
-              />
-            </FadeUp>
-
-            <FadeUp delay={0.24}>
-              <p className="font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[20ch] mx-auto text-balance">
-                The challenge isn’t creating more. It’s helping what already exists{' '}
-                <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
-                  move together
-                </HandUnderline>
-                .
-              </p>
-            </FadeUp>
-
-            <FadeUp delay={0.3}>
-              <p className="mt-8 md:mt-10 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch] mx-auto">
-                Because somewhere between idea and market, momentum slips and value gets lost.
-              </p>
-            </FadeUp>
-
-            <FadeUp delay={0.36}>
-              <p className="mt-10 md:mt-12 font-serif text-[26px] md:text-[36px] leading-[1.2] text-ink max-w-[24ch] mx-auto">
-                It deserves to arrive as intended.
-              </p>
-            </FadeUp>
+              {/* Right: the argument that builds to the close */}
+              <div>
+                <FadeUp delay={0.1}>
+                  <p className="text-xl md:text-2xl leading-[1.4] text-ink max-w-[34ch]">
+                    Most organisations already have what they need.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.15}>
+                  <p className="mt-4 text-base md:text-lg text-graphite max-w-[42ch]">
+                    Strategy. Creative ambition. Investment. Good people. Trusted partners.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <p className="mt-10 md:mt-12 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[22ch]">
+                    The challenge isn’t creating more. It’s helping what already exists{' '}
+                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
+                      move together
+                    </HandUnderline>
+                    .
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.26}>
+                  <p className="mt-6 text-base md:text-lg text-graphite leading-relaxed max-w-[42ch]">
+                    Because somewhere between idea and market, momentum slips and value gets lost.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.32}>
+                  <p className="mt-9 md:mt-10 font-serif text-[24px] md:text-[30px] leading-[1.2] text-ink/90 max-w-[26ch]">
+                    It deserves to arrive as intended.
+                  </p>
+                </FadeUp>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -193,7 +185,7 @@ export default function Home() {
         <section className="bg-paper text-ink py-16 md:py-28 border-y border-stone/60">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work by</p>
+              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">I’ve been trusted with important work by</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />

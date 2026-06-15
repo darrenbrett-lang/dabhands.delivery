@@ -8,15 +8,15 @@ const content: OperatorContent = {
   hero: {
     headline: 'As organisations grow, keeping everything moving becomes harder.',
     subline: 'I help leadership teams maintain momentum when complexity starts getting in the way.',
-    trust: 'A challenge I’ve spent over twenty years seeing inside organisations like Nike, Volkswagen and HUGO BOSS.',
+    trust: 'A challenge I’ve spent more than twenty years helping leaders navigate.',
   },
   validation: {
     heading: 'All the blocks are in place.',
     intro: 'You know where you want to go. You have capable people. The ambition is clear.',
     paras: [
       'Yet progress feels slower than it should.',
-      'Not because people aren’t working hard. Not because the strategy is wrong.',
-      'As organisations grow, complexity creates distance. Teams become more specialised. Priorities multiply. Decisions take longer to travel.',
+      'As organisations grow, complexity creates distance.',
+      'Between teams. Between priorities. Between decisions and action.',
       'The challenge isn’t deciding what to do next.',
       'It’s helping the organisation move together.',
     ],
