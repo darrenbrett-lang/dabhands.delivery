@@ -11,7 +11,7 @@ import { mailto } from '@/lib/mailto';
    recognition over explanation, "I" not "we", situations not services. Built to
    the Destination Page brief. One fixed structure, audience-specific copy. */
 
-export type Accent = 'lavender' | 'peach' | 'sage';
+export type Accent = 'moss' | 'lavender' | 'peach' | 'sage';
 
 export interface OperatorContent {
   slug: string;
@@ -28,12 +28,13 @@ export interface OperatorContent {
   close: { heading: string; line?: string };
 }
 
-// Hero washes follow the Colour System v2 Hero Treatments exactly: the primary
-// accent at 0.22, held to 60%, fading to 0 at 100%. Text uses the dark accent.
+// Hero washes (Colour System v3): the primary accent fading top-to-bottom.
+// Deep Moss leads; text uses the dark accent shade.
 const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash: string; traj: string }> = {
+  moss: { text: 'text-moss', border: 'border-moss/40', rule: 'border-moss/60', wash: 'linear-gradient(to bottom, rgba(91,106,88,0.20), rgba(91,106,88,0.14) 60%, rgba(91,106,88,0) 100%)', traj: 'var(--color-moss)' },
   lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.22), rgba(184,162,216,0.22) 60%, rgba(184,162,216,0) 100%)', traj: 'var(--color-lavender)' },
-  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0.22) 60%, rgba(230,179,154,0) 100%)', traj: 'var(--color-peach)' },
-  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(168,181,162,0.22), rgba(168,181,162,0.22) 60%, rgba(168,181,162,0) 100%)', traj: 'var(--color-sage)' },
+  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0.14) 60%, rgba(230,179,154,0) 100%)', traj: 'var(--color-peach)' },
+  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(168,181,162,0.24), rgba(168,181,162,0.14) 60%, rgba(168,181,162,0) 100%)', traj: 'var(--color-sage)' },
 };
 
 // Authored, not a blog. Hero a touch wider; body narrow; the card grid in between.

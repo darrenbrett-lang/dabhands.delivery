@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── v2.0 palette (Visual Style Guide v2.0 + Colour System v2) ────────
-     Balance: ~75% bone/paper, ~20% ink/graphite/stone, ~5% audience accent
-     (lavender / peach / sage). Colour is meaning, not decoration — accents
-     are punctuation, never the canvas. */
+  /* ── Palette (Colour System v3 — operating-partner update) ───────────
+     Balance: ~70% bone/paper, ~20% ink/graphite/stone, ~7% moss/sage,
+     ~2% lavender, ~1% peach. Deep Moss is the dominant accent — control
+     entering the system. Colour is meaning, not decoration. */
 
   /* Core neutrals */
   --color-bone: #F5F1EA;       /* primary background */
@@ -13,11 +13,12 @@
   --color-graphite: #5C5C58;   /* secondary / body text */
   --color-stone: #D8D2C8;      /* borders + dividers */
 
-  /* Momentum palette (accents — used sparingly) */
-  --color-lavender: #B8A2D8;       /* primary accent */
+  /* Accent palette — Deep Moss leads (operating-partner update) */
+  --color-moss: #5B6A58;           /* PRIMARY brand accent — capability, control, trust */
+  --color-lavender: #B8A2D8;       /* supporting — intelligence / clarity, used lightly */
   --color-lavender-soft: #E6D6EE;  /* gradient mid + soft accent wash */
-  --color-peach: #E6B39A;          /* secondary accent / warmth — Marketing leaders */
-  --color-sage: #A8B5A2;           /* primary accent — Creators & founders (Colour System v2) */
+  --color-peach: #E6B39A;          /* warmth / partnership — Marketing leaders */
+  --color-sage: #A8B5A2;           /* growth / maturity — Creators & founders */
   --color-sky: #AFCFE0;            /* supporting accent */
   --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
 
@@ -134,7 +135,7 @@ p {
 .signal-rule {
   width: 32px;
   height: 2px;
-  background: var(--color-lavender);
+  background: var(--color-moss);
   display: block;
 }
 
@@ -175,7 +176,7 @@ p {
 
 /* Brand dot retained for legacy references; now lavender, not green. */
 .brand-dot {
-  background-color: var(--color-lavender);
+  background-color: var(--color-moss);
 }
 
 /* Dev: outline every div for design QA. Excluded for dev tool elements. */

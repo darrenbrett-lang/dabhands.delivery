@@ -4,7 +4,7 @@ const content: OperatorContent = {
   slug: 'business-and-agency-leaders',
   navLabel: 'Business & agency leaders',
   eyebrow: 'For business & agency leaders',
-  accent: 'lavender',
+  accent: 'moss',
   hero: {
     headline: 'The organisation hasn’t lost its way. It’s simply become harder to move.',
     subline: 'Helping organisations keep important work moving when complexity starts getting in the way.',

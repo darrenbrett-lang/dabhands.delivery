@@ -25,10 +25,10 @@ const TURNSTILE = [
     support:
       'You need experienced operational leadership that understands delivery, commercial realities, people, and how organisations actually work.',
     href: '/business-and-agency-leaders',
-    bg: 'bg-lavender/[0.14]',
-    border: 'border-lavender/35',
-    hover: 'hover:border-lavender/60',
-    accentText: 'text-lavender-deep',
+    bg: 'bg-moss/[0.12]',
+    border: 'border-moss/35',
+    hover: 'hover:border-moss/60',
+    accentText: 'text-moss',
   },
   {
     label: 'Marketing leaders',
@@ -181,7 +181,7 @@ export default function Home() {
                 <FadeUp delay={0.26}>
                   <p className="mt-9 md:mt-12 font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.1] text-ink max-w-[20ch]">
                     It deserves to arrive{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-lavender)">
+                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
                       as intended
                     </HandUnderline>
                     .
@@ -219,12 +219,12 @@ export default function Home() {
               <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[16ch]">What’s getting in the way?</h2>
             </FadeUp>
             {/* The path reappears: a single line entering and dividing into the
-                three doors below (lavender / peach / sage), matching each card's
+                three doors below (moss / peach / sage), matching each card's
                 accent. Desktop only — on mobile the cards stack with their dots. */}
             <div aria-hidden className="hidden md:block mb-6 -mt-2">
               <svg viewBox="0 0 1200 110" preserveAspectRatio="none" fill="none" className="h-16 lg:h-20 w-full">
                 {[
-                  { d: 'M -40 28 C 180 40, 250 80, 200 110', c: 'var(--color-lavender)' },
+                  { d: 'M -40 28 C 180 40, 250 80, 200 110', c: 'var(--color-moss)' },
                   { d: 'M -40 28 C 320 42, 560 82, 600 110', c: 'var(--color-peach)' },
                   { d: 'M -40 28 C 560 46, 940 82, 1000 110', c: 'var(--color-sage)' },
                 ].map((b, i) => (

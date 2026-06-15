@@ -3,7 +3,7 @@ import { useId } from 'react';
 
 interface TrajectoryProps {
   className?: string;
-  /** Stroke colour. Defaults to lavender (primary accent). */
+  /** Stroke colour. Defaults to moss (primary brand accent). */
   stroke?: string;
   /** Peak opacity of the line; the gradient fades both ends to 0. */
   opacity?: number;
@@ -25,7 +25,7 @@ const GESTURE = 'M -60 250 C 180 232, 330 244, 540 348 C 720 432, 930 322, 1300 
 
 export const Trajectory = ({
   className = '',
-  stroke = 'var(--color-lavender)',
+  stroke = 'var(--color-moss)',
   opacity = 0.65,
   delay = 0.1,
   duration = 2.3,

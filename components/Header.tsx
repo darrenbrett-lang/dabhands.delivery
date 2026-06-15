@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // (and when active). `tint` is the light accent (still used for the mobile
 // lead); `lead` is its legible text shade — the same colour as the room's eyebrow.
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#B8A2D8', lead: '#6E5A86' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#5B6A58', lead: '#5B6A58' },
   { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', lead: '#B97D62' },
   { href: '/creators-and-founders', label: 'Creators & founders', tint: '#A8B5A2', lead: '#6F7D69' },
 ];
