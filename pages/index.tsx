@@ -148,17 +148,17 @@ export default function Home() {
               {/* Right: the argument that builds to the close */}
               <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
-                  <p className="text-xl md:text-2xl leading-[1.4] text-ink max-w-[34ch]">
+                  <p className="text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
                     Most organisations already have what they need.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.15}>
-                  <p className="mt-4 text-base md:text-lg text-graphite max-w-[42ch]">
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
                     Strategy. Creative ambition. Investment. Good people. Capable partners.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
-                  <p className="mt-10 md:mt-12 text-lg md:text-xl leading-relaxed text-ink max-w-[40ch]">
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
                     The challenge isn’t creating more. It’s helping what already exists{' '}
                     <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
                       move together
@@ -167,12 +167,12 @@ export default function Home() {
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.26}>
-                  <p className="mt-6 text-base md:text-lg text-graphite leading-relaxed max-w-[42ch]">
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
                     Because somewhere between ambition and execution, work gets diluted. Momentum slips. Complexity takes hold.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.32}>
-                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[22ch]">
+                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[24ch]">
                     It deserves to arrive as intended.
                   </p>
                 </FadeUp>

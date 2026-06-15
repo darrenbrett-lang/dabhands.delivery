@@ -18,11 +18,12 @@ export interface OperatorContent {
   navLabel: string;
   eyebrow: string; // "For business & agency leaders"
   accent: Accent;
-  hero: { headline: string; subline: string; trust: string };
+  hero: { headline: string; subline: string; trust?: string };
   validation: { heading: string; intro: string; paras: string[] };
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
   outcomes: { heading: string; paras: string[] };
   transition: { heading: string; subline: string };
+  bring?: { heading: string; items: { title: string; body: string }[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[] };
   close: { heading: string; line?: string };
@@ -53,6 +54,22 @@ const Cta = ({ label = 'Start a conversation', full = false }: { label?: string;
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
   </a>
 );
+
+// Restrained marks for the "What I bring" triptych — cohesive with the
+// trajectory language (a path / a form / an arrival), inheriting the accent.
+const BRING_ICONS = [
+  <svg key="grow" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
+    <path d="M4 25 C 12 24, 19 14, 26 6" />
+    <circle cx="26" cy="6" r="1.9" />
+  </svg>,
+  <svg key="change" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
+    <path d="M5 22 C 12 6, 20 26, 27 10" />
+  </svg>,
+  <svg key="exec" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
+    <path d="M4 16 L24 16" />
+    <circle cx="26" cy="16" r="2.4" fill="currentColor" stroke="none" />
+  </svg>,
+];
 
 export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
   const c = content;
@@ -91,16 +108,24 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <FadeUp delay={0.12}>
               <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[44ch]">{c.hero.subline}</p>
             </FadeUp>
-            <FadeUp delay={0.16}>
-              <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
-                <p className={`border-l-2 ${a.border} pl-4 text-[14px] leading-relaxed text-graphite max-w-[40ch]`}>
-                  {c.hero.trust}
-                </p>
-                <div className="shrink-0">
+            {c.hero.trust ? (
+              <FadeUp delay={0.16}>
+                <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
+                  <p className={`border-l-2 ${a.border} pl-4 text-[14px] leading-relaxed text-graphite max-w-[40ch]`}>
+                    {c.hero.trust}
+                  </p>
+                  <div className="shrink-0">
+                    <Cta />
+                  </div>
+                </div>
+              </FadeUp>
+            ) : (
+              <FadeUp delay={0.16}>
+                <div className="mt-8">
                   <Cta />
                 </div>
-              </div>
-            </FadeUp>
+              </FadeUp>
+            )}
           </div>
         </section>
 
@@ -190,6 +215,26 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
+        {/* WHAT I BRING — credibility triptych, before "where I help" ── */}
+        {c.bring && (
+          <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+            <div className={COL_WIDE}>
+              <FadeUp>
+                <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.bring.heading}</h2>
+              </FadeUp>
+              <div className="mt-10 md:mt-14 grid gap-x-8 gap-y-10 md:grid-cols-3">
+                {c.bring.items.map((item, i) => (
+                  <FadeUp key={item.title} delay={0.06 + i * 0.08}>
+                    <div className={a.text}>{BRING_ICONS[i]}</div>
+                    <h3 className="mt-5 font-serif text-[21px] md:text-[23px] leading-[1.25] text-ink">{item.title}</h3>
+                    <p className="mt-2 text-graphite leading-relaxed text-[15px] max-w-[34ch]">{item.body}</p>
+                  </FadeUp>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
         <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={c.help.situations ? COL_WIDE : COL}>
@@ -263,18 +308,18 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 8 ── CLOSE: simple, confident invitation ── */}
-        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section className="bg-paper text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
           <div className={`${COL} text-center`}>
             <FadeUp>
-              <h2 className="font-serif text-[32px] md:text-[48px] leading-[1.08] max-w-[20ch] mx-auto">{c.close.heading}</h2>
+              <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>
             </FadeUp>
             {c.close.line && (
               <FadeUp delay={0.06}>
-                <p className="mt-5 text-lg text-graphite max-w-[44ch] mx-auto">{c.close.line}</p>
+                <p className="mt-4 text-lg text-graphite max-w-[62ch] mx-auto">{c.close.line}</p>
               </FadeUp>
             )}
             <FadeUp delay={0.1}>
-              <div className="mt-9 flex justify-center">
+              <div className="mt-8 flex justify-center">
                 <Cta />
               </div>
             </FadeUp>

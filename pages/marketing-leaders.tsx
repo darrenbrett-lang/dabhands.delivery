@@ -7,8 +7,7 @@ const content: OperatorContent = {
   accent: 'peach',
   hero: {
     headline: 'When the work matters too much to get lost on the way.',
-    subline: 'Helping brands get more of the original ambition into market.',
-    trust: 'A challenge I’ve spent over twenty years seeing inside organisations like Nike, Volkswagen and HUGO BOSS.',
+    subline: 'I help brands get more of the original ambition into market.',
   },
   validation: {
     heading: 'You’ve already done the hard part.',
@@ -30,6 +29,14 @@ const content: OperatorContent = {
     heading: 'The work arrives intact.',
     paras: [
       'The original ambition remains visible. The ecosystem works together. The customer understands it. The investment works harder.',
+    ],
+  },
+  bring: {
+    heading: 'What I bring',
+    items: [
+      { title: 'Built businesses.', body: 'I understand growth from the inside.' },
+      { title: 'Led transformation.', body: 'I understand how organisations change.' },
+      { title: 'Helped organisations execute.', body: 'I understand how important work gets done.' },
     ],
   },
   help: {

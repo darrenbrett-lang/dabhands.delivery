@@ -8,7 +8,6 @@ const content: OperatorContent = {
   hero: {
     headline: 'Everything depends on you. Until it can’t.',
     subline: 'Helping founder-led businesses build the capability required for their next stage of growth.',
-    trust: 'A challenge I’ve spent over twenty years seeing inside organisations like Nike, Volkswagen and HUGO BOSS.',
   },
   validation: {
     heading: 'You’ve already created momentum.',
@@ -36,6 +35,14 @@ const content: OperatorContent = {
     heading: 'That’s where I step in.',
     subline:
       'When a founder feels stuck between where the business is and where it could be. When growth is creating complexity. When opportunities are arriving faster than the organisation can absorb them. When everything still depends on one person.',
+  },
+  bring: {
+    heading: 'What I bring',
+    items: [
+      { title: 'Built businesses.', body: 'I understand growth from the inside.' },
+      { title: 'Led transformation.', body: 'I understand how organisations change.' },
+      { title: 'Helped organisations execute.', body: 'I understand how important work gets done.' },
+    ],
   },
   help: {
     heading: 'Where I tend to help.',

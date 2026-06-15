@@ -8,7 +8,6 @@ const content: OperatorContent = {
   hero: {
     headline: 'As organisations grow, keeping everything moving becomes harder.',
     subline: 'I help leadership teams maintain momentum when complexity starts getting in the way.',
-    trust: 'A challenge I’ve spent more than twenty years helping leaders navigate.',
   },
   validation: {
     heading: 'All the blocks are in place.',
@@ -32,15 +31,23 @@ const content: OperatorContent = {
     ],
   },
   outcomes: {
-    heading: 'The organisation starts moving together again.',
+    heading: 'The organisation becomes easier to lead.',
     paras: [
-      'People understand what matters. Teams pull in the same direction. Decisions move faster. Leadership spends less time connecting dots and more time leading.',
-      'The organisation doesn’t feel different. But it moves differently.',
+      'People understand what matters. Teams pull in the same direction. Decisions move faster. Leadership spends less time connecting dots and more time leading. Client outcomes are better and clients are happier.',
+      'The organisation doesn’t feel different. But it performs differently.',
     ],
   },
   transition: {
     heading: 'That’s where I step in.',
     subline: 'Into the space between ambition and execution, where momentum is gained or lost.',
+  },
+  bring: {
+    heading: 'What I bring',
+    items: [
+      { title: 'Built businesses.', body: 'I understand growth from the inside.' },
+      { title: 'Led transformation.', body: 'I understand how organisations change.' },
+      { title: 'Helped organisations execute.', body: 'I understand how important work gets done.' },
+    ],
   },
   help: {
     heading: 'Where I tend to help.',
