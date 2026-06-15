@@ -35,6 +35,7 @@ const content: OperatorContent = {
   },
   outcomes: {
     heading: 'I help organisations move together.',
+    bgImage: '/images/business_solution.png',
     paras: [
       'By identifying what’s slowing progress and strengthening the connections between people, priorities and execution.',
       'The goal isn’t more process. It’s making it easier for good people to do good work.',

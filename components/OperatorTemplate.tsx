@@ -21,7 +21,7 @@ export interface OperatorContent {
   hero: { headline: string; subline: string; trust?: string };
   validation: { heading: string; intro: string; paras: string[]; strong?: boolean };
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[]; problem?: string[]; context?: string[]; payoff?: string };
-  outcomes: { heading: string; paras: string[] };
+  outcomes: { heading: string; paras: string[]; bgImage?: string };
   transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
@@ -280,8 +280,18 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         )}
 
         {/* 5 ── OUTCOMES: what changes when it moves ── */}
-        <section data-spine="What changes" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-          <div className={COL}>
+        <section
+          data-spine="What changes"
+          className={`relative text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50 ${c.outcomes.bgImage ? 'overflow-hidden' : 'bg-bone'}`}
+        >
+          {c.outcomes.bgImage && (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={c.outcomes.bgImage} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover object-center" />
+              <div aria-hidden className="absolute inset-0 bg-bone/35" />
+            </>
+          )}
+          <div className={`relative z-10 ${COL}`}>
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em] max-w-[20ch]">{c.outcomes.heading}</h2>
             </FadeUp>
