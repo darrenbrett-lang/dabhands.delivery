@@ -9,15 +9,19 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
    Escape / outside click / scroll. Rendered through a portal so it escapes the
    hero's overflow. The header nav carries the fully keyboard-robust version. */
 
+// Section colours (Business=sage, Marketing=peach, Creators=lavender) drive the
+// hover block + arrow tint via inline style — kept off Tailwind classes so the
+// dynamic per-item colour is deterministic.
 const PATHS = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.' },
-  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.', block: 'rgba(168,181,162,0.22)', accent: '#6F7D69' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.', block: 'rgba(230,179,154,0.24)', accent: '#B97D62' },
+  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.', block: 'rgba(184,162,216,0.24)', accent: '#6E5A86' },
 ];
 
 export const PathwayPicker = () => {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -103,17 +107,26 @@ export const PathwayPicker = () => {
                   className="w-[min(92vw,720px)] overflow-hidden rounded-2xl border border-stone bg-bone text-left shadow-[0_24px_70px_-24px_rgba(31,31,29,0.4)]"
                 >
                   <div className="grid grid-cols-1 divide-y divide-stone/60 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-                    {PATHS.map((p) => (
+                    {PATHS.map((p, i) => (
                       <Link
                         key={p.href}
                         href={p.href}
                         role="menuitem"
                         onClick={hideNow}
-                        className="group/item flex flex-col gap-1.5 px-6 py-6 transition-colors duration-200 hover:bg-paper"
+                        onMouseEnter={() => setHovered(i)}
+                        onMouseLeave={() => setHovered(null)}
+                        className="flex flex-col gap-1.5 px-6 py-6 transition-colors duration-200"
+                        style={{ backgroundColor: hovered === i ? p.block : undefined }}
                       >
                         <span className="flex items-center justify-between gap-3">
                           <span className="font-serif text-[19px] md:text-[20px] leading-tight text-ink">{p.label}</span>
-                          <span aria-hidden className="shrink-0 text-ink transition-transform duration-300 group-hover/item:translate-x-1">→</span>
+                          <span
+                            aria-hidden
+                            className="shrink-0 transition-all duration-300"
+                            style={{ color: hovered === i ? p.accent : 'rgba(31,31,29,0.55)', transform: hovered === i ? 'translateX(4px)' : 'translateX(0)' }}
+                          >
+                            →
+                          </span>
                         </span>
                         <span className="text-[13px] leading-snug text-graphite">{p.line}</span>
                       </Link>

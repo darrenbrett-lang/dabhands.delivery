@@ -4,13 +4,14 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // The three destination pages live under "Who I help". Each carries its own
-// pathway colour. In the desktop dropdown the label takes that colour on hover
-// (and when active). `tint` is the light accent (still used for the mobile
-// lead); `lead` is its legible text shade — the same colour as the room's eyebrow.
+// pathway colour (Business=sage, Marketing=peach, Creators=lavender). In the
+// desktop dropdown the hovered/active option gets a soft block of that colour
+// while the label stays ink; `tint` is the solid accent (mobile lead dash),
+// `block` the low-alpha hover fill.
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#5B6A58', lead: '#5B6A58' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', lead: '#B97D62' },
-  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#A8B5A2', lead: '#6F7D69' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#A8B5A2', block: 'rgba(168,181,162,0.20)' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', block: 'rgba(230,179,154,0.22)' },
+  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#B8A2D8', block: 'rgba(184,162,216,0.22)' },
 ];
 
 export const Header = () => {
@@ -120,16 +121,12 @@ export const Header = () => {
                             role="menuitem"
                             onMouseEnter={() => setHoveredWho(a.href)}
                             onMouseLeave={() => setHoveredWho(null)}
-                            className="block rounded-xl px-3 py-2.5"
+                            className="block rounded-xl px-3 py-2.5 transition-colors duration-200"
+                            style={{ backgroundColor: lit ? a.block : undefined }}
                           >
-                            {/* The label takes the target page's lead colour on
-                                hover (and when active); ink otherwise. */}
-                            <span
-                              className={`text-[14.5px] leading-snug transition-colors duration-200 ${lit ? '' : 'text-ink/75'}`}
-                              style={{ color: lit ? a.lead : undefined }}
-                            >
-                              {a.label}
-                            </span>
+                            {/* Hovered/active option gets a soft block of the
+                                section colour; the label stays ink. */}
+                            <span className="text-[14.5px] leading-snug text-ink">{a.label}</span>
                           </Link>
                         );
                       })}

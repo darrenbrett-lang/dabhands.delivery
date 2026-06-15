@@ -54,10 +54,11 @@ const Cta = ({ label = 'Start a conversation', full = false }: { label?: string;
   </a>
 );
 
-// Auto-rotating testimonial carousel (3s) with pips. All quotes are stacked
-// in one grid cell and crossfaded, so the height never jumps. Auto-rotation
-// pauses for reduced-motion; the pips stay clickable.
-const Testimonials = ({ items, rule, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; rule: string; interval?: number }) => {
+// Testimonials as neutral evidence: a single warm-paper card with a light
+// border and a thin accent rule on top. Multiple quotes crossfade inside the
+// one card, so the height never jumps. Interval is per page; rotation pauses
+// for reduced-motion; the pips stay clickable.
+const Testimonials = ({ items, accent, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; accent: string; interval?: number }) => {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   useEffect(() => {
@@ -66,8 +67,11 @@ const Testimonials = ({ items, rule, interval = 6000 }: { items: { quote: string
     return () => clearInterval(id);
   }, [active, reduce, items.length, interval]);
   return (
-    <div>
-      <div className={`relative grid border-l-2 ${rule} pl-6 md:pl-8 max-w-[62ch]`}>
+    <div className="max-w-[64ch]">
+      <div
+        className="relative grid rounded-2xl border border-stone bg-paper px-7 py-8 md:px-9 md:py-10 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_14px_34px_-16px_rgba(31,31,29,0.16)]"
+        style={{ borderTopColor: accent, borderTopWidth: 3 }}
+      >
         {items.map((t, i) => (
           <motion.figure
             key={i}
@@ -77,19 +81,22 @@ const Testimonials = ({ items, rule, interval = 6000 }: { items: { quote: string
             transition={{ duration: 0.6, ease: 'easeInOut' }}
             style={{ gridArea: '1 / 1', pointerEvents: i === active ? 'auto' : 'none' }}
           >
-            <blockquote className="font-serif italic text-[18px] md:text-[22px] leading-[1.55] text-bone">“{t.quote}”</blockquote>
-            <figcaption className="mt-6 text-[14px] not-italic text-bone/65">{t.name}, {t.role}</figcaption>
+            <blockquote className="font-serif text-[19px] md:text-[23px] leading-[1.5] text-ink">“{t.quote}”</blockquote>
+            <figcaption className="mt-6 not-italic">
+              <span className="block text-[15px] font-medium text-ink">{t.name}</span>
+              <span className="block text-[13px] text-graphite">{t.role}</span>
+            </figcaption>
           </motion.figure>
         ))}
       </div>
-      <div className="mt-9 flex gap-2.5">
+      <div className="mt-6 flex gap-2.5">
         {items.map((_, i) => (
           <button
             key={i}
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Show testimonial ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/50'}`}
+            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-ink' : 'w-2 bg-ink/20 hover:bg-ink/40'}`}
           />
         ))}
       </div>
@@ -295,31 +302,37 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
-        <section data-spine="Trusted" data-spine-tone="dark" className="bg-plum text-bone py-20 md:py-28 lg:py-32">
+        <section data-spine="Trusted" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
-              <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-bone/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
+              <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-ink mb-8 max-w-[26ch]">{c.proof.heading}</p>
             </FadeUp>
             <FadeUp delay={0.08}>
               {c.proof.testimonials ? (
-                <Testimonials items={c.proof.testimonials} rule={a.rule} interval={c.proof.interval} />
+                <Testimonials items={c.proof.testimonials} accent={a.traj} interval={c.proof.interval} />
               ) : c.proof.quote ? (
-                <blockquote className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
-                  <p className="font-serif italic text-[19px] md:text-[24px] leading-[1.5] text-bone">“{c.proof.quote}”</p>
+                <blockquote
+                  className="max-w-[64ch] rounded-2xl border border-stone bg-paper px-7 py-8 md:px-9 md:py-10 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_14px_34px_-16px_rgba(31,31,29,0.16)]"
+                  style={{ borderTopColor: a.traj, borderTopWidth: 3 }}
+                >
+                  <p className="font-serif text-[19px] md:text-[23px] leading-[1.5] text-ink">“{c.proof.quote}”</p>
                   {c.proof.name && (
-                    <footer className="mt-6 text-[14px] not-italic text-bone/65">
-                      {c.proof.name}
-                      {c.proof.role ? `, ${c.proof.role}` : ''}
+                    <footer className="mt-6 not-italic">
+                      <span className="block text-[15px] font-medium text-ink">{c.proof.name}</span>
+                      {c.proof.role && <span className="block text-[13px] text-graphite">{c.proof.role}</span>}
                     </footer>
                   )}
                 </blockquote>
               ) : (
                 c.proof.statement && (
-                  <div className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
+                  <div
+                    className="max-w-[64ch] rounded-2xl border border-stone bg-paper px-7 py-8 md:px-9 md:py-10 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_14px_34px_-16px_rgba(31,31,29,0.16)]"
+                    style={{ borderTopColor: a.traj, borderTopWidth: 3 }}
+                  >
                     {c.proof.statement.map((p, i) => (
                       <p
                         key={i}
-                        className={i === 0 ? 'font-serif text-[19px] md:text-[24px] leading-[1.5] text-bone' : 'mt-5 text-lg text-bone/80 leading-relaxed'}
+                        className={i === 0 ? 'font-serif text-[19px] md:text-[23px] leading-[1.5] text-ink' : 'mt-5 text-lg text-graphite leading-relaxed'}
                       >
                         {p}
                       </p>

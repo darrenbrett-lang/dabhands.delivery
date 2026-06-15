@@ -4,7 +4,7 @@ const content: OperatorContent = {
   slug: 'creators-and-founders',
   navLabel: 'Creators & founders',
   eyebrow: 'For creators & founders',
-  accent: 'sage',
+  accent: 'lavender',
   hero: {
     headline: 'Everything depends on you. Until it can’t.',
     subline: 'I help creator and founder-led businesses build the capability required for their next stage of growth.',
