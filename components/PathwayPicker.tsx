@@ -104,7 +104,7 @@ export const PathwayPicker = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: reduce ? 0 : 6 }}
                   transition={{ duration: reduce ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-[min(92vw,720px)] overflow-hidden rounded-2xl border border-stone bg-bone text-left shadow-[0_24px_70px_-24px_rgba(31,31,29,0.4)]"
+                  className="w-[min(94vw,920px)] overflow-hidden rounded-2xl border border-stone bg-bone text-left shadow-[0_24px_70px_-24px_rgba(31,31,29,0.4)]"
                 >
                   <div className="grid grid-cols-1 divide-y divide-stone/60 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                     {PATHS.map((p, i) => (

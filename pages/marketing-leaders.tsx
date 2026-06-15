@@ -33,6 +33,7 @@ const content: OperatorContent = {
   },
   outcomes: {
     heading: 'The market creates enough noise already.',
+    bgImage: '/images/marketing_solution.png',
     paras: [
       'The last thing great work needs is more noise from inside the organisation.',
       'That’s why alignment matters. Not alignment for its own sake. Alignment around the things that made the work worth doing in the first place.',

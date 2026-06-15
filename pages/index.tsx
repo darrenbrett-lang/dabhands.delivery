@@ -17,7 +17,7 @@ const TURNSTILE = [
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
-    block: 'color-mix(in srgb, var(--color-sage) 24%, transparent)',
+    block: 'color-mix(in srgb, var(--color-sage) 55%, var(--color-bone))',
     accent: 'var(--color-sage-deep)',
   },
   {
@@ -25,7 +25,7 @@ const TURNSTILE = [
     diagnosis: 'Great work loses power on the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
-    block: 'color-mix(in srgb, var(--color-peach) 26%, transparent)',
+    block: 'color-mix(in srgb, var(--color-peach) 58%, var(--color-bone))',
     accent: 'var(--color-peach-deep)',
   },
   {
@@ -33,7 +33,7 @@ const TURNSTILE = [
     diagnosis: 'Everything depends on you. Until it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
-    block: 'color-mix(in srgb, var(--color-lavender) 26%, transparent)',
+    block: 'color-mix(in srgb, var(--color-lavender) 58%, var(--color-bone))',
     accent: 'var(--color-lavender-deep)',
   },
 ];
