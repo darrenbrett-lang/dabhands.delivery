@@ -42,6 +42,16 @@
   --font-sans: var(--font-manrope), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: var(--font-manrope), -apple-system, system-ui, sans-serif;
 
+  /* ── Grid system ──────────────────────────────────────────────────────
+     One page container, a 12-column grid inside it, and named reading
+     measures for centred text. Outer gutter is px-6/md:px-10/lg:px-16
+     (24/40/64); the 12-col gutter is gap-x-6/lg:gap-x-8 (24/32). Use the
+     Container + Grid primitives in components/Grid.tsx. Vertical rhythm:
+     sections are py-20 md:py-28 lg:py-32 (a deep beat uses py-24/32/40). */
+  --container-page: 80rem;        /* 1280px — page container / 12-col grid bound */
+  --container-statement: 60rem;   /* 960px — hero & statement measure */
+  --container-read: 50rem;        /* 800px — authored reading measure (body) */
+
   /* ── Legacy v1 tokens — retained so un-migrated pages still build.
      Removed once nothing references them. Do not use in new work. ── */
   --color-dab-cream: #F3F0EA;
@@ -60,6 +70,33 @@
 :root {
   --background: #F5F1EA;
   --foreground: #5C5C58;
+}
+
+/* ── Grid primitives ──────────────────────────────────────────────────────
+   .u-container — the one page width (max-w-page) + the one responsive gutter
+   (24 / 40 / 64). Every module shell uses this; nothing sets its own width.
+   .u-grid — the 12-column grid (4 on mobile), gutter 24 / 32. Place children
+   with col-span-* / col-start-* utilities so columns align to one system. */
+@layer components {
+  .u-container {
+    width: 100%;
+    margin-inline: auto;
+    max-width: var(--container-page);
+    padding-inline: 1.5rem;
+  }
+  .u-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .u-container { padding-inline: 2.5rem; }
+    .u-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1024px) {
+    .u-container { padding-inline: 4rem; }
+    .u-grid { column-gap: 2rem; }
+  }
 }
 
 * {

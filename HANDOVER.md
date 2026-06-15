@@ -102,6 +102,16 @@ Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no gr
 
 Ratio ~70% bone/paper, ~20% ink/graphite/stone, ~7% moss/sage, ~2% lavender, ~1% peach — per **Colour System v3** (operating-partner update; colour is meaning, not decoration). **Deep Moss `#5B6A58` is the dominant accent** — control entering the system. **Audience rooms shift one accent each** (Business **moss**, Marketing peach, Creators sage); each room's **hero wash** is the primary accent fading top-to-bottom (`ACCENT[accent].wash` in `OperatorTemplate`): moss `0.20→0.14→0`, peach `0.22→0.14→0`, sage `0.24→0.14→0`. Same type/spacing/layout/core palette otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`. (`.halo-glow` removed — halo motif retired.) Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
 
+## Grid system (deliberate + fixed)
+
+One page width, one gutter, one 12-column grid, named reading measures, one vertical rhythm. Tokens live in `globals.css @theme`; the primitives are CSS utilities in `globals.css` (`@layer components`).
+
+- **`.u-container`** — the page shell: `max-w-page` (1280) + responsive gutter **24 / 40 / 64** (`px-6 / md:px-10 / lg:px-16`). Every full-width module uses it; nothing sets its own max-width or horizontal padding.
+- **`.u-grid`** — the **12-column** grid (4 columns on mobile), gutter **24 / 32**. Place children with `col-span-*` / `col-start-*`. Homepage POV = thesis `md:col-span-6` + argument `md:col-span-5 md:col-start-8` (column 7 is a deliberate spacer); turnstile = three cards each `col-span-4`; both stack full-width on mobile.
+- **Reading measures** (centred text line-length): `max-w-statement` (960 — heroes / statements), `max-w-read` (800 — authored body). The room template's `COL` / `COL_HERO` / `COL_WIDE` use these tokens.
+- **Vertical rhythm** — standard section is `py-20 md:py-28 lg:py-32` (homepage + room template). The hero and the slim plum CTA keep their own intentional padding.
+- Token scale: `--container-page` 80rem · `--container-statement` 60rem · `--container-read` 50rem.
+
 ## Components (`/components`)
 
 - **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (just the font, no mark or dot). **"Who I help" now reads as a choice of paths** (hover + click/keyboard; Escape + route-change close): each option has a fine **pathway-colour lead** (`audiences[].tint`) that extends on hover, label stays ink; desktop is a light paper/blur panel, the mobile sheet shows the same leads before each serif name. "Contact". Mobile hamburger → bone sheet.

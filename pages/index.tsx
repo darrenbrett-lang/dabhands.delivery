@@ -64,7 +64,7 @@ export default function Home() {
           {/* The trajectory enters the page and passes behind the headline:
               something is already in motion before the visitor arrives. */}
           <Trajectory className="pointer-events-none absolute inset-0 h-full w-full" opacity={0.6} />
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
+          <div className="relative z-10 u-container text-center">
             <motion.h1
               className="text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px] leading-[1.03] max-w-[15ch] mx-auto"
               aria-label="Keeping important work moving."
@@ -108,7 +108,7 @@ export default function Home() {
             aria-hidden
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 pt-12 md:pt-16 lg:pb-16">
+          <div className="relative z-10 u-container pt-12 md:pt-16 lg:pb-16">
             <div className="max-w-[30rem] lg:max-w-[34rem]">
               <FadeUp>
                 <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
@@ -135,18 +135,18 @@ export default function Home() {
 
         {/* ── POINT OF VIEW (two columns — a commanding thesis, an argument
             that builds; typography carries it, no image) ───────────────── */}
-        <section className="bg-bone text-ink py-20 md:py-32">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <div className="grid lg:grid-cols-[1.15fr_1fr] gap-y-12 lg:gap-x-20 xl:gap-x-28 lg:items-center">
+        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+          <div className="u-container">
+            <div className="u-grid gap-y-12 lg:items-center">
               {/* Left: the thesis — large, commanding, fills the column */}
-              <FadeUp>
+              <FadeUp className="col-span-4 md:col-span-6">
                 <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
                   The tools are changing.<br />The problems aren’t.
                 </h2>
               </FadeUp>
 
               {/* Right: the argument that builds to the close */}
-              <div>
+              <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
                   <p className="text-xl md:text-2xl leading-[1.4] text-ink max-w-[34ch]">
                     Most organisations already have what they need.
@@ -182,8 +182,8 @@ export default function Home() {
         </section>
 
         {/* ── PROOF ────────────────────────────────── */}
-        <section className="bg-paper text-ink py-16 md:py-28 border-y border-stone/60">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-y border-stone/60">
+          <div className="u-container">
             <FadeUp>
               <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">I’ve been trusted with important work by</p>
             </FadeUp>
@@ -202,8 +202,8 @@ export default function Home() {
         </section>
 
         {/* ── TURNSTILE ────────────────────────────── */}
-        <section className="bg-bone text-ink py-16 md:py-32">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+          <div className="u-container">
             <FadeUp>
               <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
             </FadeUp>
@@ -233,9 +233,9 @@ export default function Home() {
                 ))}
               </svg>
             </div>
-            <div className="grid md:grid-cols-3 gap-5 lg:gap-7">
+            <div className="u-grid gap-y-6">
               {TURNSTILE.map((t, i) => (
-                <Link key={t.label} href={t.href} className="group block">
+                <Link key={t.label} href={t.href} className="group block col-span-4">
                   <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -259,7 +259,7 @@ export default function Home() {
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
         <section className="bg-plum text-bone py-14 md:py-20">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+          <div className="u-container">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
                 <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-bone max-w-[30ch]">

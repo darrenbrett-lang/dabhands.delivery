@@ -38,9 +38,11 @@ const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash:
 };
 
 // Authored, not a blog. Hero a touch wider; body narrow; the card grid in between.
-const COL = 'mx-auto max-w-[800px] px-6 md:px-10';
-const COL_HERO = 'mx-auto max-w-[960px] px-6 md:px-10';
-const COL_WIDE = 'mx-auto max-w-[940px] px-6 md:px-10';
+// Authored reading measures from the shared grid scale (globals.css @theme):
+// read = 800, statement = 960. Centred within the page; gutter matches the system.
+const COL = 'mx-auto max-w-read px-6 md:px-10';
+const COL_HERO = 'mx-auto max-w-statement px-6 md:px-10';
+const COL_WIDE = 'mx-auto max-w-statement px-6 md:px-10';
 
 const Cta = ({ label = 'Start a conversation', full = false }: { label?: string; full?: boolean }) => (
   <a
@@ -103,7 +105,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 2 ── VALIDATION: you've done the hard part ── */}
-        <section className="bg-paper text-ink py-16 md:py-24 border-t border-stone/50">
+        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.validation.heading}</h2>
@@ -122,7 +124,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 3 ── DIAGNOSIS: what I see from the middle (4 cards) ── */}
-        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/50">
+        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.diagnosis.heading}</h2>
@@ -159,7 +161,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 4 ── TRANSITION: the space between strategy and execution / where I step in ── */}
-        <section className="bg-paper text-ink py-16 md:py-24 border-t border-stone/50">
+        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
@@ -171,7 +173,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 5 ── OUTCOMES: what changes when it moves ── */}
-        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/50">
+        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.outcomes.heading}</h2>
@@ -189,7 +191,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
-        <section className="bg-paper text-ink py-16 md:py-24 border-t border-stone/50">
+        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={c.help.situations ? COL_WIDE : COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
@@ -226,7 +228,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
-        <section className="bg-plum text-bone py-16 md:py-24">
+        <section className="bg-plum text-bone py-20 md:py-28 lg:py-32">
           <div className={COL}>
             <FadeUp>
               <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-bone/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
@@ -261,7 +263,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 8 ── CLOSE: simple, confident invitation ── */}
-        <section className="bg-paper text-ink py-20 md:py-28 border-t border-stone/50">
+        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={`${COL} text-center`}>
             <FadeUp>
               <h2 className="font-serif text-[32px] md:text-[48px] leading-[1.08] max-w-[20ch] mx-auto">{c.close.heading}</h2>
