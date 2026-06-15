@@ -24,7 +24,7 @@ export interface OperatorContent {
   outcomes: { heading: string; paras: string[] };
   transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
-  proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[] };
+  proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
 }
 
@@ -57,14 +57,14 @@ const Cta = ({ label = 'Start a conversation', full = false }: { label?: string;
 // Auto-rotating testimonial carousel (3s) with pips. All quotes are stacked
 // in one grid cell and crossfaded, so the height never jumps. Auto-rotation
 // pauses for reduced-motion; the pips stay clickable.
-const Testimonials = ({ items, rule }: { items: { quote: string; name: string; role: string }[]; rule: string }) => {
+const Testimonials = ({ items, rule, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; rule: string; interval?: number }) => {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   useEffect(() => {
     if (reduce || items.length <= 1) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % items.length), 6000);
+    const id = setInterval(() => setActive((a) => (a + 1) % items.length), interval);
     return () => clearInterval(id);
-  }, [active, reduce, items.length]);
+  }, [active, reduce, items.length, interval]);
   return (
     <div>
       <div className={`relative grid border-l-2 ${rule} pl-6 md:pl-8 max-w-[62ch]`}>
@@ -77,7 +77,7 @@ const Testimonials = ({ items, rule }: { items: { quote: string; name: string; r
             transition={{ duration: 0.6, ease: 'easeInOut' }}
             style={{ gridArea: '1 / 1', pointerEvents: i === active ? 'auto' : 'none' }}
           >
-            <blockquote className="font-serif italic text-[22px] md:text-[30px] leading-[1.3] text-bone">“{t.quote}”</blockquote>
+            <blockquote className="font-serif italic text-[18px] md:text-[22px] leading-[1.55] text-bone">“{t.quote}”</blockquote>
             <figcaption className="mt-6 text-[14px] not-italic text-bone/65">{t.name}, {t.role}</figcaption>
           </motion.figure>
         ))}
@@ -302,10 +302,10 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             </FadeUp>
             <FadeUp delay={0.08}>
               {c.proof.testimonials ? (
-                <Testimonials items={c.proof.testimonials} rule={a.rule} />
+                <Testimonials items={c.proof.testimonials} rule={a.rule} interval={c.proof.interval} />
               ) : c.proof.quote ? (
                 <blockquote className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
-                  <p className="font-serif italic text-[24px] md:text-[32px] leading-[1.3] text-bone">“{c.proof.quote}”</p>
+                  <p className="font-serif italic text-[19px] md:text-[24px] leading-[1.5] text-bone">“{c.proof.quote}”</p>
                   {c.proof.name && (
                     <footer className="mt-6 text-[14px] not-italic text-bone/65">
                       {c.proof.name}
@@ -319,7 +319,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     {c.proof.statement.map((p, i) => (
                       <p
                         key={i}
-                        className={i === 0 ? 'font-serif text-[24px] md:text-[30px] leading-[1.3] text-bone' : 'mt-5 text-lg text-bone/80 leading-relaxed'}
+                        className={i === 0 ? 'font-serif text-[19px] md:text-[24px] leading-[1.5] text-bone' : 'mt-5 text-lg text-bone/80 leading-relaxed'}
                       >
                         {p}
                       </p>

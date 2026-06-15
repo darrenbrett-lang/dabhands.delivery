@@ -39,10 +39,9 @@ const content: OperatorContent = {
   outcomes: {
     heading: 'That’s where I come in.',
     paras: [
-      'Having spent seven years building and running my own agency, I know first-hand how quickly success can create these pressures. The opportunities increase. Expectations rise. The team grows. The complexity grows with it.',
-      'Alongside that experience, I’ve spent more than twenty years helping organisations navigate change, growth and execution.',
-      'I tend to work in the space between ambition and action, helping businesses strengthen the systems, people and ways of working that allow good ideas to become reality.',
-      'I understand how businesses move forward in practice. The priorities that matter. The initiatives that create momentum. The capability required to support them.',
+      'Having spent seven years building and running my own agency, I know first-hand how quickly success creates complexity.',
+      'Alongside that experience, I’ve spent more than twenty years helping organisations navigate growth, change and execution.',
+      'I help businesses build the capability required to support what comes next.',
       'Not through more hustle. Through greater clarity, stronger ownership and better alignment.',
     ],
   },

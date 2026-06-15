@@ -30,10 +30,6 @@ const content: OperatorContent = {
       'The result is often the same. The organisation has everything it needs, but struggles to move at the pace it’s capable of.',
     ],
   },
-  transition: {
-    heading: 'That’s where I step in.',
-    subline: 'Into the space between strategy and execution. Where momentum is either protected or lost.',
-  },
   outcomes: {
     heading: 'I help organisations move together.',
     paras: [
@@ -62,6 +58,7 @@ const content: OperatorContent = {
   },
   proof: {
     heading: 'Trusted by leaders',
+    interval: 10000,
     testimonials: [
       {
         quote:

@@ -56,6 +56,7 @@ const content: OperatorContent = {
   },
   proof: {
     heading: 'Trusted to protect what matters',
+    interval: 4000,
     testimonials: [
       {
         quote: 'Darren brings control to complex situations quickly. He aligns teams, simplifies decisions, and gets the work moving again without losing what made it strong.',

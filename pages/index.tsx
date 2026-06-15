@@ -17,9 +17,9 @@ const TURNSTILE = [
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
-    bg: 'bg-moss/[0.12]',
-    border: 'border-moss/35',
-    hover: 'hover:border-moss/60',
+    bg: 'bg-moss/[0.06]',
+    border: 'border-stone/70',
+    hover: 'group-hover:border-moss/55',
     accentText: 'text-moss',
   },
   {
@@ -27,9 +27,9 @@ const TURNSTILE = [
     diagnosis: 'Great work loses power on the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
-    bg: 'bg-peach/[0.16]',
-    border: 'border-peach/35',
-    hover: 'hover:border-peach/60',
+    bg: 'bg-peach/[0.08]',
+    border: 'border-stone/70',
+    hover: 'group-hover:border-peach/55',
     accentText: 'text-peach-deep',
   },
   {
@@ -37,9 +37,9 @@ const TURNSTILE = [
     diagnosis: 'Everything depends on you. Until it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
-    bg: 'bg-sage/[0.18]',
-    border: 'border-sage/40',
-    hover: 'hover:border-sage/60',
+    bg: 'bg-sage/[0.08]',
+    border: 'border-stone/70',
+    hover: 'group-hover:border-sage/55',
     accentText: 'text-sage-deep',
   },
 ];
@@ -141,7 +141,7 @@ export default function Home() {
 
         {/* ── POINT OF VIEW (two columns — a commanding thesis, an argument
             that builds; typography carries it, no image) ───────────────── */}
-        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+        <section className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
             <div className="u-grid gap-y-12 lg:items-start">
               {/* Left: the thesis — large, commanding, fills the column */}
@@ -154,29 +154,29 @@ export default function Home() {
               {/* Right: the argument that builds to the close */}
               <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
-                  <p className="text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
+                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
                     Most organisations already have what they need.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.15}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
-                    Strategy. Creative ambition. Investment. Capability. Good people. Trusted partners.
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    Strategy. Creative ambition. Investment. Good people. Capable partners.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
                     The challenge isn’t creating more. It’s helping what already exists move together.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.26}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
-                    Because somewhere between idea and market, work gets diluted. Momentum slips. Complexity takes hold.
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    Because somewhere between ambition and execution, work gets diluted. Momentum slips. Complexity takes hold.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.32}>
-                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[24ch]">
+                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
                     It deserves to arrive{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
+                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-sage)">
                       as intended
                     </HandUnderline>
                     .
@@ -205,32 +205,6 @@ export default function Home() {
             <FadeUp>
               <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
             </FadeUp>
-            {/* The path reappears: a single line entering and dividing into the
-                three doors below (moss / peach / sage), matching each card's
-                accent. Desktop only — on mobile the cards stack with their dots. */}
-            <div aria-hidden className="hidden md:block mb-6 -mt-2">
-              <svg viewBox="0 0 1200 110" preserveAspectRatio="none" fill="none" className="h-16 lg:h-20 w-full">
-                {[
-                  { d: 'M -40 28 C 180 40, 250 80, 200 110', c: 'var(--color-moss)' },
-                  { d: 'M -40 28 C 320 42, 560 82, 600 110', c: 'var(--color-peach)' },
-                  { d: 'M -40 28 C 560 46, 940 82, 1000 110', c: 'var(--color-sage)' },
-                ].map((b, i) => (
-                  <motion.path
-                    key={b.c}
-                    d={b.d}
-                    stroke={b.c}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    vectorEffect="non-scaling-stroke"
-                    opacity={0.5}
-                    initial={reduceMotion ? { pathLength: 1 } : { pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 1.1, delay: 0.1 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                  />
-                ))}
-              </svg>
-            </div>
             <div className="u-grid gap-y-6">
               {TURNSTILE.map((t, i) => (
                 <Link key={t.label} href={t.href} className="group block col-span-4">
@@ -239,13 +213,13 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className={`flex h-full flex-col rounded-2xl border ${t.border} ${t.bg} p-7 md:p-8 transition-colors duration-300 ${t.hover}`}
+                    className={`flex h-full flex-col rounded-2xl border ${t.border} ${t.bg} p-7 md:p-8 shadow-[0_1px_3px_rgba(31,31,29,0.04)] transition-[border-color,box-shadow] duration-300 ${t.hover} group-hover:shadow-[0_16px_34px_-18px_rgba(31,31,29,0.20)]`}
                   >
                     <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
                     <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
                     <span className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold ${t.accentText}`}>
-                      That’s me
+                      Explore
                       <span aria-hidden className="text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </span>
                   </motion.div>

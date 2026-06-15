@@ -1,133 +1,130 @@
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
-/* A calm, optional shortcut in the hero: "Who I help" opens a small overlay
-   that lays the three pathways out as a clear three-choice navigation, so a
-   decisive visitor can step straight into a doorway without scrolling. */
+/* Hero quick-nav. "See where I can help" reveals the three pathways as one
+   horizontal row, charcoal on bone — an effortless shortcut into a doorway for
+   a decisive visitor. Opens on hover or focus, tap-toggles on touch, closes on
+   Escape / outside click / scroll. Rendered through a portal so it escapes the
+   hero's overflow. The header nav carries the fully keyboard-robust version. */
 
 const PATHS = [
-  {
-    href: '/business-and-agency-leaders',
-    label: 'Business & agency leaders',
-    line: 'Keeping momentum when complexity starts getting in the way.',
-    bg: 'bg-moss/[0.10]',
-    border: 'border-moss/30',
-    hover: 'hover:border-moss/60',
-    accent: 'text-moss',
-  },
-  {
-    href: '/marketing-leaders',
-    label: 'Marketing leaders',
-    line: 'Getting your strongest ideas into market with their impact intact.',
-    bg: 'bg-peach/[0.14]',
-    border: 'border-peach/30',
-    hover: 'hover:border-peach/60',
-    accent: 'text-peach-deep',
-  },
-  {
-    href: '/creators-and-founders',
-    label: 'Creators & founders',
-    line: 'Building the capability for your next stage of growth.',
-    bg: 'bg-sage/[0.16]',
-    border: 'border-sage/35',
-    hover: 'hover:border-sage/60',
-    accent: 'text-sage-deep',
-  },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.' },
+  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.' },
 ];
 
 export const PathwayPicker = () => {
-  const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [pos, setPos] = useState({ top: 0, left: 0 });
+  const wrapRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  useEffect(() => setMounted(true), []);
+
+  const show = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    const r = triggerRef.current?.getBoundingClientRect();
+    if (r) setPos({ top: r.bottom + 12, left: r.left + r.width / 2 });
+    setOpen(true);
+  }, []);
+
+  const hideSoon = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpen(false), 140);
+  }, []);
+
+  const hideNow = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(false);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') hideNow();
     };
-    document.addEventListener('keydown', onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    panelRef.current?.querySelector('a')?.focus();
+    const onScrollOrResize = () => hideNow();
+    const onPointerDown = (e: PointerEvent) => {
+      const t = e.target as Node;
+      if (wrapRef.current?.contains(t) || panelRef.current?.contains(t)) return;
+      hideNow();
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+    document.addEventListener('pointerdown', onPointerDown);
     return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
-      triggerRef.current?.focus();
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+      document.removeEventListener('pointerdown', onPointerDown);
     };
-  }, [open]);
+  }, [open, hideNow]);
 
   return (
-    <>
+    <div ref={wrapRef} className="relative mt-8 inline-block" onMouseEnter={show} onMouseLeave={hideSoon}>
       <button
         ref={triggerRef}
         type="button"
-        onClick={() => setOpen(true)}
-        aria-haspopup="dialog"
-        className="group mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-moss transition-colors duration-300 hover:text-ink"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => (open ? hideNow() : show())}
+        onFocus={show}
+        className="group inline-flex items-center gap-2 text-[15px] md:text-[16px] font-semibold text-ink transition-colors duration-300 hover:text-graphite"
       >
-        Who I help
-        <span aria-hidden className="text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
+        See where I can help
+        <span aria-hidden className="text-[16px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.2 }}
-          >
-            <button
-              type="button"
-              aria-label="Close"
-              onClick={() => setOpen(false)}
-              className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
-            />
-            <motion.div
-              ref={panelRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Who I help"
-              initial={{ opacity: 0, y: reduce ? 0 : 14, scale: reduce ? 1 : 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: reduce ? 0 : 8, scale: reduce ? 1 : 0.98 }}
-              transition={{ duration: reduce ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-[660px] rounded-3xl border border-stone bg-bone p-6 md:p-8 shadow-[0_24px_80px_-20px_rgba(31,31,29,0.35)]"
-            >
-              <div className="flex items-center justify-between">
-                <p className="eyebrow text-graphite">Who I help</p>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close"
-                  className="-mr-1 -mt-1 p-1 text-[22px] leading-none text-graphite transition-colors hover:text-ink"
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <div
+                className="fixed z-[90] -translate-x-1/2"
+                style={{ top: pos.top, left: pos.left }}
+                onMouseEnter={show}
+                onMouseLeave={hideSoon}
+              >
+                <motion.div
+                  ref={panelRef}
+                  role="menu"
+                  aria-label="Who I help"
+                  initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: reduce ? 0 : 6 }}
+                  transition={{ duration: reduce ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  className="w-[min(92vw,720px)] overflow-hidden rounded-2xl border border-stone bg-bone text-left shadow-[0_24px_70px_-24px_rgba(31,31,29,0.4)]"
                 >
-                  ×
-                </button>
+                  <div className="grid grid-cols-1 divide-y divide-stone/60 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+                    {PATHS.map((p) => (
+                      <Link
+                        key={p.href}
+                        href={p.href}
+                        role="menuitem"
+                        onClick={hideNow}
+                        className="group/item flex flex-col gap-1.5 px-6 py-6 transition-colors duration-200 hover:bg-paper"
+                      >
+                        <span className="flex items-center justify-between gap-3">
+                          <span className="font-serif text-[19px] md:text-[20px] leading-tight text-ink">{p.label}</span>
+                          <span aria-hidden className="shrink-0 text-ink transition-transform duration-300 group-hover/item:translate-x-1">→</span>
+                        </span>
+                        <span className="text-[13px] leading-snug text-graphite">{p.line}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
-              <div className="mt-5 grid gap-3">
-                {PATHS.map((p) => (
-                  <Link
-                    key={p.href}
-                    href={p.href}
-                    onClick={() => setOpen(false)}
-                    className={`group flex items-center justify-between gap-5 rounded-2xl border ${p.border} ${p.bg} ${p.hover} px-5 py-4 transition-colors duration-300`}
-                  >
-                    <span>
-                      <span className="block font-serif text-[20px] md:text-[23px] leading-tight text-ink">{p.label}</span>
-                      <span className="mt-1 block text-[14px] leading-snug text-graphite">{p.line}</span>
-                    </span>
-                    <span aria-hidden className={`shrink-0 text-[18px] ${p.accent} transition-transform duration-300 group-hover:translate-x-1`}>→</span>
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
-    </>
+    </div>
   );
 };
