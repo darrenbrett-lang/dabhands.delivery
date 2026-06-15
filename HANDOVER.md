@@ -83,7 +83,7 @@ Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no gr
 | Role | Token | Hex |
 |---|---|---|
 | Primary background (bone) | `bone` | `#F5F1EB` |
-| Secondary background (paper) | `paper` | `#FBF8F3` |
+| Retired — paper (no white in the palette; use **bone** for all light bgs) | `paper` | `#FBF8F3` |
 | Primary text / headlines (ink) | `ink` | `#1F1F1D` |
 | Secondary / body text | `graphite` | `#5C5C58` |
 | Borders / dividers | `stone` | `#D8D2C8` |
