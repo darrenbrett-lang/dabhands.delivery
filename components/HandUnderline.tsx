@@ -52,7 +52,7 @@ export const HandUnderline = ({
         transition={{ duration: 0.6, ease: 'easeOut', delay }}
         className={`pointer-events-none absolute left-0 ${offsetClass} w-full h-2`}
       >
-        <path d={PATHS[variant]} stroke={resolvedStroke} strokeWidth="1.6" strokeLinecap="round" />
+        <path d={PATHS[variant]} stroke={resolvedStroke} strokeWidth="3.2" strokeLinecap="round" />
       </motion.svg>
     </span>
   );
