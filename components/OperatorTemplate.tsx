@@ -22,7 +22,7 @@ export interface OperatorContent {
   validation: { heading: string; intro: string; paras: string[] };
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
   outcomes: { heading: string; paras: string[] };
-  transition?: { heading: string; subline: string };
+  transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[] };
   close: { heading: string; line?: string };
@@ -62,7 +62,7 @@ const Testimonials = ({ items, rule }: { items: { quote: string; name: string; r
   const [active, setActive] = useState(0);
   useEffect(() => {
     if (reduce || items.length <= 1) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % items.length), 3000);
+    const id = setInterval(() => setActive((a) => (a + 1) % items.length), 6000);
     return () => clearInterval(id);
   }, [active, reduce, items.length]);
   return (
@@ -211,16 +211,30 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 4 ── TRANSITION (optional): the messy middle / where I step in ── */}
+        {/* 4 ── TRANSITION (optional): the messy middle / where I step in.
+            Renders a single subline, or a fuller set of paragraphs. ── */}
         {c.transition && (
           <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
             <div className={COL}>
               <FadeUp>
                 <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
               </FadeUp>
-              <FadeUp delay={0.06}>
-                <p className="mt-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">{c.transition.subline}</p>
-              </FadeUp>
+              {c.transition.subline && (
+                <FadeUp delay={0.06}>
+                  <p className="mt-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">{c.transition.subline}</p>
+                </FadeUp>
+              )}
+              {c.transition.paras && (
+                <FadeUp delay={0.06}>
+                  <div className="mt-6 space-y-4 text-lg text-graphite leading-[1.7] max-w-[58ch]">
+                    {c.transition.paras.map((p, i) => (
+                      <p key={i} className={i === c.transition!.paras!.length - 1 ? 'text-ink' : undefined}>
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                </FadeUp>
+              )}
             </div>
           </section>
         )}

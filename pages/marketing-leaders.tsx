@@ -6,29 +6,35 @@ const content: OperatorContent = {
   eyebrow: 'For marketing leaders',
   accent: 'peach',
   hero: {
-    headline: 'When the work matters too much to get lost on the way.',
-    subline: 'I help brands get more of the original ambition into market.',
+    headline: 'Great work loses power on the journey.',
+    subline: 'I help ambitious brands bring their strongest ideas into the world with the impact they deserve.',
   },
   validation: {
-    heading: 'You’ve already done the hard part.',
-    intro: 'The thinking exists. The investment is committed. The work matters.',
-    paras: ['Now it has to survive the journey to market.'],
-  },
-  diagnosis: {
-    heading: 'Complexity doesn’t kill work overnight. It dilutes it.',
+    heading: 'The ingredients are already there.',
+    intro: 'The strategy is clear. The ambition is strong. The investment has been made.',
     paras: [
-      'A compromise here. A delay there. Another approval. Another interpretation. Until the thing that launches isn’t quite the thing you started with.',
+      'Yet creating work that genuinely stands out has never been harder.',
+      'The market is crowded. Attention is fragmented. Expectations continue to rise.',
+      'The challenge isn’t finding another idea. It’s bringing together the right people, capabilities and decisions in a way that allows the work to reach its full potential.',
     ],
   },
-  transition: {
-    heading: 'This is where campaigns become real.',
-    subline:
-      'Between strategy and execution. Between agencies and teams. Between the plan and the market. This is where momentum is either protected or lost.',
+  diagnosis: {
+    heading: 'What gets in the way',
+    paras: [
+      'I’ve spent more than twenty years working alongside brands, agencies, strategists, creatives and digital teams.',
+      'One thing I’ve noticed is that great work rarely disappears overnight. It loses strength gradually.',
+      'A compromise here. A delay there. Another interpretation. Another approval. Another stakeholder.',
+      'Individually, none of these things seem particularly significant. Together, they can change the shape of the work completely.',
+      'The idea is still there. It just isn’t as powerful as it was when everyone first believed in it.',
+    ],
   },
   outcomes: {
-    heading: 'The work arrives intact.',
+    heading: 'The market creates enough noise already.',
     paras: [
-      'The original ambition remains visible. The ecosystem works together. The customer understands it. The investment works harder.',
+      'The last thing great work needs is more noise from inside the organisation.',
+      'That’s why alignment matters. Not alignment for its own sake. Alignment around the things that made the work worth doing in the first place.',
+      'I’ve spent my career helping brands maximise the value of their investment across digital experiences, campaigns, content ecosystems, membership programmes and loyalty initiatives.',
+      'The goal is simple. To help the strongest ideas arrive in market with their clarity, confidence and ambition intact.',
     ],
   },
   help: {
@@ -36,20 +42,20 @@ const content: OperatorContent = {
     situations: [
       {
         heading: 'A major launch is approaching.',
-        body: 'Helping important work arrive in market as intended.',
+        body: 'A campaign, experience or initiative carries significant investment and expectation. The work needs to arrive with its ambition intact.',
       },
       {
-        heading: 'Multiple teams need to align.',
-        body: 'Bringing clarity, momentum and accountability across the ecosystem.',
+        heading: 'Multiple partners need to move as one.',
+        body: 'Internal teams, agencies, production partners and specialist suppliers all have a role to play. The challenge is keeping everyone aligned around the same outcome.',
       },
       {
-        heading: 'The stakes are high.',
-        body: 'Providing experienced operational leadership when the work matters most.',
+        heading: 'The work matters too much to leave to chance.',
+        body: 'When visibility is high, timelines are tight and expectations are significant, experienced leadership helps protect the quality of the outcome.',
       },
     ],
   },
   proof: {
-    heading: 'Trusted to protect what matters.',
+    heading: 'Trusted to protect what matters',
     testimonials: [
       {
         quote: 'Darren brings control to complex situations quickly. He aligns teams, simplifies decisions, and gets the work moving again without losing what made it strong.',
@@ -69,8 +75,8 @@ const content: OperatorContent = {
     ],
   },
   close: {
-    heading: 'Great work rarely fails on ambition.',
-    line: 'More often, it gets diluted on the journey.',
+    heading: 'Great work rarely fails because of ambition.',
+    line: 'More often, it loses strength on the journey. I help ambitious brands make sure it doesn’t.',
   },
 };
 

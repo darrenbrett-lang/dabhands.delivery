@@ -7,15 +7,15 @@ import { SeoMeta } from '@/components/SeoMeta';
 import { HandUnderline } from '@/components/HandUnderline';
 import { LogoTicker } from '@/components/LogoTicker';
 import { Trajectory } from '@/components/Trajectory';
+import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
 
 // The single path becomes three rooms. Each carries its own movement accent.
 const TURNSTILE = [
   {
     label: 'Business & agency leaders',
-    diagnosis: 'The work matters. Complexity is getting in the way.',
-    support:
-      'You need experienced operational leadership that understands delivery, commercial realities, people, and how organisations actually work.',
+    diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
+    support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
     bg: 'bg-moss/[0.12]',
     border: 'border-moss/35',
@@ -24,9 +24,8 @@ const TURNSTILE = [
   },
   {
     label: 'Marketing leaders',
-    diagnosis: 'The idea isn’t the problem. Getting it to market intact is.',
-    support:
-      'You need campaigns, launches, experiences, and agencies moving together without losing momentum, quality, or impact along the way.',
+    diagnosis: 'Great work loses power on the journey.',
+    support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
     bg: 'bg-peach/[0.16]',
     border: 'border-peach/35',
@@ -35,9 +34,8 @@ const TURNSTILE = [
   },
   {
     label: 'Creators & founders',
-    diagnosis: 'Growth creates complexity. Complexity creates drag.',
-    support:
-      'You need operational strength around the business without losing the energy, creativity, and ambition that made it successful in the first place.',
+    diagnosis: 'Everything depends on you. Until it can’t.',
+    support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
     bg: 'bg-sage/[0.18]',
     border: 'border-sage/40',
@@ -93,6 +91,9 @@ export default function Home() {
                 I help digital-forward businesses get their best work into the world, intact.
               </p>
             </FadeUp>
+            <FadeUp delay={0.55}>
+              <PathwayPicker />
+            </FadeUp>
           </div>
         </section>
 
@@ -125,7 +126,7 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.22}>
                 <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
-                  I’ve spent my career helping organisations navigate growth, change, and the challenge of keeping important work moving.
+                  Over that time, I’ve built businesses, led change and helped organisations execute at scale.
                 </p>
               </FadeUp>
             </div>
@@ -159,7 +160,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.15}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
-                    Strategy. Creative ambition. Investment. Good people. Capable partners.
+                    Strategy. Creative ambition. Investment. Capability. Good people. Trusted partners.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
@@ -169,7 +170,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.26}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
-                    Because somewhere between ambition and execution, work gets diluted. Momentum slips. Complexity takes hold.
+                    Because somewhere between idea and market, work gets diluted. Momentum slips. Complexity takes hold.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.32}>
