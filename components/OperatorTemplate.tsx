@@ -322,11 +322,10 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full flex-col rounded-2xl p-6 md:p-7"
-                    style={{ backgroundColor: a.full }}
+                    className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 transition-colors duration-300 hover:border-ink/30"
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
-                    <p className="mt-3 text-ink/80 leading-relaxed text-[15px]">{s.body}</p>
+                    <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
                   </motion.div>
                 ))}
               </div>

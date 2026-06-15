@@ -192,7 +192,7 @@ export default function Home() {
         </section>
 
         {/* ── TURNSTILE ────────────────────────────── */}
-        <section data-spine="Who I help" className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+        <section data-spine="Who I help" data-spine-tone="dark" className="bg-teal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
             <FadeUp>
               <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
@@ -235,18 +235,18 @@ export default function Home() {
         </section>
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section data-spine="Let’s talk" data-spine-tone="dark" className="bg-teal text-bone py-14 md:py-20">
+        <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20 border-t border-stone/60">
           <div className="u-container">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
-                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-bone max-w-[30ch]">
+                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch]">
                   If something important needs to move properly, let’s talk.
                 </h2>
               </FadeUp>
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Starting a conversation' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-bone px-7 py-3.5 text-[15px] font-medium text-ink transition-colors duration-300 hover:bg-charcoal hover:text-bone"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-teal"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
