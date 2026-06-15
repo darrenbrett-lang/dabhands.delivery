@@ -19,8 +19,8 @@ export interface OperatorContent {
   eyebrow: string; // "For business & agency leaders"
   accent: Accent;
   hero: { headline: string; subline: string; trust?: string };
-  validation: { heading: string; intro: string; paras: string[] };
-  diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
+  validation: { heading: string; intro: string; paras: string[]; strong?: boolean };
+  diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[]; problem?: string[]; context?: string[]; payoff?: string };
   outcomes: { heading: string; paras: string[] };
   transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
@@ -30,11 +30,11 @@ export interface OperatorContent {
 
 // Hero washes (Colour System v3): the primary accent fading top-to-bottom.
 // Deep Moss leads; text uses the dark accent shade.
-const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash: string; traj: string }> = {
-  moss: { text: 'text-moss', border: 'border-moss/40', rule: 'border-moss/60', wash: 'linear-gradient(to bottom, rgba(91,106,88,0.20), rgba(91,106,88,0.14) 60%, rgba(91,106,88,0) 100%)', traj: 'var(--color-moss)' },
-  lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.22), rgba(184,162,216,0.22) 60%, rgba(184,162,216,0) 100%)', traj: 'var(--color-lavender)' },
-  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0.14) 60%, rgba(230,179,154,0) 100%)', traj: 'var(--color-peach)' },
-  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(168,181,162,0.24), rgba(168,181,162,0.14) 60%, rgba(168,181,162,0) 100%)', traj: 'var(--color-sage)' },
+const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash: string; traj: string; cardBg: string; cardBorder: string; strong: string }> = {
+  moss: { text: 'text-moss', border: 'border-moss/40', rule: 'border-moss/60', wash: 'linear-gradient(to bottom, rgba(91,106,88,0.20), rgba(91,106,88,0.14) 60%, rgba(91,106,88,0) 100%)', traj: 'var(--color-moss)', cardBg: 'rgba(91,106,88,0.08)', cardBorder: 'rgba(91,106,88,0.40)', strong: 'rgba(91,106,88,0.22)' },
+  lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.22), rgba(184,162,216,0.22) 60%, rgba(184,162,216,0) 100%)', traj: 'var(--color-lavender)', cardBg: 'rgba(184,162,216,0.13)', cardBorder: 'rgba(184,162,216,0.45)', strong: 'rgba(184,162,216,0.40)' },
+  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0.14) 60%, rgba(230,179,154,0) 100%)', traj: 'var(--color-peach)', cardBg: 'rgba(230,179,154,0.14)', cardBorder: 'rgba(230,179,154,0.45)', strong: 'rgba(230,179,154,0.45)' },
+  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(168,181,162,0.24), rgba(168,181,162,0.14) 60%, rgba(168,181,162,0) 100%)', traj: 'var(--color-sage)', cardBg: 'rgba(168,181,162,0.13)', cardBorder: 'rgba(168,181,162,0.45)', strong: 'rgba(168,181,162,0.45)' },
 };
 
 // Authored, not a blog. Hero a touch wider; body narrow; the card grid in between.
@@ -67,27 +67,20 @@ const Testimonials = ({ items, accent, interval = 6000 }: { items: { quote: stri
     return () => clearInterval(id);
   }, [active, reduce, items.length, interval]);
   return (
-    <div className="max-w-[64ch]">
-      <div
-        className="relative grid rounded-2xl border border-stone bg-paper px-7 py-8 md:px-9 md:py-10 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_14px_34px_-16px_rgba(31,31,29,0.16)]"
-        style={{ borderTopColor: accent, borderTopWidth: 3 }}
-      >
-        {items.map((t, i) => (
-          <motion.figure
-            key={i}
-            aria-hidden={i !== active}
-            initial={false}
-            animate={{ opacity: i === active ? 1 : 0 }}
-            transition={{ duration: 0.6, ease: 'easeInOut' }}
-            style={{ gridArea: '1 / 1', pointerEvents: i === active ? 'auto' : 'none' }}
-          >
-            <blockquote className="font-serif text-[19px] md:text-[23px] leading-[1.5] text-ink">“{t.quote}”</blockquote>
-            <figcaption className="mt-6 not-italic">
-              <span className="block text-[15px] font-medium text-ink">{t.name}</span>
-              <span className="block text-[13px] text-graphite">{t.role}</span>
-            </figcaption>
-          </motion.figure>
-        ))}
+    <div className="max-w-[860px]">
+      <div className="border-l-2 pl-6 md:pl-8" style={{ borderColor: accent }}>
+        <motion.figure
+          key={active}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduce ? 0 : 0.45, ease: 'easeInOut' }}
+        >
+          <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink max-w-[66ch]">“{items[active].quote}”</blockquote>
+          <figcaption className="mt-5 not-italic">
+            <span className="block text-[15px] font-medium text-ink">{items[active].name}</span>
+            <span className="block text-[13px] text-graphite">{items[active].role}</span>
+          </figcaption>
+        </motion.figure>
       </div>
       <div className="mt-6 flex gap-2.5">
         {items.map((_, i) => (
@@ -163,7 +156,11 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 2 ── VALIDATION: you've done the hard part ── */}
-        <section data-spine="The situation" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section
+          data-spine="The situation"
+          className={`text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50 ${c.validation.strong ? '' : 'bg-paper'}`}
+          style={c.validation.strong ? { backgroundColor: a.strong } : undefined}
+        >
           <div className={COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.validation.heading}</h2>
@@ -182,41 +179,74 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 3 ── DIAGNOSIS: what I see from the middle (4 cards) ── */}
-        <section data-spine="The challenge" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-          <div className={COL}>
-            <FadeUp>
-              <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.diagnosis.heading}</h2>
-            </FadeUp>
-            {c.diagnosis.intro && (
-              <FadeUp delay={0.06}>
-                <p className="mt-5 text-lg text-graphite leading-relaxed max-w-[56ch]">{c.diagnosis.intro}</p>
+        {c.diagnosis.problem && c.diagnosis.context ? (
+          // The Challenge as a charcoal two-column module: problem (left),
+          // context (right), then a full-width payoff line.
+          <section data-spine="The challenge" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
+            <div className={COL_WIDE}>
+              <FadeUp>
+                <h2 className="font-serif text-[30px] md:text-[44px] leading-[1.1] max-w-[20ch] text-bone">{c.diagnosis.heading}</h2>
               </FadeUp>
-            )}
-            {c.diagnosis.cards && (
-              <div className="mt-9 max-w-[66ch]">
-                {c.diagnosis.cards.map((card, i) => (
-                  <FadeUp key={i} delay={0.1 + i * 0.05}>
-                    <div className={`py-6 ${i < c.diagnosis.cards!.length - 1 ? 'border-b border-stone/60' : ''}`}>
-                      <h3 className="text-xl md:text-2xl text-ink leading-[1.2]">{card.heading}</h3>
-                      <p className="mt-2.5 text-graphite leading-relaxed max-w-[56ch]">{card.body}</p>
-                    </div>
-                  </FadeUp>
-                ))}
+              <div className="mt-9 md:mt-11 grid gap-x-10 gap-y-7 md:grid-cols-2">
+                <FadeUp delay={0.06}>
+                  <div className="space-y-4 text-[17px] leading-[1.7] text-bone/80">
+                    {c.diagnosis.problem.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </div>
+                </FadeUp>
+                <FadeUp delay={0.12}>
+                  <div className="space-y-4 text-[17px] leading-[1.7] text-bone/80">
+                    {c.diagnosis.context.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </div>
+                </FadeUp>
               </div>
-            )}
-            {c.diagnosis.paras && (
-              <FadeUp delay={0.08}>
-                <div className="mt-6 space-y-4 text-lg text-graphite leading-[1.7] max-w-[58ch]">
-                  {c.diagnosis.paras.map((p, i) => (
-                    <p key={i} className={i === c.diagnosis.paras!.length - 1 ? 'text-ink' : undefined}>
-                      {p}
-                    </p>
+              {c.diagnosis.payoff && (
+                <FadeUp delay={0.18}>
+                  <p className="mt-10 md:mt-12 font-serif text-[24px] md:text-[30px] leading-[1.25] text-bone max-w-[34ch]">{c.diagnosis.payoff}</p>
+                </FadeUp>
+              )}
+            </div>
+          </section>
+        ) : (
+          <section data-spine="The challenge" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+            <div className={COL}>
+              <FadeUp>
+                <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.diagnosis.heading}</h2>
+              </FadeUp>
+              {c.diagnosis.intro && (
+                <FadeUp delay={0.06}>
+                  <p className="mt-5 text-lg text-graphite leading-relaxed max-w-[56ch]">{c.diagnosis.intro}</p>
+                </FadeUp>
+              )}
+              {c.diagnosis.cards && (
+                <div className="mt-9 max-w-[66ch]">
+                  {c.diagnosis.cards.map((card, i) => (
+                    <FadeUp key={i} delay={0.1 + i * 0.05}>
+                      <div className={`py-6 ${i < c.diagnosis.cards!.length - 1 ? 'border-b border-stone/60' : ''}`}>
+                        <h3 className="text-xl md:text-2xl text-ink leading-[1.2]">{card.heading}</h3>
+                        <p className="mt-2.5 text-graphite leading-relaxed max-w-[56ch]">{card.body}</p>
+                      </div>
+                    </FadeUp>
                   ))}
                 </div>
-              </FadeUp>
-            )}
-          </div>
-        </section>
+              )}
+              {c.diagnosis.paras && (
+                <FadeUp delay={0.08}>
+                  <div className="mt-6 space-y-4 text-lg text-graphite leading-[1.7] max-w-[58ch]">
+                    {c.diagnosis.paras.map((p, i) => (
+                      <p key={i} className={i === c.diagnosis.paras!.length - 1 ? 'text-ink' : undefined}>
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                </FadeUp>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* 4 ── TRANSITION (optional): the messy middle / where I step in.
             Renders a single subline, or a fuller set of paragraphs. ── */}
@@ -279,7 +309,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 transition-colors duration-300 hover:border-ink/30"
+                    className="flex h-full flex-col rounded-2xl border p-6 md:p-7"
+                    style={{ backgroundColor: a.cardBg, borderColor: a.cardBorder }}
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
                     <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
@@ -303,7 +334,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
         <section data-spine="Trusted" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-          <div className={COL}>
+          <div className={COL_WIDE}>
             <FadeUp>
               <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-ink mb-8 max-w-[26ch]">{c.proof.heading}</p>
             </FadeUp>
@@ -311,13 +342,10 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               {c.proof.testimonials ? (
                 <Testimonials items={c.proof.testimonials} accent={a.traj} interval={c.proof.interval} />
               ) : c.proof.quote ? (
-                <blockquote
-                  className="max-w-[64ch] rounded-2xl border border-stone bg-paper px-7 py-8 md:px-9 md:py-10 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_14px_34px_-16px_rgba(31,31,29,0.16)]"
-                  style={{ borderTopColor: a.traj, borderTopWidth: 3 }}
-                >
-                  <p className="font-serif text-[19px] md:text-[23px] leading-[1.5] text-ink">“{c.proof.quote}”</p>
+                <blockquote className="max-w-[860px] border-l-2 pl-6 md:pl-8" style={{ borderColor: a.traj }}>
+                  <p className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink max-w-[66ch]">“{c.proof.quote}”</p>
                   {c.proof.name && (
-                    <footer className="mt-6 not-italic">
+                    <footer className="mt-5 not-italic">
                       <span className="block text-[15px] font-medium text-ink">{c.proof.name}</span>
                       {c.proof.role && <span className="block text-[13px] text-graphite">{c.proof.role}</span>}
                     </footer>
@@ -325,14 +353,11 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                 </blockquote>
               ) : (
                 c.proof.statement && (
-                  <div
-                    className="max-w-[64ch] rounded-2xl border border-stone bg-paper px-7 py-8 md:px-9 md:py-10 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_14px_34px_-16px_rgba(31,31,29,0.16)]"
-                    style={{ borderTopColor: a.traj, borderTopWidth: 3 }}
-                  >
+                  <div className="max-w-[860px] border-l-2 pl-6 md:pl-8" style={{ borderColor: a.traj }}>
                     {c.proof.statement.map((p, i) => (
                       <p
                         key={i}
-                        className={i === 0 ? 'font-serif text-[19px] md:text-[23px] leading-[1.5] text-ink' : 'mt-5 text-lg text-graphite leading-relaxed'}
+                        className={i === 0 ? 'font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink max-w-[66ch]' : 'mt-4 text-lg text-graphite leading-relaxed'}
                       >
                         {p}
                       </p>

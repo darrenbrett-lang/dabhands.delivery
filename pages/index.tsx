@@ -1,40 +1,47 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
 import { HandUnderline } from '@/components/HandUnderline';
 import { LogoTicker } from '@/components/LogoTicker';
-import { Trajectory } from '@/components/Trajectory';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
 
-// The single path becomes three rooms. Each carries its own movement accent.
+// The single path becomes three rooms. Each carries its section colour as a
+// hover cue (block + arrow tint), matching the nav dropdown and the P1 overlay.
 const TURNSTILE = [
   {
     label: 'Business & agency leaders',
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
+    block: 'rgba(168,181,162,0.20)',
+    accent: '#6F7D69',
   },
   {
     label: 'Marketing leaders',
     diagnosis: 'Great work loses power on the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
+    block: 'rgba(230,179,154,0.22)',
+    accent: '#B97D62',
   },
   {
     label: 'Creators & founders',
     diagnosis: 'Everything depends on you. Until it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
+    block: 'rgba(184,162,216,0.22)',
+    accent: '#6E5A86',
   },
 ];
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
   const headlineWords = ['Keeping', 'important', 'work', 'moving.'];
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <>
@@ -46,10 +53,7 @@ export default function Home() {
 
       <Layout footerVariant="none">
         {/* ── HERO ─────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
-          {/* The trajectory enters the page and passes behind the headline:
-              something is already in motion before the visitor arrives. */}
-          <Trajectory className="pointer-events-none absolute inset-0 h-full w-full" opacity={0.6} />
+        <section className="relative bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
           <div className="relative z-10 u-container text-center">
             <motion.h1
               className="text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px] leading-[1.03] max-w-[15ch] mx-auto"
@@ -195,20 +199,33 @@ export default function Home() {
             </FadeUp>
             <div className="u-grid gap-y-6">
               {TURNSTILE.map((t, i) => (
-                <Link key={t.label} href={t.href} className="group block col-span-4">
+                <Link
+                  key={t.label}
+                  href={t.href}
+                  className="block col-span-4"
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                >
                   <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className={`flex h-full flex-col rounded-2xl border border-stone bg-paper p-7 md:p-8 shadow-[0_1px_2px_rgba(31,31,29,0.05),0_12px_30px_-14px_rgba(31,31,29,0.16)] transition-[border-color,box-shadow] duration-300 group-hover:border-ink/25 group-hover:shadow-[0_2px_6px_rgba(31,31,29,0.06),0_20px_44px_-18px_rgba(31,31,29,0.24)]`}
+                    className="flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-[border-color,box-shadow,background-color] duration-300"
+                    style={{
+                      backgroundColor: hovered === i ? t.block : 'var(--color-paper)',
+                      borderColor: hovered === i ? t.accent : 'var(--color-stone)',
+                      boxShadow: hovered === i
+                        ? '0 4px 10px rgba(31,31,29,0.07), 0 22px 48px -20px rgba(31,31,29,0.26)'
+                        : '0 1px 2px rgba(31,31,29,0.05), 0 12px 30px -14px rgba(31,31,29,0.16)',
+                    }}
                   >
                     <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
                     <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold text-ink">
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold" style={{ color: hovered === i ? t.accent : 'var(--color-ink)' }}>
                       Explore
-                      <span aria-hidden className="text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      <span aria-hidden className="transition-transform duration-300" style={{ transform: hovered === i ? 'translateX(4px)' : 'translateX(0)' }}>→</span>
                     </span>
                   </motion.div>
                 </Link>

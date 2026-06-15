@@ -12,6 +12,7 @@ const content: OperatorContent = {
   validation: {
     heading: 'All the blocks are in place.',
     intro: 'The direction is clear. The people are capable. The work matters.',
+    strong: true,
     paras: [
       'From the outside, everything appears to be there.',
       'Yet progress feels slower than it should.',
@@ -22,15 +23,15 @@ const content: OperatorContent = {
   },
   diagnosis: {
     heading: 'What gets in the way',
-    paras: [
-      'I’ve been around organisations long enough to know that momentum rarely disappears all at once.',
-      'It gets lost in small places.',
+    problem: [
+      'I’ve been around organisations long enough to know that momentum rarely disappears all at once. It gets lost in small places.',
       'A decision that takes longer than it should. A priority that means different things to different teams. Information that isn’t where people need it. A handoff that loses context. A meeting that creates more noise than clarity.',
-      'Individually, none of these things look particularly serious.',
-      'Together, they make progress harder than it needs to be.',
-      'The organisation has everything it needs.',
-      'It just struggles to move at the pace it’s capable of.',
     ],
+    context: [
+      'Individually, none of these things look particularly serious. Together, they make progress harder than it needs to be.',
+      'Technology is adding another layer. New tools are creating new opportunities, but they’re also changing how work flows, how decisions get made and where accountability sits.',
+    ],
+    payoff: 'The organisation has everything it needs. It just struggles to move at the pace it’s capable of.',
   },
   outcomes: {
     heading: 'I help organisations move together.',
