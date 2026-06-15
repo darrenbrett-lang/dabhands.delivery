@@ -13,10 +13,12 @@ const content: OperatorContent = {
     heading: 'All the blocks are in place.',
     intro: 'The direction is clear. The people are capable. The work matters.',
     strong: true,
-    paras: [
+    left: [
       'From the outside, everything appears to be there.',
       'Yet progress feels slower than it should.',
       'Not because people aren’t working hard. Not because the strategy is wrong.',
+    ],
+    right: [
       'As organisations grow, more teams become involved. More priorities compete for attention. More decisions need to travel further before anything happens.',
       'The challenge is rarely deciding what to do next. More often, it’s helping the organisation move together.',
     ],

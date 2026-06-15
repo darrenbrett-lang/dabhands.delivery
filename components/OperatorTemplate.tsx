@@ -19,7 +19,7 @@ export interface OperatorContent {
   eyebrow: string; // "For business & agency leaders"
   accent: Accent;
   hero: { headline: string; subline: string; trust?: string };
-  validation: { heading: string; intro: string; paras: string[]; strong?: boolean };
+  validation: { heading: string; intro: string; paras?: string[]; strong?: boolean; left?: string[]; right?: string[] };
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[]; problem?: string[]; context?: string[]; payoff?: string };
   outcomes: { heading: string; paras: string[]; bgImage?: string };
   transition?: { heading: string; subline?: string; paras?: string[] };
@@ -164,20 +164,42 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           className={`text-ink py-20 md:py-28 lg:py-32 ${c.validation.strong ? '' : 'bg-bone border-t border-stone/50'}`}
           style={c.validation.strong ? { backgroundColor: a.full } : undefined}
         >
-          <div className={COL}>
+          <div className={c.validation.left ? COL_WIDE : COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.validation.heading}</h2>
             </FadeUp>
             <FadeUp delay={0.06}>
               <p className="mt-6 text-lg md:text-xl text-ink leading-relaxed max-w-[56ch]">{c.validation.intro}</p>
             </FadeUp>
-            <FadeUp delay={0.1}>
-              <div className={`mt-5 space-y-4 text-[17px] leading-[1.7] max-w-[58ch] ${c.validation.strong ? 'text-ink/80' : 'text-graphite'}`}>
-                {c.validation.paras.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
+            {c.validation.left && c.validation.right ? (
+              // Part one (heading + intro) runs across; parts two and three split into two columns.
+              <div className="mt-9 md:mt-11 grid gap-x-10 gap-y-7 md:grid-cols-2">
+                <FadeUp delay={0.1}>
+                  <div className={`space-y-4 text-[17px] leading-[1.7] ${c.validation.strong ? 'text-ink/80' : 'text-graphite'}`}>
+                    {c.validation.left.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </div>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <div className={`space-y-4 text-[17px] leading-[1.7] ${c.validation.strong ? 'text-ink/80' : 'text-graphite'}`}>
+                    {c.validation.right.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </div>
+                </FadeUp>
               </div>
-            </FadeUp>
+            ) : (
+              c.validation.paras && (
+                <FadeUp delay={0.1}>
+                  <div className={`mt-5 space-y-4 text-[17px] leading-[1.7] max-w-[58ch] ${c.validation.strong ? 'text-ink/80' : 'text-graphite'}`}>
+                    {c.validation.paras.map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
+                  </div>
+                </FadeUp>
+              )
+            )}
           </div>
         </section>
 
@@ -322,7 +344,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 shadow-[0_2px_8px_-4px_rgba(31,31,29,0.10)] transition-colors duration-300 hover:border-ink/30"
+                    className="flex h-full flex-col rounded-2xl p-6 md:p-7"
+                    style={{ backgroundColor: 'color-mix(in srgb, var(--color-bone) 92%, var(--color-charcoal))' }}
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
                     <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
