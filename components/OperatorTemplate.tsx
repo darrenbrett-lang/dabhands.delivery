@@ -57,10 +57,10 @@ const Cta = ({ label = 'Start a conversation', full = false }: { label?: string;
   </a>
 );
 
-// Testimonials as neutral evidence: a single warm-paper card with a light
-// border and a thin accent rule on top. Multiple quotes crossfade inside the
-// one card, so the height never jumps. Interval is per page; rotation pauses
-// for reduced-motion; the pips stay clickable.
+// Testimonials as cross-cutting evidence on the teal section: open content
+// (bone copy, a thin bone left rule, no box), one quote shown at a time and
+// crossfaded on change. Interval is per page; rotation pauses for reduced
+// motion; the pips stay clickable.
 const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; interval?: number }) => {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
@@ -161,7 +161,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         {/* 2 ── VALIDATION: you've done the hard part ── */}
         <section
           data-spine="The situation"
-          className={`text-ink py-20 md:py-28 lg:py-32 ${c.validation.strong ? '' : 'bg-paper border-t border-stone/50'}`}
+          className={`text-ink py-20 md:py-28 lg:py-32 ${c.validation.strong ? '' : 'bg-bone border-t border-stone/50'}`}
           style={c.validation.strong ? { backgroundColor: a.full } : undefined}
         >
           <div className={COL}>
@@ -254,7 +254,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         {/* 4 ── TRANSITION (optional): the messy middle / where I step in.
             Renders a single subline, or a fuller set of paragraphs. ── */}
         {c.transition && (
-          <section data-spine="Where I step in" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+          <section data-spine="Where I step in" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
             <div className={COL}>
               <FadeUp>
                 <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
@@ -308,7 +308,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
-        <section data-spine="Where I help" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section data-spine="Where I help" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={c.help.situations ? COL_WIDE : COL}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
@@ -322,7 +322,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 transition-colors duration-300 hover:border-ink/30"
+                    className="flex h-full flex-col rounded-2xl border border-stone bg-bone p-6 md:p-7 shadow-[0_2px_8px_-4px_rgba(31,31,29,0.10)] transition-colors duration-300 hover:border-ink/30"
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
                     <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
@@ -382,7 +382,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 8 ── CLOSE: simple, confident invitation ── */}
-        <section data-spine="Let’s talk" className="bg-paper text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
+        <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
           <div className={`${COL} text-center`}>
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>

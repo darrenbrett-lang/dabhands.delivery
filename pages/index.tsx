@@ -180,7 +180,7 @@ export default function Home() {
         </section>
 
         {/* ── PROOF ────────────────────────────────── */}
-        <section data-spine="Trusted by" className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-y border-stone/60">
+        <section data-spine="Trusted by" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-y border-stone/60">
           <div className="u-container">
             <FadeUp>
               <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work by</p>
@@ -213,7 +213,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-[border-color,box-shadow,background-color] duration-300"
                     style={{
-                      backgroundColor: hovered === i ? t.block : 'var(--color-paper)',
+                      backgroundColor: hovered === i ? t.block : 'var(--color-bone)',
                       borderColor: hovered === i ? t.accent : 'var(--color-stone)',
                       boxShadow: hovered === i
                         ? '0 4px 10px rgba(31,31,29,0.07), 0 22px 48px -20px rgba(31,31,29,0.26)'

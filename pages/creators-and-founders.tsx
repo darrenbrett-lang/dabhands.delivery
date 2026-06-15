@@ -41,6 +41,7 @@ const content: OperatorContent = {
   },
   outcomes: {
     heading: 'That’s where I come in.',
+    bgImage: '/images/creators_solution.png',
     paras: [
       'Having spent seven years building and running my own agency, I know first-hand how quickly success creates complexity.',
       'Alongside that experience, I’ve spent more than twenty years helping organisations navigate growth, change and execution.',

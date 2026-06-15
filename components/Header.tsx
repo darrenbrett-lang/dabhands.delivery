@@ -110,7 +110,7 @@ export const Header = () => {
                     className="absolute right-0 top-full pt-3"
                     role="menu"
                   >
-                    <div className="w-[300px] rounded-2xl border border-stone/70 bg-paper/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
+                    <div className="w-[300px] rounded-2xl border border-stone/70 bg-bone/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
                       {audiences.map((a) => {
                         const active = router.pathname === a.href;
                         const lit = active || hoveredWho === a.href;
