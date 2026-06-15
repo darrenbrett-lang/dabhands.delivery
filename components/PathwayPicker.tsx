@@ -13,9 +13,9 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 // hover block + arrow tint via inline style — kept off Tailwind classes so the
 // dynamic per-item colour is deterministic.
 const PATHS = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.', block: 'rgba(168,181,162,0.22)', accent: '#6F7D69' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.', block: 'rgba(230,179,154,0.24)', accent: '#B97D62' },
-  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.', block: 'rgba(184,162,216,0.24)', accent: '#6E5A86' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.', block: 'color-mix(in srgb, var(--color-sage) 24%, transparent)', accent: 'var(--color-sage-deep)' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.', block: 'color-mix(in srgb, var(--color-peach) 26%, transparent)', accent: 'var(--color-peach-deep)' },
+  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.', block: 'color-mix(in srgb, var(--color-lavender) 26%, transparent)', accent: 'var(--color-lavender-deep)' },
 ];
 
 export const PathwayPicker = () => {

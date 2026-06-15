@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 // while the label stays ink; `tint` is the solid accent (mobile lead dash),
 // `block` the low-alpha hover fill.
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: '#A8B5A2', block: 'rgba(168,181,162,0.20)' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', tint: '#E6B39A', block: 'rgba(230,179,154,0.22)' },
-  { href: '/creators-and-founders', label: 'Creators & founders', tint: '#B8A2D8', block: 'rgba(184,162,216,0.22)' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', tint: 'var(--color-sage)', block: 'color-mix(in srgb, var(--color-sage) 22%, transparent)' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', tint: 'var(--color-peach)', block: 'color-mix(in srgb, var(--color-peach) 24%, transparent)' },
+  { href: '/creators-and-founders', label: 'Creators & founders', tint: 'var(--color-lavender)', block: 'color-mix(in srgb, var(--color-lavender) 24%, transparent)' },
 ];
 
 export const Header = () => {

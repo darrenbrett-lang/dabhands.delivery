@@ -17,24 +17,24 @@ const TURNSTILE = [
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
-    block: 'rgba(168,181,162,0.20)',
-    accent: '#6F7D69',
+    block: 'color-mix(in srgb, var(--color-sage) 24%, transparent)',
+    accent: 'var(--color-sage-deep)',
   },
   {
     label: 'Marketing leaders',
     diagnosis: 'Great work loses power on the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
-    block: 'rgba(230,179,154,0.22)',
-    accent: '#B97D62',
+    block: 'color-mix(in srgb, var(--color-peach) 26%, transparent)',
+    accent: 'var(--color-peach-deep)',
   },
   {
     label: 'Creators & founders',
     diagnosis: 'Everything depends on you. Until it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
-    block: 'rgba(184,162,216,0.22)',
-    accent: '#6E5A86',
+    block: 'color-mix(in srgb, var(--color-lavender) 26%, transparent)',
+    accent: 'var(--color-lavender-deep)',
   },
 ];
 
@@ -168,7 +168,7 @@ export default function Home() {
                 <FadeUp delay={0.32}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
                     It deserves to arrive{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-sage)">
+                    <HandUnderline delay={0.6} variant={3} stroke="color-mix(in srgb, var(--color-teal), var(--color-bone) 45%)">
                       as intended
                     </HandUnderline>
                     .
@@ -235,7 +235,7 @@ export default function Home() {
         </section>
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section data-spine="Let’s talk" data-spine-tone="dark" className="bg-plum text-bone py-14 md:py-20">
+        <section data-spine="Let’s talk" data-spine-tone="dark" className="bg-teal text-bone py-14 md:py-20">
           <div className="u-container">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
@@ -246,7 +246,7 @@ export default function Home() {
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Starting a conversation' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-bone px-7 py-3.5 text-[15px] font-medium text-ink transition-colors duration-300 hover:bg-moss hover:text-bone"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-bone px-7 py-3.5 text-[15px] font-medium text-ink transition-colors duration-300 hover:bg-charcoal hover:text-bone"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>

@@ -12,6 +12,7 @@ const content: OperatorContent = {
   validation: {
     heading: 'You’ve already created momentum.',
     intro: 'The audience is growing. Customers are responding. Opportunities keep appearing.',
+    strong: true,
     paras: [
       'From the outside, things look successful.',
       'Yet somehow every important decision still seems to find its way back to you.',
@@ -20,12 +21,14 @@ const content: OperatorContent = {
   },
   diagnosis: {
     heading: 'What I’ve seen happen.',
-    paras: [
+    problem: [
       'Success creates complexity. More customers. More projects. More partnerships. More people. More decisions.',
       'At first, that’s exciting. Over time, it becomes harder to keep everything moving.',
-      'The founder spends more time coordinating than creating. More time solving problems than spotting opportunities. More time keeping things together than building what comes next.',
-      'Nothing is broken. The business has simply reached a point where it needs more capability around it than it did before.',
     ],
+    context: [
+      'The founder spends more time coordinating than creating. More time solving problems than spotting opportunities. More time keeping things together than building what comes next.',
+    ],
+    payoff: 'Nothing is broken. The business has simply reached a point where it needs more capability around it than it did before.',
   },
   transition: {
     heading: 'The challenge isn’t ambition.',

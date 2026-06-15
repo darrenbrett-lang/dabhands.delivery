@@ -30,11 +30,14 @@ export interface OperatorContent {
 
 // Hero washes (Colour System v3): the primary accent fading top-to-bottom.
 // Deep Moss leads; text uses the dark accent shade.
-const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash: string; traj: string; cardBg: string; cardBorder: string; strong: string }> = {
-  moss: { text: 'text-moss', border: 'border-moss/40', rule: 'border-moss/60', wash: 'linear-gradient(to bottom, rgba(91,106,88,0.20), rgba(91,106,88,0.14) 60%, rgba(91,106,88,0) 100%)', traj: 'var(--color-moss)', cardBg: 'rgba(91,106,88,0.08)', cardBorder: 'rgba(91,106,88,0.40)', strong: 'rgba(91,106,88,0.22)' },
-  lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(184,162,216,0.22), rgba(184,162,216,0.22) 60%, rgba(184,162,216,0) 100%)', traj: 'var(--color-lavender)', cardBg: 'rgba(184,162,216,0.13)', cardBorder: 'rgba(184,162,216,0.45)', strong: 'rgba(184,162,216,0.40)' },
-  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(230,179,154,0.22), rgba(230,179,154,0.14) 60%, rgba(230,179,154,0) 100%)', traj: 'var(--color-peach)', cardBg: 'rgba(230,179,154,0.14)', cardBorder: 'rgba(230,179,154,0.45)', strong: 'rgba(230,179,154,0.45)' },
-  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(168,181,162,0.24), rgba(168,181,162,0.14) 60%, rgba(168,181,162,0) 100%)', traj: 'var(--color-sage)', cardBg: 'rgba(168,181,162,0.13)', cardBorder: 'rgba(168,181,162,0.45)', strong: 'rgba(168,181,162,0.45)' },
+// Audience accents: Business=sage, Marketing=peach, Creators=lavender. `full`
+// is the solid colour for the strong Situation panel + the Where-I-help cards;
+// `wash` is the soft hero fade; `text` the legible deep shade for eyebrows.
+const ACCENT: Record<Accent, { text: string; border: string; rule: string; wash: string; traj: string; full: string }> = {
+  moss: { text: 'text-moss', border: 'border-moss/40', rule: 'border-moss/60', wash: 'linear-gradient(to bottom, rgba(91,106,88,0.20), rgba(91,106,88,0.14) 60%, rgba(91,106,88,0) 100%)', traj: 'var(--color-moss)', full: 'var(--color-moss)' },
+  lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', rule: 'border-lavender/60', wash: 'linear-gradient(to bottom, rgba(199,189,215,0.26), rgba(199,189,215,0.16) 60%, rgba(199,189,215,0) 100%)', traj: 'var(--color-lavender)', full: 'var(--color-lavender)' },
+  peach: { text: 'text-peach-deep', border: 'border-peach/40', rule: 'border-peach/60', wash: 'linear-gradient(to bottom, rgba(231,197,175,0.30), rgba(231,197,175,0.18) 60%, rgba(231,197,175,0) 100%)', traj: 'var(--color-peach)', full: 'var(--color-peach)' },
+  sage: { text: 'text-sage-deep', border: 'border-sage/40', rule: 'border-sage/60', wash: 'linear-gradient(to bottom, rgba(170,183,165,0.28), rgba(170,183,165,0.16) 60%, rgba(170,183,165,0) 100%)', traj: 'var(--color-sage)', full: 'var(--color-sage)' },
 };
 
 // Authored, not a blog. Hero a touch wider; body narrow; the card grid in between.
@@ -47,7 +50,7 @@ const COL_WIDE = 'mx-auto max-w-statement px-6 md:px-10';
 const Cta = ({ label = 'Start a conversation', full = false }: { label?: string; full?: boolean }) => (
   <a
     href={mailto()}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-moss ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-teal ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -58,7 +61,7 @@ const Cta = ({ label = 'Start a conversation', full = false }: { label?: string;
 // border and a thin accent rule on top. Multiple quotes crossfade inside the
 // one card, so the height never jumps. Interval is per page; rotation pauses
 // for reduced-motion; the pips stay clickable.
-const Testimonials = ({ items, accent, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; accent: string; interval?: number }) => {
+const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; interval?: number }) => {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   useEffect(() => {
@@ -68,28 +71,28 @@ const Testimonials = ({ items, accent, interval = 6000 }: { items: { quote: stri
   }, [active, reduce, items.length, interval]);
   return (
     <div className="max-w-[860px]">
-      <div className="border-l-2 pl-6 md:pl-8" style={{ borderColor: accent }}>
+      <div className="border-l-2 border-bone/30 pl-6 md:pl-8">
         <motion.figure
           key={active}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: reduce ? 0 : 0.45, ease: 'easeInOut' }}
         >
-          <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink max-w-[66ch]">“{items[active].quote}”</blockquote>
+          <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone max-w-[66ch]">“{items[active].quote}”</blockquote>
           <figcaption className="mt-5 not-italic">
-            <span className="block text-[15px] font-medium text-ink">{items[active].name}</span>
-            <span className="block text-[13px] text-graphite">{items[active].role}</span>
+            <span className="block text-[15px] font-medium text-bone">{items[active].name}</span>
+            <span className="block text-[13px] text-bone/70">{items[active].role}</span>
           </figcaption>
         </motion.figure>
       </div>
-      <div className="mt-6 flex gap-2.5">
+      <div className="mt-7 flex gap-2.5">
         {items.map((_, i) => (
           <button
             key={i}
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Show testimonial ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-ink' : 'w-2 bg-ink/20 hover:bg-ink/40'}`}
+            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/55'}`}
           />
         ))}
       </div>
@@ -158,8 +161,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         {/* 2 ── VALIDATION: you've done the hard part ── */}
         <section
           data-spine="The situation"
-          className={`text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50 ${c.validation.strong ? '' : 'bg-paper'}`}
-          style={c.validation.strong ? { backgroundColor: a.strong } : undefined}
+          className={`text-ink py-20 md:py-28 lg:py-32 ${c.validation.strong ? '' : 'bg-paper border-t border-stone/50'}`}
+          style={c.validation.strong ? { backgroundColor: a.full } : undefined}
         >
           <div className={COL}>
             <FadeUp>
@@ -169,7 +172,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               <p className="mt-6 text-lg md:text-xl text-ink leading-relaxed max-w-[56ch]">{c.validation.intro}</p>
             </FadeUp>
             <FadeUp delay={0.1}>
-              <div className="mt-5 space-y-4 text-[17px] text-graphite leading-[1.7] max-w-[58ch]">
+              <div className={`mt-5 space-y-4 text-[17px] leading-[1.7] max-w-[58ch] ${c.validation.strong ? 'text-ink/80' : 'text-graphite'}`}>
                 {c.validation.paras.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
@@ -309,11 +312,11 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full flex-col rounded-2xl border p-6 md:p-7"
-                    style={{ backgroundColor: a.cardBg, borderColor: a.cardBorder }}
+                    className="flex h-full flex-col rounded-2xl p-6 md:p-7"
+                    style={{ backgroundColor: a.full }}
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
-                    <p className="mt-3 text-graphite leading-relaxed text-[15px]">{s.body}</p>
+                    <p className="mt-3 text-ink/80 leading-relaxed text-[15px]">{s.body}</p>
                   </motion.div>
                 ))}
               </div>
@@ -333,31 +336,31 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
-        <section data-spine="Trusted" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+        <section data-spine="Trusted" data-spine-tone="dark" className="bg-teal text-bone py-20 md:py-28 lg:py-32">
           <div className={COL_WIDE}>
             <FadeUp>
-              <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-ink mb-8 max-w-[26ch]">{c.proof.heading}</p>
+              <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-bone/90 mb-8 max-w-[26ch]">{c.proof.heading}</p>
             </FadeUp>
             <FadeUp delay={0.08}>
               {c.proof.testimonials ? (
-                <Testimonials items={c.proof.testimonials} accent={a.traj} interval={c.proof.interval} />
+                <Testimonials items={c.proof.testimonials} interval={c.proof.interval} />
               ) : c.proof.quote ? (
-                <blockquote className="max-w-[860px] border-l-2 pl-6 md:pl-8" style={{ borderColor: a.traj }}>
-                  <p className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink max-w-[66ch]">“{c.proof.quote}”</p>
+                <blockquote className="max-w-[860px] border-l-2 border-bone/30 pl-6 md:pl-8">
+                  <p className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone max-w-[66ch]">“{c.proof.quote}”</p>
                   {c.proof.name && (
                     <footer className="mt-5 not-italic">
-                      <span className="block text-[15px] font-medium text-ink">{c.proof.name}</span>
-                      {c.proof.role && <span className="block text-[13px] text-graphite">{c.proof.role}</span>}
+                      <span className="block text-[15px] font-medium text-bone">{c.proof.name}</span>
+                      {c.proof.role && <span className="block text-[13px] text-bone/70">{c.proof.role}</span>}
                     </footer>
                   )}
                 </blockquote>
               ) : (
                 c.proof.statement && (
-                  <div className="max-w-[860px] border-l-2 pl-6 md:pl-8" style={{ borderColor: a.traj }}>
+                  <div className="max-w-[860px] border-l-2 border-bone/30 pl-6 md:pl-8">
                     {c.proof.statement.map((p, i) => (
                       <p
                         key={i}
-                        className={i === 0 ? 'font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink max-w-[66ch]' : 'mt-4 text-lg text-graphite leading-relaxed'}
+                        className={i === 0 ? 'font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone max-w-[66ch]' : 'mt-4 text-lg text-bone/80 leading-relaxed'}
                       >
                         {p}
                       </p>

@@ -12,6 +12,7 @@ const content: OperatorContent = {
   validation: {
     heading: 'The ingredients are already there.',
     intro: 'The strategy is clear. The ambition is strong. The investment has been made.',
+    strong: true,
     paras: [
       'Yet creating work that genuinely stands out has never been harder.',
       'The market is crowded. Attention is fragmented. Expectations continue to rise.',
@@ -20,13 +21,15 @@ const content: OperatorContent = {
   },
   diagnosis: {
     heading: 'What gets in the way',
-    paras: [
-      'I’ve spent more than twenty years working alongside brands, agencies, strategists, creatives and digital teams.',
+    problem: [
       'One thing I’ve noticed is that great work rarely disappears overnight. It loses strength gradually.',
       'A compromise here. A delay there. Another interpretation. Another approval. Another stakeholder.',
-      'Individually, none of these things seem particularly significant. Together, they can change the shape of the work completely.',
-      'The idea is still there. It just isn’t as powerful as it was when everyone first believed in it.',
     ],
+    context: [
+      'I’ve spent more than twenty years working alongside brands, agencies, strategists, creatives and digital teams.',
+      'Individually, none of these things seem particularly significant. Together, they can change the shape of the work completely.',
+    ],
+    payoff: 'The idea is still there. It just isn’t as powerful as it was when everyone first believed in it.',
   },
   outcomes: {
     heading: 'The market creates enough noise already.',

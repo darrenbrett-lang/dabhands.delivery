@@ -7,35 +7,36 @@
      entering the system. Colour is meaning, not decoration. */
 
   /* Core neutrals */
-  --color-bone: #F5F1EA;       /* primary background */
+  --color-bone: #F5F1EB;       /* primary background */
   --color-paper: #FBF8F3;      /* secondary background */
   --color-ink: #1F1F1D;        /* primary text + headlines */
   --color-graphite: #5C5C58;   /* secondary / body text */
   --color-stone: #D8D2C8;      /* borders + dividers */
 
-  /* Accent palette — Deep Moss leads (operating-partner update) */
-  --color-moss: #5B6A58;           /* PRIMARY brand accent — capability, control, trust */
-  --color-lavender: #B8A2D8;       /* supporting — intelligence / clarity, used lightly */
+  /* Accent palette — Deep Teal is the brand colour; sage/peach/lavender are the audience system */
+  --color-teal: #48666A;           /* DAB HANDS brand accent — intelligent, calm, trustworthy. Cross-cutting "I'm different": global CTAs, testimonials, nav, homepage accents */
+  --color-moss: #5B6A58;           /* legacy — retired as an accent, kept so old refs don't break */
+  --color-lavender: #C7BDD7;       /* audience — Creators & founders (growth / possibility) */
   --color-lavender-soft: #E6D6EE;  /* gradient mid + soft accent wash */
-  --color-peach: #E6B39A;          /* warmth / partnership — Marketing leaders */
-  --color-sage: #A8B5A2;           /* growth / maturity — Creators & founders */
+  --color-peach: #E7C5AF;          /* audience — Marketing leaders (creative impact) */
+  --color-sage: #AAB7A5;           /* audience — Business & agency leaders (organisational flow) */
   --color-sky: #AFCFE0;            /* supporting accent */
   --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
 
-  /* Audience light washes — section highlights (Colour System v2) */
-  --color-lavender-wash: #E9E1F4;  /* Business & agency leaders */
-  --color-peach-wash: #F4E0D4;     /* Marketing leaders */
-  --color-sage-wash: #DDE4D8;      /* Creators & founders */
+  /* Audience light washes — section highlights */
+  --color-lavender-wash: #E9E1F4;
+  --color-peach-wash: #F4E0D4;
+  --color-sage-wash: #DDE4D8;
 
-  /* Audience dark accents — accent text, quote details, interactive (Colour System v2) */
-  --color-lavender-deep: #6E5A86;  /* Business & agency leaders */
+  /* Audience dark accents — eyebrows, arrows, links (legible on bone) */
+  --color-lavender-deep: #6E5A86;  /* Creators & founders */
   --color-peach-deep: #B97D62;     /* Marketing leaders */
-  --color-sage-deep: #6F7D69;      /* Creators & founders */
+  --color-sage-deep: #6F7D69;      /* Business & agency leaders */
 
   /* Dark palette */
-  --color-plum: #352E44;       /* deep sections, final CTA */
+  --color-plum: #352E44;       /* legacy deep section colour */
   --color-aubergine: #4A3D59;  /* supporting dark */
-  --color-charcoal: #262420;   /* footer base — warm charcoal, near-neutral */
+  --color-charcoal: #232323;   /* charcoal — authority, dark sections, footer */
 
   /* Fonts */
   --font-serif: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;
@@ -172,7 +173,7 @@ p {
 .signal-rule {
   width: 32px;
   height: 2px;
-  background: var(--color-moss);
+  background: var(--color-teal);
   display: block;
 }
 
@@ -213,7 +214,7 @@ p {
 
 /* Brand dot retained for legacy references; now lavender, not green. */
 .brand-dot {
-  background-color: var(--color-moss);
+  background-color: var(--color-teal);
 }
 
 /* Dev: outline every div for design QA. Excluded for dev tool elements. */
