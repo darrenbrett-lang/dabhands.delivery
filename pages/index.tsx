@@ -258,7 +258,7 @@ export default function Home() {
                     <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
                     <span className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold ${t.accentText}`}>
-                      Explore
+                      That’s me
                       <span aria-hidden className="text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </span>
                   </motion.div>
