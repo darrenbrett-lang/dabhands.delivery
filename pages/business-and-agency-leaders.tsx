@@ -26,9 +26,9 @@ const content: OperatorContent = {
     paras: [
       'I’ve been in these rooms long enough to know the problem is rarely one big thing. More often, it’s a series of small points of drag.',
       'A decision that takes too long. A priority that means different things to different teams. A handoff that loses context. A meeting that creates more noise than clarity.',
+      'Today, technology is accelerating change even further. New tools create new opportunities, but they also change how decisions are made, how work flows, and where accountability sits.',
       'Individually, none of it looks fatal. Together, it slows the whole system down.',
       'That’s where orchestration matters. Not more process. Not more noise. The right adjustments, in the right places, so the organisation can move with less drag and more confidence.',
-      'Small points of drag become big limits on progress.',
     ],
   },
   outcomes: {
@@ -40,7 +40,7 @@ const content: OperatorContent = {
   },
   transition: {
     heading: 'That’s where I step in.',
-    subline: 'Into the gap between ambition and execution, where important work tends to stall.',
+    subline: 'Into the space between ambition and execution, where momentum is gained or lost.',
   },
   help: {
     heading: 'Where I tend to help.',

@@ -154,7 +154,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.15}>
                   <p className="mt-4 text-base md:text-lg text-graphite max-w-[42ch]">
-                    Strategy. Creative ambition. Investment. Good people. Trusted partners.
+                    Strategy. Creative ambition. Investment. Good people. Capable partners.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
@@ -168,7 +168,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.26}>
                   <p className="mt-6 text-base md:text-lg text-graphite leading-relaxed max-w-[42ch]">
-                    Because somewhere between idea and market, momentum slips and value gets lost.
+                    Because somewhere between ambition and execution, work gets diluted. Momentum slips. Complexity takes hold.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.32}>
