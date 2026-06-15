@@ -8,7 +8,7 @@ const content: OperatorContent = {
   hero: {
     headline: 'The organisation hasn’t lost its way. It’s simply become harder to move.',
     subline: 'Helping organisations keep important work moving when complexity starts getting in the way.',
-    trust: 'A challenge I’ve spent twenty years seeing inside organisations like Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever.',
+    trust: 'A challenge I’ve spent over twenty years seeing inside organisations like Nike, Volkswagen and HUGO BOSS.',
   },
   validation: {
     heading: 'All the blocks are in place.',
