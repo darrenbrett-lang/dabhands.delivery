@@ -22,7 +22,7 @@ export interface OperatorContent {
   validation: { heading: string; intro: string; paras: string[] };
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
   outcomes: { heading: string; paras: string[] };
-  transition: { heading: string; subline: string };
+  transition?: { heading: string; subline: string };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[] };
   close: { heading: string; line?: string };
@@ -211,23 +211,25 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 4 ── TRANSITION: the space between strategy and execution / where I step in ── */}
-        <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-          <div className={COL}>
-            <FadeUp>
-              <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
-            </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">{c.transition.subline}</p>
-            </FadeUp>
-          </div>
-        </section>
+        {/* 4 ── TRANSITION (optional): the messy middle / where I step in ── */}
+        {c.transition && (
+          <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+            <div className={COL}>
+              <FadeUp>
+                <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1] max-w-[18ch]">{c.transition.heading}</h2>
+              </FadeUp>
+              <FadeUp delay={0.06}>
+                <p className="mt-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">{c.transition.subline}</p>
+              </FadeUp>
+            </div>
+          </section>
+        )}
 
         {/* 5 ── OUTCOMES: what changes when it moves ── */}
         <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={COL}>
             <FadeUp>
-              <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[22ch]">{c.outcomes.heading}</h2>
+              <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em] max-w-[20ch]">{c.outcomes.heading}</h2>
             </FadeUp>
             <FadeUp delay={0.06}>
               <div className="mt-6 space-y-4 text-lg text-graphite leading-[1.7] max-w-[56ch]">

@@ -31,15 +31,12 @@ const content: OperatorContent = {
     ],
   },
   outcomes: {
-    heading: 'The organisation becomes easier to lead.',
+    heading: 'I help organisations regain operational flow.',
     paras: [
-      'People understand what matters. Teams pull in the same direction. Decisions move faster. Leadership spends less time connecting dots and more time leading. Client outcomes are better and clients are happier.',
-      'The organisation doesn’t feel different. But it performs differently.',
+      'I work across teams, priorities, processes and people to identify what’s slowing progress, strengthen the points that matter, and help important work keep moving.',
+      'Priorities become clearer. Decisions move faster. Accountability strengthens. Teams spend less time navigating friction and more time creating value.',
+      'Leadership gains confidence that important work will move from ambition to execution without constant intervention.',
     ],
-  },
-  transition: {
-    heading: 'That’s where I step in.',
-    subline: 'Into the space between ambition and execution, where momentum is gained or lost.',
   },
   help: {
     heading: 'Where I tend to help.',

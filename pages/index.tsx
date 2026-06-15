@@ -195,14 +195,6 @@ export default function Home() {
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />
             </FadeUp>
-            <FadeUp delay={0.12}>
-              <figure className="mt-16 md:mt-24 max-w-[60ch] mx-auto text-center">
-                <blockquote className="font-serif italic text-[24px] md:text-[34px] leading-[1.3] text-ink">
-                  “He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.”
-                </blockquote>
-                <figcaption className="mt-6 text-[14px] text-graphite">Anthony Mahon, Global Membership Director, Hugo Boss</figcaption>
-              </figure>
-            </FadeUp>
           </div>
         </section>
 
