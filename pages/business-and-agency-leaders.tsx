@@ -11,13 +11,14 @@ const content: OperatorContent = {
     trust: 'A challenge I’ve spent twenty years seeing inside organisations like Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail and Unilever.',
   },
   validation: {
-    heading: 'You’ve done the hard part already.',
-    intro: 'You know where you want to go. You have the right people. The strategy is clear.',
+    heading: 'All the blocks are in place.',
+    intro: 'You know where you want to go. You have capable people. The ambition is clear.',
     paras: [
-      'But somewhere between the decision and the delivery, friction builds.',
-      'The same priority gets discussed in three different rooms. A decision gets made, but doesn’t move the way it should. People are working hard, but important things aren’t moving as fast as they should.',
-      'It’s not that people don’t care. It’s not that the strategy is wrong.',
-      'It’s that keeping everything moving together when there’s this much happening is harder than it used to be.',
+      'Yet progress feels slower than it should.',
+      'Not because people aren’t working hard. Not because the strategy is wrong.',
+      'As organisations grow, complexity creates distance. Teams become more specialised. Priorities multiply. Decisions take longer to travel.',
+      'The challenge isn’t deciding what to do next.',
+      'It’s helping the organisation move together.',
     ],
   },
   diagnosis: {
