@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Layout } from './Layout';
 import { FadeUp } from './FadeUp';
 import { SeoMeta } from './SeoMeta';
@@ -23,7 +23,6 @@ export interface OperatorContent {
   diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[] };
   outcomes: { heading: string; paras: string[] };
   transition: { heading: string; subline: string };
-  bring?: { heading: string; items: { title: string; body: string }[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[] };
   close: { heading: string; line?: string };
@@ -55,21 +54,48 @@ const Cta = ({ label = 'Start a conversation', full = false }: { label?: string;
   </a>
 );
 
-// Restrained marks for the "What I bring" triptych — cohesive with the
-// trajectory language (a path / a form / an arrival), inheriting the accent.
-const BRING_ICONS = [
-  <svg key="grow" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
-    <path d="M4 25 C 12 24, 19 14, 26 6" />
-    <circle cx="26" cy="6" r="1.9" />
-  </svg>,
-  <svg key="change" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
-    <path d="M5 22 C 12 6, 20 26, 27 10" />
-  </svg>,
-  <svg key="exec" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
-    <path d="M4 16 L24 16" />
-    <circle cx="26" cy="16" r="2.4" fill="currentColor" stroke="none" />
-  </svg>,
-];
+// Auto-rotating testimonial carousel (3s) with pips. All quotes are stacked
+// in one grid cell and crossfaded, so the height never jumps. Auto-rotation
+// pauses for reduced-motion; the pips stay clickable.
+const Testimonials = ({ items, rule }: { items: { quote: string; name: string; role: string }[]; rule: string }) => {
+  const reduce = useReducedMotion();
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    if (reduce || items.length <= 1) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % items.length), 3000);
+    return () => clearInterval(id);
+  }, [active, reduce, items.length]);
+  return (
+    <div>
+      <div className={`relative grid border-l-2 ${rule} pl-6 md:pl-8 max-w-[62ch]`}>
+        {items.map((t, i) => (
+          <motion.figure
+            key={i}
+            aria-hidden={i !== active}
+            initial={false}
+            animate={{ opacity: i === active ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
+            style={{ gridArea: '1 / 1', pointerEvents: i === active ? 'auto' : 'none' }}
+          >
+            <blockquote className="font-serif italic text-[22px] md:text-[30px] leading-[1.3] text-bone">“{t.quote}”</blockquote>
+            <figcaption className="mt-6 text-[14px] not-italic text-bone/65">{t.name}, {t.role}</figcaption>
+          </motion.figure>
+        ))}
+      </div>
+      <div className="mt-9 flex gap-2.5">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setActive(i)}
+            aria-label={`Show testimonial ${i + 1}`}
+            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/50'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
   const c = content;
@@ -215,26 +241,6 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* WHAT I BRING — credibility triptych, before "where I help" ── */}
-        {c.bring && (
-          <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-            <div className={COL_WIDE}>
-              <FadeUp>
-                <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.bring.heading}</h2>
-              </FadeUp>
-              <div className="mt-10 md:mt-14 grid gap-x-8 gap-y-10 md:grid-cols-3">
-                {c.bring.items.map((item, i) => (
-                  <FadeUp key={item.title} delay={0.06 + i * 0.08}>
-                    <div className={a.text}>{BRING_ICONS[i]}</div>
-                    <h3 className="mt-5 font-serif text-[21px] md:text-[23px] leading-[1.25] text-ink">{item.title}</h3>
-                    <p className="mt-2 text-graphite leading-relaxed text-[15px] max-w-[34ch]">{item.body}</p>
-                  </FadeUp>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* 6 ── WHERE I TEND TO HELP: situations, not services (3 cards) ── */}
         <section className="bg-paper text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className={c.help.situations ? COL_WIDE : COL}>
@@ -274,23 +280,13 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
         <section className="bg-plum text-bone py-20 md:py-28 lg:py-32">
-          <div className={c.proof.testimonials ? COL_WIDE : COL}>
+          <div className={COL}>
             <FadeUp>
               <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-bone/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
             </FadeUp>
             <FadeUp delay={0.08}>
               {c.proof.testimonials ? (
-                <div className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
-                  {c.proof.testimonials.map((t) => (
-                    <figure key={t.name} className="flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border border-bone/15 bg-bone/[0.04] p-6 sm:w-[56%] md:w-auto md:p-7">
-                      <blockquote className="font-serif italic text-[18px] md:text-[20px] leading-[1.4] text-bone/95">“{t.quote}”</blockquote>
-                      <figcaption className="mt-auto pt-6 text-[13px] not-italic text-bone/60">
-                        <span className="block text-bone/85">{t.name}</span>
-                        {t.role}
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                <Testimonials items={c.proof.testimonials} rule={a.rule} />
               ) : c.proof.quote ? (
                 <blockquote className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
                   <p className="font-serif italic text-[24px] md:text-[32px] leading-[1.3] text-bone">“{c.proof.quote}”</p>

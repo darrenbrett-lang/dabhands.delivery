@@ -31,14 +31,6 @@ const content: OperatorContent = {
       'The original ambition remains visible. The ecosystem works together. The customer understands it. The investment works harder.',
     ],
   },
-  bring: {
-    heading: 'What I bring',
-    items: [
-      { title: 'Built businesses.', body: 'I understand growth from the inside.' },
-      { title: 'Led transformation.', body: 'I understand how organisations change.' },
-      { title: 'Helped organisations execute.', body: 'I understand how important work gets done.' },
-    ],
-  },
   help: {
     heading: 'Where I tend to help.',
     situations: [

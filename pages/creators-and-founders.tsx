@@ -36,14 +36,6 @@ const content: OperatorContent = {
     subline:
       'When a founder feels stuck between where the business is and where it could be. When growth is creating complexity. When opportunities are arriving faster than the organisation can absorb them. When everything still depends on one person.',
   },
-  bring: {
-    heading: 'What I bring',
-    items: [
-      { title: 'Built businesses.', body: 'I understand growth from the inside.' },
-      { title: 'Led transformation.', body: 'I understand how organisations change.' },
-      { title: 'Helped organisations execute.', body: 'I understand how important work gets done.' },
-    ],
-  },
   help: {
     heading: 'Where I tend to help.',
     situations: [

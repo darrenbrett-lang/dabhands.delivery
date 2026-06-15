@@ -123,6 +123,11 @@ export default function Home() {
                   I tend to work in the space between ambition and execution, because that’s where organisations either gain or lose momentum.
                 </p>
               </FadeUp>
+              <FadeUp delay={0.22}>
+                <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
+                  Over that time, I’ve built businesses, led transformation, and helped organisations execute at scale.
+                </p>
+              </FadeUp>
             </div>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -137,7 +142,7 @@ export default function Home() {
             that builds; typography carries it, no image) ───────────────── */}
         <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <div className="u-grid gap-y-12 lg:items-center">
+            <div className="u-grid gap-y-12 lg:items-start">
               {/* Left: the thesis — large, commanding, fills the column */}
               <FadeUp className="col-span-4 md:col-span-6">
                 <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
@@ -159,11 +164,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.2}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch]">
-                    The challenge isn’t creating more. It’s helping what already exists{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
-                      move together
-                    </HandUnderline>
-                    .
+                    The challenge isn’t creating more. It’s helping what already exists move together.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.26}>
@@ -173,7 +174,11 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.32}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[24ch]">
-                    It deserves to arrive as intended.
+                    It deserves to arrive{' '}
+                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
+                      as intended
+                    </HandUnderline>
+                    .
                   </p>
                 </FadeUp>
               </div>

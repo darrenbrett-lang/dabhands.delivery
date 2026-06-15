@@ -41,14 +41,6 @@ const content: OperatorContent = {
     heading: 'That’s where I step in.',
     subline: 'Into the space between ambition and execution, where momentum is gained or lost.',
   },
-  bring: {
-    heading: 'What I bring',
-    items: [
-      { title: 'Built businesses.', body: 'I understand growth from the inside.' },
-      { title: 'Led transformation.', body: 'I understand how organisations change.' },
-      { title: 'Helped organisations execute.', body: 'I understand how important work gets done.' },
-    ],
-  },
   help: {
     heading: 'Where I tend to help.',
     situations: [
