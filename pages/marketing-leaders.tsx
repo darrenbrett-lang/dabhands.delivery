@@ -40,16 +40,41 @@ const content: OperatorContent = {
     ],
   },
   help: {
-    heading: 'The right people. The right challenge. The right moment.',
-    statement: [
-      'Small senior teams assembled around important work. Top craft. Clear ownership. Less drag. No unnecessary layers.',
+    heading: 'Where I tend to help.',
+    situations: [
+      {
+        heading: 'A major launch is approaching.',
+        body: 'Helping important work arrive in market as intended.',
+      },
+      {
+        heading: 'Multiple teams need to align.',
+        body: 'Bringing clarity, momentum and accountability across the ecosystem.',
+      },
+      {
+        heading: 'The stakes are high.',
+        body: 'Providing experienced operational leadership when the work matters most.',
+      },
     ],
   },
   proof: {
     heading: 'Trusted to protect what matters.',
-    quote: 'He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.',
-    name: 'Anthony Mahon',
-    role: 'Global Membership Director, HUGO BOSS',
+    testimonials: [
+      {
+        quote: 'Darren brings control to complex situations quickly. He aligns teams, simplifies decisions, and gets the work moving again without losing what made it strong.',
+        name: 'Joel Sinnott',
+        role: 'Senior Digital Lead, Nike',
+      },
+      {
+        quote: 'He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.',
+        name: 'Anthony Mahon',
+        role: 'Global Membership Director, HUGO BOSS',
+      },
+      {
+        quote: 'A calm, experienced operator who knows how to step into complexity, align people, and make things work under pressure.',
+        name: 'Meher Mumtaz',
+        role: 'Digital Brand Director, Western Union',
+      },
+    ],
   },
   close: {
     heading: 'Great work rarely fails on ambition.',

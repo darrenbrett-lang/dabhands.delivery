@@ -25,7 +25,7 @@ export interface OperatorContent {
   transition: { heading: string; subline: string };
   bring?: { heading: string; items: { title: string; body: string }[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
-  proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[] };
+  proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[] };
   close: { heading: string; line?: string };
 }
 
@@ -274,12 +274,24 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
         {/* 7 ── TRUST: a quote that shows understanding of the gap ── */}
         <section className="bg-plum text-bone py-20 md:py-28 lg:py-32">
-          <div className={COL}>
+          <div className={c.proof.testimonials ? COL_WIDE : COL}>
             <FadeUp>
               <p className="font-serif text-[22px] md:text-[28px] leading-[1.2] text-bone/90 mb-9 max-w-[24ch]">{c.proof.heading}</p>
             </FadeUp>
             <FadeUp delay={0.08}>
-              {c.proof.quote ? (
+              {c.proof.testimonials ? (
+                <div className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
+                  {c.proof.testimonials.map((t) => (
+                    <figure key={t.name} className="flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border border-bone/15 bg-bone/[0.04] p-6 sm:w-[56%] md:w-auto md:p-7">
+                      <blockquote className="font-serif italic text-[18px] md:text-[20px] leading-[1.4] text-bone/95">“{t.quote}”</blockquote>
+                      <figcaption className="mt-auto pt-6 text-[13px] not-italic text-bone/60">
+                        <span className="block text-bone/85">{t.name}</span>
+                        {t.role}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : c.proof.quote ? (
                 <blockquote className={`border-l-2 ${a.rule} pl-6 md:pl-8 max-w-[60ch]`}>
                   <p className="font-serif italic text-[24px] md:text-[32px] leading-[1.3] text-bone">“{c.proof.quote}”</p>
                   {c.proof.name && (
