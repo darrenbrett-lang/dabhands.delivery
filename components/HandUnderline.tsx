@@ -37,7 +37,7 @@ export const HandUnderline = ({
   // When the underline is the same colour as the body text (charcoal on cream),
   // push it down a few extra pixels so it doesn't read as a descender.
   const sameColourAsText = resolvedStroke === 'var(--color-ink)';
-  const offsetClass = sameColourAsText ? '-bottom-[8px]' : '-bottom-[3px]';
+  const offsetClass = sameColourAsText ? '-bottom-[8px]' : '-bottom-[6px]';
   return (
     <span className="relative inline-block">
       {children}

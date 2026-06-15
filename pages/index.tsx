@@ -133,49 +133,59 @@ export default function Home() {
           />
         </section>
 
-        {/* ── POINT OF VIEW ────────────────────────── */}
-        <section className="bg-bone text-ink py-16 md:py-28">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <div className="grid md:grid-cols-2 gap-y-9 md:gap-x-14 lg:gap-x-20 md:items-start">
-              {/* Left: the thesis + the fold mark beneath it */}
-              <div>
-                <FadeUp delay={0.06}>
-                  <h2 className="text-[34px] sm:text-[44px] md:text-[52px] lg:text-[60px] leading-[1.05] max-w-[15ch]">
-                    The tools are changing. The problems aren’t.
-                  </h2>
-                </FadeUp>
-                <FadeUp delay={0.14}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/fold.png"
-                    alt=""
-                    aria-hidden
-                    className="pointer-events-none select-none mt-8 md:mt-10 w-full max-w-[460px] xl:w-[600px] xl:max-w-none xl:-ml-10"
-                  />
-                </FadeUp>
-              </div>
+        {/* ── POINT OF VIEW (manifesto — a centred crescendo) ─────────
+            Provocation -> "you already have it" -> a single form under
+            tension -> the insight -> the stakes -> a calm resolution. */}
+        <section className="bg-bone text-ink py-24 md:py-36">
+          <div className="mx-auto max-w-[880px] px-6 md:px-10 text-center">
+            <FadeUp>
+              <h2 className="font-serif text-[36px] sm:text-[52px] md:text-[64px] lg:text-[72px] leading-[1.04] tracking-[-0.01em] text-balance">
+                The tools are changing. The problems aren’t.
+              </h2>
+            </FadeUp>
 
-              {/* Right: the argument, resolving to a single confident line */}
-              <div>
-                <FadeUp delay={0.12}>
-                  <p className="text-lg md:text-xl text-graphite max-w-[44ch]">Most organisations already have what they need.</p>
-                </FadeUp>
-                <FadeUp delay={0.16}>
-                  <p className="mt-5 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
-                    Strategy. Creative ambition. Investment. Good people. Trusted partners.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.22}>
-                  <p className="mt-9 md:mt-12 font-serif text-[26px] md:text-[34px] lg:text-[40px] leading-[1.15] text-ink max-w-[24ch]">
-                    The challenge isn’t creating more. It’s helping what already exists{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
-                      move together
-                    </HandUnderline>
-                    .
-                  </p>
-                </FadeUp>
-              </div>
-            </div>
+            <FadeUp delay={0.1}>
+              <p className="mt-12 md:mt-16 text-xl md:text-2xl leading-[1.45] text-ink max-w-[30ch] mx-auto">
+                Most organisations already have what they need.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.16}>
+              <p className="mt-4 text-base md:text-lg text-graphite max-w-[48ch] mx-auto">
+                Strategy. Creative ambition. Investment. Good people. Trusted partners.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.2}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/fold.png"
+                alt=""
+                aria-hidden
+                className="pointer-events-none select-none mx-auto my-12 md:my-16 w-full max-w-[300px] md:max-w-[340px]"
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.24}>
+              <p className="font-serif text-[28px] md:text-[40px] lg:text-[44px] leading-[1.12] tracking-[-0.01em] text-ink max-w-[20ch] mx-auto text-balance">
+                The challenge isn’t creating more. It’s helping what already exists{' '}
+                <HandUnderline delay={0.6} variant={3} stroke="var(--color-moss)">
+                  move together
+                </HandUnderline>
+                .
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.3}>
+              <p className="mt-8 md:mt-10 text-lg md:text-xl leading-relaxed text-graphite max-w-[42ch] mx-auto">
+                Because somewhere between idea and market, momentum slips and value gets lost.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.36}>
+              <p className="mt-10 md:mt-12 font-serif text-[26px] md:text-[36px] leading-[1.2] text-ink max-w-[24ch] mx-auto">
+                It deserves to arrive as intended.
+              </p>
+            </FadeUp>
           </div>
         </section>
 
