@@ -6,7 +6,7 @@ Pick this up cold. Captures the project after the **Style Guide v2.0 refresh** a
 
 ## Status (read first)
 
-- **Working branch: `staging`** (committed at `74677f9`, pushed to `origin/staging`). `refresh/style-guide-v2` is a local snapshot at the same commit. The whole v2.0 + mastery build lives here.
+- **Working branch: `staging`** (latest substantive commit `8cc2583`, pushed to `origin/staging`): the operator-template Marketing + Creators rooms, the homepage copy refresh, and the hero `PathwayPicker` quick-nav. The whole v2.0 + mastery build lives here.
 - **Production is untouched.** `main` is still the old v1 site (`efaa863`) serving `https://dabhands.delivery`. Nothing of the new build is on `main` yet.
 - **Staging preview:** `https://dabhands-delivery-git-staging-darren-brett-s-projects.vercel.app` (Vercel preview of the `staging` branch, rebuilds on every push). It currently returns **401 "Authentication Required"** because Vercel Deployment Protection is on by default. To open it: Vercel → `dabhands-delivery` project → Settings → Deployment Protection → Vercel Authentication → Disabled. (Or keep it on and use a Password / Shareable Link for specified people.)
 - **localhost:3000** is the local `npm run dev` server. It hot-reloads edits to this repo, so it always shows the latest on whatever branch is checked out (currently `staging`). Keep it running in a terminal; preview-tool servers launched from inside a session are ephemeral and get reaped.
