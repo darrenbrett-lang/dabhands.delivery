@@ -45,7 +45,7 @@ const COL_WIDE = 'mx-auto max-w-[940px] px-6 md:px-10';
 const Cta = ({ label = 'Start a conversation', full = false }: { label?: string; full?: boolean }) => (
   <a
     href={mailto()}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-ink ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-moss ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>

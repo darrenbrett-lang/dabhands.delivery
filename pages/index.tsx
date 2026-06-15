@@ -280,7 +280,7 @@ export default function Home() {
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Starting a conversation' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full border border-white/40 px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-white hover:text-ink"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-bone px-7 py-3.5 text-[15px] font-medium text-ink transition-colors duration-300 hover:bg-moss hover:text-bone"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
