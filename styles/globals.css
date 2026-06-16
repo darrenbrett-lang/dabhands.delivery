@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Palette (Colour System v3 — operating-partner update) ───────────
-     Balance: ~70% bone/paper, ~20% ink/graphite/stone, ~7% moss/sage,
-     ~2% lavender, ~1% peach. Deep Moss is the dominant accent — control
-     entering the system. Colour is meaning, not decoration. */
+  /* ── Palette (Colour System v4 — atmosphere-led) ─────────────────────
+     Bone + graphite carry the interface. The cloud image is the parent
+     visual system; the audience colours are sampled from it and used as a
+     navigational device (doorway cards, hovers, overlays, outcomes), never
+     as dominant backgrounds. Hierarchy: typography > atmosphere > colour. */
 
   /* Core neutrals */
   --color-bone: #F5F1EB;       /* primary background */
@@ -13,15 +14,19 @@
   --color-graphite: #5C5C58;   /* secondary / body text */
   --color-stone: #D8D2C8;      /* borders + dividers */
 
-  /* Accent palette — Deep Teal is the brand colour; sage/peach/lavender are the audience system */
-  --color-teal: #48666A;           /* DAB HANDS brand accent — intelligent, calm, trustworthy. Cross-cutting "I'm different": global CTAs, testimonials, nav, homepage accents */
-  --color-moss: #5B6A58;           /* legacy — retired as an accent, kept so old refs don't break */
-  --color-lavender: #C7BDD7;       /* audience — Creators & founders (growth / possibility) */
-  --color-lavender-soft: #E6D6EE;  /* gradient mid + soft accent wash */
-  --color-peach: #E7C5AF;          /* audience — Marketing leaders (creative impact) */
-  --color-sage: #AAB7A5;           /* audience — Business & agency leaders (organisational flow) */
+  /* Audience colours — sampled from the cloud atmosphere; soft, mineral, editorial.
+     Used as a navigational device (cards, hovers, overlays, outcomes), never as
+     dominant page backgrounds. */
+  --color-sage: #BCC5B8;           /* Sage Mist — Business & agency leaders (mineral, calm, architectural) */
+  --color-peach: #E5C8BA;          /* Dusty Apricot — Marketing leaders (warm, human, creative, premium) */
+  --color-lavender: #CDC3DA;       /* Cloud Lavender — Creators & founders (expansive, optimistic, thoughtful) */
   --color-sky: #AFCFE0;            /* supporting accent */
   --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
+
+  /* Legacy accents — retired in the atmosphere-led system; kept defined so old refs don't break */
+  --color-teal: #48666A;
+  --color-moss: #5B6A58;
+  --color-lavender-soft: #E6D6EE;
 
   /* Audience light washes — section highlights */
   --color-lavender-wash: #E9E1F4;

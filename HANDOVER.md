@@ -1,151 +1,135 @@
 # DAB Hands Website — Handover
 
-Pick this up cold. Captures the project after the **Style Guide v2.0 refresh**, the **"marks of skilled hands" mastery recentre**, and the **Deep Teal palette** (June 2026).
+Pick this up cold. Captures the project after the **doorway colour-rhythm pass** (June 2026): soft cloud-sampled audience colours, a per-room solid colour rhythm, a hide-on-scroll masthead with a room locator, the doorway pages moved onto the real grid, and Deep Teal retired.
 
 ---
 
 ## Status (read first)
 
-- **Working branch: `staging`** (latest `20840c7`, pushed to `origin/staging`): the **Deep Teal palette** (teal brand, bone-only, charcoal `#232323`), full-colour **Situation** panels (two-column on Business), charcoal two-column **Challenge**, **teal** testimonials + turnstile, per-room **sky images** on What Changes, the hover `PathwayPicker`, and the floating `SpineLabel`. The whole v2.0 + mastery + teal build lives here.
-- **Production is untouched.** `main` is still the old v1 site (`efaa863`) serving `https://dabhands.delivery`. Nothing of the new build is on `main` yet.
-- **Staging preview:** `https://dabhands-delivery-git-staging-darren-brett-s-projects.vercel.app` (Vercel preview of the `staging` branch, rebuilds on every push). It currently returns **401 "Authentication Required"** because Vercel Deployment Protection is on by default. To open it: Vercel → `dabhands-delivery` project → Settings → Deployment Protection → Vercel Authentication → Disabled. (Or keep it on and use a Password / Shareable Link for specified people.)
-- **localhost:3000** is the local `npm run dev` server. It hot-reloads edits to this repo, so it always shows the latest on whatever branch is checked out (currently `staging`). Keep it running in a terminal; preview-tool servers launched from inside a session are ephemeral and get reaped.
-- **Build:** `npm run build` is clean (TypeScript passes). Routes: `/`, `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`, `/contact`, `/for/manifesto-digital`, plus `/404` and `/api/hello`.
+- **Working branch: `staging`.** The current build: **bone `#F5F1EB` + dark type carry the site; Deep Teal is retired.** Each audience room owns one **soft, cloud-sampled colour** — Business **Sage Mist `#BCC5B8`**, Marketing **Dusty Apricot `#E5C8BA`**, Creators **Cloud Lavender `#CDC3DA`** — applied as a deliberate **colour rhythm** down the page (see "The three rooms"). The doorway pages now sit on the shared 12-column grid; the masthead **hides on scroll and returns when you stop**, with a persistent **room locator** under the wordmark; the `SpineLabel` is gone.
+- **Production is untouched.** `main` is still the old v1 site serving `https://dabhands.delivery`. Nothing of the new build is on `main`.
+- **Staging preview:** `https://dabhands-delivery-git-staging-darren-brett-s-projects.vercel.app` (Vercel preview of `staging`, rebuilds on every push). It may return **401** if Vercel Deployment Protection is on (Vercel → project → Settings → Deployment Protection).
+- **localhost:3000** is the local `npm run dev` server (hot-reloads the checked-out branch). NB **`@theme` colour/token edits in `globals.css` often do NOT hot-reload under Turbopack** — stop dev, `rm -rf .next`, restart to see token changes. (Runtime CSS like inline `color-mix`/styles hot-reloads fine.)
+- **Build:** `npm run build` / `npx tsc --noEmit` is the gate (TypeScript passes). Routes: `/`, `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`, `/contact`, `/for/manifesto-digital`, plus `/404`, `/api/hello`.
 
 ### Deploy flow (staging + production)
-- **Work on `staging`.** Edit → localhost hot-reloads → commit + push `staging` → Vercel rebuilds the staging preview. Standing practice: keep both in sync as you go.
-- **Do NOT promote to production until the owner explicitly says the new site is ready.** `main` stays frozen on the v1 site; **do not push/merge to `main`, and do not even open a `staging → main` PR**, without an explicit go-ahead (standing owner directive, 2026-06-14). When that day comes: `git checkout main && git merge staging && git push origin main` → Vercel deploys `dabhands.delivery`; then refresh social caches (LinkedIn Post Inspector + FB Sharing Debugger).
+- **Work on `staging`.** Edit → localhost hot-reloads → commit + push `staging` → Vercel rebuilds the staging preview.
+- **Do NOT promote to production until the owner explicitly says so.** `main` stays frozen on v1; **do not push/merge to `main`, and do not open a `staging → main` PR**, without an explicit go-ahead (standing owner directive). When that day comes: `git checkout main && git merge staging && git push origin main` → Vercel deploys `dabhands.delivery`; then refresh social caches (LinkedIn Post Inspector + FB Sharing Debugger).
 - Repo: `git@github.com:darrenbrett-lang/dabhands.delivery.git`. Vercel project `dabhands-delivery` under team `darren-brett-s-projects`, GitHub-integration auto-deploys.
 
 ## The brand direction (source of truth)
 
-Two owner briefs stack: the **Style Guide v2.0** brief, then a **visual recentre** that supersedes anything leaning into consultancy, abstract art, decorative brushwork, or polished Apple-minimalism.
+A **mastery brand** — "the marks left behind by skilled hands." The digital home of **Darren** (first person, "I"), a senior digital operator with the heart of a creative. Not a consultancy, agency, or technology brand. The current visual direction is **calm, premium, editorial** (Aesop / Monocle / Kinfolk), atmosphere + restraint over decoration.
 
-- **Visual centre: "the marks left behind by skilled hands."** A mastery brand. The feeling: *somebody capable has been here.* It is the digital home of **Darren** (first person, "I"), a senior digital operator with the heart of a creative. Not a consultancy, agency, or technology brand.
-- **Central tension: Darren is still, the work moves.** He is calm, judgement, experience, scar tissue. The marks create movement, alignment, momentum around and through the page.
-- **One journey, not many marks.** The trajectory line (a racing line / conductor's gesture, `Trajectory.tsx`, default **teal**) is the recurring mark, now only on the **room heroes** (behind the headline, in the room accent, opacity ~0.5). It was **removed from the homepage** (wasn't strong enough), and the turnstile reprise was removed too — momentum without clutter. (A signature mark beside the wordmark was tried, then removed — the logo is just the wordmark in the serif.) Reduce motifs ~60%; typography does most of the work.
-- **Copy thread:** the work isn't the problem, the journey is, and Darren protects it. Preserve the link words **intact** (hero), **as intended** (point of view), **integrity / protects** (testimonial). First person, warm, senior, no buzzwords.
-- References: Apple (reduction), Rapha (craft), Nike (momentum), plus Darren's scar tissue. **Retired: the halo motif (the `.halo-glow` class is now removed), decorative gradient atmospheres, pill/lozenge tags.** The test for any addition: feels like a consultancy → simplify; like software → humanise; like art → remove decoration; like *movement through complexity* → keep.
+- **Central tension: Darren is still, the work moves.** Calm, judgement, experience.
+- **The `Trajectory` line has been removed everywhere** (homepage and room heroes). Typography + the colour rhythm + the cloud imagery do the work now. (`Trajectory.tsx` still exists but is unused.)
+- **Copy thread:** the work isn't the problem, the journey is, and Darren protects it. First person, warm, senior, no buzzwords.
+- **No em dashes in user-facing copy.** Wordmark is **"DAB Hands"** (uppercase DAB, capital-H Hands). White text is always **bone**, never `text-white`.
 
 ## Stack
 
 - **Next.js 16.2.6** (Pages Router, Turbopack). `AGENTS.md`: read `node_modules/next/dist/docs/` before adding Next features.
 - **Tailwind v4** (`@import "tailwindcss"` + `@theme` in `styles/globals.css`).
-- **Framer Motion 12** (subtle reveals via `FadeUp`, gentle transitions, disclosure height-animations).
-- **TypeScript.** `npm run build` is the gate. Note: `next build` conflicts with a running `next dev` over `.next`, so stop dev (or just push and let Vercel's build be the check).
+- **Framer Motion 12** (subtle reveals via `FadeUp`, gentle transitions).
+- **TypeScript.** `npx tsc --noEmit` is a clean, fast gate that doesn't fight a running `next dev` over `.next`.
 - **Fonts:** Instrument Serif (display) + Manrope (UI) via `next/font/google` in `pages/_app.tsx`.
 
 ### Gotchas
-1. **Font vars must live at `:root`.** `@theme` sets `--font-serif: var(--font-instrument-serif), ...`; custom properties resolve where declared, so `_app.tsx` injects `<style>:root{--font-instrument-serif:…;--font-manrope:…}</style>` from `font.style.fontFamily`. Without it, `--font-serif` collapses to empty and headings fall back to sans. Do not remove it.
-2. **Turbopack stale `@theme` CSS.** Editing colour/font tokens sometimes does not hot-reload. Fix: stop dev, `rm -rf .next`, restart.
-3. **Heading colour is inherited, not forced.** The `h1`-`h6` rule in `globals.css` deliberately sets no `color`: it is unlayered, so a `color` there beats the Tailwind `text-*` utilities and would force every heading dark (invisible on plum). Set the colour on the **section** (`text-ink` on light, `text-bone` on dark) and headings inherit it.
-4. **Dynamic per-item colours use inline `style` + `color-mix`, not Tailwind arbitrary classes.** Newly-added `hover:bg-{color}/[0.xx]` utilities did not reliably compile under Turbopack, so the section-colour hovers (turnstile, nav dropdown, P1 overlay), the full-colour Situation panel (`a.full`), the knocked-back Help cards, and the image scrims are driven by inline style — e.g. `color-mix(in srgb, var(--color-sage) 55%, var(--color-bone))`. Because they reference the CSS vars, editing a token in `@theme` updates them automatically. The new `teal` token did compile fine as `bg-teal` / `text-teal`.
+1. **Font vars must live at `:root`.** `_app.tsx` injects `<style>:root{--font-instrument-serif:…;--font-manrope:…}</style>`. Without it, `--font-serif` collapses and headings fall back to sans. Do not remove.
+2. **Turbopack stale `@theme`.** Editing colour/font tokens often doesn't hot-reload. Fix: stop dev, `rm -rf .next`, restart. (The preview tooling also caches JS chunks — a hard reload / cache-bust may be needed after edits.)
+3. **Heading colour is inherited, not forced.** The `h1`-`h6` rule sets no `color`; set the colour on the **section** (`text-ink`/`text-bone`) and headings inherit it.
 
 ## Information architecture
 
-Nav: **DAB Hands (home) · Who I help (dropdown) · Contact.** No persistent "Start a conversation" button; CTAs live in content.
-- "Who I help" → three **flat** routes: `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`.
-- **Deleted:** `pages/experience.tsx`, `pages/where-we-step-in.tsx` (scrubbed from `sitemap.xml`, `llms.txt`). The three rooms replace About / Services / Experience.
+Nav: **DAB Hands (home) · Who I help (dropdown) · Contact.** "Who I help" → three flat routes: `/business-and-agency-leaders`, `/marketing-leaders`, `/creators-and-founders`. (`pages/experience.tsx`, `pages/where-we-step-in.tsx` deleted long ago.)
 
 ## Pages
 
 ### `/` — `pages/index.tsx`
-Rhythm: bone hero → clouds (Darren) → **charcoal** (point of view) → bone (proof) → **teal** (turnstile) → bone (final CTA). Light sections are all **bone** (no paper/white). Sections:
-1. **Hero** (bone, centred) — Instrument Serif "Keeping important work moving." (per-word stagger on mount) + Manrope subline. (The trajectory line that used to pass behind the headline was removed from the homepage — it wasn't strong enough. The room heroes keep their accent `Trajectory`.) Content sits at `z-10`. Below the subline, the hero's CTA is a quiet **"See where I can help →" cue** (`PathwayPicker`) that on hover or focus reveals the three pathways as a horizontal charcoal-on-bone panel (one divided row), portalled out of the hero's overflow; Escape / outside-click / scroll close it. An effortless shortcut into a doorway; the nav carries the keyboard-robust version.
-2. **Darren** — **full-bleed `clouds.png` banner** (`object-cover`, landscape banner depth ~2.6:1), copy on the **left**: "Hi, I'm Darren.", the serif headline "For more than twenty years, I've helped leaders turn strategy into action across some of the world's largest organisations." + the "space between ambition and execution / gain or lose momentum" support line (all ink on the pale clouds; left side stays light enough to read). Darren's **cut-out portrait** (`darren_new-image.png`, transparent PNG) is anchored **bottom-right over the clouds** (absolute bottom-right on `lg`+, `lg:h-80%` / `xl:h-94%`; on mobile/tablet it stacks centred beneath the copy, grounded on the bottom edge). No `Figure` here now; the old `darren_jesus.jpeg` (halo) is unused.
-3. **Point of view** (charcoal, bone copy) — **two columns** on `.u-grid` (thesis left, argument right), **no image** (typography carries it). **Left** = the commanding thesis "The tools are changing. The problems aren't." (serif, up to `xl:88px`, tight leading/tracking, fills the column). **Right** = the argument that builds: "Most organisations already have what they need." → ingredients "Strategy. Creative ambition. Investment. Good people. Capable partners." → the insight "The challenge isn't creating more. It's helping what already exists **move together**." (plain body) → the stakes "Because somewhere between ambition and execution, work gets diluted. Momentum slips. Complexity takes hold." → the resolution "It deserves to arrive as intended." (serif, `HandUnderline` in a lightened teal on "as intended"). Columns stack on mobile (thesis then argument). No eyebrow; the thesis leads.
-4. **Proof** (bone) — "Trusted with important work by" + `<LogoTicker>` (**all 13 clients**, seamless marquee). No testimonial here — testimonials live only on the doorway pages.
-5. **Turnstile** (teal, bone heading) — "Where do you need help keeping important work moving?" + three cards, **each a defined box** (neutral `bg-bone` + `border-stone` + soft shadow at rest; on hover it fills with an **opaque pale tint of its section colour** — the colour mixed with bone so it stays readable on the teal — plus an accent border + arrow), title, diagnosis, support, and a clear **"Explore →"** CTA. Each links to its room.
-6. **Final CTA** (bone) — "If something important needs to move properly, let's talk." + a charcoal "Start a conversation" button (hover teal). A quiet white close; the teal emphasis moved to the turnstile. `footerVariant="none"`.
+Predominantly **bone + graphite**. Rhythm: bone hero → clouds banner (Darren) → charcoal (point of view) → bone (proof) → bone (turnstile) → bone (final CTA).
+1. **Hero** (bone, centred, clean) — Instrument Serif "Keeping important work moving." + subline. CTA cue **"See where I can help +"** (`PathwayPicker`) — a small **plus** (rotating to × when open) that reveals the three pathways as a charcoal-on-bone panel on hover/focus. No cloud behind the hero copy.
+2. **Darren** — full-bleed `clouds.png` banner, copy left, cut-out portrait bottom-right (`darren_new-image.png`).
+3. **Point of view** (charcoal, bone copy) — two columns (thesis left, argument right). `HandUnderline` on "as intended" is now a soft **bone** stroke (teal retired).
+4. **Proof** (bone) — `<LogoTicker>` (all 13 clients).
+5. **Turnstile** (bone) — "Where do you need help…" + three **doorway cards, each in its room colour** (`color-mix(audience ~50%, bone)` at rest, deepening + accent border on hover), charcoal text. The homepage's one colour moment (deliberate wayfinding).
+6. **Final CTA** (bone) — charcoal "Start a conversation" button (hover → neutral graphite).
 
-### The three rooms
+### The three rooms (`components/OperatorTemplate.tsx`)
 
-> **Operator template (all three rooms live).** Per the Destination Page brief, all three rooms are now built on a new 8-section **operator** template (`components/OperatorTemplate.tsx`): DAB Hands as a trusted **operating partner, not a consultant**; **"I" voice**, recognition over explanation, **situations not services**. Spine: Hero (recognition headline + simple subline + an **optional** trust line (`hero.trust?`) + **charcoal CTA (solid; teal on hover)**, above the fold — trust is currently omitted on all three rooms, so the hero is headline + subline + CTA) → Validation ("you've done the hard part"; `validation.strong` paints the panel the **full** audience colour — "The Situation" on all three rooms; optional `validation.left[]`/`right[]` runs heading + intro across, then splits parts two and three into two columns — on Business) → Diagnosis (cards, prose, **or** a charcoal two-column module via `diagnosis.problem` / `context` / `payoff`: problem left, context right, payoff line; all three rooms use it as "The Challenge") → **Transition** (optional `transition?`, rendering either a `subline` or a `paras[]` block (Creators uses `paras` for its reframe) — the messy middle / "that's where I step in") → Outcomes (the **bold payoff** — big serif heading up to `lg:54px`; optional `outcomes.bgImage` lays a full-bleed sky behind it under a bone scrim — all three rooms use one: Business sage (`business_solution.png`), Marketing peach (`marketing_solution.png`), Creators lavender (`creators_solution.png`)) → Where I tend to help (**3 situation cards** — soft knocked-back bone panels, no outline/shadow — or a how-we-work statement) → Trust (a **teal** section, bone copy — cross-cutting "I'm different": a thin bone left rule, no box, wide and restrained — a single quote, a credibility statement, **or** auto-rotating testimonials via `proof.testimonials` (per-page interval via `proof.interval`, default 6s; Business 10s, Marketing 4s) with pips, rendered active-only) → **Close** (a tighter beat: 2-line heading, 1-line qualifier, slimmer padding `py-14/20/24`). Mobile **sticky CTA**; per-room accent; content lives in the page file. **Authored widths** (from the grid scale): hero `max-w-statement` (960), body `max-w-read` (800), the situation-card + triptych grids `max-w-statement`; each hero carries a subtle **per-accent atmospheric glow** (`a.wash`) **and the single `Trajectory` mark** (`a.traj`, opacity ~0.5) entering behind the headline, so the rooms share the homepage's one-journey visual language. **All three rooms are now on it** (content lives in each page file; the diagnosis section accepts either 4 cards or prose `paras`). The legacy `AudienceTemplate` (documented below) is **no longer imported by any page — safe to delete.** All three rooms now carry their final supplied copy with attributed proof (Marketing: three testimonials from Sinnott/Nike, Mahon/HUGO BOSS and Mumtaz/Western Union; Business: Tom Roberts/Tribal and Gary Shannon; Creators: Gary Shannon, Managing Partner).
+All three on one 8-section operator spine (operating **partner**, "I" voice, situations not services). **On the shared grid** (`.u-container` + `.u-grid`, col-span/col-start, like the homepage). Each room owns one colour and runs this **colour rhythm** top-to-bottom:
 
-#### Legacy template — `components/AudienceTemplate.tsx` (UNUSED — safe to delete)
-All three are **built with full copy** and **section-driven**: a `CONTENT` map keyed by slug holds `{ navLabel, eyebrow, hero, accent, sections[], close }`. They share the visual kit and rhythm but **compose differently** (not a fixed spine). `footerVariant="none"`. **Each room's hero carries a subtle accent atmosphere** (a top-down `heroWash` from the `ACCENT` map, fading into bone) **and an accent-coloured eyebrow** (the deepened `trigger` shade), so entering a room is a quiet shift in atmosphere while the rest of the page stays the neutral house.
+| Panel | Treatment |
+|---|---|
+| **P1 Hero** | bone + a soft **vignette** of the room colour (`ACCENT.wash`, top-down gradient); coloured eyebrow; charcoal CTA |
+| **P2 The Situation** | **solid** panel of the room colour; big title left, two paragraphs right, serif **coda** across both; `data-p2` (drives the masthead locator) |
+| **P3 The Challenge** | **charcoal/black** two-column (problem / context / payoff) |
+| **P4 What Changes** | the **cloud image** (`clouds.png` + `bg-bone/35` scrim, neutral — no colour tint); the bold serif payoff |
+| **(Transition)** | optional bone section — Creators only ("The challenge isn't ambition.") |
+| **P5 Where I tend to help** | **bone**; three situation cards filled in the room colour (`color-mix(a.color 50%, bone)`) |
+| **Trusted by…** | **solid** panel of the room colour, **dark** copy (testimonials flip to ink text + charcoal rule); auto-rotating `proof.testimonials` (Business 2 / Marketing 3; interval per page) or a single `proof.quote` (Creators — Gary Shannon) |
+| **Close** | **bone**, centred, charcoal CTA |
 
-Section kit (each optional-field-driven): `drumbeat` (stacked lines + optional bridge/pivot/disclosure), `blocks` (sub-statements, each heading+para+optional disclosure), `twoSystems` (visible/invisible cards), `statement` (serif heading + optional visible `body[]` + optional disclosure), `outcomes` (heading + bullet list + optional `close[]`), `experience` (line + optional `body[]` + `<LogoTicker>` all 13), `testimonial` (plum), `plumStatement` (plum heading + sub), `workCards` (engagement models + note). The single plum section per page is the one deep beat. Section eyebrows that read like deck headings — **The situation, What good looks like, Relevant experience, How we might work together** — are suppressed via `HIDDEN_LABELS` so the content leads. A `drumbeat` can render **inline as a dot-delimited paragraph** (`inline: true`; used for the Business "situation").
+Content lives in each page file. Per-room CTA hover fills the room colour (charcoal text). Mobile **sticky CTA**. **Failed experiment (don't repeat):** an "atmosphere-led" pass that tinted Situation/Outcomes with low-opacity colour over the cloud — `clouds.png` is a warm pink sky, so every room read pink and the rhythm was lost. Colour on the room pages = **solid panels + vignette + coloured cards**, not faint cloud tints.
 
-- **Business & agency leaders** (accent **moss**): situation drumbeat → "What needs to change" two-systems → "What good looks like" outcomes → "Relevant experience" → plum testimonial (Joel Sinnott, Nike) → "How we might work together" workCards → close. Three disclosures.
-- **Marketing leaders** (accent **peach**): "The situation" three blocks (each Expand) → "Where I come in" statement (Expand) → "What good looks like" outcomes (Expand) → "Relevant experience" → plum testimonial (Anthony Mahon, Hugo Boss) → "How we might work together" statement (Expand) → close.
-- **Creators & founders** (accent **sage**): "The moment" blocks → "The real challenge" statement → "This might sound familiar" drumbeat → "What changes things" statement → "Where I come in" statement → "What good looks like" outcomes (+close lines) → "A familiar problem" experience (+body, logos) → **"The partnership" plumStatement** (its deep beat, no testimonial) → close. No disclosures (the supplied copy was continuous prose).
+Creators differs structurally: it adds the optional **Transition** section and uses a single `proof.quote` instead of the rotating testimonials. `components/AudienceTemplate.tsx` is the legacy engine — **unused, safe to delete.**
 
-**Disclosure / accordion** (built to the Accordion brief — Stripe/Apple/Notion patterns): the trigger is an **accent-tinted pill** (`accent.cardBg` + `accent.cardBorder` + `accent.trigger` text, `rounded-full`, `min-h-[44px]` touch target) with a **short descriptive label + chevron** that rotates 180° on open. Labels are statements of what's inside (no "Expand"/"+"), e.g. "Explore the challenge", "The gap between ambition and execution", "Where I step in". Semantic `<button>` + `aria-expanded`; each is independent (multiple open allowed; none open by default); ease-in-out height + chevron animation (~0.35s). Expanded body nests under a `border-l-2` accent rule with a **weighted lead paragraph** (`font-medium`, ink) then 15px / 1.65 graphite paragraphs. Per-room accent (lavender→`#6E5A86`, peach→`#9E5B3A`, sage→`#5E6B3F`). The whole `ACCENT[accent]` object is passed to `Disclosure`.
-
-### `/contact` — `pages/contact.tsx`
-Bone hero "What needs moving?" (serif) + intro + Email / Phone / LinkedIn channels (Manrope, `hover:opacity-60`). No decorative gradient. `footerVariant="none"`.
-
-### `/for/manifesto-digital` (UNLISTED)
-Private pitch for Rebecca Hull, on v2.0 (plum/aubergine, lavender accents, no green). `PrivateLayout` (plum chrome, serif wordmark) + `<SeoMeta noindex>`. Keep out of nav and sitemap. Local components `ChipExplorer` / `PhaseHeading` / `ActivityList`. Topic icons `/images/icon-*.svg` recoloured to lavender, referenced `?v=2` (immutable cache → bump version on any edit).
+### `/contact`, `/for/manifesto-digital`
+Contact: bone hero "What needs moving?" + channels. Manifesto-digital: unlisted private pitch on `PrivateLayout` (plum), `noindex` — keep out of nav/sitemap.
 
 ## Visual system
 
 | Role | Token | Hex |
 |---|---|---|
 | Primary background (bone) | `bone` | `#F5F1EB` |
-| Retired — paper (no white in the palette; use **bone** for all light bgs) | `paper` | `#FBF8F3` |
 | Primary text / headlines (ink) | `ink` | `#1F1F1D` |
 | Secondary / body text | `graphite` | `#5C5C58` |
 | Borders / dividers | `stone` | `#D8D2C8` |
-| **Brand accent — Deep Teal** (CTAs, testimonials, nav, homepage accents; the "I'm different" moments) | `teal` | `#48666A` |
-| Charcoal (authority, dark sections, footer) | `charcoal` | `#232323` |
-| Audience — Business & agency (organisational flow) | `sage` | `#AAB7A5` |
-| Audience — Marketing (creative impact) | `peach` | `#E7C5AF` |
-| Audience — Creators & founders (growth / possibility) | `lavender` | `#C7BDD7` |
-| Audience dark shades (eyebrows, links, arrows) — B / M / C | `sage-deep` / `peach-deep` / `lavender-deep` | `#6F7D69` / `#B97D62` / `#6E5A86` |
-| Hero washes (legacy wash tokens) — B / M / C | `lavender-wash` / `peach-wash` / `sage-wash` | `#E9E1F4` / `#F4E0D4` / `#DDE4D8` |
-| Highlight / hover / focus | `coral` | `#D98773` |
-| Retired — Deep Moss (was the brand accent) | `moss` | `#5B6A58` |
-| Legacy / unused — plum, aubergine, sky, lavender-soft | — | — |
+| Charcoal — dark sections, footer, "black" beats | `charcoal` | `#232323` |
+| Audience — Business (Sage Mist) | `sage` | `#BCC5B8` |
+| Audience — Marketing (Dusty Apricot) | `peach` | `#E5C8BA` |
+| Audience — Creators (Cloud Lavender) | `lavender` | `#CDC3DA` |
+| Audience deep shades (eyebrow text) — B / M / C | `sage-deep` / `peach-deep` / `lavender-deep` | `#6F7D69` / `#B97D62` / `#6E5A86` |
+| Highlight / focus ring | `coral` | `#D98773` |
+| **Retired — Deep Teal** (legacy token only, not on any live surface) | `teal` | `#48666A` |
+| Legacy / unused | moss, plum, aubergine, sky, paper, `dab-*` | — |
 
-Bone + charcoal/ink carry the site (no paper/white); **Deep Teal `#48666A` is the brand colour** (`Trajectory`, default `HandUnderline`, global CTA hover, nav, homepage accents). **Each audience room takes one colour** (Business **sage**, Marketing **peach**, Creators **lavender**), used at **full strength** on The Situation panel (charcoal/ink text on the light colour); the Where-I-tend-to-help cards are soft **knocked-back bone panels** (no outline; full audience-colour blocks read tacky). Hover states use an **opaque pale tint** of the colour (mixed with bone), plus the soft **hero wash**. **The testimonial modules and the homepage turnstile sit on teal** (bone copy) — cross-cutting "I'm different" moments; the homepage final Let's-talk CTA is a quiet bone close. **The Challenge (diagnosis) can be a charcoal `#232323` two-column** (problem left / context right / payoff). Moss and plum are retired/legacy. Same type/spacing/layout otherwise. Tokens in `globals.css @theme`. Utilities: `.eyebrow` (Manrope uppercase label), `.font-serif`, `.signature-gradient`. (`.halo-glow` removed — halo motif retired.) Focus ring is coral. Legacy `dab-*` tokens remain defined but nothing live uses them (prune, see TODO).
+Bone + dark type carry the site. **Each room = one soft colour**, applied as the rhythm above (solid panels carry it; the new colours are light enough for charcoal/ink text). **Audience colour is a navigational device** — solid Situation + Trusted-by panels, the room vignette, the room-coloured help cards + homepage doorway cards, nav hovers — never bright/digital. **Teal is retired.** Tokens in `globals.css @theme`. Utilities: `.eyebrow`, `.font-serif`. Focus ring coral.
 
 ## Grid system (deliberate + fixed)
 
-One page width, one gutter, one 12-column grid, named reading measures, one vertical rhythm. Tokens live in `globals.css @theme`; the primitives are CSS utilities in `globals.css` (`@layer components`).
-
-- **`.u-container`** — the page shell: `max-w-page` (1280) + responsive gutter **24 / 40 / 64** (`px-6 / md:px-10 / lg:px-16`). Every full-width module uses it; nothing sets its own max-width or horizontal padding.
-- **`.u-grid`** — the **12-column** grid (4 columns on mobile), gutter **24 / 32**. Place children with `col-span-*` / `col-start-*`. Homepage POV = thesis `md:col-span-6` + argument `md:col-span-5 md:col-start-8` (column 7 is a deliberate spacer); turnstile = three cards each `col-span-4`; both stack full-width on mobile.
-- **Reading measures** (centred text line-length): `max-w-statement` (960 — heroes / statements), `max-w-read` (800 — authored body). The room template's `COL` / `COL_HERO` / `COL_WIDE` use these tokens.
-- **Vertical rhythm** — standard section is `py-20 md:py-28 lg:py-32` (homepage + room template). The hero and the slim plum CTA keep their own intentional padding.
-- Token scale: `--container-page` 80rem · `--container-statement` 60rem · `--container-read` 50rem.
+One page width, one 12-column grid, named reading measures, one vertical rhythm. **Both the homepage and the doorway pages now use it.**
+- **`.u-container`** — page shell: `max-w-page` (1280) + gutter **24 / 40 / 64** (`px-6 / md:px-10 / lg:px-16`).
+- **`.u-grid`** — 12 columns (4 on mobile), gutter **24 / 32**. Place children with `col-span-*` / `col-start-*`. Common patterns: two-column = `col-span-5` + `col-span-6 col-start-7` (col 6 the spacer); three cards = `col-span-4` each.
+- **Reading measures:** `max-w-statement` (960), `max-w-read` (800) — used as inner `ch` caps inside columns.
+- **Vertical rhythm:** standard section `py-20 md:py-28 lg:py-32`.
 
 ## Components (`/components`)
 
-- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border-stone` on scroll. Serif "DAB Hands" wordmark (just the font, no mark or dot). **"Who I help" now reads as a choice of paths** (hover + click/keyboard; Escape + route-change close): on hover/active the option gets a soft **block of its section colour** (`audiences[].block`, label stays ink, following Business=sage / Marketing=peach / Creators=lavender); desktop is a light bone/blur panel, the mobile sheet shows a colour lead dash (`audiences[].tint`) before each serif name. "Contact". Mobile hamburger → bone sheet.
-- **`AudienceTemplate.tsx`** — the section-driven engine (kit + `CONTENT` map + `ACCENT` map + `Disclosure`). See "The three rooms" above.
-- **`Figure.tsx`** — **art-directed, mobile-first imagery.** `<picture>` with the mobile crop as the `<img>` base and an optional `desktop` `<source media="(min-width:768px)">`. Props: `mobile`, `desktop?`, `alt`, `className` (wrapper sizing/shape), `priority?`. Use this for striking imagery so desktop and mobile carry different framing.
-- **`Footer.tsx`** — charcoal slim bar (`bg-charcoal` `#232323`) with **bone text**: serif wordmark + bone LinkedIn icon + "© 2026 DAB Hands", `border-t border-bone/10`. Global (same on every page). `variant 'default'|'minimal'|'none'`; every page uses `none`. The contact module (default/minimal) is unused.
-- **`BoxCTA.tsx`** — understated rounded-full pill, `tone 'light'|'dark'`. NOTE: still a pill; see the open CTA question in TODO.
-- **`HandUnderline.tsx`** — restrained hand mark; `tone 'dark'`→teal (default), `'light'`→coral; `stroke` override; `strokeWidth` 3.2.
-- **`Trajectory.tsx`** — the brand's core gesture. One canonical SVG path, drawn on via framer `pathLength` (decelerating ease = settling momentum), gradient-faded at both ends, `vectorEffect=non-scaling-stroke`, reduced-motion aware. Props: `stroke` (default teal), `opacity`, `delay`, `duration`, `strokeWidth`. Placed absolutely behind content on the **room heroes** (removed from the homepage; the turnstile reprise was removed). (A `DabMark` signature stroke was tried beside the wordmark, then removed — the logo is just the font.)
-- **`PathwayPicker.tsx`** — the homepage hero quick-nav and primary CTA. The trigger ("See where I can help →") reveals, on hover or focus (tap-toggles on touch), a horizontal charcoal-on-bone panel of the three pathways (one divided row, `role="menu"`), portalled to `document.body` so it escapes the hero's overflow and positioned from the trigger's rect. Closes on Escape / outside-click / scroll; reduced-motion aware. The header nav carries the keyboard-robust dropdown.
-- **`LogoTicker.tsx` / `TickerLogo.tsx`** — seamless marquee + the canonical **13-client** `clients` array (single source of truth). `brightness(0)` charcoal silhouettes. Used on the homepage Proof and every room's experience section (all 13).
-- **`SpineLabel.tsx`** — a floating section label on the page's left spine, rendered site-wide via `Layout`. An IntersectionObserver with a centre-line `rootMargin` (`-50% 0px -50% 0px`) tracks which `[data-spine]` section crosses the viewport's vertical centre; the label crossfades to it and takes `text-bone` or `text-ink` per the section's `data-spine-tone` (so it stays legible on that ground). Vertical text (`writing-mode: vertical-rl`), `pointer-events-none`, hidden below `lg`. Sections opt in with `data-spine="Label"` (+ `data-spine-tone="dark"`); the homepage hero and each room hero deliberately omit it so the label fades in on scroll.
-- **`SeoMeta.tsx`**, **`FadeUp.tsx`**, **`Layout.tsx`** (skip-link + Header + `SpineLabel` + `<main id="top">` + Footer), **`PrivateLayout.tsx`**.
-- **Unused / prunable v1 artifacts** (no imports): `Ribbon.tsx`, `RibbonAccent.tsx`, `RibbonMotif.tsx`, `StatPopover.tsx`, `GridToggle.tsx`. Crown/calibration/compass marks + green `icon-*` originals unused on the main site.
+- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border` on scroll. **Hides on scroll, returns on pause** (`-translate-y-full` while scrolling, idle-timer restores it; stays put at the very top; `motion-reduce` aware). Serif "DAB Hands" wordmark with a **persistent room locator** beneath it on the doorway pages (small uppercase graphite, left-aligned to the wordmark, no dash) that fades in once you've **scrolled to P2** (a scroll-through-hero check on `[data-p2]`) and stays for the rest of the page. "Who I help" dropdown: hover/active gets a soft block of the room colour, label stays ink. Mobile hamburger → bone sheet.
+- **`OperatorTemplate.tsx`** — the 8-section room engine + the per-room colour rhythm (see above). `ACCENT` map: `color` (room colour — solid panels, card fills, CTA hover), `wash` (hero vignette gradient), `text` (deep eyebrow shade), `border`.
+- **`PathwayPicker.tsx`** — homepage hero quick-nav; trigger "See where I can help" with a **plus** icon (→ × when open); portalled charcoal-on-bone panel; closes on Escape/outside-click/scroll.
+- **`GridToggle.tsx`** — floating **design aid** bottom-right ("● GRID"); toggles a coral 12-column overlay mirroring `.u-container`/`.u-grid`. Rendered in `Layout` (all environments). **Hide/gate before promoting to production.**
+- **`HandUnderline.tsx`** — restrained hand mark; default `dark` tone is now graphite (teal retired); `light` is coral.
+- **`LogoTicker.tsx` / `TickerLogo.tsx`** — 13-client marquee (single source of truth).
+- **`Figure.tsx`**, **`SeoMeta.tsx`**, **`FadeUp.tsx`** (forwards `className`), **`Footer.tsx`** (charcoal slim bar, bone text), **`Layout.tsx`** (skip-link + Header + `<main>` + Footer + GridToggle), **`PrivateLayout.tsx`**.
+- **Removed/unused:** `SpineLabel.tsx` (the left-spine vertical labels — removed from `Layout`, file orphaned, safe to delete). `Trajectory.tsx` (no longer used). `AudienceTemplate.tsx`, `Ribbon*.tsx`, `StatPopover.tsx` (legacy, prunable).
 
 ## Hard rules
-
 1. **No em dashes** in user-facing copy (code comments fine).
 2. **Brand wordmark is "DAB Hands"** (uppercase DAB, capital-H Hands). Tokens/paths exempt.
-3. **Deep Teal is the brand colour; bone is the only light background.** `teal #48666A` carries the cross-cutting moments (CTAs, testimonials, nav, homepage accents). **No white, no paper — every light surface is bone `#F5F1EB`.** Audience colours (sage/peach/lavender) are full-strength on The Situation, knocked-back elsewhere; for audience text use the **`*-deep` tokens** (`sage-deep #6F7D69`, `peach-deep #B97D62`, `lavender-deep #6E5A86` — a touch below AA as small text on bone, deepen if strict AA is needed). Moss is retired.
-4. **Type:** Instrument Serif for display/statements/quotes; Manrope for everything else. Never force weight on the serif (single 400). Label headings no full stops; truth-statements keep periods.
-5. **Mastery marks, not decoration.** One journey/trajectory, confident and economical. No halos, no decorative gradients, no pill/lozenge tags, no hand/tool icons. Motion communicates momentum, not novelty.
+3. **White text is always bone** (`text-bone`), never `text-white`.
+4. **Type:** Instrument Serif for display/statements/quotes; Manrope for everything else. Never force weight on the serif. Label headings no full stops; truth-statements keep periods.
+5. **Each doorway room is one colour, applied as the solid rhythm.** Don't flatten it into faint tints; don't reintroduce teal; keep the homepage predominantly bone/graphite.
 
 ## Open items / TODO
-
-- **Imagery.** The three rooms' **What Changes** modules carry full-bleed sky images (sage / peach / lavender) via `outcomes.bgImage` + a bone scrim; the homepage Darren banner uses `clouds.png`. `Figure` remains available for art-directed (desktop + mobile) crops elsewhere. Drop new images into `public/images/`.
-- **CTA shape — owner decision pending.** The CTAs are still rounded-full pills (the only lozenge-shaped element left after the no-lozenge rule). Options offered: text link with a quiet arrow (recommended), squared/underlined button, or keep as pills. Apply consistently once chosen.
-- **Vercel staging is protected (401).** Toggle Deployment Protection off for the open link the owner wants, or use Password/Shareable Link for specified-people access.
-- **Darren portrait — placed.** `darren_new-image.png` (transparent cut-out): absolute bottom-right on `lg`+, stacked centred beneath the copy on mobile/tablet (grounded on the bottom edge). **Follow-up:** it's a ~2.3 MB PNG — convert to WebP (with alpha) to cut the homepage payload. The old `darren_jesus.jpeg` (halo) is unused.
-- **`og-image.png` and `favicon.svg` are still v1 green.** Regenerate for v2.0 (`og-image.png` is the SeoMeta default + the `_document` JSON-LD logo; `theme-color` is already bone).
-- **Prune** legacy `dab-*` tokens from `globals.css` and delete the unused v1 components once confirmed.
+- **`GridToggle` ships in all environments** — hide or gate it (`process.env.NODE_ENV`) before any production promotion.
+- **Imagery:** `clouds.png` is the brand's warm cloud asset (Darren banner + the What-Changes payoff). `Figure` is ready for art-directed imagery. The per-room `*_solution.png` sky images are **no longer used** (the What-Changes cloud is the shared `clouds.png` now) — prune when convenient.
+- **`darren_new-image.png`** is a ~2.3 MB PNG — convert to WebP to cut homepage payload.
+- **`og-image.png` / `favicon.svg`** are still v1 green — regenerate for the current look.
+- **Prune** legacy `dab-*`, plum/aubergine/sky/moss/paper tokens + unused v1 components once confirmed.
 
 ## Working style
-
 - Owner iterates fast in small, specific edits. For exploratory questions, answer in 2-3 sentences with a recommendation + the main tradeoff before implementing. Don't pre-emptively redesign neighbouring work.
-- **Verification:** preview-tool screenshots are unreliable for deep-scrolled sections (they capture from the top) and `FadeUp` content sits at opacity 0 until revealed, so a fresh screenshot often looks blank mid-animation. Use `preview_eval` DOM measurements to confirm below the fold; a tall viewport (`preview_resize` height ~3000-4900) captures more at once. `gh` and the `vercel` CLI are not installed; the unauthenticated GitHub API (via `curl`/`python3`) can read Vercel commit-status URLs.
+- **Verification:** `FadeUp` content sits at opacity 0 until revealed; framer animations + screenshots can be unreliable in the headless preview (it throttles rendering) — prefer `preview_eval` DOM/CSS measurements, and a tall viewport (`preview_resize` height ~3000-4600) to capture more at once. After `@theme`/token edits, `rm -rf .next` + restart for accurate colour.
 - React Strict Mode is on (double-renders in dev).
-- **Saved memory rules** live at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` and apply every session — read `MEMORY.md` first. Current rules: no em dashes; white text is always bone; "DAB Hands" wordmark; the **Deep Teal palette** (bone-only, teal brand, Business=sage / Marketing=peach / Creators=lavender, full-strength on The Situation); charcoal-on-bone homepage chrome; typography (Instrument Serif + Manrope); the "marks of skilled hands" visual centre (no halos/decoration/lozenges); portrait direction; the v2.0 refresh + "push brand energy".
+- **Saved memory rules** live at `~/.claude/projects/-Users-darrenbrett-Projects-DAB-Hands-Website/memory/` — read `MEMORY.md` first.

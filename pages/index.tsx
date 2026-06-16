@@ -17,7 +17,8 @@ const TURNSTILE = [
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
-    block: 'color-mix(in srgb, var(--color-sage) 55%, var(--color-bone))',
+    rest: 'color-mix(in srgb, var(--color-sage) 50%, var(--color-bone))',
+    hover: 'color-mix(in srgb, var(--color-sage) 70%, var(--color-bone))',
     accent: 'var(--color-sage-deep)',
   },
   {
@@ -25,7 +26,8 @@ const TURNSTILE = [
     diagnosis: 'Great work loses power on the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
-    block: 'color-mix(in srgb, var(--color-peach) 58%, var(--color-bone))',
+    rest: 'color-mix(in srgb, var(--color-peach) 50%, var(--color-bone))',
+    hover: 'color-mix(in srgb, var(--color-peach) 70%, var(--color-bone))',
     accent: 'var(--color-peach-deep)',
   },
   {
@@ -33,7 +35,8 @@ const TURNSTILE = [
     diagnosis: 'Everything depends on you. Until it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
-    block: 'color-mix(in srgb, var(--color-lavender) 58%, var(--color-bone))',
+    rest: 'color-mix(in srgb, var(--color-lavender) 50%, var(--color-bone))',
+    hover: 'color-mix(in srgb, var(--color-lavender) 70%, var(--color-bone))',
     accent: 'var(--color-lavender-deep)',
   },
 ];
@@ -168,7 +171,7 @@ export default function Home() {
                 <FadeUp delay={0.32}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
                     It deserves to arrive{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="color-mix(in srgb, var(--color-teal), var(--color-bone) 45%)">
+                    <HandUnderline delay={0.6} variant={3} stroke="color-mix(in srgb, var(--color-bone), transparent 30%)">
                       as intended
                     </HandUnderline>
                     .
@@ -192,7 +195,7 @@ export default function Home() {
         </section>
 
         {/* ── TURNSTILE ────────────────────────────── */}
-        <section data-spine="Who I help" data-spine-tone="dark" className="bg-teal text-bone py-20 md:py-28 lg:py-32">
+        <section data-spine="Who I help" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
               <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
@@ -213,8 +216,8 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-[border-color,box-shadow,background-color] duration-300"
                     style={{
-                      backgroundColor: hovered === i ? t.block : 'var(--color-bone)',
-                      borderColor: hovered === i ? t.accent : 'var(--color-stone)',
+                      backgroundColor: hovered === i ? t.hover : t.rest,
+                      borderColor: hovered === i ? t.accent : 'transparent',
                       boxShadow: hovered === i
                         ? '0 4px 10px rgba(31,31,29,0.07), 0 22px 48px -20px rgba(31,31,29,0.26)'
                         : '0 1px 2px rgba(31,31,29,0.05), 0 12px 30px -14px rgba(31,31,29,0.16)',
@@ -246,7 +249,7 @@ export default function Home() {
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Starting a conversation' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-teal"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-graphite"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>

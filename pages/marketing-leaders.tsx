@@ -12,12 +12,11 @@ const content: OperatorContent = {
   validation: {
     heading: 'The ingredients are already there.',
     intro: 'The strategy is clear. The ambition is strong. The investment has been made.',
-    strong: true,
     paras: [
       'Yet creating work that genuinely stands out has never been harder.',
       'The market is crowded. Attention is fragmented. Expectations continue to rise.',
-      'The challenge isn’t finding another idea. It’s bringing together the right people, capabilities and decisions in a way that allows the work to reach its full potential.',
     ],
+    coda: 'The challenge isn’t finding another idea. It’s bringing together the right people, capabilities and decisions in a way that allows the work to reach its full potential.',
   },
   diagnosis: {
     heading: 'What gets in the way',
@@ -33,7 +32,6 @@ const content: OperatorContent = {
   },
   outcomes: {
     heading: 'The market creates enough noise already.',
-    bgImage: '/images/marketing_solution.png',
     paras: [
       'The last thing great work needs is more noise from inside the organisation.',
       'That’s why alignment matters. Not alignment for its own sake. Alignment around the things that made the work worth doing in the first place.',
@@ -59,7 +57,7 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Trusted to protect what matters',
+    heading: 'Trusted by marketing leaders',
     interval: 4000,
     testimonials: [
       {

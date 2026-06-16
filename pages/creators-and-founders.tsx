@@ -12,12 +12,11 @@ const content: OperatorContent = {
   validation: {
     heading: 'You’ve already created momentum.',
     intro: 'The audience is growing. Customers are responding. Opportunities keep appearing.',
-    strong: true,
     paras: [
       'From the outside, things look successful.',
       'Yet somehow every important decision still seems to find its way back to you.',
-      'The business has grown. The way it operates hasn’t quite caught up.',
     ],
+    coda: 'The business has grown. The way it operates hasn’t quite caught up.',
   },
   diagnosis: {
     heading: 'What I’ve seen happen.',
@@ -41,7 +40,6 @@ const content: OperatorContent = {
   },
   outcomes: {
     heading: 'That’s where I come in.',
-    bgImage: '/images/creators_solution.png',
     paras: [
       'Having spent seven years building and running my own agency, I know first-hand how quickly success creates complexity.',
       'Alongside that experience, I’ve spent more than twenty years helping organisations navigate growth, change and execution.',
@@ -67,7 +65,7 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Trusted by leaders',
+    heading: 'Trusted by creators & founders',
     quote:
       'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
     name: 'Gary Shannon',

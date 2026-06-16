@@ -12,16 +12,11 @@ const content: OperatorContent = {
   validation: {
     heading: 'All the blocks are in place.',
     intro: 'The direction is clear. The people are capable. The work matters.',
-    strong: true,
-    left: [
-      'From the outside, everything appears to be there.',
-      'Yet progress feels slower than it should.',
-      'Not because people aren’t working hard. Not because the strategy is wrong.',
-    ],
-    right: [
+    paras: [
+      'From the outside, everything appears to be there. Yet progress feels slower than it should. Not because people aren’t working hard. Not because the strategy is wrong.',
       'As organisations grow, more teams become involved. More priorities compete for attention. More decisions need to travel further before anything happens.',
-      'The challenge is rarely deciding what to do next. More often, it’s helping the organisation move together.',
     ],
+    coda: 'The challenge is rarely deciding what to do next. More often, it’s helping the organisation move together.',
   },
   diagnosis: {
     heading: 'What gets in the way',
@@ -37,7 +32,6 @@ const content: OperatorContent = {
   },
   outcomes: {
     heading: 'I help organisations move together.',
-    bgImage: '/images/business_solution.png',
     paras: [
       'By identifying what’s slowing progress and strengthening the connections between people, priorities and execution.',
       'The goal isn’t more process. It’s making it easier for good people to do good work.',
@@ -63,7 +57,7 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Trusted by leaders',
+    heading: 'Trusted by business & agency leaders',
     interval: 10000,
     testimonials: [
       {

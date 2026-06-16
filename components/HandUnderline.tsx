@@ -7,7 +7,7 @@ interface HandUnderlineProps {
   delay?: number;
   /** Alternative path data for natural variation between instances. */
   variant?: 1 | 2 | 3 | 4;
-  /** 'dark' (default) uses Deep Teal — the brand accent.
+  /** 'dark' (default) uses graphite — neutral, on light backgrounds.
    *  'light' uses coral on bone/paper backgrounds. */
   tone?: 'dark' | 'light';
   /** Stroke colour override. Takes precedence over `tone`. */
@@ -22,7 +22,7 @@ const PATHS: Record<NonNullable<HandUnderlineProps['variant']>, string> = {
 };
 
 const TONE_STROKE: Record<NonNullable<HandUnderlineProps['tone']>, string> = {
-  dark: 'var(--color-teal)',
+  dark: 'var(--color-graphite)',
   light: 'var(--color-coral)',
 };
 
