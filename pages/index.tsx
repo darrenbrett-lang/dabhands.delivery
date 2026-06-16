@@ -224,7 +224,7 @@ export default function Home() {
                     }}
                   >
                     <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
-                    <p className="text-ink/90 leading-snug mb-2.5">{t.diagnosis}</p>
+                    <p className="text-ink/90 leading-snug mb-2.5 md:min-h-[2lh]">{t.diagnosis}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold" style={{ color: hovered === i ? t.accent : 'var(--color-ink)' }}>
                       Explore
@@ -248,7 +248,7 @@ export default function Home() {
               </FadeUp>
               <FadeUp delay={0.1}>
                 <a
-                  href={mailto({ subject: 'Starting a conversation' })}
+                  href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
                   className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-graphite"
                 >
                   Start a conversation

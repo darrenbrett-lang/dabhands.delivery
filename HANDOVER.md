@@ -61,15 +61,15 @@ All three on one 8-section operator spine (operating **partner**, "I" voice, sit
 | Panel | Treatment |
 |---|---|
 | **P1 Hero** | bone + a soft **vignette** of the room colour (`ACCENT.wash`, top-down gradient); coloured eyebrow; charcoal CTA |
-| **P2 The Situation** | **solid** panel of the room colour; big title left, two paragraphs right, serif **coda** across both; `data-p2` (drives the masthead locator) |
+| **P2 The Situation** | **solid** panel of the room colour; same layout as The Challenge — heading + lead on top, two-column body underneath (para 1 left, rest right), serif **coda** in the left column; `data-p2` (drives the masthead locator) |
 | **P3 The Challenge** | **charcoal/black** two-column (problem / context / payoff) |
 | **P4 What Changes** | the **cloud image** (`clouds.png` + `bg-bone/35` scrim, neutral — no colour tint); the bold serif payoff |
 | **(Transition)** | optional bone section — Creators only ("The challenge isn't ambition.") |
 | **P5 Where I tend to help** | **bone**; three situation cards filled in the room colour (`color-mix(a.color 50%, bone)`) |
 | **Trusted by…** | **solid** panel of the room colour, **dark** copy (testimonials flip to ink text + charcoal rule); auto-rotating `proof.testimonials` (Business 2 / Marketing 3; interval per page) or a single `proof.quote` (Creators — Gary Shannon) |
-| **Close** | **bone**, centred, charcoal CTA |
+| **Close** | **bone**, left-aligned, charcoal CTA |
 
-Content lives in each page file. Per-room CTA hover fills the room colour (charcoal text). Mobile **sticky CTA**. **Failed experiment (don't repeat):** an "atmosphere-led" pass that tinted Situation/Outcomes with low-opacity colour over the cloud — `clouds.png` is a warm pink sky, so every room read pink and the rhythm was lost. Colour on the room pages = **solid panels + vignette + coloured cards**, not faint cloud tints.
+Content lives in each page file. Per-room CTA hover fills the room colour (charcoal text); each room's CTA opens a context-specific email via `content.email` (mailto subject + body). Mobile **sticky CTA**. All doorway module content is left-aligned on the grid. **Failed experiment (don't repeat):** an "atmosphere-led" pass that tinted Situation/Outcomes with low-opacity colour over the cloud — `clouds.png` is a warm pink sky, so every room read pink and the rhythm was lost. Colour on the room pages = **solid panels + vignette + coloured cards**, not faint cloud tints.
 
 Creators differs structurally: it adds the optional **Transition** section and uses a single `proof.quote` instead of the rotating testimonials. `components/AudienceTemplate.tsx` is the legacy engine — **unused, safe to delete.**
 

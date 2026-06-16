@@ -36,6 +36,7 @@ export interface OperatorContent {
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
+  email?: { subject: string; body: string }; // pre-fills the CTA mailto for this room's context
 }
 
 // Audience accents: Business=Sage Mist, Marketing=Dusty Apricot, Creators=Cloud
@@ -51,9 +52,9 @@ const ACCENT: Record<Accent, { text: string; border: string; color: string; wash
 
 // Charcoal at rest; on hover it fills the room colour. Because the accents are
 // light, the label flips to charcoal so it stays legible.
-const Cta = ({ label = 'Start a conversation', full = false, accent }: { label?: string; full?: boolean; accent: string }) => (
+const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { label?: string; full?: boolean; accent: string; email?: { subject?: string; body?: string } }) => (
   <a
-    href={mailto()}
+    href={mailto(email)}
     style={{ '--cta-accent': accent } as CSSProperties}
     className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] hover:text-charcoal ${full ? 'w-full' : ''}`}
   >
@@ -148,14 +149,14 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                         {c.hero.trust}
                       </p>
                       <div className="shrink-0">
-                        <Cta accent={a.color} />
+                        <Cta accent={a.color} email={c.email} />
                       </div>
                     </div>
                   </FadeUp>
                 ) : (
                   <FadeUp delay={0.16}>
                     <div className="mt-8">
-                      <Cta accent={a.color} />
+                      <Cta accent={a.color} email={c.email} />
                     </div>
                   </FadeUp>
                 )}
@@ -165,32 +166,30 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 2 ── VALIDATION ("The Situation" — P2): a solid panel of the room
-            colour. Big title left, two paragraphs right, serif coda. ── */}
+            colour. Same layout as The Challenge below — heading (+ lead) on top,
+            two-column body underneath, the serif coda in the left column. ── */}
         <section data-p2 className="text-ink py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
-            <div className="u-grid gap-y-8 md:items-start">
-              {/* Left: the big title + its quiet lead-in. */}
-              <div className="col-span-4 md:col-span-5">
-                <FadeUp>
-                  <h2 className="font-serif text-[32px] md:text-[44px] lg:text-[50px] leading-[1.05] tracking-[-0.01em]">{c.validation.heading}</h2>
-                </FadeUp>
-                <FadeUp delay={0.06}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-ink/90">{c.validation.intro}</p>
-                </FadeUp>
-              </div>
-              {/* Right: the copy — two full paragraphs. */}
-              <div className="col-span-4 md:col-span-6 md:col-start-7">
-                <FadeUp delay={0.12}>
-                  <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-ink/80">
-                    {c.validation.paras.map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </div>
-                </FadeUp>
-              </div>
-              {/* Coda: one serif line that sits across both columns. */}
+            <div className="u-grid gap-y-10 md:gap-y-12 md:items-start">
+              {/* Heading + its quiet lead-in, across the top. */}
+              <FadeUp className="col-span-4 md:col-span-12">
+                <h2 className="font-serif text-[32px] md:text-[44px] lg:text-[50px] leading-[1.05] tracking-[-0.01em] max-w-[24ch]">{c.validation.heading}</h2>
+                <p className="mt-5 text-lg md:text-xl leading-relaxed text-ink/90 max-w-[46ch]">{c.validation.intro}</p>
+              </FadeUp>
+              {/* Two-column body: first paragraph left, the rest right. */}
+              <FadeUp delay={0.08} className="col-span-4 md:col-span-5">
+                <p className="text-[17px] md:text-[18px] leading-[1.75] text-ink/80">{c.validation.paras[0]}</p>
+              </FadeUp>
+              <FadeUp delay={0.14} className="col-span-4 md:col-span-6 md:col-start-7">
+                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-ink/80">
+                  {c.validation.paras.slice(1).map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+              </FadeUp>
+              {/* Coda: the payoff line, left column. */}
               {c.validation.coda && (
-                <FadeUp delay={0.18} className="col-span-4 md:col-span-12 mt-4 md:mt-8">
+                <FadeUp delay={0.2} className="col-span-4 md:col-span-12">
                   <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.28] text-ink max-w-[46ch]">{c.validation.coda}</p>
                 </FadeUp>
               )}
@@ -365,8 +364,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         <section className="text-ink py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
             <div className="u-grid gap-y-8">
-              <FadeUp className="col-span-4 md:col-span-8">
-                <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-ink/80 max-w-[26ch]">{c.proof.heading}</p>
+              <FadeUp className="col-span-4 md:col-span-12">
+                <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-ink/80 md:whitespace-nowrap">{c.proof.heading}</p>
               </FadeUp>
               <FadeUp delay={0.08} className="col-span-4 md:col-span-9 md:col-start-1">
                 {c.proof.testimonials ? (
@@ -400,22 +399,22 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 8 ── CLOSE: simple, confident invitation (centred on the grid), bone. ── */}
+        {/* 8 ── CLOSE: simple, confident invitation (left-aligned on the grid), bone. ── */}
         <section className="bg-bone text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
           <div className="u-container">
             <div className="u-grid">
-              <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
+              <div className="col-span-4 md:col-span-8">
                 <FadeUp>
-                  <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>
+                  <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch]">{c.close.heading}</h2>
                 </FadeUp>
                 {c.close.line && (
                   <FadeUp delay={0.06}>
-                    <p className="mt-4 text-lg text-graphite max-w-[62ch] mx-auto">{c.close.line}</p>
+                    <p className="mt-4 text-lg text-graphite max-w-[62ch]">{c.close.line}</p>
                   </FadeUp>
                 )}
                 <FadeUp delay={0.1}>
-                  <div className="mt-8 flex justify-center">
-                    <Cta accent={a.color} />
+                  <div className="mt-8 flex">
+                    <Cta accent={a.color} email={c.email} />
                   </div>
                 </FadeUp>
               </div>
@@ -430,7 +429,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           }`}
         >
           <a
-            href={mailto()}
+            href={mailto(c.email)}
             className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-charcoal text-[15px] font-medium text-bone"
           >
             Start a conversation

@@ -75,6 +75,10 @@ const content: OperatorContent = {
     heading: 'The goal isn’t simply to grow.',
     line: 'It’s to build a business capable of supporting bigger ambitions without losing what made it successful in the first place.',
   },
+  email: {
+    subject: 'Building for the next stage of growth',
+    body: 'The business has grown and I want to build the capability to carry it forward. I would like to talk.',
+  },
 };
 
 export default function CreatorsAndFounders() {

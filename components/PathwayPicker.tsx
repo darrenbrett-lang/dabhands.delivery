@@ -133,7 +133,7 @@ export const PathwayPicker = () => {
                             →
                           </span>
                         </span>
-                        <span className="text-[13px] leading-snug text-graphite">{p.line}</span>
+                        <span className="block text-[13px] leading-snug text-graphite text-balance">{p.line}</span>
                       </Link>
                     ))}
                   </div>

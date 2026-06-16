@@ -7,7 +7,7 @@ const content: OperatorContent = {
   accent: 'sage',
   hero: {
     headline: 'As organisations grow, keeping everything moving becomes harder.',
-    subline: 'I help leadership teams maintain momentum when complexity starts getting in the way.',
+    subline: 'I help leadership teams maintain momentum when complexity is getting in the way.',
   },
   validation: {
     heading: 'All the blocks are in place.',
@@ -77,6 +77,10 @@ const content: OperatorContent = {
   close: {
     heading: 'Great organisations don’t succeed because they have fewer challenges.',
     line: 'They succeed because they can keep moving through them.',
+  },
+  email: {
+    subject: 'Keeping important work moving',
+    body: 'Our organisation has what it needs, but momentum is getting harder to maintain. I would like to talk.',
   },
 };
 

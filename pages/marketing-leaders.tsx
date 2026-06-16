@@ -81,6 +81,10 @@ const content: OperatorContent = {
     heading: 'Great work rarely fails because of ambition.',
     line: 'More often, it loses strength on the journey. I help ambitious brands make sure it doesn’t.',
   },
+  email: {
+    subject: 'Getting our strongest work into market intact',
+    body: 'We have important work in motion and I want it to arrive with its ambition intact. I would like to talk.',
+  },
 };
 
 export default function MarketingLeaders() {
