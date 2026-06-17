@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
-import { HandUnderline } from '@/components/HandUnderline';
 import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
@@ -170,11 +169,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.32}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    It deserves to arrive{' '}
-                    <HandUnderline delay={0.6} variant={3} stroke="color-mix(in srgb, var(--color-bone), transparent 30%)">
-                      as intended
-                    </HandUnderline>
-                    .
+                    It deserves to arrive as intended.
                   </p>
                 </FadeUp>
               </div>

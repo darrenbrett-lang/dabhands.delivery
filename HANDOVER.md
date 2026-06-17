@@ -109,7 +109,7 @@ One page width, one 12-column grid, named reading measures, one vertical rhythm.
 - **`OperatorTemplate.tsx`** — the 8-section room engine + the per-room colour rhythm (see above). `ACCENT` map: `color` (room colour — solid panels, card fills, CTA hover), `wash` (hero vignette gradient), `text` (deep eyebrow shade), `border`.
 - **`PathwayPicker.tsx`** — homepage hero quick-nav; trigger "See where I can help" with a **plus** icon (→ × when open); portalled charcoal-on-bone panel; closes on Escape/outside-click/scroll.
 - **`GridToggle.tsx`** — floating **design aid** bottom-right ("● GRID"); toggles a coral 12-column overlay mirroring `.u-container`/`.u-grid`. Rendered in `Layout` (all environments). **Hide/gate before promoting to production.**
-- **`HandUnderline.tsx`** — restrained hand mark; default `dark` tone is now graphite (teal retired); `light` is coral.
+- **`HandUnderline.tsx`** — restrained hand mark; **now used only on the unlisted `/for/manifesto-digital` pitch** (removed from the public site); `light` tone is coral.
 - **`LogoTicker.tsx` / `TickerLogo.tsx`** — 13-client marquee (single source of truth).
 - **`Figure.tsx`**, **`SeoMeta.tsx`**, **`FadeUp.tsx`** (forwards `className`), **`Footer.tsx`** (charcoal slim bar, bone text), **`Layout.tsx`** (skip-link + Header + `<main>` + Footer + GridToggle), **`PrivateLayout.tsx`**.
 - **Removed/unused:** `SpineLabel.tsx` (the left-spine vertical labels — removed from `Layout`, file orphaned, safe to delete). `Trajectory.tsx` (no longer used). `AudienceTemplate.tsx`, `Ribbon*.tsx`, `StatPopover.tsx` (legacy, prunable).
