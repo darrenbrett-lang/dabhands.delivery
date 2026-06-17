@@ -3,15 +3,17 @@ import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// The three destination pages live under "Who I help". Each carries its own
-// pathway colour (Business=sage, Marketing=peach, Creators=lavender). In the
-// desktop dropdown the hovered/active option gets a soft block of that colour
-// while the label stays ink; `tint` is the solid accent (mobile lead dash),
-// `block` the low-alpha hover fill.
+// The three destination pages live under "Who I help". The per-audience colours
+// are retired — all three share one palette now. `tint` is the Cloud Pink mobile
+// lead dash, `deep` the Deep Blue-Green locator/label colour (legible on the bone
+// bar), `block` the faint hover fill behind a dropdown option.
+const NAV_TINT = 'var(--color-cloud-pink)';
+const NAV_DEEP = 'var(--color-blue-green)';
+const NAV_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', context: 'For business & agency leaders', tint: 'var(--color-sage)', deep: 'var(--color-sage-deep)', block: 'color-mix(in srgb, var(--color-sage) 22%, transparent)' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', context: 'For marketing leaders', tint: 'var(--color-peach)', deep: 'var(--color-peach-deep)', block: 'color-mix(in srgb, var(--color-peach) 24%, transparent)' },
-  { href: '/creators-and-founders', label: 'Creators & founders', context: 'For creators & founders', tint: 'var(--color-lavender)', deep: 'var(--color-lavender-deep)', block: 'color-mix(in srgb, var(--color-lavender) 24%, transparent)' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', context: 'For business & agency leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/marketing-leaders', label: 'Marketing leaders', context: 'For marketing leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/creators-and-founders', label: 'Creators & founders', context: 'For creators & founders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
 ];
 
 export const Header = () => {
@@ -150,9 +152,8 @@ export const Header = () => {
             </Link>
             {/* Persistent room locator: fades in beneath the wordmark once the
                 second panel is scrolled to. Absolute so it never nudges the
-                wordmark; left edge aligns to the wordmark, in the room's deep
-                accent (the legible form of the section colour, matching the hero
-                eyebrow — the light pastels would vanish on the bone bar). */}
+                wordmark; left edge aligns to the wordmark, in Deep Blue-Green
+                (the legible accent, matching the hero eyebrow). */}
             <AnimatePresence>
               {showContext && room && (
                 <motion.span

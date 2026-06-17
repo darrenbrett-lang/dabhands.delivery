@@ -1,47 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Palette (Colour System v4 — atmosphere-led) ─────────────────────
-     Bone + graphite carry the interface. The cloud image is the parent
-     visual system; the audience colours are sampled from it and used as a
-     navigational device (doorway cards, hovers, overlays, outcomes), never
-     as dominant backgrounds. Hierarchy: typography > atmosphere > colour. */
+  /* ── Palette (Colour System v5 — restrained) ─────────────────────────
+     A restrained five-colour system. Emotion comes from imagery, clarity from
+     contrast. Charcoal + warm stone carry the interface; Cloud Pink is the
+     expressive accent (drawn from the photography); Deep Blue-Green is the
+     interactive / emphasis colour, used sparingly; Soft Grey supports.
+     The three-audience colour system (sage / peach / lavender) is retired. */
 
-  /* Core neutrals */
-  --color-bone: #F5F1EB;       /* primary background */
-  --color-paper: #FBF8F3;      /* secondary background */
-  --color-ink: #1F1F1D;        /* primary text + headlines */
-  --color-graphite: #5C5C58;   /* secondary / body text */
-  --color-stone: #D8D2C8;      /* borders + dividers */
+  --color-bone: #F5F1EA;        /* Warm Stone — primary background */
+  --color-paper: #FBF8F3;       /* secondary background (lighter warm stone) */
+  --color-ink: #1F1F1D;         /* Charcoal — primary text + headlines */
+  --color-charcoal: #1F1F1D;    /* Charcoal — dark sections (unified with ink) */
+  --color-graphite: #5C5C58;    /* secondary / body text */
+  --color-stone: #D8D3CB;       /* Soft Grey — borders, dividers, subtle fills */
+  --color-cloud-pink: #E8A3B1;  /* Cloud Pink — expressive accent; use on dark or as fills, never as text on warm stone */
+  --color-blue-green: #3F5A61;  /* Deep Blue-Green — interactive, links, emphasis; used sparingly */
 
-  /* Audience colours — sampled from the cloud atmosphere; soft, mineral, editorial.
-     Used as a navigational device (cards, hovers, overlays, outcomes), never as
-     dominant page backgrounds. */
-  --color-sage: #BCC5B8;           /* Sage Mist — Business & agency leaders (mineral, calm, architectural) */
-  --color-peach: #E5C8BA;          /* Dusty Apricot — Marketing leaders (warm, human, creative, premium) */
-  --color-lavender: #CDC3DA;       /* Cloud Lavender — Creators & founders (expansive, optimistic, thoughtful) */
-  --color-sky: #AFCFE0;            /* supporting accent */
-  --color-coral: #D98773;          /* highlight, hover, focus — very sparing */
-
-  /* Legacy accents — retired in the atmosphere-led system; kept defined so old refs don't break */
-  --color-teal: #48666A;
-  --color-moss: #5B6A58;
-  --color-lavender-soft: #E6D6EE;
-
-  /* Audience light washes — section highlights */
-  --color-lavender-wash: #E9E1F4;
-  --color-peach-wash: #F4E0D4;
-  --color-sage-wash: #DDE4D8;
-
-  /* Audience dark accents — eyebrows, arrows, links (legible on bone) */
-  --color-lavender-deep: #6E5A86;  /* Creators & founders */
-  --color-peach-deep: #B97D62;     /* Marketing leaders */
-  --color-sage-deep: #6F7D69;      /* Business & agency leaders */
-
-  /* Dark palette */
-  --color-plum: #352E44;       /* legacy deep section colour */
-  --color-aubergine: #4A3D59;  /* supporting dark */
-  --color-charcoal: #232323;   /* charcoal — authority, dark sections, footer */
+  /* Legacy tokens — retained for the /for pages, dev tools and focus rings;
+     not part of the live brand palette. */
+  --color-coral: #D98773;       /* focus ring + grid toggle (functional) */
+  --color-teal: #48666A;        /* legacy accent (Trajectory, signal rule) */
+  --color-plum: #352E44;        /* legacy deep section (manifesto, footer) */
+  --color-aubergine: #4A3D59;   /* legacy supporting dark */
 
   /* Fonts */
   --font-serif: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;

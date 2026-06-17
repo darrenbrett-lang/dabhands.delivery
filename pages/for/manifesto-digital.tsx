@@ -209,7 +209,7 @@ const ChipExplorer = ({
                 aria-pressed={active}
                 className={`text-[13px] md:text-[14px] leading-none tracking-tight px-4 py-2.5 rounded-full border transition-colors ${
                   active
-                    ? 'bg-plum border-ink text-lavender'
+                    ? 'bg-plum border-ink text-cloud-pink'
                     : 'border-ink/25 text-ink/80 hover:border-ink/60 hover:text-ink'
                 }`}
               >
@@ -243,7 +243,7 @@ const ChipExplorer = ({
 };
 
 const PhaseHeading = ({ phase, className = '' }: { phase: (typeof phases)[number]; className?: string }) => (
-  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase text-lavender ${className}`}>
+  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase text-cloud-pink ${className}`}>
     {phase.q} {phase.verb} {phase.rest}
   </p>
 );
@@ -252,7 +252,7 @@ const ActivityList = ({ items }: { items: string[] }) => (
   <ul className="space-y-2.5">
     {items.map((item) => (
       <li key={item} className="flex items-start gap-3 text-[15px] leading-snug text-bone/80">
-        <span aria-hidden className="mt-[0.6em] block w-3 h-px bg-lavender/70 shrink-0" />
+        <span aria-hidden className="mt-[0.6em] block w-3 h-px bg-cloud-pink/70 shrink-0" />
         {item}
       </li>
     ))}
@@ -321,7 +321,7 @@ export default function ManifestoDigital() {
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-plum text-lavender rounded-lg px-5 py-3 text-center">
+                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-plum text-cloud-pink rounded-lg px-5 py-3 text-center">
                       {step}
                     </span>
                   </Fragment>
@@ -407,7 +407,7 @@ export default function ManifestoDigital() {
                       aria-pressed={active}
                       className={`font-mono text-[9px] min-[400px]:text-[10px] tracking-[0.14em] uppercase whitespace-nowrap rounded-full px-1 py-3 border transition-colors ${
                         active
-                          ? 'bg-lavender border-lavender text-ink'
+                          ? 'bg-cloud-pink border-cloud-pink text-ink'
                           : 'border-bone/25 text-bone/70'
                       }`}
                     >
@@ -485,7 +485,7 @@ export default function ManifestoDigital() {
                   <div className="border-t border-bone/15 pt-7">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={outcome.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-9 h-9 mb-5" />
-                    <h3 className="font-mono text-[11px] tracking-[0.22em] uppercase text-lavender">
+                    <h3 className="font-mono text-[11px] tracking-[0.22em] uppercase text-cloud-pink">
                       {outcome.label}
                     </h3>
                     <p className="mt-3.5 text-lg leading-relaxed text-bone/80 max-w-[30ch]">
@@ -535,7 +535,7 @@ export default function ManifestoDigital() {
               {/* The invisible system: rendered dark. The underlying current. */}
               <FadeUp delay={0.22}>
                 <div className="h-full bg-plum text-bone rounded-2xl p-7 md:p-9">
-                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-lavender">
+                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-cloud-pink">
                     02 &middot; The invisible system
                   </p>
                   <ul className="mt-6 md:mt-8 grid grid-cols-2 gap-x-6 md:gap-x-8">

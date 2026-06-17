@@ -9,13 +9,15 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
    Escape / outside click / scroll. Rendered through a portal so it escapes the
    hero's overflow. The header nav carries the fully keyboard-robust version. */
 
-// Section colours (Business=sage, Marketing=peach, Creators=lavender) drive the
-// hover block + arrow tint via inline style — kept off Tailwind classes so the
-// dynamic per-item colour is deterministic.
+// The per-audience colours are retired: every item shares one hover treatment —
+// a faint Deep Blue-Green block with a Deep Blue-Green arrow. Inline style keeps
+// the dynamic hover colour deterministic (off Tailwind classes).
+const HOVER_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
+const HOVER_ACCENT = 'var(--color-blue-green)';
 const PATHS = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.', block: 'color-mix(in srgb, var(--color-sage) 24%, transparent)', accent: 'var(--color-sage-deep)' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.', block: 'color-mix(in srgb, var(--color-peach) 26%, transparent)', accent: 'var(--color-peach-deep)' },
-  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.', block: 'color-mix(in srgb, var(--color-lavender) 26%, transparent)', accent: 'var(--color-lavender-deep)' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
 ];
 
 export const PathwayPicker = () => {

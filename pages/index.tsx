@@ -9,35 +9,33 @@ import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
 import { withSoftBreaks } from '@/lib/softBreaks';
 
-// The single path becomes three rooms. Each carries its section colour as a
-// hover cue (block + arrow tint), matching the nav dropdown and the P1 overlay.
+// The single path becomes three rooms. The per-audience colours are retired: the
+// cards are solid Deep Blue-Green with bone copy and a Cloud Pink accent (arrow +
+// hover border), matching the nav and the doorway panels.
+const CARD_REST = 'var(--color-blue-green)';
+const CARD_HOVER = 'color-mix(in srgb, var(--color-blue-green) 90%, var(--color-bone))';
+const CARD_ACCENT = 'var(--color-cloud-pink)';
 const TURNSTILE = [
   {
     label: 'Business & agency leaders',
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
-    rest: 'color-mix(in srgb, var(--color-sage) 50%, var(--color-bone))',
-    hover: 'color-mix(in srgb, var(--color-sage) 70%, var(--color-bone))',
-    accent: 'var(--color-sage-deep)',
+    rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
   },
   {
     label: 'Marketing leaders',
     diagnosis: 'Great work loses power\non the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
-    rest: 'color-mix(in srgb, var(--color-peach) 50%, var(--color-bone))',
-    hover: 'color-mix(in srgb, var(--color-peach) 70%, var(--color-bone))',
-    accent: 'var(--color-peach-deep)',
+    rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
   },
   {
     label: 'Creators & founders',
     diagnosis: 'Everything depends on you.\nUntil it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
-    rest: 'color-mix(in srgb, var(--color-lavender) 50%, var(--color-bone))',
-    hover: 'color-mix(in srgb, var(--color-lavender) 70%, var(--color-bone))',
-    accent: 'var(--color-lavender-deep)',
+    rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
   },
 ];
 
@@ -219,10 +217,10 @@ export default function Home() {
                         : '0 1px 2px rgba(31,31,29,0.05), 0 12px 30px -14px rgba(31,31,29,0.16)',
                     }}
                   >
-                    <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
-                    <p className="text-ink/90 leading-snug mb-2.5 text-balance md:min-h-[2lh]">{withSoftBreaks(t.diagnosis)}</p>
-                    <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold" style={{ color: hovered === i ? t.accent : 'var(--color-ink)' }}>
+                    <h3 className="text-xl md:text-2xl text-bone mb-3">{t.label}</h3>
+                    <p className="text-bone/90 leading-snug mb-2.5 text-balance md:min-h-[2lh]">{withSoftBreaks(t.diagnosis)}</p>
+                    <p className="text-bone/70 leading-relaxed text-[15px]">{t.support}</p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold" style={{ color: hovered === i ? t.accent : 'var(--color-bone)' }}>
                       Explore
                       <span aria-hidden className="transition-transform duration-300" style={{ transform: hovered === i ? 'translateX(4px)' : 'translateX(0)' }}>→</span>
                     </span>

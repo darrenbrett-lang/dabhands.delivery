@@ -11,15 +11,14 @@ import { SelectedWork, type SelectedWorkContent } from './SelectedWork';
    DAB Hands as a trusted operating partner, not a consultant. Operator voice:
    recognition over explanation, "I" not "we", situations not services.
 
-   Colour rhythm per room (the room's accent — Business=Sage Mist,
-   Marketing=Dusty Apricot, Creators=Cloud Lavender):
-     P1 hero        — a soft vignette of the room colour fading into bone
-     P2 Situation   — a solid panel of the room colour
-     P3 Challenge   — charcoal (black)
-     P4 What Changes— the cloud image (neutral, bone scrim)
-     P5 Where I help— bone, with the cards in the room colour
-     Trust          — a solid panel of the room colour (dark copy)
-     Close          — bone
+   Colour rhythm (one restrained palette — the three audience colours retired):
+     P1 hero        — warm stone with a soft Cloud Pink wash
+     P2 Situation   — a solid Deep Blue-Green panel (bone copy)
+     P3 Challenge   — charcoal
+     P4 What Changes— the cloud image (bone scrim)
+     P5 Where I help— warm stone, soft-grey cards
+     Trust          — a solid Deep Blue-Green panel (bone copy)
+     Close          — warm stone
 
    Layout: every section sits on the shared grid — `.u-container` + `.u-grid`. */
 
@@ -47,35 +46,36 @@ export interface OperatorContent {
   email?: { subject: string; body: string }; // pre-fills the CTA mailto for this room's context
 }
 
-// Audience accents: Business=Sage Mist, Marketing=Dusty Apricot, Creators=Cloud
-// Lavender. `color` is the room's full colour (solid panels, card fills, CTA
-// hover); `wash` is the soft hero vignette of it; `text` the legible deep shade
-// for the eyebrow.
-const ACCENT: Record<Accent, { text: string; border: string; color: string; wash: string }> = {
-  moss: { text: 'text-moss', border: 'border-moss/40', color: 'var(--color-moss)', wash: 'linear-gradient(to bottom, rgba(91,106,88,0.20), rgba(91,106,88,0.12) 55%, rgba(91,106,88,0) 100%)' },
-  lavender: { text: 'text-lavender-deep', border: 'border-lavender/40', color: 'var(--color-lavender)', wash: 'linear-gradient(to bottom, rgba(205,195,218,0.34), rgba(205,195,218,0.18) 55%, rgba(205,195,218,0) 100%)' },
-  peach: { text: 'text-peach-deep', border: 'border-peach/40', color: 'var(--color-peach)', wash: 'linear-gradient(to bottom, rgba(229,200,186,0.36), rgba(229,200,186,0.20) 55%, rgba(229,200,186,0) 100%)' },
-  sage: { text: 'text-sage-deep', border: 'border-sage/40', color: 'var(--color-sage)', wash: 'linear-gradient(to bottom, rgba(188,197,184,0.34), rgba(188,197,184,0.18) 55%, rgba(188,197,184,0) 100%)' },
+// One restrained palette shared by every room (the three audience colours are
+// retired). `color` is the solid Deep Blue-Green panel fill + CTA hover; `wash`
+// is the soft Cloud Pink hero vignette; `text` the legible eyebrow accent. The
+// per-page `accent` key is kept only so existing values still type-check.
+const ROOM = {
+  text: 'text-blue-green',
+  border: 'border-blue-green/40',
+  color: 'var(--color-blue-green)',
+  wash: 'linear-gradient(to bottom, rgba(232,163,177,0.30), rgba(232,163,177,0.15) 55%, rgba(232,163,177,0) 100%)',
 };
+const ACCENT: Record<Accent, typeof ROOM> = { moss: ROOM, lavender: ROOM, peach: ROOM, sage: ROOM };
 
 // withSoftBreaks / withBreaks (two-part headlines) live in @/lib/softBreaks,
 // shared with the homepage.
 
-// Charcoal at rest; on hover it fills the room colour. Because the accents are
-// light, the label flips to charcoal so it stays legible.
+// Charcoal at rest; on hover it fills Deep Blue-Green (the interactive colour).
+// Both are dark, so the bone label stays put.
 const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { label?: string; full?: boolean; accent: string; email?: { subject?: string; body?: string } }) => (
   <a
     href={mailto(email)}
     style={{ '--cta-accent': accent } as CSSProperties}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] hover:text-charcoal ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
   </a>
 );
 
-// Testimonials on the room-colour Trust panel: dark copy on the light accent, a
-// thin charcoal left rule, no box. One quote at a time, crossfaded; rotation
+// Testimonials on the Deep Blue-Green Trust panel: bone copy on the dark panel,
+// a thin bone left rule, no box. One quote at a time, crossfaded; rotation
 // pauses for reduced motion; the pips stay clickable.
 const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; interval?: number }) => {
   const reduce = useReducedMotion();
@@ -87,17 +87,17 @@ const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name
   }, [active, reduce, items.length, interval]);
   return (
     <div>
-      <div className="border-l-2 border-ink/25 pl-6 md:pl-8">
+      <div className="border-l-2 border-bone/25 pl-6 md:pl-8">
         <motion.figure
           key={active}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: reduce ? 0 : 0.45, ease: 'easeInOut' }}
         >
-          <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink">“{items[active].quote}”</blockquote>
+          <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone">“{items[active].quote}”</blockquote>
           <figcaption className="mt-5 not-italic">
-            <span className="block text-[15px] font-medium text-ink">{items[active].name}</span>
-            <span className="block text-[13px] text-ink/70">{items[active].role}</span>
+            <span className="block text-[15px] font-medium text-bone">{items[active].name}</span>
+            <span className="block text-[13px] text-bone/70">{items[active].role}</span>
           </figcaption>
         </motion.figure>
       </div>
@@ -108,7 +108,7 @@ const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Show testimonial ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-ink' : 'w-2 bg-ink/30 hover:bg-ink/55'}`}
+            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/55'}`}
           />
         ))}
       </div>
@@ -141,7 +141,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
       <SeoMeta title={`${c.navLabel} | DAB Hands`} description={c.hero.subline} path={`/${c.slug}`} />
 
       <Layout footerVariant="none">
-        {/* 1 ── HERO: a soft vignette of the room colour fading into bone. ── */}
+        {/* 1 ── HERO: warm stone with a soft Cloud Pink wash. ── */}
         <section className="bg-bone text-ink pt-32 md:pt-40 pb-16 md:pb-20" style={{ backgroundImage: a.wash }}>
           <div className="u-container">
             <div className="u-grid">
@@ -178,29 +178,29 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 2 ── VALIDATION ("The Situation" — P2): a solid panel of the room
-            colour. Serif heading (+ optional lead), two body-copy columns
+        {/* 2 ── VALIDATION ("The Situation" — P2): a solid Deep Blue-Green panel,
+            bone copy. Serif heading (+ optional lead), two body-copy columns
             (paras[0] left, the rest right), serif coda. ── */}
-        <section data-p2 className="text-ink py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
+        <section data-p2 className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
             <div className="u-grid gap-y-10 md:gap-y-12 md:items-start">
               {/* Serif heading + its optional quiet lead-in, across the top. */}
               <FadeUp className="col-span-4 md:col-span-12">
                 <h2 className="font-serif text-[32px] md:text-[44px] lg:text-[50px] leading-[1.05] tracking-[-0.01em] max-w-[24ch]">{c.validation.heading}</h2>
                 {c.validation.intro && (
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-ink/90 max-w-[46ch]">{c.validation.intro}</p>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/90 max-w-[46ch]">{c.validation.intro}</p>
                 )}
               </FadeUp>
               {/* Two body-copy columns: paragraphs split evenly, left then right. */}
               <FadeUp delay={0.08} className="col-span-4 md:col-span-5">
-                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-ink/80">
+                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-bone/80">
                   {c.validation.paras.slice(0, vMid).map((p, i) => (
                     <p key={i}>{withSoftBreaks(p)}</p>
                   ))}
                 </div>
               </FadeUp>
               <FadeUp delay={0.14} className="col-span-4 md:col-span-5 md:col-start-8">
-                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-ink/80">
+                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-bone/80">
                   {c.validation.paras.slice(vMid).map((p, i) => (
                     <p key={i}>{withSoftBreaks(p)}</p>
                   ))}
@@ -209,7 +209,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               {/* Coda: the serif footer statement. */}
               {c.validation.coda && (
                 <FadeUp delay={0.2} className="col-span-4 md:col-span-12">
-                  <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.28] text-ink max-w-[46ch]">{c.validation.coda}</p>
+                  <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.28] text-bone max-w-[46ch]">{c.validation.coda}</p>
                 </FadeUp>
               )}
             </div>
@@ -293,7 +293,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 6 ── WHERE I TEND TO HELP (P5): bone, with the cards in the room colour. ── */}
+        {/* 6 ── WHERE I TEND TO HELP (P5): warm stone, with soft-grey cards. ── */}
         <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
           <div className="u-container">
             <FadeUp>
@@ -309,7 +309,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="col-span-4 flex h-full flex-col rounded-2xl p-6 md:p-7"
-                    style={{ backgroundColor: `color-mix(in srgb, ${a.color} 50%, var(--color-bone))` }}
+                    style={{ backgroundColor: 'var(--color-stone)' }}
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink text-balance md:min-h-[2lh]">{withSoftBreaks(s.heading)}</h3>
                     <p className="mt-3 text-ink/75 leading-relaxed text-[15px]">{s.body}</p>
@@ -333,33 +333,33 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 7 ── TRUST ("Trusted by …"): a solid panel of the room colour, dark copy. ── */}
-        <section className="text-ink py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
+        {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy. ── */}
+        <section className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
             <div className="u-grid gap-y-8">
               <FadeUp className="col-span-4 md:col-span-12">
-                <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-ink/80 md:whitespace-nowrap">{c.proof.heading}</p>
+                <p className="font-serif text-[20px] md:text-[24px] leading-[1.2] text-bone/80 md:whitespace-nowrap">{c.proof.heading}</p>
               </FadeUp>
               <FadeUp delay={0.08} className="col-span-4 md:col-span-9 md:col-start-1">
                 {c.proof.testimonials ? (
                   <Testimonials items={c.proof.testimonials} interval={c.proof.interval} />
                 ) : c.proof.quote ? (
-                  <blockquote className="border-l-2 border-ink/25 pl-6 md:pl-8">
-                    <p className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink">“{c.proof.quote}”</p>
+                  <blockquote className="border-l-2 border-bone/25 pl-6 md:pl-8">
+                    <p className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone">“{c.proof.quote}”</p>
                     {c.proof.name && (
                       <footer className="mt-5 not-italic">
-                        <span className="block text-[15px] font-medium text-ink">{c.proof.name}</span>
-                        {c.proof.role && <span className="block text-[13px] text-ink/70">{c.proof.role}</span>}
+                        <span className="block text-[15px] font-medium text-bone">{c.proof.name}</span>
+                        {c.proof.role && <span className="block text-[13px] text-bone/70">{c.proof.role}</span>}
                       </footer>
                     )}
                   </blockquote>
                 ) : (
                   c.proof.statement && (
-                    <div className="border-l-2 border-ink/25 pl-6 md:pl-8">
+                    <div className="border-l-2 border-bone/25 pl-6 md:pl-8">
                       {c.proof.statement.map((p, i) => (
                         <p
                           key={i}
-                          className={i === 0 ? 'font-serif text-[18px] md:text-[20px] leading-[1.6] text-ink' : 'mt-4 text-lg text-ink/80 leading-relaxed'}
+                          className={i === 0 ? 'font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone' : 'mt-4 text-lg text-bone/80 leading-relaxed'}
                         >
                           {p}
                         </p>
