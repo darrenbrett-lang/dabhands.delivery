@@ -95,11 +95,11 @@ const content: OperatorContent = {
         media: 'image',
         frame: 'none',
         src: '/images/work/nike-dotcom-strategy.png',
-        outcome: 'A platform-wide transformation across Nike.com in Europe.',
+        outcome: 'Strategic platform direction for Nike.com across Europe.',
         story: {
-          headline: 'Building the digital flagship of sport.',
+          headline: 'Helping shape the future of Nike’s digital flagship.',
           body: [
-            'Led the delivery of a platform-wide transformation programme spanning Homepage, Navigation, Landing Pages and Kids experiences, helping align the future vision for Nike.com across Europe.',
+            'Led strategic platform work across Homepage, Navigation, Landing Pages and Kids experiences, helping define the direction of Nike.com across Europe and establish priorities for its future evolution.',
           ],
         },
       },

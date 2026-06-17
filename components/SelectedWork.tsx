@@ -353,7 +353,7 @@ export const SelectedWork = ({ content }: { content: SelectedWorkContent }) => {
 
   return (
     <>
-      <section data-hide-masthead aria-label="Selected work" className="overflow-hidden bg-ink text-bone py-20 md:py-28 lg:py-32">
+      <section data-hide-masthead aria-label="Selected work" className="overflow-hidden bg-black text-bone py-20 md:py-28 lg:py-32">
         <div className="u-container">
           <FadeUp>
             <p className="eyebrow text-bone/55">Selected work</p>
@@ -443,33 +443,40 @@ export const SelectedWork = ({ content }: { content: SelectedWorkContent }) => {
                       }}
                     >
                       <Phone card={card} idx={i} />
-                      {/* Caption — mobile/tablet only; on desktop the panel carries the words.
-                          Combined brand · tag eyebrow (matches the panel/sheet) so long
-                          partnership names wrap gracefully instead of colliding with the tag. */}
-                      <div className="mt-5 px-1 lg:hidden">
-                        <p className="eyebrow" style={{ color: card.hue }}>
-                          {card.brand} · {card.tag}
-                        </p>
-                        {card.story?.headline ? (
-                          <p className="mt-2.5 font-serif text-[19px] leading-[1.22] text-bone text-balance">{card.story.headline}</p>
-                        ) : (
-                          <p className="mt-2.5 text-[15px] leading-relaxed text-bone/65">{renderOutcome(card.outcome)}</p>
-                        )}
-                        {card.story && (
-                          <button
-                            type="button"
-                            onClick={() => openSheet(i)}
-                            className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-bone/85 transition-colors hover:text-bone"
-                          >
-                            Read case study
-                            <span aria-hidden>→</span>
-                          </button>
-                        )}
-                      </div>
                     </article>
                   );
                 })}
                 <div aria-hidden style={spacer} />
+              </div>
+
+              {/* Mobile caption — synced to the active card, on the page grid
+                  (on desktop the side panel carries this). */}
+              <div className="mt-7 lg:hidden">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <p className="eyebrow" style={{ color: activeCard.hue }}>
+                    {activeCard.brand} · {activeCard.tag}
+                  </p>
+                  {activeCard.story?.headline ? (
+                    <p className="mt-2.5 font-serif text-[20px] leading-[1.22] text-bone text-balance">{activeCard.story.headline}</p>
+                  ) : (
+                    <p className="mt-2.5 text-[15px] leading-relaxed text-bone/65">{renderOutcome(activeCard.outcome)}</p>
+                  )}
+                  {activeCard.story && (
+                    <button
+                      type="button"
+                      onClick={() => openSheet(active)}
+                      className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-bone/85 transition-colors hover:text-bone"
+                    >
+                      Read case study
+                      <span aria-hidden>→</span>
+                    </button>
+                  )}
+                </motion.div>
               </div>
 
               <div className="mt-9 flex items-center justify-center lg:justify-start">

@@ -19,7 +19,11 @@ export default function Contact() {
       />
 
       <Layout footerVariant="none">
-        <section className="bg-bone text-ink pt-36 md:pt-48 pb-24 md:pb-40 min-h-[78vh]">
+        {/* Warm stone + a soft Cloud Pink wash — the same hero vignette as the doorways. */}
+        <section
+          className="bg-bone text-ink pt-36 md:pt-48 pb-24 md:pb-40 min-h-[78vh]"
+          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(232,163,177,0.30), rgba(232,163,177,0.15) 55%, rgba(232,163,177,0) 100%)' }}
+        >
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
               <h1 className="text-[44px] md:text-[68px] lg:text-[88px] leading-[1.02] max-w-[12ch]">What needs moving?</h1>

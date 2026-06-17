@@ -209,19 +209,25 @@ export const Header = () => {
                     <div className="w-[300px] rounded-2xl border border-stone/70 bg-bone/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
                       {audiences.map((a) => {
                         const active = router.pathname === a.href;
-                        const lit = active || hoveredWho === a.href;
+                        const hovered = hoveredWho === a.href;
+                        // The current page reads as a soft Cloud Pink "you are here";
+                        // the other options take a soft grey on hover (places to go).
+                        const bg = active
+                          ? 'color-mix(in srgb, var(--color-cloud-pink) 30%, transparent)'
+                          : hovered
+                            ? 'color-mix(in srgb, var(--color-stone) 60%, transparent)'
+                            : undefined;
                         return (
                           <Link
                             key={a.href}
                             href={a.href}
                             role="menuitem"
+                            aria-current={active ? 'page' : undefined}
                             onMouseEnter={() => setHoveredWho(a.href)}
                             onMouseLeave={() => setHoveredWho(null)}
                             className="block rounded-xl px-3 py-2.5 transition-colors duration-200"
-                            style={{ backgroundColor: lit ? a.block : undefined }}
+                            style={{ backgroundColor: bg }}
                           >
-                            {/* Hovered/active option gets a soft block of the
-                                section colour; the label stays ink. */}
                             <span className="text-[14.5px] leading-snug text-ink">{a.label}</span>
                           </Link>
                         );
@@ -264,7 +270,7 @@ export const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-bone text-ink pt-28 px-8 md:hidden flex flex-col justify-between pb-12"
+            className="fixed inset-0 z-40 bg-bone text-ink pt-28 px-6 md:hidden flex flex-col justify-between pb-12"
           >
             <nav className="flex flex-col">
               <p className="eyebrow text-graphite mb-5">Who I help</p>

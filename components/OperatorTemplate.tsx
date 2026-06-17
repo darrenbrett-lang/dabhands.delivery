@@ -67,7 +67,7 @@ const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { 
   <a
     href={mailto(email)}
     style={{ '--cta-accent': accent } as CSSProperties}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] hover:text-cloud-pink ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -87,19 +87,27 @@ const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name
   }, [active, reduce, items.length, interval]);
   return (
     <div>
-      <div className="border-l-2 border-bone/25 pl-6 md:pl-8">
-        <motion.figure
-          key={active}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: reduce ? 0 : 0.45, ease: 'easeInOut' }}
-        >
-          <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone">“{items[active].quote}”</blockquote>
-          <figcaption className="mt-5 not-italic">
-            <span className="block text-[15px] font-medium text-bone">{items[active].name}</span>
-            <span className="block text-[13px] text-bone/70">{items[active].role}</span>
-          </figcaption>
-        </motion.figure>
+      {/* All quotes share one grid cell so the block is always the height of the
+          tallest testimonial — the pips below never jump as the quote changes,
+          and the left rule keeps a constant height. */}
+      <div className="grid border-l-2 border-bone/25 pl-6 md:pl-8">
+        {items.map((item, i) => (
+          <motion.figure
+            key={i}
+            aria-hidden={i !== active}
+            initial={false}
+            animate={{ opacity: i === active ? 1 : 0 }}
+            transition={{ duration: reduce ? 0 : 0.45, ease: 'easeInOut' }}
+            style={{ gridArea: '1 / 1' }}
+            className={i === active ? '' : 'pointer-events-none'}
+          >
+            <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone">“{item.quote}”</blockquote>
+            <figcaption className="mt-5 not-italic">
+              <span className="block text-[15px] font-medium text-bone">{item.name}</span>
+              <span className="block text-[13px] text-bone/70">{item.role}</span>
+            </figcaption>
+          </motion.figure>
+        ))}
       </div>
       <div className="mt-7 flex gap-2.5">
         {items.map((_, i) => (
@@ -193,14 +201,14 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               </FadeUp>
               {/* Two body-copy columns: paragraphs split evenly, left then right. */}
               <FadeUp delay={0.08} className="col-span-4 md:col-span-5">
-                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-bone/80">
+                <div className="space-y-5 border-l-2 border-bone/25 pl-5 md:pl-6 text-[17px] md:text-[18px] leading-[1.75] text-bone/80">
                   {c.validation.paras.slice(0, vMid).map((p, i) => (
                     <p key={i}>{withSoftBreaks(p)}</p>
                   ))}
                 </div>
               </FadeUp>
               <FadeUp delay={0.14} className="col-span-4 md:col-span-5 md:col-start-8">
-                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-bone/80">
+                <div className="space-y-5 border-l-2 border-bone/25 pl-5 md:pl-6 text-[17px] md:text-[18px] leading-[1.75] text-bone/80">
                   {c.validation.paras.slice(vMid).map((p, i) => (
                     <p key={i}>{withSoftBreaks(p)}</p>
                   ))}
@@ -401,7 +409,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
         {/* Mobile sticky CTA (thumb zone). Hidden on desktop and near page ends. */}
         <div
-          className={`md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-stone/60 bg-bone/95 px-4 py-3 backdrop-blur transition-all duration-300 ${
+          className={`md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-stone/60 bg-bone/95 px-6 py-3 backdrop-blur transition-all duration-300 ${
             sticky ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
           }`}
         >

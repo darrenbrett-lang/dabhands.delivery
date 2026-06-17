@@ -80,8 +80,8 @@ export default function Home() {
             </motion.h1>
 
             <FadeUp delay={0.4}>
-              <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[40ch] mx-auto">
-                I help digital-forward businesses get their best work into the world, intact.
+              <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[46ch] mx-auto">
+                {withSoftBreaks('I help digital-forward businesses get their\nbest work into the world, intact.')}
               </p>
             </FadeUp>
             <FadeUp delay={0.55}>
@@ -243,7 +243,7 @@ export default function Home() {
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-graphite"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green hover:text-cloud-pink"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
