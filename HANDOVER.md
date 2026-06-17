@@ -1,12 +1,12 @@
 # DAB Hands Website — Handover
 
-Pick this up cold. Captures the project after the **doorway colour-rhythm pass** (June 2026): soft cloud-sampled audience colours, a per-room solid colour rhythm, a hide-on-scroll masthead with a room locator, the doorway pages moved onto the real grid, and Deep Teal retired.
+Pick this up cold. Captures the project after the **v5 colour-system pass** (June 2026): the three-audience colour system (sage / peach / lavender) was **retired** and replaced with **one restrained five-colour palette** (Charcoal, Warm Stone, Cloud Pink, Deep Blue-Green, Soft Grey). Also live: a **Selected Work** phone-carousel on the Marketing page, a hide-on-scroll masthead (room locator + a "hide zone" over the carousel), and the doorway pages on the real grid.
 
 ---
 
 ## Status (read first)
 
-- **Working branch: `staging`.** The current build: **bone `#F5F1EB` + dark type carry the site; Deep Teal is retired.** Each audience room owns one **soft, cloud-sampled colour** — Business **Sage Mist `#BCC5B8`**, Marketing **Dusty Apricot `#E5C8BA`**, Creators **Cloud Lavender `#CDC3DA`** — applied as a deliberate **colour rhythm** down the page (see "The three rooms"). The doorway pages now sit on the shared 12-column grid; the masthead **hides on scroll and returns when you stop**, with a persistent **room locator** under the wordmark; the `SpineLabel` is gone.
+- **Working branch: `staging`.** The current build runs **one restrained five-colour palette** (the three-audience sage/peach/lavender system is retired): **Charcoal `#1F1F1D`** (text + dark sections), **Warm Stone `#F5F1EA`** (background), **Cloud Pink `#E8A3B1`** (expressive accent), **Deep Blue-Green `#3F5A61`** (interactive + the solid Situation/Trust panels + turnstile cards), **Soft Grey `#D8D3CB`** (borders + the "Where I help" cards). Every room shares this one palette — no per-room colour. The doorway pages sit on the shared 12-column grid; the masthead **hides on scroll and returns when you stop**, with a persistent **room locator** under the wordmark; the `SpineLabel` is gone.
 - **Production is untouched.** `main` is still the old v1 site serving `https://dabhands.delivery`. Nothing of the new build is on `main`.
 - **Staging preview:** `https://dabhands-delivery-git-staging-darren-brett-s-projects.vercel.app` (Vercel preview of `staging`, rebuilds on every push). It may return **401** if Vercel Deployment Protection is on (Vercel → project → Settings → Deployment Protection).
 - **localhost:3000** is the local `npm run dev` server (hot-reloads the checked-out branch). NB **`@theme` colour/token edits in `globals.css` often do NOT hot-reload under Turbopack** — stop dev, `rm -rf .next`, restart to see token changes. (Runtime CSS like inline `color-mix`/styles hot-reloads fine.)
@@ -49,10 +49,10 @@ Nav: **DAB Hands (home) · Who I help (dropdown) · Contact.** "Who I help" → 
 Predominantly **bone + graphite**. Rhythm: bone hero → clouds banner (Darren) → charcoal (point of view) → bone (proof) → bone (turnstile) → bone (final CTA).
 1. **Hero** (bone, centred, clean) — Instrument Serif "Keeping important work moving." + subline. CTA cue **"See where I can help +"** (`PathwayPicker`) — a small **plus** (rotating to × when open) that reveals the three pathways as a charcoal-on-bone panel on hover/focus. No cloud behind the hero copy.
 2. **Darren** — full-bleed `clouds.png` banner, copy left, cut-out portrait bottom-right (`darren_new-image.png`).
-3. **Point of view** (charcoal, bone copy) — two columns (thesis left, argument right). `HandUnderline` on "as intended" is now a soft **bone** stroke (teal retired).
+3. **Point of view** (charcoal, bone copy) — two columns (thesis left, argument right). (The `HandUnderline` mark was removed from the public site — see Components.)
 4. **Proof** (bone) — `<LogoTicker>` (all 13 clients).
-5. **Turnstile** (bone) — "Where do you need help…" + three **doorway cards, each in its room colour** (`color-mix(audience ~50%, bone)` at rest, deepening + accent border on hover), charcoal text. The homepage's one colour moment (deliberate wayfinding).
-6. **Final CTA** (bone) — charcoal "Start a conversation" button (hover → neutral graphite).
+5. **Turnstile** (warm stone) — "Where do you need help…" + three **doorway cards in solid Deep Blue-Green** (bone copy, Cloud Pink "Explore" accent + hover border). The per-room colours are retired; the cards differ by label, not colour.
+6. **Final CTA** (warm stone) — charcoal "Start a conversation" button (hover → neutral graphite).
 
 ### The three rooms (`components/OperatorTemplate.tsx`)
 
@@ -60,18 +60,22 @@ All three on one 8-section operator spine (operating **partner**, "I" voice, sit
 
 | Panel | Treatment |
 |---|---|
-| **P1 Hero** | bone + a soft **vignette** of the room colour (`ACCENT.wash`, top-down gradient); coloured eyebrow; charcoal CTA |
-| **P2 The Situation** | **solid** panel of the room colour; same layout as The Challenge — heading + lead on top, two-column body underneath (para 1 left, rest right), serif **coda** in the left column; `data-p2` (drives the masthead locator) |
-| **P3 The Challenge** | **charcoal/black** two-column (problem / context / payoff) |
-| **P4 What Changes** | the **cloud image** (`clouds.png` + `bg-bone/35` scrim, neutral — no colour tint); the bold serif payoff |
-| **(Transition)** | optional bone section — Creators only ("The challenge isn't ambition.") |
-| **P5 Where I tend to help** | **bone**; three situation cards filled in the room colour (`color-mix(a.color 50%, bone)`) |
-| **Trusted by…** | **solid** panel of the room colour, **dark** copy (testimonials flip to ink text + charcoal rule); auto-rotating `proof.testimonials` (Business 2 / Marketing 3; interval per page) or a single `proof.quote` (Creators — Gary Shannon) |
-| **Close** | **bone**, left-aligned, charcoal CTA |
+| **P1 Hero** | warm stone + a soft **Cloud Pink wash** (`ACCENT.wash`, top-down gradient); blue-green eyebrow; charcoal CTA |
+| **P2 The Situation** | **solid Deep Blue-Green** panel, **bone** copy; heading + lead on top, two-column body underneath (para 1 left, rest right), serif **coda**; `data-p2` (drives the masthead locator) |
+| **P3 The Challenge** | **charcoal** — big serif thesis (left) + building argument → serif resolution (right) |
+| **P4 What Changes** | the **cloud image** (`clouds.png` + `bg-bone/35` scrim); the bold serif payoff |
+| **(Transition)** | optional warm-stone section (rarely used) |
+| **P5 Where I tend to help** | **warm stone**; three situation cards in **Soft Grey** |
+| **Selected Work** (Marketing only) | **charcoal** phone carousel — see its own section below |
+| **Trusted by…** | **solid Deep Blue-Green** panel, **bone** copy (testimonials in bone); auto-rotating `proof.testimonials` (interval per page) or a single `proof.quote` |
+| **Close** | **warm stone**, centred, charcoal CTA (hover fills blue-green) |
 
-Content lives in each page file. Per-room CTA hover fills the room colour (charcoal text); each room's CTA opens a context-specific email via `content.email` (mailto subject + body). Mobile **sticky CTA**. All doorway module content is left-aligned on the grid. **Failed experiment (don't repeat):** an "atmosphere-led" pass that tinted Situation/Outcomes with low-opacity colour over the cloud — `clouds.png` is a warm pink sky, so every room read pink and the rhythm was lost. Colour on the room pages = **solid panels + vignette + coloured cards**, not faint cloud tints.
+Content lives in each page file. The CTA is charcoal, hover fills Deep Blue-Green; each room's CTA opens a context-specific email via `content.email` (mailto subject + body). Mobile **sticky CTA**. All doorway module content is left-aligned on the grid. The per-page `accent` field is now **vestigial** — every value resolves to the one shared `ROOM` palette in `OperatorTemplate`.
 
 Creators differs structurally: it adds the optional **Transition** section and uses a single `proof.quote` instead of the rotating testimonials. `components/AudienceTemplate.tsx` is the legacy engine — **unused, safe to delete.**
+
+### Selected Work carousel (`components/SelectedWork.tsx`) — Marketing only
+A show-don't-explain phone-mockup carousel on a **charcoal** stage (silent chrome, loud work — colour lives only inside the screens; the chrome accent is **Cloud Pink**). Data-driven from `work.cards` (`WorkCard[]`) in `marketing-leaders.tsx`: nine real case studies, each a 9:19 device-mockup PNG in `/public/images/work/` (`media:'image'`, `frame:'none'` since the PNGs already include the phone). Native scroll-snap, the next card always peeking; **swipe + arrows + dots + keyboard** all wired. **Desktop:** a synced narrative panel (grid cols 1–5) crossfades to the centred card; phones in cols 6–12. **Mobile:** the card shows brand · tag · headline + "Read case study", which opens a slide-up sheet. The masthead treats this section as a **hide zone** (`data-hide-masthead`): the nav stays hidden over it, returning on pointer-to-top or when you scroll away. Each card may carry an optional `story` (headline + body + optional `result` chip).
 
 ### `/contact`, `/for/manifesto-digital`
 Contact: bone hero "What needs moving?" + channels. Manifesto-digital: unlisted private pitch on `PrivateLayout` (plum), `noindex` — keep out of nav/sitemap.
@@ -80,20 +84,16 @@ Contact: bone hero "What needs moving?" + channels. Manifesto-digital: unlisted 
 
 | Role | Token | Hex |
 |---|---|---|
-| Primary background (bone) | `bone` | `#F5F1EB` |
-| Primary text / headlines (ink) | `ink` | `#1F1F1D` |
+| Warm Stone — primary background | `bone` | `#F5F1EA` |
+| Charcoal — primary text + ALL dark sections (ink/charcoal unified) | `ink` / `charcoal` | `#1F1F1D` |
 | Secondary / body text | `graphite` | `#5C5C58` |
-| Borders / dividers | `stone` | `#D8D2C8` |
-| Charcoal — dark sections, footer, "black" beats | `charcoal` | `#232323` |
-| Audience — Business (Sage Mist) | `sage` | `#BCC5B8` |
-| Audience — Marketing (Dusty Apricot) | `peach` | `#E5C8BA` |
-| Audience — Creators (Cloud Lavender) | `lavender` | `#CDC3DA` |
-| Audience deep shades (eyebrow text) — B / M / C | `sage-deep` / `peach-deep` / `lavender-deep` | `#6F7D69` / `#B97D62` / `#6E5A86` |
-| Highlight / focus ring | `coral` | `#D98773` |
-| **Retired — Deep Teal** (legacy token only, not on any live surface) | `teal` | `#48666A` |
-| Legacy / unused | moss, plum, aubergine, sky, paper, `dab-*` | — |
+| Soft Grey — borders, dividers, "Where I help" cards | `stone` | `#D8D3CB` |
+| Cloud Pink — expressive accent (hero wash, carousel, on-dark eyebrows) | `cloud-pink` | `#E8A3B1` |
+| Deep Blue-Green — interactive/links/emphasis + solid Situation/Trust panels + turnstile | `blue-green` | `#3F5A61` |
+| Legacy — dev tools / focus ring / `/for` only | `coral` / `teal` / `plum` / `aubergine` | `#D98773` / `#48666A` / `#352E44` / `#4A3D59` |
+| Legacy / unused | sky, moss, paper, lavender-*, `dab-*` | — |
 
-Bone + dark type carry the site. **Each room = one soft colour**, applied as the rhythm above (solid panels carry it; the new colours are light enough for charcoal/ink text). **Audience colour is a navigational device** — solid Situation + Trusted-by panels, the room vignette, the room-coloured help cards + homepage doorway cards, nav hovers — never bright/digital. **Teal is retired.** Tokens in `globals.css @theme`. Utilities: `.eyebrow`, `.font-serif`. Focus ring coral.
+**One restrained palette, shared by every room** (the three-audience sage/peach/lavender system is retired). Principle: *restrained palette, emotion from imagery, clarity from contrast.* Cloud Pink is used on dark / as fills — never as text on warm stone (too low-contrast); Deep Blue-Green carries the solid panels + interactive bits (sparingly); eyebrows are blue-green on light, cloud pink on dark. Tokens in `globals.css @theme`. Utilities: `.eyebrow`, `.font-serif`. Focus ring coral (functional, not a brand colour).
 
 ## Grid system (deliberate + fixed)
 
@@ -105,8 +105,8 @@ One page width, one 12-column grid, named reading measures, one vertical rhythm.
 
 ## Components (`/components`)
 
-- **`Header.tsx`** — transparent over bone, gains `bg-bone/85 backdrop-blur + border` on scroll. **Hides on scroll, returns on pause** (`-translate-y-full` while scrolling, idle-timer restores it; stays put at the very top; `motion-reduce` aware). Serif "DAB Hands" wordmark with a **persistent room locator** beneath it on the doorway pages (small uppercase graphite, left-aligned to the wordmark, no dash) that fades in once you've **scrolled to P2** (a scroll-through-hero check on `[data-p2]`) and stays for the rest of the page. "Who I help" dropdown: hover/active gets a soft block of the room colour, label stays ink. Mobile hamburger → bone sheet.
-- **`OperatorTemplate.tsx`** — the 8-section room engine + the per-room colour rhythm (see above). `ACCENT` map: `color` (room colour — solid panels, card fills, CTA hover), `wash` (hero vignette gradient), `text` (deep eyebrow shade), `border`.
+- **`Header.tsx`** — transparent over warm stone, gains `bg-bone/85 backdrop-blur + border` on scroll. **Hides on scroll, returns on pause**; also honours **hide zones** (`[data-hide-masthead]`, e.g. the Selected Work carousel) — stays hidden over them, reappearing on pointer-to-top or when you scroll away. Serif "DAB Hands" wordmark with a **persistent room locator** beneath it on the doorway pages (small uppercase **Deep Blue-Green**, fades in once you've **scrolled to P2** via `[data-p2]`). "Who I help" dropdown: hover/active gets a faint blue-green block, label stays ink. Mobile hamburger → warm-stone sheet.
+- **`OperatorTemplate.tsx`** — the 8-section room engine + the shared colour rhythm (see above). One `ROOM` palette object (the `ACCENT` map points every key at it): `color` (Deep Blue-Green — solid panels + CTA hover), `wash` (Cloud Pink hero vignette), `text` (blue-green eyebrow), `border`. Renders the optional `SelectedWork` carousel before the close.
 - **`PathwayPicker.tsx`** — homepage hero quick-nav; trigger "See where I can help" with a **plus** icon (→ × when open); portalled charcoal-on-bone panel; closes on Escape/outside-click/scroll.
 - **`GridToggle.tsx`** — floating **design aid** bottom-right ("● GRID"); toggles a coral 12-column overlay mirroring `.u-container`/`.u-grid`. Rendered in `Layout` (all environments). **Hide/gate before promoting to production.**
 - **`HandUnderline.tsx`** — restrained hand mark; **now used only on the unlisted `/for/manifesto-digital` pitch** (removed from the public site); `light` tone is coral.
@@ -119,14 +119,14 @@ One page width, one 12-column grid, named reading measures, one vertical rhythm.
 2. **Brand wordmark is "DAB Hands"** (uppercase DAB, capital-H Hands). Tokens/paths exempt.
 3. **White text is always bone** (`text-bone`), never `text-white`.
 4. **Type:** Instrument Serif for display/statements/quotes; Manrope for everything else. Never force weight on the serif. Label headings no full stops; truth-statements keep periods.
-5. **Each doorway room is one colour, applied as the solid rhythm.** Don't flatten it into faint tints; don't reintroduce teal; keep the homepage predominantly bone/graphite.
+5. **One restrained five-colour palette; the three-audience sage/peach/lavender system is RETIRED — do not reintroduce it.** Cloud Pink on dark / as fills (never as text on warm stone); Deep Blue-Green for interactive + the solid Situation/Trust panels + turnstile; Soft Grey for borders/cards. Emotion from imagery, clarity from contrast.
 
 ## Open items / TODO
 - **`GridToggle` ships in all environments** — hide or gate it (`process.env.NODE_ENV`) before any production promotion.
 - **Imagery:** `clouds.png` is the brand's warm cloud asset (Darren banner + the What-Changes payoff). `Figure` is ready for art-directed imagery. The per-room `*_solution.png` sky images are **no longer used** (the What-Changes cloud is the shared `clouds.png` now) — prune when convenient.
 - **`darren_new-image.png`** is a ~2.3 MB PNG — convert to WebP to cut homepage payload.
 - **`og-image.png` / `favicon.svg`** are still v1 green — regenerate for the current look.
-- **Prune** legacy `dab-*`, plum/aubergine/sky/moss/paper tokens + unused v1 components once confirmed.
+- **Prune** legacy `dab-*`, plum/aubergine/sky/moss/paper + `lavender-*` tokens + unused v1 components (`AudienceTemplate.tsx`, `Ribbon*.tsx`, etc.) once confirmed. (sage/peach/lavender already removed; coral/teal/plum kept for dev tools, focus ring and `/for`.)
 
 ## Working style
 - Owner iterates fast in small, specific edits. For exploratory questions, answer in 2-3 sentences with a recommendation + the main tradeoff before implementing. Don't pre-emptively redesign neighbouring work.
