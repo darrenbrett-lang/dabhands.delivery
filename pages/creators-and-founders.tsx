@@ -11,55 +11,42 @@ const content: OperatorContent = {
   },
   validation: {
     heading: 'You’ve already created momentum.',
-    intro: 'The audience is growing. Customers are responding. Opportunities keep appearing.',
     paras: [
-      'From the outside, things look successful.',
-      'Yet somehow every important decision still seems to find its way back to you.',
+      'The audience is growing. Customers are responding. Opportunities keep appearing. From the outside, things look successful.',
+      'Yet every important decision still seems to find its way back to you. The business has grown. The way it operates hasn’t quite caught up.',
     ],
-    coda: 'The business has grown. The way it operates hasn’t quite caught up.',
+    coda: 'It’s creating the capability to grow beyond you.',
   },
   diagnosis: {
-    heading: 'What I’ve seen happen.',
-    problem: [
-      'Success creates complexity. More customers. More projects. More partnerships. More people. More decisions.',
-      'At first, that’s exciting. Over time, it becomes harder to keep everything moving.',
+    thesis: 'You’ve created momentum.\nYou’re carrying too much of it.',
+    argument: [
+      'More customers. More projects. More partnerships. More people. More decisions.',
+      'What once felt simple starts demanding more attention. The founder spends more time coordinating than creating.',
     ],
-    context: [
-      'The founder spends more time coordinating than creating. More time solving problems than spotting opportunities. More time keeping things together than building what comes next.',
-    ],
-    payoff: 'Nothing is broken. The business has simply reached a point where it needs more capability around it than it did before.',
-  },
-  transition: {
-    heading: 'The challenge isn’t ambition.',
-    paras: [
-      'You’ve already proved there’s demand. The challenge is building a business capable of carrying the momentum you’ve created.',
-      'That doesn’t mean becoming corporate. It doesn’t mean layers of process or endless meetings.',
-      'It means creating enough clarity, ownership and accountability that the business can continue to grow without everything depending on one person.',
-      'The best founder-led businesses find a way to protect what made them special while becoming better at execution.',
-    ],
+    resolution: 'The business has simply outgrown the way it used to operate.',
   },
   outcomes: {
-    heading: 'That’s where I come in.',
+    heading: 'I help businesses grow\nbeyond their founders.',
     paras: [
-      'Having spent seven years building and running my own agency, I know first-hand how quickly success creates complexity.',
+      'Having spent seven years building and running my own agency, I know how quickly success creates complexity.',
       'Alongside that experience, I’ve spent more than twenty years helping organisations navigate growth, change and execution.',
-      'I help businesses build the capability required to support what comes next.',
-      'Not through more hustle. Through greater clarity, stronger ownership and better alignment.',
+      'I help businesses build the clarity, ownership and capability required to support what comes next.',
+      'Not through more hustle. Through better foundations.',
     ],
   },
   help: {
     heading: 'Where I tend to help',
     situations: [
       {
-        heading: 'The business has become too dependent on you.',
+        heading: 'The business has become\ntoo dependent on you.',
         body: 'Important decisions, approvals and momentum still rely on one person holding everything together.',
       },
       {
-        heading: 'Growth is faster than capability.',
+        heading: 'Growth is faster\nthan capability.',
         body: 'New opportunities are arriving, but the systems, team structure and operating rhythm haven’t evolved at the same pace.',
       },
       {
-        heading: 'The next stage is obvious.',
+        heading: 'The next stage\nis obvious.',
         body: 'The ambition is clear. The challenge is building the business required to support it.',
       },
     ],

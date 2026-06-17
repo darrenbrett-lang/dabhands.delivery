@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 // while the label stays ink; `tint` is the solid accent (mobile lead dash),
 // `block` the low-alpha hover fill.
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', context: 'For business & agency leaders', tint: 'var(--color-sage)', block: 'color-mix(in srgb, var(--color-sage) 22%, transparent)' },
-  { href: '/marketing-leaders', label: 'Marketing leaders', context: 'For marketing leaders', tint: 'var(--color-peach)', block: 'color-mix(in srgb, var(--color-peach) 24%, transparent)' },
-  { href: '/creators-and-founders', label: 'Creators & founders', context: 'For creators & founders', tint: 'var(--color-lavender)', block: 'color-mix(in srgb, var(--color-lavender) 24%, transparent)' },
+  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', context: 'For business & agency leaders', tint: 'var(--color-sage)', deep: 'var(--color-sage-deep)', block: 'color-mix(in srgb, var(--color-sage) 22%, transparent)' },
+  { href: '/marketing-leaders', label: 'Marketing leaders', context: 'For marketing leaders', tint: 'var(--color-peach)', deep: 'var(--color-peach-deep)', block: 'color-mix(in srgb, var(--color-peach) 24%, transparent)' },
+  { href: '/creators-and-founders', label: 'Creators & founders', context: 'For creators & founders', tint: 'var(--color-lavender)', deep: 'var(--color-lavender-deep)', block: 'color-mix(in srgb, var(--color-lavender) 24%, transparent)' },
 ];
 
 export const Header = () => {
@@ -22,26 +22,52 @@ export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false); // nav tucks away while actively scrolling
   const [atP2, setAtP2] = useState(false); // true once scrolled to the doorway's second panel (P2)
+  const [hideZone, setHideZone] = useState(false); // inside a section that keeps the masthead tucked away (e.g. the work carousel)
+  const [peekTop, setPeekTop] = useState(false); // pointer at the top edge — reveal even inside a hide zone
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // The nav slides up out of view while the user is actively scrolling and slides
-  // back once scrolling stops (a short idle). It stays put at the very top of the
-  // page. The idle timer reappearance is what "comes back when you stop" means.
+  // The nav slides up out of view while the user is actively scrolling and glides
+  // back ~1s after scrolling stops. It stays put at the very top of the page. The
+  // 1s idle pause + the slower slide-in (see header className) keep it premium.
+  // It also tracks "hide zones": sections tagged [data-hide-masthead] (e.g. the
+  // work carousel) that keep the nav tucked away while they own the viewport, so
+  // the idle-return can't flicker the nav on and off over them.
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
-      setHidden(y > 10); // hide once we've moved off the top; shown again on idle
+      setHidden(y > 10); // hide once we've moved off the top; glides back on idle
       if (idleTimer.current) clearTimeout(idleTimer.current);
-      idleTimer.current = setTimeout(() => setHidden(false), 200);
+      idleTimer.current = setTimeout(() => setHidden(false), 1000);
+      const zone = document.querySelector('[data-hide-masthead]');
+      if (zone) {
+        const r = zone.getBoundingClientRect();
+        const mid = window.innerHeight / 2;
+        setHideZone(r.top < mid && r.bottom > mid); // the zone owns the viewport centre
+      } else {
+        setHideZone(false);
+      }
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
       if (idleTimer.current) clearTimeout(idleTimer.current);
     };
+  }, [router.pathname]);
+
+  // Inside a hide zone the nav stays hidden — unless the pointer reaches the top
+  // edge of the viewport, which brings it back so the menu is always reachable.
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const y = e.clientY;
+      setPeekTop((prev) => (y <= 80 ? true : y > 160 ? false : prev));
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
   }, []);
 
   // The doorway pages tag their second panel ("The Situation") with [data-p2].
@@ -99,12 +125,18 @@ export const Header = () => {
   const contactActive = router.pathname === '/contact';
   const room = audiences.find((a) => router.pathname === a.href) ?? null;
   const showContext = atP2 && !!room;
+  // In a hide zone the nav stays tucked away (no idle flicker); a pointer at the
+  // top edge or an open menu always brings it back. Elsewhere it's the normal
+  // scroll/idle behaviour.
+  const navHidden = menuOpen || whoOpen ? false : hideZone ? !peekTop : hidden;
 
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color] duration-300 ease-out motion-reduce:transition-none ${
-          hidden ? '-translate-y-full' : 'translate-y-0'
+        className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color] motion-reduce:transition-none ${
+          navHidden
+            ? 'duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] -translate-y-full'
+            : 'duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] translate-y-0'
         } ${scrolled ? 'bg-bone/85 backdrop-blur-md border-b border-stone/70' : 'bg-transparent'}`}
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
@@ -118,8 +150,9 @@ export const Header = () => {
             </Link>
             {/* Persistent room locator: fades in beneath the wordmark once the
                 second panel is scrolled to. Absolute so it never nudges the
-                wordmark; left edge aligns to the wordmark, graphite for
-                legibility on the bone bar. */}
+                wordmark; left edge aligns to the wordmark, in the room's deep
+                accent (the legible form of the section colour, matching the hero
+                eyebrow — the light pastels would vanish on the bone bar). */}
             <AnimatePresence>
               {showContext && room && (
                 <motion.span
@@ -128,7 +161,8 @@ export const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -3 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute left-0 top-full mt-1.5 whitespace-nowrap text-[10px] md:text-[10.5px] uppercase tracking-[0.18em] text-graphite leading-none"
+                  style={{ color: room.deep }}
+                  className="absolute left-0 top-full mt-1.5 whitespace-nowrap text-[10px] md:text-[10.5px] uppercase tracking-[0.18em] leading-none"
                 >
                   {room.context}
                 </motion.span>

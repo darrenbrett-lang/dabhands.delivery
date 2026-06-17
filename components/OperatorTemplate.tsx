@@ -4,6 +4,8 @@ import { Layout } from './Layout';
 import { FadeUp } from './FadeUp';
 import { SeoMeta } from './SeoMeta';
 import { mailto } from '@/lib/mailto';
+import { withSoftBreaks, withBreaks } from '@/lib/softBreaks';
+import { SelectedWork, type SelectedWorkContent } from './SelectedWork';
 
 /* ── Operator destination template (8-section spine) ──────────────────────────
    DAB Hands as a trusted operating partner, not a consultant. Operator voice:
@@ -29,13 +31,19 @@ export interface OperatorContent {
   eyebrow: string; // "For business & agency leaders"
   accent: Accent;
   hero: { headline: string; subline: string; trust?: string };
-  validation: { heading: string; intro: string; paras: string[]; coda?: string };
-  diagnosis: { heading: string; intro?: string; cards?: { heading: string; body: string }[]; paras?: string[]; problem?: string[]; context?: string[]; payoff?: string };
+  // Serif heading (+ optional lead), two body-copy columns (paras[0] left, the
+  // rest right), serif coda. Statements may carry "\n" for a desktop soft break.
+  validation: { heading: string; intro?: string; paras: string[]; coda?: string };
+  // "The Challenge", charcoal — homepage Point-of-View form: a large serif thesis
+  // (left), an argument that builds (right) and resolves into a serif line.
+  diagnosis: { thesis: string; argument: string[]; resolution: string };
   outcomes: { heading: string; paras: string[] };
   transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
+  // Optional "Selected Work" carousel, rendered just before the closing CTA.
+  work?: SelectedWorkContent;
   email?: { subject: string; body: string }; // pre-fills the CTA mailto for this room's context
 }
 
@@ -49,6 +57,9 @@ const ACCENT: Record<Accent, { text: string; border: string; color: string; wash
   peach: { text: 'text-peach-deep', border: 'border-peach/40', color: 'var(--color-peach)', wash: 'linear-gradient(to bottom, rgba(229,200,186,0.36), rgba(229,200,186,0.20) 55%, rgba(229,200,186,0) 100%)' },
   sage: { text: 'text-sage-deep', border: 'border-sage/40', color: 'var(--color-sage)', wash: 'linear-gradient(to bottom, rgba(188,197,184,0.34), rgba(188,197,184,0.18) 55%, rgba(188,197,184,0) 100%)' },
 };
+
+// withSoftBreaks / withBreaks (two-part headlines) live in @/lib/softBreaks,
+// shared with the homepage.
 
 // Charcoal at rest; on hover it fills the room colour. Because the accents are
 // light, the label flips to charcoal so it stays legible.
@@ -108,6 +119,8 @@ const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name
 export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
   const c = content;
   const a = ACCENT[c.accent];
+  // The Situation's body paragraphs split evenly across the two columns.
+  const vMid = Math.ceil(c.validation.paras.length / 2);
 
   // Mobile sticky CTA: appears once the hero is scrolled past, hides near the
   // bottom so it never fights the close section's own CTA or the footer.
@@ -166,28 +179,34 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         </section>
 
         {/* 2 ── VALIDATION ("The Situation" — P2): a solid panel of the room
-            colour. Same layout as The Challenge below — heading (+ lead) on top,
-            two-column body underneath, the serif coda in the left column. ── */}
+            colour. Serif heading (+ optional lead), two body-copy columns
+            (paras[0] left, the rest right), serif coda. ── */}
         <section data-p2 className="text-ink py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
             <div className="u-grid gap-y-10 md:gap-y-12 md:items-start">
-              {/* Heading + its quiet lead-in, across the top. */}
+              {/* Serif heading + its optional quiet lead-in, across the top. */}
               <FadeUp className="col-span-4 md:col-span-12">
                 <h2 className="font-serif text-[32px] md:text-[44px] lg:text-[50px] leading-[1.05] tracking-[-0.01em] max-w-[24ch]">{c.validation.heading}</h2>
-                <p className="mt-5 text-lg md:text-xl leading-relaxed text-ink/90 max-w-[46ch]">{c.validation.intro}</p>
+                {c.validation.intro && (
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-ink/90 max-w-[46ch]">{c.validation.intro}</p>
+                )}
               </FadeUp>
-              {/* Two-column body: first paragraph left, the rest right. */}
+              {/* Two body-copy columns: paragraphs split evenly, left then right. */}
               <FadeUp delay={0.08} className="col-span-4 md:col-span-5">
-                <p className="text-[17px] md:text-[18px] leading-[1.75] text-ink/80">{c.validation.paras[0]}</p>
-              </FadeUp>
-              <FadeUp delay={0.14} className="col-span-4 md:col-span-6 md:col-start-7">
                 <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-ink/80">
-                  {c.validation.paras.slice(1).map((p, i) => (
-                    <p key={i}>{p}</p>
+                  {c.validation.paras.slice(0, vMid).map((p, i) => (
+                    <p key={i}>{withSoftBreaks(p)}</p>
                   ))}
                 </div>
               </FadeUp>
-              {/* Coda: the payoff line, left column. */}
+              <FadeUp delay={0.14} className="col-span-4 md:col-span-5 md:col-start-8">
+                <div className="space-y-5 text-[17px] md:text-[18px] leading-[1.75] text-ink/80">
+                  {c.validation.paras.slice(vMid).map((p, i) => (
+                    <p key={i}>{withSoftBreaks(p)}</p>
+                  ))}
+                </div>
+              </FadeUp>
+              {/* Coda: the serif footer statement. */}
               {c.validation.coda && (
                 <FadeUp delay={0.2} className="col-span-4 md:col-span-12">
                   <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.28] text-ink max-w-[46ch]">{c.validation.coda}</p>
@@ -197,76 +216,30 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 3 ── DIAGNOSIS ("The Challenge"): charcoal. ── */}
-        {c.diagnosis.problem && c.diagnosis.context ? (
-          // Charcoal two-column module: problem (left), context (right), payoff.
-          <section className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
-            <div className="u-container">
-              <div className="u-grid gap-y-10 md:gap-y-12 md:items-start">
-                <FadeUp className="col-span-4 md:col-span-12">
-                  <h2 className="font-serif text-[30px] md:text-[44px] leading-[1.1] max-w-[20ch] text-bone">{c.diagnosis.heading}</h2>
-                </FadeUp>
-                <FadeUp delay={0.06} className="col-span-4 md:col-span-5">
-                  <div className="space-y-4 text-[17px] leading-[1.7] text-bone/80">
-                    {c.diagnosis.problem.map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </div>
-                </FadeUp>
-                <FadeUp delay={0.12} className="col-span-4 md:col-span-6 md:col-start-7">
-                  <div className="space-y-4 text-[17px] leading-[1.7] text-bone/80">
-                    {c.diagnosis.context.map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </div>
-                </FadeUp>
-                {c.diagnosis.payoff && (
-                  <FadeUp delay={0.18} className="col-span-4 md:col-span-12">
-                    <p className="font-serif text-[24px] md:text-[30px] leading-[1.25] text-bone max-w-[34ch]">{c.diagnosis.payoff}</p>
+        {/* 3 ── DIAGNOSIS ("The Challenge"): charcoal, in the homepage Point-of-View
+            form — a large serif thesis (left), an argument that builds (right) and
+            resolves into a serif line. ── */}
+        <section className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
+          <div className="u-container">
+            <div className="u-grid gap-y-12 lg:items-start">
+              {/* Left: the thesis — large, commanding, fills the column. */}
+              <FadeUp className="col-span-4 md:col-span-6">
+                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">{withBreaks(c.diagnosis.thesis)}</h2>
+              </FadeUp>
+              {/* Right: the argument that builds to the resolution. */}
+              <div className="col-span-4 md:col-span-5 md:col-start-8">
+                {c.diagnosis.argument.map((p, i) => (
+                  <FadeUp key={i} delay={0.1 + i * 0.05}>
+                    <p className={`text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch] ${i === 0 ? '' : 'mt-5'}`}>{withSoftBreaks(p)}</p>
                   </FadeUp>
-                )}
+                ))}
+                <FadeUp delay={0.1 + c.diagnosis.argument.length * 0.05}>
+                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">{withSoftBreaks(c.diagnosis.resolution)}</p>
+                </FadeUp>
               </div>
             </div>
-          </section>
-        ) : (
-          <section className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
-            <div className="u-container">
-              <FadeUp>
-                <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch] text-bone">{c.diagnosis.heading}</h2>
-              </FadeUp>
-              {c.diagnosis.intro && (
-                <FadeUp delay={0.06}>
-                  <p className="mt-5 text-lg text-bone/70 leading-relaxed max-w-[56ch]">{c.diagnosis.intro}</p>
-                </FadeUp>
-              )}
-              {c.diagnosis.cards && (
-                <div className="u-grid mt-9">
-                  <div className="col-span-4 md:col-span-8">
-                    {c.diagnosis.cards.map((card, i) => (
-                      <FadeUp key={i} delay={0.1 + i * 0.05}>
-                        <div className={`py-6 ${i < c.diagnosis.cards!.length - 1 ? 'border-b border-bone/15' : ''}`}>
-                          <h3 className="text-xl md:text-2xl text-bone leading-[1.2]">{card.heading}</h3>
-                          <p className="mt-2.5 text-bone/70 leading-relaxed">{card.body}</p>
-                        </div>
-                      </FadeUp>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {c.diagnosis.paras && (
-                <FadeUp delay={0.08}>
-                  <div className="mt-6 space-y-4 text-lg text-bone/70 leading-[1.7] max-w-[58ch]">
-                    {c.diagnosis.paras.map((p, i) => (
-                      <p key={i} className={i === c.diagnosis.paras!.length - 1 ? 'text-bone' : undefined}>
-                        {p}
-                      </p>
-                    ))}
-                  </div>
-                </FadeUp>
-              )}
-            </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* 4 ── TRANSITION (optional): the messy middle / where I step in. ── */}
         {c.transition && (
@@ -305,7 +278,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           <div className="relative z-10 u-container">
             <div className="u-grid gap-y-6 md:gap-y-7">
               <FadeUp className="col-span-4 md:col-span-9">
-                <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em]">{c.outcomes.heading}</h2>
+                <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em] text-balance">{withSoftBreaks(c.outcomes.heading)}</h2>
               </FadeUp>
               <FadeUp delay={0.06} className="col-span-4 md:col-span-7 md:col-start-1">
                 <div className="space-y-4 text-lg text-graphite leading-[1.7]">
@@ -338,7 +311,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     className="col-span-4 flex h-full flex-col rounded-2xl p-6 md:p-7"
                     style={{ backgroundColor: `color-mix(in srgb, ${a.color} 50%, var(--color-bone))` }}
                   >
-                    <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink">{s.heading}</h3>
+                    <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink text-balance md:min-h-[2lh]">{withSoftBreaks(s.heading)}</h3>
                     <p className="mt-3 text-ink/75 leading-relaxed text-[15px]">{s.body}</p>
                   </motion.div>
                 ))}
@@ -399,21 +372,25 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 8 ── CLOSE: simple, confident invitation (left-aligned on the grid), bone. ── */}
+        {/* 7.5 ── SELECTED WORK (optional): silent-chrome phone carousel; the only
+            colour comes from inside the screens. Sits just before the close. ── */}
+        {c.work && <SelectedWork content={c.work} />}
+
+        {/* 8 ── CLOSE: simple, confident invitation — always centred, bone. ── */}
         <section className="bg-bone text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
           <div className="u-container">
             <div className="u-grid">
-              <div className="col-span-4 md:col-span-8">
+              <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
                 <FadeUp>
-                  <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch]">{c.close.heading}</h2>
+                  <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>
                 </FadeUp>
                 {c.close.line && (
                   <FadeUp delay={0.06}>
-                    <p className="mt-4 text-lg text-graphite max-w-[62ch]">{c.close.line}</p>
+                    <p className="mt-4 text-lg text-graphite max-w-[62ch] mx-auto text-balance">{withSoftBreaks(c.close.line)}</p>
                   </FadeUp>
                 )}
                 <FadeUp delay={0.1}>
-                  <div className="mt-8 flex">
+                  <div className="mt-8 flex justify-center">
                     <Cta accent={a.color} email={c.email} />
                   </div>
                 </FadeUp>

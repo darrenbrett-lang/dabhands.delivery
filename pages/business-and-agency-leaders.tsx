@@ -11,48 +11,47 @@ const content: OperatorContent = {
   },
   validation: {
     heading: 'All the blocks are in place.',
-    intro: 'The direction is clear. The people are capable. The work matters.',
     paras: [
-      'From the outside, everything appears to be there. Yet progress feels slower than it should. Not because people aren’t working hard. Not because the strategy is wrong.',
-      'As organisations grow, more teams become involved. More priorities compete for attention. More decisions need to travel further before anything happens.',
+      'The direction is clear. The people are capable. The work matters. Yet progress feels slower than it should. As organisations grow, more teams become involved.',
+      'More priorities compete for attention. More decisions need to travel further before anything happens. The challenge is rarely deciding what to do next.',
     ],
-    coda: 'The challenge is rarely deciding what to do next. More often, it’s helping the organisation move together.',
+    coda: 'It’s helping the organisation move together.',
   },
   diagnosis: {
-    heading: 'What gets in the way',
-    problem: [
-      'I’ve been around organisations long enough to know that momentum rarely disappears all at once. It gets lost in small places.',
-      'A decision that takes longer than it should. A priority that means different things to different teams. Information that isn’t where people need it. A handoff that loses context. A meeting that creates more noise than clarity.',
+    thesis: 'The strategy isn’t the problem.\nThe system is.',
+    argument: [
+      'Most organisations already have what they need.',
+      'Capable people. Clear ambition. Meaningful work.',
+      'The challenge isn’t creating more.',
+      'It’s adapting to a world where growth creates complexity, technology changes how work gets done and client expectations continue to evolve.',
+      'What once felt straightforward becomes harder to coordinate.',
     ],
-    context: [
-      'Individually, none of these things look particularly serious. Together, they make progress harder than it needs to be.',
-      'Technology is adding another layer. New tools are creating new opportunities, but they’re also changing how work flows, how decisions get made and where accountability sits.',
-    ],
-    payoff: 'The organisation has everything it needs. It just struggles to move at the pace it’s capable of.',
+    resolution: 'The organisation has what it needs. It just needs a way to move together at scale.',
   },
   outcomes: {
-    heading: 'I help organisations move together.',
+    heading: 'I help organisations\nmove together.',
     paras: [
-      'By identifying what’s slowing progress and strengthening the connections between people, priorities and execution.',
+      'By creating the clarity, alignment and capability required to grow with confidence.',
       'The goal isn’t more process. It’s making it easier for good people to do good work.',
-      'Priorities become clearer. Decisions move faster. Accountability becomes stronger. Leadership spends less time connecting dots and more time leading.',
-      'The organisation doesn’t need to work harder. It simply needs less friction.',
+      'Priorities become clearer. Decisions move faster. Accountability becomes stronger.',
+      'Leadership spends less time connecting dots and more time leading.',
+      'The organisation doesn’t need to work harder. It simply moves with less friction.',
     ],
   },
   help: {
     heading: 'Where I tend to help',
     situations: [
       {
-        heading: 'A strategic priority isn’t moving.',
-        body: 'The direction is clear. The intent is understood. Yet progress feels slower than it should and momentum is becoming harder to maintain.',
+        heading: 'A strategic priority\nisn’t moving.',
+        body: 'The direction is clear. The intent is understood. Yet progress feels slower than it should.',
       },
       {
-        heading: 'The organisation has become harder to coordinate.',
-        body: 'More teams, stakeholders and dependencies create friction between decision-making and execution.',
+        heading: 'The organisation has become\nharder to coordinate.',
+        body: 'More teams. More stakeholders. More dependencies. What once felt straightforward now takes more effort to move forward.',
       },
       {
-        heading: 'Leadership has become the operating system.',
-        body: 'Too much progress depends on a small number of people continually aligning teams, removing blockers and keeping important work moving.',
+        heading: 'Leadership has become\nthe operating system.',
+        body: 'Too much progress depends on a small number of people continually connecting dots and keeping important work moving.',
       },
     ],
   },

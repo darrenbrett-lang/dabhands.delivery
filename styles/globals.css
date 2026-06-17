@@ -231,3 +231,30 @@ p {
 .outlines-on [data-dev-tool] * {
   outline: none !important;
 }
+
+/* ── Selected Work carousel ───────────────────────────────────────────────
+   Silent chrome, loud work: the section is near-monochrome (ink + bone); the
+   only colour comes from inside the phone screens. A native scroll-snap gallery
+   (no library, no autoplay); the in-screen mock UIs animate so the work reads
+   "alive" rather than as a static template. */
+.work-track {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;            /* Firefox */
+  -ms-overflow-style: none;         /* old Edge */
+  overscroll-behavior-x: contain;
+}
+.work-track::-webkit-scrollbar { display: none; }
+.work-snap { scroll-snap-align: center; }
+
+@keyframes work-feed   { from { transform: translateY(0); }      to { transform: translateY(-50%); } }
+@keyframes work-rise   { 0%, 100% { transform: scaleY(0.18); }   50% { transform: scaleY(1); } }
+@keyframes work-fill   { 0% { width: 8%; }                       60%, 100% { width: 94%; } }
+@keyframes work-tick   { 0%, 35% { opacity: 0.25; }              55%, 100% { opacity: 1; } }
+@keyframes work-draw   { 0% { stroke-dashoffset: 300; }          70%, 100% { stroke-dashoffset: 0; } }
+@keyframes work-shimmer{ 0% { transform: translateX(-150%); }    100% { transform: translateX(260%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .work-anim { animation: none !important; }
+  .work-draw-path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .work-track { scroll-behavior: auto; }
+}

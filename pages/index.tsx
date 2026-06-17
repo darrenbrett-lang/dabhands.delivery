@@ -7,6 +7,7 @@ import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
+import { withSoftBreaks } from '@/lib/softBreaks';
 
 // The single path becomes three rooms. Each carries its section colour as a
 // hover cue (block + arrow tint), matching the nav dropdown and the P1 overlay.
@@ -22,7 +23,7 @@ const TURNSTILE = [
   },
   {
     label: 'Marketing leaders',
-    diagnosis: 'Great work loses power on the journey.',
+    diagnosis: 'Great work loses power\non the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
     rest: 'color-mix(in srgb, var(--color-peach) 50%, var(--color-bone))',
@@ -31,7 +32,7 @@ const TURNSTILE = [
   },
   {
     label: 'Creators & founders',
-    diagnosis: 'Everything depends on you. Until it can’t.',
+    diagnosis: 'Everything depends on you.\nUntil it can’t.',
     support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
     href: '/creators-and-founders',
     rest: 'color-mix(in srgb, var(--color-lavender) 50%, var(--color-bone))',
@@ -159,7 +160,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.2}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The challenge isn’t creating more. It’s helping what already exists move together.
+                    The challenge isn’t creating more. It’s helping what already exists move together well.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.26}>
@@ -219,7 +220,7 @@ export default function Home() {
                     }}
                   >
                     <h3 className="text-xl md:text-2xl text-ink mb-3">{t.label}</h3>
-                    <p className="text-ink/90 leading-snug mb-2.5 md:min-h-[2lh]">{t.diagnosis}</p>
+                    <p className="text-ink/90 leading-snug mb-2.5 text-balance md:min-h-[2lh]">{withSoftBreaks(t.diagnosis)}</p>
                     <p className="text-graphite leading-relaxed text-[15px]">{t.support}</p>
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold" style={{ color: hovered === i ? t.accent : 'var(--color-ink)' }}>
                       Explore
