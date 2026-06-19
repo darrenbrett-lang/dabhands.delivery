@@ -2,8 +2,8 @@ import { OperatorTemplate, type OperatorContent } from '@/components/OperatorTem
 
 const content: OperatorContent = {
   slug: 'business-and-agency-leaders',
-  navLabel: 'Business & agency leaders',
-  eyebrow: 'For business & agency leaders',
+  navLabel: 'Business & Agency Leaders',
+  eyebrow: 'For Business & Agency Leaders',
   accent: 'sage',
   hero: {
     headline: 'As organisations grow, keeping everything moving becomes harder.',
@@ -56,7 +56,7 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Trusted by business & agency leaders',
+    heading: 'Trusted by Business & Agency Leaders',
     interval: 10000,
     testimonials: [
       {

@@ -15,9 +15,9 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 const HOVER_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
 const HOVER_ACCENT = 'var(--color-blue-green)';
 const PATHS = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', line: 'Keeping momentum when complexity gets in the way.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
-  { href: '/marketing-leaders', label: 'Marketing leaders', line: 'Getting your strongest ideas into market intact.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
-  { href: '/creators-and-founders', label: 'Creators & founders', line: 'Building the capability for your next stage of growth.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'Keeping momentum when complexity gets in the way.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'Getting your strongest ideas into market intact.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', line: 'Building the foundations the next stage of growth depends on.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
 ];
 
 export const PathwayPicker = () => {

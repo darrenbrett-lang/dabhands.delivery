@@ -15,7 +15,10 @@
   --color-graphite: #5C5C58;    /* secondary / body text */
   --color-stone: #D8D3CB;       /* Soft Grey — borders, dividers, subtle fills */
   --color-cloud-pink: #E8A3B1;  /* Cloud Pink — expressive accent; use on dark or as fills, never as text on warm stone */
-  --color-blue-green: #3F5A61;  /* Deep Blue-Green — interactive, links, emphasis; used sparingly */
+  --color-blue-green: #535B68;  /* Slate Blue (from the portrait t-shirt, deepened for bone-text contrast) — interactive, solid panels, emphasis; replaces the former Deep Blue-Green teal */
+  --color-walnut: #53403B;      /* Walnut (from the portrait doorway) — warm dark; deep sections, footer, warm accents (bone text, 8.6:1) */
+  --color-clay: #A49786;        /* Warm Clay (from the portrait limestone) — soft hero washes / section highlights; replaces the Cloud Pink wash */
+  --color-gold: #C0974A;        /* Aged Gold — the expressive accent (arrows, eyebrows, current-page, CTA hover); earthy + grounded, replaces the Cloud Pink accent */
 
   /* Legacy tokens — retained for the /for pages, dev tools and focus rings;
      not part of the live brand palette. */

@@ -6,6 +6,7 @@ import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
+import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
 import { withSoftBreaks } from '@/lib/softBreaks';
 
@@ -14,27 +15,27 @@ import { withSoftBreaks } from '@/lib/softBreaks';
 // hover border), matching the nav and the doorway panels.
 const CARD_REST = 'var(--color-blue-green)';
 const CARD_HOVER = 'color-mix(in srgb, var(--color-blue-green) 90%, var(--color-bone))';
-const CARD_ACCENT = 'var(--color-cloud-pink)';
+const CARD_ACCENT = 'var(--color-gold)';
 const TURNSTILE = [
   {
-    label: 'Business & agency leaders',
+    label: 'Business & Agency Leaders',
     diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
     support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
     href: '/business-and-agency-leaders',
     rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
   },
   {
-    label: 'Marketing leaders',
+    label: 'Marketing Leaders',
     diagnosis: 'Great work loses power\non the journey.',
     support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
     href: '/marketing-leaders',
     rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
   },
   {
-    label: 'Creators & founders',
-    diagnosis: 'Everything depends on you.\nUntil it can’t.',
-    support: 'Helping creator and founder-led businesses build the capability required for their next stage of growth.',
-    href: '/creators-and-founders',
+    label: 'Growth-Stage Businesses',
+    diagnosis: 'Growth creates complexity\nfaster than capability.',
+    support: 'Helping ambitious businesses build the foundations their next stage of growth depends on.',
+    href: '/growth-stage-businesses',
     rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
   },
 ];
@@ -91,45 +92,38 @@ export default function Home() {
         </section>
 
         {/* ── DARREN ───────────────────────────────── */}
-        {/* Full-bleed cloud field. Copy on the left; Darren's cut-out portrait
-            is anchored bottom-right on desktop and stacked beneath the copy on
-            mobile/tablet — grounded on the banner's bottom edge either way. */}
-        <section data-spine="Darren" className="relative isolate overflow-hidden text-ink">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/clouds.png"
-            alt=""
-            aria-hidden
-            className="absolute inset-0 h-full w-full object-cover object-center"
-          />
-          <div className="relative z-10 u-container pt-12 md:pt-16 lg:pb-16">
-            <div className="max-w-[30rem] lg:max-w-[34rem]">
-              <FadeUp>
-                <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
-              </FadeUp>
-              <FadeUp delay={0.08}>
-                <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                  For more than twenty years, I’ve helped leaders turn strategy into action across some of the world’s largest organisations.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.16}>
-                <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
-                  I tend to work in the space between ambition and execution, because that’s where organisations either gain or lose momentum.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.22}>
-                <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[40ch]">
-                  Over that time, I’ve built businesses, led change and helped organisations execute at scale.
-                </p>
+        {/* Warm-stone field. Copy left; the doorway portrait right, its left edge
+            broken into accelerating vertical slats (the brand's momentum cue,
+            frozen in the image). Stacks on mobile. */}
+        <section data-spine="Darren" className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+          <div className="u-container">
+            <div className="u-grid items-start gap-y-12 md:gap-y-16">
+              <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:pt-4">
+                <FadeUp>
+                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
+                </FadeUp>
+                <FadeUp delay={0.08}>
+                  <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
+                    For most of my adult life, I’ve helped organisations move important work forward.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                    I tend to work in the space between ambition and execution, because that’s where momentum is either created or lost.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.22}>
+                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                    Over that time, I’ve built a business, led change and helped great organisations execute at scale.
+                  </p>
+                </FadeUp>
+              </div>
+
+              <FadeUp delay={0.1} className="col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
+                <SlatPortrait />
               </FadeUp>
             </div>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/darren_new-image.png"
-            alt="Darren Brett"
-            className="pointer-events-none select-none relative z-[5] mx-auto mt-6 block w-[min(88%,400px)] lg:absolute lg:bottom-0 lg:mx-0 lg:mt-0 lg:w-auto lg:right-[-3%] lg:h-[80%] xl:right-[2%] xl:h-[94%]"
-          />
         </section>
 
         {/* ── POINT OF VIEW (two columns — a commanding thesis, an argument
@@ -243,7 +237,7 @@ export default function Home() {
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green hover:text-cloud-pink"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green hover:text-gold"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>

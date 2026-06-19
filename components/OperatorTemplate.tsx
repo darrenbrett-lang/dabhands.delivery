@@ -6,6 +6,7 @@ import { SeoMeta } from './SeoMeta';
 import { mailto } from '@/lib/mailto';
 import { withSoftBreaks, withBreaks } from '@/lib/softBreaks';
 import { SelectedWork, type SelectedWorkContent } from './SelectedWork';
+import { SlatPortrait } from './SlatPortrait';
 
 /* ── Operator destination template (8-section spine) ──────────────────────────
    DAB Hands as a trusted operating partner, not a consultant. Operator voice:
@@ -27,7 +28,7 @@ export type Accent = 'moss' | 'lavender' | 'peach' | 'sage';
 export interface OperatorContent {
   slug: string;
   navLabel: string;
-  eyebrow: string; // "For business & agency leaders"
+  eyebrow: string; // "For Business & Agency Leaders"
   accent: Accent;
   hero: { headline: string; subline: string; trust?: string };
   // Serif heading (+ optional lead), two body-copy columns (paras[0] left, the
@@ -54,7 +55,7 @@ const ROOM = {
   text: 'text-blue-green',
   border: 'border-blue-green/40',
   color: 'var(--color-blue-green)',
-  wash: 'linear-gradient(to bottom, rgba(232,163,177,0.30), rgba(232,163,177,0.15) 55%, rgba(232,163,177,0) 100%)',
+  wash: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)',
 };
 const ACCENT: Record<Accent, typeof ROOM> = { moss: ROOM, lavender: ROOM, peach: ROOM, sage: ROOM };
 
@@ -67,7 +68,7 @@ const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { 
   <a
     href={mailto(email)}
     style={{ '--cta-accent': accent } as CSSProperties}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] hover:text-cloud-pink ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] hover:text-gold ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -278,25 +279,28 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </section>
         )}
 
-        {/* 5 ── OUTCOMES ("What Changes"): the bold payoff over the cloud image. ── */}
-        <section className="relative overflow-hidden text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/clouds.png" alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover object-center" />
-          <div aria-hidden className="absolute inset-0 bg-bone/35" />
-          <div className="relative z-10 u-container">
-            <div className="u-grid gap-y-6 md:gap-y-7">
-              <FadeUp className="col-span-4 md:col-span-9">
-                <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em] text-balance">{withSoftBreaks(c.outcomes.heading)}</h2>
+        {/* 5 ── OUTCOMES ("What Changes"): warm stone; the doorway portrait with its
+            slat reveal on the left, the payoff copy alongside (mirrors the homepage). ── */}
+        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+          <div className="u-container">
+            <div className="u-grid items-center gap-y-12 md:gap-y-16">
+              <FadeUp className="col-span-4 md:col-span-6 lg:col-span-6">
+                <SlatPortrait />
               </FadeUp>
-              <FadeUp delay={0.06} className="col-span-4 md:col-span-7 md:col-start-1">
-                <div className="space-y-4 text-lg text-graphite leading-[1.7]">
-                  {c.outcomes.paras.map((p, i) => (
-                    <p key={i} className={i === c.outcomes.paras.length - 1 ? 'text-ink' : undefined}>
-                      {p}
-                    </p>
-                  ))}
-                </div>
-              </FadeUp>
+              <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:col-start-8">
+                <FadeUp>
+                  <h2 className="font-serif text-[30px] md:text-[46px] lg:text-[54px] leading-[1.06] tracking-[-0.015em] text-balance">{withSoftBreaks(c.outcomes.heading)}</h2>
+                </FadeUp>
+                <FadeUp delay={0.06}>
+                  <div className="mt-6 md:mt-7 space-y-4 text-lg text-graphite leading-[1.7]">
+                    {c.outcomes.paras.map((p, i) => (
+                      <p key={i} className={i === c.outcomes.paras.length - 1 ? 'text-ink' : undefined}>
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                </FadeUp>
+              </div>
             </div>
           </div>
         </section>

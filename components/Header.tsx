@@ -7,13 +7,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 // are retired — all three share one palette now. `tint` is the Cloud Pink mobile
 // lead dash, `deep` the Deep Blue-Green locator/label colour (legible on the bone
 // bar), `block` the faint hover fill behind a dropdown option.
-const NAV_TINT = 'var(--color-cloud-pink)';
+const NAV_TINT = 'var(--color-gold)';
 const NAV_DEEP = 'var(--color-blue-green)';
 const NAV_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & agency leaders', context: 'For business & agency leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
-  { href: '/marketing-leaders', label: 'Marketing leaders', context: 'For marketing leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
-  { href: '/creators-and-founders', label: 'Creators & founders', context: 'For creators & founders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', context: 'For Business & Agency Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/marketing-leaders', label: 'Marketing Leaders', context: 'For Marketing Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', context: 'For Growth-Stage Businesses', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
 ];
 
 export const Header = () => {
@@ -210,10 +210,10 @@ export const Header = () => {
                       {audiences.map((a) => {
                         const active = router.pathname === a.href;
                         const hovered = hoveredWho === a.href;
-                        // The current page reads as a soft Cloud Pink "you are here";
+                        // The current page reads as a soft clay "you are here";
                         // the other options take a soft grey on hover (places to go).
                         const bg = active
-                          ? 'color-mix(in srgb, var(--color-cloud-pink) 30%, transparent)'
+                          ? 'color-mix(in srgb, var(--color-gold) 38%, transparent)'
                           : hovered
                             ? 'color-mix(in srgb, var(--color-stone) 60%, transparent)'
                             : undefined;

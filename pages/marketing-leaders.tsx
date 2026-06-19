@@ -2,8 +2,8 @@ import { OperatorTemplate, type OperatorContent } from '@/components/OperatorTem
 
 const content: OperatorContent = {
   slug: 'marketing-leaders',
-  navLabel: 'Marketing leaders',
-  eyebrow: 'For marketing leaders',
+  navLabel: 'Marketing Leaders',
+  eyebrow: 'For Marketing Leaders',
   accent: 'peach',
   hero: {
     headline: 'Great work loses power on the journey.',
@@ -55,7 +55,7 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Trusted by marketing leaders',
+    heading: 'Trusted by Marketing Leaders',
     interval: 4000,
     testimonials: [
       {
@@ -91,7 +91,7 @@ const content: OperatorContent = {
       {
         brand: 'Nike',
         tag: 'DotCom strategy',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/nike-dotcom-strategy.png',
@@ -106,7 +106,7 @@ const content: OperatorContent = {
       {
         brand: 'Nike',
         tag: 'Campaign activation',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/nike-forreal.png',
@@ -121,7 +121,7 @@ const content: OperatorContent = {
       {
         brand: 'Western Union',
         tag: 'Global rebrand',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/western-union-redesign.png',
@@ -136,7 +136,7 @@ const content: OperatorContent = {
       {
         brand: 'Vimergy',
         tag: 'Digital blueprint',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/vimergy-digital-rebrand.png',
@@ -151,7 +151,7 @@ const content: OperatorContent = {
       {
         brand: 'Palantir × Scuderia Ferrari',
         tag: 'Content programme',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/palantir-ferrari.png',
@@ -166,7 +166,7 @@ const content: OperatorContent = {
       {
         brand: 'Nike Membership',
         tag: 'Communications',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/nike-membership.png',
@@ -181,7 +181,7 @@ const content: OperatorContent = {
       {
         brand: 'Tommy Hilfiger',
         tag: 'Membership playbook',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/tommy-hilfiger.png',
@@ -196,7 +196,7 @@ const content: OperatorContent = {
       {
         brand: 'Nike',
         tag: 'Community content',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/nike-running.png',
@@ -211,7 +211,7 @@ const content: OperatorContent = {
       {
         brand: 'HUGO BOSS XP',
         tag: 'Membership strategy',
-        hue: 'var(--color-cloud-pink)',
+        hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
         src: '/images/work/hugo-boss-xp.png',
