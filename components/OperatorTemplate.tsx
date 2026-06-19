@@ -138,7 +138,11 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
     const onScroll = () => {
       const y = window.scrollY;
       const nearBottom = y + window.innerHeight > document.documentElement.scrollHeight - 280;
-      setSticky(y > 520 && !nearBottom);
+      // Hide the sticky CTA while the work carousel owns the view (it sits at the
+      // bottom edge and would otherwise cover the carousel's controls).
+      const zone = document.querySelector('[data-hide-masthead]');
+      const overCarousel = !!zone && (() => { const r = zone.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; })();
+      setSticky(y > 520 && !nearBottom && !overCarousel);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

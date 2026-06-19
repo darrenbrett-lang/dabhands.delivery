@@ -5,9 +5,9 @@ const orgJsonLd = {
   '@type': 'Organization',
   name: 'DAB Hands',
   url: 'https://dabhands.delivery',
-  logo: 'https://dabhands.delivery/og-image.png',
+  logo: 'https://dabhands.delivery/og-card.png',
   description:
-    'Senior digital delivery for high-stakes work. We help modern brands get stronger digital work out into the world, keeping important work aligned, moving, and commercially effective inside complex organisations.',
+    'Senior operational leadership for important work moving through complex organisations. Darren Brett helps digital-forward and growth-stage businesses get their best work into the world, intact.',
   founder: {
     '@type': 'Person',
     name: 'Darren Brett',
@@ -27,6 +27,7 @@ export default function Document() {
         <meta name="theme-color" content="#F5F1EA" />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"

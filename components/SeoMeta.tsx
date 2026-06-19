@@ -14,7 +14,7 @@ interface SeoMetaProps {
 const SITE_URL = 'https://dabhands.delivery';
 const SITE_NAME = 'DAB Hands';
 
-export const SeoMeta = ({ title, description, path, image = '/og-image.png', noindex = false }: SeoMetaProps) => {
+export const SeoMeta = ({ title, description, path, image = '/og-card.png', noindex = false }: SeoMetaProps) => {
   const url = `${SITE_URL}${path}`;
   const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 

@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer, FooterVariant } from './Footer';
-import { GridToggle } from './GridToggle';
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,6 +13,5 @@ export const Layout = ({ children, footerVariant }: LayoutProps) => (
     <Header />
     <main id="top">{children}</main>
     <Footer variant={footerVariant} />
-    <GridToggle />
   </>
 );

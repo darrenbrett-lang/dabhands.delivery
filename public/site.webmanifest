@@ -1,16 +1,13 @@
 {
-  "name": "Dab Hands",
-  "short_name": "Dab Hands",
-  "description": "Senior digital delivery for high-stakes work.",
+  "name": "DAB Hands",
+  "short_name": "DAB Hands",
+  "description": "Keeping important work moving. Senior operational leadership for important work moving through complex organisations.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F3F0EA",
-  "theme_color": "#111111",
+  "background_color": "#F5F1EA",
+  "theme_color": "#F5F1EA",
   "icons": [
-    {
-      "src": "/favicon.ico",
-      "sizes": "any",
-      "type": "image/x-icon"
-    }
+    { "src": "/favicon.ico", "sizes": "48x48 32x32 16x16", "type": "image/x-icon" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
   ]
 }

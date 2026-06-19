@@ -95,7 +95,11 @@ export default function Home() {
         {/* Warm-stone field. Copy left; the doorway portrait right, its left edge
             broken into accelerating vertical slats (the brand's momentum cue,
             frozen in the image). Stacks on mobile. */}
-        <section data-spine="Darren" className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+        <section
+          data-spine="Darren"
+          className="bg-bone text-ink py-20 md:py-28 lg:py-32"
+          style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
+        >
           <div className="u-container">
             <div className="u-grid items-start gap-y-12 md:gap-y-16">
               <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:pt-4">
