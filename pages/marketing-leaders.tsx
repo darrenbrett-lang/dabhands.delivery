@@ -33,8 +33,8 @@ const content: OperatorContent = {
     paras: [
       'The last thing great work needs is more noise from inside the system it is created in.',
       'That’s why alignment matters. Not alignment for its own sake. Alignment around the things that made the work worth doing in the first place.',
-      'I’ve spent my career helping brands maximise the value of their investment across digital experiences, campaigns, content ecosystems, membership programmes and loyalty initiatives.',
-      'The goal is simple. To help the strongest ideas arrive in market with their clarity, confidence and ambition intact.',
+      'I’ve spent my career helping organisations turn ambition into action. Long enough to understand the opportunities, constraints and trade-offs that shape every piece of work. The best outcomes rarely come from fighting the system. They come from understanding it well enough to make it work in your favour.',
+      'The goal is simple. To help the strongest ideas arrive with their clarity, confidence and ambition intact.',
     ],
   },
   help: {
@@ -94,7 +94,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/nike-dotcom-strategy.png',
+        src: '/images/work/nike-dotcom-strategy.webp',
         outcome: 'Strategic platform direction for Nike.com across Europe.',
         story: {
           headline: 'Helping shape the future of Nike’s digital flagship.',
@@ -109,7 +109,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/nike-forreal.png',
+        src: '/images/work/nike-forreal.webp',
         outcome: 'A gamified member experience extending the Footballverse campaign.',
         story: {
           headline: 'Turning brand investment into member engagement.',
@@ -124,7 +124,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/western-union-redesign.png',
+        src: '/images/work/western-union-redesign.webp',
         outcome: 'A global digital rebrand across a complex ecosystem.',
         story: {
           headline: 'Uniting a global digital ecosystem.',
@@ -139,7 +139,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/vimergy-digital-rebrand.png',
+        src: '/images/work/vimergy-digital-rebrand.webp',
         outcome: 'A digital blueprint connecting web, Amazon and customer journeys.',
         story: {
           headline: 'Helping a wellness brand match its digital experience to its ambition.',
@@ -154,7 +154,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/palantir-ferrari.png',
+        src: '/images/work/palantir-ferrari.webp',
         outcome: 'A content programme turning complex technology into a relatable story.',
         story: {
           headline: 'Making complex technology impossible to ignore.',
@@ -169,7 +169,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/nike-membership.png',
+        src: '/images/work/nike-membership.webp',
         outcome: 'Membership communications across more than 50 initiatives.',
         story: {
           headline: 'Helping consumers understand the value of membership.',
@@ -184,7 +184,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/tommy-hilfiger.png',
+        src: '/images/work/tommy-hilfiger.webp',
         outcome: 'An EMEA membership activation playbook for local markets.',
         story: {
           headline: 'Scaling membership across markets.',
@@ -199,7 +199,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/nike-running.png',
+        src: '/images/work/nike-running.webp',
         outcome: 'A community-led running content programme, produced in Madrid.',
         story: {
           headline: 'Making Nike feel closer to everyday runners.',
@@ -214,7 +214,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/hugo-boss-xp.png',
+        src: '/images/work/hugo-boss-xp.webp',
         outcome: 'A membership communications strategy for the HUGO BOSS XP programme.',
         story: {
           headline: 'Making membership mean something.',

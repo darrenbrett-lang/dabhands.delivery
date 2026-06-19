@@ -31,10 +31,10 @@ const content: OperatorContent = {
   outcomes: {
     heading: 'I help businesses build\nthe capability to keep scaling.',
     paras: [
-      'I’ve built and scaled a business of my own, so I know how quickly growth turns into complexity.',
-      'I’ve also spent more than twenty years leading delivery and operations at scale for global organisations and tier-one agencies.',
-      'I help businesses build operating models, team structures, and decision-making that quietly outpace growth.',
-      'Not more process for its own sake. The right foundations, built at the right time.',
+      'I’ve built and scaled a business of my own, so I know how quickly growth creates complexity.',
+      'I’ve also spent more than twenty years helping organisations navigate growth, change and execution at scale.',
+      'The goal is simple. To build enough capability around the business that growth no longer depends on a small number of people holding everything together.',
+      'Not more process. The right foundations, built at the right time.',
     ],
   },
   help: {
@@ -63,7 +63,7 @@ const content: OperatorContent = {
   },
   close: {
     heading: 'Growth will always create complexity.',
-    line: 'The businesses that keep scaling are the ones that build the capability to stay ahead of it.',
+    line: 'The businesses that keep scaling are the ones that build\nthe capability to stay ahead of it.',
   },
   email: {
     subject: 'Building for the next stage of growth',

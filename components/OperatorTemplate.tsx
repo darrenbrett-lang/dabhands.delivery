@@ -287,7 +287,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             slat reveal on the left, the payoff copy alongside (mirrors the homepage). ── */}
         <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <div className="u-grid items-center gap-y-12 md:gap-y-16">
+            <div className="u-grid items-start gap-y-12 md:gap-y-16">
               <FadeUp className="col-span-4 md:col-span-6 lg:col-span-6">
                 <SlatPortrait />
               </FadeUp>
@@ -302,6 +302,11 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                         {p}
                       </p>
                     ))}
+                  </div>
+                </FadeUp>
+                <FadeUp delay={0.12}>
+                  <div className="mt-8 md:mt-10">
+                    <Cta accent={a.color} email={c.email} />
                   </div>
                 </FadeUp>
               </div>

@@ -211,7 +211,7 @@ const Phone = ({ card, idx }: { card: WorkCard; idx: number }) =>
         <video src={card.src} autoPlay muted loop playsInline className="h-full w-full object-contain" style={{ filter: 'drop-shadow(0 28px 50px rgba(0,0,0,0.55))' }} />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={card.src} alt={`${card.brand} — ${card.tag}`} draggable={false} className="h-full w-full object-contain" style={{ filter: 'drop-shadow(0 28px 50px rgba(0,0,0,0.55))' }} />
+        <img src={card.src} alt={`${card.brand} · ${card.tag}`} loading="lazy" decoding="async" draggable={false} className="h-full w-full object-contain" style={{ filter: 'drop-shadow(0 28px 50px rgba(0,0,0,0.55))' }} />
       )}
     </div>
   ) : (
@@ -222,7 +222,7 @@ const Phone = ({ card, idx }: { card: WorkCard; idx: number }) =>
           <video src={card.src} autoPlay muted loop playsInline className="h-full w-full object-cover" />
         ) : card.media === 'image' && card.src ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={card.src} alt={`${card.brand} — ${card.tag}`} className="h-full w-full object-cover" />
+          <img src={card.src} alt={`${card.brand} · ${card.tag}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         ) : (
           <ScreenUi kind={card.ui ?? 'feed'} hue={card.hue} idx={idx} />
         )}

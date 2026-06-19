@@ -3,7 +3,6 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { PrivateLayout } from '@/components/PrivateLayout';
 import { SeoMeta } from '@/components/SeoMeta';
 import { FadeUp } from '@/components/FadeUp';
-import { HandUnderline } from '@/components/HandUnderline';
 import { mailto } from '@/lib/mailto';
 
 /*
@@ -209,7 +208,7 @@ const ChipExplorer = ({
                 aria-pressed={active}
                 className={`text-[13px] md:text-[14px] leading-none tracking-tight px-4 py-2.5 rounded-full border transition-colors ${
                   active
-                    ? 'bg-plum border-ink text-cloud-pink'
+                    ? 'bg-charcoal border-ink text-gold'
                     : 'border-ink/25 text-ink/80 hover:border-ink/60 hover:text-ink'
                 }`}
               >
@@ -229,7 +228,7 @@ const ChipExplorer = ({
             transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
             className={panelMinHClass}
           >
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-ink/75">
+            <p className="text-[10px] tracking-[0.22em] uppercase text-blue-green">
               {item.label}
             </p>
             <p className="mt-3 text-lg leading-relaxed text-ink/85 max-w-[65ch]">
@@ -243,7 +242,7 @@ const ChipExplorer = ({
 };
 
 const PhaseHeading = ({ phase, className = '' }: { phase: (typeof phases)[number]; className?: string }) => (
-  <p className={`font-mono text-[10px] tracking-[0.22em] uppercase text-cloud-pink ${className}`}>
+  <p className={`text-[10px] tracking-[0.22em] uppercase text-gold ${className}`}>
     {phase.q} {phase.verb} {phase.rest}
   </p>
 );
@@ -252,7 +251,7 @@ const ActivityList = ({ items }: { items: string[] }) => (
   <ul className="space-y-2.5">
     {items.map((item) => (
       <li key={item} className="flex items-start gap-3 text-[15px] leading-snug text-bone/80">
-        <span aria-hidden className="mt-[0.6em] block w-3 h-px bg-cloud-pink/70 shrink-0" />
+        <span aria-hidden className="mt-[0.6em] block w-3 h-px bg-gold/70 shrink-0" />
         {item}
       </li>
     ))}
@@ -284,17 +283,17 @@ export default function ManifestoDigital() {
                   draggable={false}
                   className="w-11 h-11 md:w-13 md:h-13 rounded-full object-cover shrink-0"
                 />
-                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75">
+                <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green">
                   Prepared by Darren Brett for Rebecca Hull, Manifesto Digital
                 </p>
               </div>
               <p className="text-xl md:text-2xl font-medium tracking-[-0.022em] mb-4 md:mb-6">
                 Manifesto Digital
               </p>
-              <h1 className="text-[44px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-medium leading-[1.02] tracking-[-0.03em] max-w-[16ch]">
+              <h1 className="text-[44px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-serif leading-[1.02] tracking-[-0.01em] max-w-[16ch]">
                 Building a modern delivery operating system
               </h1>
-              <p className="mt-5 md:mt-7 text-xl md:text-2xl font-medium tracking-[-0.022em] text-ink/75">
+              <p className="mt-5 md:mt-7 text-xl md:text-2xl font-medium tracking-[-0.022em] text-blue-green">
                 A perspective on the journey to 2027
               </p>
             </FadeUp>
@@ -305,10 +304,10 @@ export default function ManifestoDigital() {
         <section className="bg-paper text-ink py-20 md:py-48">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-10 md:mb-14">
+              <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green mb-10 md:mb-14">
                 We lead with strategy
               </p>
-              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-serif leading-[0.95] tracking-[-0.01em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 Every operational and delivery decision should reinforce our strategy and strengthen our ability to meet the evolving needs of our clients.
               </h2>
             </FadeUp>
@@ -321,7 +320,7 @@ export default function ManifestoDigital() {
                         &rarr;
                       </span>
                     )}
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-plum text-cloud-pink rounded-lg px-5 py-3 text-center">
+                    <span className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase bg-charcoal text-gold rounded-lg px-5 py-3 text-center">
                       {step}
                     </span>
                   </Fragment>
@@ -335,7 +334,7 @@ export default function ManifestoDigital() {
         <section className="bg-paper text-ink pb-14 md:pb-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-6 md:mb-8">
+              <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green mb-6 md:mb-8">
                 The forces in play
               </p>
               <p className="text-xl leading-relaxed text-ink/80 max-w-[56ch] mb-10 md:mb-12">
@@ -350,13 +349,13 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── THE SYSTEM (charcoal, 3x3) ────────────── */}
-        <section className="bg-plum text-bone py-16 md:py-40">
+        <section className="bg-charcoal text-bone py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-bone/75 mb-10 md:mb-14">
+              <p className="text-[10px] tracking-[0.24em] uppercase text-gold mb-10 md:mb-14">
                 The plan
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[26ch]">
+              <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-serif leading-[0.95] tracking-[-0.01em] max-w-[26ch]">
                 A framework for the next 12 months
               </h2>
             </FadeUp>
@@ -364,7 +363,7 @@ export default function ManifestoDigital() {
             {/* Desktop matrix (lg+) */}
             <div className="hidden lg:block mt-16 md:mt-24">
               <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-x-10 pb-5 border-b border-bone/20">
-                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-bone/60">
+                <p className="text-[10px] tracking-[0.22em] uppercase text-bone/60">
                   Altitude / time
                 </p>
                 {phases.map((phase) => (
@@ -405,9 +404,9 @@ export default function ManifestoDigital() {
                       type="button"
                       onClick={() => setActiveQuarter(i)}
                       aria-pressed={active}
-                      className={`font-mono text-[9px] min-[400px]:text-[10px] tracking-[0.14em] uppercase whitespace-nowrap rounded-full px-1 py-3 border transition-colors ${
+                      className={`text-[9px] min-[400px]:text-[10px] tracking-[0.14em] uppercase whitespace-nowrap rounded-full px-1 py-3 border transition-colors ${
                         active
-                          ? 'bg-cloud-pink border-cloud-pink text-ink'
+                          ? 'bg-gold border-gold text-ink'
                           : 'border-bone/25 text-bone/70'
                       }`}
                     >
@@ -450,10 +449,10 @@ export default function ManifestoDigital() {
         <section className="bg-paper text-ink py-14 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-10 md:mb-14">
+              <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green mb-10 md:mb-14">
                 What we&rsquo;re building towards
               </p>
-              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[22ch]">
+              <h2 className="text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px] font-serif leading-[0.95] tracking-[-0.01em] max-w-[22ch]">
                 Characteristics of a high-performing system
               </h2>
             </FadeUp>
@@ -469,13 +468,13 @@ export default function ManifestoDigital() {
         </section>
 
         {/* ── OUTCOMES (charcoal) ───────────────────── */}
-        <section className="bg-plum text-bone py-16 md:py-40">
+        <section className="bg-charcoal text-bone py-16 md:py-40">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-bone/75 mb-10 md:mb-14">
+              <p className="text-[10px] tracking-[0.24em] uppercase text-gold mb-10 md:mb-14">
                 Outcomes
               </p>
-              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[18ch]">
+              <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-serif leading-[0.95] tracking-[-0.01em] max-w-[18ch]">
                 What success looks like
               </h2>
             </FadeUp>
@@ -485,7 +484,7 @@ export default function ManifestoDigital() {
                   <div className="border-t border-bone/15 pt-7">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={outcome.icon} alt="" aria-hidden loading="lazy" decoding="async" className="w-9 h-9 mb-5" />
-                    <h3 className="font-mono text-[11px] tracking-[0.22em] uppercase text-cloud-pink">
+                    <h3 className="text-[11px] tracking-[0.22em] uppercase text-gold">
                       {outcome.label}
                     </h3>
                     <p className="mt-3.5 text-lg leading-relaxed text-bone/80 max-w-[30ch]">
@@ -503,10 +502,10 @@ export default function ManifestoDigital() {
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <div className="text-center">
               <FadeUp>
-                <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75 mb-10 md:mb-14">
+                <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green mb-10 md:mb-14">
                   Beneath the system
                 </p>
-                <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                <h2 className="text-[36px] sm:text-[44px] md:text-[56px] lg:text-[68px] font-serif leading-[0.95] tracking-[-0.01em] max-w-[20ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                   Every organisation has two operating systems.
                 </h2>
               </FadeUp>
@@ -516,7 +515,7 @@ export default function ManifestoDigital() {
               {/* The visible system: rendered visibly. Crisp, bordered, technical. */}
               <FadeUp delay={0.1}>
                 <div className="h-full border border-ink/20 rounded-2xl p-7 md:p-9">
-                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-ink/75">
+                  <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green">
                     01 &middot; The visible system
                   </p>
                   <ul className="mt-6 md:mt-8">
@@ -534,8 +533,8 @@ export default function ManifestoDigital() {
 
               {/* The invisible system: rendered dark. The underlying current. */}
               <FadeUp delay={0.22}>
-                <div className="h-full bg-plum text-bone rounded-2xl p-7 md:p-9">
-                  <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-cloud-pink">
+                <div className="h-full bg-charcoal text-bone rounded-2xl p-7 md:p-9">
+                  <p className="text-[10px] tracking-[0.24em] uppercase text-gold">
                     02 &middot; The invisible system
                   </p>
                   <ul className="mt-6 md:mt-8 grid grid-cols-2 gap-x-6 md:gap-x-8">
@@ -554,8 +553,8 @@ export default function ManifestoDigital() {
 
             <div className="mt-14 md:mt-20 text-center">
               <FadeUp>
-                <p className="text-[28px] md:text-[40px] lg:text-[48px] font-medium leading-[1] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
-                  <HandUnderline delay={1.0} variant={2} tone="light">Both</HandUnderline> deserve attention.
+                <p className="text-[28px] md:text-[40px] lg:text-[48px] font-serif leading-[1] tracking-[-0.01em] max-w-[24ch] mx-auto" style={{ textWrap: 'balance' }}>
+                  Both deserve attention.
                 </p>
               </FadeUp>
             </div>
@@ -566,7 +565,7 @@ export default function ManifestoDigital() {
         <section className="bg-bone text-ink py-16 md:py-32">
           <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 text-center">
             <FadeUp>
-              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-medium leading-[0.95] tracking-[-0.03em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
+              <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-serif leading-[0.95] tracking-[-0.01em] max-w-[24ch] mx-auto" style={{ marginLeft: 'auto', marginRight: 'auto', textWrap: 'balance' }}>
                 The dots are already here. Perhaps it&rsquo;s simply a case of connecting them.
               </h2>
             </FadeUp>
@@ -577,7 +576,7 @@ export default function ManifestoDigital() {
                     subject: 'Comparing Notes',
                     body: "Hi Darren,\n\nI've been reading your perspective on building a modern delivery operating system.\n\nA few thoughts came to mind...",
                   })}
-                  className="group inline-flex items-center gap-2 border border-ink text-ink text-[14px] font-medium tracking-tight px-6 py-3 rounded-full hover:bg-plum hover:text-bone transition-colors"
+                  className="group inline-flex items-center gap-2 border border-ink text-ink text-[14px] font-medium tracking-tight px-6 py-3 rounded-full transition-colors hover:bg-blue-green hover:text-gold hover:border-blue-green"
                 >
                   Compare notes
                   <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
