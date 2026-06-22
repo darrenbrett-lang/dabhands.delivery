@@ -57,6 +57,15 @@ export default function Home() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="relative bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
           <div className="relative z-10 u-container text-center">
+            <motion.img
+              src="/images/crown-mark.webp"
+              alt=""
+              aria-hidden
+              className="mx-auto mb-6 md:mb-8 h-12 md:h-14 lg:h-16 w-auto select-none"
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            />
             <motion.h1
               className="text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px] leading-[1.03] max-w-[15ch] mx-auto"
               aria-label="Keeping important work moving."
