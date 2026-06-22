@@ -14,7 +14,7 @@ interface SeoMetaProps {
 const SITE_URL = 'https://dabhands.delivery';
 const SITE_NAME = 'DAB Hands';
 
-export const SeoMeta = ({ title, description, path, image = '/og-card-2.png', noindex = false }: SeoMetaProps) => {
+export const SeoMeta = ({ title, description, path, image = '/og-card-3.png', noindex = false }: SeoMetaProps) => {
   const url = `${SITE_URL}${path}`;
   const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
@@ -34,7 +34,7 @@ export const SeoMeta = ({ title, description, path, image = '/og-card-2.png', no
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content={`${SITE_NAME} — Keeping important work moving`} />
+      <meta property="og:image:alt" content={`${SITE_NAME} · Keeping important work moving`} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

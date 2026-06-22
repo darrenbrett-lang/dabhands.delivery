@@ -403,6 +403,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <div className="u-grid">
               <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
                 <FadeUp>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/crown-mark.webp" alt="" aria-hidden className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
                   <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>
                 </FadeUp>
                 {c.close.line && (
