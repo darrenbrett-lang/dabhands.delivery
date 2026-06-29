@@ -281,6 +281,8 @@ export default function ManifestoDigital() {
                   src="/images/darren-brett_colour_headshot.jpeg"
                   alt="Darren Brett"
                   draggable={false}
+                  loading="lazy"
+                  decoding="async"
                   className="w-11 h-11 md:w-13 md:h-13 rounded-full object-cover shrink-0"
                 />
                 <p className="text-[10px] tracking-[0.24em] uppercase text-blue-green">
@@ -576,7 +578,7 @@ export default function ManifestoDigital() {
                     subject: 'Comparing Notes',
                     body: "Hi Darren,\n\nI've been reading your perspective on building a modern delivery operating system.\n\nA few thoughts came to mind...",
                   })}
-                  className="group inline-flex items-center gap-2 border border-ink text-ink text-[14px] font-medium tracking-tight px-6 py-3 rounded-full transition-colors hover:bg-blue-green hover:text-gold hover:border-blue-green"
+                  className="group inline-flex items-center gap-2 border border-ink text-ink text-[14px] font-medium tracking-tight px-6 py-3 rounded-full transition-colors hover:bg-blue-green hover:text-bone hover:border-blue-green"
                 >
                   Compare notes
                   <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>

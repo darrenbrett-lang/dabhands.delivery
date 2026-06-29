@@ -145,10 +145,14 @@ export const Header = () => {
           <div className="relative">
             <Link
               href="/"
-              className="font-serif text-ink text-[22px] md:text-[26px] leading-none tracking-[-0.01em]"
+              className="inline-flex items-baseline gap-[8px] md:gap-[9.5px]"
               aria-label="DAB Hands, home"
             >
-              DAB Hands
+              <span
+                aria-hidden
+                className="shrink-0 rounded-full bg-gold h-[16px] w-[16px] md:h-[19px] md:w-[19px]"
+              />
+              <span className="font-serif text-ink text-[22px] md:text-[26px] leading-none tracking-[-0.01em]">DAB Hands</span>
             </Link>
             {/* Persistent room locator: fades in beneath the wordmark once the
                 second panel is scrolled to. Absolute so it never nudges the
@@ -163,7 +167,7 @@ export const Header = () => {
                   exit={{ opacity: 0, y: -3 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   style={{ color: room.deep }}
-                  className="absolute left-0 top-full mt-1.5 whitespace-nowrap text-[10px] md:text-[10.5px] uppercase tracking-[0.18em] leading-none"
+                  className="absolute left-[24px] md:left-[28.5px] top-full mt-1.5 whitespace-nowrap text-[10px] md:text-[10.5px] uppercase tracking-[0.18em] leading-none"
                 >
                   {room.context}
                 </motion.span>
@@ -210,12 +214,12 @@ export const Header = () => {
                       {audiences.map((a) => {
                         const active = router.pathname === a.href;
                         const hovered = hoveredWho === a.href;
-                        // The current page reads as a soft clay "you are here";
-                        // the other options take a soft grey on hover (places to go).
+                        // The current page sits in a soft grey "you are here"; the
+                        // option under the cursor lights up gold (the live selection).
                         const bg = active
-                          ? 'color-mix(in srgb, var(--color-gold) 38%, transparent)'
+                          ? 'color-mix(in srgb, var(--color-stone) 60%, transparent)'
                           : hovered
-                            ? 'color-mix(in srgb, var(--color-stone) 60%, transparent)'
+                            ? 'color-mix(in srgb, var(--color-gold) 38%, transparent)'
                             : undefined;
                         return (
                           <Link

@@ -7,34 +7,31 @@ const content: OperatorContent = {
   accent: 'peach',
   hero: {
     headline: 'Great work loses power on the journey.',
-    subline: 'I help ambitious brands bring their strongest ideas into the world with the impact they deserve.',
+    subline: 'I help ambitious brands realise the full impact of their strongest ideas.',
   },
   validation: {
-    heading: 'The ingredients are already there.',
+    heading: 'Most organisations know what good looks like.',
     paras: [
-      'The strategy is clear. The ambition is strong. The investment has been made. Yet creating work that genuinely stands out has never been harder.',
-      'The market is crowded. Attention is fragmented. Expectations continue to rise. The challenge isn’t finding another idea.',
+      'The strategy is clear. The ambition is strong. The investment has already been made. Everyone knows what success looks like.',
+      'The challenge is rarely finding another idea. It’s helping the right idea survive the journey from conception to attention.',
     ],
-    coda: 'It’s helping great work arrive with its power intact.',
+    coda: 'Because that’s where great work loses its power,\nand its impact with it.',
   },
   diagnosis: {
-    thesis: 'The work arrives.\nThe magic doesn’t.',
+    thesis: 'Not all at once.\nGradually.',
     argument: [
-      'Most great work doesn’t fail because the idea wasn’t good enough.',
-      'It loses strength gradually.',
       'A compromise here. A delay there. Another interpretation. Another approval.',
-      'The work still arrives.',
-      'It just doesn’t arrive with the same clarity, confidence or conviction it started with.',
+      'The work still arrives. It just doesn’t arrive with the same clarity, confidence or conviction it started with.',
     ],
-    resolution: 'The idea is still there. It just isn’t as powerful as it was when everyone first believed in it.',
+    resolution: 'The idea is still there. It simply isn’t as powerful as it was when everyone first believed in it.',
   },
   outcomes: {
-    heading: 'I help great ideas\nsurvive the journey.',
+    heading: 'I help ambitious work\nrealise its full impact.',
     paras: [
-      'The last thing great work needs is more noise from inside the system it is created in.',
-      'That’s why alignment matters. Not alignment for its own sake. Alignment around the things that made the work worth doing in the first place.',
-      'I’ve spent my career helping organisations turn ambition into action. Long enough to understand the opportunities, constraints and trade-offs that shape every piece of work. The best outcomes rarely come from fighting the system. They come from understanding it well enough to make it work in your favour.',
-      'The goal is simple. To help the strongest ideas arrive with their clarity, confidence and ambition intact.',
+      'Most organisations don’t need another advocate for the work. They need someone who understands how organisations actually work.',
+      'Someone who knows where momentum slips, where decisions stall, where priorities collide and where strong ideas quietly lose their power.',
+      'I’ve spent more than twenty years helping brands, agencies and internal teams navigate those realities. Long enough to understand that the best outcomes rarely come from fighting the system. They come from understanding it well enough to make it work in your favour.',
+      'My role is simple. Not just to protect the work, but to help it create the impact it was always meant to have.',
     ],
   },
   help: {
@@ -42,15 +39,15 @@ const content: OperatorContent = {
     situations: [
       {
         heading: 'A major launch\nis approaching.',
-        body: 'A campaign, experience or initiative carries significant investment and expectation. The work needs to arrive with its ambition intact.',
+        body: 'A campaign, experience or initiative carries significant investment and expectation. The work needs to arrive with its full impact intact.',
       },
       {
         heading: 'Multiple partners\nneed to move as one.',
-        body: 'Internal teams, agencies, production partners and specialist suppliers all have a role to play. The challenge is keeping everyone aligned around the same outcome.',
+        body: 'Internal teams, agencies, production partners and specialist suppliers all have a role to play. The challenge is keeping everyone aligned around the impact it’s meant to have.',
       },
       {
         heading: 'The work matters too much\nto leave to chance.',
-        body: 'When visibility is high, timelines are tight and expectations are significant, experienced leadership helps protect the quality of the outcome.',
+        body: 'When visibility is high, timelines are tight and expectations are significant, experienced leadership protects the quality of the work, and the impact it was meant to deliver.',
       },
     ],
   },
@@ -77,7 +74,7 @@ const content: OperatorContent = {
   },
   close: {
     heading: 'Great work rarely fails because of ambition.',
-    line: 'More often, it loses strength on the journey.\nI help ambitious brands make sure it doesn’t.',
+    line: 'More often, it loses power on the journey.\nI help ambitious brands realise the full impact of their best ideas.',
   },
   // The Selected Work case studies. Each card: brand, tag (eyebrow label), hue (panel
   // accent on the dark stage), a 9:19 device-mockup image (media:'image',
@@ -86,7 +83,7 @@ const content: OperatorContent = {
   // metric-free fallback shown only when a card has no story.
   work: {
     heading: 'Some of the programmes, platforms and campaigns I’ve led in recent years.',
-    intro: 'Complex work. Ambitious brands. High expectations. The kind of projects where alignment, momentum and execution matter just as much as the original idea.',
+    intro: 'Complex work. Ambitious brands. High expectations. The kind of programmes where judgement and execution mattered, because significant commercial, strategic and brand outcomes depended on them.',
     cards: [
       {
         brand: 'Nike',
@@ -226,8 +223,12 @@ const content: OperatorContent = {
     ],
   },
   email: {
-    subject: 'Getting our strongest work into market intact',
-    body: 'We have important work in motion and I want it to arrive with its ambition intact. I would like to talk.',
+    subject: 'Realising the full impact of our best work',
+    body: 'We have important work in motion and I want it to realise its full impact. I would like to talk.',
+  },
+  seo: {
+    description:
+      'DAB Hands helps marketing leaders realise the full impact of their strongest ideas, protecting great work as it moves from strategy to the customer.',
   },
 };
 

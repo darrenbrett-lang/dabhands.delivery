@@ -6,16 +6,16 @@ const content: OperatorContent = {
   eyebrow: 'For Business & Agency Leaders',
   accent: 'sage',
   hero: {
-    headline: 'As organisations grow, keeping everything moving becomes harder.',
-    subline: 'I help leadership teams maintain momentum when complexity is getting in the way.',
+    headline: 'As organisations grow, ambition gets harder to realise.',
+    subline: 'I help leadership teams consistently turn ambition into impact.',
   },
   validation: {
     heading: 'All the blocks are in place.',
     paras: [
-      'The direction is clear. The people are capable. The work matters. Yet progress feels slower than it should. As organisations grow, more teams become involved.',
+      'The direction is clear. People are capable. The work matters. Yet progress feels slower than it should. As organisations grow, complexity takes hold.',
       'More priorities compete for attention. More decisions need to travel further before anything happens. The challenge is rarely deciding what to do next.',
     ],
-    coda: 'It’s helping the organisation move together.',
+    coda: 'It’s turning what’s already there into impact.',
   },
   diagnosis: {
     thesis: 'The strategy isn’t the problem.\nThe system is.',
@@ -23,35 +23,35 @@ const content: OperatorContent = {
       'Most organisations already have what they need.',
       'Capable people. Clear ambition. Meaningful work.',
       'The challenge isn’t creating more.',
-      'It’s adapting to a world where growth creates complexity, technology changes how work gets done and client expectations continue to evolve.',
-      'What once felt straightforward becomes harder to coordinate.',
+      'It’s creating the conditions where all of it consistently turns into impact.',
+      'Those conditions are rarely just process. They live in how people work together, how decisions get made, where momentum builds and where it quietly stalls.',
     ],
-    resolution: 'The organisation has what it needs. It just needs a way to move together at scale.',
+    resolution: 'The organisation has what it needs. It needs the conditions to turn it into impact, consistently and at scale.',
   },
   outcomes: {
-    heading: 'I help organisations\nmove together.',
+    heading: 'I help capable organisations\nperform at their best.',
     paras: [
-      'By creating the clarity, alignment and capability required to grow with confidence.',
-      'The goal isn’t more process. It’s making it easier for good people to do good work.',
+      'By creating the clarity, alignment and capability for capable people to consistently do their best work together.',
+      'The goal isn’t more process. It’s making it easier for good people to do great work.',
       'Priorities become clearer. Decisions move faster. Accountability becomes stronger.',
       'Leadership spends less time connecting dots and more time leading.',
-      'The organisation doesn’t need to work harder. It simply moves with less friction.',
+      'The organisation doesn’t need to work harder. It simply turns more of its ambition into impact.',
     ],
   },
   help: {
     heading: 'Where I tend to help',
     situations: [
       {
-        heading: 'A strategic priority\nisn’t moving.',
-        body: 'The direction is clear. The intent is understood. Yet progress feels slower than it should.',
+        heading: 'An important ambition\nisn’t becoming reality.',
+        body: 'The direction is clear and the intent is real. But the ambition isn’t translating into the impact it promised.',
       },
       {
-        heading: 'The organisation has become\nharder to coordinate.',
-        body: 'More teams. More stakeholders. More dependencies. What once felt straightforward now takes more effort to move forward.',
+        heading: 'Complexity is holding\nperformance back.',
+        body: 'More teams, more stakeholders, more dependencies. The organisation is capable of more than its own complexity now allows.',
       },
       {
         heading: 'Leadership has become\nthe operating system.',
-        body: 'Too much progress depends on a small number of people continually connecting dots and keeping important work moving.',
+        body: 'Too much depends on a few people holding everything together. The organisation can only realise as much as they can personally carry.',
       },
     ],
   },
@@ -75,11 +75,15 @@ const content: OperatorContent = {
   },
   close: {
     heading: 'Great organisations don’t succeed because they have fewer challenges.',
-    line: 'They succeed because they can keep moving through them.',
+    line: 'They succeed by creating the conditions to turn ambition\ninto impact, again and again.',
   },
   email: {
     subject: 'Keeping important work moving',
-    body: 'Our organisation has what it needs, but momentum is getting harder to maintain. I would like to talk.',
+    body: 'Our organisation has what it needs, but turning ambition into impact is getting harder. I would like to talk.',
+  },
+  seo: {
+    description:
+      'Experienced operational leadership for business and agency leaders. DAB Hands helps capable organisations turn ambition into impact, and perform at their best.',
   },
 };
 

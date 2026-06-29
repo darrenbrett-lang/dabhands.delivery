@@ -7,34 +7,31 @@ const content: OperatorContent = {
   accent: 'lavender',
   hero: {
     headline: 'Growth creates complexity faster than capability.',
-    subline: 'I help fast-growing businesses build the operating foundations their next stage depends on.',
+    subline: 'I help fast-growing businesses build the capability to sustain their growth.',
   },
   validation: {
     heading: 'The growth is real.',
     paras: [
-      'Revenue is climbing. The team is growing. New markets, products and opportunities keep arriving. By every external measure, the business is winning.',
-      'Inside, it feels harder than it should. Decisions take longer. Priorities multiply. The way the business runs hasn’t kept pace with how fast it has grown.',
+      'From the outside, things look good. Revenue is growing. The team is expanding. New opportunities keep appearing.',
+      'Inside, it feels different. Decisions take longer. Priorities compete for attention. More of the business now depends on a handful of people.',
     ],
-    coda: 'It’s building the capability to keep pace with the growth.',
+    coda: 'The challenge isn’t finding the next opportunity. It’s building a business that can keep up with the one you’ve already created.',
   },
   diagnosis: {
     thesis: 'Growth doesn’t break a business.\nComplexity does.',
     argument: [
-      'Every stage of growth adds more.',
-      'More people. More decisions. More priorities. More dependencies.',
-      'Each one is manageable on its own.',
-      'Together, they change how the business has to run.',
-      'What used to happen on its own now has to be built on purpose.',
+      'Every stage of growth changes the business. The way decisions get made. The way teams work together. The way priorities compete for attention.',
+      'What once happened naturally now needs intention.',
     ],
-    resolution: 'The business hasn’t run out of ambition. It’s outgrown the way it was built to run.',
+    resolution: 'Not because the business has lost its ambition, but because it’s become something bigger than the way it was built to operate.',
   },
   outcomes: {
-    heading: 'I help businesses build\nthe capability to keep scaling.',
+    heading: 'I help businesses keep growing\nwithout breaking.',
     paras: [
-      'I’ve built and scaled a business of my own, so I know how quickly growth creates complexity.',
-      'I’ve also spent more than twenty years helping organisations navigate growth, change and execution at scale.',
-      'The goal is simple. To build enough capability around the business that growth no longer depends on a small number of people holding everything together.',
-      'Not more process. The right foundations, built at the right time.',
+      'I’ve built and scaled a business of my own, so I know how quickly success creates complexity.',
+      'One of the biggest changes isn’t operational. It’s deciding what deserves the organisation’s attention. Growth creates more opportunities than any business can pursue well. Without clear priorities, energy spreads too thinly and momentum begins to disappear.',
+      'I help leadership teams become clear about where the business is trying to create value, then build the structures, rhythms and ways of working that help everyone move in that direction together.',
+      'The result is a business that grows with greater confidence because the organisation is becoming stronger at the same pace as its ambition.',
     ],
   },
   help: {
@@ -42,15 +39,15 @@ const content: OperatorContent = {
     situations: [
       {
         heading: 'Too much still depends\non too few people.',
-        body: 'Key decisions, momentum and quality still rely on a small group holding everything together.',
+        body: 'Growth now relies on a small number of people continually connecting the dots. The business has become difficult to scale because too much still flows through them.',
       },
       {
         heading: 'The business has outgrown\nthe way it runs.',
-        body: 'Systems, structure and ways of working were built for a smaller, simpler version of the company.',
+        body: 'The strategy is working. The operating model isn’t. Systems, structures and ways of working designed for yesterday’s business are beginning to hold tomorrow’s one back.',
       },
       {
-        heading: 'The next stage\nis a step change.',
-        body: 'New funding, new markets or new scale are raising expectations the current operating model wasn’t built to meet.',
+        heading: 'The next stage demands\na stronger organisation.',
+        body: 'New funding, new markets or faster growth raise expectations. The challenge is no longer working harder. It’s building a business capable of sustaining greater ambition.',
       },
     ],
   },
@@ -63,11 +60,15 @@ const content: OperatorContent = {
   },
   close: {
     heading: 'Growth will always create complexity.',
-    line: 'The businesses that keep scaling are the ones that build\nthe capability to stay ahead of it.',
+    line: 'The businesses that keep growing aren’t the ones with fewer challenges.\nThey’re the ones that build the capability to keep turning ambition into results.',
   },
   email: {
     subject: 'Building for the next stage of growth',
-    body: 'Our business is growing quickly and I want to build the capability to support what comes next. I would like to talk.',
+    body: 'Our business is growing quickly and I want to build the capability to sustain it. I would like to talk.',
+  },
+  seo: {
+    description:
+      'DAB Hands helps fast-growing businesses build the capability to sustain their growth, so success creates momentum, not complexity.',
   },
 };
 

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
@@ -8,48 +8,44 @@ import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
-import { withSoftBreaks } from '@/lib/softBreaks';
+import { withSoftBreaks, withBreaks } from '@/lib/softBreaks';
 
-// The single path becomes three rooms. The per-audience colours are retired: the
-// cards are solid Deep Blue-Green with bone copy and a Cloud Pink accent (arrow +
-// hover border), matching the nav and the doorway panels.
-const CARD_REST = 'var(--color-blue-green)';
-const CARD_HOVER = 'color-mix(in srgb, var(--color-blue-green) 90%, var(--color-bone))';
-const CARD_ACCENT = 'var(--color-gold)';
-const TURNSTILE = [
+// "Where does momentum keep slipping?" — three full-width editorial rows, each a
+// doorway. Image left; the symptom right (index, headline, the short diagnosis)
+// with an Explore link. Photography lives in /images/momentum (owner-supplied).
+const MOMENTUM = [
   {
-    label: 'Business & Agency Leaders',
-    diagnosis: 'The organisation has everything it needs. It’s just become harder to move.',
-    support: 'Helping leadership teams maintain momentum when complexity starts getting in the way.',
+    num: '01',
+    headline: 'Keeping everything moving\nbecomes harder.',
+    support: ['The strategy exists.\nThe investment exists.\nThe people exist.', 'Momentum doesn’t.'],
     href: '/business-and-agency-leaders',
-    rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
+    src: '/images/momentum/01-rowers-2.webp',
   },
   {
-    label: 'Marketing Leaders',
-    diagnosis: 'Great work loses power\non the journey.',
-    support: 'Helping brands bring their strongest ideas into the world with the impact they deserve.',
+    num: '02',
+    headline: 'Great work loses power\non the journey.',
+    support: ['It starts strong.\nThen complexity gets involved.'],
     href: '/marketing-leaders',
-    rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
+    src: '/images/momentum/02-fineart.webp',
   },
   {
-    label: 'Growth-Stage Businesses',
-    diagnosis: 'Growth creates complexity\nfaster than capability.',
-    support: 'Helping ambitious businesses build the foundations their next stage of growth depends on.',
+    num: '03',
+    headline: 'Growth creates complexity\nfaster than capability.',
+    support: ['The business is winning.\nThe foundations are struggling to keep up.'],
     href: '/growth-stage-businesses',
-    rest: CARD_REST, hover: CARD_HOVER, accent: CARD_ACCENT,
+    src: '/images/momentum/03-escalator.webp',
   },
 ];
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
   const headlineWords = ['Keeping', 'important', 'work', 'moving.'];
-  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <>
       <SeoMeta
         title="DAB Hands | Keeping important work moving"
-        description="I help digital-forward businesses get their best work into the world, intact. Senior operational leadership for important work moving through complex organisations."
+        description="DAB Hands helps organisations turn ambition into impact. Senior operational leadership for important work moving through complex organisations, led by Darren Brett."
         path="/"
       />
 
@@ -91,7 +87,7 @@ export default function Home() {
 
             <FadeUp delay={0.4}>
               <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[46ch] mx-auto">
-                {withSoftBreaks('I help digital-forward businesses get their\nbest work into the world, intact.')}
+                {withSoftBreaks('Helping organisations\nturn ambition into impact.')}
               </p>
             </FadeUp>
             <FadeUp delay={0.55}>
@@ -117,7 +113,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.08}>
                   <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                    For most of my adult life, I’ve helped organisations move important work forward.
+                    For most of my career, I’ve helped organisations turn ambition into impact.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
@@ -165,17 +161,17 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.2}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The challenge isn’t creating more. It’s helping what already exists move together well.
+                    The challenge isn’t creating more. It’s realising more impact from what already exists.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.26}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Because somewhere between ambition and execution, work gets diluted. Momentum slips. Complexity takes hold.
+                    Somewhere between ambition and execution, that impact gets diluted. Momentum slips. Complexity takes hold.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.32}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    It deserves to arrive as intended.
+                    Because that’s where ambition becomes impact.
                   </p>
                 </FadeUp>
               </div>
@@ -187,7 +183,7 @@ export default function Home() {
         <section data-spine="Trusted by" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-y border-stone/60">
           <div className="u-container">
             <FadeUp>
-              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted with important work by</p>
+              <p className="eyebrow text-graphite mb-10 md:mb-12 text-center">Trusted where the stakes are high</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />
@@ -195,46 +191,58 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── TURNSTILE ────────────────────────────── */}
-        <section data-spine="Who I help" className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/60">
-          <div className="u-container">
-            <FadeUp>
-              <h2 className="text-[34px] sm:text-[44px] md:text-[60px] leading-[1.04] mb-10 max-w-[20ch]">Where do you need help keeping important work moving?</h2>
-            </FadeUp>
-            <div className="u-grid gap-y-6">
-              {TURNSTILE.map((t, i) => (
-                <Link
-                  key={t.label}
-                  href={t.href}
-                  className="block col-span-4"
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
-                >
-                  <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex h-full flex-col rounded-2xl border p-7 md:p-8 transition-[border-color,box-shadow,background-color] duration-300"
-                    style={{
-                      backgroundColor: hovered === i ? t.hover : t.rest,
-                      borderColor: hovered === i ? t.accent : 'transparent',
-                      boxShadow: hovered === i
-                        ? '0 4px 10px rgba(31,31,29,0.07), 0 22px 48px -20px rgba(31,31,29,0.26)'
-                        : '0 1px 2px rgba(31,31,29,0.05), 0 12px 30px -14px rgba(31,31,29,0.16)',
-                    }}
-                  >
-                    <h3 className="text-xl md:text-2xl text-bone mb-3">{t.label}</h3>
-                    <p className="text-bone/90 leading-snug mb-2.5 text-balance md:min-h-[2lh]">{withSoftBreaks(t.diagnosis)}</p>
-                    <p className="text-bone/70 leading-relaxed text-[15px]">{t.support}</p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-semibold" style={{ color: hovered === i ? t.accent : 'var(--color-bone)' }}>
-                      Explore
-                      <span aria-hidden className="transition-transform duration-300" style={{ transform: hovered === i ? 'translateX(4px)' : 'translateX(0)' }}>→</span>
-                    </span>
-                  </motion.div>
-                </Link>
-              ))}
+        {/* ── MOMENTUM (Who I help): three doorways as one big editorial sequence ── */}
+        <section data-spine="Who I help" className="bg-bone text-ink border-t border-stone/60">
+          {/* Header band — a warm clay wash, matching the rows' rollover state below. */}
+          <div className="bg-clay/20 text-ink py-16 md:py-20 lg:py-24">
+            <div className="u-container">
+              <div className="u-grid items-end gap-y-6">
+                <FadeUp className="col-span-4 md:col-span-7">
+                  <h2 className="font-serif text-[40px] md:text-[56px] lg:text-[72px] leading-[1.0] tracking-[-0.01em]">
+                    {withSoftBreaks('Where does impact\nget lost?')}
+                  </h2>
+                </FadeUp>
+                <FadeUp delay={0.08} className="col-span-4 md:col-span-5 lg:col-span-4 lg:col-start-9">
+                  <p className="text-lg md:text-xl text-ink/70 leading-relaxed">
+                    Most organisations don’t need more ideas. They need fewer things getting in the way.
+                  </p>
+                </FadeUp>
+              </div>
             </div>
+          </div>
+
+          <div className="pb-14 md:pb-20 lg:pb-24">
+            {MOMENTUM.map((row, i) => (
+              <FadeUp key={row.num} delay={i * 0.06}>
+                <Link href={row.href} className="group block border-b border-stone/60 transition-colors duration-300 hover:bg-clay/20">
+                  <div className="u-container py-10 md:py-12 lg:py-16">
+                    <span className="mb-5 block text-[13px] font-medium tracking-[0.12em] text-blue-green">{row.num}</span>
+                    <div className="u-grid items-start gap-y-5">
+                      <h3 className="col-span-4 font-serif text-[30px] leading-[1.04] tracking-[-0.01em] md:col-span-6 md:text-[40px] lg:text-[48px]">
+                        {withSoftBreaks(row.headline)}
+                      </h3>
+                      <div className="col-span-4 flex flex-col gap-5 md:col-span-5 md:col-start-8">
+                        <div className="space-y-3 text-[15px] leading-relaxed text-ink/70 md:text-base">
+                          {row.support.map((p, j) => (
+                            <p key={j}>{withBreaks(p)}</p>
+                          ))}
+                        </div>
+                        <span className="inline-flex items-center gap-2 self-start border-b-2 border-gold pb-1.5 text-[15px] font-medium text-ink">
+                          Explore
+                          {/* Arrow loop: as the row fills, the arrow glides off to the right while a
+                              second arrow slides in from the left to take its place — a continuous,
+                              premium sense of forward motion. Clipped by the box; honours reduced-motion. */}
+                          <span aria-hidden className="relative inline-block h-[1.1em] w-[1.25em] overflow-hidden leading-none">
+                            <span className="absolute inset-0 flex items-center justify-center leading-none transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[220%] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">→</span>
+                            <span className="absolute inset-0 flex items-center justify-center leading-none -translate-x-[220%] transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:hidden">→</span>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+            ))}
           </div>
         </section>
 
@@ -250,7 +258,7 @@ export default function Home() {
               <FadeUp delay={0.1}>
                 <a
                   href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green hover:text-gold"
+                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green"
                 >
                   Start a conversation
                   <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>

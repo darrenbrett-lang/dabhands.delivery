@@ -15,7 +15,7 @@ const instrumentSerif = Instrument_Serif({
 // Body, navigation, buttons, cards, all interface.
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600"],
   variable: "--font-manrope",
   display: "swap",
 });

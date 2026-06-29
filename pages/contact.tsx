@@ -4,7 +4,7 @@ import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
 const channels = [
-  { label: 'Email', value: 'darren@dabhands.delivery', href: mailto({ subject: 'Important work needs to move properly' }), external: false },
+  { label: 'Email', value: 'darren@dabhands.delivery', href: mailto({ subject: 'Important work that needs to create real impact' }), external: false },
   { label: 'Phone', value: '07788 711433', href: 'tel:+447788711433', external: false },
   { label: 'LinkedIn', value: '/dab-hands-delivery', href: 'https://www.linkedin.com/company/dab-hands-delivery/about/', external: true },
 ];
@@ -14,25 +14,37 @@ export default function Contact() {
     <>
       <SeoMeta
         title="Contact | DAB Hands"
-        description="Start a conversation with DAB Hands. I help important work move properly through complex organisations."
+        description="Start a conversation with DAB Hands. Senior operational leadership to help your most important work turn ambition into impact."
         path="/contact"
       />
 
       <Layout footerVariant="none">
         {/* Warm stone + a soft Clay wash — the same hero vignette as the doorways. */}
         <section
-          className="bg-bone text-ink pt-36 md:pt-48 pb-24 md:pb-40 min-h-[78vh]"
+          className="relative overflow-hidden bg-bone text-ink pt-36 md:pt-48 pb-24 md:pb-40 min-h-[78vh]"
           style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
         >
-          <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
+          {/* Big crown set jauntily in the right negative space (desktop). */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/crown-mark.webp"
+            alt=""
+            aria-hidden
+            decoding="async"
+            className="pointer-events-none select-none hidden md:block absolute right-[7%] lg:right-[10%] top-40 h-[240px] lg:h-[320px] w-auto rotate-[15deg]"
+          />
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
             <FadeUp>
-              <h1 className="text-[44px] md:text-[68px] lg:text-[88px] leading-[1.02] max-w-[12ch]">What needs moving?</h1>
+              {/* Small crown above the heading (mobile only). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden decoding="async" className="md:hidden block mb-5 h-10 w-auto select-none" />
+              <h1 className="text-[44px] md:text-[68px] lg:text-[88px] leading-[1.02] max-w-[12ch]">What’s important?</h1>
             </FadeUp>
 
             <FadeUp delay={0.12}>
               <p className="mt-9 md:mt-12 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">
-                For critical digital initiatives that need to move properly,
-                <br className="hidden md:block" /> reach out directly.
+                If you’ve got something important
+                <br className="hidden md:block" /> that needs to create real impact, let’s talk.
               </p>
             </FadeUp>
 

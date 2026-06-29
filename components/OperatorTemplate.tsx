@@ -30,7 +30,7 @@ export interface OperatorContent {
   navLabel: string;
   eyebrow: string; // "For Business & Agency Leaders"
   accent: Accent;
-  hero: { headline: string; subline: string; trust?: string };
+  hero: { headline: string; subline: string; trust?: string; image?: string };
   // Serif heading (+ optional lead), two body-copy columns (paras[0] left, the
   // rest right), serif coda. Statements may carry "\n" for a desktop soft break.
   validation: { heading: string; intro?: string; paras: string[]; coda?: string };
@@ -45,6 +45,7 @@ export interface OperatorContent {
   // Optional "Selected Work" carousel, rendered just before the closing CTA.
   work?: SelectedWorkContent;
   email?: { subject: string; body: string }; // pre-fills the CTA mailto for this room's context
+  seo?: { description?: string }; // optional richer meta description (falls back to hero.subline)
 }
 
 // One restrained palette shared by every room (the three audience colours are
@@ -68,7 +69,7 @@ const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { 
   <a
     href={mailto(email)}
     style={{ '--cta-accent': accent } as CSSProperties}
-    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] hover:text-gold ${full ? 'w-full' : ''}`}
+    className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-[var(--cta-accent)] ${full ? 'w-full' : ''}`}
   >
     {label}
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -151,14 +152,22 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
   return (
     <>
-      <SeoMeta title={`${c.navLabel} | DAB Hands`} description={c.hero.subline} path={`/${c.slug}`} />
+      <SeoMeta title={`${c.navLabel} | DAB Hands`} description={c.seo?.description ?? c.hero.subline} path={`/${c.slug}`} />
 
       <Layout footerVariant="none">
-        {/* 1 ── HERO: warm stone with a soft Cloud Pink wash. ── */}
-        <section className="bg-bone text-ink pt-32 md:pt-40 pb-16 md:pb-20" style={{ backgroundImage: a.wash }}>
+        {/* 1 ── HERO: warm stone + soft clay wash. Optional right-anchored photo
+            (desktop) blended into the bone on its left so the copy stays readable. ── */}
+        <section className="relative isolate overflow-hidden bg-bone text-ink pt-32 md:pt-40 pb-16 md:pb-20" style={{ backgroundImage: a.wash }}>
+          {c.hero.image && (
+            <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 -z-10 hidden w-[64%] md:block lg:w-[56%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={c.hero.image} alt="" className="h-full w-full object-cover object-center" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--color-bone) 0%, var(--color-bone) 12%, color-mix(in srgb, var(--color-bone) 45%, transparent) 40%, transparent 64%)' }} />
+            </div>
+          )}
           <div className="u-container">
             <div className="u-grid">
-              <div className="col-span-4 md:col-span-10 lg:col-span-9">
+              <div className="relative col-span-4 md:col-span-10 lg:col-span-9">
                 <FadeUp>
                   <p className={`eyebrow mb-6 ${a.text}`}>{c.eyebrow}</p>
                 </FadeUp>
@@ -181,8 +190,17 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                   </FadeUp>
                 ) : (
                   <FadeUp delay={0.16}>
-                    <div className="mt-8">
+                    <div className="mt-8 flex flex-col items-start gap-4">
                       <Cta accent={a.color} email={c.email} />
+                      {c.work && (
+                        <a
+                          href="#selected-work"
+                          className="group inline-flex items-center gap-1.5 text-[14px] text-graphite underline decoration-stone underline-offset-[5px] transition-colors hover:text-ink hover:decoration-graphite"
+                        >
+                          Jump to the work I’ve made recently
+                          <span aria-hidden className="text-[15px] leading-none transition-transform group-hover:translate-y-0.5">↓</span>
+                        </a>
+                      )}
                     </div>
                   </FadeUp>
                 )}
@@ -222,7 +240,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               {/* Coda: the serif footer statement. */}
               {c.validation.coda && (
                 <FadeUp delay={0.2} className="col-span-4 md:col-span-12">
-                  <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.28] text-bone max-w-[46ch]">{c.validation.coda}</p>
+                  <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.28] text-bone max-w-[46ch]">{withSoftBreaks(c.validation.coda)}</p>
                 </FadeUp>
               )}
             </div>
@@ -395,7 +413,11 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
 
         {/* 7.5 ── SELECTED WORK (optional): silent-chrome phone carousel; the only
             colour comes from inside the screens. Sits just before the close. ── */}
-        {c.work && <SelectedWork content={c.work} />}
+        {c.work && (
+          <div id="selected-work" className="scroll-mt-24">
+            <SelectedWork content={c.work} />
+          </div>
+        )}
 
         {/* 8 ── CLOSE: simple, confident invitation — always centred, bone. ── */}
         <section className="bg-bone text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
@@ -404,7 +426,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
                 <FadeUp>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/crown-mark.webp" alt="" aria-hidden className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
+                  <img src="/images/crown-mark.webp" alt="" aria-hidden loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
                   <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>
                 </FadeUp>
                 {c.close.line && (

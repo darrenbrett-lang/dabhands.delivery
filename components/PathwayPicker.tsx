@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { withSoftBreaks } from '@/lib/softBreaks';
 
 /* Hero quick-nav. "See where I can help" reveals the three pathways as one
    horizontal row, charcoal on bone — an effortless shortcut into a doorway for
@@ -15,9 +16,9 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 const HOVER_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
 const HOVER_ACCENT = 'var(--color-blue-green)';
 const PATHS = [
-  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'Keeping momentum when complexity gets in the way.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
-  { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'Getting your strongest ideas into market intact.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
-  { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', line: 'Building the foundations the next stage of growth depends on.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'Helping organisations move with less friction.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'Helping great ideas\narrive with more impact.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', line: 'Helping growing businesses stay ahead of complexity.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
 ];
 
 export const PathwayPicker = () => {
@@ -135,7 +136,7 @@ export const PathwayPicker = () => {
                             →
                           </span>
                         </span>
-                        <span className="block text-[13px] leading-snug text-graphite text-balance">{p.line}</span>
+                        <span className="block text-[13px] leading-snug text-graphite text-balance">{withSoftBreaks(p.line)}</span>
                       </Link>
                     ))}
                   </div>

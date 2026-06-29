@@ -13,11 +13,11 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
           <div className="space-y-4 max-w-[22ch] md:max-w-none mx-auto">
             {variant === 'default' && (
               <p className="font-serif text-[26px] md:text-[38px] leading-[1.12]">
-                I help organisations get their best work into the world, intact.
+                I help organisations turn ambition into impact.
               </p>
             )}
             <p className="font-serif text-[28px] md:text-[44px] leading-[1.1]">
-              If something important needs to move properly,{' '}
+              If something important needs to create real impact,{' '}
               <Link
                 href="/contact"
                 className="underline decoration-1 underline-offset-[6px] decoration-coral hover:decoration-2 transition-all"
@@ -39,8 +39,9 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
     <footer className="bg-charcoal text-bone/75 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <Link href="/" className="font-serif text-bone text-[18px] tracking-[-0.01em]" aria-label="DAB Hands, home">
-            DAB Hands
+          <Link href="/" className="inline-flex items-baseline gap-[6.5px]" aria-label="DAB Hands, home">
+            <span aria-hidden className="shrink-0 rounded-full bg-gold h-[13px] w-[13px]" />
+            <span className="font-serif text-bone text-[18px] tracking-[-0.01em]">DAB Hands</span>
           </Link>
           <div className="flex items-center gap-5">
             <a
