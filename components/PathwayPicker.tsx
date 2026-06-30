@@ -11,10 +11,10 @@ import { withSoftBreaks } from '@/lib/softBreaks';
    hero's overflow. The header nav carries the fully keyboard-robust version. */
 
 // The per-audience colours are retired: every item shares one hover treatment —
-// a faint Deep Blue-Green block with a Deep Blue-Green arrow. Inline style keeps
-// the dynamic hover colour deterministic (off Tailwind classes).
-const HOVER_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
-const HOVER_ACCENT = 'var(--color-blue-green)';
+// a gold block matching the header nav dropdown, with a charcoal arrow for
+// contrast on the gold. Inline style keeps the dynamic hover colour deterministic.
+const HOVER_BLOCK = 'color-mix(in srgb, var(--color-gold) 38%, transparent)';
+const HOVER_ACCENT = 'var(--color-ink)';
 const PATHS = [
   { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'Helping organisations move with less friction.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
   { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'Helping great ideas\narrive with more impact.', block: HOVER_BLOCK, accent: HOVER_ACCENT },

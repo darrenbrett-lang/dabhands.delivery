@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 import { Layout } from './Layout';
 import { FadeUp } from './FadeUp';
 import { SeoMeta } from './SeoMeta';
@@ -39,7 +40,7 @@ export interface OperatorContent {
   diagnosis: { thesis: string; argument: string[]; resolution: string };
   outcomes: { heading: string; paras: string[] };
   transition?: { heading: string; subline?: string; paras?: string[] };
-  help: { heading: string; situations?: { heading: string; body: string }[]; statement?: string[] };
+  help: { heading: string; intro?: string; situations?: { heading: string; body: string; enquiry?: { subject: string; body: string } }[]; statement?: string[] };
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
   // Optional "Selected Work" carousel, rendered just before the closing CTA.
@@ -155,19 +156,29 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
       <SeoMeta title={`${c.navLabel} | DAB Hands`} description={c.seo?.description ?? c.hero.subline} path={`/${c.slug}`} />
 
       <Layout footerVariant="none">
-        {/* 1 ── HERO: warm stone + soft clay wash. Optional right-anchored photo
-            (desktop) blended into the bone on its left so the copy stays readable. ── */}
+        {/* 1 ── HERO: warm stone + soft clay wash. The audience's metaphor image sits
+            square on the right (lg); a shallow full-width sliver on top below that. ── */}
         <section className="relative isolate overflow-hidden bg-bone text-ink pt-32 md:pt-40 pb-16 md:pb-20" style={{ backgroundImage: a.wash }}>
-          {c.hero.image && (
-            <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 -z-10 hidden w-[64%] md:block lg:w-[56%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={c.hero.image} alt="" className="h-full w-full object-cover object-center" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--color-bone) 0%, var(--color-bone) 12%, color-mix(in srgb, var(--color-bone) 45%, transparent) 40%, transparent 64%)' }} />
-            </div>
-          )}
           <div className="u-container">
-            <div className="u-grid">
-              <div className="relative col-span-4 md:col-span-10 lg:col-span-9">
+            <div className="u-grid items-center gap-y-8 lg:gap-y-0">
+              {/* Metaphor image — square on the right (lg); a shallow full-width sliver
+                  above the copy on smaller screens, kept deliberately shallow. */}
+              {c.hero.image && (
+                <div className="col-span-4 md:col-span-12 lg:col-span-5 lg:col-start-8 lg:row-start-1">
+                  <div className="relative aspect-[5/2] lg:aspect-square overflow-hidden rounded-2xl ring-1 ring-inset ring-ink/10">
+                    <Image
+                      src={c.hero.image}
+                      alt=""
+                      fill
+                      priority
+                      quality={82}
+                      sizes="(max-width: 1024px) 92vw, 38vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+              <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
                 <FadeUp>
                   <p className={`eyebrow mb-6 ${a.text}`}>{c.eyebrow}</p>
                 </FadeUp>
@@ -197,7 +208,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                           href="#selected-work"
                           className="group inline-flex items-center gap-1.5 text-[14px] text-graphite underline decoration-stone underline-offset-[5px] transition-colors hover:text-ink hover:decoration-graphite"
                         >
-                          Jump to the work I’ve made recently
+                          Jump to recent work
                           <span aria-hidden className="text-[15px] leading-none transition-transform group-hover:translate-y-0.5">↓</span>
                         </a>
                       )}
@@ -278,7 +289,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <div className="u-container">
               <div className="u-grid gap-y-6 md:gap-y-7">
                 <FadeUp className="col-span-4 md:col-span-8">
-                  <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1]">{c.transition.heading}</h2>
+                  <h2 className="font-serif text-[30px] md:text-[48px] leading-[1.1]">{withBreaks(c.transition.heading)}</h2>
                 </FadeUp>
                 {c.transition.subline && (
                   <FadeUp delay={0.06} className="col-span-4 md:col-span-7 md:col-start-1">
@@ -302,8 +313,9 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
         )}
 
         {/* 5 ── OUTCOMES ("What Changes"): warm stone; the doorway portrait with its
-            slat reveal on the left, the payoff copy alongside (mirrors the homepage). ── */}
-        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32">
+            slat reveal on the left, the payoff copy alongside (mirrors the homepage).
+            Gains a top rule when a (bone) transition section precedes it. ── */}
+        <section className={`bg-bone text-ink py-20 md:py-28 lg:py-32 ${c.transition ? 'border-t border-stone/50' : ''}`}>
           <div className="u-container">
             <div className="u-grid items-start gap-y-12 md:gap-y-16">
               <FadeUp className="col-span-4 md:col-span-6 lg:col-span-6">
@@ -337,6 +349,9 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           <div className="u-container">
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
+              {c.help.intro && (
+                <p className="mt-4 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">{c.help.intro}</p>
+              )}
             </FadeUp>
             {c.help.situations && (
               <div className="u-grid gap-y-5 mt-9">
@@ -352,6 +367,21 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                   >
                     <h3 className="font-serif text-[22px] md:text-[24px] leading-[1.18] text-ink text-balance md:min-h-[2lh]">{withSoftBreaks(s.heading)}</h3>
                     <p className="mt-3 text-ink/75 leading-relaxed text-[15px]">{s.body}</p>
+                    {s.enquiry && (
+                      <div className="mt-auto pt-6">
+                        {/* Small ecommerce-style enquiry button (Apple Pay feel): charcoal pill,
+                            gold brand dot, opens a pre-filled mail draft for this exact situation. */}
+                        <a
+                          href={mailto(s.enquiry)}
+                          style={{ '--cta-accent': a.color } as CSSProperties}
+                          className="inline-flex w-fit items-center gap-2 rounded-full bg-charcoal px-4 py-2 text-[13px] font-medium text-bone transition duration-300 hover:bg-[var(--cta-accent)] active:scale-95"
+                          aria-label={`Enquire about ${s.heading.replace(/\n/g, ' ')}`}
+                        >
+                          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold" />
+                          Enquire
+                        </a>
+                      </div>
+                    )}
                   </motion.div>
                 ))}
               </div>

@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Fragment } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
@@ -8,32 +9,36 @@ import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
-import { withSoftBreaks, withBreaks } from '@/lib/softBreaks';
+import { withSoftBreaks } from '@/lib/softBreaks';
 
-// "Where does momentum keep slipping?" — three full-width editorial rows, each a
-// doorway. Image left; the symptom right (index, headline, the short diagnosis)
-// with an Explore link. Photography lives in /images/momentum (owner-supplied).
+// "Where I help" — three editorial doorway rows on the grid: a third-width image
+// (cols 1–4) with the audience label over it, the conceptual line as the headline,
+// and the Explore CTA inline with the helping line beneath (cols 5–12).
+// Movement / Attention / Support.
 const MOMENTUM = [
   {
     num: '01',
-    headline: 'Keeping everything moving\nbecomes harder.',
-    support: ['The strategy exists.\nThe investment exists.\nThe people exist.', 'Momentum doesn’t.'],
+    label: 'Business & Agency Leaders',
+    headline: 'Keeping everything moving.',
+    support: 'Helping organisations turn ambition into impact when complexity starts slowing everything down.',
     href: '/business-and-agency-leaders',
-    src: '/images/momentum/01-rowers-2.webp',
+    src: '/images/momentum/01-tracks-2.jpg',
   },
   {
     num: '02',
-    headline: 'Great work loses power\non the journey.',
-    support: ['It starts strong.\nThen complexity gets involved.'],
+    label: 'Marketing Leaders',
+    headline: 'Keeping the signal strong.',
+    support: 'Helping ambitious work reach the market with the clarity, confidence and impact it deserves.',
     href: '/marketing-leaders',
-    src: '/images/momentum/02-fineart.webp',
+    src: '/images/momentum/02-branding-2.jpg',
   },
   {
     num: '03',
-    headline: 'Growth creates complexity\nfaster than capability.',
-    support: ['The business is winning.\nThe foundations are struggling to keep up.'],
+    label: 'Growth-Stage Businesses',
+    headline: 'Supporting greater ambition.',
+    support: 'Helping growing businesses build the capability their next stage depends on.',
     href: '/growth-stage-businesses',
-    src: '/images/momentum/03-escalator.webp',
+    src: '/images/momentum/03-growth.jpg',
   },
 ];
 
@@ -194,49 +199,68 @@ export default function Home() {
         {/* ── MOMENTUM (Who I help): three doorways as one big editorial sequence ── */}
         <section data-spine="Who I help" className="bg-bone text-ink border-t border-stone/60">
           {/* Header band — a warm clay wash, matching the rows' rollover state below. */}
-          <div className="bg-clay/20 text-ink py-16 md:py-20 lg:py-24">
+          <div className="bg-clay/20 text-ink py-14 md:py-16 lg:py-20">
             <div className="u-container">
-              <div className="u-grid items-end gap-y-6">
-                <FadeUp className="col-span-4 md:col-span-7">
-                  <h2 className="font-serif text-[40px] md:text-[56px] lg:text-[72px] leading-[1.0] tracking-[-0.01em]">
-                    {withSoftBreaks('Where does impact\nget lost?')}
+              <div className="u-grid items-end gap-y-5">
+                {/* Title over the image column (cols 1–4 on lg); intro over the copy column
+                    (cols 5–12) — the same two zones the rows below use. */}
+                <FadeUp className="col-span-4 md:col-span-12 lg:col-span-4">
+                  <h2 className="font-serif text-[40px] md:text-[56px] leading-[1.02] tracking-[-0.01em]">
+                    Where I help.
                   </h2>
                 </FadeUp>
-                <FadeUp delay={0.08} className="col-span-4 md:col-span-5 lg:col-span-4 lg:col-start-9">
-                  <p className="text-lg md:text-xl text-ink/70 leading-relaxed">
-                    Most organisations don’t need more ideas. They need fewer things getting in the way.
+                <FadeUp delay={0.08} className="col-span-4 md:col-span-12 lg:col-span-8 lg:col-start-5">
+                  <p className="text-lg md:text-xl text-ink/70 leading-relaxed max-w-[54ch]">
+                    {withSoftBreaks('Different challenges. Same pattern.\nAmbition is clear. The work matters. Complexity is getting in the way.')}
                   </p>
                 </FadeUp>
               </div>
             </div>
           </div>
 
-          <div className="pb-14 md:pb-20 lg:pb-24">
+          <div>
             {MOMENTUM.map((row, i) => (
               <FadeUp key={row.num} delay={i * 0.06}>
-                <Link href={row.href} className="group block border-b border-stone/60 transition-colors duration-300 hover:bg-clay/20">
-                  <div className="u-container py-10 md:py-12 lg:py-16">
-                    <span className="mb-5 block text-[13px] font-medium tracking-[0.12em] text-blue-green">{row.num}</span>
-                    <div className="u-grid items-start gap-y-5">
-                      <h3 className="col-span-4 font-serif text-[30px] leading-[1.04] tracking-[-0.01em] md:col-span-6 md:text-[40px] lg:text-[48px]">
-                        {withSoftBreaks(row.headline)}
-                      </h3>
-                      <div className="col-span-4 flex flex-col gap-5 md:col-span-5 md:col-start-8">
-                        <div className="space-y-3 text-[15px] leading-relaxed text-ink/70 md:text-base">
-                          {row.support.map((p, j) => (
-                            <p key={j}>{withBreaks(p)}</p>
-                          ))}
-                        </div>
-                        <span className="inline-flex items-center gap-2 self-start border-b-2 border-gold pb-1.5 text-[15px] font-medium text-ink">
-                          Explore
-                          {/* Arrow loop: as the row fills, the arrow glides off to the right while a
-                              second arrow slides in from the left to take its place — a continuous,
-                              premium sense of forward motion. Clipped by the box; honours reduced-motion. */}
-                          <span aria-hidden className="relative inline-block h-[1.1em] w-[1.25em] overflow-hidden leading-none">
-                            <span className="absolute inset-0 flex items-center justify-center leading-none transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[220%] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">→</span>
-                            <span className="absolute inset-0 flex items-center justify-center leading-none -translate-x-[220%] transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:hidden">→</span>
+                <Link
+                  href={row.href}
+                  aria-label={`${row.label}: ${row.headline}`}
+                  className="group block border-b border-stone/50"
+                >
+                  <div className="u-container py-8 md:py-10 lg:py-12">
+                    <div className="u-grid items-center gap-y-6">
+                      {/* The doorway: a clean third-width image ON THE GRID (cols 1–4 on lg);
+                          on smaller screens a shallow full-width sliver that matches the
+                          audience-page hero (5:2, rounded, hairline ring). The audience label
+                          sits over it; it opens on hover with a slow Ken Burns push-in. */}
+                      <div className="relative col-span-4 md:col-span-12 lg:col-span-4 aspect-[5/2] lg:aspect-[3/2] overflow-hidden rounded-2xl lg:rounded-none ring-1 ring-inset ring-ink/10 lg:ring-0">
+                        <Image
+                          src={row.src}
+                          alt=""
+                          fill
+                          quality={82}
+                          sizes="(max-width: 1024px) 100vw, 33vw"
+                          className="object-cover transition-transform duration-[1400ms] ease-out will-change-transform group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
+                        {/* Scrim so the audience label stays readable over the image. */}
+                        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/0 to-transparent" />
+                        <span className="absolute bottom-4 left-5 right-5 text-[14px] md:text-[15px] font-medium tracking-[-0.01em] text-bone">{row.label}</span>
+                      </div>
+                      {/* The message — conceptual line as the headline, Explore inline with the
+                          helping line beneath. Cols 5–12 on lg, aligned with the header intro. */}
+                      <div className="col-span-4 md:col-span-12 lg:col-span-8 lg:col-start-5">
+                        <h3 className="font-serif text-[24px] md:text-[30px] lg:text-[38px] leading-[1.06] tracking-[-0.01em]">{row.headline}</h3>
+                        <div className="mt-3.5 flex items-end justify-between gap-6">
+                          <p className="text-[15px] md:text-base leading-relaxed text-ink/70 max-w-[54ch]">{row.support}</p>
+                          <span className="shrink-0 inline-flex items-center gap-2 border-b-2 border-gold pb-1 text-[15px] font-medium text-ink">
+                            Explore
+                            {/* Arrow loop: glides off right while a second arrow slides in from the
+                                left. Honours reduced-motion. */}
+                            <span aria-hidden className="relative inline-block h-[1.1em] w-[1.25em] overflow-hidden leading-none">
+                              <span className="absolute inset-0 flex items-center justify-center leading-none transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[220%] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">→</span>
+                              <span className="absolute inset-0 flex items-center justify-center leading-none -translate-x-[220%] transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:hidden">→</span>
+                            </span>
                           </span>
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -247,7 +271,7 @@ export default function Home() {
         </section>
 
         {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20 border-t border-stone/60">
+        <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20">
           <div className="u-container">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>

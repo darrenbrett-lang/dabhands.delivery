@@ -8,50 +8,61 @@ const content: OperatorContent = {
   hero: {
     headline: 'As organisations grow, ambition gets harder to realise.',
     subline: 'I help leadership teams consistently turn ambition into impact.',
+    image: '/images/momentum/01-tracks-2.jpg',
   },
   validation: {
-    heading: 'All the blocks are in place.',
+    heading: 'The organisation is already capable.',
     paras: [
-      'The direction is clear. People are capable. The work matters. Yet progress feels slower than it should. As organisations grow, complexity takes hold.',
-      'More priorities compete for attention. More decisions need to travel further before anything happens. The challenge is rarely deciding what to do next.',
+      'The strategy is clear. The people are capable. The investment has been made. Everyone understands what success looks like.',
+      'The challenge is rarely deciding what to do. It’s helping capable people consistently turn ambition into impact.',
     ],
-    coda: 'It’s turning what’s already there into impact.',
+    coda: 'It’s helping the organisation\nperform at its best.',
   },
   diagnosis: {
-    thesis: 'The strategy isn’t the problem.\nThe system is.',
+    thesis: 'Capability isn’t the problem.\nPerformance is.',
     argument: [
-      'Most organisations already have what they need.',
-      'Capable people. Clear ambition. Meaningful work.',
-      'The challenge isn’t creating more.',
-      'It’s creating the conditions where all of it consistently turns into impact.',
-      'Those conditions are rarely just process. They live in how people work together, how decisions get made, where momentum builds and where it quietly stalls.',
+      'Most organisations already have what they need to succeed.',
+      'The challenge isn’t finding more ideas, hiring more people or introducing more process. It’s creating the conditions where capable people consistently produce great outcomes together.',
+      'Those conditions are built through clarity, alignment and accountability. When they’re present, organisations move with confidence.',
     ],
-    resolution: 'The organisation has what it needs. It needs the conditions to turn it into impact, consistently and at scale.',
+    resolution: 'When they’re missing, complexity quietly becomes the operating system.',
   },
   outcomes: {
     heading: 'I help capable organisations\nperform at their best.',
     paras: [
-      'By creating the clarity, alignment and capability for capable people to consistently do their best work together.',
-      'The goal isn’t more process. It’s making it easier for good people to do great work.',
-      'Priorities become clearer. Decisions move faster. Accountability becomes stronger.',
-      'Leadership spends less time connecting dots and more time leading.',
-      'The organisation doesn’t need to work harder. It simply turns more of its ambition into impact.',
+      'I work alongside leadership teams to remove the friction that slows important work down.',
+      'Sometimes that means bringing clarity to a strategic initiative that has lost momentum. Sometimes it means helping teams work together more effectively as the organisation grows. Often it’s establishing stronger operating rhythms so progress no longer depends on a handful of people holding everything together.',
+      'The goal isn’t more governance.',
+      'It’s an organisation that’s easier to lead, quicker to respond and better able to turn ambition into impact.',
     ],
   },
   help: {
-    heading: 'Where I tend to help',
+    heading: 'Typical engagements',
+    intro: 'The situations where organisations usually bring me in.',
     situations: [
       {
-        heading: 'An important ambition\nisn’t becoming reality.',
-        body: 'The direction is clear and the intent is real. But the ambition isn’t translating into the impact it promised.',
+        heading: 'Critical programmes need\nexperienced leadership',
+        body: 'A major transformation, product, platform or delivery programme needs someone who can create clarity, align stakeholders and keep important work moving.',
+        enquiry: {
+          subject: 'Experienced leadership for a critical programme',
+          body: 'We have an important programme that needs experienced leadership to keep it moving. I would like to talk.',
+        },
       },
       {
-        heading: 'Complexity is holding\nperformance back.',
-        body: 'More teams, more stakeholders, more dependencies. The organisation is capable of more than its own complexity now allows.',
+        heading: 'Complexity is slowing\nthe organisation',
+        body: 'Growth has created friction. Teams, priorities and decisions are no longer moving together, and the operating model needs to catch up with the ambition.',
+        enquiry: {
+          subject: 'Cutting through the complexity slowing us down',
+          body: 'Complexity is slowing us down and our operating model needs to catch up with our ambition. I would like to talk.',
+        },
       },
       {
-        heading: 'Leadership has become\nthe operating system.',
-        body: 'Too much depends on a few people holding everything together. The organisation can only realise as much as they can personally carry.',
+        heading: 'The business is entering\nits next chapter',
+        body: 'AI, growth, restructuring or new commercial ambitions require stronger operational foundations to help the organisation adapt with confidence.',
+        enquiry: {
+          subject: 'Stronger foundations for our next chapter',
+          body: 'We are entering a new chapter and want stronger operational foundations to adapt with confidence. I would like to talk.',
+        },
       },
     ],
   },
@@ -74,8 +85,8 @@ const content: OperatorContent = {
     ],
   },
   close: {
-    heading: 'Great organisations don’t succeed because they have fewer challenges.',
-    line: 'They succeed by creating the conditions to turn ambition\ninto impact, again and again.',
+    heading: 'Great organisations rarely lack ambition.',
+    line: 'They create the conditions for ambition\nto become impact, again and again.',
   },
   email: {
     subject: 'Keeping important work moving',

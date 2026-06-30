@@ -8,46 +8,64 @@ const content: OperatorContent = {
   hero: {
     headline: 'Great work loses power on the journey.',
     subline: 'I help ambitious brands realise the full impact of their strongest ideas.',
+    image: '/images/momentum/02-branding-2.jpg',
   },
   validation: {
     heading: 'Most organisations know what good looks like.',
     paras: [
       'The strategy is clear. The ambition is strong. The investment has already been made. Everyone knows what success looks like.',
-      'The challenge is rarely finding another idea. It’s helping the right idea survive the journey from conception to attention.',
+      'The challenge is rarely finding another idea. It’s helping the right idea survive the journey from conception to customer.',
     ],
-    coda: 'Because that’s where great work loses its power,\nand its impact with it.',
+    coda: 'It’s helping ambitious work\narrive with its full impact.',
   },
   diagnosis: {
-    thesis: 'Not all at once.\nGradually.',
+    thesis: 'Great ideas rarely disappear.\nThey become diluted.',
     argument: [
-      'A compromise here. A delay there. Another interpretation. Another approval.',
-      'The work still arrives. It just doesn’t arrive with the same clarity, confidence or conviction it started with.',
+      'Most organisations don’t need another advocate for the work.',
+      'They need someone who understands how ambitious work moves through complex organisations.',
+      'Someone who knows where momentum slips. Where decisions stall. Where competing priorities quietly weaken strong ideas before customers ever see them.',
+      'Because protecting the work isn’t the only objective.',
     ],
-    resolution: 'The idea is still there. It simply isn’t as powerful as it was when everyone first believed in it.',
+    resolution: 'It’s helping it create the commercial, brand, and customer impact it was designed to achieve.',
   },
   outcomes: {
     heading: 'I help ambitious work\nrealise its full impact.',
     paras: [
-      'Most organisations don’t need another advocate for the work. They need someone who understands how organisations actually work.',
-      'Someone who knows where momentum slips, where decisions stall, where priorities collide and where strong ideas quietly lose their power.',
-      'I’ve spent more than twenty years helping brands, agencies and internal teams navigate those realities. Long enough to understand that the best outcomes rarely come from fighting the system. They come from understanding it well enough to make it work in your favour.',
-      'My role is simple. Not just to protect the work, but to help it create the impact it was always meant to have.',
+      'For more than twenty years I’ve worked alongside brands, agencies and internal teams delivering programmes where execution mattered just as much as the original idea.',
+      'I don’t replace strategy.',
+      'I don’t replace creative.',
+      'I help the organisation around them work well enough that ambitious ideas arrive with the same strength they had when everyone first believed in them.',
+      'The outcome isn’t simply better delivery.',
+      'It’s better performing work.',
     ],
   },
   help: {
-    heading: 'Where I tend to help',
+    heading: 'Typical engagements',
+    intro: 'The situations where marketing leaders usually bring me in.',
     situations: [
       {
-        heading: 'A major launch\nis approaching.',
-        body: 'A campaign, experience or initiative carries significant investment and expectation. The work needs to arrive with its full impact intact.',
+        heading: 'High-value campaigns\nneed confident delivery',
+        body: 'Major campaigns, digital experiences and product launches need experienced operational leadership to protect quality, momentum and impact from briefing to launch.',
+        enquiry: {
+          subject: 'Confident delivery for a high-value campaign',
+          body: 'We have a high-value campaign that needs confident operational leadership from briefing to launch. I would like to talk.',
+        },
       },
       {
-        heading: 'Multiple partners\nneed to move as one.',
-        body: 'Internal teams, agencies, production partners and specialist suppliers all have a role to play. The challenge is keeping everyone aligned around the impact it’s meant to have.',
+        heading: 'Multiple partners need\nto work as one team',
+        body: 'Internal teams, agencies, production partners and specialist suppliers all have different priorities. I help align people, decisions and delivery around one shared outcome.',
+        enquiry: {
+          subject: 'Aligning multiple partners around one outcome',
+          body: 'We have several partners who need to work as one team around a shared outcome. I would like to talk.',
+        },
       },
       {
-        heading: 'The work matters too much\nto leave to chance.',
-        body: 'When visibility is high, timelines are tight and expectations are significant, experienced leadership protects the quality of the work, and the impact it was meant to deliver.',
+        heading: 'Execution needs to\nmatch the ambition',
+        body: 'The strategy is right. The creative is strong. The challenge is turning ambition into consistent execution across markets, channels and teams without losing what made the idea valuable.',
+        enquiry: {
+          subject: 'Matching execution to the ambition',
+          body: 'Our strategy and creative are strong, and we want execution to match the ambition across markets and teams. I would like to talk.',
+        },
       },
     ],
   },
@@ -73,8 +91,8 @@ const content: OperatorContent = {
     ],
   },
   close: {
-    heading: 'Great work rarely fails because of ambition.',
-    line: 'More often, it loses power on the journey.\nI help ambitious brands realise the full impact of their best ideas.',
+    heading: 'Great work deserves to realise its full impact.',
+    line: 'The investment is made. The ambition exists.\nI help make sure it arrives intact.',
   },
   // The Selected Work case studies. Each card: brand, tag (eyebrow label), hue (panel
   // accent on the dark stage), a 9:19 device-mockup image (media:'image',
@@ -82,8 +100,8 @@ const content: OperatorContent = {
   // (headline + one body paragraph; optional `result` chip). `outcome` is a
   // metric-free fallback shown only when a card has no story.
   work: {
-    heading: 'Some of the programmes, platforms and campaigns I’ve led in recent years.',
-    intro: 'Complex work. Ambitious brands. High expectations. The kind of programmes where judgement and execution mattered, because significant commercial, strategic and brand outcomes depended on them.',
+    heading: 'Some of the programmes, platforms and campaigns I’ve led over the past two decades.',
+    intro: 'Work where commercial outcomes, customer experience and brand reputation depended on getting the execution right.',
     cards: [
       {
         brand: 'Nike',
@@ -196,7 +214,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/nike-running.webp',
+        src: '/images/work/nike-running-2.webp',
         outcome: 'A community-led running content programme, produced in Madrid.',
         story: {
           headline: 'Making Nike feel closer to everyday runners.',
