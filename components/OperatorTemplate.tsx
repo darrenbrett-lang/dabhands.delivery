@@ -350,7 +350,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
               {c.help.intro && (
-                <p className="mt-4 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">{c.help.intro}</p>
+                <p className="mt-4 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">{withSoftBreaks(c.help.intro)}</p>
               )}
             </FadeUp>
             {c.help.situations && (

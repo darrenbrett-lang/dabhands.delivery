@@ -53,7 +53,7 @@ const content: OperatorContent = {
       },
       {
         heading: 'Multiple partners need\nto work as one team',
-        body: 'Internal teams, agencies, production partners and specialist suppliers all have different priorities. I help align people, decisions and delivery around one shared outcome.',
+        body: 'Internal teams, agencies, production partners and specialist suppliers all have different priorities, with AI-enabled workflows now part of the mix. I help align people, decisions and delivery around one shared outcome.',
         enquiry: {
           subject: 'Aligning multiple partners around one outcome',
           body: 'We have several partners who need to work as one team around a shared outcome. I would like to talk.',
@@ -100,7 +100,7 @@ const content: OperatorContent = {
   // (headline + one body paragraph; optional `result` chip). `outcome` is a
   // metric-free fallback shown only when a card has no story.
   work: {
-    heading: 'Some of the programmes, platforms and campaigns I’ve led over the past two decades.',
+    heading: 'Some of the programmes, platforms and campaigns I’ve led over the recent years.',
     intro: 'Work where commercial outcomes, customer experience and brand reputation depended on getting the execution right.',
     cards: [
       {

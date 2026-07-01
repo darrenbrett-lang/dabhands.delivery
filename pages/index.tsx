@@ -161,22 +161,27 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.15}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Strategy. Creative ambition. Investment. Good people. Capable partners.
+                    Strategy. Creative ambition. Investment. Good people. Increasingly, AI and specialist capability too.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The challenge isn’t creating more. It’s realising more impact from what already exists.
+                    The challenge isn’t creating more.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.26}>
+                <FadeUp delay={0.25}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Somewhere between ambition and execution, that impact gets diluted. Momentum slips. Complexity takes hold.
+                    It’s realising more impact from what already exists.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.32}>
+                <FadeUp delay={0.3}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    Somewhere between ambition and execution, momentum slips. Complexity takes hold. Value gets diluted.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.36}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    Because that’s where ambition becomes impact.
+                    That’s where I work.
                   </p>
                 </FadeUp>
               </div>

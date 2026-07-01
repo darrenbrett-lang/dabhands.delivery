@@ -22,6 +22,7 @@ const content: OperatorContent = {
     thesis: 'Capability isn’t the problem.\nPerformance is.',
     argument: [
       'Most organisations already have what they need to succeed.',
+      'AI, leaner teams and specialist partners are changing how work gets done. Organisations have never had more capability. They have rarely needed better judgement.',
       'The challenge isn’t finding more ideas, hiring more people or introducing more process. It’s creating the conditions where capable people consistently produce great outcomes together.',
       'Those conditions are built through clarity, alignment and accountability. When they’re present, organisations move with confidence.',
     ],

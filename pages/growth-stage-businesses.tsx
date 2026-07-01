@@ -30,7 +30,7 @@ const content: OperatorContent = {
     heading: 'I help businesses keep growing\nwithout breaking.',
     paras: [
       'I’ve built and scaled a business of my own, so I know how quickly success creates complexity.',
-      'One of the biggest shifts isn’t operational. It’s strategic. Growth creates more opportunities than any organisation can pursue well. Without clear priorities, energy spreads too thinly and momentum quietly disappears.',
+      'One of the biggest shifts isn’t operational. It’s strategic. Growth already creates more opportunities than any organisation can pursue well, and AI creates even more. The question is no longer what the business could do. It’s what it should do.',
       'I help leadership teams become clear about where the business is trying to create value, then build the operating rhythms, structures and ways of working that help the organisation move in that direction together.',
       'The outcome isn’t more process.',
       'It’s a business that becomes stronger as it grows.',
@@ -38,7 +38,7 @@ const content: OperatorContent = {
   },
   help: {
     heading: 'Typical engagements',
-    intro: 'The situations where growth-stage businesses usually bring me in.',
+    intro: 'The situations where growth-stage businesses\nusually bring me in.',
     situations: [
       {
         heading: 'The founder can no longer\nbe the operating system',
