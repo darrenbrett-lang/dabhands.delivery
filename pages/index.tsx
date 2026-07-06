@@ -238,7 +238,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.08} className="col-span-4 md:col-span-12 lg:col-span-8 lg:col-start-5">
                   <p className="text-lg md:text-xl text-ink/70 leading-relaxed max-w-[54ch]">
-                    {withSoftBreaks('Different challenges. Same pattern.\nAmbition is clear. The work matters. Complexity is getting in the way.')}
+                    Different challenges.<br />The same pattern underneath.
                   </p>
                 </FadeUp>
               </div>
