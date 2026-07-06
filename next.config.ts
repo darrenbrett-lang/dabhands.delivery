@@ -20,6 +20,14 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Private, unlisted proposal page. Belt-and-braces alongside the
+        // in-page noindex meta: an HTTP-level noindex for bots that ignore it.
+        source: "/p/clear-path-eterna-bf29921da7ad134519b277b3",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/images/(.*)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
