@@ -5,10 +5,10 @@ import { FadeUp } from '@/components/FadeUp';
 /*
  * PRIVATE, UNLISTED PROPOSAL PAGE. "The Clear Path", for Dr Adeel Khan (Eterna Health).
  *
- * Do not link to this from anywhere on the site. Not in sitemap.xml. The URL
- * carries a random token and the route sends an X-Robots-Tag: noindex header
- * (see next.config.ts) alongside the in-page robots meta below. Open Graph tags
- * are deliberately omitted so a shared link never leaks the client or contents.
+ * Route: /for/eterna. Do not link to this from anywhere on the site. Not in
+ * sitemap.xml. The route sends an X-Robots-Tag: noindex header (see
+ * next.config.ts) alongside the in-page robots meta below. Open Graph tags are
+ * deliberately omitted so a shared link never leaks the client or contents.
  * Standalone: reuses the DAB Hands design system but carries no site navigation.
  *
  * Layout: the site's wide 1280 container. Content is left-aligned; the richer
