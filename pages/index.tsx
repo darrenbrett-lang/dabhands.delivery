@@ -179,9 +179,19 @@ export default function Home() {
                     Somewhere between ambition and execution, momentum slips. Complexity takes hold. Value gets diluted.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.36}>
+                <FadeUp delay={0.35}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    There is a name for that gap. Coordination debt: the work of holding everything together that quietly becomes nobody’s job.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.4}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.46}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    That’s where I work.
+                    That is where I work.
                   </p>
                 </FadeUp>
               </div>
@@ -197,6 +207,18 @@ export default function Home() {
             </FadeUp>
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />
+            </FadeUp>
+          </div>
+        </section>
+
+        {/* PROPOSITION: the commercial payoff, a short statement that bridges the proof
+            wall into "Where I help". Copy only, reuses the existing serif treatment. */}
+        <section className="bg-bone text-ink py-16 md:py-20 lg:py-24">
+          <div className="u-container">
+            <FadeUp>
+              <p className="font-serif text-[26px] md:text-[32px] lg:text-[38px] leading-[1.16] tracking-[-0.01em] max-w-[42ch]">
+                I help agency, brand and growth-stage leaders move important work through complexity, so execution turns into revenue, margin and growth.
+              </p>
             </FadeUp>
           </div>
         </section>
