@@ -151,8 +151,9 @@ export const Header = () => {
               <span
                 aria-hidden
                 className="shrink-0 rounded-full bg-gold h-[16px] w-[16px] md:h-[19px] md:w-[19px]"
+                style={{ boxShadow: '0 0 0 4px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
               />
-              <span className="font-serif text-ink text-[22px] md:text-[26px] leading-none tracking-[-0.01em]">DAB Hands</span>
+              <span className="font-sans font-semibold text-ink text-[20px] md:text-[23px] leading-none tracking-[-0.02em]">DAB Hands</span>
             </Link>
             {/* Persistent room locator: fades in beneath the wordmark once the
                 second panel is scrolled to. Absolute so it never nudges the

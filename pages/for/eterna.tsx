@@ -111,8 +111,12 @@ export default function ClearPath() {
       <header className="bg-bone border-b border-ink/10">
         <Container className="py-5 flex items-center justify-between gap-4">
           <span className="inline-flex items-baseline gap-[8px] md:gap-[9.5px]">
-            <span aria-hidden className="shrink-0 rounded-full bg-gold h-[15px] w-[15px] md:h-[17px] md:w-[17px]" />
-            <span className="font-serif text-[22px] md:text-[24px] leading-none text-ink tracking-[-0.01em]">DAB Hands</span>
+            <span
+              aria-hidden
+              className="shrink-0 rounded-full bg-gold h-[15px] w-[15px] md:h-[17px] md:w-[17px]"
+              style={{ boxShadow: '0 0 0 4px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
+            />
+            <span className="font-sans font-semibold text-[20px] md:text-[22px] leading-none text-ink tracking-[-0.02em]">DAB Hands</span>
           </span>
           <a
             href="https://dabhands.delivery"

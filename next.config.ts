@@ -29,6 +29,16 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Private, unlisted design-system reference (/design-system). Same
+        // belt-and-braces as the proposal pages: an HTTP-level noindex to
+        // back up the in-page noindex meta. Kept out of nav, sitemap and
+        // llms.txt so nothing links to it.
+        source: "/design-system",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/images/(.*)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },

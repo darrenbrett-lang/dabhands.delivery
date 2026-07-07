@@ -14,7 +14,7 @@ export const PrivateLayout = ({ children }: PrivateLayoutProps) => (
     <a href="#top" className="skip-link">Skip to content</a>
     <header className="fixed top-0 left-0 right-0 z-50 bg-charcoal">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center">
-        <span className="font-serif text-bone text-[22px] md:text-[24px] leading-none tracking-[-0.01em]">
+        <span className="font-sans font-semibold text-bone text-[20px] md:text-[22px] leading-none tracking-[-0.02em]">
           DAB Hands
         </span>
       </div>
