@@ -333,9 +333,14 @@ export default function ClearPath() {
             }
           >
             <FadeUp delay={0.1}>
-              <p className="text-lg leading-relaxed text-bone/85">
-                A single, prioritised view of exactly where the right patients decide you are the best and safest choice for them, and where they slip away, ranked by what each moment is worth to you. It tracks four things at every step: whether they feel this is for them, whether they believe you will give them the best result, whether your standards land as a reason to choose you, and whether they feel safe you are the better option.
-              </p>
+              <div className="space-y-5 text-lg leading-relaxed text-bone/85">
+                <p>
+                  A single, prioritised view of exactly where the right patients gain the confidence to choose you, and where they quietly slip away, ranked by what each moment is worth to you.
+                </p>
+                <p>
+                  It follows a patient the whole way and asks, at every step: do they feel seen, and understand what they are choosing? Is this honestly right for them? Do they believe you, and the evidence behind you? Do they feel safe, and know the risks? And do they trust you will be there after they commit? Wherever one of those slips, a patient you would have served well is quietly lost.
+                </p>
+              </div>
             </FadeUp>
           </Rail>
         </section>
