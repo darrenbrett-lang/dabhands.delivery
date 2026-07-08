@@ -139,39 +139,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── PROBLEM PANEL (dark): the problem owns the dark beat. Pure recognition —
-            the environment, the slip — closing on the operator planting himself in
-            the gap, set off by the gold rule. ── */}
-        <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-24 lg:py-28">
+        {/* ── PROBLEM PANEL (dark): the live point-of-view layout — a commanding
+            statement left, three paragraphs of prose and the sign-off right. ── */}
+        <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <div className="max-w-[760px]">
-              <FadeUp>
-                <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.3] text-bone max-w-[24ch] u-balance">
+            <div className="u-grid gap-y-12 lg:items-start">
+              {/* Left: the statement — large, commanding, fills the column */}
+              <FadeUp className="col-span-4 md:col-span-6">
+                <h2 className="font-serif text-[40px] sm:text-[52px] md:text-[60px] lg:text-[66px] xl:text-[76px] leading-[1.02] tracking-[-0.02em] u-balance">
                   Important work is harder to land than it used to be. The environment sees to that.
-                </p>
+                </h2>
               </FadeUp>
-              <FadeUp delay={0.08}>
-                <p className="mt-8 text-[16px] md:text-[17px] leading-[1.85] text-bone/70 max-w-[62ch]">
-                  The fight for attention is real, internally and externally. AI is in every boardroom conversation and landing in very few P&Ls. The people holding everything together are running closer to empty. And through all of it, important work still has to travel from a good idea to real commercial impact.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.14}>
-                <p className="mt-6 text-[16px] md:text-[17px] leading-[1.7] text-bone/85 max-w-[52ch]">
-                  Somewhere between ambition and execution, momentum slips. Complexity takes hold. Value gets diluted.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.2}>
-                <p className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-clay max-w-[52ch]">
-                  My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.26}>
-                <div className="mt-10 md:mt-12 border-l-[3px] border-gold pl-6 md:pl-7">
-                  <p className="font-serif italic text-[21px] md:text-[24px] leading-[1.3] text-bone">
+
+              {/* Right: three paragraphs of prose building to the sign-off */}
+              <div className="col-span-4 md:col-span-5 md:col-start-8">
+                <FadeUp delay={0.1}>
+                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    The fight for attention is real, internally and externally. AI is in every boardroom conversation and landing in very few P&Ls. The people holding everything together are running closer to empty. And through all of it, important work still has to travel from a good idea to real commercial impact.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    Somewhere between ambition and execution, momentum slips. Complexity takes hold. Value gets diluted.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.22}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.3}>
+                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
                     That is where I work.
                   </p>
-                </div>
-              </FadeUp>
+                </FadeUp>
+              </div>
             </div>
           </div>
         </section>
