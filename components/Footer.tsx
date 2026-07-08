@@ -43,7 +43,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
             <span
               aria-hidden
               className="shrink-0 rounded-full bg-gold h-[13px] w-[13px]"
-              style={{ boxShadow: '0 0 0 3px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
+              style={{ boxShadow: '0 0 0 4px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
             />
             <span className="font-sans font-semibold text-bone text-[16px] tracking-[-0.02em]">DAB Hands</span>
           </Link>

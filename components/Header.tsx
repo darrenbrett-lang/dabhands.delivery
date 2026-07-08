@@ -151,7 +151,7 @@ export const Header = () => {
               <span
                 aria-hidden
                 className="shrink-0 rounded-full bg-gold h-[16px] w-[16px] md:h-[19px] md:w-[19px]"
-                style={{ boxShadow: '0 0 0 4px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
+                style={{ boxShadow: '0 0 0 6px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
               />
               <span className="font-sans font-semibold text-ink text-[20px] md:text-[23px] leading-none tracking-[-0.02em]">DAB Hands</span>
             </Link>
