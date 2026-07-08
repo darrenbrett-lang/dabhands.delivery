@@ -19,7 +19,7 @@ const MOMENTUM = [
     num: '01',
     label: 'Business & Agency Leaders',
     headline: 'Keeping everything moving.',
-    support: 'Helping organisations turn ambition into impact when complexity starts slowing everything down.',
+    support: 'When good thinking keeps losing ground between decision and delivery.',
     href: '/business-and-agency-leaders',
     src: '/images/momentum/01-tracks-2.jpg',
   },
@@ -27,7 +27,7 @@ const MOMENTUM = [
     num: '02',
     label: 'Marketing Leaders',
     headline: 'Keeping the signal strong.',
-    support: 'Helping ambitious work reach the market with the clarity, confidence and impact it deserves.',
+    support: 'When great work arrives with less impact than it deserved.',
     href: '/marketing-leaders',
     src: '/images/momentum/02-branding-2.jpg',
   },
@@ -35,7 +35,7 @@ const MOMENTUM = [
     num: '03',
     label: 'Growth-Stage Businesses',
     headline: 'Supporting greater ambition.',
-    support: 'Helping growing businesses build the capability their next stage depends on.',
+    support: 'When the ambition is clear but the structure hasn’t caught up.',
     href: '/growth-stage-businesses',
     src: '/images/momentum/03-growth.jpg',
   },
@@ -113,26 +113,21 @@ export default function Home() {
             <div className="u-grid items-start gap-y-12 md:gap-y-16">
               <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:pt-4">
                 <FadeUp>
-                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
+                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren Brett.</p>
                 </FadeUp>
                 <FadeUp delay={0.08}>
                   <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                    For most of my career, I’ve worked in the space where strategy becomes execution, where momentum is either built or quietly lost.
+                    For most of my career I’ve worked at the point where ambition has to become reality, inside agencies, global brands and businesses navigating complexity.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    There is a name for what happens when it slips. Coordination debt: the work of holding everything together that gradually becomes nobody’s job.
+                    I’ve led major programmes, built operating structures from the ground up, and helped leadership teams close the gap between what they intend to deliver and what actually gets built.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    As organisations grow and complexity takes hold, good thinking loses strength. Strategy moves into action but arrives diluted. Important initiatives reach the world with less clarity and impact than they deserved.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.28}>
-                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
+                    I work with leaders for whom getting it right matters as much as getting it done.
                   </p>
                 </FadeUp>
               </div>
@@ -140,6 +135,80 @@ export default function Home() {
               <FadeUp delay={0.1} className="col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
                 <SlatPortrait />
               </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROBLEM PANEL (dark): the page's one dark beat. The environment, the
+            slip, and the named gap (coordination debt) set off by a gold rule. ── */}
+        <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-24 lg:py-28">
+          <div className="u-container">
+            <div className="max-w-[760px]">
+              <FadeUp>
+                <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.3] text-bone max-w-[24ch]">
+                  Important work is harder to land than it used to be. The environment sees to that.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.08}>
+                <p className="mt-8 text-[16px] md:text-[17px] leading-[1.85] text-bone/70 max-w-[62ch]">
+                  The fight for attention is real, internally and externally. AI is in every boardroom conversation and landing in very few P&Ls. The people holding everything together are running closer to empty. And through all of it, important work still has to travel from a good idea to real commercial impact.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.14}>
+                <p className="mt-6 text-[16px] md:text-[17px] leading-[1.7] text-bone/85 max-w-[52ch]">
+                  Somewhere between ambition and execution, momentum slips. Complexity takes hold. Value gets diluted.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <div className="mt-10 md:mt-12 border-l-[3px] border-gold pl-6 md:pl-7">
+                  <p className="eyebrow text-gold mb-3" style={{ letterSpacing: '0.14em' }}>Coordination debt</p>
+                  <p className="font-serif text-[22px] md:text-[27px] leading-[1.35] text-bone max-w-[26ch]">
+                    The work of holding everything together that quietly becomes nobody’s job.
+                  </p>
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.26}>
+                <p className="mt-9 md:mt-10 text-[15px] md:text-[16px] leading-[1.8] text-clay max-w-[52ch]">
+                  My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.32}>
+                <p className="mt-7 font-serif italic text-[21px] md:text-[24px] leading-[1.3] text-bone">
+                  That is where I work.
+                </p>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* ── WHAT I DO (light): a lead-in, then three "turns" as bordered rows, each
+            naming a transformation with the pivot word "into" in italic deep gold. ── */}
+        <section data-spine="What I do" className="bg-bone text-ink py-16 md:py-20 lg:py-24">
+          <div className="u-container">
+            <FadeUp>
+              <p className="text-[17px] md:text-[18px] leading-[1.7] text-graphite max-w-[640px]">
+                I work with leadership teams where good thinking is already in the room, and the problem is getting it to survive contact with the organisation.
+              </p>
+            </FadeUp>
+            <div className="mt-12 md:mt-14 border-b border-stone/60">
+              {[
+                { key: 'strategy', a: 'Strategy ', b: ' operating reality', body: 'Most direction gets lost at the point where decisions become someone else’s problem. I work with leadership teams to close that gap, building the priorities, rhythms and decision-making structures that let people actually follow through.' },
+                { key: 'complexity', a: 'Complexity ', b: ' clarity', body: 'As organisations grow, drag builds quietly. More stakeholders, competing priorities, more places for momentum to slow. I help leadership teams remove what’s slowing the work down, so capable people can move together rather than around each other.' },
+                { key: 'impact', a: 'Important work ', b: ' impact', body: 'Major programmes, platform launches and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive with the clarity and commercial impact it was built to create.' },
+              ].map((t, i) => (
+                <FadeUp key={t.key} delay={i * 0.06}>
+                  <div className="border-t border-stone/60 py-7 md:py-9">
+                    <div className="u-grid gap-y-3 items-baseline">
+                      <h3 className="col-span-4 md:col-span-5 font-serif text-[22px] md:text-[26px] leading-[1.15] text-ink">
+                        {t.a}<span className="italic text-[#7E5E27]">into</span>{t.b}
+                      </h3>
+                      <p className="col-span-4 md:col-span-7 text-[15px] md:text-[16px] leading-[1.7] text-graphite max-w-[560px]">
+                        {t.body}
+                      </p>
+                    </div>
+                  </div>
+                </FadeUp>
+              ))}
             </div>
           </div>
         </section>
@@ -156,39 +225,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* HOW I WORK: a charcoal statement block, the page's dark beat, reusing the
-            point-of-view treatment. A commanding line left, the model's argument right. */}
-        <section data-spine="How I work" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
+        {/* ── HOW I WORK (light): the operating model, a calm single-column read so the
+            dark Problem Panel above stays the page's one dark beat. ── */}
+        <section data-spine="How I work" className="bg-bone text-ink py-16 md:py-20 lg:py-24 border-t border-stone/60">
           <div className="u-container">
-            <div className="u-grid gap-y-12 lg:items-start">
-              <FadeUp className="col-span-4 md:col-span-6">
-                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
-                  DAB Hands is intentionally small.
-                </h2>
+            <FadeUp>
+              <p className="eyebrow text-graphite mb-6 md:mb-8">How I work</p>
+            </FadeUp>
+            <div className="max-w-[640px]">
+              <FadeUp delay={0.06}>
+                <p className="text-[17px] md:text-[18px] leading-[1.8] text-graphite">
+                  DAB Hands is intentionally small. I stay close to the work because that’s where the judgement lives.
+                </p>
               </FadeUp>
-
-              <div className="col-span-4 md:col-span-5 md:col-start-8">
-                <FadeUp delay={0.1}>
-                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    I stay close to the work because that’s where the judgement lives.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.16}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    When an engagement needs additional capability, I bring together trusted senior specialists I’ve worked with for years, chosen because they’re right for the challenge, not because they’re on a payroll.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.22}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    You’ll always work with me. The team expands only when the work demands it.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.3}>
-                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    The work determines the team. Never the other way around.
-                  </p>
-                </FadeUp>
-              </div>
+              <FadeUp delay={0.12}>
+                <p className="mt-5 text-[17px] md:text-[18px] leading-[1.8] text-graphite">
+                  When an engagement needs additional capability, I bring together trusted senior specialists I’ve worked with for years, chosen because they’re right for the challenge, not because they’re on a payroll.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.18}>
+                <p className="mt-5 text-[17px] md:text-[18px] leading-[1.8] text-graphite">
+                  You’ll always work with me. The team expands only when the work demands it.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.24}>
+                <p className="mt-8 md:mt-10 font-serif text-[26px] md:text-[32px] leading-[1.2] tracking-[-0.01em] text-ink">
+                  The work determines the team. Never the other way around.
+                </p>
+              </FadeUp>
             </div>
           </div>
         </section>
@@ -201,15 +265,11 @@ export default function Home() {
               <div className="u-grid items-end gap-y-5">
                 {/* Title over the image column (cols 1–4 on lg); intro over the copy column
                     (cols 5–12) — the same two zones the rows below use. */}
-                <FadeUp className="col-span-4 md:col-span-12 lg:col-span-4">
-                  <h2 className="font-serif text-[40px] md:text-[56px] leading-[1.02] tracking-[-0.01em]">
-                    Where I help.
-                  </h2>
-                </FadeUp>
-                <FadeUp delay={0.08} className="col-span-4 md:col-span-12 lg:col-span-8 lg:col-start-5">
-                  <p className="text-lg md:text-xl text-ink/70 leading-relaxed max-w-[54ch]">
+                <FadeUp className="col-span-4 md:col-span-12 lg:col-span-9">
+                  <p className="eyebrow text-graphite mb-3">Where I help</p>
+                  <h2 className="font-serif text-[36px] md:text-[52px] leading-[1.05] tracking-[-0.01em]">
                     Different challenges.<br />The same pattern underneath.
-                  </p>
+                  </h2>
                 </FadeUp>
               </div>
             </div>
@@ -278,7 +338,7 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
                 <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch]">
-                  If something important needs to move properly, let’s talk.
+                  When something important needs to land properly, let’s talk.
                 </h2>
               </FadeUp>
               <FadeUp delay={0.1}>
