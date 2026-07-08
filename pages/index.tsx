@@ -194,9 +194,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most direction gets lost at the point where decisions become someone else’s problem. I work with leadership teams to close that gap, building the priorities, rhythms and decision-making structures that let people actually follow through.' },
-                { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. More stakeholders, competing priorities, more places for momentum to slow. I help leadership teams remove what’s slowing the work down, so capable people can move together rather than around each other.' },
-                { key: 'impact', from: 'Important work', to: 'impact', body: 'Major programmes, platform launches and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive with the clarity and commercial impact it was built to create.' },
+                { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most strategy loses its force the moment it becomes someone else’s problem. I help leadership teams build the priorities, rhythms and clarity that let people actually follow through.' },
+                { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. The right people are still there. They just can’t move together. I help remove what’s in the way so they do.' },
+                { key: 'impact', from: 'Important work', to: 'impact', body: 'Major programmes and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive as what it actually is.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
