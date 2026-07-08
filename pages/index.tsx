@@ -194,11 +194,11 @@ export default function Home() {
               </h2>
             </FadeUp>
             <FadeUp delay={0.08}>
-              <p className="mt-6 md:mt-7 text-[17px] leading-[1.7] text-graphite max-w-[640px]">
+              <p className="eyebrow text-graphite mt-8 md:mt-10">
                 I do that by turning:
               </p>
             </FadeUp>
-            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
+            <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most strategy loses its force the moment it becomes someone else’s problem. I help leadership teams build the priorities, rhythms and clarity that let people actually follow through.' },
                 { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. The right people are still there. They just can’t move together. I help remove what’s in the way so they do.' },
