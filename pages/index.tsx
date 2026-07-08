@@ -94,12 +94,7 @@ export default function Home() {
                 Most organisations don’t lack good thinking.<br />They struggle to preserve it.
               </p>
             </FadeUp>
-            <FadeUp delay={0.5}>
-              <p className="mt-7 md:mt-8 text-[13px] md:text-[14px] leading-relaxed text-graphite max-w-[54ch] mx-auto">
-                Twenty years inside Nike, HUGO BOSS, Volkswagen, Audi, Royal Mail, Unilever.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.6}>
+            <FadeUp delay={0.55}>
               <PathwayPicker />
             </FadeUp>
           </div>
