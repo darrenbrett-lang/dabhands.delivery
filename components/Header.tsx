@@ -145,15 +145,10 @@ export const Header = () => {
           <div className="relative">
             <Link
               href="/"
-              className="inline-flex items-baseline gap-[8px] md:gap-[9.5px]"
+              className="inline-flex items-baseline"
               aria-label="DAB Hands, home"
             >
-              <span
-                aria-hidden
-                className="shrink-0 rounded-full bg-gold h-[16px] w-[16px] md:h-[19px] md:w-[19px]"
-                style={{ boxShadow: '0 0 0 6px color-mix(in srgb, var(--color-gold) 22%, transparent)' }}
-              />
-              <span className="font-sans font-semibold text-ink text-[20px] md:text-[23px] leading-none tracking-[-0.02em]">DAB Hands</span>
+              <span className="font-serif text-ink text-[24px] md:text-[28px] leading-none tracking-[-0.01em]">DAB Hands</span>
             </Link>
             {/* Persistent room locator: fades in beneath the wordmark once the
                 second panel is scrolled to. Absolute so it never nudges the
