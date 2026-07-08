@@ -200,16 +200,16 @@ export default function Home() {
             </FadeUp>
             <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most strategy loses its force the moment it becomes someone else’s problem. I help leadership teams build the priorities, rhythms and clarity that let people actually follow through.' },
-                { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. The right people are still there. They just can’t move together. I help remove what’s in the way so they do.' },
-                { key: 'impact', from: 'Important work', to: 'impact', body: 'Major programmes and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive as what it actually is.' },
+                { key: 'strategy', from: 'Strategy', to: 'an operating reality', body: 'Strategy starts on a page. The work is building the operation that delivers on it: keeping intent intact, removing what doesn’t serve it, and making sure what the organisation does each day is actually pointed at it.' },
+                { key: 'complexity', from: 'System complexity', to: 'more clarity', body: 'Organisations are getting harder to coordinate: more noise, more places for important work to lose its shape. I help keep the signal strong: what to look for, what to protect, what to push on.' },
+                { key: 'impact', from: 'Important work', to: 'impactful attention', body: 'Major programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help significant work arrive with the full force it was built to carry.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
                       becomes, pivoting on the gold italic "into". A hairline rule
                       opens each column; the three arrive in sequence. */}
                   <div className="border-t border-stone/60 pt-6 md:pt-7">
-                    <h3 className="font-serif text-[32px] md:text-[28px] lg:text-[36px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
+                    <h3 className="font-serif text-[32px] md:text-[24px] lg:text-[32px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
                       {t.from}
                       <br />
                       <span className="italic text-gold">into</span> {t.to}
