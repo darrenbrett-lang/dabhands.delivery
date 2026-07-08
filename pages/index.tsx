@@ -183,11 +183,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── WHAT I DO (light): the three turns open the section directly — each a
-            from→to statement at anchor scale, pivoting on the gold italic "into". ── */}
+        {/* ── WHAT I DO (light): a two-beat lead-in ("...arrives as intended." / "I do
+            that by turning:") opening onto the three turns — each a from→to statement
+            at anchor scale, pivoting on the gold italic "into". ── */}
         <section data-spine="What I do" className="bg-bone text-ink py-16 md:py-20 lg:py-24 border-t border-stone/60">
           <div className="u-container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
+            <FadeUp>
+              <p className="text-[17px] leading-[1.7] text-graphite max-w-[640px]">
+                I help leaders of agencies, brands and growth-stage businesses make sure good thinking arrives as intended.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <p className="mt-5 text-[17px] leading-[1.7] text-graphite max-w-[640px]">
+                I do that by turning:
+              </p>
+            </FadeUp>
+            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most strategy loses its force the moment it becomes someone else’s problem. I help leadership teams build the priorities, rhythms and clarity that let people actually follow through.' },
                 { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. The right people are still there. They just can’t move together. I help remove what’s in the way so they do.' },
