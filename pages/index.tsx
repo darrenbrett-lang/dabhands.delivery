@@ -139,8 +139,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── PROBLEM PANEL (dark): the page's one dark beat. The environment, the
-            slip, and the named gap (coordination debt) set off by a gold rule. ── */}
+        {/* ── PROBLEM PANEL (dark): the problem owns the dark beat. Pure recognition —
+            the environment, the slip — closing on the operator planting himself in
+            the gap, set off by the gold rule. ── */}
         <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-24 lg:py-28">
           <div className="u-container">
             <div className="max-w-[760px]">
@@ -160,22 +161,16 @@ export default function Home() {
                 </p>
               </FadeUp>
               <FadeUp delay={0.2}>
-                <div className="mt-10 md:mt-12 border-l-[3px] border-gold pl-6 md:pl-7">
-                  <p className="eyebrow text-gold mb-3" style={{ letterSpacing: '0.14em' }}>Coordination debt</p>
-                  <p className="font-serif text-[22px] md:text-[27px] leading-[1.35] text-bone max-w-[26ch]">
-                    The work of holding everything together that quietly becomes nobody’s job.
-                  </p>
-                </div>
-              </FadeUp>
-              <FadeUp delay={0.26}>
-                <p className="mt-9 md:mt-10 text-[15px] md:text-[16px] leading-[1.8] text-clay max-w-[52ch]">
+                <p className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-clay max-w-[52ch]">
                   My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
                 </p>
               </FadeUp>
-              <FadeUp delay={0.32}>
-                <p className="mt-7 font-serif italic text-[21px] md:text-[24px] leading-[1.3] text-bone">
-                  That is where I work.
-                </p>
+              <FadeUp delay={0.26}>
+                <div className="mt-10 md:mt-12 border-l-[3px] border-gold pl-6 md:pl-7">
+                  <p className="font-serif italic text-[21px] md:text-[24px] leading-[1.3] text-bone">
+                    That is where I work.
+                  </p>
+                </div>
               </FadeUp>
             </div>
           </div>
