@@ -234,7 +234,7 @@ export default function Home() {
               <FadeUp className="col-span-4 md:col-span-6">
                 <p className="eyebrow mb-5" style={{ color: '#EBD4A8', letterSpacing: '0.14em' }}>How I work</p>
                 <h2 className="font-serif text-[42px] sm:text-[54px] md:text-[62px] lg:text-[72px] leading-[1.0] tracking-[-0.02em] u-balance">
-                  DAB Hands is intentionally small.
+                  The work determines the team.
                 </h2>
               </FadeUp>
 
@@ -246,7 +246,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
-                    When an engagement needs additional capability, I bring together trusted senior specialists I’ve worked with for years, chosen because they’re right for the challenge, not because they’re on a payroll.
+                    When the work demands more, I bring in the right people. Trusted senior specialists I’ve worked with for years, chosen for the challenge rather than the roster.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
@@ -256,7 +256,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.28}>
                   <p className="mt-8 pt-6 border-t border-bone/20 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone u-balance">
-                    The work determines the team. Never the other way around.
+                    Never the other way around.
                   </p>
                 </FadeUp>
               </div>
