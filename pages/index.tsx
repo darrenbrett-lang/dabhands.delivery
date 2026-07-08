@@ -183,16 +183,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── WHAT I DO (light): a lead-in, then the three turns side by side — each
-            naming a transformation, the pivot word "into" in italic deep gold. ── */}
+        {/* ── WHAT I DO (light): the three turns open the section directly — each a
+            from→to statement at anchor scale, pivoting on the gold italic "into". ── */}
         <section data-spine="What I do" className="bg-bone text-ink py-16 md:py-20 lg:py-24 border-t border-stone/60">
           <div className="u-container">
-            <FadeUp>
-              <p className="text-[17px] leading-[1.7] text-graphite max-w-[640px]">
-                I work with leadership teams where good thinking is already in the room, and the problem is getting it to survive contact with the organisation.
-              </p>
-            </FadeUp>
-            <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most strategy loses its force the moment it becomes someone else’s problem. I help leadership teams build the priorities, rhythms and clarity that let people actually follow through.' },
                 { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. The right people are still there. They just can’t move together. I help remove what’s in the way so they do.' },
@@ -203,10 +198,10 @@ export default function Home() {
                       becomes, pivoting on the gold italic "into". A hairline rule
                       opens each column; the three arrive in sequence. */}
                   <div className="border-t border-stone/60 pt-6 md:pt-7">
-                    <h3 className="font-serif text-[26px] md:text-[23px] lg:text-[30px] leading-[1.14] tracking-[-0.01em] text-ink">
+                    <h3 className="font-serif text-[32px] md:text-[28px] lg:text-[36px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
                       {t.from}
                       <br />
-                      <span className="italic text-[#7E5E27]">into</span> {t.to}
+                      <span className="italic text-gold">into</span> {t.to}
                     </h3>
                     <p className="mt-4 md:mt-5 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
                       {t.body}
