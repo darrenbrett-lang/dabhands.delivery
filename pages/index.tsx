@@ -189,12 +189,12 @@ export default function Home() {
         <section data-spine="What I do" className="bg-bone text-ink py-16 md:py-20 lg:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
-              <p className="text-[17px] leading-[1.7] text-graphite max-w-[640px]">
+              <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
                 I help leaders of agencies, brands and growth-stage businesses make sure good thinking arrives as intended.
-              </p>
+              </h2>
             </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-5 text-[17px] leading-[1.7] text-graphite max-w-[640px]">
+            <FadeUp delay={0.08}>
+              <p className="mt-6 md:mt-7 text-[17px] leading-[1.7] text-graphite max-w-[640px]">
                 I do that by turning:
               </p>
             </FadeUp>
