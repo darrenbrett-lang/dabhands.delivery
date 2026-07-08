@@ -192,19 +192,26 @@ export default function Home() {
                 I work with leadership teams where good thinking is already in the room, and the problem is getting it to survive contact with the organisation.
               </p>
             </FadeUp>
-            <div className="mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-10">
+            <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', a: 'Strategy ', b: ' operating reality', body: 'Most direction gets lost at the point where decisions become someone else’s problem. I work with leadership teams to close that gap, building the priorities, rhythms and decision-making structures that let people actually follow through.' },
-                { key: 'complexity', a: 'Complexity ', b: ' clarity', body: 'As organisations grow, drag builds quietly. More stakeholders, competing priorities, more places for momentum to slow. I help leadership teams remove what’s slowing the work down, so capable people can move together rather than around each other.' },
-                { key: 'impact', a: 'Important work ', b: ' impact', body: 'Major programmes, platform launches and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive with the clarity and commercial impact it was built to create.' },
+                { key: 'strategy', from: 'Strategy', to: 'operating reality', body: 'Most direction gets lost at the point where decisions become someone else’s problem. I work with leadership teams to close that gap, building the priorities, rhythms and decision-making structures that let people actually follow through.' },
+                { key: 'complexity', from: 'Complexity', to: 'clarity', body: 'As organisations grow, drag builds quietly. More stakeholders, competing priorities, more places for momentum to slow. I help leadership teams remove what’s slowing the work down, so capable people can move together rather than around each other.' },
+                { key: 'impact', from: 'Important work', to: 'impact', body: 'Major programmes, platform launches and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive with the clarity and commercial impact it was built to create.' },
               ].map((t, i) => (
-                <FadeUp key={t.key} delay={i * 0.08}>
-                  <h3 className="font-serif text-[20px] md:text-[21px] leading-[1.3] text-ink">
-                    {t.a}<span className="italic text-[#7E5E27]">into</span>{t.b}
-                  </h3>
-                  <p className="mt-3.5 text-[15px] leading-[1.7] text-graphite">
-                    {t.body}
-                  </p>
+                <FadeUp key={t.key} delay={i * 0.12}>
+                  {/* Each turn is a from→to statement: what they have, then what it
+                      becomes, pivoting on the gold italic "into". A hairline rule
+                      opens each column; the three arrive in sequence. */}
+                  <div className="border-t border-stone/60 pt-6 md:pt-7">
+                    <h3 className="font-serif text-[26px] md:text-[23px] lg:text-[30px] leading-[1.14] tracking-[-0.01em] text-ink">
+                      {t.from}
+                      <br />
+                      <span className="italic text-[#7E5E27]">into</span> {t.to}
+                    </h3>
+                    <p className="mt-4 md:mt-5 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
+                      {t.body}
+                    </p>
+                  </div>
                 </FadeUp>
               ))}
             </div>
