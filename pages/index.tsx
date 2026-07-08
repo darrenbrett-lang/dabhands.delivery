@@ -111,12 +111,12 @@ export default function Home() {
         >
           <div className="u-container">
             <div className="u-grid items-start gap-y-12 md:gap-y-16">
-              <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:pt-4">
+              <div className="col-span-4 md:col-span-6 lg:col-span-5">
                 <FadeUp>
-                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren Brett.</p>
+                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
                 </FadeUp>
                 <FadeUp delay={0.08}>
-                  <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
+                  <p className="font-serif text-[30px] md:text-[34px] lg:text-[44px] leading-[1.14] text-ink u-balance">
                     For most of my career I’ve worked at the point where ambition has to become reality, inside agencies, global brands and businesses navigating complexity.
                   </p>
                 </FadeUp>
@@ -145,7 +145,7 @@ export default function Home() {
           <div className="u-container">
             <div className="max-w-[760px]">
               <FadeUp>
-                <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.3] text-bone max-w-[24ch]">
+                <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.3] text-bone max-w-[24ch] u-balance">
                   Important work is harder to land than it used to be. The environment sees to that.
                 </p>
               </FadeUp>
@@ -225,34 +225,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── HOW I WORK (light): the operating model, a calm single-column read so the
-            dark Problem Panel above stays the page's one dark beat. ── */}
-        <section data-spine="How I work" className="bg-bone text-ink py-16 md:py-20 lg:py-24 border-t border-stone/60">
+        {/* ── HOW I WORK (slate-blue panel): a big statement left, the model's detail
+            right — a second coloured beat after the problem panel. A light-gold
+            eyebrow and a hairline rule above the close add interest. ── */}
+        <section data-spine="How I work" data-spine-tone="dark" className="bg-blue-green text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <FadeUp>
-              <p className="eyebrow text-graphite mb-6 md:mb-8">How I work</p>
-            </FadeUp>
-            <div className="max-w-[640px]">
-              <FadeUp delay={0.06}>
-                <p className="text-[17px] md:text-[18px] leading-[1.8] text-graphite">
-                  DAB Hands is intentionally small. I stay close to the work because that’s where the judgement lives.
-                </p>
+            <div className="u-grid gap-y-10 lg:items-start">
+              <FadeUp className="col-span-4 md:col-span-6">
+                <p className="eyebrow mb-5" style={{ color: '#EBD4A8', letterSpacing: '0.14em' }}>How I work</p>
+                <h2 className="font-serif text-[42px] sm:text-[54px] md:text-[62px] lg:text-[72px] leading-[1.0] tracking-[-0.02em] u-balance">
+                  DAB Hands is intentionally small.
+                </h2>
               </FadeUp>
-              <FadeUp delay={0.12}>
-                <p className="mt-5 text-[17px] md:text-[18px] leading-[1.8] text-graphite">
-                  When an engagement needs additional capability, I bring together trusted senior specialists I’ve worked with for years, chosen because they’re right for the challenge, not because they’re on a payroll.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.18}>
-                <p className="mt-5 text-[17px] md:text-[18px] leading-[1.8] text-graphite">
-                  You’ll always work with me. The team expands only when the work demands it.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.24}>
-                <p className="mt-8 md:mt-10 font-serif text-[26px] md:text-[32px] leading-[1.2] tracking-[-0.01em] text-ink">
-                  The work determines the team. Never the other way around.
-                </p>
-              </FadeUp>
+
+              <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:col-start-8">
+                <FadeUp delay={0.1}>
+                  <p className="text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
+                    I stay close to the work because that’s where the judgement lives.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
+                    When an engagement needs additional capability, I bring together trusted senior specialists I’ve worked with for years, chosen because they’re right for the challenge, not because they’re on a payroll.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.22}>
+                  <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
+                    You’ll always work with me. The team expands only when the work demands it.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.28}>
+                  <p className="mt-8 pt-6 border-t border-bone/20 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone u-balance">
+                    The work determines the team. Never the other way around.
+                  </p>
+                </FadeUp>
+              </div>
             </div>
           </div>
         </section>
@@ -267,7 +274,7 @@ export default function Home() {
                     (cols 5–12) — the same two zones the rows below use. */}
                 <FadeUp className="col-span-4 md:col-span-12 lg:col-span-9">
                   <p className="eyebrow text-graphite mb-3">Where I help</p>
-                  <h2 className="font-serif text-[36px] md:text-[52px] leading-[1.05] tracking-[-0.01em]">
+                  <h2 className="font-serif text-[36px] md:text-[52px] leading-[1.05] tracking-[-0.01em] u-balance">
                     Different challenges.<br />The same pattern underneath.
                   </h2>
                 </FadeUp>
@@ -275,55 +282,43 @@ export default function Home() {
             </div>
           </div>
 
-          <div>
-            {MOMENTUM.map((row, i) => (
-              <FadeUp key={row.num} delay={i * 0.06}>
-                <Link
-                  href={row.href}
-                  aria-label={`${row.label}: ${row.headline}`}
-                  className="group block border-b border-stone/50"
-                >
-                  <div className="u-container py-8 md:py-10 lg:py-12">
-                    <div className="u-grid items-center gap-y-6">
-                      {/* The doorway: a clean third-width image ON THE GRID (cols 1–4 on lg);
-                          on smaller screens a shallow full-width sliver that matches the
-                          audience-page hero (5:2, rounded, hairline ring). The audience label
-                          sits over it; it opens on hover with a slow Ken Burns push-in. */}
-                      <div className="relative col-span-4 md:col-span-12 lg:col-span-4 aspect-[5/2] lg:aspect-[3/2] overflow-hidden rounded-2xl lg:rounded-none ring-1 ring-inset ring-ink/10 lg:ring-0">
-                        <Image
-                          src={row.src}
-                          alt=""
-                          fill
-                          quality={82}
-                          sizes="(max-width: 1024px) 100vw, 33vw"
-                          className="object-cover transition-transform duration-[1400ms] ease-out will-change-transform group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                        />
-                        {/* Scrim so the audience label stays readable over the image. */}
-                        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/0 to-transparent" />
-                        <span className="absolute bottom-4 left-5 right-5 text-[14px] md:text-[15px] font-medium tracking-[-0.01em] text-bone">{row.label}</span>
-                      </div>
-                      {/* The message — conceptual line as the headline, Explore inline with the
-                          helping line beneath. Cols 5–12 on lg, aligned with the header intro. */}
-                      <div className="col-span-4 md:col-span-12 lg:col-span-8 lg:col-start-5">
-                        <h3 className="font-serif text-[24px] md:text-[30px] lg:text-[38px] leading-[1.06] tracking-[-0.01em]">{row.headline}</h3>
-                        <div className="mt-3.5 flex items-end justify-between gap-6">
-                          <p className="text-[15px] md:text-base leading-relaxed text-ink/70 max-w-[54ch]">{row.support}</p>
-                          <span className="shrink-0 inline-flex items-center gap-2 border-b-2 border-gold pb-1 text-[15px] font-medium text-ink">
-                            Explore
-                            {/* Arrow loop: glides off right while a second arrow slides in from the
-                                left. Honours reduced-motion. */}
-                            <span aria-hidden className="relative inline-block h-[1.1em] w-[1.25em] overflow-hidden leading-none">
-                              <span className="absolute inset-0 flex items-center justify-center leading-none transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[220%] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">→</span>
-                              <span className="absolute inset-0 flex items-center justify-center leading-none -translate-x-[220%] transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:hidden">→</span>
-                            </span>
-                          </span>
-                        </div>
-                      </div>
+          <div className="u-container pt-12 md:pt-14 lg:pt-16 pb-16 md:pb-20 lg:pb-24">
+            <div className="u-grid gap-y-12">
+              {MOMENTUM.map((row, i) => (
+                <FadeUp key={row.num} delay={i * 0.06} className="col-span-4">
+                  <Link
+                    href={row.href}
+                    aria-label={`${row.label}: ${row.headline}`}
+                    className="group flex h-full flex-col"
+                  >
+                    {/* The doorway image, now a card top; the audience label sits over it,
+                        opening on hover with a slow Ken Burns push-in. */}
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl ring-1 ring-inset ring-ink/10">
+                      <Image
+                        src={row.src}
+                        alt=""
+                        fill
+                        quality={82}
+                        sizes="(max-width: 767px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-[1400ms] ease-out will-change-transform group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                      />
+                      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/0 to-transparent" />
+                      <span className="absolute bottom-3.5 left-4 right-4 text-[13px] md:text-[14px] font-medium tracking-[-0.01em] text-bone">{row.label}</span>
                     </div>
-                  </div>
-                </Link>
-              </FadeUp>
-            ))}
+                    <h3 className="mt-5 font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.08] tracking-[-0.01em] text-ink u-balance">{row.headline}</h3>
+                    <p className="mt-2.5 text-[15px] leading-relaxed text-ink/70">{row.support}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 border-b-2 border-gold pb-1 text-[14px] font-medium text-ink">
+                      Explore
+                      {/* Arrow loop: glides off right while a second slides in from the left. */}
+                      <span aria-hidden className="relative inline-block h-[1.1em] w-[1.25em] overflow-hidden leading-none">
+                        <span className="absolute inset-0 flex items-center justify-center leading-none transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[220%] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">→</span>
+                        <span className="absolute inset-0 flex items-center justify-center leading-none -translate-x-[220%] transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:hidden">→</span>
+                      </span>
+                    </span>
+                  </Link>
+                </FadeUp>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -337,7 +332,7 @@ export default function Home() {
             </FadeUp>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
-                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch]">
+                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch] u-balance">
                   When something important needs to land properly, let’s talk.
                 </h2>
               </FadeUp>

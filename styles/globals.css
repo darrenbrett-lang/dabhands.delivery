@@ -131,6 +131,10 @@ p {
   text-wrap: pretty;
 }
 
+/* Force balanced wrapping (a class beats the unlayered p { text-wrap: pretty } on
+   specificity) so display lines don't drop a widow word on the last line. */
+.u-balance { text-wrap: balance; }
+
 /* Section label / eyebrow — Manrope, uppercase, tracked.
    Replaces the old monospace eyebrow. Colour set per use. */
 .eyebrow {
