@@ -17,7 +17,7 @@ const HOVER_BLOCK = 'color-mix(in srgb, var(--color-gold) 38%, transparent)';
 const HOVER_ACCENT = 'var(--color-ink)';
 const PATHS = [
   { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'When good thinking keeps losing ground between decision and delivery.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
-  { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'When great work arrives with less impact than it deserved.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'When great work lands softer than it should.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
   { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', line: 'When the ambition is clear but the structure hasn’t caught up.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
 ];
 
