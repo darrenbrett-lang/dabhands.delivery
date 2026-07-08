@@ -178,35 +178,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── WHAT I DO (light): a lead-in, then three "turns" as bordered rows, each
-            naming a transformation with the pivot word "into" in italic deep gold. ── */}
-        <section data-spine="What I do" className="bg-bone text-ink py-16 md:py-20 lg:py-24">
+        {/* ── THE MOMENT (light): where momentum actually goes — four small places,
+            told as serif fragments stepping down and across the page (the slip made
+            visible, the trajectory in type). Prose, not services; the doorway pages
+            own the what-I-do detail. ── */}
+        <section data-spine="What gets in the way" className="bg-bone text-ink py-16 md:py-20 lg:py-24">
           <div className="u-container">
             <FadeUp>
-              <p className="text-[17px] md:text-[18px] leading-[1.7] text-graphite max-w-[640px]">
-                I work with leadership teams where good thinking is already in the room, and the problem is getting it to survive contact with the organisation.
+              <p className="eyebrow text-graphite mb-6 md:mb-8">What gets in the way</p>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <p className="font-serif text-[26px] md:text-[32px] lg:text-[36px] leading-[1.2] text-ink max-w-[30ch] u-balance">
+                Momentum rarely disappears all at once. It gets lost in small places.
               </p>
             </FadeUp>
-            <div className="mt-12 md:mt-14 border-b border-stone/60">
+
+            <div className="mt-10 md:mt-14">
               {[
-                { key: 'strategy', a: 'Strategy ', b: ' operating reality', body: 'Most direction gets lost at the point where decisions become someone else’s problem. I work with leadership teams to close that gap, building the priorities, rhythms and decision-making structures that let people actually follow through.' },
-                { key: 'complexity', a: 'Complexity ', b: ' clarity', body: 'As organisations grow, drag builds quietly. More stakeholders, competing priorities, more places for momentum to slow. I help leadership teams remove what’s slowing the work down, so capable people can move together rather than around each other.' },
-                { key: 'impact', a: 'Important work ', b: ' impact', body: 'Major programmes, platform launches and campaigns rarely fail because the idea was wrong. They lose ground in translation. I help significant work arrive with the clarity and commercial impact it was built to create.' },
-              ].map((t, i) => (
-                <FadeUp key={t.key} delay={i * 0.06}>
-                  <div className="border-t border-stone/60 py-7 md:py-9">
-                    <div className="u-grid gap-y-3 items-baseline">
-                      <h3 className="col-span-4 md:col-span-5 font-serif text-[22px] md:text-[26px] leading-[1.15] text-ink">
-                        {t.a}<span className="italic text-[#7E5E27]">into</span>{t.b}
-                      </h3>
-                      <p className="col-span-4 md:col-span-7 text-[15px] md:text-[16px] leading-[1.7] text-graphite max-w-[560px]">
-                        {t.body}
-                      </p>
-                    </div>
-                  </div>
+                { key: 'decision', line: 'A decision that takes longer than it should.', indent: '' },
+                { key: 'priority', line: 'A priority that means different things to different teams.', indent: 'md:ml-[9%]' },
+                { key: 'information', line: 'Information that isn’t where people need it.', indent: 'md:ml-[18%]' },
+                { key: 'handoff', line: 'A handoff that loses context.', indent: 'md:ml-[27%]' },
+              ].map((m, i) => (
+                <FadeUp key={m.key} delay={i * 0.09} className={`${i > 0 ? 'mt-5 md:mt-7' : ''} ${m.indent}`}>
+                  <p className="font-serif text-[24px] md:text-[32px] lg:text-[38px] leading-[1.15] tracking-[-0.01em] text-ink u-balance">
+                    {m.line}
+                  </p>
                 </FadeUp>
               ))}
             </div>
+
+            <FadeUp delay={0.12}>
+              <p className="mt-10 md:mt-14 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
+                Individually, none of them look serious. Together, they make progress harder than it needs to be. And they accumulate as the organisation grows.
+              </p>
+            </FadeUp>
           </div>
         </section>
 
