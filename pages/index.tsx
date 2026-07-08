@@ -144,18 +144,18 @@ export default function Home() {
         <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
             <div className="u-grid gap-y-12 lg:items-start">
-              {/* Left: the statement — large, commanding, fills the column */}
+              {/* Left: the thesis — large, commanding, fills the column */}
               <FadeUp className="col-span-4 md:col-span-6">
-                <h2 className="font-serif text-[40px] sm:text-[52px] md:text-[60px] lg:text-[66px] xl:text-[76px] leading-[1.02] tracking-[-0.02em] u-balance">
-                  Important work is harder to land than it used to be. The environment sees to that.
+                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
+                  The tools are changing.<br />The problems aren’t.
                 </h2>
               </FadeUp>
 
-              {/* Right: three paragraphs of prose building to the sign-off */}
+              {/* Right: the argument building to the sign-off */}
               <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
                   <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The fight for attention is real, internally and externally. AI is in every boardroom conversation and landing in very few P&Ls. The people holding everything together are running closer to empty. And through all of it, important work still has to travel from a good idea to real commercial impact.
+                    AI is in every boardroom conversation and landing in very few P&Ls.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
@@ -165,10 +165,15 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
+                    There is a name for that gap. Coordination debt: the work of holding everything together that quietly becomes nobody’s job.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.3}>
+                <FadeUp delay={0.28}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    My role is to design coordination and judgement back into the work itself, so what matters arrives as intended.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.36}>
                   <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
                     That is where I work.
                   </p>
