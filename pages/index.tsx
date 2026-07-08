@@ -9,7 +9,6 @@ import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
-import { withSoftBreaks } from '@/lib/softBreaks';
 
 // "Where I help" — three editorial doorway rows on the grid: a third-width image
 // (cols 1–4) with the audience label over it, the conceptual line as the headline,
@@ -92,7 +91,7 @@ export default function Home() {
 
             <FadeUp delay={0.4}>
               <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[46ch] mx-auto">
-                {withSoftBreaks('Helping organisations\nturn ambition into impact.')}
+                Most organisations don’t lack good thinking.<br />They struggle to preserve it.
               </p>
             </FadeUp>
             <FadeUp delay={0.55}>
@@ -118,17 +117,22 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.08}>
                   <p className="font-serif text-[30px] md:text-[40px] lg:text-[48px] leading-[1.12] text-ink">
-                    For most of my career, I’ve helped organisations turn ambition into impact.
+                    For most of my career, I’ve worked in the space where strategy becomes execution, where momentum is either built or quietly lost.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    I tend to work in the space between ambition and execution, because that’s where momentum is either created or lost.
+                    There is a name for what happens when it slips. Coordination debt: the work of holding everything together that gradually becomes nobody’s job.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    Over that time, I’ve built a business, led change and helped great organisations execute at scale.
+                    As organisations grow and complexity takes hold, good thinking loses strength. Strategy moves into action but arrives diluted. Important initiatives reach the world with less clarity and impact than they deserved.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.28}>
+                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                    My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
                   </p>
                 </FadeUp>
               </div>
@@ -136,65 +140,6 @@ export default function Home() {
               <FadeUp delay={0.1} className="col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
                 <SlatPortrait />
               </FadeUp>
-            </div>
-          </div>
-        </section>
-
-        {/* ── POINT OF VIEW (two columns — a commanding thesis, an argument
-            that builds; typography carries it, no image) ───────────────── */}
-        <section data-spine="Point of view" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
-          <div className="u-container">
-            <div className="u-grid gap-y-12 lg:items-start">
-              {/* Left: the thesis — large, commanding, fills the column */}
-              <FadeUp className="col-span-4 md:col-span-6">
-                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
-                  The tools are changing.<br />The problems aren’t.
-                </h2>
-              </FadeUp>
-
-              {/* Right: the argument that builds to the close */}
-              <div className="col-span-4 md:col-span-5 md:col-start-8">
-                <FadeUp delay={0.1}>
-                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Most organisations already have what they need.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.15}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Strategy. Creative ambition. Investment. Good people. Increasingly, AI and specialist capability too.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The challenge isn’t creating more.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.25}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    It’s realising more impact from what already exists.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.3}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Somewhere between ambition and execution, momentum slips. Complexity takes hold. Value gets diluted.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.35}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    There is a name for that gap. Coordination debt: the work of holding everything together that quietly becomes nobody’s job.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.4}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    My role is to design the coordination and judgement back into how work flows, so what matters arrives as intended.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.46}>
-                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    That is where I work.
-                  </p>
-                </FadeUp>
-              </div>
             </div>
           </div>
         </section>
@@ -211,15 +156,40 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROPOSITION: the commercial payoff, a short statement that bridges the proof
-            wall into "Where I help". Copy only, reuses the existing serif treatment. */}
-        <section className="bg-bone text-ink py-16 md:py-20 lg:py-24">
+        {/* HOW I WORK: a charcoal statement block, the page's dark beat, reusing the
+            point-of-view treatment. A commanding line left, the model's argument right. */}
+        <section data-spine="How I work" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <FadeUp>
-              <p className="font-serif text-[26px] md:text-[32px] lg:text-[38px] leading-[1.16] tracking-[-0.01em] max-w-[42ch]">
-                I help agency, brand and growth-stage leaders move important work through complexity, so execution turns into revenue, margin and growth.
-              </p>
-            </FadeUp>
+            <div className="u-grid gap-y-12 lg:items-start">
+              <FadeUp className="col-span-4 md:col-span-6">
+                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
+                  DAB Hands is intentionally small.
+                </h2>
+              </FadeUp>
+
+              <div className="col-span-4 md:col-span-5 md:col-start-8">
+                <FadeUp delay={0.1}>
+                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    I stay close to the work because that’s where the judgement lives.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    When an engagement needs additional capability, I bring together trusted senior specialists I’ve worked with for years, chosen because they’re right for the challenge, not because they’re on a payroll.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.22}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    You’ll always work with me. The team expands only when the work demands it.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.3}>
+                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
+                    The work determines the team. Never the other way around.
+                  </p>
+                </FadeUp>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -300,6 +270,11 @@ export default function Home() {
         {/* ── FINAL CTA (the decision) ─────────────── */}
         <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20">
           <div className="u-container">
+            <FadeUp>
+              <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.18] tracking-[-0.01em] text-ink max-w-[38ch] mb-8 md:mb-10">
+                Organisations rarely need more ideas.<br />They need more of their best thinking to survive the journey into the real world.
+              </p>
+            </FadeUp>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
                 <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch]">
