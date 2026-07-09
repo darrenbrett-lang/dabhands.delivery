@@ -16,7 +16,7 @@ import { withSoftBreaks } from '@/lib/softBreaks';
 const HOVER_BLOCK = 'color-mix(in srgb, var(--color-gold) 38%, transparent)';
 const HOVER_ACCENT = 'var(--color-ink)';
 const PATHS = [
-  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'When good thinking keeps losing ground between decision and delivery.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
+  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', line: 'When good thinking gets lost between decision and delivery.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
   { href: '/marketing-leaders', label: 'Marketing Leaders', line: 'When great work lands softer than it should.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
   { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', line: 'When the ambition is clear but the structure hasn’t caught up.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
 ];
@@ -85,7 +85,7 @@ export const PathwayPicker = () => {
         onFocus={show}
         className="group inline-flex items-center gap-2 text-[15px] md:text-[16px] font-semibold text-ink transition-colors duration-300 hover:text-graphite"
       >
-        See where I can help
+        See what I do
         {/* Plus = "reveal the options"; rotates to an × while the panel is open. */}
         <span aria-hidden className={`inline-flex leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>
           <svg width="13" height="13" viewBox="0 0 12 12" fill="none">

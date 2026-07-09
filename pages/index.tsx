@@ -19,7 +19,7 @@ const MOMENTUM = [
     num: '01',
     label: 'Business & Agency Leaders',
     headline: 'Keeping everything moving.',
-    support: 'When good thinking keeps losing ground between decision and delivery.',
+    support: 'When good thinking gets lost between decision and delivery.',
     href: '/business-and-agency-leaders',
     src: '/images/momentum/01-tracks-2.jpg',
   },
@@ -113,16 +113,21 @@ export default function Home() {
             <div className="u-grid items-start gap-y-12 md:gap-y-16">
               <div className="col-span-4 md:col-span-6 lg:col-span-5">
                 <FadeUp>
-                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren Brett.</p>
+                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
                 </FadeUp>
                 <FadeUp delay={0.08}>
                   <p className="font-serif text-[30px] md:text-[34px] lg:text-[44px] leading-[1.14] text-ink u-balance">
-                    For most of my career I’ve worked at the point where ambition has to become reality, inside agencies, global brands and businesses in motion.
+                    For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, global brands and businesses in motion.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    I’ve led major programmes, built operating structures from the ground up, and helped leadership teams close the gap between what they intend to deliver and what actually gets built.
+                    I’ve led major programmes, built operating structures from the ground up, and helped leaders close the gap between what they intend to deliver and what actually gets built.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.22}>
+                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                    My work is about creating the conditions where capable people do their best work together.
                   </p>
                 </FadeUp>
               </div>
@@ -150,27 +155,22 @@ export default function Home() {
               <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
                   <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    AI is in every boardroom conversation and landing in very few P&Ls.
+                    AI is in every boardroom conversation. It’s in very few P&Ls.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Somewhere between ambition and execution, momentum slips. Complexity takes hold. The work loses its point.
+                    Between ambition and execution, momentum slips. Complexity takes hold. The work loses impact.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The system creates noise. Not because people aren’t trying. That’s what systems do.
+                    The system creates noise. That’s what systems do.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.28}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    My role is to reduce the noise, so the right things get through.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.36}>
-                  <p className="mt-9 md:mt-10 font-serif text-[27px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone max-w-[24ch]">
-                    That is the work.
+                    My role is reducing noise so the right things get through.
                   </p>
                 </FadeUp>
               </div>
@@ -185,24 +185,19 @@ export default function Home() {
           <div className="u-container">
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
-                I help leaders of agencies, brands and growth-stage businesses get their best thinking into the world intact.
+                I work alongside leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
               </h2>
             </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-6 md:mt-7 text-[17px] leading-[1.7] text-graphite max-w-[640px]">
-                That means creating the conditions where capable people consistently produce great outcomes together.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.1}>
+            <FadeUp delay={0.08}>
               <p className="eyebrow text-graphite mt-8 md:mt-10">
-                I do that by turning:
+                In practice, that means turning:
               </p>
             </FadeUp>
             <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategy', to: 'an operating reality', body: 'Strategy starts on a page. The work is building the operation that delivers on it, keeping intent intact, cutting what dilutes it, and making sure what the organisation does each day is actually pointed at what matters.' },
-                { key: 'complexity', from: 'System complexity', to: 'more clarity', body: 'Organisations are getting harder to coordinate. More noise, more places for important work to lose its shape. I help keep the signal strong: what to look for, what to protect, what to push on.' },
-                { key: 'impact', from: 'Important work', to: 'full impact', body: 'Major programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help significant work arrive with the full force it was built to carry.' },
+                { key: 'strategy', from: 'Strategy', to: 'an operating reality', body: 'Strategy starts on a page. I know how to build the operation that delivers on it, keeping intent intact, cutting what dilutes it, and aligning daily effort with what matters.' },
+                { key: 'complexity', from: 'System complexity', to: 'clarity', body: 'When coordination breaks down, it hits the P&L. Things ship late. Launches land softer than planned. Customer confidence erodes. Ideas don’t travel cleanly. People, process, technology, data: every layer is somewhere the signal softens. I know how to read that terrain and help you move through it.' },
+                { key: 'impact', from: 'Important work', to: 'full impact', body: 'Programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help important work arrive with the full force it was built to carry.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
@@ -344,7 +339,7 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
               <FadeUp>
                 <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch] u-balance">
-                  When something important needs to land properly, let’s talk.
+                  When important work needs to land, let’s talk.
                 </h2>
               </FadeUp>
               <FadeUp delay={0.1}>
