@@ -215,7 +215,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                   <div className="rise" style={{ '--rise-delay': '0.16s' } as CSSProperties}>
                     <div className="mt-8 flex flex-col items-start gap-4">
                       <Cta accent={a.color} email={c.email} />
-                      {c.work && (
+                      {c.work ? (
                         <a
                           href="#selected-work"
                           className="group inline-flex items-center gap-1.5 text-[14px] text-graphite underline decoration-stone underline-offset-[5px] transition-colors hover:text-ink hover:decoration-graphite"
@@ -223,7 +223,15 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                           Jump to recent work
                           <span aria-hidden className="text-[15px] leading-none transition-transform group-hover:translate-y-0.5">↓</span>
                         </a>
-                      )}
+                      ) : c.patterns ? (
+                        <a
+                          href="#operating-patterns"
+                          className="group inline-flex items-center gap-1.5 text-[14px] text-graphite underline decoration-stone underline-offset-[5px] transition-colors hover:text-ink hover:decoration-graphite"
+                        >
+                          See how I think
+                          <span aria-hidden className="text-[15px] leading-none transition-transform group-hover:translate-y-0.5">↓</span>
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 )}

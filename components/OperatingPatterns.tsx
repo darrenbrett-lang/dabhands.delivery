@@ -32,7 +32,7 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
   const single = content.items.length === 1;
 
   return (
-    <section aria-labelledby={`${baseId}-heading`} className="bg-black text-bone py-24 md:py-32 lg:py-40">
+    <section id="operating-patterns" aria-labelledby={`${baseId}-heading`} className="bg-black text-bone py-24 md:py-32 lg:py-40">
       <div className="u-container">
         {/* The exhibit's wall text: label, one serif statement, two quiet lines. */}
         <FadeUp>
