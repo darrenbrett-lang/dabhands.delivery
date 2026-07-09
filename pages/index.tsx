@@ -195,9 +195,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategy', to: 'an operating reality', body: 'Strategy starts on a page. I know how to build the operation that delivers on it, keeping intent intact, cutting what dilutes it, and aligning daily effort with what matters.' },
-                { key: 'complexity', from: 'System complexity', to: 'clarity', body: 'When coordination breaks down, it hits the P&L. Things ship late. Launches land softer than planned. Customer confidence erodes. Ideas don’t travel cleanly. People, process, technology, data: every layer is somewhere the signal softens. I know how to read that terrain and help you move through it.' },
-                { key: 'impact', from: 'Important work', to: 'full impact', body: 'Programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help important work arrive with the full force it was built to carry.' },
+                { key: 'strategy', from: 'Strategy', to: 'an operating reality', intoOnFirstLine: true, body: 'Strategy starts on a page. I know how to build the operation that delivers on it, keeping intent intact, cutting what dilutes it, and aligning daily effort with what matters.' },
+                { key: 'complexity', from: 'System complexity', to: 'clarity', intoOnFirstLine: false, body: 'When coordination breaks down, it hits the P&L. Things ship late. Launches land softer than planned. Customer confidence erodes. Ideas don’t travel cleanly. People, process, technology, data: every layer is somewhere the signal softens. I know how to read that terrain and help you move through it.' },
+                { key: 'impact', from: 'Important work', to: 'full impact', intoOnFirstLine: false, body: 'Programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help important work arrive with the full force it was built to carry.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
@@ -205,9 +205,19 @@ export default function Home() {
                       opens each column; the three arrive in sequence. */}
                   <div className="border-t border-stone/60 pt-6 md:pt-7">
                     <h3 className="font-serif text-[32px] md:text-[24px] lg:text-[32px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
-                      {t.from}
-                      <br />
-                      <span className="italic text-gold">into</span> {t.to}
+                      {t.intoOnFirstLine ? (
+                        <>
+                          {t.from} <span className="italic text-gold">into</span>
+                          <br />
+                          {t.to}
+                        </>
+                      ) : (
+                        <>
+                          {t.from}
+                          <br />
+                          <span className="italic text-gold">into</span> {t.to}
+                        </>
+                      )}
                     </h3>
                     <p className="mt-4 md:mt-5 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
                       {t.body}
