@@ -280,10 +280,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── MOMENTUM (Who I help): three doorways as one big editorial sequence ── */}
-        <section data-spine="Who I help" className="bg-bone text-ink border-t border-stone/60">
-          {/* Header band — a warm clay wash, matching the rows' rollover state below. */}
-          <div className="bg-clay/20 text-ink py-14 md:py-16 lg:py-20">
+        {/* ── MOMENTUM (Who I help): three doorways as one big editorial sequence.
+            The warm clay wash runs the full module — header and cards as one block. ── */}
+        <section data-spine="Who I help" className="bg-clay/20 text-ink border-t border-stone/60">
+          <div className="py-14 md:py-16 lg:py-20">
             <div className="u-container">
               <div className="u-grid items-end gap-y-5">
                 {/* Title over the image column (cols 1–4 on lg); intro over the copy column
