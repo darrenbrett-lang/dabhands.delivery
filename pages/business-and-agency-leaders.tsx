@@ -6,15 +6,15 @@ const content: OperatorContent = {
   eyebrow: 'For Business & Agency Leaders',
   accent: 'sage',
   hero: {
-    headline: 'As organisations grow, ambition gets harder to realise.',
-    subline: 'I help leadership teams consistently turn ambition into impact.',
+    headline: 'As organisations grow, good thinking gets harder to land.',
+    subline: 'I help leadership teams close the gap between what they intend to deliver and what actually gets built.',
     image: '/images/momentum/01-tracks-2.jpg',
   },
   validation: {
     heading: 'The organisation is already capable.',
     paras: [
       'The strategy is clear. The people are capable. The investment has been made. Everyone understands what success looks like.',
-      'The challenge is rarely deciding what to do. It’s helping capable people consistently turn ambition into impact.',
+      'The challenge is rarely deciding what to do. It’s making sure good thinking survives the journey from decision to delivery.',
     ],
     coda: 'It’s helping the organisation\nperform at its best.',
   },
@@ -22,8 +22,8 @@ const content: OperatorContent = {
     thesis: 'Capability isn’t the problem.\nPerformance is.',
     argument: [
       'Most organisations already have what they need to succeed.',
-      'AI, leaner teams and specialist partners are changing how work gets done. Organisations have never had more capability. They have rarely needed better judgement.',
-      'The challenge isn’t finding more ideas, hiring more people or introducing more process. It’s creating the conditions where capable people consistently produce great outcomes together.',
+      'Organisations have never had more capability. They have rarely needed better judgement.',
+      'The challenge isn’t finding more ideas, hiring more people or introducing more process. It’s creating the conditions where capable people do their best work together.',
       'Those conditions are built through clarity, alignment and accountability. When they’re present, organisations move with confidence.',
     ],
     resolution: 'When they’re missing, complexity quietly becomes the operating system.',
@@ -34,7 +34,7 @@ const content: OperatorContent = {
       'I work alongside leadership teams to remove the friction that slows important work down.',
       'Sometimes that means bringing clarity to a strategic initiative that has lost momentum. Sometimes it means helping teams work together more effectively as the organisation grows. Often it’s establishing stronger operating rhythms so progress no longer depends on a handful of people holding everything together.',
       'The goal isn’t more governance.',
-      'It’s an organisation that’s easier to lead, quicker to respond and better able to turn ambition into impact.',
+      'It’s an organisation that’s easier to lead, quicker to respond and better at turning good thinking into delivery.',
     ],
   },
   help: {
@@ -58,11 +58,11 @@ const content: OperatorContent = {
         },
       },
       {
-        heading: 'The business is entering\nits next chapter',
-        body: 'AI, growth, restructuring or new commercial ambitions require stronger operational foundations to help the organisation adapt with confidence.',
+        heading: 'Growth is outpacing\nthe operating model',
+        body: 'AI, growth, restructuring or new commercial ambitions require stronger foundations so the organisation can move with confidence.',
         enquiry: {
-          subject: 'Stronger foundations for our next chapter',
-          body: 'We are entering a new chapter and want stronger operational foundations to adapt with confidence. I would like to talk.',
+          subject: 'Stronger foundations to move with confidence',
+          body: 'Our growth is outpacing our operating model and we want stronger foundations to move with confidence. I would like to talk.',
         },
       },
     ],
@@ -81,7 +81,7 @@ const content: OperatorContent = {
         quote:
           'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
         name: 'Gary Shannon',
-        role: 'Managing Partner',
+        role: 'Managing Partner, Tribal Worldwide London',
       },
     ],
   },
