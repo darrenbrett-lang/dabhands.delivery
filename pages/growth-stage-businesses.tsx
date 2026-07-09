@@ -73,7 +73,7 @@ const content: OperatorContent = {
       {
         headline: 'Growth only scales when the operating system does.',
         why: 'Early growth can hide weak foundations. More clients, more people and more opportunity don’t automatically create a stronger business. They create more complexity. Sustainable growth comes from building the operating system alongside the business itself.',
-        learned: 'As co-founder of Anchor Leg, I helped build the agency from the ground up. Working alongside my business partner, and with the guidance of former BBH Global CEO Neil Munn, we clarified our proposition and strategic direction. My role was to operationalise that strategy, embedding it into the operating model, leadership rhythms, ways of working and delivery discipline that shaped how the business behaved every day. The result wasn’t simply growth. It was a business capable of partnering with, and staying in step with, the needs of one of the world’s biggest brands.',
+        learned: 'As co-founder of Anchor Leg, I helped build the agency from the ground up. Working alongside my business partner, and with the guidance of former BBH Global CEO Neil Munn, we clarified our proposition and strategic direction. From there, I helped translate that thinking into the operating model, leadership rhythms, ways of working and delivery discipline that shaped how the business behaved every day. The result wasn’t simply growth. It was a business capable of partnering with, and staying in step with, the needs of one of the world’s biggest brands.',
       },
     ],
   },
