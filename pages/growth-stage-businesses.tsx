@@ -78,7 +78,7 @@ const content: OperatorContent = {
     ],
   },
   proof: {
-    heading: 'Trusted by Growth-Stage Businesses',
+    heading: 'In Their Words',
     quote:
       'Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it. That’s a capability I’ve always admired.',
     name: 'Neil Munn',
