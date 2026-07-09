@@ -101,19 +101,19 @@ const content: OperatorContent = {
         quote:
           'Darren’s influence extended far beyond the delivery function. He created and implemented Tribal’s first agency-wide ways-of-working framework, helping teams align around a common approach while strengthening consistency, accountability and performance across the business.',
         name: 'Tom Roberts',
-        role: 'CEO, Tribal Worldwide London',
+        role: 'Former CEO, Tribal Worldwide London',
       },
       {
         quote:
           'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
         name: 'Gary Shannon',
-        role: 'Managing Partner, Tribal Worldwide London',
+        role: 'Former Managing Partner, Tribal Worldwide London',
       },
       {
         quote:
           'Darren walked into a really difficult situation and made sense of it remarkably quickly. Within a few weeks, there was a plan, people understood what they were doing again, and the temperature had dropped considerably. He brings a calmness and momentum that’s incredibly valuable when projects start to drift.',
         name: 'Dave Wallace',
-        role: 'Global COO, Mirum',
+        role: 'Former Global COO, Mirum',
       },
     ],
   },

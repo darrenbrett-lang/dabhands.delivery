@@ -79,12 +79,12 @@ const content: OperatorContent = {
       {
         quote: 'He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.',
         name: 'Anthony Mahon',
-        role: 'Global Membership Director, HUGO BOSS',
+        role: 'Former Global Membership Director, HUGO BOSS',
       },
       {
         quote: 'A calm, experienced operator who knows how to step into complexity, align people, and make things work under pressure.',
         name: 'Meher Mumtaz',
-        role: 'Digital Brand Director, Western Union',
+        role: 'Former Digital Brand Director, Western Union',
       },
     ],
   },
