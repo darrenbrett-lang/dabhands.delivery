@@ -31,8 +31,7 @@ const content: OperatorContent = {
     heading: 'I help important work\narrive as intended.',
     paras: [
       'For more than twenty years I’ve led programmes alongside brands, agencies and internal teams. Work where execution mattered as much as the original idea.',
-      'I don’t replace strategy.',
-      'I don’t replace creative.',
+      'I’ll take your guiding strategies and creative boundaries and amplify them within the brief.',
       'I help the organisation around them work well enough that ambitious ideas arrive with the same strength they had at the start.',
       'The outcome isn’t better delivery.',
       'It’s better performing work.',
