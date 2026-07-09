@@ -67,8 +67,8 @@ const content: OperatorContent = {
     ],
   },
   patterns: {
-    intro: 'Twenty years inside agencies, brands and digital transformation has taught me that the same organisational patterns appear again and again.',
-    support: ['These aren’t case studies.', 'They’re lessons earned through experience.'],
+    intro: 'Building and growing a business taught me that the same patterns emerge at every stage of growth.',
+    support: ['These aren’t startup stories.', 'They’re lessons earned from building one.'],
     items: [
       {
         headline: 'Growth only scales when the operating system does.',
