@@ -7,7 +7,7 @@ const content: OperatorContent = {
   accent: 'lavender',
   hero: {
     headline: 'Growth creates complexity faster than capability.',
-    subline: 'I help fast-growing businesses build the capability to sustain their growth.',
+    subline: 'I help fast-growing businesses build the structure to sustain what they’ve created.',
     image: '/images/momentum/03-growth.jpg',
   },
   validation: {
@@ -27,11 +27,11 @@ const content: OperatorContent = {
     resolution: 'Eventually, it outgrows the way it was built to run.',
   },
   outcomes: {
-    heading: 'I help businesses keep growing\nwithout breaking.',
+    heading: 'I help businesses keep growing without\nlosing grip of what made them good.',
     paras: [
-      'I’ve built and scaled a business of my own, so I know how quickly success creates complexity.',
-      'One of the biggest shifts isn’t operational. It’s strategic. Growth already creates more opportunities than any organisation can pursue well, and AI creates even more. The question is no longer what the business could do. It’s what it should do.',
-      'I help leadership teams become clear about where the business is trying to create value, then build the operating rhythms, structures and ways of working that help the organisation move in that direction together.',
+      'I’ve built and scaled my own business, so I know how quickly success creates complexity.',
+      'One of the biggest shifts isn’t operational. It’s strategic. The question is no longer what the business could do. It’s what it should do.',
+      'I help leadership teams get clear on where the business is trying to create value, then build the operating rhythms and structures that help the organisation move in that direction together.',
       'The outcome isn’t more process.',
       'It’s a business that becomes stronger as it grows.',
     ],
@@ -42,26 +42,26 @@ const content: OperatorContent = {
     situations: [
       {
         heading: 'The founder can no longer\nbe the operating system',
-        body: 'The business has reached a point where too much depends on a handful of people. I help build the structure, rhythms and clarity that allow the organisation to scale beyond its founders.',
+        body: 'The business has reached a point where too much depends on a handful of people. I help build the structure, rhythms and clarity that allow the organisation to scale beyond the founder.',
         enquiry: {
-          subject: 'Scaling beyond the founders',
-          body: 'Too much still depends on a handful of people and we want to scale beyond the founders. I would like to talk.',
+          subject: 'Scaling beyond the founder',
+          body: 'Too much still depends on a handful of people and we want to scale beyond the founder. I would like to talk.',
         },
       },
       {
         heading: 'Growth has outpaced\nthe operating model',
-        body: 'The business is winning, but delivery, decision-making and coordination haven’t kept pace. I help simplify complexity and build operating models that support the next stage of growth.',
+        body: 'The business is winning, but delivery, decision-making and coordination haven’t kept pace. I help untangle what’s grown too complicated and build operating models that support continued growth.',
         enquiry: {
           subject: 'An operating model that keeps pace with growth',
-          body: 'Our growth has outpaced our operating model and we want to simplify complexity for the next stage. I would like to talk.',
+          body: 'Our growth has outpaced our operating model and we want to untangle what has grown too complicated. I would like to talk.',
         },
       },
       {
-        heading: 'The next stage needs\noperational leadership',
-        body: 'Investment, expansion or increasing ambition demand stronger execution. I provide experienced operational leadership to help the business grow with confidence, without creating unnecessary bureaucracy.',
+        heading: 'Increasing ambition needs\nstronger foundations',
+        body: 'Investment, expansion or new commercial ambitions demand stronger execution. I help build the operational foundations that let the business grow with confidence without adding bureaucracy.',
         enquiry: {
-          subject: 'Operational leadership for our next stage',
-          body: 'Our ambition is rising and we want stronger operational leadership to grow with confidence. I would like to talk.',
+          subject: 'Stronger foundations for our ambition',
+          body: 'Our ambition is growing and we want stronger operational foundations to grow with confidence. I would like to talk.',
         },
       },
     ],
@@ -71,7 +71,7 @@ const content: OperatorContent = {
     quote:
       'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
     name: 'Gary Shannon',
-    role: 'Managing Partner',
+    role: 'Managing Partner, Tribal Worldwide London',
   },
   close: {
     heading: 'Growth will always create complexity.',
