@@ -69,7 +69,7 @@ const content: OperatorContent = {
   },
   patterns: {
     intro: 'Twenty years inside agencies, brands and digital transformation has taught me that the same organisational patterns appear again and again.',
-    support: ['These aren’t case studies.', 'They’re lessons earned through experience.'],
+    support: ['These aren’t case studies.', 'There are a few lessons learned through experience.'],
     items: [
       {
         headline: 'Shared language changes organisations.',
