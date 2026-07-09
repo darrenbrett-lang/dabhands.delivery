@@ -69,7 +69,7 @@ const content: OperatorContent = {
   },
   proof: {
     heading: 'Trusted by Marketing Leaders',
-    interval: 4000,
+    interval: 6000,
     testimonials: [
       {
         quote: 'Darren brings control to complex situations quickly. He aligns teams, simplifies decisions, and gets the work moving again without losing what made it strong.',
