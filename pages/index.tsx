@@ -196,7 +196,7 @@ export default function Home() {
             <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategy', to: 'an operating reality', intoOnFirstLine: true, body: 'Strategy starts on a page. I know how to build the operation that delivers on it, keeping intent intact, cutting what dilutes it, and aligning daily effort with what matters.' },
-                { key: 'complexity', from: 'System complexity', to: 'clarity', intoOnFirstLine: false, body: 'When coordination breaks down, it hits the P&L. Things ship late. Launches land softer than planned. Customer confidence erodes. Ideas don’t travel cleanly. People, process, technology, data: every layer is somewhere the signal softens. I know how to read that terrain and help you move through it.' },
+                { key: 'complexity', from: 'System complexity', to: 'clarity', intoOnFirstLine: false, body: 'When coordination breaks down, it hits the P&L: things ship late, launches land softer, customer confidence erodes. Ideas don’t travel cleanly. People, process, technology, data: every layer is somewhere the signal softens, and I know how to read that terrain and help you move through it.' },
                 { key: 'impact', from: 'Important work', to: 'full impact', intoOnFirstLine: false, body: 'Programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help important work arrive with the full force it was built to carry.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
