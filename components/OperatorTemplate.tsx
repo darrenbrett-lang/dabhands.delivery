@@ -427,7 +427,16 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             truths — proof of judgement, not case studies. ── */}
         {c.patterns && <OperatingPatterns content={c.patterns} />}
 
-        {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy.
+        {/* 7 ── SELECTED WORK (optional): silent-chrome phone carousel; the only
+            colour comes from inside the screens. Sits ahead of the testimonials so
+            the work makes the case before the witnesses speak. ── */}
+        {c.work && (
+          <div id="selected-work" className="scroll-mt-24">
+            <SelectedWork content={c.work} />
+          </div>
+        )}
+
+        {/* 7.5 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy.
             Optional — pages without `proof` data skip the panel entirely. ── */}
         {c.proof && (
         <section className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
@@ -467,14 +476,6 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             </div>
           </div>
         </section>
-        )}
-
-        {/* 7.5 ── SELECTED WORK (optional): silent-chrome phone carousel; the only
-            colour comes from inside the screens. Sits just before the close. ── */}
-        {c.work && (
-          <div id="selected-work" className="scroll-mt-24">
-            <SelectedWork content={c.work} />
-          </div>
         )}
 
         {/* 8 ── CLOSE: simple, confident invitation — always centred, bone. ── */}
