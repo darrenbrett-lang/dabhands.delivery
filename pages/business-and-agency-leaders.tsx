@@ -109,6 +109,12 @@ const content: OperatorContent = {
         name: 'Gary Shannon',
         role: 'Managing Partner, Tribal Worldwide London',
       },
+      {
+        quote:
+          'Darren walked into a really difficult situation and made sense of it remarkably quickly. Within a few weeks, there was a plan, people understood what they were doing again, and the temperature had dropped considerably. He brings a calmness and momentum that’s incredibly valuable when projects start to drift.',
+        name: 'Dave Wallace',
+        role: 'Global COO, Mirum',
+      },
     ],
   },
   close: {
