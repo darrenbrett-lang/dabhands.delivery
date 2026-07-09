@@ -267,7 +267,7 @@ export default function Home() {
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.34}>
-                  <p className="mt-8 pt-6 border-t border-bone/20 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone u-balance">
+                  <p className="mt-8 md:mt-9 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone u-balance">
                     Never the other way around.
                   </p>
                 </FadeUp>
@@ -305,7 +305,7 @@ export default function Home() {
                   >
                     {/* The doorway image, now a card top; the audience label sits over it,
                         opening on hover with a slow Ken Burns push-in. */}
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl ring-1 ring-inset ring-ink/10">
+                    <div className="relative aspect-[5/2] md:aspect-[4/3] overflow-hidden rounded-xl ring-1 ring-inset ring-ink/10">
                       <Image
                         src={row.src}
                         alt=""
