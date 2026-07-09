@@ -255,7 +255,7 @@ const BODY = String.raw`<div class="wrap">
     </div>
 
     <div class="scale" aria-label="Type scale">
-      <div class="step"><span class="sample s-display serif">Turn ambition into impact</span><span class="spec"><b>Display</b> &middot; 3.2rem / 1.02</span></div>
+      <div class="step"><span class="sample s-display serif">Keeping important work moving</span><span class="spec"><b>Display</b> &middot; 3.2rem / 1.02</span></div>
       <div class="step"><span class="sample s-h1 serif">Where I help</span><span class="spec"><b>H1</b> &middot; 2.3rem</span></div>
       <div class="step"><span class="sample s-h2 serif">The confidence map</span><span class="spec"><b>H2</b> &middot; 1.7rem</span></div>
       <div class="step"><span class="sample s-h3 serif">Marks of skilled hands</span><span class="spec"><b>H3</b> &middot; 1.28rem</span></div>

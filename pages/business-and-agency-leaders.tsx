@@ -123,7 +123,7 @@ const content: OperatorContent = {
   },
   email: {
     subject: 'Keeping important work moving',
-    body: 'Our organisation has what it needs, but turning ambition into impact is getting harder. I would like to talk.',
+    body: 'Our organisation has what it needs, but getting good thinking to land is getting harder. I would like to talk.',
   },
   seo: {
     description:

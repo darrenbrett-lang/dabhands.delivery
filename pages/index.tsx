@@ -354,7 +354,7 @@ export default function Home() {
                 <FadeUp delay={0.1}>
                   <div className="mt-8 flex justify-center">
                     <a
-                      href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
+                      href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to land. I would like to talk.' })}
                       className="group inline-flex items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green"
                     >
                       Start a conversation

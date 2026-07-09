@@ -1,6 +1,6 @@
 const EMAIL = 'darren@dabhands.delivery';
 const DEFAULT_SUBJECT = 'Starting a conversation';
-const DEFAULT_BODY = 'I want to get stronger digital work into the world.';
+const DEFAULT_BODY = 'I have important work that needs to keep moving. I would like to talk.';
 
 export const mailto = (opts?: { subject?: string; body?: string }): string => {
   const subject = encodeURIComponent(opts?.subject ?? DEFAULT_SUBJECT);

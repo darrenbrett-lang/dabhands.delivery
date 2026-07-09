@@ -239,8 +239,8 @@ const content: OperatorContent = {
     ],
   },
   email: {
-    subject: 'Realising the full impact of our best work',
-    body: 'We have important work in motion and I want it to realise its full impact. I would like to talk.',
+    subject: 'Helping important work land with its full force',
+    body: 'We have important work in motion and I want it to arrive with its full force. I would like to talk.',
   },
   seo: {
     description:
