@@ -48,7 +48,7 @@ export default function Home() {
     <>
       <SeoMeta
         title="DAB Hands | Keeping important work moving"
-        description="DAB Hands helps organisations turn ambition into impact. Senior operational leadership for important work moving through complex organisations, led by Darren Brett."
+        description="Most organisations don’t lack good thinking. They struggle to preserve it. DAB Hands provides senior operational leadership that keeps important work moving, led by Darren Brett."
         path="/"
       />
 
@@ -116,7 +116,7 @@ export default function Home() {
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.08s' } as CSSProperties}>
                   <p className="font-serif text-[30px] md:text-[34px] lg:text-[44px] leading-[1.14] text-ink u-balance">
-                    For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, global brands and businesses in motion.
+                    For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, and alongside global brands and businesses in motion.
                   </p>
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.16s' } as CSSProperties}>

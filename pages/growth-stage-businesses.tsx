@@ -92,11 +92,11 @@ const content: OperatorContent = {
   },
   email: {
     subject: 'Building for the next stage of growth',
-    body: 'Our business is growing quickly and I want to build the capability to sustain it. I would like to talk.',
+    body: 'Our business is growing quickly and I want to build the structure to sustain it. I would like to talk.',
   },
   seo: {
     description:
-      'DAB Hands helps fast-growing businesses build the capability to sustain their growth, so success creates momentum, not complexity.',
+      'DAB Hands helps fast-growing businesses build the structure to sustain what they’ve created, so success creates momentum, not complexity.',
   },
 };
 

@@ -14,7 +14,7 @@ export default function Contact() {
     <>
       <SeoMeta
         title="Contact | DAB Hands"
-        description="Start a conversation with DAB Hands. Senior operational leadership to help your most important work turn ambition into impact."
+        description="Start a conversation with DAB Hands. Senior operational leadership for important work that needs to create real impact."
         path="/contact"
       />
 

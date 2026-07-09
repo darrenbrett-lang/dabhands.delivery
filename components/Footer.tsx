@@ -13,7 +13,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
           <div className="space-y-4 max-w-[22ch] md:max-w-none mx-auto">
             {variant === 'default' && (
               <p className="font-serif text-[26px] md:text-[38px] leading-[1.12]">
-                I help organisations turn ambition into impact.
+                Keeping important work moving.
               </p>
             )}
             <p className="font-serif text-[28px] md:text-[44px] leading-[1.1]">

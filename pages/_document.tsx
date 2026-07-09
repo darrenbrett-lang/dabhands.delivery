@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 const DESCRIPTION =
-  'DAB Hands helps organisations turn ambition into impact. Senior operational leadership for important work moving through complex organisations, from focused programmes to longer-running support. Led by Darren Brett, with more than 20 years helping global brands and tier-one agencies move important digital work from idea to market.';
+  'DAB Hands keeps important work moving. Senior operational leadership for organisations where good thinking needs to survive the journey from decision to delivery, from focused programmes to longer-running support. Led by Darren Brett, with more than 20 years helping global brands and tier-one agencies move important digital work from idea to market.';
 const LINKEDIN = 'https://www.linkedin.com/in/darren-brett-1474403/';
 const KNOWS_ABOUT = [
   'Operational leadership',
@@ -52,7 +52,7 @@ const orgJsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'For Marketing Leaders',
-              description: 'Helping ambitious brands realise the full impact of their strongest ideas.',
+              description: 'Helping marketing leaders close the gap between the brief and what reaches the customer.',
               url: 'https://dabhands.delivery/marketing-leaders',
             },
           },
@@ -61,7 +61,7 @@ const orgJsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'For Growth-Stage Businesses',
-              description: 'Helping fast-growing businesses build the capability to sustain their growth.',
+              description: 'Helping fast-growing businesses build the structure to sustain what they have created.',
               url: 'https://dabhands.delivery/growth-stage-businesses',
             },
           },
@@ -74,7 +74,7 @@ const orgJsonLd = {
       name: 'Darren Brett',
       jobTitle: 'Senior digital operator',
       description:
-        'Darren Brett provides senior operational leadership that helps organisations turn ambition into impact, keeping important digital work moving through complex organisations.',
+        'Darren Brett provides senior operational leadership that keeps important work moving through complex organisations, closing the gap between what leadership teams intend to deliver and what actually gets done.',
       image: 'https://dabhands.delivery/images/darren_doorway.webp',
       url: 'https://dabhands.delivery',
       worksFor: { '@id': 'https://dabhands.delivery/#org' },

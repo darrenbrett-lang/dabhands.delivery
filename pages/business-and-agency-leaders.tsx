@@ -68,7 +68,7 @@ const content: OperatorContent = {
     ],
   },
   patterns: {
-    intro: 'Twenty years inside agencies, brands and digital transformation has taught me that the same organisational patterns appear again and again.',
+    intro: 'Twenty years across agencies, brands and digital transformation has taught me that the same organisational patterns appear again and again.',
     support: ['These aren’t case studies.', 'Here are a few lessons learned through experience.'],
     items: [
       {

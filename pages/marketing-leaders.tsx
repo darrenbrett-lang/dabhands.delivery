@@ -244,7 +244,7 @@ const content: OperatorContent = {
   },
   seo: {
     description:
-      'DAB Hands helps marketing leaders realise the full impact of their strongest ideas, protecting great work as it moves from strategy to the customer.',
+      'DAB Hands helps marketing leaders close the gap between the brief and what reaches the customer, so great work keeps its power on the journey.',
   },
 };
 
