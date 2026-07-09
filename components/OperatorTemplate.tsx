@@ -220,7 +220,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                           href="#selected-work"
                           className="group inline-flex items-center gap-1.5 text-[14px] text-graphite underline decoration-stone underline-offset-[5px] transition-colors hover:text-ink hover:decoration-graphite"
                         >
-                          Jump to recent work
+                          See recent work
                           <span aria-hidden className="text-[15px] leading-none transition-transform group-hover:translate-y-0.5">↓</span>
                         </a>
                       ) : c.patterns ? (
