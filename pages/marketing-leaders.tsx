@@ -212,7 +212,7 @@ const content: OperatorContent = {
         hue: 'var(--color-gold)',
         media: 'image',
         frame: 'none',
-        src: '/images/work/nike-running-3.webp',
+        src: '/images/work/nike-running-4.png',
         outcome: 'A community-led running content programme, produced in Madrid.',
         story: {
           headline: 'Making Nike feel closer to everyday runners.',
