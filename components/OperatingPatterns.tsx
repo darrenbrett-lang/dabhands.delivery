@@ -111,11 +111,12 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                           {item.headline}
                         </span>
                       </span>
-                      {/* The cue: quiet text + a plus that settles into a close. */}
-                      <span className="mt-[5px] ml-6 flex items-center gap-2.5 text-[13px] text-bone/50 transition-colors duration-300 group-hover:text-bone">
+                      {/* The cue: quiet text + a plus that settles into a close.
+                          aria-hidden keeps it out of the button's accessible name;
+                          aria-expanded already carries the open/closed state. */}
+                      <span aria-hidden className="mt-[5px] ml-6 flex items-center gap-2.5 text-[13px] text-bone/50 transition-colors duration-300 group-hover:text-bone">
                         <span className="hidden md:inline">{isOpen ? 'Close' : 'Explore pattern'}</span>
                         <span
-                          aria-hidden
                           className={`inline-flex transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${isOpen ? 'rotate-45' : ''}`}
                         >
                           <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
@@ -132,6 +133,7 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                     id={`${baseId}-panel-${i}`}
                     role="region"
                     aria-labelledby={`${baseId}-trigger-${i}`}
+                    aria-hidden={!isOpen}
                     className="grid transition-[grid-template-rows] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
                     style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
                   >

@@ -31,7 +31,7 @@ interface LogoTickerProps {
 // animation distance equals exactly one set's width (no flick on wrap). Dropped
 // entirely under prefers-reduced-motion. Duplicated items are aria-hidden so
 // screen readers see each client name once.
-export const LogoTicker = ({ ariaLabel = "Clients I've worked with at scale", compact = false }: LogoTickerProps) => {
+export const LogoTicker = ({ ariaLabel = 'Clients I’ve worked with at scale', compact = false }: LogoTickerProps) => {
   const reduceMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
