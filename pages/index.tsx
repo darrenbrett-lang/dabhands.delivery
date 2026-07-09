@@ -240,27 +240,32 @@ export default function Home() {
               <FadeUp className="col-span-4 md:col-span-6">
                 <p className="eyebrow mb-5" style={{ color: '#EBD4A8', letterSpacing: '0.14em' }}>How I work</p>
                 <h2 className="font-serif text-[42px] sm:text-[54px] md:text-[62px] lg:text-[72px] leading-[1.0] tracking-[-0.02em] u-balance">
-                  The work determines the team.
+                  Built around the work, not the headcount.
                 </h2>
               </FadeUp>
 
               <div className="col-span-4 md:col-span-6 lg:col-span-5 lg:col-start-8">
                 <FadeUp delay={0.1}>
                   <p className="text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
-                    I stay close to the work because that’s where the judgement lives.
+                    The work determines the team.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
-                    When the work demands more, I bring in the right people. Trusted senior specialists I’ve worked with for years, chosen for the challenge rather than the roster.
+                    I stay accountable from first conversation to final delivery.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
-                    You’ll always work with me. The team expands only when the work demands it.
+                    When additional capability is needed, I bring in trusted senior specialists I’ve worked with for years, chosen specifically for the challenge.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.28}>
+                  <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
+                    The team expands only when the work demands it.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.34}>
                   <p className="mt-8 pt-6 border-t border-bone/20 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone u-balance">
                     Never the other way around.
                   </p>
