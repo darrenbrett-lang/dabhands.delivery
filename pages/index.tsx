@@ -198,7 +198,7 @@ export default function Home() {
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page. Real impact comes from turning it into everyday decisions, priorities and action. I help organisations make that transition without losing the original intent.' },
-                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity grows with every successful organisation. Left unmanaged, it weakens momentum and dilutes good thinking. I help reconnect people, priorities and systems so the organisation moves together again.' },
+                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity grows with every successful organisation. Left unmanaged, it weakens momentum. I help reconnect people, priorities and systems so the organisation moves together again.' },
                 { key: 'impact', from: 'Important work', to: 'full impact', body: 'Important work rarely fails because the idea was wrong. It loses strength as it moves through the organisation. I help it arrive with the clarity, conviction and impact it was built to create.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
