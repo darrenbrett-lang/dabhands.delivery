@@ -191,11 +191,11 @@ export default function Home() {
               </h2>
             </FadeUp>
             <FadeUp delay={0.08}>
-              <p className="eyebrow text-graphite mt-8 md:mt-10">
+              <p className="mt-6 md:mt-7 text-[17px] leading-[1.7] text-graphite">
                 In practice, that means turning:
               </p>
             </FadeUp>
-            <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page. Real impact comes from turning it into everyday decisions, priorities and action. I help organisations make that transition without losing the original intent.' },
                 { key: 'complexity', from: 'System complexity', to: 'clarity', body: 'Complexity grows with every successful organisation. Left unmanaged, it weakens momentum and dilutes good thinking. I help reconnect people, priorities and systems so the organisation moves together again.' },
