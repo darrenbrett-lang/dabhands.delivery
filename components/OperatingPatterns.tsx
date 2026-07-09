@@ -63,20 +63,21 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                       aria-expanded={isOpen}
                       aria-controls={`${baseId}-panel-${i}`}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="group flex w-full items-start gap-5 md:gap-8 py-8 md:py-11 text-left"
+                      className="group grid w-full grid-cols-[2.5rem_1fr_auto] md:grid-cols-[3.25rem_1fr_auto] items-start py-8 md:py-11 text-left"
                     >
-                      {/* The one restrained accent: a small gold numeral. */}
-                      <span aria-hidden className="mt-[5px] shrink-0 text-[12px] md:text-[13px] tracking-[0.18em] text-gold tabular-nums">
+                      {/* The one restrained accent: a small gold numeral, in a fixed
+                          column shared with the expanded panel below. */}
+                      <span aria-hidden className="mt-[5px] text-[12px] md:text-[13px] tracking-[0.18em] text-gold tabular-nums">
                         {num}
                       </span>
-                      <span className="flex-1">
+                      <span>
                         <span className="eyebrow block text-bone/45">Operating Pattern</span>
                         <span className="mt-3 block font-serif text-[26px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone/90 transition-colors duration-300 group-hover:text-bone">
                           {item.headline}
                         </span>
                       </span>
                       {/* The cue: quiet text + a plus that settles into a close. */}
-                      <span className="mt-[5px] flex shrink-0 items-center gap-2.5 text-[13px] text-bone/50 transition-colors duration-300 group-hover:text-bone">
+                      <span className="mt-[5px] ml-6 flex items-center gap-2.5 text-[13px] text-bone/50 transition-colors duration-300 group-hover:text-bone">
                         <span className="hidden md:inline">{isOpen ? 'Close' : 'Explore pattern'}</span>
                         <span
                           aria-hidden
@@ -100,18 +101,23 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                     style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
                   >
                     <div className="overflow-hidden">
-                      <div
-                        className={`grid grid-cols-1 gap-y-8 gap-x-10 pb-10 md:grid-cols-2 md:pb-14 pl-[29px] md:pl-[37px] pr-0 md:pr-24 transition-opacity duration-300 motion-reduce:transition-none ${
-                          isOpen ? 'opacity-100 delay-150' : 'opacity-0 delay-0'
-                        }`}
-                      >
-                        <div>
-                          <p className="eyebrow text-bone/45">Why it matters</p>
-                          <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.why}</p>
-                        </div>
-                        <div>
-                          <p className="eyebrow text-bone/45">Where I learned it</p>
-                          <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.learned}</p>
+                      {/* Same column template as the trigger, so the content's left
+                          edge aligns exactly with the label and headline above. */}
+                      <div className="grid grid-cols-[2.5rem_1fr] md:grid-cols-[3.25rem_1fr]">
+                        <span aria-hidden />
+                        <div
+                          className={`grid grid-cols-1 gap-y-8 gap-x-10 pb-10 md:grid-cols-2 md:pb-14 md:pr-24 transition-opacity duration-300 motion-reduce:transition-none ${
+                            isOpen ? 'opacity-100 delay-150' : 'opacity-0 delay-0'
+                          }`}
+                        >
+                          <div>
+                            <p className="eyebrow text-bone/45">Why it matters</p>
+                            <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.why}</p>
+                          </div>
+                          <div>
+                            <p className="eyebrow text-bone/45">Where I learned it</p>
+                            <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.learned}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
