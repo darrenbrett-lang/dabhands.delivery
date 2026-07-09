@@ -89,7 +89,7 @@ const content: OperatorContent = {
       {
         headline: 'Transformation is bigger than the project.',
         why: 'Transformation rarely fails because of technology. It succeeds or fails because every decision affects people, process, leadership and confidence at the same time. The project is only one part of the system.',
-        learned: 'Leading a major commerce transformation for Falabella meant carrying more than delivery. Alongside programme leadership came the responsibility of helping a large organisation understand, adopt and gain confidence in what was being built. Success depended on protecting delivery while keeping the wider business moving with it.',
+        learned: 'Leading the programme behind a major commerce transformation for Falabella meant carrying far more than delivery. Alongside the programme came the responsibility of helping a large organisation understand, adopt and build confidence in what was being created. Success depended on keeping the delivery moving while bringing the wider business along.',
       },
     ],
   },
