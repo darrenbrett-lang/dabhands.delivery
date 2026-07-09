@@ -43,7 +43,7 @@ const orgJsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'For Business & Agency Leaders',
-              description: 'Helping capable organisations turn ambition into impact and perform at their best.',
+              description: 'Helping leadership teams close the gap between what they intend to deliver and what actually gets done.',
               url: 'https://dabhands.delivery/business-and-agency-leaders',
             },
           },

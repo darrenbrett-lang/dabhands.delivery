@@ -7,7 +7,7 @@ const content: OperatorContent = {
   accent: 'sage',
   hero: {
     headline: 'As organisations grow, good thinking gets harder to land.',
-    subline: 'I help leadership teams close the gap between what they intend to deliver and what actually gets built.',
+    subline: 'I help leadership teams close the gap between what they intend to deliver and what actually gets done.',
     image: '/images/momentum/01-tracks-2.jpg',
   },
   validation: {
@@ -127,7 +127,7 @@ const content: OperatorContent = {
   },
   seo: {
     description:
-      'Experienced operational leadership for business and agency leaders. DAB Hands helps capable organisations turn ambition into impact, and perform at their best.',
+      'DAB Hands helps leadership teams close the gap between what they intend to deliver and what actually gets done, so good thinking survives the journey from decision to delivery.',
   },
 };
 
