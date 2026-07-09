@@ -9,7 +9,7 @@ import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
-import { withBreaks } from '@/lib/softBreaks';
+import { withBreaks, withSoftBreaks } from '@/lib/softBreaks';
 
 // "Where I help" — three editorial doorway rows on the grid: a third-width image
 // (cols 1–4) with the audience label over it, the conceptual line as the headline,
@@ -279,7 +279,7 @@ export default function Home() {
         {/* ── MOMENTUM (Who I help): three doorways as one big editorial sequence.
             The warm clay wash runs the full module — header and cards as one block. ── */}
         <section data-spine="Who I help" className="bg-clay/20 text-ink border-t border-stone/60">
-          <div className="py-14 md:py-16 lg:py-20">
+          <div className="pt-14 md:pt-16 lg:pt-20">
             <div className="u-container">
               <div className="u-grid items-end gap-y-5">
                 {/* Title over the image column (cols 1–4 on lg); intro over the copy column
@@ -294,7 +294,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="u-container pt-12 md:pt-14 lg:pt-16 pb-16 md:pb-20 lg:pb-24">
+          <div className="u-container pt-8 md:pt-10 pb-16 md:pb-20 lg:pb-24">
             <div className="u-grid gap-y-12">
               {MOMENTUM.map((row, i) => (
                 <FadeUp key={row.num} delay={i * 0.06} className="col-span-4">
@@ -334,29 +334,36 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── FINAL CTA (the decision) ─────────────── */}
-        <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20">
+        {/* ── FINAL CTA: the deeper pages' close module — centred on bone, crown mark,
+            serif heading, Manrope support lines, one button. ── */}
+        <section data-spine="Let’s talk" className="bg-bone text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">
           <div className="u-container">
-            <FadeUp>
-              <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] leading-[1.18] tracking-[-0.01em] text-ink max-w-[38ch] mb-8 md:mb-10">
-                Organisations rarely need more ideas.<br />They need their best thinking to survive the journey from concept to customer.
-              </p>
-            </FadeUp>
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
-              <FadeUp>
-                <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-[1.1] text-ink max-w-[30ch] u-balance">
-                  When important work needs to land, let’s talk.
-                </h2>
-              </FadeUp>
-              <FadeUp delay={0.1}>
-                <a
-                  href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
-                  className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green"
-                >
-                  Start a conversation
-                  <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                </a>
-              </FadeUp>
+            <div className="u-grid">
+              <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
+                <FadeUp>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/crown-mark.webp" alt="" aria-hidden loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
+                  <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">
+                    Organisations rarely need more ideas.
+                  </h2>
+                </FadeUp>
+                <FadeUp delay={0.06}>
+                  <p className="mt-4 text-lg text-graphite max-w-[62ch] mx-auto text-balance">
+                    {withSoftBreaks('They need their best thinking to survive the journey from concept to customer.\nWhen important work needs to land, let’s talk.')}
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                  <div className="mt-8 flex justify-center">
+                    <a
+                      href={mailto({ subject: 'Getting important work moving', body: 'I have important work that needs to move properly. I would like to talk.' })}
+                      className="group inline-flex items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green"
+                    >
+                      Start a conversation
+                      <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                    </a>
+                  </div>
+                </FadeUp>
+              </div>
             </div>
           </div>
         </section>
