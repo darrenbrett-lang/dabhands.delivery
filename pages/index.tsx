@@ -9,6 +9,7 @@ import { LogoTicker } from '@/components/LogoTicker';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
+import { withBreaks } from '@/lib/softBreaks';
 
 // "Where I help" — three editorial doorway rows on the grid: a third-width image
 // (cols 1–4) with the audience label over it, the conceptual line as the headline,
@@ -19,7 +20,7 @@ const MOMENTUM = [
     num: '01',
     label: 'Business & Agency Leaders',
     headline: 'Keeping everything moving.',
-    support: 'When good thinking gets lost between decision and delivery.',
+    support: 'When good thinking slows between\nleadership and execution.',
     href: '/business-and-agency-leaders',
     src: '/images/momentum/01-tracks-2.jpg',
   },
@@ -27,7 +28,7 @@ const MOMENTUM = [
     num: '02',
     label: 'Marketing Leaders',
     headline: 'Keeping the signal strong.',
-    support: 'When great work lands softer than it should.',
+    support: 'When ambitious work loses power\non its way to the world.',
     href: '/marketing-leaders',
     src: '/images/momentum/02-branding-2.jpg',
   },
@@ -35,7 +36,7 @@ const MOMENTUM = [
     num: '03',
     label: 'Growth-Stage Businesses',
     headline: 'Supporting greater ambition.',
-    support: 'When the ambition is clear but the structure hasn’t caught up.',
+    support: 'When the business grows faster\nthan the organisation beneath it.',
     href: '/growth-stage-businesses',
     src: '/images/momentum/03-growth.jpg',
   },
@@ -317,7 +318,7 @@ export default function Home() {
                       <span className="absolute bottom-3.5 left-4 right-4 text-[13px] md:text-[14px] font-medium tracking-[-0.01em] text-bone">{row.label}</span>
                     </div>
                     <h3 className="mt-5 font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.08] tracking-[-0.01em] text-ink u-balance">{row.headline}</h3>
-                    <p className="mt-2.5 text-[15px] leading-relaxed text-ink/70">{row.support}</p>
+                    <p className="mt-2.5 text-[15px] leading-relaxed text-ink/70">{withBreaks(row.support)}</p>
                     <span className="mt-4 inline-flex items-center gap-2 border-b-2 border-gold pb-1 text-[14px] font-medium text-ink">
                       Explore
                       {/* Arrow loop: glides off right while a second slides in from the left. */}
