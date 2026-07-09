@@ -27,6 +27,9 @@ export interface OperatingPatternsContent {
 export const OperatingPatterns = ({ content }: { content: OperatingPatternsContent }) => {
   const [open, setOpen] = useState<number | null>(null);
   const baseId = useId();
+  // A lone pattern is shown fully open as a static plaque — nothing to operate.
+  // The accordion returns automatically once a second pattern exists.
+  const single = content.items.length === 1;
 
   return (
     <section aria-labelledby={`${baseId}-heading`} className="bg-black text-bone py-24 md:py-32 lg:py-40">
@@ -53,6 +56,38 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
           {content.items.map((item, i) => {
             const isOpen = open === i;
             const num = String(i + 1).padStart(2, '0');
+            if (single) {
+              return (
+                <FadeUp key={i}>
+                  <article className="border-t border-bone/15 pt-8 md:pt-11 pb-10 md:pb-14">
+                    <div className="grid grid-cols-[2.5rem_1fr] md:grid-cols-[3.25rem_1fr]">
+                      <span aria-hidden className="mt-[5px] text-[12px] md:text-[13px] tracking-[0.18em] text-gold tabular-nums">
+                        {num}
+                      </span>
+                      <div>
+                        <p className="eyebrow text-bone/45">Operating Pattern</p>
+                        <h3 className="mt-3 font-serif text-[26px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone/90">
+                          {item.headline}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="mt-8 md:mt-10 grid grid-cols-[2.5rem_1fr] md:grid-cols-[3.25rem_1fr]">
+                      <span aria-hidden />
+                      <div className="grid grid-cols-1 gap-y-8 gap-x-10 md:grid-cols-2 md:pr-24">
+                        <div>
+                          <p className="eyebrow text-bone/45">Why it matters</p>
+                          <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.why}</p>
+                        </div>
+                        <div>
+                          <p className="eyebrow text-bone/45">Where I learned it</p>
+                          <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.learned}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </FadeUp>
+              );
+            }
             return (
               <FadeUp key={i} delay={i * 0.05}>
                 <article className="border-t border-bone/15">
