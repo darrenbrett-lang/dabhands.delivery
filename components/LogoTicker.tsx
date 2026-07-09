@@ -4,20 +4,20 @@ import { TickerLogo } from './TickerLogo';
 
 // Canonical client list — single source of truth for the brand ticker, reused on
 // the Experience page and the homepage / Where-we-step-in closing modules.
-export const clients: Array<{ name: string; src: string; kind?: 'icon' | 'wordmark'; boost?: boolean }> = [
-  { name: 'Nike', src: '/images/logos/svg/nike.svg', kind: 'icon' },
-  { name: 'Volkswagen', src: '/images/logos/svg/volkswagen.svg', kind: 'icon' },
-  { name: 'Audi', src: '/images/logos/svg/audi.svg', kind: 'icon' },
-  { name: 'Hugo Boss', src: '/images/logos/svg/hugo-boss.svg' },
-  { name: 'Tommy Hilfiger', src: '/images/logos/svg/tommy-hilfiger-mono.png', boost: true },
-  { name: 'Unilever', src: '/images/logos/svg/unilever.svg', kind: 'icon' },
-  { name: 'Johnson & Johnson', src: '/images/logos/svg/johnson-and-johnson.svg' },
-  { name: 'Royal Mail', src: '/images/logos/svg/royal-mail-mono.png' },
-  { name: 'Parcelforce', src: '/images/logos/svg/parcelforce.svg' },
-  { name: 'Palantir', src: '/images/logos/svg/palantir.svg', kind: 'icon' },
-  { name: 'Post Office', src: '/images/logos/svg/post-office.svg', boost: true },
-  { name: 'Fortnum & Mason', src: '/images/logos/svg/fortnum-and-mason.svg' },
-  { name: 'Falabella', src: '/images/logos/svg/falabella.svg' },
+export const clients: Array<{ name: string; src: string; w: number; h: number; kind?: 'icon' | 'wordmark'; boost?: boolean }> = [
+  { name: 'Nike', src: '/images/logos/svg/nike.svg', w: 24, h: 24, kind: 'icon' },
+  { name: 'Volkswagen', src: '/images/logos/svg/volkswagen.svg', w: 24, h: 24, kind: 'icon' },
+  { name: 'Audi', src: '/images/logos/svg/audi.svg', w: 24, h: 24, kind: 'icon' },
+  { name: 'Hugo Boss', src: '/images/logos/svg/hugo-boss.svg', w: 1005, h: 124 },
+  { name: 'Tommy Hilfiger', src: '/images/logos/svg/tommy-hilfiger-mono.png', w: 558, h: 417, boost: true },
+  { name: 'Unilever', src: '/images/logos/svg/unilever.svg', w: 24, h: 24, kind: 'icon' },
+  { name: 'Johnson & Johnson', src: '/images/logos/svg/johnson-and-johnson.svg', w: 577, h: 54 },
+  { name: 'Royal Mail', src: '/images/logos/svg/royal-mail-mono.png', w: 3329, h: 654 },
+  { name: 'Parcelforce', src: '/images/logos/svg/parcelforce.svg', w: 142, h: 51 },
+  { name: 'Palantir', src: '/images/logos/svg/palantir.svg', w: 24, h: 24, kind: 'icon' },
+  { name: 'Post Office', src: '/images/logos/svg/post-office.svg', w: 285, h: 185, boost: true },
+  { name: 'Fortnum & Mason', src: '/images/logos/svg/fortnum-and-mason.svg', w: 400, h: 49 },
+  { name: 'Falabella', src: '/images/logos/svg/falabella.svg', w: 320, h: 125 },
 ];
 
 interface LogoTickerProps {
@@ -60,7 +60,7 @@ export const LogoTicker = ({ ariaLabel = "Clients I've worked with at scale", co
             aria-hidden={i >= clients.length}
             className={`flex-shrink-0 ${rowHeight} flex items-center justify-center`}
           >
-            <TickerLogo name={c.name} src={c.src} kind={c.kind} boost={c.boost} />
+            <TickerLogo name={c.name} src={c.src} width={c.w} height={c.h} kind={c.kind} boost={c.boost} />
           </li>
         ))}
       </motion.ul>

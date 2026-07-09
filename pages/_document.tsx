@@ -20,7 +20,8 @@ const orgJsonLd = {
       '@id': 'https://dabhands.delivery/#org',
       name: 'DAB Hands',
       url: 'https://dabhands.delivery',
-      logo: 'https://dabhands.delivery/og-card-3.png',
+      // Google's logo guidance wants a roughly square mark, not the wide OG card.
+      logo: 'https://dabhands.delivery/icon-512.png',
       image: 'https://dabhands.delivery/og-card-3.png',
       slogan: 'Keeping important work moving',
       description: DESCRIPTION,

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
 interface PrivateLayoutProps {
   children: ReactNode;
@@ -23,9 +24,9 @@ export const PrivateLayout = ({ children }: PrivateLayoutProps) => (
     <div className="bg-charcoal py-6">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between gap-4">
         <p className="text-[11px] tracking-[0.16em] text-bone/60">&copy; {new Date().getFullYear()} DAB Hands.</p>
-        <a href="/" className="text-[11px] tracking-[0.16em] text-bone/60 hover:text-bone transition-colors">
+        <Link href="/" className="text-[11px] tracking-[0.16em] text-bone/60 hover:text-bone transition-colors">
           dabhands.delivery
-        </a>
+        </Link>
       </div>
     </div>
   </>

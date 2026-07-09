@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365,
+    // Next 16 coerces quality props to the nearest allowed value; register the
+    // 82 the hero/doorway images actually request alongside the 75 default.
+    qualities: [75, 82],
   },
   async headers() {
     return [

@@ -104,10 +104,16 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
   /* Non-static so Framer Motion's useScroll can measure the document scroll
      container offset cleanly (otherwise it dev-warns about a static container). */
   position: relative;
+}
+
+/* Smooth anchor scrolling only for users who haven't asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 section {
@@ -134,6 +140,23 @@ p {
 /* Force balanced wrapping (a class beats the unlayered p { text-wrap: pretty } on
    specificity) so display lines don't drop a widow word on the last line. */
 .u-balance { text-wrap: balance; }
+
+/* First-viewport entrance, CSS-driven: the SSR HTML paints and the animation runs
+   before React hydrates. (Framer-gated entrances hold content at opacity 0 until
+   JS boots, which inflates LCP on throttled devices — use .rise for anything in
+   the initial viewport; FadeUp stays for scroll-triggered reveals further down.) */
+.rise {
+  opacity: 0;
+  transform: translateY(var(--rise-y, 14px));
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--rise-delay, 0s);
+}
+@keyframes rise-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; opacity: 1; transform: none; }
+}
 
 /* Section label / eyebrow — Manrope, uppercase, tracked.
    Replaces the old monospace eyebrow. Colour set per use. */
@@ -170,13 +193,17 @@ p {
   display: block;
 }
 
-/* Focus visible: coral ring, readable on both bone and plum. */
+/* Focus visible: a two-tone ring (bone inner, ink outer) that clears the 3:1
+   non-text contrast minimum on every surface — bone, clay, slate, charcoal,
+   black — where the old single coral ring failed on light backgrounds. */
 :focus {
   outline: none;
 }
 :focus-visible {
-  outline: 2px solid var(--color-coral);
-  outline-offset: 3px;
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-bone),
+    0 0 0 4px var(--color-ink);
   border-radius: 2px;
 }
 
@@ -201,8 +228,9 @@ p {
 .skip-link:focus,
 .skip-link:focus-visible {
   transform: translateY(0);
-  outline: 2px solid var(--color-coral);
-  outline-offset: 3px;
+  box-shadow:
+    0 0 0 2px var(--color-bone),
+    0 0 0 4px var(--color-ink);
 }
 
 /* Brand dot retained for legacy references; now lavender, not green. */

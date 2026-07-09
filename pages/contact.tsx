@@ -1,5 +1,5 @@
+import type { CSSProperties } from 'react';
 import { Layout } from '@/components/Layout';
-import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
 import { mailto } from '@/lib/mailto';
 
@@ -30,25 +30,28 @@ export default function Contact() {
             src="/images/crown-mark.webp"
             alt=""
             aria-hidden
+            width={467}
+            height={367}
             decoding="async"
             className="pointer-events-none select-none hidden md:block absolute right-[7%] lg:right-[10%] top-40 h-[240px] lg:h-[320px] w-auto rotate-[15deg]"
           />
           <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16">
-            <FadeUp>
+            {/* Entrance is CSS-driven (.rise) so the hero paints before hydration. */}
+            <div className="rise">
               {/* Small crown above the heading (mobile only). */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/crown-mark.webp" alt="" aria-hidden decoding="async" className="md:hidden block mb-5 h-10 w-auto select-none" />
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} decoding="async" className="md:hidden block mb-5 h-10 w-auto select-none" />
               <h1 className="text-[44px] md:text-[68px] lg:text-[88px] leading-[1.02] max-w-[12ch]">What’s important?</h1>
-            </FadeUp>
+            </div>
 
-            <FadeUp delay={0.12}>
+            <div className="rise" style={{ '--rise-delay': '0.12s' } as CSSProperties}>
               <p className="mt-9 md:mt-12 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">
                 If you’ve got something important
                 <br className="hidden md:block" /> that needs to create real impact, let’s talk.
               </p>
-            </FadeUp>
+            </div>
 
-            <FadeUp delay={0.2}>
+            <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
               <div className="mt-16 md:mt-24 flex flex-col sm:flex-row sm:flex-wrap gap-y-10 gap-x-16 md:gap-x-24">
                 {channels.map((c) => (
                   <div key={c.label}>
@@ -63,7 +66,7 @@ export default function Contact() {
                   </div>
                 ))}
               </div>
-            </FadeUp>
+            </div>
           </div>
         </section>
       </Layout>

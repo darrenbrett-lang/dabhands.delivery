@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
+import { MotionConfig } from "framer-motion";
 import { Instrument_Serif, Manrope } from "next/font/google";
 
 // Display + quotes. Single weight (400) with a true italic for pull quotes.
@@ -33,9 +34,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <style dangerouslySetInnerHTML={{ __html: rootFontVars }} />
       </Head>
-      <div className={`${instrumentSerif.variable} ${manrope.variable}`}>
-        <Component {...pageProps} />
-      </div>
+      {/* reducedMotion="user" makes every framer animation (FadeUp included)
+          honour prefers-reduced-motion without per-component wiring. */}
+      <MotionConfig reducedMotion="user">
+        <div className={`${instrumentSerif.variable} ${manrope.variable}`}>
+          <Component {...pageProps} />
+        </div>
+      </MotionConfig>
     </>
   );
 }

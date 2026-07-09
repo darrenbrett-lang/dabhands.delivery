@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { withSoftBreaks } from '@/lib/softBreaks';
@@ -21,18 +21,21 @@ const PATHS = [
   { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', line: 'When the ambition is clear but the structure hasn’t caught up.', block: HOVER_BLOCK, accent: HOVER_ACCENT },
 ];
 
+// SSR-safe mounted flag without a set-state-in-effect: false on the server
+// snapshot, true on the client, no subscription needed.
+const subscribeNever = () => () => {};
+const useMounted = () => useSyncExternalStore(subscribeNever, () => true, () => false);
+
 export const PathwayPicker = () => {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-
-  useEffect(() => setMounted(true), []);
 
   const show = useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);

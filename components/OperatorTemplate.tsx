@@ -107,20 +107,26 @@ const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name
             <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone">“{item.quote}”</blockquote>
             <figcaption className="mt-5 not-italic">
               <span className="block text-[15px] font-medium text-bone">{item.name}</span>
-              <span className="block text-[13px] text-bone/70">{item.role}</span>
+              <span className="block text-[13px] text-bone/85">{item.role}</span>
             </figcaption>
           </motion.figure>
         ))}
       </div>
-      <div className="mt-7 flex gap-2.5">
+      <div className="mt-6 flex gap-0.5">
         {items.map((_, i) => (
+          /* 24px+ touch target (WCAG target-size); the visible pip is the inner span. */
           <button
             key={i}
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Show testimonial ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/55'}`}
-          />
+            className="flex h-6 min-w-6 items-center justify-center"
+          >
+            <span
+              aria-hidden
+              className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/55'}`}
+            />
+          </button>
         ))}
       </div>
     </div>
@@ -178,18 +184,20 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                   </div>
                 </div>
               )}
+              {/* Entrance is CSS-driven (.rise) so the hero paints before hydration
+                  (keeps LCP at first paint rather than JS boot). */}
               <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
-                <FadeUp>
+                <div className="rise">
                   <p className={`eyebrow mb-6 ${a.text}`}>{c.eyebrow}</p>
-                </FadeUp>
-                <FadeUp delay={0.06}>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.06s' } as CSSProperties}>
                   <h1 className="font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[19ch]">{c.hero.headline}</h1>
-                </FadeUp>
-                <FadeUp delay={0.12}>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.12s' } as CSSProperties}>
                   <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[44ch]">{c.hero.subline}</p>
-                </FadeUp>
+                </div>
                 {c.hero.trust ? (
-                  <FadeUp delay={0.16}>
+                  <div className="rise" style={{ '--rise-delay': '0.16s' } as CSSProperties}>
                     <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
                       <p className={`border-l-2 ${a.border} pl-4 text-[14px] leading-relaxed text-graphite max-w-[40ch]`}>
                         {c.hero.trust}
@@ -198,9 +206,9 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                         <Cta accent={a.color} email={c.email} />
                       </div>
                     </div>
-                  </FadeUp>
+                  </div>
                 ) : (
-                  <FadeUp delay={0.16}>
+                  <div className="rise" style={{ '--rise-delay': '0.16s' } as CSSProperties}>
                     <div className="mt-8 flex flex-col items-start gap-4">
                       <Cta accent={a.color} email={c.email} />
                       {c.work && (
@@ -213,7 +221,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                         </a>
                       )}
                     </div>
-                  </FadeUp>
+                  </div>
                 )}
               </div>
             </div>
@@ -418,7 +426,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     {c.proof.name && (
                       <footer className="mt-5 not-italic">
                         <span className="block text-[15px] font-medium text-bone">{c.proof.name}</span>
-                        {c.proof.role && <span className="block text-[13px] text-bone/70">{c.proof.role}</span>}
+                        {c.proof.role && <span className="block text-[13px] text-bone/85">{c.proof.role}</span>}
                       </footer>
                     )}
                   </blockquote>
@@ -456,7 +464,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
               <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
                 <FadeUp>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/crown-mark.webp" alt="" aria-hidden loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
+                  <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
                   <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">{c.close.heading}</h2>
                 </FadeUp>
                 {c.close.line && (
@@ -474,14 +482,17 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* Mobile sticky CTA (thumb zone). Hidden on desktop and near page ends. */}
+        {/* Mobile sticky CTA (thumb zone). Hidden on desktop and near page ends.
+            aria-hidden + tabIndex keep the invisible bar out of the tab order. */}
         <div
+          aria-hidden={!sticky}
           className={`md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-stone/60 bg-bone/95 px-6 py-3 backdrop-blur transition-all duration-300 ${
             sticky ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
           }`}
         >
           <a
             href={mailto(c.email)}
+            tabIndex={sticky ? 0 : -1}
             className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-charcoal text-[15px] font-medium text-bone"
           >
             Start a conversation

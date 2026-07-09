@@ -1,5 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { Fragment } from 'react';
+import { Fragment, type CSSProperties } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Layout } from '@/components/Layout';
@@ -43,7 +42,6 @@ const MOMENTUM = [
 ];
 
 export default function Home() {
-  const reduceMotion = useReducedMotion();
   const headlineWords = ['Keeping', 'important', 'work', 'moving.'];
 
   return (
@@ -55,49 +53,47 @@ export default function Home() {
       />
 
       <Layout footerVariant="none">
-        {/* ── HERO ─────────────────────────────────── */}
+        {/* ── HERO ─────────────────────────────────────────────────────────────
+            The entrance is CSS-driven (.rise) rather than framer so the SSR HTML
+            paints and animates before hydration — a framer-gated hero holds the
+            largest content at opacity 0 until JS boots, inflating LCP. ── */}
         <section className="relative bg-bone text-ink pt-40 md:pt-52 pb-24 md:pb-32">
           <div className="relative z-10 u-container text-center">
-            <motion.img
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/images/crown-mark.webp"
               alt=""
               aria-hidden
-              className="mx-auto mb-6 md:mb-8 h-12 md:h-14 lg:h-16 w-auto select-none"
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              width={467}
+              height={367}
+              className="rise mx-auto mb-6 md:mb-8 h-12 md:h-14 lg:h-16 w-auto select-none"
+              style={{ '--rise-y': '10px' } as CSSProperties}
             />
-            <motion.h1
+            <h1
               className="text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px] leading-[1.03] max-w-[15ch] mx-auto"
               aria-label="Keeping important work moving."
-              initial="hidden"
-              animate="visible"
-              variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.1, delayChildren: 0.1 } } }}
             >
               {headlineWords.map((word, i) => (
                 <Fragment key={word}>
                   {i > 0 && ' '}
-                  <motion.span
-                    className="inline-block"
-                    variants={{
-                      hidden: { opacity: 0, y: reduceMotion ? 0 : '0.4em' },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-                    }}
+                  <span
+                    className="rise inline-block"
+                    style={{ '--rise-delay': `${0.1 + i * 0.1}s`, '--rise-y': '0.4em' } as CSSProperties}
                   >
                     {word}
-                  </motion.span>
+                  </span>
                 </Fragment>
               ))}
-            </motion.h1>
+            </h1>
 
-            <FadeUp delay={0.4}>
+            <div className="rise" style={{ '--rise-delay': '0.4s' } as CSSProperties}>
               <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[46ch] mx-auto">
                 Most organisations don’t lack good thinking.<br />They struggle to preserve it.
               </p>
-            </FadeUp>
-            <FadeUp delay={0.55}>
+            </div>
+            <div className="rise" style={{ '--rise-delay': '0.55s' } as CSSProperties}>
               <PathwayPicker />
-            </FadeUp>
+            </div>
           </div>
         </section>
 
@@ -112,30 +108,32 @@ export default function Home() {
         >
           <div className="u-container">
             <div className="u-grid items-start gap-y-12 md:gap-y-16">
+              {/* CSS-driven entrance (.rise): this section peeks into the first mobile
+                  viewport, so it must paint pre-hydration (it was the page's LCP). */}
               <div className="col-span-4 md:col-span-6 lg:col-span-5">
-                <FadeUp>
+                <div className="rise">
                   <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
-                </FadeUp>
-                <FadeUp delay={0.08}>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.08s' } as CSSProperties}>
                   <p className="font-serif text-[30px] md:text-[34px] lg:text-[44px] leading-[1.14] text-ink u-balance">
                     For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, global brands and businesses in motion.
                   </p>
-                </FadeUp>
-                <FadeUp delay={0.16}>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.16s' } as CSSProperties}>
                   <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     I’ve led major programmes, built operating structures from the ground up, and helped leaders close the gap between what they intend to deliver and what actually gets built.
                   </p>
-                </FadeUp>
-                <FadeUp delay={0.22}>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.22s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     My work is about creating the conditions where capable people do their best work together.
                   </p>
-                </FadeUp>
+                </div>
               </div>
 
-              <FadeUp delay={0.1} className="col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
+              <div className="rise col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7" style={{ '--rise-delay': '0.1s' } as CSSProperties}>
                 <SlatPortrait />
-              </FadeUp>
+              </div>
             </div>
           </div>
         </section>
@@ -343,7 +341,7 @@ export default function Home() {
               <div className="col-span-4 md:col-span-8 md:col-start-3 text-center">
                 <FadeUp>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/crown-mark.webp" alt="" aria-hidden loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
+                  <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
                   <h2 className="font-serif text-[28px] md:text-[34px] lg:text-[40px] leading-[1.1] max-w-[34ch] mx-auto">
                     Organisations rarely need more ideas.
                   </h2>

@@ -207,7 +207,7 @@ const Phone = ({ card, idx }: { card: WorkCard; idx: number }) =>
     // silhouette-following drop shadow and no chrome of ours.
     <div className="relative aspect-[9/19] w-full" onDragStart={(e) => e.preventDefault()}>
       {card.media === 'video' ? (
-        // eslint-disable-next-line jsx-a11y/media-has-caption
+         
         <video src={card.src} autoPlay muted loop playsInline className="h-full w-full object-contain" style={{ filter: 'drop-shadow(0 28px 50px rgba(0,0,0,0.55))' }} />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
@@ -218,7 +218,7 @@ const Phone = ({ card, idx }: { card: WorkCard; idx: number }) =>
     <div className="rounded-[2.3rem] p-2.5 shadow-[0_40px_80px_-50px_rgba(0,0,0,0.9)]" style={{ background: '#0C0C0A', border: '1px solid rgba(245,241,235,0.08)' }}>
       <div className="relative aspect-[9/19] w-full overflow-hidden rounded-[1.8rem]" style={{ background: card.screenBg ?? SCREEN_BG }} onDragStart={(e) => e.preventDefault()}>
         {card.media === 'video' && card.src ? (
-          // eslint-disable-next-line jsx-a11y/media-has-caption
+           
           <video src={card.src} autoPlay muted loop playsInline className="h-full w-full object-cover" />
         ) : card.media === 'image' && card.src ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -480,8 +480,10 @@ export const SelectedWork = ({ content }: { content: SelectedWorkContent }) => {
               </div>
 
               <div className="mt-9 flex items-center justify-center lg:justify-start">
-                <div className="flex items-center gap-2.5" role="tablist" aria-label="Selected work">
+                <div className="flex items-center gap-0.5" role="tablist" aria-label="Selected work">
                   {cards.map((card, i) => (
+                    /* The button is a 24px+ touch target (WCAG target-size); the
+                       visible dot is the inner span. */
                     <button
                       key={i}
                       type="button"
@@ -489,9 +491,14 @@ export const SelectedWork = ({ content }: { content: SelectedWorkContent }) => {
                       aria-selected={i === active}
                       aria-label={`Show ${card.brand}`}
                       onClick={() => centerOn(i)}
-                      className="h-2 rounded-full transition-all duration-300"
-                      style={{ width: i === active ? 28 : 8, background: i === active ? 'var(--color-bone)' : 'rgba(245,241,235,0.3)' }}
-                    />
+                      className="flex h-6 min-w-6 items-center justify-center"
+                    >
+                      <span
+                        aria-hidden
+                        className="h-2 rounded-full transition-all duration-300"
+                        style={{ width: i === active ? 28 : 8, background: i === active ? 'var(--color-bone)' : 'rgba(245,241,235,0.3)' }}
+                      />
+                    </button>
                   ))}
                 </div>
                 <span className="ml-4 font-mono text-[12px] tracking-[0.2em] text-bone/50 tabular-nums lg:hidden">{counter}</span>

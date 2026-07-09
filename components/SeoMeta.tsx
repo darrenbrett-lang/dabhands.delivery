@@ -27,6 +27,7 @@ export const SeoMeta = ({ title, description, path, image = '/og-card-3.png', no
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
+      <meta property="og:locale" content="en_GB" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -41,6 +42,7 @@ export const SeoMeta = ({ title, description, path, image = '/og-card-3.png', no
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={`${SITE_NAME} · Keeping important work moving`} />
     </Head>
   );
 };
