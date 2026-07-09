@@ -79,7 +79,7 @@ const content: OperatorContent = {
       {
         headline: 'Winning the work changes the work.',
         why: 'Winning an important client changes the organisation. New opportunities create new demands. Success depends on building the capability around the opportunity, not simply celebrating the win.',
-        learned: 'Following BBH’s Audi digital win, I helped establish the delivery and consultancy capability needed to support one of the agency’s most significant new relationships.',
+        learned: 'Following BBH’s Audi digital win, I helped build the delivery and consultancy capability needed to support one of the agency’s most significant new client relationships. Working alongside the Business Director, we established the multidisciplinary teams, operating model and delivery discipline required to turn a successful pitch into a confident, scalable capability.',
       },
       {
         headline: 'Every complex programme needs a centre of gravity.',
