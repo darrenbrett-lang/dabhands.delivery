@@ -24,17 +24,15 @@ export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false); // nav tucks away while actively scrolling
   const [atP2, setAtP2] = useState(false); // true once scrolled to the doorway's second panel (P2)
-  const [hideZone, setHideZone] = useState(false); // inside a section that keeps the masthead tucked away (e.g. the work carousel)
-  const [peekTop, setPeekTop] = useState(false); // pointer at the top edge — reveal even inside a hide zone
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // The nav slides up out of view while the user is actively scrolling and glides
-  // back ~1s after scrolling stops. It stays put at the very top of the page. The
-  // 1s idle pause + the slower slide-in (see header className) keep it premium.
-  // It also tracks "hide zones": sections tagged [data-hide-masthead] (e.g. the
-  // work carousel) that keep the nav tucked away while they own the viewport, so
-  // the idle-return can't flicker the nav on and off over them.
+  // back ~1s after scrolling stops — uniformly, everywhere on the page (the old
+  // "hide zone" suppression over the carousel/testimonial panels is retired: the
+  // owner wants the masthead returning on idle over every section). It stays put
+  // at the very top of the page. The 1s idle pause + the slower slide-in (see
+  // header className) keep it premium.
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
@@ -42,16 +40,6 @@ export const Header = () => {
       setHidden(y > 10); // hide once we've moved off the top; glides back on idle
       if (idleTimer.current) clearTimeout(idleTimer.current);
       idleTimer.current = setTimeout(() => setHidden(false), 1000);
-      // A zone keeps the masthead away while any part of it sits under the masthead
-      // band (the top ~96px), not just while it spans the viewport centre — the old
-      // centre test let the bar reappear over a zone's first/last half-screen. Pages
-      // may carry several zones (testimonial panel, work carousel); check them all.
-      let inZone = false;
-      document.querySelectorAll('[data-hide-masthead]').forEach((zone) => {
-        const r = zone.getBoundingClientRect();
-        if (r.top < 96 && r.bottom > 0) inZone = true;
-      });
-      setHideZone(inZone);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -62,17 +50,6 @@ export const Header = () => {
       if (idleTimer.current) clearTimeout(idleTimer.current);
     };
   }, [router.pathname]);
-
-  // Inside a hide zone the nav stays hidden — unless the pointer reaches the top
-  // edge of the viewport, which brings it back so the menu is always reachable.
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const y = e.clientY;
-      setPeekTop((prev) => (y <= 80 ? true : y > 160 ? false : prev));
-    };
-    window.addEventListener('mousemove', onMove, { passive: true });
-    return () => window.removeEventListener('mousemove', onMove);
-  }, []);
 
   // The doorway pages tag their second panel ("The Situation") with [data-p2].
   // Reveal the masthead room locator as soon as we've scrolled to P2, and keep it
@@ -129,10 +106,9 @@ export const Header = () => {
   const contactActive = router.pathname === '/contact';
   const room = audiences.find((a) => router.pathname === a.href) ?? null;
   const showContext = atP2 && !!room;
-  // In a hide zone the nav stays tucked away (no idle flicker); a pointer at the
-  // top edge or an open menu always brings it back. Elsewhere it's the normal
-  // scroll/idle behaviour.
-  const navHidden = menuOpen || whoOpen ? false : hideZone ? !peekTop : hidden;
+  // An open menu always keeps the nav on screen; otherwise it's the normal
+  // scroll/idle behaviour, uniform across the whole page.
+  const navHidden = menuOpen || whoOpen ? false : hidden;
 
   return (
     <>

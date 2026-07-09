@@ -141,9 +141,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
       const y = window.scrollY;
       const nearBottom = y + window.innerHeight > document.documentElement.scrollHeight - 280;
       // Hide the sticky CTA while the work carousel owns the view (it sits at the
-      // bottom edge and would otherwise cover the carousel's controls). Keys off its
-      // own data-hide-sticky tag: data-hide-masthead now also marks the trust panel,
-      // which should NOT suppress the sticky CTA.
+      // bottom edge and would otherwise cover the carousel's controls).
       const zone = document.querySelector('[data-hide-sticky]');
       const overCarousel = !!zone && (() => { const r = zone.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; })();
       setSticky(y > 520 && !nearBottom && !overCarousel);
@@ -404,9 +402,8 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy.
-            data-hide-masthead keeps the cream masthead off the dark panel. ── */}
-        <section data-hide-masthead className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
+        {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy. ── */}
+        <section className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
             <div className="u-grid gap-y-8">
               <FadeUp className="col-span-4 md:col-span-12">
