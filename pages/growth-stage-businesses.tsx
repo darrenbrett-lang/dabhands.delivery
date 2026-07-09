@@ -80,9 +80,9 @@ const content: OperatorContent = {
   proof: {
     heading: 'Trusted by Growth-Stage Businesses',
     quote:
-      'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
-    name: 'Gary Shannon',
-    role: 'Managing Partner, Tribal Worldwide London',
+      'Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it. That’s a capability I’ve always admired.',
+    name: 'Neil Munn',
+    role: 'Former Global CEO, BBH',
   },
   close: {
     heading: 'Growth will always create complexity.',
