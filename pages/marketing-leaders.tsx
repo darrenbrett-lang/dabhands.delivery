@@ -7,16 +7,16 @@ const content: OperatorContent = {
   accent: 'peach',
   hero: {
     headline: 'Great work loses power on the journey.',
-    subline: 'I help ambitious brands realise the full impact of their strongest ideas.',
+    subline: 'I help ambitious brands close the gap between the brief and what reaches the customer.',
     image: '/images/momentum/02-branding-2.jpg',
   },
   validation: {
     heading: 'Most organisations know what good looks like.',
     paras: [
       'The strategy is clear. The ambition is strong. The investment has already been made. Everyone knows what success looks like.',
-      'The challenge is rarely finding another idea. It’s helping the right idea survive the journey from conception to customer.',
+      'The challenge is rarely finding another idea. It’s helping the right idea survive the journey from concept to customer.',
     ],
-    coda: 'It’s helping ambitious work\narrive with its full impact.',
+    coda: 'It’s helping ambitious work arrive\nwith the force it was built to carry.',
   },
   diagnosis: {
     thesis: 'Great ideas rarely disappear.\nThey become diluted.',
@@ -24,18 +24,17 @@ const content: OperatorContent = {
       'Most organisations don’t need another advocate for the work.',
       'They need someone who understands how ambitious work moves through complex organisations.',
       'Someone who knows where momentum slips. Where decisions stall. Where competing priorities quietly weaken strong ideas before customers ever see them.',
-      'Because protecting the work isn’t the only objective.',
     ],
-    resolution: 'It’s helping it create the commercial, brand, and customer impact it was designed to achieve.',
+    resolution: 'The measure isn’t whether the work survived. It’s whether it created the commercial and brand impact it was designed to deliver.',
   },
   outcomes: {
-    heading: 'I help ambitious work\nrealise its full impact.',
+    heading: 'I help important work\narrive as intended.',
     paras: [
-      'For more than twenty years I’ve worked alongside brands, agencies and internal teams delivering programmes where execution mattered just as much as the original idea.',
+      'For more than twenty years I’ve led programmes alongside brands, agencies and internal teams. Work where execution mattered as much as the original idea.',
       'I don’t replace strategy.',
       'I don’t replace creative.',
-      'I help the organisation around them work well enough that ambitious ideas arrive with the same strength they had when everyone first believed in them.',
-      'The outcome isn’t simply better delivery.',
+      'I help the organisation around them work well enough that ambitious ideas arrive with the same strength they had at the start.',
+      'The outcome isn’t better delivery.',
       'It’s better performing work.',
     ],
   },
@@ -45,7 +44,7 @@ const content: OperatorContent = {
     situations: [
       {
         heading: 'High-value campaigns\nneed confident delivery',
-        body: 'Major campaigns, digital experiences and product launches need experienced operational leadership to protect quality, momentum and impact from briefing to launch.',
+        body: 'Major campaigns, digital experiences and product launches need experienced leadership to protect quality, momentum and impact from briefing to launch.',
         enquiry: {
           subject: 'Confident delivery for a high-value campaign',
           body: 'We have a high-value campaign that needs confident operational leadership from briefing to launch. I would like to talk.',
@@ -53,7 +52,7 @@ const content: OperatorContent = {
       },
       {
         heading: 'Multiple partners need\nto work as one team',
-        body: 'Internal teams, agencies, production partners and specialist suppliers all have different priorities, with AI-enabled workflows now part of the mix. I help align people, decisions and delivery around one shared outcome.',
+        body: 'Internal teams, agencies, production partners and specialist suppliers all have different priorities. I help align people, decisions and delivery around one shared outcome.',
         enquiry: {
           subject: 'Aligning multiple partners around one outcome',
           body: 'We have several partners who need to work as one team around a shared outcome. I would like to talk.',
@@ -91,8 +90,8 @@ const content: OperatorContent = {
     ],
   },
   close: {
-    heading: 'Great work deserves to realise its full impact.',
-    line: 'The investment is made. The ambition exists.\nI help make sure it arrives intact.',
+    heading: 'Great work deserves to land with its full force.',
+    line: 'The investment is made. The ambition exists.\nI help it arrive intact.',
   },
   // The Selected Work case studies. Each card: brand, tag (eyebrow label), hue (panel
   // accent on the dark stage), a 9:19 device-mockup image (media:'image',
