@@ -42,14 +42,16 @@ export const Header = () => {
       setHidden(y > 10); // hide once we've moved off the top; glides back on idle
       if (idleTimer.current) clearTimeout(idleTimer.current);
       idleTimer.current = setTimeout(() => setHidden(false), 1000);
-      const zone = document.querySelector('[data-hide-masthead]');
-      if (zone) {
+      // A zone keeps the masthead away while any part of it sits under the masthead
+      // band (the top ~96px), not just while it spans the viewport centre — the old
+      // centre test let the bar reappear over a zone's first/last half-screen. Pages
+      // may carry several zones (testimonial panel, work carousel); check them all.
+      let inZone = false;
+      document.querySelectorAll('[data-hide-masthead]').forEach((zone) => {
         const r = zone.getBoundingClientRect();
-        const mid = window.innerHeight / 2;
-        setHideZone(r.top < mid && r.bottom > mid); // the zone owns the viewport centre
-      } else {
-        setHideZone(false);
-      }
+        if (r.top < 96 && r.bottom > 0) inZone = true;
+      });
+      setHideZone(inZone);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

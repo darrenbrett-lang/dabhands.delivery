@@ -353,7 +353,7 @@ export const SelectedWork = ({ content }: { content: SelectedWorkContent }) => {
 
   return (
     <>
-      <section data-hide-masthead aria-label="Selected work" className="overflow-hidden bg-black text-bone py-20 md:py-28 lg:py-32">
+      <section data-hide-masthead data-hide-sticky aria-label="Selected work" className="overflow-hidden bg-black text-bone py-20 md:py-28 lg:py-32">
         <div className="u-container">
           <FadeUp>
             <p className="eyebrow text-bone/55">Selected work</p>
