@@ -74,17 +74,17 @@ const content: OperatorContent = {
       {
         headline: 'Shared language changes organisations.',
         why: 'Every organisation develops its own way of working. Left alone, those differences become friction. Shared ways of working don’t remove flexibility. They create a common language that helps good people make better decisions together.',
-        learned: 'At Tribal Worldwide London, Darren designed and implemented the agency’s first organisation-wide operating framework, bringing consultancy, web development and communications together under one shared operating model.',
+        learned: 'At Tribal Worldwide London, I designed and implemented the agency’s first organisation-wide operating framework, bringing consultancy, web development and communications together under one shared operating model.',
       },
       {
         headline: 'Winning the work changes the work.',
         why: 'Winning an important client changes the organisation. New opportunities create new demands. Success depends on building the capability around the opportunity, not simply celebrating the win.',
-        learned: 'Following BBH’s Audi digital win, Darren helped establish the delivery and consultancy capability needed to support one of the agency’s most significant new relationships.',
+        learned: 'Following BBH’s Audi digital win, I helped establish the delivery and consultancy capability needed to support one of the agency’s most significant new relationships.',
       },
       {
         headline: 'Every complex programme needs a centre of gravity.',
         why: 'Complex programmes rarely fail because people stop caring. They fail because nobody owns the space between the teams. Decisions become disconnected. Momentum quietly disappears.',
-        learned: 'Joining a major international ecommerce programme after three previous programme directors had failed to stabilise it, Darren stepped into a programme that had effectively lost its centre. Client confidence had eroded, delivery teams were frustrated and no single plan existed. Within six weeks he rebuilt the operating rhythm, restored accountability and created a recovery plan the organisation could finally align behind.',
+        learned: 'Joining a major international ecommerce programme after three previous programme directors had failed to stabilise it, I stepped into a programme that had effectively lost its centre. Client confidence had eroded, delivery teams were frustrated and no single plan existed. Within six weeks I rebuilt the operating rhythm, restored accountability and created a recovery plan the organisation could finally align behind.',
       },
       {
         headline: 'Transformation is bigger than the project.',

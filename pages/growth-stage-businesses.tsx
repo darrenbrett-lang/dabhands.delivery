@@ -69,6 +69,7 @@ const content: OperatorContent = {
   patterns: {
     intro: 'Building and growing a business taught me that the same patterns emerge at every stage of growth.',
     support: ['These aren’t startup stories.', 'They’re lessons earned from building one.'],
+    heroLink: 'See what I learned',
     items: [
       {
         headline: 'Growth only scales when the operating system does.',

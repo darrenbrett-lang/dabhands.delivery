@@ -21,6 +21,8 @@ export interface OperatingPatternsContent {
   intro: string;
   /** Short supporting lines under the intro ("These aren't case studies." …) */
   support: string[];
+  /** Label for the hero's anchor link down to the exhibit (default "See how I think"). */
+  heroLink?: string;
   items: OperatingPattern[];
 }
 
