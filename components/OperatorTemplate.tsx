@@ -45,7 +45,8 @@ export interface OperatorContent {
   // Optional "Operating Patterns" exhibit — accumulated judgement as a museum
   // wall of operating truths; sits between the engagements and the trust panel.
   patterns?: OperatingPatternsContent;
-  proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
+  // Optional — omit (or comment out in the page data) to hide the trust panel.
+  proof?: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
   // Optional "Selected Work" carousel, rendered just before the closing CTA.
   work?: SelectedWorkContent;
@@ -426,7 +427,9 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             truths — proof of judgement, not case studies. ── */}
         {c.patterns && <OperatingPatterns content={c.patterns} />}
 
-        {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy. ── */}
+        {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy.
+            Optional — pages without `proof` data skip the panel entirely. ── */}
+        {c.proof && (
         <section className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>
           <div className="u-container">
             <div className="u-grid gap-y-8">
@@ -464,6 +467,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             </div>
           </div>
         </section>
+        )}
 
         {/* 7.5 ── SELECTED WORK (optional): silent-chrome phone carousel; the only
             colour comes from inside the screens. Sits just before the close. ── */}
