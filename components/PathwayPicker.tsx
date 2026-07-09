@@ -126,7 +126,7 @@ export const PathwayPicker = () => {
                         onClick={hideNow}
                         onMouseEnter={() => setHovered(i)}
                         onMouseLeave={() => setHovered(null)}
-                        className="flex flex-col gap-1.5 px-6 py-6 transition-colors duration-200"
+                        className="flex flex-col gap-1.5 px-6 py-6 transition-colors duration-200 active:bg-[color-mix(in_srgb,var(--color-gold)_38%,transparent)]"
                         style={{ backgroundColor: hovered === i ? p.block : undefined }}
                       >
                         <span className="flex items-center justify-between gap-3">

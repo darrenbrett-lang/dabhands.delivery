@@ -141,7 +141,7 @@ export const Header = () => {
                   exit={{ opacity: 0, y: -3 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   style={{ color: room.deep }}
-                  className="absolute left-0 top-full mt-1.5 whitespace-nowrap text-[10px] md:text-[10.5px] uppercase tracking-[0.18em] leading-none"
+                  className="absolute left-0 top-full mt-[2px] md:mt-1.5 whitespace-nowrap text-[10px] md:text-[10.5px] uppercase tracking-[0.18em] leading-none"
                 >
                   {room.context}
                 </motion.span>

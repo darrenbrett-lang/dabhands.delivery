@@ -7,6 +7,7 @@ import { SeoMeta } from './SeoMeta';
 import { mailto } from '@/lib/mailto';
 import { withSoftBreaks, withBreaks } from '@/lib/softBreaks';
 import { SelectedWork, type SelectedWorkContent } from './SelectedWork';
+import { OperatingPatterns, type OperatingPatternsContent } from './OperatingPatterns';
 import { SlatPortrait } from './SlatPortrait';
 
 /* ── Operator destination template (8-section spine) ──────────────────────────
@@ -41,6 +42,9 @@ export interface OperatorContent {
   outcomes: { heading: string; paras: string[] };
   transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; intro?: string; situations?: { heading: string; body: string; enquiry?: { subject: string; body: string } }[]; statement?: string[] };
+  // Optional "Operating Patterns" exhibit — accumulated judgement as a museum
+  // wall of operating truths; sits between the engagements and the trust panel.
+  patterns?: OperatingPatternsContent;
   proof: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
   // Optional "Selected Work" carousel, rendered just before the closing CTA.
@@ -409,6 +413,10 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             )}
           </div>
         </section>
+
+        {/* 6b ── OPERATING PATTERNS (optional): the black exhibit of operating
+            truths — proof of judgement, not case studies. ── */}
+        {c.patterns && <OperatingPatterns content={c.patterns} />}
 
         {/* 7 ── TRUST ("Trusted by …"): a solid Deep Blue-Green panel, bone copy. ── */}
         <section className="text-bone py-20 md:py-28 lg:py-32" style={{ backgroundColor: a.color }}>

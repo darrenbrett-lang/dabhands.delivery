@@ -67,6 +67,32 @@ const content: OperatorContent = {
       },
     ],
   },
+  patterns: {
+    intro: 'Twenty years inside agencies, brands and digital transformation has taught me that the same organisational patterns appear again and again.',
+    support: ['These aren’t case studies.', 'They’re lessons earned through experience.'],
+    items: [
+      {
+        headline: 'Shared language changes organisations.',
+        why: 'Every organisation develops its own way of working. Left alone, those differences become friction. Shared ways of working don’t remove flexibility. They create a common language that helps good people make better decisions together.',
+        learned: 'At Tribal Worldwide London, Darren designed and implemented the agency’s first organisation-wide operating framework, bringing consultancy, web development and communications together under one shared operating model.',
+      },
+      {
+        headline: 'Winning the work changes the work.',
+        why: 'Winning an important client changes the organisation. New opportunities create new demands. Success depends on building the capability around the opportunity, not simply celebrating the win.',
+        learned: 'Following BBH’s Audi digital win, Darren helped establish the delivery and consultancy capability needed to support one of the agency’s most significant new relationships.',
+      },
+      {
+        headline: 'Every complex programme needs a centre of gravity.',
+        why: 'Complex programmes rarely fail because people stop caring. They fail because nobody owns the space between the teams. Decisions become disconnected. Momentum quietly disappears.',
+        learned: 'Joining a major international ecommerce programme after three previous programme directors, Darren rebuilt operating rhythms, restored accountability and created a single delivery plan the organisation could align behind.',
+      },
+      {
+        headline: 'Transformation only succeeds when people come with it.',
+        why: 'Technology is only one part of transformation. Lasting change happens when people understand it, trust it and know how to work differently because of it.',
+        learned: 'Leading a major commerce transformation for Falabella in Santiago, Darren helped build organisational capability alongside the technology, ensuring the business could realise the value of its investment.',
+      },
+    ],
+  },
   proof: {
     heading: 'Trusted by Business & Agency Leaders',
     interval: 10000,
