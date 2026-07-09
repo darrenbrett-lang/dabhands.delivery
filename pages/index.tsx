@@ -196,9 +196,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page. I know how to build the operation that delivers on it, keeping intent intact, cutting what dilutes it, and aligning daily effort with what matters.' },
-                { key: 'complexity', from: 'System complexity', to: 'clarity', body: 'As organisations grow, complexity becomes part of the job. More people. More technology. More decisions. More opportunities for good thinking to lose strength. I help organisations cut through the noise so people, priorities and progress move together again.' },
-                { key: 'impact', from: 'Important work', to: 'full impact', body: 'Programmes, campaigns and launches rarely fail because the idea was wrong. They lose conviction in translation. I help important work arrive with the full force it was built to carry.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page. Real impact comes from turning it into everyday decisions, priorities and action. I help organisations make that transition without losing the original intent.' },
+                { key: 'complexity', from: 'System complexity', to: 'clarity', body: 'Complexity grows with every successful organisation. Left unmanaged, it weakens momentum and dilutes good thinking. I help reconnect people, priorities and systems so the organisation moves together again.' },
+                { key: 'impact', from: 'Important work', to: 'full impact', body: 'Important work rarely fails because the idea was wrong. It loses strength as it moves through the organisation. I help it arrive with the clarity, conviction and impact it was built to create.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
