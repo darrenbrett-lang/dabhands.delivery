@@ -185,6 +185,7 @@ export default function Home() {
         <section data-spine="What I do" className="bg-bone text-ink py-16 md:py-20 lg:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
+              <p className="eyebrow text-graphite mb-5">How I help</p>
               <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
                 I work alongside leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
               </h2>
