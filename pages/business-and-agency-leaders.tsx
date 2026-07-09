@@ -87,9 +87,9 @@ const content: OperatorContent = {
         learned: 'Joining a major international ecommerce programme after three previous programme directors had failed to stabilise it, Darren stepped into a programme that had effectively lost its centre. Client confidence had eroded, delivery teams were frustrated and no single plan existed. Within six weeks he rebuilt the operating rhythm, restored accountability and created a recovery plan the organisation could finally align behind.',
       },
       {
-        headline: 'Transformation only succeeds when people come with it.',
-        why: 'Technology is only one part of transformation. Lasting change happens when people understand it, trust it and know how to work differently because of it.',
-        learned: 'Leading a major commerce transformation for Falabella in Santiago, Darren helped build organisational capability alongside the technology, ensuring the business could realise the value of its investment.',
+        headline: 'Transformation is bigger than the project.',
+        why: 'Transformation rarely fails because of technology. It succeeds or fails because every decision affects people, process, leadership and confidence at the same time. The project is only one part of the system.',
+        learned: 'Leading a major commerce transformation for Falabella meant carrying more than delivery. Alongside programme leadership came the responsibility of helping a large organisation understand, adopt and gain confidence in what was being built. Success depended on protecting delivery while keeping the wider business moving with it.',
       },
     ],
   },
