@@ -84,7 +84,7 @@ const content: OperatorContent = {
       {
         headline: 'Every complex programme needs a centre of gravity.',
         why: 'Complex programmes rarely fail because people stop caring. They fail because nobody owns the space between the teams. Decisions become disconnected. Momentum quietly disappears.',
-        learned: 'Joining a major international ecommerce programme after three previous programme directors, Darren rebuilt operating rhythms, restored accountability and created a single delivery plan the organisation could align behind.',
+        learned: 'Joining a major international ecommerce programme after three previous programme directors had failed to stabilise it, Darren stepped into a programme that had effectively lost its centre. Client confidence had eroded, delivery teams were frustrated and no single plan existed. Within six weeks he rebuilt the operating rhythm, restored accountability and created a recovery plan the organisation could finally align behind.',
       },
       {
         headline: 'Transformation only succeeds when people come with it.',
