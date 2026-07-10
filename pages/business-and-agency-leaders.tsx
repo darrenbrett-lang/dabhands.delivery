@@ -91,6 +91,11 @@ const content: OperatorContent = {
         why: 'Transformation rarely fails because of technology. It succeeds or fails because every decision affects people, process, leadership and confidence at the same time. The project is only one part of the system.',
         learned: 'Leading the programme behind a major commerce transformation for Falabella meant carrying far more than delivery. Alongside the programme came the responsibility of helping a large organisation understand, adopt and build confidence in what was being created. Success depended on keeping the delivery moving while bringing the wider business along.',
       },
+      {
+        headline: 'Organisations drift before they fail.',
+        why: 'Organisations rarely stop performing overnight. They drift. Decisions become slower. Priorities multiply. Ownership becomes less clear. Good people work harder, but less of their best thinking reaches the real world. Recognising the drift early is one of leadership’s greatest advantages.',
+        learned: 'Looking back across more than twenty years, I’ve realised the projects were rarely the point. Whether I was building operating models, leading platform transformations or delivering major programmes, the same pattern kept emerging. Organisations rarely lack ambition. They gradually lose the ability to make it real. Helping leaders reverse that has become the thread that connects everything I’ve done.',
+      },
     ],
   },
   proof: {
