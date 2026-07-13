@@ -126,7 +126,7 @@ export default function Home() {
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.22s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    My work is about creating the conditions where capable people do their best work together.
+                    My work is about creating the conditions where capable people do their best work together. That work lives at the point where direction has to become reality.
                   </p>
                 </div>
               </div>
