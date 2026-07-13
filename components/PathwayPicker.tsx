@@ -88,7 +88,7 @@ export const PathwayPicker = () => {
         onFocus={show}
         className="group inline-flex items-center gap-2 text-[15px] md:text-[16px] font-semibold text-ink transition-colors duration-300 hover:text-graphite"
       >
-        See what I do
+        See who I help
         {/* Plus = "reveal the options"; rotates to an × while the panel is open. */}
         <span aria-hidden className={`inline-flex leading-none transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>
           <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
