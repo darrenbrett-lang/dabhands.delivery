@@ -185,7 +185,7 @@ export default function Home() {
             <FadeUp>
               <p className="eyebrow text-graphite mb-5">How I help</p>
               <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
-                I work alongside MDs, CEOs and senior leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
+                I work alongside leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
               </h2>
             </FadeUp>
             <FadeUp delay={0.08}>
