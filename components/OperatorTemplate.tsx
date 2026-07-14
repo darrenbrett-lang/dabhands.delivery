@@ -365,9 +365,16 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
 
-        {/* 6 ── WHERE I TEND TO HELP (P5): warm stone, with soft-grey cards. ── */}
-        <section className="bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
-          <div className="u-container">
+        {/* 6 ── WHERE I TEND TO HELP (P5): warm stone, with soft-grey cards.
+            The page's doorway image runs full-bleed behind the module at 10%
+            opacity over the warm-stone ground; the cards sit solid on top. ── */}
+        <section className="relative overflow-hidden bg-bone text-ink py-20 md:py-28 lg:py-32 border-t border-stone/50">
+          {c.hero.image && (
+            <div aria-hidden className="pointer-events-none absolute inset-0 opacity-10 select-none">
+              <Image src={c.hero.image} alt="" fill sizes="100vw" quality={82} className="object-cover" />
+            </div>
+          )}
+          <div className="u-container relative">
             <FadeUp>
               <h2 className="font-serif text-[28px] md:text-[40px] leading-[1.12] max-w-[20ch]">{c.help.heading}</h2>
               {c.help.intro && (
