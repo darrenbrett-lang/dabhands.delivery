@@ -19,7 +19,7 @@ const MOMENTUM = [
     num: '01',
     label: 'Business & Agency Leaders',
     headline: 'Keeping everything moving.',
-    support: 'When good thinking slows between\nleadership and execution.',
+    support: 'When good thinking gets lost\nbetween decision and delivery.',
     href: '/business-and-agency-leaders',
     src: '/images/momentum/01-tracks-2.jpg',
   },
@@ -27,7 +27,7 @@ const MOMENTUM = [
     num: '02',
     label: 'Marketing Leaders',
     headline: 'Keeping the signal strong.',
-    support: 'When ambitious work loses power\non its way to the world.',
+    support: 'When great work lands\nsofter than it should.',
     href: '/marketing-leaders',
     src: '/images/momentum/02-branding-2.jpg',
   },
@@ -35,7 +35,7 @@ const MOMENTUM = [
     num: '03',
     label: 'Growth-Stage Businesses',
     headline: 'Supporting greater ambition.',
-    support: 'When the business grows faster\nthan the organisation beneath it.',
+    support: 'When the ambition is clear but\nthe structure hasn’t caught up.',
     href: '/growth-stage-businesses',
     src: '/images/momentum/03-growth.jpg',
   },
@@ -159,7 +159,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Between ambition and execution, momentum slips. Complexity takes hold. The work loses impact.
+                    Between ambition and execution, momentum slips. Complexity takes hold. The work loses strength.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
@@ -185,7 +185,7 @@ export default function Home() {
             <FadeUp>
               <p className="eyebrow text-graphite mb-5">How I help</p>
               <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
-                I work alongside leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
+                I work alongside MDs, CEOs and senior leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
               </h2>
             </FadeUp>
             <FadeUp delay={0.08}>
@@ -197,7 +197,7 @@ export default function Home() {
               {[
                 { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page. Real impact comes from turning it into everyday decisions, priorities and action. I help organisations make that transition without losing the original intent.' },
                 { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity grows with every successful organisation. Left unmanaged, it weakens momentum. I help reconnect people, priorities and systems so the organisation moves together again.' },
-                { key: 'impact', from: 'Important work', to: 'full impact', body: 'Important work rarely fails because the idea was wrong. It loses strength as it moves through the organisation. I help it arrive with the clarity, conviction and impact it was built to create.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely fails because the idea was wrong. It loses strength as it moves through the organisation. I help it arrive with the clarity, conviction and performance it was built to create.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
