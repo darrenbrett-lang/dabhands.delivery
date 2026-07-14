@@ -25,7 +25,7 @@ const content: OperatorContent = {
       'They need someone who understands how ambitious work moves through complex organisations.',
       'Someone who knows where momentum slips. Where decisions stall. Where competing priorities quietly weaken strong ideas before customers ever see them.',
     ],
-    resolution: 'The measure isn’t whether the work survived. It’s whether it created the commercial and brand impact it was designed to deliver.',
+    resolution: 'The measure isn’t whether the work survived. It’s whether it arrived performing, and made the case for itself.',
   },
   outcomes: {
     heading: 'I help important work\narrive as intended.',
@@ -90,7 +90,7 @@ const content: OperatorContent = {
   },
   close: {
     heading: 'Great work deserves to land with its full force.',
-    line: 'The investment is made. The ambition exists.\nI help it arrive intact.',
+    line: 'The investment is made. The ambition exists.\nI help it arrive intact, performing, and making its case.',
   },
   // The Selected Work case studies. Each card: brand, tag (eyebrow label), hue (panel
   // accent on the dark stage), a 9:19 device-mockup image (media:'image',
