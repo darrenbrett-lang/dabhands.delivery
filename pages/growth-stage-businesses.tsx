@@ -78,14 +78,13 @@ const content: OperatorContent = {
       },
     ],
   },
-  // Trust panel hidden pending content approval (2026-07-09) — uncomment to restore.
-  // proof: {
-  //   heading: 'In Their Words',
-  //   quote:
-  //     'Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it. That’s a capability I’ve always admired.',
-  //   name: 'Neil Munn',
-  //   role: 'Former Global CEO, BBH',
-  // },
+  proof: {
+    heading: 'In Their Words',
+    quote:
+      'Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it. That’s a capability I’ve always admired.',
+    name: 'Neil Munn',
+    role: 'Former Global CEO, BBH',
+  },
   close: {
     heading: 'Growth will always create complexity.',
     line: 'The businesses that keep scaling aren’t the ones with fewer opportunities.\nThey’re the ones that build the capability to turn growth into lasting advantage.',
