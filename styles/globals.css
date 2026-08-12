@@ -274,3 +274,22 @@ p {
   .work-draw-path { stroke-dashoffset: 0 !important; animation: none !important; }
   .work-track { scroll-behavior: auto; }
 }
+
+/* ── Safe Passage model (pages/safe-passage.tsx): the signal line. ──
+   .sp-seg is one vertical segment of the journey line; .sp-pulse drifts a soft
+   gold highlight down the coherent segments. Calm by design: slow, low
+   contrast, and stilled entirely under reduced motion. */
+.sp-seg { width: 2px; margin-inline: auto; }
+@keyframes sp-pulse {
+  from { background-position: 0 -70px; }
+  to   { background-position: 0 140px; }
+}
+.sp-pulse {
+  background-image: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-gold) 90%, white) 50%, transparent);
+  background-size: 100% 70px;
+  background-repeat: no-repeat;
+  animation: sp-pulse 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-pulse { animation: none; background-image: none; }
+}
