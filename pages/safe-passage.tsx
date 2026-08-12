@@ -65,7 +65,7 @@ export default function SafePassage() {
         path="/safe-passage"
       />
 
-      <Layout>
+      <Layout footerVariant="none">
         {/* ── 1 · HERO: two statements, room to breathe. CSS .rise entrance. ── */}
         <section className="bg-bone text-ink pt-36 md:pt-48 pb-20 md:pb-28">
           <div className="u-container">
