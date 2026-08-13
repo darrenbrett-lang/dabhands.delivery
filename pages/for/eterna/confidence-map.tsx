@@ -143,6 +143,15 @@ const css = `
 .eterna .markets li:first-child{border-top:0;}
 .eterna .markets li::before{content:'';position:absolute;left:0;top:0.72em;width:10px;height:1px;background:var(--goldink);}
 .eterna .markets strong{color:var(--ink);font-weight:600;}
+
+/* After the Map: the two engagement levels (Roadmap slate, Partner gold) */
+.eterna .levels{margin:18px 0 0;display:grid;gap:12px;}
+.eterna .level{padding:16px 18px;background:color-mix(in srgb, var(--hair) 24%, var(--stone));border-radius:10px;border-left:3px solid var(--slate);}
+.eterna .level.level-top{border-left-color:var(--gold);}
+.eterna .level-name{margin:0;font-family:var(--font-serif),Georgia,serif;font-size:20px;line-height:1.1;color:var(--ink);}
+.eterna .level-when{margin:5px 0 0;font-size:14.5px;font-weight:500;color:var(--goldink);}
+.eterna .level-desc{margin:9px 0 0;font-size:14.5px;line-height:1.5;color:var(--graphite);}
+.eterna .dbody .levels-close{margin-top:16px;color:var(--ink);}
 .eterna .illus strong{font-weight:600;}
 
 /* Figure table */
@@ -330,6 +339,7 @@ const css = `
 
   /* Money cards: two-up, and the media band label as a left rail */
   .eterna .mg-cards{grid-template-columns:1fr 1fr;gap:12px;}
+  .eterna .levels{grid-template-columns:1fr 1fr;gap:14px;}
   .eterna .mg-media{display:grid;grid-template-columns:128px 1fr;gap:18px;align-items:start;}
   .eterna .mg-media-label{margin-bottom:0;}
   .eterna .dbody .mg-close{margin-top:36px;font-size:25px;}
@@ -983,6 +993,28 @@ export default function Eterna() {
               </Disclosure>
             </div>
           </Sec>
+
+          {/* After the Map: the engagement levels, ahead of the close */}
+          <div className="disc-wrap">
+            <Disclosure summary="What happens after the Map">
+              <p>The Map is the entry level, and it is finished work. Your own team, or any agency you already use, can pick it up and act on it. If we never speak again after week six, you have lost nothing and you own everything.</p>
+              <p>That is deliberate. A diagnosis that can only be acted on by the person who wrote it is not a diagnosis, it is a sales document.</p>
+              <p>If you want to go further, there are two more levels, set by how much of the outcome I hold rather than the hours I bill.</p>
+              <div className="levels">
+                <div className="level">
+                  <p className="level-name">Confidence Roadmap</p>
+                  <p className="level-when">When you have the team but need the plan.</p>
+                  <p className="level-desc">I build it and stay close to steer delivery. Your team runs the work, and I keep it holding together as it moves.</p>
+                </div>
+                <div className="level level-top">
+                  <p className="level-name">Confidence Partner</p>
+                  <p className="level-when">When it simply has to land.</p>
+                  <p className="level-desc">I hold the outcome alongside you and drive the priorities end-to-end. My judgement in the room, and accountability for the work arriving as it should.</p>
+                </div>
+              </div>
+              <p className="levels-close">Neither is decided now, nor is it priced now. We choose in the final session, with the roadmap in front of us.</p>
+            </Disclosure>
+          </div>
 
           {/* ── Close ─────────────────────────────────────────────── */}
           <section className="close">
