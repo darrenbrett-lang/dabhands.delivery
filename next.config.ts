@@ -23,10 +23,17 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Private, unlisted proposal page (/for/eterna). Belt-and-braces
-        // alongside the in-page noindex meta: an HTTP-level noindex for bots
-        // that ignore it.
+        // Private, unlisted Eterna workspace: the hub (/for/eterna) and every
+        // document under it (/for/eterna/*). Belt-and-braces alongside each
+        // page's in-page noindex meta: an HTTP-level noindex for bots that
+        // ignore it.
         source: "/for/eterna",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
+        source: "/for/eterna/:path*",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
         ],

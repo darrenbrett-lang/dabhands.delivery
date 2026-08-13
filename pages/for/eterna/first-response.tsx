@@ -5,7 +5,7 @@ import { FadeUp } from '@/components/FadeUp';
 /*
  * PRIVATE, UNLISTED PROPOSAL PAGE. "The Clear Path", for Dr Adeel Khan (Eterna Health).
  *
- * Route: /for/eterna. Do not link to this from anywhere on the site. Not in
+ * Route: /for/eterna/first-response. Do not link to this from anywhere on the site. Not in
  * sitemap.xml. The route sends an X-Robots-Tag: noindex header (see
  * next.config.ts) alongside the in-page robots meta below. Open Graph tags are
  * deliberately omitted so a shared link never leaks the client or contents.
@@ -106,6 +106,15 @@ export default function ClearPath() {
         <title>The Clear Path</title>
         <meta name="robots" content="noindex, nofollow, noarchive" />
       </Head>
+
+      {/* ── Back to the Eterna workspace ────────────────────────────── */}
+      <div className="bg-bone">
+        <Container className="pt-3.5">
+          <a href="/for/eterna" className="text-[13px] tracking-[0.02em] text-graphite hover:text-ink transition-colors">
+            <span className="text-blue-green" aria-hidden>&larr;</span> Eterna
+          </a>
+        </Container>
+      </div>
 
       {/* ── Header lockup (no site nav) ─────────────────────────────── */}
       <header className="bg-bone border-b border-ink/10">
