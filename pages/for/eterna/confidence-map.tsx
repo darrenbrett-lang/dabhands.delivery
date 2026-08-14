@@ -225,13 +225,7 @@ const css = `
 @media (prefers-reduced-motion:no-preference){.eterna .plan-panel{animation:eterna-plan-in .26s ease both;}}
 @keyframes eterna-plan-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @media (min-width:768px){
-  .eterna .plan-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:start;}
-  .eterna .pcards{flex-direction:column;flex-wrap:nowrap;}
-  .eterna .pcard{flex:none;padding:11px 9px 26px;}
-  .eterna .pcard-name{font-size:16px;}
-  .eterna .pcard-mark{position:absolute;right:9px;bottom:8px;font-size:18px;}
-  .eterna .pweek{grid-row:1;}
-  .eterna .plan-panel{grid-column:1/-1;padding:22px 24px 24px;}
+  .eterna .plan-panel{padding:22px 24px 24px;}
 }
 
 /* Dark block */
@@ -689,7 +683,7 @@ export default function Eterna() {
         {/* ── Sticky jump bar ─────────────────────────────────────── */}
         <nav className="jump" aria-label="Jump to a part of the proposal">
           <div className="jump-inner">
-            <a href="#argument">The argument</a>
+            <a href="#argument">The situation</a>
             <span className="sep" aria-hidden>·</span>
             <a href="#engagement">The plan</a>
             <span className="sep" aria-hidden>·</span>
@@ -733,7 +727,7 @@ export default function Eterna() {
           <div className="part" id="argument">
             <span className="part-num" aria-hidden>01</span>
             <p className="part-eyebrow">Part one</p>
-            <p className="part-title">The argument</p>
+            <p className="part-title">The situation</p>
           </div>
 
           {/* 1 · The prize */}
