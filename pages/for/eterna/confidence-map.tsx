@@ -418,6 +418,13 @@ const css = `
 }
 
 /* Print: open every disclosure, drop the chrome */
+/* Instrument Serif runs tight at display sizes; open the tracking slightly
+   across every serif element (the brand wordmark keeps its own logo tracking). */
+.eterna .serif,.eterna h1,.eterna .statement,.eterna .part-title,.eterna .part-num,.eterna .name-line,.eterna .pq,
+.eterna .lnum,.eterna .lq,.eterna .disc-num,.eterna .p-name,.eterna .p-stat-num,.eterna .level-name,.eterna .app-lead,
+.eterna .pcard-name,.eterna .ppanel-num,.eterna .dark .dk-lead,.eterna .fee .fee-num,.eterna .gp-name,.eterna .mg-title,
+.eterna .dbody .mg-close,.eterna .wk-num,.eterna .close h2{letter-spacing:0.01em;}
+
 @media print{
   .eterna{background:#fff;color:#000;}
   .eterna .jump{display:none;}
