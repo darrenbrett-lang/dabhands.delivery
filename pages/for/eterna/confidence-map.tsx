@@ -128,9 +128,6 @@ const css = `
 .eterna .more .more-open{display:none;}
 .eterna .more[open] .more-open{display:inline;}
 .eterna .more[open] .more-closed{display:none;}
-.eterna .whospend{margin:28px 0 0;}
-.eterna .whospend-label{margin:0;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,241,234,0.78);}
-.eterna .whospend p{margin:10px 0 0;font-size:15px;line-height:1.55;color:rgba(245,241,234,0.82);}
 .eterna .spend-table{width:100%;border-collapse:collapse;margin:14px 0 0;font-variant-numeric:tabular-nums;}
 .eterna .spend-table th,.eterna .spend-table td{padding:8px 6px;font-size:14.5px;text-align:right;border-top:1px solid rgba(245,241,234,0.25);font-weight:400;}
 .eterna .spend-table thead th{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,241,234,0.78);border-top:0;}
@@ -894,12 +891,6 @@ export default function Eterna() {
             <p className="illus">
               <strong>Illustrative until calibrated.</strong> Industry benchmarks, not yet Eterna’s numbers.
             </p>
-            <div className="whospend">
-              <p className="whospend-label">Who spends it</p>
-              <p>That four million is what the growth costs. It is not a fee to me or anyone you choose to work with.</p>
-              <p>It also needs more disciplines than any one person has. What I have is the reach, people at the top of their field in each of the parts this needs.</p>
-              <p>I won’t put anyone in the room you haven’t asked for. We build the team a piece at a time, as the Map shows what is actually missing, and you keep the say on every one of them. Working this way gets you way more value than a traditional route: no board to take a cut, just the topflight talent needed to steer it right.</p>
-            </div>
             <div className="disc-wrap">
               <Disclosure summary="Where the four million comes from">
                 <p><strong>The band.</strong> For elective, self-pay healthcare the accepted range is 8 to 15% of revenue. The Aesthetic Society puts a steady year at 5 to 8% and a growth year at 10 to 12%. AmSpa’s survey has the average med spa at about 7%, which is a holding number. Practices genuinely growing, new sites or hard markets, run 15 to 20% for the first two years and then taper. Gartner has all-industry marketing at 7.7%, but that is mostly billion dollar companies with brands already built. Smaller businesses growing fast always spend a higher share. Doubling in two years puts you near the top of the range, not the middle.</p>
@@ -942,6 +933,16 @@ export default function Eterna() {
               </Disclosure>
             </div>
             </details>
+          </Sec>
+
+          {/* 5b2 · Who spends it: the question the number creates, answered in the open */}
+          <Sec label="Who spends it" statement="That four million is what the growth costs. It is not a fee to me or anyone you choose to work with.">
+            <div className="disc-wrap">
+              <Disclosure summary="How the team gets built">
+                <p>It also needs more disciplines than any one person has. What I have is the reach, people at the top of their field in each of the parts this needs.</p>
+                <p>I won’t put anyone in the room you haven’t asked for. We build the team a piece at a time, as the Map shows what is actually missing, and you keep the say on every one of them. Working this way gets you way more value than a traditional route: no board to take a cut, just the topflight talent needed to steer it right.</p>
+              </Disclosure>
+            </div>
           </Sec>
 
           {/* 5c · Where the money goes (unchanged copy; the natural follow-on to the number) */}
