@@ -1015,7 +1015,7 @@ export default function Eterna() {
           </div>
 
           {/* 7 · What you get (value established before the number) */}
-          <Sec label="What you get" statement="Four documents: the leak map is the evidence, the strategy page is the decision, the ranked roadmap is the plan, and the scorecard is how you know it working as it moves.">
+          <Sec label="What you get" statement="Four documents: the leak map is the evidence, the strategy page is the decision, the ranked roadmap is the plan, and the scorecard is how you know it’s working as it moves.">
             <div className="disc-wrap wyk-discs">
               <Disclosure num="01" summary="The leak map">
                 <p className="wyk-lead">Every place a patient stops, why, how many, and what it costs you a year.</p>
