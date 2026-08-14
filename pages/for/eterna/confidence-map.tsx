@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode, useState } from 'react';
 
 /*
  * PRIVATE, UNLISTED PROPOSAL PAGE. For Dr Adeel Khan (Eterna Health).
@@ -12,7 +12,10 @@ import { ReactNode } from 'react';
  * A single mobile-first page inside the DAB Hands house system (Instrument
  * Serif + Manrope, warm-stone palette). Two parts, "The argument" and "The
  * engagement", reachable from a sticky jump bar. Progressive disclosure via
- * native <details> (no JS required; keyboard accessible; forced open in print).
+ * native <details> (keyboard accessible; forced open in print). The six-week
+ * plan lozenges are React-state disclosures instead (one step open at a time,
+ * panel under the tapped week on mobile, full-width under the row on desktop;
+ * also forced open in print).
  * Contrast is tuned to WCAG AA at the token level: gold is used for rules only,
  * deep gold (#7E5E27, 5.3:1 on stone) for gold text/marks, graphite darkened
  * for secondary text. The veto is red AND the word "veto", used once.
@@ -67,14 +70,16 @@ const css = `
 /* Hero */
 .eterna .hero{margin:28px 0 0;}
 .eterna .hero-doc{margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--goldink);}
+.eterna .hero-title{margin:2px 0 10px;}
 .eterna .hero-summary{padding:26px 22px 28px;background:var(--taupe);border-radius:16px;}
 .eterna .hero-summary .eyebrow{color:var(--ink);}
 
 /* Part label */
-.eterna .part{margin:0;padding:64px 0 6px;border-top:1px solid var(--hair);}
-.eterna .part-eyebrow{margin:0;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--goldink);}
-.eterna .part-title{margin:9px 0 0;font-family:var(--font-serif),Georgia,serif;font-weight:400;font-size:32px;line-height:1.04;letter-spacing:-0.01em;color:var(--ink);}
-@media (min-width:768px){.eterna .part-title{font-size:38px;}}
+.eterna .part{position:relative;overflow:hidden;margin:64px 0 0;padding:26px 22px 28px;background:var(--dark);border-radius:16px;}
+.eterna .part-eyebrow{position:relative;z-index:1;margin:0;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--goldOnDark);}
+.eterna .part-title{position:relative;z-index:1;margin:9px 0 0;font-family:var(--font-serif),Georgia,serif;font-weight:400;font-size:32px;line-height:1.04;letter-spacing:-0.01em;color:var(--onDark);}
+.eterna .part-num{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-family:var(--font-serif),Georgia,serif;font-size:80px;line-height:1;color:var(--goldOnDark);opacity:0.3;pointer-events:none;}
+@media (min-width:768px){.eterna .part{padding:34px 32px 36px;}.eterna .part-title{font-size:38px;}.eterna .part-num{right:32px;font-size:112px;}}
 
 /* Section */
 .eterna .sec{padding:44px 0;border-top:1px solid var(--hair);}
@@ -87,7 +92,7 @@ const css = `
 .eterna .sec-slate .body{color:var(--onDarkMuted);}
 .eterna .sec-slate .pq{color:var(--onDark);border-left-color:var(--goldOnDark);}
 .eterna .sec-slate .disc,.eterna .sec-slate .disc-wrap .disc:first-child{border-top-color:rgba(245,241,234,0.22);}
-.eterna .sec-slate .disc-label{color:var(--onDark);}
+.eterna .sec-slate .disc-label{color:var(--goldOnDark);}
 .eterna .sec-slate summary::after{color:var(--goldOnDark);}
 .eterna .sec-slate .dbody{color:var(--onDarkMuted);}
 .eterna .sec-slate .dbody strong{color:var(--onDark);}
@@ -95,6 +100,11 @@ const css = `
 .eterna .sec-slate .figrow dt{color:var(--onDarkMuted);}
 .eterna .sec-slate .figrow dd{color:var(--onDark);}
 .eterna .sec-slate .illus{border-color:var(--goldOnDark);color:var(--onDark);background:rgba(245,241,234,0.07);}
+
+/* The name line: twelve words, linked through to the appendix */
+.eterna .name-line{margin:26px 0 0;font-family:var(--font-serif),Georgia,serif;font-size:20px;line-height:1.36;color:var(--ink);}
+.eterna .name-line a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:1px;text-underline-offset:5px;}
+.eterna .name-line a:hover{text-decoration-color:var(--goldink);}
 
 /* Pull quote */
 .eterna .pq{margin:24px 0 0;border-left:3px solid var(--gold);padding:2px 0 2px 18px;
@@ -119,9 +129,12 @@ const css = `
 .eterna summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
   min-height:44px;padding:11px 0;}
 .eterna summary::-webkit-details-marker{display:none;}
-.eterna .disc-label{font-size:12px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink);}
+.eterna .disc-label{font-size:12px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--goldink);}
+.eterna .disc-main{display:flex;align-items:baseline;gap:12px;}
+.eterna .disc-num{font-family:var(--font-serif),Georgia,serif;font-size:16px;line-height:1;color:var(--goldink);min-width:22px;flex:none;}
+.eterna .disc-plus{margin-top:16px;}
 .eterna summary::after{content:'+';color:var(--goldink);font-size:20px;line-height:1;flex:none;}
-.eterna details[open] summary::after{content:'\\2212';}
+.eterna details[open] > summary::after{content:'\\2212';}
 .eterna .dbody{padding:2px 0 20px;font-size:15.5px;color:var(--graphite);}
 .eterna .dbody p{margin:0;}
 .eterna .dbody p+p{margin-top:13px;}
@@ -154,7 +167,7 @@ const css = `
 .eterna .wyk-map{margin:18px 0 0;font-size:16.5px;line-height:1.55;color:var(--ink);}
 .eterna .dbody .wyk-lead{color:var(--ink);font-weight:500;}
 .eterna .dbody .wyk-do{margin-top:15px;padding-left:14px;border-left:2px solid var(--gold);font-style:italic;color:var(--ink);}
-.eterna .wyk-discs .disc-label{color:var(--goldink);}
+.eterna .disc[id]{scroll-margin-top:64px;}
 
 /* Four-market rulebook bullets */
 .eterna .markets{list-style:none;margin:16px 0 0;padding:0;}
@@ -179,43 +192,46 @@ const css = `
 .eterna .figrow:first-child{border-top:0;}
 .eterna .figrow dt{margin:0;color:var(--graphite);font-size:15px;}
 .eterna .figrow dd{margin:0;color:var(--ink);font-weight:600;white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums;}
+.eterna .fig-title{margin:24px 0 2px;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--goldink);}
+.eterna .app-lead{margin:6px 0 0;font-family:var(--font-serif),Georgia,serif;font-size:22px;line-height:1.28;letter-spacing:-0.01em;color:var(--ink);}
 
 /* Eight steps (tappable step cards) */
-.eterna .steps-block{margin:40px 0 0;padding-top:38px;border-top:1px solid var(--hair);}
-.eterna .steps-label{margin:0;font-size:12px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink);}
-.eterna .steps-hint{margin:6px 0 0;font-size:13px;color:var(--graphite);}
-.eterna .steps{margin:12px 0 0;}
-.eterna .step{border-top:1px solid var(--hair);}
-.eterna .step:first-child{border-top:0;}
-.eterna .step summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;min-height:44px;padding:14px 0;}
-.eterna .step summary::-webkit-details-marker{display:none;}
-.eterna .step-num{font-family:var(--font-serif),Georgia,serif;color:var(--goldink);font-size:19px;line-height:1.2;flex:none;min-width:23px;align-self:flex-start;padding-top:1px;}
-.eterna .step-main{flex:1;display:flex;flex-direction:column;gap:2px;}
-.eterna .step-name{font-weight:600;color:var(--ink);font-size:16.5px;}
-.eterna .step-time{font-size:13.5px;color:var(--graphite);}
-.eterna .step summary::after{content:'+';color:var(--goldink);font-size:21px;line-height:1;flex:none;}
-.eterna .step[open] summary::after{content:'\\2212';}
-.eterna .step-body{padding:2px 0 18px 36px;font-size:15.5px;color:var(--graphite);}
-.eterna .step-body p{margin:0;}
-.eterna .step-body p + p{margin-top:12px;}
-.eterna .step-lead{color:var(--ink);font-weight:600;}
 
 /* The shape of the six weeks */
 .eterna .plan{margin:40px 0 0;padding-top:38px;border-top:1px solid var(--hair);}
 .eterna .plan-label{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink);}
-.eterna .plan-hint{margin:0 0 18px;font-size:13px;color:var(--graphite);}
+.eterna .plan-hint{margin:0 0 18px;font-size:13px;font-weight:500;color:var(--goldink);}
 .eterna .plan-grid{display:flex;flex-direction:column;gap:16px;}
 .eterna .pweek-label{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--graphite);}
 .eterna .pyou{font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--onDark);background:var(--dark);border-radius:999px;padding:3px 9px;}
 .eterna .pcards{display:flex;flex-wrap:wrap;gap:8px;}
-.eterna .pcard{flex:1 1 130px;border-radius:10px;padding:12px 14px;}
+.eterna .pcard{position:relative;flex:1 1 130px;display:block;border:0;border-radius:10px;padding:12px 14px;font:inherit;text-align:left;color:inherit;cursor:pointer;}
+.eterna .pcard:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+@media (hover:hover){.eterna .pcard:hover{box-shadow:inset 0 0 0 1px var(--goldink);}}
+.eterna .pcard-open,.eterna .pcard-open:hover{box-shadow:inset 0 0 0 2px var(--goldink);}
+.eterna .pcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
 .eterna .pcard-name{display:block;font-family:var(--font-serif),Georgia,serif;font-size:18px;line-height:1.15;color:var(--ink);}
+.eterna .pcard-mark{flex:none;color:var(--goldink);font-size:20px;line-height:0.9;}
 .eterna .pcard-sub{display:block;margin-top:4px;font-size:13px;line-height:1.3;color:var(--cardsub);}
+.eterna .plan-panel{border:1px solid var(--hair);border-radius:12px;background:color-mix(in srgb, var(--gold) 6%, var(--stone));padding:18px 18px 20px;font-size:15.5px;color:var(--graphite);}
+.eterna .plan-panel p{margin:0;}
+.eterna .plan-panel p + p{margin-top:12px;}
+.eterna .ppanel-head{display:flex;align-items:baseline;gap:10px;}
+.eterna .ppanel-num{font-family:var(--font-serif),Georgia,serif;color:var(--goldink);font-size:19px;}
+.eterna .ppanel-name{font-weight:600;color:var(--ink);font-size:16.5px;}
+.eterna .plan-panel .ppanel-tag{margin-top:2px;font-size:13.5px;color:var(--graphite);}
+.eterna .plan-panel .step-lead{color:var(--ink);font-weight:600;}
 .eterna .plan-parallel{margin:18px 0 0;font-size:13px;line-height:1.5;color:var(--graphite);}
+@media (prefers-reduced-motion:no-preference){.eterna .plan-panel{animation:eterna-plan-in .26s ease both;}}
+@keyframes eterna-plan-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @media (min-width:768px){
-  .eterna .plan-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:start;}
+  .eterna .plan-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:start;}
   .eterna .pcards{flex-direction:column;flex-wrap:nowrap;}
-  .eterna .pcard{flex:none;}
+  .eterna .pcard{flex:none;padding:11px 9px 26px;}
+  .eterna .pcard-name{font-size:16px;}
+  .eterna .pcard-mark{position:absolute;right:9px;bottom:8px;font-size:18px;}
+  .eterna .pweek{grid-row:1;}
+  .eterna .plan-panel{grid-column:1/-1;padding:22px 24px 24px;}
 }
 
 /* Dark block */
@@ -223,10 +239,10 @@ const css = `
 .eterna .dark .dk-label{margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--goldOnDark);}
 .eterna .dark .dk-lead{margin:0;font-family:var(--font-serif),Georgia,serif;font-size:22px;line-height:1.28;letter-spacing:-0.01em;color:var(--onDark);}
 .eterna .dark p{margin:15px 0 0;font-size:15.5px;color:var(--onDarkMuted);}
-.eterna .dark .floor-list{margin:16px 0 0;padding:0;list-style:none;}
-.eterna .dark .floor-list li{position:relative;padding:10px 0 10px 24px;font-size:15.5px;line-height:1.5;color:var(--onDark);border-top:1px solid rgba(245,241,234,0.14);}
-.eterna .dark .floor-list li:first-child{border-top:0;}
-.eterna .dark .floor-list li::before{content:'';position:absolute;left:0;top:1.05em;width:11px;height:1px;background:var(--goldOnDark);}
+.eterna .floor-list{margin:16px 0 0;padding:0;list-style:none;}
+.eterna .floor-list li{position:relative;padding:10px 0 10px 24px;font-size:15.5px;line-height:1.5;color:var(--ink);border-top:1px solid var(--hair);}
+.eterna .floor-list li:first-child{border-top:0;}
+.eterna .floor-list li::before{content:'';position:absolute;left:0;top:1.05em;width:11px;height:1px;background:var(--gold);}
 .eterna .fee .fee-num{margin:0;font-family:var(--font-serif),Georgia,serif;font-size:46px;line-height:1;letter-spacing:-0.01em;color:var(--onDark);}
 
 /* Included / not included lists */
@@ -253,6 +269,7 @@ const css = `
 .eterna .gp-srow{position:relative;padding:14px 0 15px 18px;border-top:1px solid var(--hair);}
 .eterna .gp-srow:first-child{border-top:0;padding-top:2px;}
 .eterna .gp-srow::before{content:'';position:absolute;left:0;top:16px;bottom:17px;width:3px;border-radius:2px;background:var(--clay);}
+.eterna .gp-srow:first-child::before{top:4px;}
 .eterna .gp-srow.gp-found::before{background:var(--dark);}
 .eterna .gp-srow.gp-brand::before{background:var(--walnut);}
 .eterna .gp-srow.gp-oper::before{background:var(--slate);}
@@ -371,6 +388,11 @@ const css = `
   .eterna .jump{display:none;}
   .eterna details:not([open]) > *:not(summary){display:block !important;}
   .eterna summary::after{content:'' !important;}
+  .eterna .plan-panel[hidden]{display:block !important;}
+  .eterna .pcard-mark{display:none;}
+  .eterna .part{background:#fff;border:1px solid #000;}
+  .eterna .part-eyebrow,.eterna .part-title{color:#000;}
+  .eterna .part-num{display:none;}
   .eterna .dark{background:#fff;color:#000;border:1px solid #000;}
   .eterna .dark .dk-lead,.eterna .fee .fee-num,.eterna .dark p{color:#000;}
   .eterna .btn{border:1px solid #000;color:#000;}
@@ -394,12 +416,12 @@ const steps: { num: string; name: string; tagline: string; happens: string; need
   {
     num: '01', name: 'Foundation', tagline: 'Establish what Eterna is building towards.',
     happens: 'I send a written set of questions and you record your answers whenever it suits, in your own voice, with no meeting to attend. I turn those into a single statement of where Eterna is going and what you believe is true about how it gets there. Anything you suspect but have not proved is written down as a question rather than a fact, and those questions become the things the next five weeks tests.',
-    need: 'Sixty to ninety minutes of recorded answers, in your own time.',
+    need: 'Sixty to ninety minutes of recorded answers, in your own time. An export of the last twelve months of enquiries, however messy. Whatever system holds them, or the inbox if there isn’t one.',
     end: 'A one-page draft of where you are going, back with you inside a week, for you to argue with.',
   },
   {
     num: '02', name: 'Signal', tagline: 'Understand what the evidence says.',
-    happens: 'I read the category properly: the rules in all four markets, what patients say in public where you have no control over it, the behavioural evidence on how people decide under uncertainty, and the comparable categories where the same decision has already been studied. Every finding is labelled before it is used. Evidence means two independent sources agree. Pattern means it shows up repeatedly but is not proven. Hypothesis means it is a reasonable inference I still have to test.',
+    happens: 'I read the category properly: the rules in your source markets, what patients say in public where you have no control over it, the behavioural evidence on how people decide under uncertainty, and the comparable categories where the same decision has already been studied. Every finding is labelled before it is used. Evidence means two independent sources agree. Pattern means it shows up repeatedly but is not proven. Hypothesis means it is a reasonable inference I still have to test.',
     need: 'Nothing.',
     end: 'The findings that matter, not the reading list, with the sources there if you want them.',
   },
@@ -411,19 +433,19 @@ const steps: { num: string; name: string; tagline: string; happens: string; need
   },
   {
     num: '04', name: 'Reality', tagline: 'Understand what actually happens inside.',
-    happens: 'Conversations with the people who run each part: whoever answers first, whoever books, whoever consults, whoever follows up once a patient has flown home. Arranged around them rather than the other way round. I am listening for what works, what breaks, and what quietly depends on one person being available that day. The seven standards are the lens I listen through, not a checklist anybody gets handed.',
+    happens: 'Conversations with the people who run each part: whoever answers first, whoever books, whoever consults, whoever follows up once a patient has flown home. Arranged around them rather than the other way round. I am listening for what works, what breaks, and what quietly depends on one person being available that day. The seven standards are the lens I listen through, not a checklist anybody gets handed. I also look at the record itself. What holds an enquiry, what is written down when someone does not book, who is supposed to follow up and whether anyone does. Then the twelve months of enquiries, counted: how many came in, how many reached a consultation, how many were treated, and what happened to everyone else.',
     need: 'Introductions, and permission for people to be straight with me.',
-    end: 'How the business actually behaves, set next to how it is meant to.',
+    end: 'How the business actually behaves, set next to how it is meant to. And the first real count of how many people stopped, and where.',
   },
   {
     num: '05', name: 'Patients', tagline: 'Understand how confidence is really built.',
-    happens: 'Conversations with patients across the three types, recruited, run and analysed by us. We rebuild the journey from the first search to the last follow-up and find where confidence was built and where it went. Where you will allow it, that includes people who enquired and did not go ahead, who are the most valuable conversations of the lot.',
-    need: 'The names. Consent and data handling are ours to manage.',
-    end: 'What your patients actually say, in their own words, with the pattern underneath it.',
+    happens: 'Conversations with patients across the three types, recruited, run and analysed by us. Most of them with people who enquired and did not go ahead, because they are the ones who can tell us what stopped them. The rest with patients who did proceed, to find what carried them over the same rung. Recruitment runs underneath week 2, so the conversations are ready to start when the week does.',
+    need: 'The names, including the ones who did not book. Consent and data handling are ours to manage.',
+    end: 'What your patients actually say, in their own words, with the pattern underneath it, and the reason the ones who stopped gave.',
   },
   {
     num: '06', name: 'Choices', tagline: 'Decide where to place the bets.',
-    happens: 'Everything comes together and we choose. Which patients to build the next two years around, which treatments lead, and what we stop doing. Held as a working session rather than a presentation, because the decisions have to be yours, made in the room, not agreed later by email. A second senior strategist sits in with me so you get two views rather than one.',
+    happens: 'Everything comes together and we choose. Which patients to build the next two years around, which treatments lead, and what we stop doing. The synthesis behind it runs underneath weeks 3 and 4, so nothing lands cold in the session. Held as a working session rather than a presentation, because the decisions have to be yours, made in the room, not agreed later by email. A second senior strategist sits in with me so you get two views rather than one.',
     need: 'Offline review of recommendations, then 90 minutes on a call and the authority to decide in it.',
     end: 'Fewer things on the list than when we started.',
   },
@@ -441,18 +463,73 @@ const steps: { num: string; name: string; tagline: string; happens: string; need
   },
 ];
 
-// The six-week shape. Steps placed into weeks per the delivery mockup; `you`
-// marks the three founder touchpoints (about 90 minutes each). The card tint
-// ramps from light to deep gold across the six weeks.
+// The six-week shape. Steps placed into weeks per the delivery mockup; every
+// lozenge is a disclosure that opens the matching step's detail (SixWeekPlan
+// below). Competitors sits in week 2 and runs across weeks 2 and 3. The card
+// tint ramps from light to deep gold across the six weeks.
 const weeks: { wk: string; cards: { name: string; sub: string }[] }[] = [
   { wk: 'Week 1', cards: [{ name: 'Foundation', sub: 'Everything from you' }, { name: 'Signal', sub: 'The category' }] },
-  { wk: 'Week 2', cards: [{ name: 'Reality', sub: 'Inside the clinics' }] },
+  { wk: 'Week 2', cards: [{ name: 'Competitors', sub: 'Where you can win' }, { name: 'Reality', sub: 'Inside the clinics' }] },
   { wk: 'Week 3', cards: [{ name: 'Patients', sub: 'The conversations' }] },
   { wk: 'Week 4', cards: [{ name: 'Choices', sub: 'Where we bet' }] },
   { wk: 'Week 5', cards: [{ name: 'Blueprint', sub: 'What good looks like' }] },
   { wk: 'Week 6', cards: [{ name: 'Roadmap', sub: 'Sequence and scorecard' }] },
 ];
 const weekTint = [20, 33, 46, 59, 72, 85];
+
+// The six-week plan: lozenges are the disclosure triggers for the step detail.
+// One step open at a time. On mobile (stacked weeks) the panel sits directly
+// under the tapped week; on desktop the panel spans the full row beneath the
+// six columns (the pweeks are pinned to grid row 1, the open panel takes row 2).
+const SixWeekPlan = () => {
+  const [open, setOpen] = useState<string | null>(null);
+  return (
+    <div className="plan-grid">
+      {weeks.map((w, i) => (
+        <Fragment key={w.wk}>
+          <div className="pweek">
+            <p className="pweek-label">{w.wk}</p>
+            <div className="pcards">
+              {w.cards.map((c) => {
+                const s = steps.find((st) => st.name === c.name)!;
+                const isOpen = open === s.num;
+                return (
+                  <button
+                    type="button"
+                    className={`pcard${isOpen ? ' pcard-open' : ''}`}
+                    key={c.name}
+                    aria-expanded={isOpen}
+                    aria-controls={`plan-step-${s.num}`}
+                    onClick={() => setOpen(isOpen ? null : s.num)}
+                    style={{ background: `color-mix(in srgb, var(--gold) ${weekTint[i]}%, var(--stone))` }}
+                  >
+                    <span className="pcard-head">
+                      <span className="pcard-name">{c.name}</span>
+                      <span className="pcard-mark" aria-hidden>{isOpen ? '−' : '+'}</span>
+                    </span>
+                    <span className="pcard-sub">{c.sub}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {w.cards.map((c) => {
+            const s = steps.find((st) => st.name === c.name)!;
+            return (
+              <div className="plan-panel" id={`plan-step-${s.num}`} key={`panel-${c.name}`} hidden={open !== s.num}>
+                <p className="ppanel-head"><span className="ppanel-num">{s.num}</span><span className="ppanel-name">{s.name}</span></p>
+                <p className="ppanel-tag">{s.tagline}</p>
+                <p><span className="step-lead">What happens.</span> {s.happens}</p>
+                <p><span className="step-lead">What we need from you.</span> {s.need}</p>
+                <p><span className="step-lead">What you will have at the end.</span> {s.end}</p>
+              </div>
+            );
+          })}
+        </Fragment>
+      ))}
+    </div>
+  );
+};
 
 // The material each step hands over, listed in "The working underneath".
 const workingDocs: [string, string, string][] = [
@@ -476,10 +553,17 @@ const Sec = ({ label, statement, body, first, tone, children }: { label: string;
   </section>
 );
 
-const Disclosure = ({ summary, children }: { summary: string; children: ReactNode }) => (
-  <details className="disc">
+const Disclosure = ({ summary, children, id, num, plus }: { summary: string; children: ReactNode; id?: string; num?: string; plus?: boolean }) => (
+  <details className={`disc${plus ? ' disc-plus' : ''}`} id={id}>
     <summary>
-      <span className="disc-label">{summary}</span>
+      {num ? (
+        <span className="disc-main">
+          <span className="disc-num">{num}</span>
+          <span className="disc-label">{summary}</span>
+        </span>
+      ) : (
+        <span className="disc-label">{summary}</span>
+      )}
     </summary>
     <div className="dbody">{children}</div>
   </details>
@@ -607,9 +691,11 @@ export default function Eterna() {
           <div className="jump-inner">
             <a href="#argument">The argument</a>
             <span className="sep" aria-hidden>·</span>
-            <a href="#engagement">The engagement</a>
+            <a href="#engagement">The plan</a>
             <span className="sep" aria-hidden>·</span>
             <a href="#scope">Scope &amp; cost</a>
+            <span className="sep" aria-hidden>·</span>
+            <a href="#appendix">Appendix</a>
           </div>
         </nav>
 
@@ -619,25 +705,33 @@ export default function Eterna() {
             <div className="hero-mast">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="hero-crown" src="/images/crown-mark.webp" alt="" aria-hidden decoding="async" />
-              <p className="hero-doc">Eterna Proposal</p>
+              <p className="hero-doc">Eterna Health · Proposal · V1</p>
+              {/* The document title proper; the exec summary h1 is hidden above,
+                  so this carries the page's h1 while it is. */}
+              <h1 className="hero-title">Confidence Map</h1>
               <p className="meta">Prepared for Dr Adeel Khan, with Marco De Pasquale.</p>
             </div>
-            <div className="hero-summary">
-              <p className="eyebrow">Exec Summary</p>
-              <h1>A two-year plan to fill the chairs.</h1>
-            <div className="lede">
-              <p>
-                You want another ten million. That is fewer than five more patients a week, in each clinic you already run. The cheapest place to find them is among the people already talking to you. Most of them stop, and they stop at different points, because something they needed to believe did not hold.
-              </p>
-              <p>
-                Six weeks finds where that happens, what each one costs, which patients and treatments to build around, and what has to change over two years to fix it.
-              </p>
-            </div>
-            </div>
+            {/* Exec Summary hidden for now (owner call, 2026-08-14). Restore by
+                flipping this flag. Keeps the h1 out of the page while hidden. */}
+            {false && (
+              <div className="hero-summary">
+                <p className="eyebrow">Exec Summary</p>
+                <h1>A two-year plan to fill the chairs.</h1>
+                <div className="lede">
+                  <p>
+                    You want another ten million. That is fewer than five more patients a week, in each clinic you already run. The cheapest place to find them is among the people already talking to you. Most of them stop, and they stop at different points, because something they needed to believe did not hold. They have not said no. Most of them are still deciding.
+                  </p>
+                  <p>
+                    Six weeks finds where that happens, what each one costs, which patients and treatments to build around, and what has to change over two years to fix it.
+                  </p>
+                </div>
+              </div>
+            )}
           </header>
 
           {/* ══════════════ PART ONE · THE ARGUMENT ══════════════ */}
           <div className="part" id="argument">
+            <span className="part-num" aria-hidden>01</span>
             <p className="part-eyebrow">Part one</p>
             <p className="part-title">The argument</p>
           </div>
@@ -659,8 +753,18 @@ export default function Eterna() {
                 <p style={{ marginTop: '14px' }}>
                   At $12,000 it is 5.8 a week. At $25,000 it is 2.8. It never leaves single figures. The average treatment value is the number only you have.
                 </p>
+                <p className="fig-title">What one lost patient costs</p>
+                <FigTable
+                  rows={[
+                    ['First treatment', '$15,000'],
+                    ['Come back for a second', '28%'],
+                    ['Of those, take a third', '30%'],
+                    ['Refer someone who books', '10%'],
+                    ['Three-year value', 'about $22,000'],
+                  ]}
+                />
                 <p>
-                  <strong>What one lost patient costs.</strong> First treatment $15,000. Twenty-eight per cent come back for a second, thirty per cent of those take a third, ten per cent refer someone who books. Both of those depend on someone staying in touch. They are not clinical outcomes. Three-year value about $22,000. Rates discounted from IVF after a successful cycle, the closest self-pay comparison there is. Your own records replace both in week one.
+                  Return and referral depend on someone staying in touch. They are not clinical outcomes. The rates are discounted from IVF after a successful cycle, the closest self-pay comparison there is. Your own records replace them in week one.
                 </p>
                 <p>
                   Florida is not in these numbers. If it opens and runs at today’s per-clinic average it adds about $3.3m, a third of the gap, and everything above gets easier.
@@ -670,26 +774,24 @@ export default function Eterna() {
           </Sec>
 
           {/* 2 · Where the growth is */}
-          <Sec label="Where the growth is" statement="The cheapest patients to win are the ones already talking to you." body="More enquiries cost money. Converting the ones you have costs attention. Doubling on volume alone would mean twice the consultations, in every clinic, every week.">
-            <p className="pq">One number: revenue per available appointment. How full the chairs are, and with what.</p>
+          <Sec label="Where the growth is" statement="The cheapest patients to win are the ones already talking to you." body="More enquiries cost a certain type of investment in marketing. Converting the ones you already have requires attention and trust building.">
+            <p className="pq">The focus is revenue per available appointment. More of the chairs you already have, filled by patients worth more, who come back and bring people with them.</p>
           </Sec>
 
-          {/* 3 · How patients decide */}
-          <Sec label="How patients decide" statement="Advertising does not answer a patient’s questions. It sends more people to find them unanswered." body="A patient climbs a ladder of confidence, rung by rung. They only book when enough rungs hold.">
-            <ol className="ladder">
-              {ladder.map((r) => (
-                <li key={r.n}>
-                  <span className="lnum">{r.n}</span>
-                  <span className="lname">{r.name}</span>
-                  <span className="lq">
-                    {r.q}
-                    {r.veto && <span className="veto">veto</span>}
-                  </span>
-                </li>
-              ))}
-            </ol>
+          {/* 3 · The reality */}
+          <Sec
+            label="The reality"
+            statement="A patient who does not book today has not said no. They have stopped at something."
+            body="Some are waiting for better evidence. Some are still comparing, and will be for months. Some are frightened and have gone quiet. Almost nobody follows up with any of them."
+          >
+            <p className="body">So it is one job with two halves. Know who stopped and at which rung, and keep hold of them. Then fix the thing that stopped them, so that more move forward at this stage.</p>
+            <p className="pq">Fixing a rung helps everyone who comes next. It does nothing for the people who already stopped, unless you still have their names.</p>
+          </Sec>
+
+          {/* 4 · How patients decide */}
+          <Sec label="How patients decide" statement="Advertising does not answer a patient’s questions. It sends more people to find them unanswered.">
             <div className="disc-wrap">
-              <Disclosure summary="Our three patients">
+              <Disclosure summary="See our three patients">
                 <div className="personas">
                   <div className="persona">
                     <p className="p-name">The Proactive Optimiser</p>
@@ -708,104 +810,33 @@ export default function Eterna() {
                     <p className="p-desc">Serious or chronic, told there is nothing else. The most to lose.</p>
                   </div>
                 </div>
-                <p className="pq">Each drops out at a different rung. That is what lets us point your spend rather than spread it.</p>
-              </Disclosure>
-              <Disclosure summary="Retaining your name">
-                <p>
-                  <strong>Your name gets them onto the ladder. It cannot hold the rungs that stop the sale.</strong>
-                </p>
-                <div className="namesplit">
-                  <div className="ns-group">
-                    <p className="ns-label ns-label-lift">It lifts</p>
-                    <div className="chips">
-                      <span className="chip chip-lift">Recognition</span>
-                      <span className="chip chip-lift">Credibility</span>
-                      <span className="chip chip-lift">Proof</span>
-                    </div>
-                  </div>
-                  <div className="ns-group">
-                    <p className="ns-label">It cannot lift</p>
-                    <div className="chips">
-                      <span className="chip chip-no">Fit</span>
-                      <span className="chip chip-no">Clarity</span>
-                      <span className="chip chip-no">Safety</span>
-                      <span className="chip chip-no">Care</span>
-                    </div>
-                  </div>
-                </div>
-                <p>Worth continuing, and worth pointing at the rungs it moves.</p>
-                <p>So we fix the leaks in order: the ones losing the patients worth most, the ones costing the most margin, then the rest. The few that move the money first, not everything at once.</p>
               </Disclosure>
             </div>
+            <p className="body">A patient climbs a ladder of confidence, rung by rung. They only book when enough rungs hold.</p>
+            <ol className="ladder">
+              {ladder.map((r) => (
+                <li key={r.n}>
+                  <span className="lnum">{r.n}</span>
+                  <span className="lname">{r.name}</span>
+                  <span className="lq">
+                    {r.q}
+                    {r.veto && <span className="veto">veto</span>}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <p className="pq">Each drops out at a different rung. That’s what will let us point your spend rather than spread it.</p>
           </Sec>
 
-          {/* 4 · The conditions */}
-          <Sec label="The conditions" statement="Patients can hear about you and still not be able to verify you." body="Most people now get their answer before they reach anyone’s website. They ask, something answers, and you are either in that answer or you are not. What decides it is what other people have already published about you: reviews you did not write, outcomes you have shown, and credentials anyone can look up.">
-            <div className="disc-wrap">
-              <Disclosure summary="What has changed in search">
-                <FigTable
-                  rows={[
-                    ['Health searches returning an AI answer', '88%'],
-                    ['Of those, never clicking through', '83%'],
-                    ['Traffic falls on clinical pages', '20 to 40%'],
-                    ['AI referral conversion, against 2.8% organic', '16%'],
-                  ]}
-                />
-                <p style={{ marginTop: '14px' }}>
-                  Someone describes you before anyone visits. Your website is where people check what they were told, not where they arrive. Fewer of them come now, but the ones who do are far more likely to book, so losing them costs much more than it used to.
-                </p>
-                <p>Sources: 210 Digital and WebFX, 2026; Bregg, 2026; AirOps and ALM, 2026. Industry analysis, not peer-reviewed.</p>
-              </Disclosure>
-              <Disclosure summary="What you are allowed to say">
-                <p>Four clinics, four rulebooks. Some of what you say now would not clear all four.</p>
-                <ul className="markets">
-                  <li><strong>Florida</strong> wants trial evidence behind a claim about results.</li>
-                  <li><strong>Toronto</strong> bans patient testimonials outright.</li>
-                  <li><strong>Dubai</strong> approves every advert before it runs, and does not allow superlatives.</li>
-                  <li><strong>Cabo</strong> needs a permit, and will not approve claims for treatments whose effect is not proven.</li>
-                </ul>
-                <p>So we write each claim once, with its evidence attached, then produce the four versions each market allows. Your team stops guessing, and you can hand a regulator a folder instead of an explanation.</p>
-              </Disclosure>
-            </div>
+          {/* ══════════════ PART TWO · THE PLAN ══════════════ */}
+          <div className="part" id="engagement">
+            <span className="part-num" aria-hidden>02</span>
+            <p className="part-eyebrow">Part two</p>
+            <p className="part-title">The plan</p>
+          </div>
 
-            <div className="dark">
-              <p className="dk-label">Repairing the floor</p>
-              <p className="dk-lead">Safety has a veto. Nothing else starts until this holds.</p>
-              <p>Five things any clinic treating patients who then fly home should be able to show. Most cannot:</p>
-              <ul className="floor-list">
-                <li>An adverse event protocol distributed across every location.</li>
-                <li>A coordination letter to the patient’s own doctor before they fly home.</li>
-                <li>A named 24 hour contact given in writing before treatment.</li>
-                <li>Registration and licence status published for each market.</li>
-                <li>A certificate of analysis as standard for every product used.</li>
-              </ul>
-              <p>Until this holds, awareness spend accelerates exposure rather than conversion. It is also the cheapest work in the plan, and the only work that should not wait.</p>
-            </div>
-          </Sec>
-
-          {/* 4b · Holding on to people */}
-          <Sec
-            label="Holding on to people"
-            statement="A patient who does not book today has not said no. Most of them are still deciding."
-            body="The people who take six to eighteen months to choose a clinic are the same people who are worth the most when they arrive. Almost nobody follows them through that window, so the enquiry lost in March is still deciding in November and hearing nothing."
-          >
-            <div className="disc-wrap">
-              <Disclosure summary="Why this decides two of the numbers">
-                <p>The three-year value on the earlier page rests on two figures: how many patients come back, and how many refer someone. Neither of those is a clinical outcome. Both are a consequence of whether anyone stayed in touch, and how.</p>
-                <p>Nobody returns to a clinic that went quiet. Nobody recommends one either.</p>
-                <p>The same is true further up. Someone who stalls on safety in March has not refused, they have paused. If the evidence improves and they never see it, they will not come back to check.</p>
-                <p>
-                  <strong>What this is not.</strong> It is not discounting. In a five-figure decision a price cut says the price was arbitrary, and it costs more credibility than it buys bookings. The version that works here is not an offer, it is a reason to look again: here is what has changed since you last enquired, here is a result we can now show you, here is a question you asked that we can now answer properly.
-                </p>
-                <p>
-                  <strong>What it needs.</strong> One system that holds an enquiry across an eighteen-month decision and a patient across three years, with one person accountable for it. That is an operating job, not a marketing campaign, and it sits in the operating lane of the two-year plan.
-                </p>
-              </Disclosure>
-            </div>
-          </Sec>
-
-          {/* 5 · The two-year shape */}
-          <Sec label="The two-year shape" statement="Foundations first, then spend behind what we know works." body="Nothing scales until the chairs prove it. We spend more when the chairs prove it works, not because it is year two.">
+          {/* 5 · The two-year shape (the horizon, before the first step) */}
+          <Sec label="The two-year shape" first statement="Foundations first, then spend behind what we know works." body="Nothing scales until the chairs prove it. We spend more when the chairs prove it works, not because it is year two.">
             <GrowthPlan />
             <div className="disc-wrap">
               <Disclosure summary="Where the money goes">
@@ -839,106 +870,69 @@ export default function Eterna() {
                   </div>
                   <p className="mg-media-body">Google prohibits advertising cell, gene and PRP therapies outright, with no certification route, so media buys attention for the problem, the questions and the clinic, never the procedure. I do not buy media. I bring the buyer, set their aim, and hold the spend to the proof.</p>
                 </div>
-                <p className="mg-close">Growth is funded as a share of turnover, set in advance and protected. You size it. The Map points it.</p>
               </Disclosure>
             </div>
+            <p className="pq">Growth is funded as a share of turnover, set in advance and protected. You size it. The Map points it.</p>
           </Sec>
 
-          {/* ══════════════ PART TWO · THE ENGAGEMENT ══════════════ */}
-          <div className="part" id="engagement">
-            <p className="part-eyebrow">Part two</p>
-            <p className="part-title">The engagement</p>
-          </div>
-
           {/* 6 · The first engagement */}
-          <Sec label="The first engagement" first statement="Where your patients stop, what each stop costs you, and what to fix first." body="The diagnosis, then the plan. Plus one page you all agree on that guides us, and a scorecard to mark it by.">
-            <p className="body">Not a restart. Firmer ground under a business that already works.</p>
-            <p className="pq">I’m not here to run a campaign. I’m here to help you double the business.</p>
+          <Sec label="The first engagement" statement="The Confidence Map: where your patients stop, what each stop costs you, and what to fix first.">
 
             <div className="plan">
               <p className="plan-label">The shape of the six weeks</p>
-              <p className="plan-hint">Foundations first, building to the roadmap.</p>
-              <div className="plan-grid">
-                {weeks.map((w, i) => (
-                  <div className="pweek" key={w.wk}>
-                    <p className="pweek-label">{w.wk}</p>
-                    <div className="pcards">
-                      {w.cards.map((c) => (
-                        <div
-                          className="pcard"
-                          key={c.name}
-                          style={{ background: `color-mix(in srgb, var(--gold) ${weekTint[i]}%, var(--stone))` }}
-                        >
-                          <span className="pcard-name">{c.name}</span>
-                          <span className="pcard-sub">{c.sub}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="plan-parallel">Running underneath: competitor and comparator review across weeks 2 and 3, patient recruitment in week 2, and synthesis across weeks 3 and 4.</p>
+              <p className="plan-hint">Tap any stage to see what happens, what it asks of you, and what you get.</p>
+              <SixWeekPlan />
             </div>
-            <p className="checkin">A short check-in every Friday to review the week and make the decisions together.</p>
-
-            <div className="steps-block">
-              <p className="steps-label">The eight steps, and your time</p>
-              <p className="steps-hint">Tap any step to see what it involves.</p>
-              <div className="steps">
-                {steps.map((s) => (
-                  <details className="step" key={s.num}>
-                    <summary>
-                      <span className="step-num">{s.num}</span>
-                      <span className="step-main">
-                        <span className="step-name">{s.name}</span>
-                        <span className="step-time">{s.tagline}</span>
-                      </span>
-                    </summary>
-                    <div className="step-body">
-                      <p><span className="step-lead">What happens.</span> {s.happens}</p>
-                      <p><span className="step-lead">What we need from you.</span> {s.need}</p>
-                      <p><span className="step-lead">What you will have at the end.</span> {s.end}</p>
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
+            <p className="checkin">A short check-in every Friday to review the week and make the decisions together to make the next week count.</p>
 
           </Sec>
 
           {/* ══════════════ PART THREE · SCOPE & COST ══════════════ */}
           <div className="part" id="scope">
+            <span className="part-num" aria-hidden>03</span>
             <p className="part-eyebrow">Part three</p>
             <p className="part-title">Scope &amp; cost</p>
           </div>
 
-          {/* 7 · What you keep (value established before the number) */}
-          <Sec label="What you keep" statement="The evidence, the decision, the plan, and the proof." body="Four things you act on, and everything they were built from.">
-            <p className="wyk-map">The leak map is the evidence. The strategy page is the decision. The ranked roadmap is the action. The scorecard is how you know it worked.</p>
+          {/* 7 · What you get (value established before the number) */}
+          <Sec label="What you get" statement="Four documents: the leak map is the evidence, the strategy page is the decision, the ranked roadmap is the plan, and the scorecard is how you know it working as it moves.">
             <div className="disc-wrap wyk-discs">
-              <Disclosure summary="The leak map">
+              <Disclosure num="01" summary="The leak map">
                 <p className="wyk-lead">Every place a patient stops, why, how many, and what it costs you a year.</p>
-                <p>A grid. The seven rungs down one side, your three patients across the top. For every square: does it hold, what the evidence is, roughly how many people it affects, and the money at risk each year. Ranked, so the biggest number sits at the top.</p>
+                <p>A grid. The seven rungs down one side, your three patients across the top. For every square: does it hold, what the evidence is, how many people stopped there in the last twelve months, and the money at risk each year. Ranked, so the biggest number sits at the top.</p>
                 <p>It covers the whole route, not just the website. The first response and how long it took. The consultation. The price conversation. What happened after they flew home. And every enquiry that went quiet and was never chased, which is usually the largest and cheapest leak in the business.</p>
+                <p>And because it is built from your own enquiry records, it is not only a map of where the money goes. It is the list of people still sitting behind each rung, and what it would take to bring them back.</p>
                 <p className="wyk-do">What you do with it: fix the top three, and leave the rest alone until those are done.</p>
               </Disclosure>
-              <Disclosure summary="The ranked roadmap">
+              <Disclosure num="02" summary="The ranked roadmap">
                 <p className="wyk-lead">Everything worth doing, in order, with a quarter and a name against it.</p>
                 <p>Every initiative placed by effort and by value, then sorted into nought to six, six to twelve and twelve to twenty-four months, across the four places you spend: experience, operations, marketing and comms, and reputation.</p>
                 <p>Dependencies marked, so you can see what cannot start until something else has finished.</p>
                 <p className="wyk-do">What you do with it: you know what to fund this quarter, and what to defer without losing it.</p>
               </Disclosure>
-              <Disclosure summary="Strategy on a page">
+              <Disclosure num="03" summary="Strategy on a page">
                 <p className="wyk-lead">What Eterna is for, who it is for, and what it will not do.</p>
                 <p>The patients you are building the next two years around. The treatments that lead. The promise you can actually prove. What you have decided to stop doing. And the one number everything is judged by.</p>
                 <p>One sheet, in your words, built from your own thinking rather than over the top of it.</p>
                 <p className="wyk-do">What you do with it: every argument about priorities gets settled against it, and three countries start saying the same thing.</p>
               </Disclosure>
-              <Disclosure summary="The scorecard">
+              <Disclosure num="04" summary="The scorecard">
                 <p className="wyk-lead">How you know, quarter by quarter, whether it is working.</p>
                 <p>A small number of measures agreed before we start. Each with today’s baseline, and where it should be at three, six and twelve months.</p>
                 <p>Including the ones that make me look bad if they do not move.</p>
                 <p className="wyk-do">What you do with it: you mark the work rather than take anyone’s word for it.</p>
+              </Disclosure>
+              <Disclosure plus summary="Plus: The working underneath">
+                <p>Every step produces its own material, and all of it comes to you at the end, named and in one place.</p>
+                <ol className="wk-list">
+                  {workingDocs.map(([num, name, desc]) => (
+                    <li className="wk-item" key={num}>
+                      <span className="wk-num">{num}</span>
+                      <span className="wk-body"><span className="wk-name">{name}</span> <span className="wk-desc">{desc}</span></span>
+                    </li>
+                  ))}
+                </ol>
+                <p>Written so that someone who was not in the room can pick it up and use it.</p>
               </Disclosure>
             </div>
           </Sec>
@@ -952,28 +946,17 @@ export default function Eterna() {
               <p>Fixed. Six weeks. No day rates, no expenses on top, no change requests.</p>
             </div>
             <div className="disc-wrap">
-              <Disclosure summary="The working underneath">
-                <p>Every step produces its own material, and all of it comes to you at the end, named and in one place.</p>
-                <ol className="wk-list">
-                  {workingDocs.map(([num, name, desc]) => (
-                    <li className="wk-item" key={num}>
-                      <span className="wk-num">{num}</span>
-                      <span className="wk-body"><span className="wk-name">{name}</span> <span className="wk-desc">{desc}</span></span>
-                    </li>
-                  ))}
-                </ol>
-                <p>Written so that someone who was not in the room can pick it up and use it.</p>
-              </Disclosure>
               <Disclosure summary="What is included, and what is not">
                 <div className="inclist">
                   <p className="inc-head">Included</p>
                   <ul className="inc-items">
                     <li>The four documents: the strategy page, the leak map, the ranked roadmap, the scorecard</li>
                     <li>Up to ten conversations inside your business, across all three clinics</li>
-                    <li>Eight patient conversations, recruited, run and analysed by us</li>
+                    <li>Eight patient conversations, five with people who did not proceed and three with people who did, recruited, run and analysed by us</li>
+                    <li>Twelve months of enquiry records analysed: how many came in, where each one stopped, and how many are still reachable</li>
                     <li>Six competitor clinics enquired at and assessed the way a patient would</li>
-                    <li>The rules in all four of your markets, and what they mean for what you can say</li>
-                    <li>Two working sessions with your team, half a day each</li>
+                    <li>The rules in your source markets, and what they mean for what you can say</li>
+                    <li>Two working sessions with your team, ninety minutes each</li>
                     <li>Every transcript, source and working file, yours to keep</li>
                   </ul>
                   <p className="inc-head inc-head-no">Not included</p>
@@ -1020,9 +1003,81 @@ export default function Eterna() {
             </div>
           </Sec>
 
-          {/* After the Map: the engagement levels, ahead of the close */}
-          <div className="disc-wrap">
-            <Disclosure summary="What happens after the Map">
+          {/* ══════════════ APPENDIX ══════════════ */}
+          <div className="part" id="appendix">
+            <span className="part-num" aria-hidden>A</span>
+            <p className="part-eyebrow">Appendix</p>
+            <p className="part-title">The detail</p>
+          </div>
+
+          <section className="sec first">
+            <p className="body">Supplementary detail that sits alongside the proposal. Read it now or come back to it later; nothing here is required.</p>
+            <div className="disc-wrap app-discs">
+
+              <Disclosure summary="Your name" id="your-name">
+                <p>
+                  <strong>Your name gets them onto the ladder. It cannot hold the rungs that stop the sale.</strong>
+                </p>
+                <div className="namesplit">
+                  <div className="ns-group">
+                    <p className="ns-label ns-label-lift">It lifts</p>
+                    <div className="chips">
+                      <span className="chip chip-lift">Recognition</span>
+                      <span className="chip chip-lift">Credibility</span>
+                      <span className="chip chip-lift">Proof</span>
+                    </div>
+                  </div>
+                  <div className="ns-group">
+                    <p className="ns-label">It cannot lift</p>
+                    <div className="chips">
+                      <span className="chip chip-no">Fit</span>
+                      <span className="chip chip-no">Clarity</span>
+                      <span className="chip chip-no">Safety</span>
+                      <span className="chip chip-no">Care</span>
+                    </div>
+                  </div>
+                </div>
+                <p>Worth continuing, and worth pointing at the rungs it moves.</p>
+                <p>So we fix the leaks in order: the ones losing the patients worth most, the ones costing the most margin, then the rest. The few that move the money first, not everything at once.</p>
+              </Disclosure>
+
+              <Disclosure summary="What has changed in search">
+                    <FigTable
+                      rows={[
+                        ['Health searches returning an AI answer', '88%'],
+                        ['Of those, never clicking through', '83%'],
+                        ['Traffic falls on clinical pages', '20 to 40%'],
+                        ['AI referral conversion, against 2.8% organic', '16%'],
+                      ]}
+                    />
+                    <p style={{ marginTop: '14px' }}>
+                      Someone describes you before anyone visits. Your website is where people check what they were told, not where they arrive. Fewer of them come now, but the ones who do are far more likely to book, so losing them costs much more than it used to.
+                    </p>
+                    <p>Sources: 210 Digital and WebFX, 2026; Bregg, 2026; AirOps and ALM, 2026. Industry analysis, not peer-reviewed.</p>
+                  </Disclosure>
+                  <Disclosure summary="What you are allowed to say">
+                    <p>
+                      <strong>The rules follow the patient, not the clinic.</strong>
+                    </p>
+                    <p>A person in London researching treatment in Cabo is covered by British rules. One in Texas is covered by American ones. So the question is never what you may say in Mexico, it is who you are speaking to and where they are sitting when they read it.</p>
+                    <p>That makes it a choice rather than a constraint. Which source markets you go after, and how you speak to each of them, is one of the things the Map decides.</p>
+                  </Disclosure>
+                  <Disclosure summary="Repairing the floor">
+                    <p>
+                      <strong>Safety has a veto. Nothing else starts until this holds.</strong>
+                    </p>
+                    <p>Five things any clinic treating patients who then fly home should be able to show. Most cannot:</p>
+                    <ul className="floor-list">
+                      <li>An adverse event protocol distributed across every location.</li>
+                      <li>A coordination letter to the patient’s own doctor before they fly home.</li>
+                      <li>A named 24 hour contact given in writing before treatment.</li>
+                      <li>Registration and licence status published for each market.</li>
+                      <li>A certificate of analysis as standard for every product used.</li>
+                    </ul>
+                    <p>Until this holds, awareness spend accelerates exposure rather than conversion. It is also the cheapest work in the plan, and the only work that should not wait.</p>
+              </Disclosure>
+
+              <Disclosure summary="What happens after the Map">
               <p>The Map is the entry level, and it is finished work. Your own team, or any agency you already use, can pick it up and act on it. If we never speak again after week six, you have lost nothing and you own everything.</p>
               <p>That is deliberate. A diagnosis that can only be acted on by the person who wrote it is not a diagnosis, it is a sales document.</p>
               <p>If you want to go further, there are two more levels, set by how much of the outcome I hold rather than the hours I bill.</p>
@@ -1038,9 +1093,11 @@ export default function Eterna() {
                   <p className="level-desc">I hold the outcome alongside you and drive the priorities end-to-end. My judgement in the room, and accountability for the work arriving as it should. I bring the people needed to execute at the highest level whilst maximising budget.</p>
                 </div>
               </div>
-              <p className="levels-close">Neither is decided now, nor is it priced now. We choose in the final session, with the roadmap in front of us.</p>
-            </Disclosure>
-          </div>
+                <p className="levels-close">Neither is decided now, nor is it priced now. We choose in the final session, with the roadmap in front of us.</p>
+              </Disclosure>
+
+            </div>
+          </section>
 
           {/* ── Close ─────────────────────────────────────────────── */}
           <section className="close">
