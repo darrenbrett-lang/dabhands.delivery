@@ -348,6 +348,7 @@ const css = `
 .eterna .close h2{margin:0 auto;max-width:22ch;font-family:var(--font-serif),Georgia,serif;font-weight:400;font-size:28px;line-height:1.24;letter-spacing:-0.01em;color:var(--ink);}
 .eterna .actions{margin:28px 0 0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;}
 .eterna .close-panel{padding:46px 26px;text-align:center;}
+.eterna .close-crown{display:block;height:51px;width:auto;margin:0 auto 20px;}
 .eterna .close-panel h2{color:var(--onDark);}
 .eterna .close-panel .btn-primary{background:var(--onDark);color:var(--ink);}
 .eterna .close-panel .btn-primary:hover{background:#fff;color:var(--ink);}
@@ -1214,9 +1215,11 @@ export default function Eterna() {
           {/* ── Close ─────────────────────────────────────────────── */}
           <section className="close">
             <div className="dark close-panel">
-              <h2>Five more patients per clinic, per week. Six weeks to find out where they are going.</h2>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="close-crown" src="/images/DabHands_crown_white.png" alt="" aria-hidden decoding="async" width={467} height={367} />
+              <h2>Five more patients per clinic, per week. Six weeks to find out where they are going and what to do about it.</h2>
               <div className="actions">
-                <a className="btn btn-primary" href="mailto:darren@dabhands.delivery?subject=Eterna%20%7C%20The%20first%20six%20weeks%20%7C%20Confidence%20Map">Reply to Darren</a>
+                <a className="btn btn-primary" href="mailto:darren@dabhands.delivery?subject=Eterna%20%7C%20The%20First%20Six%20Weeks%20%7C%20Confidence%20Map%20%7C%20v1%20Proposal">Reply to Darren</a>
               </div>
             </div>
             <p className="signoff">DAB Hands &middot; Keeping important work moving</p>
