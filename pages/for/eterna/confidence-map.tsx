@@ -25,7 +25,7 @@ const css = `
 .eterna{
   --stone:#F5F1EA;--ink:#1F1F1D;--graphite:#54504A;--gold:#C0974A;--goldink:#7E5E27;
   --hair:#D8D3CB;--dark:#22201C;--onDark:#F5F1EA;--onDarkMuted:#D8CFC0;--goldOnDark:#DFB877;--red:#A62E22;--cardsub:#3A362F;
-  --walnut:#53403B;--clay:#A49786;--slate:#535B68;
+  --walnut:#53403B;--clay:#A49786;--slate:#535B68;--taupe:#D3CBC2;
   background:var(--stone);color:var(--ink);min-height:100vh;
   font-family:var(--font-sans),-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;line-height:1.6;
@@ -65,7 +65,10 @@ const css = `
 .eterna .cue{margin:6px 0 0;font-size:13px;color:var(--graphite);}
 
 /* Hero */
-.eterna .hero{padding:40px 0 8px;}
+.eterna .hero{margin:28px 0 0;}
+.eterna .hero-doc{margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--goldink);}
+.eterna .hero-summary{padding:26px 22px 28px;background:var(--taupe);border-radius:16px;}
+.eterna .hero-summary .eyebrow{color:var(--ink);}
 
 /* Part label */
 .eterna .part{margin:0;padding:64px 0 6px;border-top:1px solid var(--hair);}
@@ -76,6 +79,22 @@ const css = `
 /* Section */
 .eterna .sec{padding:44px 0;border-top:1px solid var(--hair);}
 .eterna .sec.first{border-top:0;padding-top:30px;}
+
+/* Cost of Waiting: a unique slate-blue panel (mirrors the taupe Exec Summary) */
+.eterna .sec-slate{border-top:0;margin:44px 0;padding:30px 24px 32px;background:var(--slate);color:var(--onDark);border-radius:16px;}
+.eterna .sec-slate .eyebrow{color:var(--onDark);}
+.eterna .sec-slate .statement{color:var(--onDark);}
+.eterna .sec-slate .body{color:var(--onDarkMuted);}
+.eterna .sec-slate .pq{color:var(--onDark);border-left-color:var(--goldOnDark);}
+.eterna .sec-slate .disc,.eterna .sec-slate .disc-wrap .disc:first-child{border-top-color:rgba(245,241,234,0.22);}
+.eterna .sec-slate .disc-label{color:var(--onDark);}
+.eterna .sec-slate summary::after{color:var(--goldOnDark);}
+.eterna .sec-slate .dbody{color:var(--onDarkMuted);}
+.eterna .sec-slate .dbody strong{color:var(--onDark);}
+.eterna .sec-slate .figrow{border-top-color:rgba(245,241,234,0.22);}
+.eterna .sec-slate .figrow dt{color:var(--onDarkMuted);}
+.eterna .sec-slate .figrow dd{color:var(--onDark);}
+.eterna .sec-slate .illus{border-color:var(--goldOnDark);color:var(--onDark);background:rgba(245,241,234,0.07);}
 
 /* Pull quote */
 .eterna .pq{margin:24px 0 0;border-left:3px solid var(--gold);padding:2px 0 2px 18px;
@@ -296,7 +315,8 @@ const css = `
   .eterna h1{font-size:52px;}
   .eterna .statement{font-size:32px;}
   .eterna .wrap{padding:0 24px;}
-  .eterna .hero{padding:56px 0 8px;}
+  .eterna .hero-summary{padding:34px 32px 36px;}
+  .eterna .sec-slate{padding:38px 34px 40px;}
   .eterna .brand-wordmark{font-size:26px;}
   .eterna .hero-crown{height:48px;margin-bottom:26px;}
   .eterna .fee .fee-num{font-size:56px;}
@@ -447,8 +467,8 @@ const workingDocs: [string, string, string][] = [
 ];
 
 // ── Building blocks ─────────────────────────────────────────────────────────
-const Sec = ({ label, statement, body, first, children }: { label: string; statement: ReactNode; body?: ReactNode; first?: boolean; children?: ReactNode }) => (
-  <section className={`sec${first ? ' first' : ''}`}>
+const Sec = ({ label, statement, body, first, tone, children }: { label: string; statement: ReactNode; body?: ReactNode; first?: boolean; tone?: string; children?: ReactNode }) => (
+  <section className={`sec${first ? ' first' : ''}${tone ? ` sec-${tone}` : ''}`}>
     <p className="eyebrow">{label}</p>
     <h2 className="statement">{statement}</h2>
     {body && <p className="body">{body}</p>}
@@ -596,11 +616,15 @@ export default function Eterna() {
         <main className="wrap">
           {/* ── Hero ──────────────────────────────────────────────── */}
           <header className="hero">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="hero-crown" src="/images/crown-mark.webp" alt="" aria-hidden decoding="async" />
-            <p className="eyebrow">Eterna Health · Proposal</p>
-            <p className="meta">Prepared for Dr Adeel Khan, with Marco De Pasquale.</p>
-            <h1>A two-year plan to fill the chairs.</h1>
+            <div className="hero-mast">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="hero-crown" src="/images/crown-mark.webp" alt="" aria-hidden decoding="async" />
+              <p className="hero-doc">Eterna Proposal</p>
+              <p className="meta">Prepared for Dr Adeel Khan, with Marco De Pasquale.</p>
+            </div>
+            <div className="hero-summary">
+              <p className="eyebrow">Exec Summary</p>
+              <h1>A two-year plan to fill the chairs.</h1>
             <div className="lede">
               <p>
                 You want another ten million. That is fewer than five more patients a week, in each clinic you already run. The cheapest place to find them is among the people already talking to you. Most of them stop, and they stop at different points, because something they needed to believe did not hold.
@@ -608,6 +632,7 @@ export default function Eterna() {
               <p>
                 Six weeks finds where that happens, what each one costs, which patients and treatments to build around, and what has to change over two years to fix it.
               </p>
+            </div>
             </div>
           </header>
 
@@ -971,6 +996,7 @@ export default function Eterna() {
 
           {/* The cost of waiting: the last thing before the close */}
           <Sec
+            tone="slate"
             label="The cost of waiting"
             statement="Every month is about fifty-six patients."
             body="Nineteen per clinic. The same four and a half a week from earlier, counted differently. In money, roughly $830,000 a month, because waiting does not pause the plan, it moves it."
@@ -1009,7 +1035,7 @@ export default function Eterna() {
                 <div className="level level-top">
                   <p className="level-name">Confidence Partner</p>
                   <p className="level-when">When it simply has to land.</p>
-                  <p className="level-desc">I hold the outcome alongside you and drive the priorities end-to-end. My judgement in the room, and accountability for the work arriving as it should.</p>
+                  <p className="level-desc">I hold the outcome alongside you and drive the priorities end-to-end. My judgement in the room, and accountability for the work arriving as it should. I bring the people needed to execute at the highest level whilst maximising budget.</p>
                 </div>
               </div>
               <p className="levels-close">Neither is decided now, nor is it priced now. We choose in the final session, with the roadmap in front of us.</p>
