@@ -28,7 +28,7 @@ const css = `
 .eterna{
   --stone:#F5F1EA;--ink:#1F1F1D;--graphite:#54504A;--gold:#C0974A;--goldink:#7E5E27;
   --hair:#D8D3CB;--dark:#22201C;--onDark:#F5F1EA;--onDarkMuted:#D8CFC0;--goldOnDark:#DFB877;--red:#A62E22;--cardsub:#3A362F;
-  --walnut:#53403B;--clay:#A49786;--slate:#535B68;--taupe:#D3CBC2;
+  --walnut:#53403B;--clay:#A49786;--slate:#535B68;--taupe:#D3CBC2;--green:#3E5C50;
   background:var(--stone);color:var(--ink);min-height:100vh;
   font-family:var(--font-sans),-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;line-height:1.6;
@@ -105,6 +105,49 @@ const css = `
 .eterna .name-line{margin:26px 0 0;font-family:var(--font-serif),Georgia,serif;font-size:20px;line-height:1.36;color:var(--ink);}
 .eterna .name-line a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:1px;text-underline-offset:5px;}
 .eterna .name-line a:hover{text-decoration-color:var(--goldink);}
+
+/* What it costs to get there: the ONE green section on the page (a plan with
+   the weight of a warning but a calmer temperature; do not add a second green
+   section without removing this one). Cream opacities are tuned to clear WCAG
+   AA on this green at each type size. No gold and no clay in here. */
+.eterna .sec-green{border-top:0;margin:44px 0;padding:30px 24px 32px;background:var(--green);color:var(--stone);border-radius:16px;}
+.eterna .sec-green .eyebrow{color:rgba(245,241,234,0.78);}
+.eterna .sec-green .statement{color:var(--stone);}
+.eterna .sec-green .body{color:rgba(245,241,234,0.9);}
+.eterna .sec-green .pq{color:var(--stone);border-left-color:rgba(245,241,234,0.25);}
+.eterna .sec-green .illus{margin-top:28px;border-color:rgba(245,241,234,0.25);color:rgba(245,241,234,0.9);background:rgba(245,241,234,0.07);}
+.eterna .sec-green .illus strong{color:var(--stone);}
+.eterna .sec-green .disc,.eterna .sec-green .disc-wrap .disc:first-child{border-top-color:rgba(245,241,234,0.25);}
+.eterna .sec-green .disc-label{color:rgba(245,241,234,0.78);}
+.eterna .sec-green summary::after{color:rgba(245,241,234,0.78);}
+.eterna .sec-green .dbody{color:rgba(245,241,234,0.9);}
+.eterna .sec-green .dbody strong{color:var(--stone);}
+.eterna .more{margin:6px 0 0;}
+.eterna .more > summary{display:inline-flex;justify-content:flex-start;align-items:center;gap:9px;min-height:40px;padding:4px 0;}
+.eterna .more-label{font-size:12px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:rgba(245,241,234,0.85);}
+.eterna .more .more-open{display:none;}
+.eterna .more[open] .more-open{display:inline;}
+.eterna .more[open] .more-closed{display:none;}
+.eterna .whospend{margin:28px 0 0;}
+.eterna .whospend-label{margin:0;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,241,234,0.78);}
+.eterna .whospend p{margin:10px 0 0;font-size:15px;line-height:1.55;color:rgba(245,241,234,0.82);}
+.eterna .spend-table{width:100%;border-collapse:collapse;margin:14px 0 0;font-variant-numeric:tabular-nums;}
+.eterna .spend-table th,.eterna .spend-table td{padding:8px 6px;font-size:14.5px;text-align:right;border-top:1px solid rgba(245,241,234,0.25);font-weight:400;}
+.eterna .spend-table thead th{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,241,234,0.78);border-top:0;}
+.eterna .spend-table th[scope=row]{text-align:left;color:rgba(245,241,234,0.9);}
+.eterna .spend-table td{color:rgba(245,241,234,0.9);}
+.eterna .spend-table .yr{font-weight:600;color:var(--stone);}
+@media (max-width:767px){
+  .eterna .spend-table thead{display:none;}
+  .eterna .spend-table,.eterna .spend-table tbody,.eterna .spend-table tr,.eterna .spend-table th[scope=row],.eterna .spend-table td{display:block;width:100%;}
+  .eterna .spend-table tr + tr{margin-top:18px;}
+  .eterna .spend-table th[scope=row]{border-top:0;padding:0 0 4px;font-weight:600;}
+  .eterna .spend-table td{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;}
+  .eterna .spend-table td::before{content:attr(data-q);font-size:13px;color:rgba(245,241,234,0.78);}
+}
+.eterna .src-note{font-size:13px;color:rgba(245,241,234,0.78);}
+.eterna .src-note a,.eterna .sec-green .dbody .src-note a{color:rgba(245,241,234,0.85);text-decoration:underline;text-underline-offset:3px;}
+.eterna .sec-green .dbody .src-note a:hover{color:var(--stone);}
 
 /* Pull quote */
 .eterna .pq{margin:24px 0 0;border-left:3px solid var(--gold);padding:2px 0 2px 18px;
@@ -579,7 +622,7 @@ const FigTable = ({ rows }: { rows: [string, string][] }) => (
 // phone. Foundations build first, marketing scales only past the proof gate.
 type GpLayer = { name: string; desc: string; tone: string; bars: { start: number; span: number; label?: string; cont?: boolean }[]; win: string };
 const gpLayers: GpLayer[] = [
-  { name: 'Foundations', desc: 'what we can prove', tone: 'found', win: 'Q1-Q3', bars: [{ start: 1, span: 3, label: 'Confidence Map, the standards, packaging and pricing' }, { start: 4, span: 5, cont: true }] },
+  { name: 'Foundations', desc: 'what we can prove', tone: 'found', win: 'Q1-Q3', bars: [{ start: 1, span: 1, label: 'Confidence Map' }, { start: 2, span: 1, label: 'The standards' }, { start: 3, span: 1, label: 'Packaging and pricing' }, { start: 4, span: 5, cont: true }] },
   { name: 'Brand', desc: 'what we say', tone: 'brand', win: 'Q2-Q4', bars: [{ start: 2, span: 3, label: 'One story, three clinics, three patients' }, { start: 5, span: 4, cont: true }] },
   { name: 'Operating', desc: 'how it runs', tone: 'oper', win: 'Q3-Q5', bars: [{ start: 3, span: 3, label: 'Enquiry to consult to treatment, running optimally' }, { start: 6, span: 3, cont: true }] },
   { name: 'Marketing', desc: 'who hears it', tone: 'mkt', win: 'Q3-Q8', bars: [{ start: 3, span: 2, label: 'Test what converts' }, { start: 5, span: 4, label: 'Scale behind proof', cont: false }] },
@@ -683,11 +726,13 @@ export default function Eterna() {
         {/* ── Sticky jump bar ─────────────────────────────────────── */}
         <nav className="jump" aria-label="Jump to a part of the proposal">
           <div className="jump-inner">
-            <a href="#argument">The situation</a>
+            <a href="#argument">Situation</a>
             <span className="sep" aria-hidden>·</span>
-            <a href="#engagement">The plan</a>
+            <a href="#plan">Plan</a>
             <span className="sep" aria-hidden>·</span>
-            <a href="#scope">Scope &amp; cost</a>
+            <a href="#engagement">Engagement</a>
+            <span className="sep" aria-hidden>·</span>
+            <a href="#scope">Terms</a>
             <span className="sep" aria-hidden>·</span>
             <a href="#appendix">Appendix</a>
           </div>
@@ -822,20 +867,88 @@ export default function Eterna() {
             <p className="pq">Each drops out at a different rung. That’s what will let us point your spend rather than spread it.</p>
           </Sec>
 
-          {/* ══════════════ PART TWO · THE PLAN ══════════════ */}
-          <div className="part" id="engagement">
+          {/* ══════════════ PART TWO · THE TWO-YEAR PLAN ══════════════ */}
+          <div className="part" id="plan">
             <span className="part-num" aria-hidden>02</span>
             <p className="part-eyebrow">Part two</p>
-            <p className="part-title">The plan</p>
+            <p className="part-title">The two-year plan</p>
           </div>
 
           {/* 5 · The two-year shape (the horizon, before the first step) */}
           <Sec label="The two-year shape" first statement="Foundations first, then spend behind what we know works." body="Nothing scales until the chairs prove it. We spend more when the chairs prove it works, not because it is year two.">
             <GrowthPlan />
+          </Sec>
+
+          {/* 5b · What it costs to get there: the size of the cheque before what it buys */}
+          <Sec
+            tone="green"
+            label="What it costs to get there"
+            statement="Around four million dollars, across the two years."
+            body="That is what the industry spends to move a business of this size that far. It runs light in year one and heavier in year two, because year two is feeding something that already works."
+          >
+            <details className="more">
+              <summary><span className="more-label more-closed">More</span><span className="more-label more-open">Less</span></summary>
+              <p className="body">Most of it is not advertising. Across the industry, media is under a third of a marketing budget. The rest is the people, the systems and the material that make the advertising worth buying.</p>
+              <p className="body">Which is why the six weeks comes first. It decides where in the range you land, and how much of the money goes into fixing rather than buying.</p>
+              <p className="pq">Growth is funded as a share of turnover, set in advance and protected. You size it. The Map points it.</p>
+            <p className="illus">
+              <strong>Illustrative until calibrated.</strong> Industry benchmarks, not yet Eterna’s numbers.
+            </p>
+            <div className="whospend">
+              <p className="whospend-label">Who spends it</p>
+              <p>That four million is what the growth costs. It is not a fee to me or anyone you choose to work with.</p>
+              <p>It also needs more disciplines than any one person has. What I have is the reach, people at the top of their field in each of the parts this needs.</p>
+              <p>I won’t put anyone in the room you haven’t asked for. We build the team a piece at a time, as the Map shows what is actually missing, and you keep the say on every one of them. Working this way gets you way more value than a traditional route: no board to take a cut, just the topflight talent needed to steer it right.</p>
+            </div>
             <div className="disc-wrap">
-              <Disclosure summary="Where the money goes">
-                <p>Four places to build, and one to amplify.</p>
-                <div className="mg-cards">
+              <Disclosure summary="Where the four million comes from">
+                <p><strong>The band.</strong> For elective, self-pay healthcare the accepted range is 8 to 15% of revenue. The Aesthetic Society puts a steady year at 5 to 8% and a growth year at 10 to 12%. AmSpa’s survey has the average med spa at about 7%, which is a holding number. Practices genuinely growing, new sites or hard markets, run 15 to 20% for the first two years and then taper. Gartner has all-industry marketing at 7.7%, but that is mostly billion dollar companies with brands already built. Smaller businesses growing fast always spend a higher share. Doubling in two years puts you near the top of the range, not the middle.</p>
+                <p><strong>The mechanic.</strong> You spend against the revenue you are trying to reach, not the revenue you made last year. Spend 10% of eleven million and you have funded an eleven million dollar business. The money goes in ahead of the curve or the curve does not happen.</p>
+                <p><strong>The shape.</strong> Eleven million now, about fifteen at the end of year one, twenty at the end of year two. At 12% of target revenue:</p>
+                <table className="spend-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Year"></th>
+                      <th scope="col">Q1</th>
+                      <th scope="col">Q2</th>
+                      <th scope="col">Q3</th>
+                      <th scope="col">Q4</th>
+                      <th scope="col">Year</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Year one</th>
+                      <td data-q="Q1">$380k</td>
+                      <td data-q="Q2">$430k</td>
+                      <td data-q="Q3">$470k</td>
+                      <td data-q="Q4">$500k</td>
+                      <td data-q="Year" className="yr">$1.78m</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Year two</th>
+                      <td data-q="Q1">$560k</td>
+                      <td data-q="Q2">$590k</td>
+                      <td data-q="Q3">$620k</td>
+                      <td data-q="Q4">$630k</td>
+                      <td data-q="Year" className="yr">$2.40m</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>About $4.2m in total. At 10% it is $3.5m. At 15% it is $5.2m.</p>
+                <p><strong>Where it actually goes.</strong> Gartner puts paid media at 30.6% of the average marketing budget. The other 70% is people, technology, content, production and agencies. So of the $4.2m, roughly $1.3m is advertising and the rest is the machine behind it. That is the industry’s own number, not mine.</p>
+                <p><strong>What moves it inside the band.</strong> If a real share of the people already enquiring are stopping at something you can fix, you land at the bottom of the range, because you convert more of what you already get and buy less of what you do not. If they are not, you land at the top. Either way you know before you commit four million rather than after.</p>
+                <p className="src-note">Sources: <a href="https://www.gartner.com/en/newsroom/press-releases/2025-05-12-gartner-2025-cmo-spend-survey-reveals-marketing-budgets-have-flatlined-at-seven-percent-of-overall-company-revenue" target="_blank" rel="noopener noreferrer">Gartner 2025 CMO Spend Survey</a> · <a href="https://americanmedspa.org/blog/industry-experts-weigh-in-to-help-answer-how-much-should-i-spend-on-med-spa-marketing" target="_blank" rel="noopener noreferrer">AmSpa Medical Spa State of the Industry</a> · <a href="https://pulsedigital.health/insights/how-much-private-clinic-spend-on-marketing-uk/" target="_blank" rel="noopener noreferrer">UK private clinic marketing benchmark</a></p>
+              </Disclosure>
+            </div>
+            </details>
+          </Sec>
+
+          {/* 5c · Where the money goes (unchanged copy; the natural follow-on to the number) */}
+          <section className="sec">
+            <p className="eyebrow">Where the money goes</p>
+            <p className="body">Four places to build, and one to amplify.</p>
+            <div className="mg-cards">
                   <div className="mg-card mg-c1">
                     <span className="mg-num">One</span>
                     <span className="mg-title">Experience</span>
@@ -862,15 +975,19 @@ export default function Eterna() {
                     <span className="mg-num">And then</span>
                     <span className="mg-title">Media</span>
                   </div>
-                  <p className="mg-media-body">Google prohibits advertising cell, gene and PRP therapies outright, with no certification route, so media buys attention for the problem, the questions and the clinic, never the procedure. I do not buy media. I bring the buyer, set their aim, and hold the spend to the proof.</p>
+                  <p className="mg-media-body">As you know, Google prohibits advertising cell, gene and PRP therapies outright, with no certification route, so media buys attention for the problem, the questions and the clinic, never the procedure. I do not buy media. I bring the buyer, set their aim, and hold the spend to the proof.</p>
                 </div>
-              </Disclosure>
-            </div>
-            <p className="pq">Growth is funded as a share of turnover, set in advance and protected. You size it. The Map points it.</p>
-          </Sec>
+          </section>
+
+          {/* ══════════════ PART THREE · THE CONFIDENCE MAP ══════════════ */}
+          <div className="part" id="engagement">
+            <span className="part-num" aria-hidden>03</span>
+            <p className="part-eyebrow">Part three</p>
+            <p className="part-title">The Confidence Map</p>
+          </div>
 
           {/* 6 · The first engagement */}
-          <Sec label="The first engagement" statement="The Confidence Map: where your patients stop, what each stop costs you, and what to fix first.">
+          <Sec label="The first engagement" first statement="The Confidence Map: where your patients stop, what each stop costs you, and what to fix first.">
 
             <div className="plan">
               <p className="plan-label">The shape of the six weeks</p>
@@ -883,8 +1000,8 @@ export default function Eterna() {
 
           {/* ══════════════ PART THREE · SCOPE & COST ══════════════ */}
           <div className="part" id="scope">
-            <span className="part-num" aria-hidden>03</span>
-            <p className="part-eyebrow">Part three</p>
+            <span className="part-num" aria-hidden>04</span>
+            <p className="part-eyebrow">Part four</p>
             <p className="part-title">Scope &amp; cost</p>
           </div>
 
@@ -933,7 +1050,7 @@ export default function Eterna() {
 
           {/* 8 · What it costs */}
           <section className="sec">
-            <p className="eyebrow">What it costs</p>
+            <p className="eyebrow">The price</p>
             <div className="dark fee">
               <p className="fee-num">£25,000</p>
               <p>About AED 116,000 at today’s rate. Invoiced and paid in sterling.</p>
