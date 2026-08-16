@@ -115,7 +115,7 @@ const css = `
 .eterna .sec-green .statement{color:var(--stone);}
 .eterna .sec-green .body{color:rgba(245,241,234,0.9);}
 .eterna .sec-green .pq{color:var(--stone);border-left-color:rgba(245,241,234,0.25);}
-.eterna .sec-green .illus{margin-top:28px;border-color:rgba(245,241,234,0.25);color:rgba(245,241,234,0.9);background:rgba(245,241,234,0.07);}
+.eterna .sec-green .illus{border-color:rgba(245,241,234,0.25);color:rgba(245,241,234,0.9);background:rgba(245,241,234,0.07);}
 .eterna .sec-green .illus strong{color:var(--stone);}
 .eterna .sec-green .disc,.eterna .sec-green .disc-wrap .disc:first-child{border-top-color:rgba(245,241,234,0.25);}
 .eterna .sec-green .disc-label{color:rgba(245,241,234,0.78);}
@@ -128,6 +128,7 @@ const css = `
 .eterna .more .more-open{display:none;}
 .eterna .more[open] .more-open{display:inline;}
 .eterna .more[open] .more-closed{display:none;}
+.eterna .more .illus{margin:28px 0 16px;}
 .eterna .spend-table{width:100%;border-collapse:collapse;margin:14px 0 0;font-variant-numeric:tabular-nums;}
 .eterna .spend-table th,.eterna .spend-table td{padding:8px 6px;font-size:14.5px;text-align:right;border-top:1px solid rgba(245,241,234,0.25);font-weight:400;}
 .eterna .spend-table thead th{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,241,234,0.78);border-top:0;}
@@ -161,6 +162,30 @@ const css = `
 .eterna .lq{font-family:var(--font-serif),Georgia,serif;font-style:italic;color:var(--graphite);}
 .eterna .veto{display:inline-block;margin-left:8px;font-family:var(--font-sans);font-style:normal;font-size:11px;font-weight:600;
   letter-spacing:0.14em;text-transform:uppercase;color:var(--red);vertical-align:middle;}
+
+/* Where the energy goes: a full-bleed dark MOMENT (ink, cream type; min 100vh
+   on desktop so nothing else shares the screen). No interaction, nothing
+   hidden: the point is the order, and the order is also an order of cost,
+   handing off into the cost module below. The three are an order of work,
+   not a list of faults; the word "fix" must never appear here. Triptych
+   columns on desktop (owner call), stacked with rules between on mobile. */
+.eterna .energy-sec{margin:44px 0;background:var(--dark);color:var(--onDark);padding:30px 24px 36px;border-radius:16px;}
+.eterna .energy-inner{width:100%;}
+.eterna .energy-sec .eyebrow{color:var(--goldOnDark);}
+.eterna .energy-stand{margin:14px 0 0;font-size:16.5px;line-height:1.55;color:var(--onDarkMuted);}
+.eterna .energy{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:8px;}
+.eterna .energy li{padding:18px 0 20px;border-top:1px solid rgba(245,241,234,0.25);}
+.eterna .e-num{display:block;font-family:var(--font-serif),Georgia,serif;font-size:42px;line-height:1;color:var(--onDark);letter-spacing:0.01em;}
+.eterna .energy p{margin:12px 0 0;font-size:15px;line-height:1.55;color:var(--onDarkMuted);}
+.eterna .energy strong{display:block;margin-bottom:6px;font-size:16.5px;color:var(--onDark);}
+.eterna .energy-close{margin:34px 0 0;font-family:var(--font-serif),Georgia,serif;font-style:italic;font-size:20px;line-height:1.4;color:var(--onDark);letter-spacing:0.01em;}
+@media (min-width:768px){
+  .eterna .energy-sec{padding:38px 34px 42px;}
+  .eterna .energy{grid-template-columns:repeat(3,1fr);gap:28px;align-items:start;}
+}
+
+/* The 1/2/3 spine marker each six-week lozenge carries (marker only, no words) */
+.eterna .pcard-serves{display:block;margin-top:7px;font-family:var(--font-serif),Georgia,serif;font-size:11.5px;letter-spacing:0.08em;color:var(--cardsub);}
 
 /* Disclosure */
 .eterna .disc{border-top:1px solid var(--hair);}
@@ -317,7 +342,7 @@ const css = `
 .eterna .gp-slabel::before{content:'';position:absolute;left:0;top:0.62em;width:9px;height:1px;background:var(--goldink);}
 .eterna .gp-sgate{margin-top:16px;padding:12px 15px;border:1px solid var(--hair);border-left:3px solid var(--red);border-radius:7px;font-size:13.5px;line-height:1.45;color:var(--ink);}
 
-/* Where the money goes: build cards + amplify band */
+/* What they spend it on: build cards + amplify band */
 .eterna .mg-cards{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0 0;}
 .eterna .mg-card{position:relative;padding:15px 16px 18px;background:color-mix(in srgb, var(--hair) 26%, var(--stone));border-radius:9px;overflow:hidden;}
 .eterna .mg-card::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--clay);}
@@ -454,51 +479,53 @@ const ladder: { n: string; name: string; q: string; veto?: boolean }[] = [
 
 // The eight steps. Each card shows the number, name and a one-line tagline; the
 // detail splits into what happens, what we need, and what you get.
-const steps: { num: string; name: string; tagline: string; happens: string; need: string; end: string }[] = [
+// `serves` is the 1/2/3 spine marker from "Where the energy goes" (marker only,
+// no words): 1 the experience, 2 how patients are won, 3 the spend.
+const steps: { num: string; name: string; tagline: string; happens: string; need: string; end: string; serves: string }[] = [
   {
-    num: '01', name: 'Foundation', tagline: 'Establish what Eterna is building towards.',
+    num: '01', name: 'Foundation', serves: '1 · 2', tagline: 'Establish what Eterna is building towards.',
     happens: 'I send a written set of questions and you record your answers whenever it suits, in your own voice, with no meeting to attend. I turn those into a single statement of where Eterna is going and what you believe is true about how it gets there. Anything you suspect but have not proved is written down as a question rather than a fact, and those questions become the things the next five weeks tests.',
     need: 'Sixty to ninety minutes of recorded answers, in your own time. An export of the last twelve months of enquiries, however messy. Whatever system holds them, or the inbox if there isn’t one.',
     end: 'A one-page draft of where you are going, back with you inside a week, for you to argue with.',
   },
   {
-    num: '02', name: 'Signal', tagline: 'Understand what the evidence says.',
+    num: '02', name: 'Signal', serves: '3', tagline: 'Understand what the evidence says.',
     happens: 'I read the category properly: the rules in your source markets, what patients say in public where you have no control over it, the behavioural evidence on how people decide under uncertainty, and the comparable categories where the same decision has already been studied. Every finding is labelled before it is used. Evidence means two independent sources agree. Pattern means it shows up repeatedly but is not proven. Hypothesis means it is a reasonable inference I still have to test.',
     need: 'Nothing.',
     end: 'The findings that matter, not the reading list, with the sources there if you want them.',
   },
   {
-    num: '03', name: 'Competitors', tagline: 'Understand where Eterna can win.',
+    num: '03', name: 'Competitors', serves: '3', tagline: 'Understand where Eterna can win.',
     happens: 'I look at the clinics you lose to and the ones nobody loses to. Not their websites, their behaviour. Someone enquires as a patient would, times the response, records what they are told about price, candidacy and risk, and notes where it is made easy or hard to check them. A specialist works the same ground as me for three days, so it is not just one pair of eyes.',
     need: 'Tell me who you think your rivals are. It is often not who we find.',
     end: 'Where the space is, and what the best of them do that you do not.',
   },
   {
-    num: '04', name: 'Reality', tagline: 'Understand what actually happens inside.',
-    happens: 'Conversations with the people who run each part: whoever answers first, whoever books, whoever consults, whoever follows up once a patient has flown home. Arranged around them rather than the other way round. I am listening for what works, what breaks, and what quietly depends on one person being available that day. The seven standards are the lens I listen through, not a checklist anybody gets handed. I also look at the record itself. What holds an enquiry, what is written down when someone does not book, who is supposed to follow up and whether anyone does. Then the twelve months of enquiries, counted: how many came in, how many reached a consultation, how many were treated, and what happened to everyone else.',
+    num: '04', name: 'Reality', serves: '1 · 2', tagline: 'Understand what actually happens inside.',
+    happens: 'Conversations with the people who run each part: whoever answers first, whoever books, whoever consults, whoever follows up once a patient has flown home. Arranged around them rather than the other way round. I am listening for what works, what breaks, and what quietly depends on one person being available that day. The seven standards are the lens I listen through, not a checklist anybody gets handed. I also look at the record itself. What holds an enquiry, what is written down when someone does not book, who is supposed to follow up and whether anyone does. Then the twelve months of enquiries, counted: how many came in, how many reached a consultation, how many were treated, and what happened to everyone else. And what happens after treatment. What the follow-up looks like, whether it is the same in all three clinics, and what happens at week six and month six.',
     need: 'Introductions, and permission for people to be straight with me.',
     end: 'How the business actually behaves, set next to how it is meant to. And the first real count of how many people stopped, and where.',
   },
   {
-    num: '05', name: 'Patients', tagline: 'Understand how confidence is really built.',
+    num: '05', name: 'Patients', serves: '1 · 2', tagline: 'Understand how confidence is really built.',
     happens: 'Conversations with patients across the three types, recruited, run and analysed by us. Most of them with people who enquired and did not go ahead, because they are the ones who can tell us what stopped them. The rest with patients who did proceed, to find what carried them over the same rung. Recruitment runs underneath week 2, so the conversations are ready to start when the week does.',
     need: 'The names, including the ones who did not book. Consent and data handling are ours to manage.',
     end: 'What your patients actually say, in their own words, with the pattern underneath it, and the reason the ones who stopped gave.',
   },
   {
-    num: '06', name: 'Choices', tagline: 'Decide where to place the bets.',
+    num: '06', name: 'Choices', serves: '2 · 3', tagline: 'Decide where to place the bets.',
     happens: 'Everything comes together and we choose. Which patients to build the next two years around, which treatments lead, and what we stop doing. The synthesis behind it runs underneath weeks 3 and 4, so nothing lands cold in the session. Held as a working session rather than a presentation, because the decisions have to be yours, made in the room, not agreed later by email. A second senior strategist sits in with me so you get two views rather than one.',
     need: 'Offline review of recommendations, then 90 minutes on a call and the authority to decide in it.',
     end: 'Fewer things on the list than when we started.',
   },
   {
-    num: '07', name: 'Blueprint', tagline: 'Define what good has to look like.',
+    num: '07', name: 'Blueprint', serves: '1 · 2', tagline: 'Define what good has to look like.',
     happens: 'For each of the seven standards, three things: where you are today, what good has to look like, and what has to change to get there. Across the experience a patient meets, the words you use, how the work runs, the systems and data underneath it, and who signs things off. Built in a working session with your people so the answer is theirs rather than mine.',
     need: 'Offline review, then 90 minutes to review and challenge, plus your key people for the session.',
     end: 'A picture of the business you are trying to become, standard by standard.',
   },
   {
-    num: '08', name: 'Roadmap', tagline: 'Turn it into something you can run.',
+    num: '08', name: 'Roadmap', serves: '1 · 2 · 3', tagline: 'Turn it into something you can run.',
     happens: 'The blueprint sequenced across twenty-four months. Nought to six, six to twelve, twelve to twenty-four. What depends on what, what each part costs, and whose name is against it. Plus the scorecard we agree before any of it starts, so you can mark the work rather than take my word for it.',
     need: 'Up to half a day to agree it and to own it.',
     end: 'A plan you could run without me, and a way to tell whether it is working.',
@@ -550,6 +577,7 @@ const SixWeekPlan = () => {
                       <span className="pcard-mark" aria-hidden>{isOpen ? '−' : '+'}</span>
                     </span>
                     <span className="pcard-sub">{c.sub}</span>
+                    <span className="pcard-serves" aria-hidden>{s.serves}</span>
                   </button>
                 );
               })}
@@ -884,25 +912,48 @@ export default function Eterna() {
             <GrowthPlan />
           </Sec>
 
+          {/* 5a2 · Where the energy goes: the dark moment (order of work = order of cost) */}
+          <section className="energy-sec">
+            <div className="energy-inner">
+              <p className="eyebrow">Where the energy goes</p>
+              <p className="energy-stand">The Map puts a number against each. The order does not change.</p>
+              <ol className="energy">
+                <li>
+                  <span className="e-num" aria-hidden>1</span>
+                  <p><strong>The experience.</strong> That is the product, not the medicine. You have done work here already. It is what makes people come back and tell someone else, and returning patients cost nothing to win.</p>
+                </li>
+                <li>
+                  <span className="e-num" aria-hidden>2</span>
+                  <p><strong>How new patients are won.</strong> That is the seven rungs. It works on the enquiries you are already paying for, so it buys no new media at all. More patients, and each one worth more than before.</p>
+                </li>
+                <li>
+                  <span className="e-num" aria-hidden>3</span>
+                  <p><strong>Then advertise.</strong> The only one of the three that costs real money, and it comes last. By then every pound lands on something that already holds.</p>
+                </li>
+              </ol>
+              <p className="energy-close">In the other order, the advertising costs the most and returns the least.</p>
+            </div>
+          </section>
+
           {/* 5b · What it costs to get there: the size of the cheque before what it buys */}
           <Sec
             tone="green"
             label="What it costs to get there"
-            statement="Around four million dollars, across the two years."
-            body="That is what the industry spends to move a business of this size that far. It runs light in year one and heavier in year two, because year two is feeding something that already works."
+            statement="Ten to fifteen per cent of revenue."
+            body="That is what growth costs in this category. Under eight per cent and you are holding position rather than growing. The businesses that have actually doubled in adjacent healthcare spent between a third and a half of revenue doing it. And the number moves with your revenue, which is the mechanic that matters: you fund the business you are trying to become, not the one you had last year."
           >
             <details className="more">
               <summary><span className="more-label more-closed">More</span><span className="more-label more-open">Less</span></summary>
               <p className="body">Most of it is not advertising. Across the industry, media is under a third of a marketing budget. The rest is the people, the systems and the material that make the advertising worth buying.</p>
-              <p className="body">Which is why the six weeks comes first. It decides where in the range you land, and how much of the money goes into fixing rather than buying.</p>
+              <p className="body">Which is why the six weeks comes first. It sets where in the range you land, and how much of the money goes into fixing rather than buying.</p>
               <p className="pq">Growth is funded as a share of turnover, set in advance and protected. You size it. The Map points it.</p>
             <p className="illus">
               <strong>Illustrative until calibrated.</strong> Industry benchmarks, not yet Eterna’s numbers.
             </p>
             <div className="disc-wrap">
-              <Disclosure summary="Where the four million comes from">
+              <Disclosure summary="What that comes to in money">
                 <p><strong>The band.</strong> For elective, self-pay healthcare the accepted range is 8 to 15% of revenue. The Aesthetic Society puts a steady year at 5 to 8% and a growth year at 10 to 12%. AmSpa’s survey has the average med spa at about 7%, which is a holding number. Practices genuinely growing, new sites or hard markets, run 15 to 20% for the first two years and then taper. Gartner has all-industry marketing at 7.7%, but that is mostly billion dollar companies with brands already built. Smaller businesses growing fast always spend a higher share. Doubling in two years puts you near the top of the range, not the middle.</p>
-                <p><strong>The mechanic.</strong> You spend against the revenue you are trying to reach, not the revenue you made last year. Spend 10% of eleven million and you have funded an eleven million dollar business. The money goes in ahead of the curve or the curve does not happen.</p>
+                <p><strong>The mechanic.</strong> Spend 10% of eleven million and you have funded an eleven million dollar business. The money goes in ahead of the curve or the curve does not happen. So the percentage is taken against where you are going, not where you have been.</p>
                 <p><strong>The shape.</strong> Eleven million now, about fifteen at the end of year one, twenty at the end of year two. At 12% of target revenue:</p>
                 <table className="spend-table">
                   <thead>
@@ -934,7 +985,7 @@ export default function Eterna() {
                     </tr>
                   </tbody>
                 </table>
-                <p>About $4.2m in total. At 10% it is $3.5m. At 15% it is $5.2m.</p>
+                <p>About $4.2m across the two years. At 10% it is $3.5m. At 15% it is $5.2m.</p>
                 <p><strong>Where it actually goes.</strong> Gartner puts paid media at 30.6% of the average marketing budget. The other 70% is people, technology, content, production and agencies. So of the $4.2m, roughly $1.3m is advertising and the rest is the machine behind it. That is the industry’s own number, not mine.</p>
                 <p><strong>What moves it inside the band.</strong> If a real share of the people already enquiring are stopping at something you can fix, you land at the bottom of the range, because you convert more of what you already get and buy less of what you do not. If they are not, you land at the top. Either way you know before you commit four million rather than after.</p>
                 <p className="src-note">Sources: <a href="https://www.gartner.com/en/newsroom/press-releases/2025-05-12-gartner-2025-cmo-spend-survey-reveals-marketing-budgets-have-flatlined-at-seven-percent-of-overall-company-revenue" target="_blank" rel="noopener noreferrer">Gartner 2025 CMO Spend Survey</a> · <a href="https://americanmedspa.org/blog/industry-experts-weigh-in-to-help-answer-how-much-should-i-spend-on-med-spa-marketing" target="_blank" rel="noopener noreferrer">AmSpa Medical Spa State of the Industry</a> · <a href="https://pulsedigital.health/insights/how-much-private-clinic-spend-on-marketing-uk/" target="_blank" rel="noopener noreferrer">UK private clinic marketing benchmark</a></p>
@@ -944,7 +995,7 @@ export default function Eterna() {
           </Sec>
 
           {/* 5b2 · Who spends it: the question the number creates, answered in the open */}
-          <Sec label="Who spends it" statement="That four million is what the growth costs. It is not a fee to me or anyone you choose to work with.">
+          <Sec label="Who spends it" statement="This level of investment is what the growth costs. It is not a fee to me or anyone you choose to work with.">
             <div className="disc-wrap">
               <Disclosure summary="How the team gets built">
                 <p>It also needs more disciplines than any one person has. What I have is the reach, people at the top of their field in each of the parts this needs.</p>
@@ -953,9 +1004,9 @@ export default function Eterna() {
             </div>
           </Sec>
 
-          {/* 5c · Where the money goes (unchanged copy; the natural follow-on to the number) */}
+          {/* 5c · What they spend it on (unchanged copy; the natural follow-on to the number) */}
           <section className="sec">
-            <p className="eyebrow">Where the money goes</p>
+            <p className="eyebrow">What it’s spent on</p>
             <p className="body">Four places to build, and one to amplify.</p>
             <div className="mg-cards">
                   <div className="mg-card mg-c1">
