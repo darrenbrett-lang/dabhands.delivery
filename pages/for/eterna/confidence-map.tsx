@@ -928,10 +928,10 @@ export default function Eterna() {
                 </li>
                 <li>
                   <span className="e-num" aria-hidden>3</span>
-                  <p><strong>Then advertise.</strong> The only one of the three that costs real money, and it comes last. By then every pound lands on something that already holds.</p>
+                  <p><strong>Then advertise.</strong> The only one of the three that costs real money, which is why it comes last. By then you know what each pound is buying.</p>
                 </li>
               </ol>
-              <p className="energy-close">In the other order, the advertising costs the most and returns the least.</p>
+              <p className="energy-close">A dollar spent after the first two is worth more than a pound spent before them.</p>
             </div>
           </section>
 
@@ -1141,9 +1141,20 @@ export default function Eterna() {
                 </div>
               </Disclosure>
               <Disclosure summary="Terms">
-                <p>Half on signature. Half at the end of week three.</p>
-                <p>At the end of week two I will show you what I have found. If you do not want me to carry on, say so and we stop there. You pay nothing further, and I keep the first half for the work done.</p>
-                <p>There is no discount for continuing. This work has to be able to tell you to stop. If we do carry on, I will hold my availability for eight weeks from delivery, and the next phase is scoped and priced in the final session.</p>
+                <p>
+                  <strong>£25,000, fixed.</strong>
+                </p>
+                <p>Payable in full on acceptance, before I start.</p>
+                <p>At the end of week two I will show you what I have found. If you do not want me to carry on, say so and I will refund £12,500 within ten working days. Everything produced to that point is yours.</p>
+                <div className="disc-wrap">
+                  <Disclosure summary="The practical detail">
+                    <p><strong>Currency and tax.</strong> Fees in pounds sterling. Dab Hands Ltd is not VAT registered, so no VAT is chargeable. Bank charges on the transfer are yours.</p>
+                    <p><strong>Which entity.</strong> Tell me which of your companies is contracting and I will invoice that one.</p>
+                    <p><strong>Dates.</strong> Six weeks from a start date we set together, once the enquiry export and the interview names are in hand. If those arrive late, the end date moves by the same amount. Nothing else shifts the timetable. The price is fixed around the six weeks. Delays in feedback could cause extensions.</p>
+                    <p><strong>What you own.</strong> Everything produced is yours, including anything unfinished if you stop at week two. I would like to describe the shape of the work in future without naming you, showing numbers or anything identifying, and you can say no to that.</p>
+                    <p><strong>Confidentiality and patient data.</strong> Nothing about your business leaves the engagement. For the patient conversations, consent, recording and data handling are mine to manage, at the strictest standard of the three jurisdictions rather than the easiest. No patient is contacted without your sign-off on the list.</p>
+                  </Disclosure>
+                </div>
               </Disclosure>
             </div>
           </section>
