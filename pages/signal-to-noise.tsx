@@ -509,13 +509,6 @@ export default function SafePassage() {
                     <br />
                     You’re paying for it either way.
                   </p>
-                  {/* The offer: a reader can now picture what they would be
-                      buying. No price, no phases, three things only. */}
-                  <p className="mt-4 text-lg text-ink max-w-[54ch] mx-auto text-balance">
-                    Four to six weeks inside your business, and three things come back. Where it’s leaking, named and
-                    located. What each one is costing you. And what to fix first, ranked by what it returns against
-                    what it takes.
-                  </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
                   <div className="mt-8 flex justify-center">
