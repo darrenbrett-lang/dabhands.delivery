@@ -114,17 +114,26 @@ export default function Home() {
                 <div className="rise">
                   <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
                 </div>
+                {/* The promise line: the one sentence on the site where Darren is
+                    the subject. A spoken standfirst, not a strapline: serif,
+                    between body and heading scale, no decoration. Appears once
+                    across the whole site, only here, by design. */}
                 <div className="rise" style={{ '--rise-delay': '0.08s' } as CSSProperties}>
+                  <p className="font-serif text-[22px] md:text-[26px] leading-[1.35] text-ink max-w-[36ch] u-balance mb-7 md:mb-8">
+                    Hand me an ambition and I’ll tell you what it actually takes, then I’ll make it happen.
+                  </p>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.14s' } as CSSProperties}>
                   <p className="font-serif text-[30px] md:text-[34px] lg:text-[44px] leading-[1.14] text-ink u-balance">
                     For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, and alongside global brands and businesses in motion.
                   </p>
                 </div>
-                <div className="rise" style={{ '--rise-delay': '0.16s' } as CSSProperties}>
+                <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
                   <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     I’ve led major programmes, built operating structures from the ground up, and helped leaders close the gap between what they intend to deliver and what actually gets built.
                   </p>
                 </div>
-                <div className="rise" style={{ '--rise-delay': '0.22s' } as CSSProperties}>
+                <div className="rise" style={{ '--rise-delay': '0.26s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     My work is about creating the conditions where capable people do their best work together. That work lives at the point where direction has to become reality.
                   </p>
