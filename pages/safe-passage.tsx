@@ -89,18 +89,30 @@ const FOUR = [
   {
     num: '02',
     lead: 'The work gets gated where it actually gets diluted.',
-    rest: 'Not on a calendar. At the specific handovers where, in your business, intent gets traded away.',
+    rest: 'Not on a calendar. At the handovers. Most decisions travel in a conversation and nothing writes down why, so the next person inherits the what and rebuilds the reasoning from scratch.',
   },
   {
     num: '03',
     lead: 'Somebody owns the space between the teams, by name.',
-    rest: 'Most programmes have an owner for every part and nobody for the gaps. The gaps are where the losses are.',
+    rest: 'Not because nobody was assigned. Because everybody was, and a thing that belongs to everyone belongs to no one.',
   },
   {
     num: '04',
     lead: 'You get told the truth on a schedule.',
     rest: 'Including when it’s uncomfortable, and especially while it’s still early enough to do something about.',
   },
+];
+
+// Section 3b: the cascade. Five stages, and the payload the idea is still
+// carrying at each one. The lists get shorter left to right; that thinning
+// is the whole device, so the treatment stays neutral and the shrinking
+// does the talking. Marked up as an ordered list for screen readers.
+const CASCADE = [
+  { stage: 'The decision', carries: ['Why it mattered.', 'What good looks like.', 'What we would not trade away.', 'Who it is for.', 'The risk we accepted.'] },
+  { stage: 'The brief', carries: ['The objective.', 'The audience.', 'The constraints we remembered.'] },
+  { stage: 'The plan', carries: ['Scope.', 'Dates.', 'Dependencies.'] },
+  { stage: 'The work', carries: ['Requirements.', 'Acceptance criteria.'] },
+  { stage: 'What arrived', carries: ['What got built.'] },
 ];
 
 // The five pre-build principles, in daylight: icon-led, graphical, five not
@@ -193,6 +205,9 @@ export default function SafePassage() {
               </p>
             </div>
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
+              <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
+                And nobody stops it, because everything is visibly moving. Movement gets read as health.
+              </p>
               <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink max-w-[52ch]">
                 This is not a framework. It’s what I’ve learned about giving good ideas safe passage to the other side.
               </p>
@@ -250,60 +265,84 @@ export default function SafePassage() {
             (owner call, 2026-08-17, overriding the brief's no-dark rule). ── */}
         <section className="bg-charcoal text-bone py-20 md:py-28">
           <div className="u-container">
-            <div className="u-grid gap-y-12 lg:items-start">
-              <FadeUp className="col-span-4 md:col-span-6 lg:col-span-5">
-                <h2 className="font-serif text-[42px] md:text-[54px] lg:text-[62px] leading-[1.02] tracking-[-0.02em] u-balance">
-                  Two systems, one idea
-                </h2>
-                <p className="mt-6 text-lg md:text-xl leading-[1.7] text-bone/80 max-w-[30ch]">
-                  Your idea moves through two systems at once.
-                </p>
-              </FadeUp>
+            {/* Headline and sub run across; the two systems sit side by side
+                beneath; the consequence copy closes the panel. */}
+            <FadeUp>
+              <h2 className="font-serif text-[42px] md:text-[54px] lg:text-[62px] leading-[1.02] tracking-[-0.02em] u-balance">
+                Two systems, one idea
+              </h2>
+              <p className="mt-5 md:mt-6 text-lg md:text-xl leading-[1.7] text-bone/80 max-w-[44ch]">
+                Your idea moves through two systems at once.
+              </p>
+            </FadeUp>
 
-              <div className="col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
-                {SYSTEMS.map((s, i) => (
-                  <FadeUp key={s.name} delay={0.08 + i * 0.08}>
-                    <div className={`rounded-2xl border border-bone/15 p-6 md:p-7 ${i > 0 ? 'mt-5' : ''}`}>
-                      <div className="flex items-center gap-4">
-                        <span className="block h-9 w-9 shrink-0 text-bone">{s.icon}</span>
-                        <div>
-                          <p className="eyebrow text-bone/60">{s.name}</p>
-                          <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">{s.line}</p>
-                        </div>
-                      </div>
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {s.stages.map((stage) => (
-                          <span key={stage} className="rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80">
-                            {stage}
-                          </span>
-                        ))}
+            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 items-stretch">
+              {SYSTEMS.map((s, i) => (
+                <FadeUp key={s.name} delay={0.08 + i * 0.08} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-bone/15 p-6 md:p-7">
+                    <div className="flex items-center gap-4">
+                      <span className="block h-9 w-9 shrink-0 text-bone">{s.icon}</span>
+                      <div>
+                        <p className="eyebrow text-bone/60">{s.name}</p>
+                        <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">{s.line}</p>
                       </div>
                     </div>
-                  </FadeUp>
-                ))}
-
-                <FadeUp delay={0.24}>
-                  <p className="mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[52ch]">
-                    Both act on the same idea. At every point it either gets stronger, or a piece of what made it worth
-                    doing gets traded away for a perfectly good local reason.
-                  </p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {s.stages.map((stage) => (
+                        <span key={stage} className="rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80">
+                          {stage}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </FadeUp>
-                <FadeUp delay={0.3}>
-                  <p className="mt-6 font-serif text-[22px] md:text-[26px] leading-[1.3] text-bone u-balance">
-                    What reaches your customer is whatever survived.
-                  </p>
-                </FadeUp>
-              </div>
+              ))}
             </div>
+
+            <FadeUp delay={0.2}>
+              <p className="mt-10 md:mt-12 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
+                Both act on the same idea. At every point it either gets stronger, or a piece of what made it worth
+                doing gets traded away for a perfectly good local reason.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.26}>
+              <p className="mt-6 font-serif text-[22px] md:text-[26px] leading-[1.3] text-bone u-balance">
+                What reaches your customer is whatever survived.
+              </p>
+            </FadeUp>
           </div>
         </section>
 
-        {/* ── 3b · THE PULL, THE DIAGRAM, THE PRINCIPLES. ── */}
+        {/* ── 3b · THE CASCADE, THE PULL, THE DIAGRAM, THE PRINCIPLES. ── */}
         <section className="bg-clay/20 text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
+            {/* The cascade: what the idea is still carrying, stage by stage.
+                The lists thin left to right; the shrinking is the argument. */}
+            <FadeUp>
+              <ol className="sp-cascade grid grid-cols-1 md:grid-cols-5 md:gap-x-12">
+                {CASCADE.map((c) => (
+                  <li key={c.stage} className="border-t border-stone/70 pt-5">
+                    <p className="text-[15px] font-medium text-ink">{c.stage}</p>
+                    <ul className="mt-3 space-y-1.5">
+                      {c.carries.map((item) => (
+                        <li key={item} className="text-[13.5px] leading-[1.55] text-graphite">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ol>
+            </FadeUp>
+            <FadeUp delay={0.08}>
+              <p className="mt-8 md:mt-10 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[56ch]">
+                Nobody deleted any of that. It just stopped being written down, one handover at a time.
+              </p>
+            </FadeUp>
+
             {/* The one pull statement on the page. Type only, no framing. */}
             <FadeUp>
-              <p className="mt-4 md:mt-6 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-ink max-w-[24ch] mx-auto u-balance">
+              <p className="mt-16 md:mt-24 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-ink max-w-[24ch] mx-auto u-balance">
                 Connection is a function of signal to noise.
               </p>
             </FadeUp>
