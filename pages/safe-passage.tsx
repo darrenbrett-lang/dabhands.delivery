@@ -6,43 +6,127 @@ import { SignalToNoiseDesktop, SignalToNoiseMobile } from '@/components/SignalTo
 import { mailto } from '@/lib/mailto';
 
 /*
- * SAFE PASSAGE — how Darren thinks, for the reader who has already read the
- * homepage. Six sections; the order is the argument (August 2026 brief):
- * recognition → what you can't see → what's happening in there (+ diagram)
- * → what I do about it → where this comes from → one next step.
+ * SAFE PASSAGE — v2 to the 17 August brief. Seven sections; the order is the
+ * argument: the condition → the evidence → why it happens (+ diagram) → what
+ * nobody can tell you → what I do about it → where this comes from → one
+ * next step.
  *
- * The governing copy rule: there is a person in every sentence. No dark
- * sections; the argument carries the page. One pull statement, one
- * disclosure, no client names, and it ends on a conversation.
+ * The page opens on the shared condition (nobody has to admit anything to
+ * agree); the blindness arrives in section 4 as a question about their
+ * business, not their competence. Editorial rules: a person in every
+ * sentence, no paragraph over three sentences, evidence set as figures not
+ * prose, the four moves numbered, one pull statement, one disclosure, no
+ * dark sections, no client names, and the page ends on a conversation.
  */
 
-// Section 4: the four things, bold lead then the explanation.
+const DEEP_GOLD = '#7E5E27';
+
+// Section 2: the evidence. Figures large, claim beneath, source small and
+// linked. Verbatim from the studies; never paraphrased.
+const EVIDENCE = [
+  {
+    figure: '9%',
+    claim: 'Share of managers who say they can rely on colleagues in other functions all of the time. For their own boss and direct reports it is 84%.',
+    source: 'Sull, Homkes and Sull, Why Strategy Execution Unravels, Harvard Business Review, March 2015. 7,600 managers across 262 companies.',
+    href: 'https://hbr.org/2015/03/why-strategy-execution-unravelsand-what-to-do-about-it',
+  },
+  {
+    figure: '84%',
+    claim: 'Share of chief marketing officers reporting high levels of strategic dysfunction. 94% say translating strategy into actionable plans is a challenge.',
+    source: 'Gartner CMO Strategy Survey, March 2025. 403 CMOs.',
+    href: 'https://www.gartner.com/en/newsroom/press-releases/2025-03-25-gartner-survey-reveals-84-percent-of-cmos-report-high-levels-of-strategic-dysfunction',
+  },
+  {
+    figure: '80% vs 8%',
+    claim: 'Share of companies that believe they deliver a superior experience, against the share of their customers who agree.',
+    source: 'Bain & Company, Closing the Delivery Gap, 2005. 362 companies.',
+    href: 'https://www.bain.com/insights/closing-the-delivery-gap/',
+  },
+];
+
+// Section 5: the four moves. Numbered, separated, never prose.
 const FOUR = [
   {
+    num: '01',
     lead: 'Everyone who can kill it is in the room before anything gets built.',
     rest: 'Not shown it later. In it, early, while their objection is still cheap.',
   },
   {
+    num: '02',
     lead: 'The work gets gated where it actually gets diluted.',
-    rest: 'Not on a calendar. At the specific handovers where, in your business, intent tends to get traded away.',
+    rest: 'Not on a calendar. At the specific handovers where, in your business, intent gets traded away.',
   },
   {
+    num: '03',
     lead: 'Somebody owns the space between the teams, by name.',
     rest: 'Most programmes have an owner for every part and nobody for the gaps. The gaps are where the losses are.',
   },
   {
-    lead: 'And you get told the truth on a schedule.',
+    num: '04',
+    lead: 'You get told the truth on a schedule.',
     rest: 'Including when it’s uncomfortable, and especially while it’s still early enough to do something about.',
   },
 ];
 
-// The five pre-build principles behind the one disclosure. Five, not twelve.
+// The five pre-build principles, in daylight: icon-led, graphical, five not
+// twelve (owner call, 2026-08-17: no disclosure). Icons share the diagram's
+// sketch weight: thin charcoal line work, nothing corporate.
+const P_ICON = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
+
 const PRINCIPLES = [
-  { lead: 'Design for the system you have.', rest: 'Work with real conditions, not ideal ones.' },
-  { lead: 'Understand time and tolerance.', rest: 'Is there enough time? Is the organisation ready?' },
-  { lead: 'Map friction before it appears.', rest: 'Identify where signal will be lost, and who might reshape it.' },
-  { lead: 'Align the big cogs early.', rest: 'Create clarity across the key teams before execution.' },
-  { lead: 'Establish shared guardrails.', rest: 'Define what is non-negotiable and what can flex.' },
+  {
+    lead: 'Design for the system you have.',
+    rest: 'Work with real conditions, not ideal ones.',
+    icon: (
+      <svg viewBox="0 0 24 24" {...P_ICON} aria-hidden>
+        <path d="M3.5 6.5l5.5-2 6 2 5.5-2v13l-5.5 2-6-2-5.5 2z" />
+        <path d="M9 4.5v13M15 6.5v13" />
+      </svg>
+    ),
+  },
+  {
+    lead: 'Understand time and tolerance.',
+    rest: 'Is there enough time? Is the organisation ready?',
+    icon: (
+      <svg viewBox="0 0 24 24" {...P_ICON} aria-hidden>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5V12l3.5 2" />
+      </svg>
+    ),
+  },
+  {
+    lead: 'Map friction before it appears.',
+    rest: 'Identify where signal will be lost, and who might reshape it.',
+    icon: (
+      <svg viewBox="0 0 24 24" {...P_ICON} aria-hidden>
+        <path d="M12 4.5L21 19.5H3z" />
+        <path d="M12 10.5v4" />
+        <path d="M12 17.4v.01" />
+      </svg>
+    ),
+  },
+  {
+    lead: 'Align the big cogs early.',
+    rest: 'Create clarity across the key teams before execution.',
+    icon: (
+      <svg viewBox="0 0 24 24" {...P_ICON} aria-hidden>
+        <circle cx="9" cy="9.5" r="4" />
+        <path d="M9 3.5v2M9 13.5v2M3 9.5h2M13 9.5h2" />
+        <circle cx="16.5" cy="16.5" r="3" />
+        <path d="M16.5 12v1.5M16.5 19.5V21M12 16.5h1.5M19.5 16.5H21" />
+      </svg>
+    ),
+  },
+  {
+    lead: 'Establish shared guardrails.',
+    rest: 'Define what is non-negotiable and what can flex.',
+    icon: (
+      <svg viewBox="0 0 24 24" {...P_ICON} aria-hidden>
+        <path d="M5 4v16M19 4v16" />
+        <path d="M9 19c0-7 6-7 6-14" />
+      </svg>
+    ),
+  },
 ];
 
 export default function SafePassage() {
@@ -50,76 +134,90 @@ export default function SafePassage() {
     <>
       <SeoMeta
         title="Safe Passage | DAB Hands"
-        description="You backed something, and what’s arriving isn’t what you had in your head when you said yes. Safe Passage is how I find where it went."
+        description="The idea was good. Everybody was competent. It still arrived weaker than it left. Safe Passage is what I’ve learned about getting good ideas to the other side."
         path="/safe-passage"
       />
 
       <Layout footerVariant="none">
-        {/* ── 1 · RECOGNITION: if the reader doesn't see themselves in ten
-            seconds, nothing below matters. CSS .rise entrance. ── */}
+        {/* ── 1 · THE CONDITION: the shared experience, no admission required. ── */}
         <section className="bg-bone text-ink pt-36 md:pt-48 pb-16 md:pb-24">
           <div className="u-container">
             <div className="rise">
               <p className="eyebrow text-graphite mb-6">Safe Passage</p>
-              <h1 className="font-serif text-[38px] md:text-[54px] lg:text-[64px] leading-[1.08] tracking-[-0.01em] max-w-[17ch] u-balance">
-                You can feel it isn’t landing. Nobody can tell you why.
+              <h1 className="font-serif text-[36px] md:text-[50px] lg:text-[58px] leading-[1.1] tracking-[-0.01em] max-w-[24ch] u-balance">
+                The idea was good. Everybody was competent. It still arrived weaker than it left.
               </h1>
             </div>
             <div className="rise" style={{ '--rise-delay': '0.12s' } as CSSProperties}>
-              <p className="mt-9 md:mt-12 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[54ch]">
-                You backed something. You stood in a room and said <em>we’re doing this</em>, and people got on with it.
-                Months later the reports are green, the meetings happen, everyone is busy, and what’s arriving isn’t
-                what you had in your head when you said yes.
+              <p className="mt-9 md:mt-11 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
+                Everyone who has worked inside a large organisation has watched this happen.
+              </p>
+              <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
+                Nobody did anything wrong. It just got a little smaller at every handover, for perfectly good reasons,
+                until what reached the customer wasn’t what anyone set out to build.
               </p>
             </div>
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
-              <p className="mt-5 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[54ch]">
-                Nobody is hiding anything from you. They can’t see it either.
+              <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink max-w-[52ch]">
+                This is not a framework. It’s what I’ve learned about giving good ideas safe passage to the other side.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 2 · WHAT YOU CAN'T SEE FROM WHERE YOU SIT ── */}
+        {/* ── 2 · THE EVIDENCE: three figures break the page's spine. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
-            <div className="u-grid gap-y-8">
-              <FadeUp className="col-span-4 md:col-span-5">
-                <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
-                  What you can’t see from where you sit
-                </h2>
-              </FadeUp>
-              <div className="col-span-4 md:col-span-6 md:col-start-7">
-                <FadeUp delay={0.08}>
-                  <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    You can see two things clearly. The decision you made, and what turned up.
-                  </p>
+            <FadeUp>
+              <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
+                It isn’t just you
+              </h2>
+            </FadeUp>
+            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-11">
+              {EVIDENCE.map((e, i) => (
+                <FadeUp key={e.figure} delay={i * 0.08}>
+                  <div className="border-t border-stone/70 pt-6 flex h-full flex-col">
+                    <p className="font-serif text-[52px] md:text-[56px] lg:text-[64px] leading-none text-ink">
+                      {e.figure === '80% vs 8%' ? (
+                        <>
+                          80%<span className="mx-2 text-[0.42em] text-graphite align-middle">vs</span>8%
+                        </>
+                      ) : (
+                        e.figure
+                      )}
+                    </p>
+                    <p className="mt-4 text-[15.5px] leading-[1.65] text-graphite max-w-[40ch]">{e.claim}</p>
+                    <p className="mt-auto pt-5 text-[12.5px] leading-[1.6] text-graphite/85 max-w-[42ch]">
+                      <a
+                        href={e.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-stone underline-offset-[3px] transition-colors hover:text-ink hover:decoration-ink"
+                      >
+                        {e.source}
+                      </a>
+                    </p>
+                  </div>
                 </FadeUp>
-                <FadeUp delay={0.14}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    You can’t see the middle. Neither can the people who report to you, because they’re standing in it.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    That’s what the seat does. The further you are from the work, the more of it you take on trust. And
-                    the more people between you and it, the more each handover costs you something you never find out
-                    about.
-                  </p>
-                </FadeUp>
-              </div>
+              ))}
             </div>
+            <FadeUp delay={0.12}>
+              <p className="mt-11 md:mt-12 text-[16px] md:text-[17px] leading-[1.75] text-ink max-w-[56ch]">
+                The same research found managers are three times more likely to miss a commitment because of another
+                team than because of their own.
+              </p>
+            </FadeUp>
           </div>
         </section>
 
-        {/* ── 3 · WHAT'S HAPPENING IN THE PART YOU CAN'T SEE: the argument,
-            the one pull statement, the diagram, the one disclosure. ── */}
+        {/* ── 3 · WHY IT HAPPENS: two systems, one idea; the pull statement,
+            the diagram, the one disclosure. ── */}
         <section className="bg-clay/20 text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <div className="u-grid gap-y-8">
               <FadeUp className="col-span-4 md:col-span-5">
                 <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
-                  What’s happening in the part you can’t see
+                  Two systems, one idea
                 </h2>
               </FadeUp>
               <div className="col-span-4 md:col-span-6 md:col-start-7">
@@ -133,21 +231,16 @@ export default function SafePassage() {
                     The business system, where the trade-offs get made. Strategy, brand, commercial, product, content,
                     technology, operations.
                   </p>
-                </FadeUp>
-                <FadeUp delay={0.18}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    And the process system underneath it, where the work actually gets handled. Brief, plan, design,
-                    produce, review, approve, deploy.
+                    The process system underneath it, where the work gets handled. Brief, plan, design, produce,
+                    review, approve, deploy.
                   </p>
                 </FadeUp>
-                <FadeUp delay={0.22}>
+                <FadeUp delay={0.2}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
                     Both act on the same idea. At every point it either gets stronger, or a piece of what made it worth
-                    doing gets traded away for a perfectly good local reason. Nobody does that to you deliberately.
-                    Everyone is doing their job.
+                    doing gets traded away for a perfectly good local reason.
                   </p>
-                </FadeUp>
-                <FadeUp delay={0.26}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
                     What reaches your customer is whatever survived.
                   </p>
@@ -174,49 +267,80 @@ export default function SafePassage() {
               </figure>
             </FadeUp>
 
-            {/* The one disclosure on the page: the five pre-build principles. */}
-            <FadeUp>
-              <details className="group mt-12 md:mt-16 max-w-[720px] border-y border-stone/70">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[15px] font-medium text-ink [&::-webkit-details-marker]:hidden">
-                  The principles behind it
-                  <span
-                    aria-hidden
-                    className="inline-flex leading-none text-graphite transition-transform duration-300 group-open:rotate-45"
-                  >
-                    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-                      <path d="M6 1.5V10.5M1.5 6H10.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                    </svg>
-                  </span>
-                </summary>
-                <ul className="pb-6 pt-1 space-y-4">
-                  {PRINCIPLES.map((p) => (
-                    <li key={p.lead} className="text-[15.5px] leading-[1.7]">
-                      <span className="font-medium text-ink">{p.lead}</span>{' '}
-                      <span className="text-graphite">{p.rest}</span>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </FadeUp>
+            {/* The five pre-build principles: icon-led, in daylight. */}
+            <div className="mt-14 md:mt-20">
+              <FadeUp>
+                <p className="eyebrow text-graphite mb-8 md:mb-10">The principles behind it</p>
+              </FadeUp>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-9">
+                {PRINCIPLES.map((p, i) => (
+                  <FadeUp key={p.lead} delay={i * 0.06}>
+                    <div className="border-t border-stone/70 pt-6 flex h-full flex-col">
+                      <span className="block h-8 w-8 text-ink">{p.icon}</span>
+                      <p className="mt-5 text-[15.5px] leading-[1.55] font-medium text-ink">{p.lead}</p>
+                      <p className="mt-2 text-[14.5px] leading-[1.65] text-graphite">{p.rest}</p>
+                    </div>
+                  </FadeUp>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ── 4 · WHAT I DO ABOUT IT: four things, editorial, no cards. ── */}
+        {/* ── 4 · WHAT NOBODY CAN TELL YOU: the blindness, as a question about
+            their business rather than their competence. ── */}
+        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
+          <div className="u-container">
+            <div className="u-grid gap-y-8">
+              <FadeUp className="col-span-4 md:col-span-5">
+                <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
+                  What nobody can tell you
+                </h2>
+              </FadeUp>
+              <div className="col-span-4 md:col-span-6 md:col-start-7">
+                <FadeUp delay={0.08}>
+                  <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
+                    Everyone can see that it happens. What almost nobody can tell you is where it happens in their
+                    business.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.14}>
+                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
+                    You can see the decision you made and you can see what turned up. The people who report to you are
+                    standing inside the middle, which is a poor place to see it from.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
+                    That isn’t anybody failing. It’s what the seat does. The further you sit from the work, the more of
+                    it you take on trust, and every handover between you and it costs you something you never find out
+                    about.
+                  </p>
+                </FadeUp>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5 · WHAT I DO ABOUT IT: four moves, numbered, separated. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
-              <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
+              <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
                 What I do about it
               </h2>
               <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                Safe Passage isn’t governance and it isn’t more meetings. It’s four things.
+                It isn’t governance and it isn’t more meetings. It’s four things.
               </p>
             </FadeUp>
-            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-9 max-w-[980px]">
+            <div className="mt-10 md:mt-12 max-w-[860px]">
               {FOUR.map((f, i) => (
-                <FadeUp key={f.lead} delay={i * 0.06}>
-                  <div className="border-t border-stone/70 pt-5">
-                    <p className="text-[16px] md:text-[17px] leading-[1.75]">
+                <FadeUp key={f.num} delay={i * 0.06}>
+                  <div className="grid grid-cols-[3rem_1fr] md:grid-cols-[4rem_1fr] items-baseline border-t border-stone/70 py-6 md:py-7">
+                    <p className="font-serif text-[15px]" style={{ color: DEEP_GOLD }} aria-hidden>
+                      {f.num}
+                    </p>
+                    <p className="text-[16px] md:text-[17px] leading-[1.7]">
                       <span className="font-semibold text-ink">{f.lead}</span>{' '}
                       <span className="text-graphite">{f.rest}</span>
                     </p>
@@ -227,7 +351,7 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 5 · WHERE THIS COMES FROM: the numbers do the work, no names. ── */}
+        {/* ── 6 · WHERE THIS COMES FROM: the numbers do the work, no names. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <div className="u-grid gap-y-8">
@@ -244,10 +368,9 @@ export default function SafePassage() {
                 </FadeUp>
                 <FadeUp delay={0.14}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    I’ve watched it happen on a fifty million pound platform programme, on a four year redesign that ran
+                    I’ve watched it on a fifty million pound platform programme, on a four year redesign that ran
                     through seven different sponsors, and on a rescue where three people had already been through it
-                    before me. Different businesses, different sectors, different decades. The same thing every time.
-                    The idea was good, everybody involved was competent, and it arrived weaker than it left.
+                    before me. Different businesses, different sectors, different decades.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
@@ -260,7 +383,7 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 6 · ONE NEXT STEP: the page ends on a conversation. ── */}
+        {/* ── 7 · ONE NEXT STEP: the page ends on a conversation. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/50">
           <div className="u-container">
             <div className="u-grid">
@@ -269,19 +392,19 @@ export default function SafePassage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
                   <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.1] max-w-[22ch] mx-auto u-balance">
-                    If the first paragraph sounded familiar
+                    Where it’s going in your business
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.06}>
                   <p className="mt-5 text-lg text-graphite max-w-[54ch] mx-auto text-balance">
-                    That’s the conversation. Not a proposal. A conversation about what you can and can’t see from where
-                    you’re sitting.
+                    That’s the conversation. Not a proposal. A conversation about where your ideas get thinner, and
+                    what it’s costing you.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
                   <div className="mt-8 flex justify-center">
                     <a
-                      href={mailto({ subject: 'The first paragraph sounded familiar', body: 'I backed something and what’s arriving isn’t what I had in my head. I would like to talk.' })}
+                      href={mailto({ subject: 'Where our ideas get thinner', body: 'I want to talk about where our ideas get thinner between decision and delivery, and what it’s costing us.' })}
                       className="group inline-flex items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green"
                     >
                       Start a conversation
