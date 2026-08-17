@@ -352,7 +352,7 @@ export default function SafePassage() {
           <div className="u-container">
             {/* The one pull statement on the page. Type only, no framing. */}
             <FadeUp>
-              <p className="mt-2 md:mt-4 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-bone max-w-[24ch] mx-auto u-balance">
+              <p className="mt-10 md:mt-14 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-bone max-w-[24ch] mx-auto u-balance">
                 Attention and connection is a function of signal to noise.
               </p>
             </FadeUp>
@@ -362,7 +362,7 @@ export default function SafePassage() {
               <figure className="mt-4">
                 <SignalToNoiseDesktop />
                 <SignalToNoiseMobile />
-                <figcaption className="mt-6 md:mt-8 text-center mx-auto text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
+                <figcaption className="mt-2 md:mt-3 text-center mx-auto text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
                   Everyone in the middle is doing their job properly. Nobody watches it move.
                 </figcaption>
               </figure>

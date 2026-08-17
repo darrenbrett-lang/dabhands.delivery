@@ -34,7 +34,7 @@ const IDEA_CARRIES = ['Clear insight', 'Strong idea', 'Defined intent', 'Custome
 const IMPACT_ITEMS = ['Notice', 'Feel something', 'Connect', 'Return again and again', 'Convert'];
 
 const DESCRIPTION =
-  'Diagram. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer impact panel at the right, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert.';
+  'Diagram. Two people, one at each end. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert. At the far right stands the customer, who feels something.';
 
 // A calm, sketch-weight cog: a circle with radial teeth and a centre dot.
 const Cog = ({ cx, cy, r, teeth }: { cx: number; cy: number; r: number; teeth: number }) => {
@@ -76,7 +76,7 @@ const label = {
 
 export const SignalToNoiseDesktop = () => (
   <svg
-    viewBox="0 0 1160 500"
+    viewBox="0 0 1250 456"
     role="img"
     aria-label={DESCRIPTION}
     className="hidden md:block w-full h-auto select-none"
@@ -102,7 +102,7 @@ export const SignalToNoiseDesktop = () => (
     <line x1="204" y1="188" x2="226" y2="188" stroke={INK} strokeWidth="1.4" />
 
     {/* ── Business system: the big cogs ── */}
-    <text x="246" y="128" fontSize="11" letterSpacing="0.14em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
+    <text x="622" y="128" textAnchor="middle" fontSize="11" letterSpacing="0.14em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
     {BIG_COGS.map((name, i) => {
       const cx = 286 + i * 112;
       return (
@@ -116,7 +116,7 @@ export const SignalToNoiseDesktop = () => (
     })}
 
     {/* ── Process system: the small cogs ── */}
-    <text x="246" y="308" fontSize="11" letterSpacing="0.14em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
+    <text x="622" y="308" textAnchor="middle" fontSize="11" letterSpacing="0.14em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
     {SMALL_COGS.map((name, i) => {
       const cx = 286 + i * 112;
       return (
@@ -129,7 +129,8 @@ export const SignalToNoiseDesktop = () => (
       );
     })}
 
-    {/* ── Customer impact: what people do when it arrives whole ── */}
+    {/* ── Customer impact, and the person it lands on: the mirror of the
+        left end. Two people, one journey between them. ── */}
     <line x1="996" y1="188" x2="1020" y2="188" stroke={INK} strokeWidth="1.4" />
     <rect x="1020" y="108" width="124" height="176" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
     <text x="1082" y="132" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
@@ -141,12 +142,16 @@ export const SignalToNoiseDesktop = () => (
       </text>
     ))}
 
+    <Figure cx={1200} cy={172} />
+    <text x="1200" y="234" textAnchor="middle" fontSize="13" fontWeight="600" fill={INK} style={label}>Customer</text>
+    <text x="1200" y="252" textAnchor="middle" fontSize="11.5" fill={GRAPHITE} style={label}>feels something</text>
+
     {/* ── The sight lines: contact stops at the band's edge and resumes at
         the other side, spaceflight-style. Bars, not arrowheads. ── */}
     <g stroke={INK} strokeWidth="1.3" opacity="0.75">
       <line x1="58" y1="34" x2="226" y2="34" strokeDasharray="6 5" />
       <line x1="226" y1="25" x2="226" y2="43" />
-      <line x1="1082" y1="34" x2="996" y2="34" strokeDasharray="6 5" />
+      <line x1="1200" y1="34" x2="996" y2="34" strokeDasharray="6 5" />
       <line x1="996" y1="25" x2="996" y2="43" />
     </g>
     {/* LOS and AOS are moments, not spans: the labels sit at the inner ends,
@@ -154,7 +159,7 @@ export const SignalToNoiseDesktop = () => (
     <text x="218" y="20" textAnchor="end" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
     <text x="1004" y="20" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
     <line x1="46" y1="44" x2="46" y2="150" stroke={INK} strokeWidth="1" opacity="0.25" />
-    <line x1="1082" y1="44" x2="1082" y2="100" stroke={INK} strokeWidth="1" opacity="0.25" />
+    <line x1="1200" y1="44" x2="1200" y2="150" stroke={INK} strokeWidth="1" opacity="0.25" />
   </svg>
 );
 
@@ -226,7 +231,7 @@ export const SignalToNoiseMobile = () => (
     <rect x="16" y="148" width="328" height="374" rx="12" style={{ fill: STRIP_FILL }} />
 
     {/* Business row: each slot cycles through its share of the seven */}
-    <text x="32" y="214" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
+    <text x="180" y="214" textAnchor="middle" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
     {MOBILE_BUSINESS.map((variants, i) => {
       const cx = 76 + i * 104;
       return (
@@ -238,7 +243,7 @@ export const SignalToNoiseMobile = () => (
     })}
 
     {/* Process row: same cycling, same beat */}
-    <text x="32" y="378" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
+    <text x="180" y="378" textAnchor="middle" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
     {MOBILE_PROCESS.map((variants, i) => {
       const cx = 76 + i * 104;
       return (
