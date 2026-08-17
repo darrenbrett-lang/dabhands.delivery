@@ -103,7 +103,7 @@ export const Header = () => {
   };
 
   const whoActive = audiences.some((a) => router.pathname === a.href);
-  const safePassageActive = router.pathname === '/safe-passage';
+  const signalActive = router.pathname === '/signal-to-noise';
   const contactActive = router.pathname === '/contact';
   const room = audiences.find((a) => router.pathname === a.href) ?? null;
   const showContext = atP2 && !!room;
@@ -224,12 +224,12 @@ export const Header = () => {
             </div>
 
             <Link
-              href="/safe-passage"
+              href="/signal-to-noise"
               className={`text-[14px] tracking-[-0.01em] transition-colors ${
-                safePassageActive ? 'text-ink' : 'text-graphite hover:text-ink'
+                signalActive ? 'text-ink' : 'text-graphite hover:text-ink'
               }`}
             >
-              Safe Passage
+              Signal to Noise
             </Link>
 
             <Link
@@ -289,11 +289,11 @@ export const Header = () => {
                 transition={{ delay: 0.06 + audiences.length * 0.05 }}
               >
                 <Link
-                  href="/safe-passage"
+                  href="/signal-to-noise"
                   onClick={() => setMenuOpen(false)}
                   className="block font-serif text-[30px] leading-[1.18] py-1.5 border-t border-stone pt-6"
                 >
-                  Safe Passage
+                  Signal to Noise
                 </Link>
               </motion.span>
               <motion.span

@@ -61,7 +61,7 @@ const SYSTEMS = [
 const EVIDENCE = [
   {
     figure: '9%',
-    claim: 'Share of managers who say they can rely on colleagues in other functions all of the time. For their own boss and direct reports it is 84%.',
+    claim: 'Share of managers who say they can rely on colleagues in other functions all of the time. For their own boss and direct reports it’s 84%.',
     source: 'Sull, Homkes and Sull, Why Strategy Execution Unravels, Harvard Business Review, March 2015. 7,600 managers across 262 companies.',
     href: 'https://hbr.org/2015/03/why-strategy-execution-unravelsand-what-to-do-about-it',
   },
@@ -79,27 +79,43 @@ const EVIDENCE = [
   },
 ];
 
-// Section 5: the four moves. Numbered, separated, never prose.
+// Section 5: what the diagnostic returns. The commercial centre.
+const FINDINGS = [
+  {
+    lead: 'Where it’s leaking.',
+    rest: 'The specific handovers in your business where intent gets traded away, named and located.',
+  },
+  {
+    lead: 'What each one costs you.',
+    rest: 'In rework, in delay, and in money spent on work that lands weaker than it should have.',
+  },
+  {
+    lead: 'What to fix first.',
+    rest: 'Ranked by what it returns against what it takes.',
+  },
+];
+
+// Section 6: the four moves. Numbered, separated, never prose.
 const FOUR = [
   {
     num: '01',
-    lead: 'Everyone who can kill it is in the room before anything gets built.',
+    lead: 'Everyone who could kill it is in the room before anything gets built.',
     rest: 'Not shown it later. In it, early, while their objection is still cheap.',
   },
   {
     num: '02',
-    lead: 'The work gets gated where it actually gets diluted.',
-    rest: 'Not on a calendar. At the handovers. Most decisions travel in a conversation and nothing writes down why, so the next person inherits the what and rebuilds the reasoning from scratch.',
+    lead: 'The work gets gated at the handovers, not on the calendar.',
+    rest: 'Decisions travel in conversation and nothing writes down why, so the next person inherits the what and rebuilds the reasoning from scratch.',
   },
   {
     num: '03',
-    lead: 'Somebody owns the space between the teams, by name.',
-    rest: 'Not because nobody was assigned. Because everybody was, and a thing that belongs to everyone belongs to no one.',
+    lead: 'Somebody owns the space between teams, by name.',
+    rest: 'Not because nobody was assigned, but because everybody was, and a thing that belongs to everyone belongs to no one.',
   },
   {
     num: '04',
     lead: 'You get told the truth on a schedule.',
-    rest: 'Including when it’s uncomfortable, and especially while it’s still early enough to do something about.',
+    rest: 'Including when it’s uncomfortable, and especially while it’s still early enough to act.',
   },
 ];
 
@@ -168,9 +184,9 @@ export default function SafePassage() {
   return (
     <>
       <SeoMeta
-        title="Safe Passage | DAB Hands"
-        description="The idea was good. Everybody was competent. It still arrived weaker than it left. What I’ve learned about giving good ideas safe passage to the other side."
-        path="/safe-passage"
+        title="Signal to Noise | DAB Hands"
+        description="The idea was good. Everybody was competent. It still arrived weaker than it left. A diagnostic that finds where it goes, what it costs, and what to fix first."
+        path="/signal-to-noise"
       />
 
       <Layout footerVariant="none">
@@ -178,7 +194,7 @@ export default function SafePassage() {
         <section className="bg-bone text-ink pt-36 md:pt-48 pb-16 md:pb-24">
           <div className="u-container">
             <div className="rise">
-              <p className="eyebrow text-graphite mb-6">Safe Passage · A delivery discipline</p>
+              <p className="eyebrow text-graphite mb-6">Signal to Noise · A diagnostic</p>
               <h1 className="font-serif text-[36px] md:text-[50px] lg:text-[58px] leading-[1.1] tracking-[-0.01em] max-w-[24ch] u-balance">
                 The idea was good. Everybody was competent. It still arrived weaker than it left.
               </h1>
@@ -196,9 +212,6 @@ export default function SafePassage() {
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
               <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
                 And nobody stops it, because everything is visibly moving. Movement gets read as health.
-              </p>
-              <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink max-w-[52ch]">
-                This is not a framework. It’s what I’ve learned about giving good ideas safe passage to the other side.
               </p>
             </div>
           </div>
@@ -242,8 +255,8 @@ export default function SafePassage() {
             </div>
             <FadeUp delay={0.12}>
               <p className="mt-11 md:mt-12 text-[16px] md:text-[17px] leading-[1.75] text-ink max-w-[56ch]">
-                The same research found managers are three times more likely to miss a commitment because of another
-                team than because of their own.
+                The same Harvard research found managers are three times more likely to miss a commitment because of
+                another team than because of their own.
               </p>
             </FadeUp>
           </div>
@@ -369,9 +382,27 @@ export default function SafePassage() {
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
+                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
+                    Reports don’t help as much as they should either. When Snow and Keil studied project status
+                    reporting they found it biased six times out of ten, and optimism twice as likely as pessimism.
+                    Not dishonesty. Just what happens when the person writing the report is also the person it
+                    reflects on.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.26}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
                     So when you ask what happened, you get honest answers from every direction and none of them adds
                     up to one.
+                  </p>
+                  <p className="mt-5 text-[12.5px] leading-[1.6] text-graphite/85">
+                    <a
+                      href="https://www.researchgate.net/publication/220652409_The_effect_of_optimistic_and_pessimistic_biasing_on_software_project_status_reporting"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-stone underline-offset-[3px] transition-colors hover:text-ink hover:decoration-ink"
+                    >
+                      Snow and Keil, Information &amp; Management, 2007.
+                    </a>
                   </p>
                 </FadeUp>
               </div>
@@ -379,21 +410,49 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 5 · WHAT I DO ABOUT IT: four moves, numbered, separated. ── */}
+        {/* ── 5 · WHAT THE WORK FINDS: the commercial centre of the page.
+            Everything above it argues the work is worth buying; this is the
+            work. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
-                What I do about it
+                What the work finds
               </h2>
-              {/* The only definition of the term on the whole page. Set apart
-                  from the line beneath: a definition, not a run-on. */}
-              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[48ch]">
-                Safe Passage is a discipline. It organises work around intent rather than activity, so that what you
-                decided is still there when it reaches your customer.
+              <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[48ch]">
+                Four to six weeks inside your business. Three things come back.
               </p>
-              <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                It isn’t governance and it isn’t more meetings. It’s four things.
+            </FadeUp>
+            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-9">
+              {FINDINGS.map((f, i) => (
+                <FadeUp key={f.lead} delay={i * 0.08}>
+                  <div className="border-t border-stone/70 pt-6">
+                    <p className="font-serif text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.01em] text-ink">
+                      {f.lead}
+                    </p>
+                    <p className="mt-3 text-[15px] leading-[1.7] text-graphite max-w-[38ch]">{f.rest}</p>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 6 · AND WHAT I DO ABOUT IT: the disclaimer, then four flat
+            statements of certainty. Confidence without claimed originality
+            (governing rule three). ── */}
+        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
+          <div className="u-container">
+            <FadeUp>
+              <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
+                And what I do about it
+              </h2>
+              {/* This line does more work than any other sentence on the page.
+                  Never cut or soften it. */}
+              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[52ch]">
+                None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
+                methodology for thirty years. Knowing which one a particular leak needs is the part that isn’t in a
+                book.
               </p>
             </FadeUp>
             {/* Four moves as four squares: solid soft-grey cards, a large
@@ -416,39 +475,7 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 6 · WHERE THIS COMES FROM: the numbers do the work, no names. ── */}
-        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
-          <div className="u-container">
-            <div className="u-grid gap-y-8">
-              <FadeUp className="col-span-4 md:col-span-5">
-                <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
-                  Where this comes from
-                </h2>
-              </FadeUp>
-              <div className="col-span-4 md:col-span-6 md:col-start-7">
-                <FadeUp delay={0.08}>
-                  <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    None of this is theory. It’s what twenty years of delivering work has left behind.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.14}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    I’ve seen it in big businesses and small ones, in sectors that have nothing in common, over three
-                    decades. The idea was good, everybody involved was competent, and less of it arrived than should
-                    have.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
-                    After enough of them you start to see where it goes, what’s coming, and how to avoid it.
-                  </p>
-                </FadeUp>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 7 · ONE NEXT STEP: the page ends on a conversation. ── */}
+        {/* ── 7 · ONE NEXT STEP: the page ends on money. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/50">
           <div className="u-container">
             <div className="u-grid">
@@ -462,14 +489,18 @@ export default function SafePassage() {
                 </FadeUp>
                 <FadeUp delay={0.06}>
                   <p className="mt-5 text-lg text-graphite max-w-[54ch] mx-auto text-balance">
-                    That’s the conversation. Not a proposal. A conversation about where your ideas get thinner, and
-                    what it’s costing you.
+                    That’s the conversation. Not a proposal.
+                  </p>
+                  {/* The page ends on money. Never soften this. */}
+                  <p className="mt-4 text-lg text-ink max-w-[54ch] mx-auto text-balance">
+                    Somewhere between the decision you made and the thing your customer got, value is going missing.
+                    You’re paying for it either way. The only question is whether it’s on a report.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
                   <div className="mt-8 flex justify-center">
                     <a
-                      href={mailto({ subject: 'Where our ideas get thinner', body: 'I want to talk about where our ideas get thinner between decision and delivery, and what it’s costing us.' })}
+                      href={mailto({ subject: 'Where the value is going', body: 'Somewhere between our decisions and what our customers get, value is going missing. I would like to talk.' })}
                       className="group inline-flex items-center gap-2.5 rounded-full bg-charcoal px-7 py-3.5 text-[15px] font-medium text-bone transition-colors duration-300 hover:bg-blue-green"
                     >
                       Start a conversation
