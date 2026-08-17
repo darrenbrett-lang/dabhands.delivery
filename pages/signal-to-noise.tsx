@@ -62,20 +62,18 @@ const SYSTEMS = [
   },
 ];
 
-// Section 2: the evidence. Figures large, claim beneath, source small and
-// linked. Verbatim from the studies; never paraphrased.
+// Section 2: the evidence. The Gartner figure runs visible in the body (the
+// reader's own job title, and the most recent number); Harvard and Bain sit
+// behind the sourcing toggle. Verbatim from the studies; never paraphrased.
+const GARTNER_HREF =
+  'https://www.gartner.com/en/newsroom/press-releases/2025-03-25-gartner-survey-reveals-84-percent-of-cmos-report-high-levels-of-strategic-dysfunction';
+
 const EVIDENCE = [
   {
     figure: '9%',
     claim: 'Share of managers who say they can rely on colleagues in other functions all of the time. For their own boss and direct reports it’s 84%.',
     source: 'Sull, Homkes and Sull, Why Strategy Execution Unravels, Harvard Business Review, March 2015. 7,600 managers across 262 companies.',
     href: 'https://hbr.org/2015/03/why-strategy-execution-unravelsand-what-to-do-about-it',
-  },
-  {
-    figure: '84%',
-    claim: 'Share of chief marketing officers reporting high levels of strategic dysfunction. 94% say translating strategy into actionable plans is a challenge.',
-    source: 'Gartner CMO Strategy Survey, March 2025. 403 CMOs.',
-    href: 'https://www.gartner.com/en/newsroom/press-releases/2025-03-25-gartner-survey-reveals-84-percent-of-cmos-report-high-levels-of-strategic-dysfunction',
   },
   {
     figure: '80% vs 8%',
@@ -95,7 +93,7 @@ const FOUR = [
   {
     num: '02',
     lead: 'The work gets gated at the handovers, not on the calendar.',
-    rest: 'Decisions travel in conversation and nothing writes down why, so the next person inherits the what and rebuilds the reasoning from scratch.',
+    rest: 'Not every fortnight. At the specific points where the work changes hands, because that is where the reasoning gets left behind and the next person inherits the what without the why.',
   },
   {
     num: '03',
@@ -212,12 +210,27 @@ export default function SafePassage() {
                 It isn’t just you
               </h2>
             </FadeUp>
-            {/* The figures live behind one disclosure: a link headline under
-                the heading. Native details; no JS. */}
+            {/* The Gartner figure is always visible: the only external
+                corroboration on the page must not be the one thing hidden. */}
             <FadeUp delay={0.06}>
-            <details className="group mt-6">
+              <p className="mt-6 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[56ch]">
+                84% of chief marketing officers report high levels of strategic dysfunction, and 94% say translating
+                strategy into an actionable plan is a challenge.{' '}
+                <a
+                  href={GARTNER_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-stone underline-offset-[3px] transition-colors hover:text-ink hover:decoration-ink"
+                >
+                  Gartner asked 403 of them in 2025.
+                </a>
+              </p>
+            </FadeUp>
+            {/* Harvard and Bain sit behind the sourcing toggle. */}
+            <FadeUp delay={0.1}>
+            <details className="group mt-7">
               <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-[15px] font-medium text-ink [&::-webkit-details-marker]:hidden">
-                <span className="border-b border-ink/25 pb-0.5 transition-colors group-hover:border-ink">Read the stats</span>
+                <span className="border-b border-ink/25 pb-0.5 transition-colors group-hover:border-ink">Where these numbers come from</span>
                 <span
                   aria-hidden
                   className="inline-flex leading-none text-graphite transition-transform duration-300 group-open:rotate-45"
@@ -227,7 +240,7 @@ export default function SafePassage() {
                   </svg>
                 </span>
               </summary>
-            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-11">
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-11 max-w-[860px]">
               {EVIDENCE.map((e, i) => (
                 <FadeUp key={e.figure} delay={i * 0.08}>
                   <div className="border-t border-stone/70 pt-6 flex h-full flex-col">
@@ -344,16 +357,12 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 3b · THE PULL, THE DIAGRAM, THE PRINCIPLES: on the slate panel. ── */}
+        {/* ── 3b · THE DIAGRAM AND THE PRINCIPLES: on the slate panel. The
+            pull statement was cut (post-review): the charcoal panel's
+            "whatever survived" landing says it better, and signal to noise
+            stays in the title and the diagram, where it is earned. ── */}
         <section className="bg-blue-green text-bone py-16 md:py-24">
           <div className="u-container">
-            {/* The one pull statement on the page. Type only, no framing. */}
-            <FadeUp>
-              <p className="mt-10 md:mt-14 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-bone max-w-[24ch] mx-auto u-balance">
-                Attention and connection are a function of signal to noise.
-              </p>
-            </FadeUp>
-
             {/* The diagram, with the caption in body copy beneath it. */}
             <FadeUp>
               <figure className="mt-4">
@@ -434,6 +443,11 @@ export default function SafePassage() {
                 methodology for thirty years. Knowing which one a particular leak needs is the part that comes with
                 experience.
               </p>
+              {/* The name on the page. One sentence, no CV. */}
+              <p className="mt-4 text-[15px] leading-[1.7] text-graphite max-w-[52ch]">
+                I’m Darren Brett, twenty years inside agencies and alongside global brands, keeping work like this
+                moving.
+              </p>
             </FadeUp>
             {/* Four moves as four squares: solid soft-grey cards, a large
                 serif numeral in deep gold, the lead as a serif statement. */}
@@ -452,6 +466,22 @@ export default function SafePassage() {
                 </FadeUp>
               ))}
             </div>
+
+            {/* One named person on the record. Quiet treatment: no card, no
+                photograph, no logo. */}
+            <FadeUp delay={0.1}>
+              <figure className="mt-12 md:mt-14 max-w-[720px] border-l-2 border-stone pl-6 md:pl-8">
+                <blockquote className="font-serif text-[19px] md:text-[21px] leading-[1.55] text-ink">
+                  “Darren walked into a really difficult situation and made sense of it remarkably quickly. Within a
+                  few weeks, there was a plan, people understood what they were doing again, and the temperature had
+                  dropped considerably.”
+                </blockquote>
+                <figcaption className="mt-4 not-italic">
+                  <span className="block text-[14.5px] font-medium text-ink">Dave Wallace</span>
+                  <span className="block text-[13px] text-graphite">Former Global COO, Mirum</span>
+                </figcaption>
+              </figure>
+            </FadeUp>
           </div>
         </section>
 
@@ -473,6 +503,13 @@ export default function SafePassage() {
                     Between your decision and your customer, value is going missing.
                     <br />
                     You’re paying for it either way.
+                  </p>
+                  {/* The offer: a reader can now picture what they would be
+                      buying. No price, no phases, three things only. */}
+                  <p className="mt-4 text-lg text-ink max-w-[54ch] mx-auto text-balance">
+                    Four to six weeks inside your business, and three things come back. Where it’s leaking, named and
+                    located. What each one is costing you. And what to fix first, ranked by what it returns against
+                    what it takes.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
