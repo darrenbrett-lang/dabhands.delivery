@@ -470,7 +470,9 @@ export default function SafePassage() {
                 <FadeUp delay={0.06}>
                   {/* The page ends on money. */}
                   <p className="mt-5 text-lg text-graphite max-w-[54ch] mx-auto text-balance">
-                    Between your decision and your customer, value is going missing. You’re paying for it either way.
+                    Between your decision and your customer, value is going missing.
+                    <br />
+                    You’re paying for it either way.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
