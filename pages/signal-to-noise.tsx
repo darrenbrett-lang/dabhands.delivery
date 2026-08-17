@@ -215,7 +215,22 @@ export default function SafePassage() {
                 It isn’t just you
               </h2>
             </FadeUp>
-            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-11">
+            {/* The figures live behind one disclosure: a link headline under
+                the heading. Native details; no JS. */}
+            <FadeUp delay={0.06}>
+            <details className="group mt-6">
+              <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-[15px] font-medium text-ink [&::-webkit-details-marker]:hidden">
+                <span className="border-b border-ink/25 pb-0.5 transition-colors group-hover:border-ink">Read the stats</span>
+                <span
+                  aria-hidden
+                  className="inline-flex leading-none text-graphite transition-transform duration-300 group-open:rotate-45"
+                >
+                  <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                    <path d="M6 1.5V10.5M1.5 6H10.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </summary>
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-11">
               {EVIDENCE.map((e, i) => (
                 <FadeUp key={e.figure} delay={i * 0.08}>
                   <div className="border-t border-stone/70 pt-6 flex h-full flex-col">
@@ -243,11 +258,11 @@ export default function SafePassage() {
                 </FadeUp>
               ))}
             </div>
-            <FadeUp delay={0.12}>
-              <p className="mt-11 md:mt-12 text-[16px] md:text-[17px] leading-[1.75] text-ink max-w-[56ch]">
-                The same Harvard research found managers are three times more likely to miss a commitment because of
-                another team than because of their own.
-              </p>
+            <p className="mt-11 md:mt-12 text-[16px] md:text-[17px] leading-[1.75] text-ink max-w-[56ch]">
+              The same Harvard research found managers are three times more likely to miss a commitment because of
+              another team than because of their own.
+            </p>
+            </details>
             </FadeUp>
           </div>
         </section>
@@ -320,8 +335,8 @@ export default function SafePassage() {
 
             <FadeUp delay={0.3}>
               <p className="mt-6 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
-                Both act on the same idea. At every point it either gets stronger, or a piece of what made it worth
-                doing gets traded away for a perfectly good local reason.
+                Both systems act on the same idea. At every point it either gets stronger, or a piece of what
+                mattered gets traded away for a perfectly good local reason.
               </p>
             </FadeUp>
             <FadeUp delay={0.36}>
