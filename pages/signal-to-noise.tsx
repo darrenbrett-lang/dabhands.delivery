@@ -307,7 +307,7 @@ export default function SafePassage() {
             {/* The one pull statement on the page. Type only, no framing. */}
             <FadeUp>
               <p className="mt-2 md:mt-4 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-bone max-w-[24ch] mx-auto u-balance">
-                Connection is a function of signal to noise.
+                Attention and connection is a function of signal to noise.
               </p>
             </FadeUp>
 
