@@ -103,18 +103,6 @@ const FOUR = [
   },
 ];
 
-// Section 3b: the cascade. Five stages, and the payload the idea is still
-// carrying at each one. The lists get shorter left to right; that thinning
-// is the whole device, so the treatment stays neutral and the shrinking
-// does the talking. Marked up as an ordered list for screen readers.
-const CASCADE = [
-  { stage: 'The decision', carries: ['Why it mattered.', 'What good looks like.', 'What we would not trade away.', 'Who it is for.', 'The risk we accepted.'] },
-  { stage: 'The brief', carries: ['The objective.', 'The audience.', 'The constraints we remembered.'] },
-  { stage: 'The plan', carries: ['Scope.', 'Dates.', 'Dependencies.'] },
-  { stage: 'The work', carries: ['Requirements.', 'Acceptance criteria.'] },
-  { stage: 'What arrived', carries: ['What got built.'] },
-];
-
 // The five pre-build principles, in daylight: icon-led, graphical, five not
 // twelve (owner call, 2026-08-17: no disclosure). Icons share the diagram's
 // sketch weight: thin charcoal line work, nothing corporate.
@@ -313,36 +301,12 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 3b · THE CASCADE, THE PULL, THE DIAGRAM, THE PRINCIPLES. ── */}
-        <section className="bg-clay/20 text-ink py-16 md:py-24 border-t border-stone/60">
+        {/* ── 3b · THE PULL, THE DIAGRAM, THE PRINCIPLES: on the slate panel. ── */}
+        <section className="bg-blue-green text-bone py-16 md:py-24">
           <div className="u-container">
-            {/* The cascade: what the idea is still carrying, stage by stage.
-                The lists thin left to right; the shrinking is the argument. */}
-            <FadeUp>
-              <ol className="sp-cascade grid grid-cols-1 md:grid-cols-5 md:gap-x-12">
-                {CASCADE.map((c) => (
-                  <li key={c.stage} className="border-t border-stone/70 pt-5">
-                    <p className="text-[15px] font-medium text-ink">{c.stage}</p>
-                    <ul className="mt-3 space-y-1.5">
-                      {c.carries.map((item) => (
-                        <li key={item} className="text-[13.5px] leading-[1.55] text-graphite">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ol>
-            </FadeUp>
-            <FadeUp delay={0.08}>
-              <p className="mt-8 md:mt-10 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[56ch]">
-                Nobody deleted any of that. It just stopped being written down, one handover at a time.
-              </p>
-            </FadeUp>
-
             {/* The one pull statement on the page. Type only, no framing. */}
             <FadeUp>
-              <p className="mt-16 md:mt-24 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-ink max-w-[24ch] mx-auto u-balance">
+              <p className="mt-2 md:mt-4 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-bone max-w-[24ch] mx-auto u-balance">
                 Connection is a function of signal to noise.
               </p>
             </FadeUp>
@@ -352,7 +316,7 @@ export default function SafePassage() {
               <figure className="mt-4">
                 <SignalToNoiseDesktop />
                 <SignalToNoiseMobile />
-                <figcaption className="mt-6 md:mt-8 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[56ch]">
+                <figcaption className="mt-6 md:mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
                   Everyone between you and the customer is standing inside the part you can’t see. Which is why nobody
                   can tell you where it went.
                 </figcaption>
@@ -362,15 +326,15 @@ export default function SafePassage() {
             {/* The five pre-build principles: icon-led, in daylight. */}
             <div className="mt-14 md:mt-20">
               <FadeUp>
-                <p className="eyebrow text-graphite mb-8 md:mb-10">The principles behind it</p>
+                <p className="eyebrow mb-8 md:mb-10" style={{ color: '#EBD4A8' }}>The principles behind it</p>
               </FadeUp>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-9">
                 {PRINCIPLES.map((p, i) => (
                   <FadeUp key={p.lead} delay={i * 0.06}>
-                    <div className="border-t border-stone/70 pt-6 flex h-full flex-col">
-                      <span className="block h-8 w-8 text-ink">{p.icon}</span>
-                      <p className="mt-5 text-[15.5px] leading-[1.55] font-medium text-ink">{p.lead}</p>
-                      <p className="mt-2 text-[14.5px] leading-[1.65] text-graphite">{p.rest}</p>
+                    <div className="border-t border-bone/25 pt-6 flex h-full flex-col">
+                      <span className="block h-8 w-8 text-bone">{p.icon}</span>
+                      <p className="mt-5 text-[15.5px] leading-[1.55] font-medium text-bone">{p.lead}</p>
+                      <p className="mt-2 text-[14.5px] leading-[1.65] text-bone/80">{p.rest}</p>
                     </div>
                   </FadeUp>
                 ))}

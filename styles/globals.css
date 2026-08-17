@@ -274,27 +274,3 @@ p {
   .work-draw-path { stroke-dashoffset: 0 !important; animation: none !important; }
   .work-track { scroll-behavior: auto; }
 }
-
-/* ── Safe Passage cascade (pages/safe-passage.tsx): a sequence of stages
-   whose payload thins. Connectors are pseudo-elements so the markup stays a
-   clean ordered list for screen readers: a ↓ between stacked stages on
-   mobile, a → alongside each stage from md up. ── */
-.sp-cascade > li { position: relative; }
-.sp-cascade > li + li { margin-top: 2.6rem; }
-.sp-cascade > li + li::before {
-  content: '↓';
-  position: absolute;
-  top: -2rem;
-  left: 0;
-  color: var(--color-graphite);
-  font-size: 15px;
-  line-height: 1;
-}
-@media (min-width: 768px) {
-  .sp-cascade > li + li { margin-top: 0; }
-  .sp-cascade > li + li::before {
-    content: '→';
-    top: 1.35rem;
-    left: -2.05rem;
-  }
-}

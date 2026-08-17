@@ -11,12 +11,15 @@
  * shaded gap stays legible at 375px without zooming.
  */
 
-const INK = 'var(--color-ink)';
-const GRAPHITE = 'var(--color-graphite)';
+// The diagram lives on the Slate Blue panel: bone line-work, a faint bone
+// band, the gold-wash strip, and the light gold that stays legible on slate
+// (plain gold fails AA there; see the palette notes).
+const INK = 'var(--color-bone)';
+const GRAPHITE = 'color-mix(in srgb, var(--color-bone) 72%, transparent)';
 const GOLD = 'var(--color-gold)';
-const DEEP_GOLD = '#7E5E27';
-const BAND_FILL = 'color-mix(in srgb, var(--color-stone) 32%, transparent)';
-const STRIP_FILL = 'color-mix(in srgb, var(--color-gold) 15%, transparent)';
+const DEEP_GOLD = '#EBD4A8';
+const BAND_FILL = 'color-mix(in srgb, var(--color-bone) 8%, transparent)';
+const STRIP_FILL = 'color-mix(in srgb, var(--color-gold) 20%, transparent)';
 
 const BIG_COGS = ['Strategy', 'Brand', 'Commercial', 'Product', 'Content', 'Technology', 'Operations'];
 const SMALL_COGS = ['Brief', 'Plan', 'Design', 'Produce', 'Review', 'Approve', 'Deploy'];
