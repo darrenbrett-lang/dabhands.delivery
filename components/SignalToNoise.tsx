@@ -31,10 +31,10 @@ const BIG_COGS = ['Strategy', 'Brand', 'Commercial', 'Product', 'Content', 'Tech
 const SMALL_COGS = ['Brief', 'Plan', 'Design', 'Produce', 'Review', 'Approve', 'Deploy'];
 
 const IDEA_CARRIES = ['Clear insight', 'Strong idea', 'Defined intent', 'Customer truth'];
-const IMPACT_ITEMS = ['Notice', 'Feel something', 'Connect', 'Return again and again', 'Convert'];
+const IMPACT_ITEMS = ['Feel something', 'Connect', 'Return again and again', 'Convert'];
 
 const DESCRIPTION =
-  'Diagram. Two people, one at each end. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert. At the far right stands the customer, at the other end of the journey.';
+  'Diagram. Two people, one at each end. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: feel something, connect, return again and again, convert. At the far right stands the customer, at the other end of the journey.';
 
 // A calm, sketch-weight cog: a circle with radial teeth and a centre dot.
 const Cog = ({ cx, cy, r, teeth }: { cx: number; cy: number; r: number; teeth: number }) => {
@@ -132,12 +132,10 @@ export const SignalToNoiseDesktop = () => (
     {/* ── Customer impact, and the person it lands on: the mirror of the
         left end. Two people, one journey between them. ── */}
     <line x1="996" y1="188" x2="1020" y2="188" stroke={INK} strokeWidth="1.4" />
-    <rect x="1020" y="108" width="124" height="176" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="1082" y="132" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
-    <text x="1082" y="150" textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>When it arrives</text>
-    <text x="1082" y="163" textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>whole, people:</text>
+    <rect x="1020" y="118" width="124" height="140" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="1082" y="144" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
     {IMPACT_ITEMS.map((item, i) => (
-      <text key={item} x="1082" y={186 + i * 18} textAnchor="middle" fontSize="10" fill={GRAPHITE} style={label}>
+      <text key={item} x="1082" y={170 + i * 19} textAnchor="middle" fontSize="10" fill={GRAPHITE} style={label}>
         {item === 'Return again and again' ? 'Return again' : item}
       </text>
     ))}
@@ -260,11 +258,10 @@ export const SignalToNoiseMobile = () => (
     <text x="198" y="526" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
 
     {/* Customer impact: what people do when it arrives whole */}
-    <rect x="92" y="570" width="176" height="146" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="180" y="594" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
-    <text x="180" y="611" textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>When it arrives whole, people:</text>
+    <rect x="92" y="570" width="176" height="122" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="180" y="596" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
     {IMPACT_ITEMS.map((item, i) => (
-      <text key={item} x="180" y={633 + i * 17} textAnchor="middle" fontSize="10" fill={GRAPHITE} style={label}>
+      <text key={item} x="180" y={620 + i * 18} textAnchor="middle" fontSize="10" fill={GRAPHITE} style={label}>
         {item}
       </text>
     ))}
