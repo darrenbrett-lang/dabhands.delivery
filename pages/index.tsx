@@ -276,12 +276,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.28}>
                   <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-bone/85">
-                    The team expands only when the work demands it.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.34}>
-                  <p className="mt-8 md:mt-9 font-serif text-[22px] md:text-[26px] leading-[1.25] text-bone u-balance">
-                    Never the other way around.
+                    The team expands only when the work demands it. Never the other way around.
                   </p>
                 </FadeUp>
               </div>
