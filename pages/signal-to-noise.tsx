@@ -434,8 +434,8 @@ export default function SafePassage() {
                   Never cut or soften it. */}
               <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[52ch]">
                 None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
-                methodology for thirty years. Knowing which one a particular leak needs is the part that isn’t in a
-                book.
+                methodology for thirty years. Knowing which one a particular leak needs is the part that comes with
+                experience.
               </p>
             </FadeUp>
             {/* Four moves as four squares: solid soft-grey cards, a large
