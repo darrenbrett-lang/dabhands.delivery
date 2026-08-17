@@ -115,21 +115,26 @@ export default function Home() {
                   <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
                 </div>
                 {/* The promise line: the one sentence on the site where Darren is
-                    the subject. A spoken standfirst, not a strapline: serif,
-                    between body and heading scale, no decoration. Appears once
-                    across the whole site, only here, by design. */}
+                    the subject, and the largest type in this block (still under the
+                    page h1). A spoken standfirst: serif, no decoration, once across
+                    the whole site. The nowrap spans are load-bearing: wraps may only
+                    land after "ambition", "you" or "takes," so no line ever ends on
+                    a conjunction or pronoun; sizes are tuned so the longest phrase
+                    clears this narrow column at every breakpoint. */}
                 <div className="rise" style={{ '--rise-delay': '0.08s' } as CSSProperties}>
-                  <p className="font-serif text-[22px] md:text-[26px] leading-[1.35] text-ink max-w-[36ch] u-balance mb-7 md:mb-8">
-                    Hand me an ambition and I’ll tell you what it actually takes, then I’ll make it happen.
+                  <p className="font-serif text-[28px] md:text-[30px] lg:text-[32px] xl:text-[40px] leading-[1.18] text-ink mb-7 md:mb-8">
+                    <span className="whitespace-nowrap">Hand me an ambition</span> <span className="whitespace-nowrap">and I’ll tell you</span>{' '}
+                    <span className="whitespace-nowrap">what it actually takes,</span> <span className="whitespace-nowrap">then I’ll make it happen.</span>
                   </p>
                 </div>
+                {/* The career sentence: background, body scale, must not compete. */}
                 <div className="rise" style={{ '--rise-delay': '0.14s' } as CSSProperties}>
-                  <p className="font-serif text-[30px] md:text-[34px] lg:text-[44px] leading-[1.14] text-ink u-balance">
+                  <p className="text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, and alongside global brands and businesses in motion.
                   </p>
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
-                  <p className="mt-7 md:mt-8 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     I’ve led major programmes, built operating structures from the ground up, and helped leaders close the gap between what they intend to deliver and what actually gets built.
                   </p>
                 </div>
