@@ -79,22 +79,6 @@ const EVIDENCE = [
   },
 ];
 
-// Section 5: what the diagnostic returns. The commercial centre.
-const FINDINGS = [
-  {
-    lead: 'Where it’s leaking.',
-    rest: 'The specific handovers in your business where intent gets traded away, named and located.',
-  },
-  {
-    lead: 'What each one costs you.',
-    rest: 'In rework, in delay, and in money spent on work that lands weaker than it should have.',
-  },
-  {
-    lead: 'What to fix first.',
-    rest: 'Ranked by what it returns against what it takes.',
-  },
-];
-
 // Section 6: the four moves. Numbered, separated, never prose.
 const FOUR = [
   {
@@ -387,34 +371,6 @@ export default function SafePassage() {
                   </p>
                 </FadeUp>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 5 · WHAT THE WORK FINDS: the commercial centre of the page.
-            Everything above it argues the work is worth buying; this is the
-            work. ── */}
-        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
-          <div className="u-container">
-            <FadeUp>
-              <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
-                What the work finds
-              </h2>
-              <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[48ch]">
-                Four to six weeks inside your business. Three things come back.
-              </p>
-            </FadeUp>
-            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-9">
-              {FINDINGS.map((f, i) => (
-                <FadeUp key={f.lead} delay={i * 0.08}>
-                  <div className="border-t border-stone/70 pt-6">
-                    <p className="font-serif text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.01em] text-ink">
-                      {f.lead}
-                    </p>
-                    <p className="mt-3 text-[15px] leading-[1.7] text-graphite max-w-[38ch]">{f.rest}</p>
-                  </div>
-                </FadeUp>
-              ))}
             </div>
           </div>
         </section>
