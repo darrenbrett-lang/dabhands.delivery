@@ -265,10 +265,12 @@ export default function SafePassage() {
               </p>
             </FadeUp>
 
-            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 items-stretch">
+            {/* The business card takes a touch more of the row at xl so its
+                seven lozenges hold one line; below xl they wrap naturally. */}
+            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.1fr_1fr] gap-5 md:gap-6 items-stretch">
               {SYSTEMS.map((s, i) => (
                 <FadeUp key={s.name} delay={0.08 + i * 0.08} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-bone/15 p-6 md:p-7">
+                  <div className="flex h-full flex-col rounded-2xl border border-bone/15 p-6 md:p-7 xl:p-6">
                     <div className="flex items-center gap-4">
                       <span className="block h-9 w-9 shrink-0 text-bone">{s.icon}</span>
                       <div>
@@ -276,9 +278,9 @@ export default function SafePassage() {
                         <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">{s.line}</p>
                       </div>
                     </div>
-                    <div className="mt-5 flex flex-wrap gap-2">
+                    <div className="mt-5 flex flex-wrap gap-2 xl:flex-nowrap xl:gap-1.5">
                       {s.stages.map((stage) => (
-                        <span key={stage} className="rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80">
+                        <span key={stage} className="whitespace-nowrap rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80 xl:px-2 xl:text-[11px]">
                           {stage}
                         </span>
                       ))}
