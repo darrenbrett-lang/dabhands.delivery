@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
 import { SignalToNoiseDesktop, SignalToNoiseMobile } from '@/components/SignalToNoise';
+import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
 
 /*
@@ -519,6 +520,13 @@ export default function SafePassage() {
                       Start a conversation
                       <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                     </a>
+                  </div>
+                </FadeUp>
+                {/* The soft exit for the reader who isn't ready to email:
+                    the homepage's pathway picker, secondary to the CTA. */}
+                <FadeUp delay={0.14}>
+                  <div className="flex justify-center">
+                    <PathwayPicker />
                   </div>
                 </FadeUp>
               </div>
