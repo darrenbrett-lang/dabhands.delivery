@@ -293,25 +293,16 @@ export default function SafePassage() {
               ))}
             </div>
 
-            {/* The third row: the shared foundation under the two systems.
-                Full width, identical treatment, no added emphasis. */}
+            {/* The third block is not a system: it is the hands operating both
+                of them. No card, no border, no icon; kicker, statement and
+                chips sit directly on the ground the two boxes stand on. */}
             <FadeUp delay={0.2}>
-              <div className="mt-5 md:mt-6 rounded-2xl border border-bone/15 p-6 md:p-7 xl:p-6">
-                <div className="flex items-center gap-4">
-                  <span className="block h-9 w-9 shrink-0 text-bone" aria-hidden>
-                    <svg viewBox="0 0 36 36" {...S_ICON}>
-                      <circle cx="18" cy="13" r="6" />
-                      <path d="M7 29c2.5-7 19.5-7 22 0" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="eyebrow text-bone/60">Who’s holding it</p>
-                    <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">
-                      People, mostly. Increasingly not.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-9 md:mt-11">
+                <p className="eyebrow text-bone/60">Who’s holding it</p>
+                <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">
+                  People, mostly. Increasingly not.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
                   {HOLDERS.map((h) => (
                     <span key={h} className="whitespace-nowrap rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80 xl:px-2 xl:text-[11px]">
                       {h}
