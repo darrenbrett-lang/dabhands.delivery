@@ -190,7 +190,7 @@ export default function SafePassage() {
         <section className="bg-bone text-ink pt-36 md:pt-48 pb-16 md:pb-24">
           <div className="u-container">
             <div className="rise">
-              <p className="eyebrow text-graphite mb-6">Safe Passage</p>
+              <p className="eyebrow text-graphite mb-6">Safe Passage · A delivery discipline</p>
               <h1 className="font-serif text-[36px] md:text-[50px] lg:text-[58px] leading-[1.1] tracking-[-0.01em] max-w-[24ch] u-balance">
                 The idea was good. Everybody was competent. It still arrived weaker than it left.
               </h1>
