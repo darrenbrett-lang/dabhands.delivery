@@ -2,9 +2,10 @@
  * The Signal to Noise diagram, rebuilt as native SVG from the original
  * framework poster: the spine only (Idea & intent → the two cog systems →
  * customer impact), in the house palette. Over it sits the interpretive
- * layer from the August 2026 brief: the person who said yes, two dashed
- * sight lines that stop short, and the shaded stretch between them that
- * nobody in the room can see.
+ * layer from the August 2026 briefs: the person who said yes, and two
+ * dashed sight lines labelled loss of signal and acquisition of signal,
+ * spaceflight-style. The whole system band is shaded: the unobserved
+ * stretch is the journey itself, not a region of it.
  *
  * The two end panels carry a touch of the poster's context: what the idea
  * arrives with, and what people do when it arrives whole. Micro-type only;
@@ -33,7 +34,7 @@ const IDEA_CARRIES = ['Clear insight', 'Strong idea', 'Defined intent', 'Custome
 const IMPACT_ITEMS = ['Notice', 'Feel something', 'Connect', 'Return again and again', 'Convert'];
 
 const DESCRIPTION =
-  'Diagram. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. A dashed sight line from you, labelled what you can see, reaches only a short way into the band before it stops. A second dashed line from the customer impact panel at the right, labelled what turned up, reaches only a short way back. The stretch between the two, covering the middle cogs of both rows, is shaded and labelled nobody watches this bit. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert.';
+  'Diagram. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer impact panel at the right, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert.';
 
 // A calm, sketch-weight cog: a circle with radial teeth and a centre dot.
 const Cog = ({ cx, cy, r, teeth }: { cx: number; cy: number; r: number; teeth: number }) => {
@@ -80,16 +81,11 @@ export const SignalToNoiseDesktop = () => (
     aria-label={DESCRIPTION}
     className="hidden md:block w-full h-auto select-none"
   >
-    {/* ── The system band ── */}
+    {/* ── The system band: shaded edge to edge. The unobserved stretch is
+        the whole journey, not a region of it; the two sight-line labels at
+        either end define the gap, so no text sits inside it. ── */}
     <rect x="226" y="66" width="770" height="366" rx="14" style={{ fill: BAND_FILL }} />
-
-    {/* ── The shaded stretch nobody can see ── */}
-    <rect x="430" y="66" width="360" height="366" style={{ fill: STRIP_FILL }} />
-    <line x1="430" y1="66" x2="430" y2="432" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
-    <line x1="790" y1="66" x2="790" y2="432" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
-    <text x="610" y="92" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
-      NOBODY WATCHES THIS BIT
-    </text>
+    <rect x="226" y="66" width="770" height="366" rx="14" style={{ fill: STRIP_FILL }} />
 
     {/* ── You, and the idea you backed: what it set out with ── */}
     <Figure cx={46} cy={172} />
@@ -145,15 +141,16 @@ export const SignalToNoiseDesktop = () => (
       </text>
     ))}
 
-    {/* ── The sight lines: they stop, they don't arrive ── */}
+    {/* ── The sight lines: contact stops at the band's edge and resumes at
+        the other side, spaceflight-style. Bars, not arrowheads. ── */}
     <g stroke={INK} strokeWidth="1.3" opacity="0.75">
-      <line x1="58" y1="34" x2="430" y2="34" strokeDasharray="6 5" />
-      <line x1="430" y1="25" x2="430" y2="43" />
-      <line x1="1082" y1="34" x2="790" y2="34" strokeDasharray="6 5" />
-      <line x1="790" y1="25" x2="790" y2="43" />
+      <line x1="58" y1="34" x2="226" y2="34" strokeDasharray="6 5" />
+      <line x1="226" y1="25" x2="226" y2="43" />
+      <line x1="1082" y1="34" x2="996" y2="34" strokeDasharray="6 5" />
+      <line x1="996" y1="25" x2="996" y2="43" />
     </g>
-    <text x="58" y="20" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
-    <text x="1082" y="20" textAnchor="end" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
+    <text x="58" y="20" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
+    <text x="1082" y="20" textAnchor="end" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
     <line x1="46" y1="44" x2="46" y2="150" stroke={INK} strokeWidth="1" opacity="0.25" />
     <line x1="1082" y1="44" x2="1082" y2="100" stroke={INK} strokeWidth="1" opacity="0.25" />
   </svg>
@@ -196,9 +193,8 @@ const CyclingLabel = ({ variants, x, y }: { variants: string[]; x: number; y: nu
 );
 
 // The small-screen telling: person → system → gap → outcome, top to bottom.
-// Both cog rows sit fully inside the shaded stretch (that overlap is the
-// argument); a thin visible sliver remains at each end of the band, where
-// the two sight lines stop. Labels keep clear lanes: nothing collides.
+// The band is shaded edge to edge; the sight lines stop at its boundaries
+// with bar terminators, and their labels sit outside the band.
 export const SignalToNoiseMobile = () => (
   <svg
     viewBox="0 0 360 724"
@@ -218,18 +214,14 @@ export const SignalToNoiseMobile = () => (
       </text>
     ))}
 
-    {/* Sight line in: stops just inside the band's top sliver */}
-    <line x1="40" y1="68" x2="40" y2="172" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
-    <line x1="31" y1="172" x2="49" y2="172" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="58" y="176" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
+    {/* Sight line in: contact stops at the band's top edge */}
+    <line x1="40" y1="68" x2="40" y2="148" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+    <line x1="31" y1="148" x2="49" y2="148" stroke={INK} strokeWidth="1.3" opacity="0.75" />
+    <text x="58" y="122" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
 
-    {/* The system band */}
+    {/* The system band: shaded edge to edge, the whole journey unobserved */}
     <rect x="16" y="148" width="328" height="374" rx="12" style={{ fill: BAND_FILL }} />
-
-    {/* The shaded stretch: covers BOTH rows, labels and all */}
-    <rect x="16" y="188" width="328" height="294" style={{ fill: STRIP_FILL }} />
-    <line x1="16" y1="188" x2="344" y2="188" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
-    <line x1="16" y1="482" x2="344" y2="482" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
+    <rect x="16" y="148" width="328" height="374" rx="12" style={{ fill: STRIP_FILL }} />
 
     {/* Business row: each slot cycles through its share of the seven */}
     <text x="32" y="214" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
@@ -243,11 +235,6 @@ export const SignalToNoiseMobile = () => (
       );
     })}
 
-    {/* The strip label sits in the clear lane between the two rows */}
-    <text x="180" y="342" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
-      NOBODY WATCHES THIS BIT
-    </text>
-
     {/* Process row: same cycling, same beat */}
     <text x="32" y="378" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
     {MOBILE_PROCESS.map((variants, i) => {
@@ -260,10 +247,10 @@ export const SignalToNoiseMobile = () => (
       );
     })}
 
-    {/* Sight line back: stops just inside the band's bottom sliver */}
-    <line x1="180" y1="566" x2="180" y2="498" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
-    <line x1="171" y1="498" x2="189" y2="498" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="194" y="540" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
+    {/* Sight line back: contact resumes at the band's bottom edge */}
+    <line x1="180" y1="566" x2="180" y2="522" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+    <line x1="171" y1="522" x2="189" y2="522" stroke={INK} strokeWidth="1.3" opacity="0.75" />
+    <text x="194" y="548" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
 
     {/* Customer impact: what people do when it arrives whole */}
     <rect x="92" y="570" width="176" height="146" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />

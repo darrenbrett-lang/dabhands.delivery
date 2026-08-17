@@ -26,6 +26,12 @@ const DEEP_GOLD = '#7E5E27';
 // system, small meshing cogs for the process system.
 const S_ICON = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' } as const;
 
+// The third row: who's holding the idea at each point. Agents sits last
+// deliberately: the newest hand in a row of familiar ones, never the
+// subject. This card carries the agentic-delivery point structurally; the
+// word AI appears nowhere on the page.
+const HOLDERS = ['Your team', 'Agencies', 'Partners', 'Contractors', 'Agents'];
+
 const SYSTEMS = [
   {
     name: 'The business system',
@@ -287,13 +293,47 @@ export default function SafePassage() {
               ))}
             </div>
 
+            {/* The third row: the shared foundation under the two systems.
+                Full width, identical treatment, no added emphasis. */}
             <FadeUp delay={0.2}>
-              <p className="mt-10 md:mt-12 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
+              <div className="mt-5 md:mt-6 rounded-2xl border border-bone/15 p-6 md:p-7 xl:p-6">
+                <div className="flex items-center gap-4">
+                  <span className="block h-9 w-9 shrink-0 text-bone" aria-hidden>
+                    <svg viewBox="0 0 36 36" {...S_ICON}>
+                      <circle cx="18" cy="13" r="6" />
+                      <path d="M7 29c2.5-7 19.5-7 22 0" />
+                    </svg>
+                  </span>
+                  <div>
+                    <p className="eyebrow text-bone/60">Who’s holding it</p>
+                    <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">
+                      People, mostly. Increasingly not.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {HOLDERS.map((h) => (
+                    <span key={h} className="whitespace-nowrap rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80 xl:px-2 xl:text-[11px]">
+                      {h}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.26}>
+              <p className="mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
+                Someone who was in the room carries the reasons without being told. Everything else carries only what
+                was written down.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.3}>
+              <p className="mt-6 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
                 Both act on the same idea. At every point it either gets stronger, or a piece of what made it worth
                 doing gets traded away for a perfectly good local reason.
               </p>
             </FadeUp>
-            <FadeUp delay={0.26}>
+            <FadeUp delay={0.36}>
               <p className="mt-6 font-serif text-[22px] md:text-[26px] leading-[1.3] text-bone u-balance">
                 What reaches your customer is whatever survived.
               </p>
@@ -316,8 +356,8 @@ export default function SafePassage() {
               <figure className="mt-4">
                 <SignalToNoiseDesktop />
                 <SignalToNoiseMobile />
-                <figcaption className="mt-6 md:mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
-                  Everyone in the middle is doing their job properly. None of them is watching the whole journey.
+                <figcaption className="mt-6 md:mt-8 text-center mx-auto text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
+                  Everyone in the middle is doing their job properly. Nobody watches it move.
                 </figcaption>
               </figure>
             </FadeUp>
