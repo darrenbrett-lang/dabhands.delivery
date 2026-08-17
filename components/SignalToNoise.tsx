@@ -138,71 +138,76 @@ export const SignalToNoiseDesktop = () => (
 );
 
 // The small-screen telling: person → system → gap → outcome, top to bottom.
+// Both cog rows sit fully inside the shaded stretch (that overlap is the
+// argument); a thin visible sliver remains at each end of the band, where
+// the two sight lines stop. Labels keep clear lanes: nothing collides.
 export const SignalToNoiseMobile = () => (
   <svg
-    viewBox="0 0 360 660"
+    viewBox="0 0 360 600"
     role="img"
     aria-label={DESCRIPTION}
     className="md:hidden w-full h-auto select-none"
   >
     {/* You and the idea */}
-    <Figure cx={40} cy={30} />
-    <text x="72" y="30" fontSize="13" fontWeight="600" fill={INK} style={label}>You</text>
-    <text x="72" y="47" fontSize="11.5" fill={GRAPHITE} style={label}>said yes</text>
-    <rect x="216" y="12" width="128" height="44" rx="10" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="280" y="38" textAnchor="middle" fontSize="12" fill={INK} style={label}>Idea &amp; intent</text>
-
-    {/* Sight line in */}
-    <line x1="40" y1="72" x2="40" y2="208" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
-    <line x1="31" y1="208" x2="49" y2="208" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="54" y="150" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
+    <Figure cx={40} cy={26} />
+    <text x="72" y="26" fontSize="13" fontWeight="600" fill={INK} style={label}>You</text>
+    <text x="72" y="43" fontSize="11.5" fill={GRAPHITE} style={label}>said yes</text>
+    <rect x="216" y="8" width="128" height="44" rx="10" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="280" y="34" textAnchor="middle" fontSize="12" fill={INK} style={label}>Idea &amp; intent</text>
 
     {/* The system band */}
-    <rect x="16" y="96" width="328" height="378" rx="12" style={{ fill: BAND_FILL }} />
+    <rect x="16" y="104" width="328" height="372" rx="12" style={{ fill: BAND_FILL }} />
 
-    {/* The shaded stretch between the two sight lines */}
-    <rect x="16" y="212" width="328" height="240" style={{ fill: STRIP_FILL }} />
-    <line x1="16" y1="212" x2="344" y2="212" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
-    <line x1="16" y1="452" x2="344" y2="452" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
-    <text x="180" y="336" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
-      YOU CAN’T SEE THIS
-    </text>
+    {/* Sight line in: stops just inside the band's top sliver */}
+    <line x1="40" y1="68" x2="40" y2="128" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+    <line x1="31" y1="128" x2="49" y2="128" stroke={INK} strokeWidth="1.3" opacity="0.75" />
+    <text x="58" y="132" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
+
+    {/* The shaded stretch: covers BOTH rows, labels and all */}
+    <rect x="16" y="142" width="328" height="294" style={{ fill: STRIP_FILL }} />
+    <line x1="16" y1="142" x2="344" y2="142" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
+    <line x1="16" y1="436" x2="344" y2="436" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
 
     {/* Business row */}
-    <text x="32" y="128" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
+    <text x="32" y="168" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
     {['Strategy', 'Product', 'Operations'].map((name, i) => {
       const cx = 76 + i * 104;
       return (
         <g key={name}>
-          <Cog cx={cx} cy={172} r={24} teeth={8} />
-          <text x={cx} y={220} textAnchor="middle" fontSize="10" letterSpacing="0.05em" fill={GRAPHITE} style={label}>
+          <Cog cx={cx} cy={210} r={24} teeth={8} />
+          <text x={cx} y={258} textAnchor="middle" fontSize="10" letterSpacing="0.05em" fill={GRAPHITE} style={label}>
             {name}
           </text>
         </g>
       );
     })}
 
+    {/* The strip label sits in the clear lane between the two rows */}
+    <text x="180" y="296" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
+      YOU CAN’T SEE THIS
+    </text>
+
     {/* Process row */}
-    <text x="32" y="374" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
+    <text x="32" y="330" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
     {['Brief', 'Produce', 'Deploy'].map((name, i) => {
       const cx = 76 + i * 104;
       return (
         <g key={name}>
-          <Cog cx={cx} cy={412} r={16} teeth={6} />
-          <text x={cx} y={452} textAnchor="middle" fontSize="10" letterSpacing="0.05em" fill={GRAPHITE} style={label}>
+          <Cog cx={cx} cy={372} r={16} teeth={6} />
+          <text x={cx} y={412} textAnchor="middle" fontSize="10" letterSpacing="0.05em" fill={GRAPHITE} style={label}>
             {name}
           </text>
         </g>
       );
     })}
 
-    {/* Sight line back */}
-    <line x1="180" y1="588" x2="180" y2="458" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
-    <line x1="171" y1="458" x2="189" y2="458" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="192" y="530" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
+    {/* Sight line back: stops just inside the band's bottom sliver */}
+    <line x1="180" y1="524" x2="180" y2="452" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+    <line x1="171" y1="452" x2="189" y2="452" stroke={INK} strokeWidth="1.3" opacity="0.75" />
+    <text x="194" y="502" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
 
     {/* Customer impact */}
-    <rect x="100" y="592" width="160" height="52" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="180" y="623" textAnchor="middle" fontSize="12.5" fontWeight="500" fill={INK} style={label}>Customer impact</text>
+    <rect x="100" y="532" width="160" height="52" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="180" y="563" textAnchor="middle" fontSize="12.5" fontWeight="500" fill={INK} style={label}>Customer impact</text>
   </svg>
 );
