@@ -336,19 +336,22 @@ export default function SafePassage() {
                 </div>
               </div>
             </FadeUp>
-            <FadeUp delay={0.26}>
-              <p className="mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
-                Someone who was in the room carries the reasons without being told. Everything else carries only what
-                was written down.
-              </p>
-            </FadeUp>
-
-            <FadeUp delay={0.3}>
-              <p className="mt-6 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[56ch]">
-                Both systems act on the same idea. At every point it either gets stronger, or a piece of what
-                mattered gets traded away for a perfectly good local reason.
-              </p>
-            </FadeUp>
+            {/* The two consequences sit as a top-aligned pair, each holding
+                two lines at desktop: the longer takes the wider column. */}
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-[1fr_1.35fr] gap-x-8 gap-y-6 items-start">
+              <FadeUp delay={0.26}>
+                <p className="text-[16px] xl:text-[15.5px] leading-[1.8] text-bone/80">
+                  Someone who was in the room carries the reasons without being told. Everything else carries only
+                  what was written down.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.3}>
+                <p className="text-[16px] xl:text-[15.5px] leading-[1.8] text-bone/80">
+                  Both systems act on the same idea. At every point it either gets stronger, or a piece of what
+                  mattered gets traded away for a perfectly good local reason.
+                </p>
+              </FadeUp>
+            </div>
           </div>
         </section>
 
