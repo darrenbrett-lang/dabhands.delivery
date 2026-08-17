@@ -394,17 +394,19 @@ export default function SafePassage() {
                 It isn’t governance and it isn’t more meetings. It’s four things.
               </p>
             </FadeUp>
-            <div className="mt-10 md:mt-12 max-w-[860px]">
+            {/* Four moves as four squares: solid soft-grey cards, a large
+                serif numeral in deep gold, the lead as a serif statement. */}
+            <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 items-stretch max-w-[980px]">
               {FOUR.map((f, i) => (
-                <FadeUp key={f.num} delay={i * 0.06}>
-                  <div className="grid grid-cols-[3rem_1fr] md:grid-cols-[4rem_1fr] items-baseline border-t border-stone/70 py-6 md:py-7">
-                    <p className="font-serif text-[15px]" style={{ color: DEEP_GOLD }} aria-hidden>
+                <FadeUp key={f.num} delay={i * 0.07} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl p-6 md:p-8" style={{ backgroundColor: 'var(--color-stone)' }}>
+                    <p className="font-serif text-[30px] md:text-[34px] leading-none" style={{ color: DEEP_GOLD }} aria-hidden>
                       {f.num}
                     </p>
-                    <p className="text-[16px] md:text-[17px] leading-[1.7]">
-                      <span className="font-semibold text-ink">{f.lead}</span>{' '}
-                      <span className="text-graphite">{f.rest}</span>
+                    <p className="mt-4 md:mt-5 font-serif text-[21px] md:text-[23px] leading-[1.25] tracking-[-0.01em] text-ink text-balance">
+                      {f.lead}
                     </p>
+                    <p className="mt-3 text-[15px] leading-[1.7] text-ink/75">{f.rest}</p>
                   </div>
                 </FadeUp>
               ))}
