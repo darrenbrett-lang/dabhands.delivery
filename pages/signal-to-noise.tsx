@@ -349,11 +349,6 @@ export default function SafePassage() {
                 mattered gets traded away for a perfectly good local reason.
               </p>
             </FadeUp>
-            <FadeUp delay={0.36}>
-              <p className="mt-6 font-serif text-[22px] md:text-[26px] leading-[1.3] text-bone u-balance">
-                What reaches your customer is whatever survived.
-              </p>
-            </FadeUp>
           </div>
         </section>
 
@@ -363,6 +358,13 @@ export default function SafePassage() {
             stays in the title and the diagram, where it is earned. ── */}
         <section className="bg-blue-green text-bone py-16 md:py-24">
           <div className="u-container">
+            {/* The section's landing, centred over the visual. */}
+            <FadeUp>
+              <p className="mt-2 md:mt-4 mb-12 md:mb-16 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-bone max-w-[24ch] mx-auto u-balance">
+                What reaches your customer is whatever survived.
+              </p>
+            </FadeUp>
+
             {/* The diagram, with the caption in body copy beneath it. */}
             <FadeUp>
               <figure className="mt-4">
