@@ -39,7 +39,9 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
     <footer className="bg-charcoal text-bone/75 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <Link href="/" className="inline-flex items-baseline" aria-label="DAB Hands, home">
+          <Link href="/" className="inline-flex items-center gap-2" aria-label="DAB Hands, home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/DabHands_crown_white.png" alt="" aria-hidden width={467} height={367} loading="lazy" decoding="async" className="block h-[22px] w-auto select-none" />
             <span className="font-serif text-bone text-[19px] tracking-[-0.01em]">DAB Hands</span>
           </Link>
           <div className="flex items-center gap-5">
