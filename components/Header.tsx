@@ -103,6 +103,7 @@ export const Header = () => {
   };
 
   const whoActive = audiences.some((a) => router.pathname === a.href);
+  const safePassageActive = router.pathname === '/safe-passage';
   const contactActive = router.pathname === '/contact';
   const room = audiences.find((a) => router.pathname === a.href) ?? null;
   const showContext = atP2 && !!room;
@@ -121,11 +122,16 @@ export const Header = () => {
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
           <div className="relative">
+            {/* The lockup: the drawn crown beside the serif wordmark (owner call,
+                2026-08-17). The crown reads slightly taller than the caps, its
+                base sitting near the text baseline, like the reference lockup. */}
             <Link
               href="/"
-              className="inline-flex items-baseline"
+              className="inline-flex items-center gap-2.5 md:gap-3"
               aria-label="DAB Hands, home"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} decoding="async" className="block h-7 md:h-8 w-auto select-none" />
               <span className="font-serif text-ink text-[24px] md:text-[28px] leading-none tracking-[-0.01em]">DAB Hands</span>
             </Link>
             {/* Persistent room locator: fades in beneath the wordmark once the
@@ -218,6 +224,15 @@ export const Header = () => {
             </div>
 
             <Link
+              href="/safe-passage"
+              className={`text-[14px] tracking-[-0.01em] transition-colors ${
+                safePassageActive ? 'text-ink' : 'text-graphite hover:text-ink'
+              }`}
+            >
+              Safe Passage
+            </Link>
+
+            <Link
               href="/contact"
               className={`text-[14px] tracking-[-0.01em] transition-colors ${
                 contactActive ? 'text-ink' : 'text-graphite hover:text-ink'
@@ -274,9 +289,22 @@ export const Header = () => {
                 transition={{ delay: 0.06 + audiences.length * 0.05 }}
               >
                 <Link
-                  href="/contact"
+                  href="/safe-passage"
                   onClick={() => setMenuOpen(false)}
                   className="block font-serif text-[30px] leading-[1.18] py-1.5 border-t border-stone pt-6"
+                >
+                  Safe Passage
+                </Link>
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.06 + (audiences.length + 1) * 0.05 }}
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block font-serif text-[30px] leading-[1.18] py-1.5"
                 >
                   Contact
                 </Link>
