@@ -194,14 +194,11 @@ export default function SafePassage() {
                 Everyone who has worked inside a large organisation has watched this happen. You’ll know it from the
                 moment the work came back, and it was good, and it wasn’t what you meant.
               </p>
-              <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
-                Nobody did anything wrong. It just got a little smaller at every handover, for perfectly good reasons,
-                until what reached the customer wasn’t what anyone set out to build.
-              </p>
             </div>
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
               <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
-                And nobody stops it, because everything is visibly moving. Movement gets read as health.
+                It gets a little smaller at every handover, always for a perfectly good reason. And nobody stops it,
+                because everything is visibly moving, and movement gets read as health.
               </p>
             </div>
           </div>
