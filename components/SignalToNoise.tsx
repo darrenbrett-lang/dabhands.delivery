@@ -140,6 +140,42 @@ export const SignalToNoiseDesktop = () => (
   </svg>
 );
 
+// The small-screen slots cycle their labels through the full seven stages
+// (3s per phase, CSS-driven), so the simplified telling carries everything
+// the desktop one does. Slots of two use a 6s window, slots of three a 9s
+// window; all switch on the same 3s beat. Reduced motion pins the first
+// label of each slot. Distribution: 2 + 2 + 3 covers all seven per row.
+const MOBILE_BUSINESS: string[][] = [
+  ['Strategy', 'Product'],
+  ['Brand', 'Content'],
+  ['Commercial', 'Technology', 'Operations'],
+];
+const MOBILE_PROCESS: string[][] = [
+  ['Brief', 'Produce'],
+  ['Plan', 'Review'],
+  ['Design', 'Approve', 'Deploy'],
+];
+
+const CyclingLabel = ({ variants, x, y }: { variants: string[]; x: number; y: number }) => (
+  <>
+    {variants.map((name, i) => (
+      <text
+        key={name}
+        x={x}
+        y={y}
+        textAnchor="middle"
+        fontSize="10"
+        letterSpacing="0.05em"
+        fill={GRAPHITE}
+        style={label}
+        className={`${variants.length === 3 ? 'sn-seq3' : 'sn-seq2'} ${i === 1 ? 'sn-d1' : ''} ${i === 2 ? 'sn-d2' : ''} ${i === 0 ? 'sn-first' : ''}`}
+      >
+        {name}
+      </text>
+    ))}
+  </>
+);
+
 // The small-screen telling: person → system → gap → outcome, top to bottom.
 // Both cog rows sit fully inside the shaded stretch (that overlap is the
 // argument); a thin visible sliver remains at each end of the band, where
@@ -171,16 +207,14 @@ export const SignalToNoiseMobile = () => (
     <line x1="16" y1="142" x2="344" y2="142" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
     <line x1="16" y1="436" x2="344" y2="436" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
 
-    {/* Business row */}
+    {/* Business row: each slot cycles through its share of the seven */}
     <text x="32" y="168" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
-    {['Strategy', 'Product', 'Operations'].map((name, i) => {
+    {MOBILE_BUSINESS.map((variants, i) => {
       const cx = 76 + i * 104;
       return (
-        <g key={name}>
+        <g key={variants[0]}>
           <Cog cx={cx} cy={210} r={24} teeth={8} />
-          <text x={cx} y={258} textAnchor="middle" fontSize="10" letterSpacing="0.05em" fill={GRAPHITE} style={label}>
-            {name}
-          </text>
+          <CyclingLabel variants={variants} x={cx} y={258} />
         </g>
       );
     })}
@@ -190,16 +224,14 @@ export const SignalToNoiseMobile = () => (
       YOU CAN’T SEE THIS
     </text>
 
-    {/* Process row */}
+    {/* Process row: same cycling, same beat */}
     <text x="32" y="330" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
-    {['Brief', 'Produce', 'Deploy'].map((name, i) => {
+    {MOBILE_PROCESS.map((variants, i) => {
       const cx = 76 + i * 104;
       return (
-        <g key={name}>
+        <g key={variants[0]}>
           <Cog cx={cx} cy={372} r={16} teeth={6} />
-          <text x={cx} y={412} textAnchor="middle" fontSize="10" letterSpacing="0.05em" fill={GRAPHITE} style={label}>
-            {name}
-          </text>
+          <CyclingLabel variants={variants} x={cx} y={412} />
         </g>
       );
     })}

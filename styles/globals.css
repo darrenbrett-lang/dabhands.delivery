@@ -274,3 +274,18 @@ p {
   .work-draw-path { stroke-dashoffset: 0 !important; animation: none !important; }
   .work-track { scroll-behavior: auto; }
 }
+
+/* ── Signal to Noise, mobile: the three cog slots per row cycle their labels
+   through the full set of seven stages, so the simplified telling carries
+   everything the desktop one does. Calm cadence: 3s per phase, soft fades.
+   Reduced motion shows the first label of each slot, statically. ── */
+@keyframes sn-window2 { 0% { opacity: 0; } 6% { opacity: 1; } 46% { opacity: 1; } 55% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes sn-window3 { 0% { opacity: 0; } 4% { opacity: 1; } 31% { opacity: 1; } 38% { opacity: 0; } 100% { opacity: 0; } }
+.sn-seq2 { opacity: 0; animation: sn-window2 6s linear infinite; }
+.sn-seq3 { opacity: 0; animation: sn-window3 9s linear infinite; }
+.sn-d1 { animation-delay: 3s; }
+.sn-d2 { animation-delay: 6s; }
+@media (prefers-reduced-motion: reduce) {
+  .sn-seq2, .sn-seq3 { animation: none; opacity: 0; }
+  .sn-first { opacity: 1 !important; }
+}
