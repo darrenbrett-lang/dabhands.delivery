@@ -21,6 +21,41 @@ import { mailto } from '@/lib/mailto';
 
 const DEEP_GOLD = '#7E5E27';
 
+// Section 3: the two systems, each in its own iconed space on the charcoal
+// panel. The cog icons echo the diagram below: big cogs for the business
+// system, small meshing cogs for the process system.
+const S_ICON = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' } as const;
+
+const SYSTEMS = [
+  {
+    name: 'The business system',
+    line: 'Where the trade-offs get made.',
+    stages: ['Strategy', 'Brand', 'Commercial', 'Product', 'Content', 'Technology', 'Operations'],
+    icon: (
+      <svg viewBox="0 0 36 36" {...S_ICON} aria-hidden>
+        <circle cx="18" cy="18" r="10" />
+        <path d="M18 4.5V8M18 28v3.5M4.5 18H8M28 18h3.5M8.5 8.5L11 11M25 25l2.5 2.5M27.5 8.5L25 11M11 25l-2.5 2.5" />
+        <circle cx="18" cy="18" r="1.6" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    name: 'The process system',
+    line: 'Where the work gets handled.',
+    stages: ['Brief', 'Plan', 'Design', 'Produce', 'Review', 'Approve', 'Deploy'],
+    icon: (
+      <svg viewBox="0 0 36 36" {...S_ICON} aria-hidden>
+        <circle cx="13" cy="14" r="6.5" />
+        <path d="M13 5v2.5M13 20.5V23M4 14h2.5M19.5 14H22M7 8l1.8 1.8M17.2 18.2L19 20" />
+        <circle cx="13" cy="14" r="1.3" fill="currentColor" stroke="none" />
+        <circle cx="25.5" cy="25.5" r="4.5" />
+        <path d="M25.5 19v2M25.5 30v2M19 25.5h2M30 25.5h2" />
+        <circle cx="25.5" cy="25.5" r="1.1" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+];
+
 // Section 2: the evidence. Figures large, claim beneath, source small and
 // linked. Verbatim from the studies; never paraphrased.
 const EVIDENCE = [
@@ -210,47 +245,65 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 3 · WHY IT HAPPENS: two systems, one idea; the pull statement,
-            the diagram, the one disclosure. ── */}
-        <section className="bg-clay/20 text-ink py-16 md:py-24 border-t border-stone/60">
+        {/* ── 3 · WHY IT HAPPENS: the charcoal panel. Thesis left at display
+            scale; the two systems each hold their own iconed space right
+            (owner call, 2026-08-17, overriding the brief's no-dark rule). ── */}
+        <section className="bg-charcoal text-bone py-20 md:py-28">
           <div className="u-container">
-            <div className="u-grid gap-y-8">
-              <FadeUp className="col-span-4 md:col-span-5">
-                <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
+            <div className="u-grid gap-y-12 lg:items-start">
+              <FadeUp className="col-span-4 md:col-span-6 lg:col-span-5">
+                <h2 className="font-serif text-[42px] md:text-[54px] lg:text-[62px] leading-[1.02] tracking-[-0.02em] u-balance">
                   Two systems, one idea
                 </h2>
+                <p className="mt-6 text-lg md:text-xl leading-[1.7] text-bone/80 max-w-[30ch]">
+                  Your idea moves through two systems at once.
+                </p>
               </FadeUp>
-              <div className="col-span-4 md:col-span-6 md:col-start-7">
-                <FadeUp delay={0.08}>
-                  <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Your idea moves through two systems at once.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.14}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    The business system, where the trade-offs get made. Strategy, brand, commercial, product, content,
-                    technology, operations.
-                  </p>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    The process system underneath it, where the work gets handled. Brief, plan, design, produce,
-                    review, approve, deploy.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
+
+              <div className="col-span-4 md:col-span-6 lg:col-span-6 lg:col-start-7">
+                {SYSTEMS.map((s, i) => (
+                  <FadeUp key={s.name} delay={0.08 + i * 0.08}>
+                    <div className={`rounded-2xl border border-bone/15 p-6 md:p-7 ${i > 0 ? 'mt-5' : ''}`}>
+                      <div className="flex items-center gap-4">
+                        <span className="block h-9 w-9 shrink-0 text-bone">{s.icon}</span>
+                        <div>
+                          <p className="eyebrow text-bone/60">{s.name}</p>
+                          <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">{s.line}</p>
+                        </div>
+                      </div>
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {s.stages.map((stage) => (
+                          <span key={stage} className="rounded-full border border-bone/20 px-3 py-1 text-[12.5px] text-bone/80">
+                            {stage}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </FadeUp>
+                ))}
+
+                <FadeUp delay={0.24}>
+                  <p className="mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/80 max-w-[52ch]">
                     Both act on the same idea. At every point it either gets stronger, or a piece of what made it worth
                     doing gets traded away for a perfectly good local reason.
                   </p>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
+                </FadeUp>
+                <FadeUp delay={0.3}>
+                  <p className="mt-6 font-serif text-[22px] md:text-[26px] leading-[1.3] text-bone u-balance">
                     What reaches your customer is whatever survived.
                   </p>
                 </FadeUp>
               </div>
             </div>
+          </div>
+        </section>
 
+        {/* ── 3b · THE PULL, THE DIAGRAM, THE PRINCIPLES. ── */}
+        <section className="bg-clay/20 text-ink py-16 md:py-24 border-t border-stone/60">
+          <div className="u-container">
             {/* The one pull statement on the page. Type only, no framing. */}
             <FadeUp>
-              <p className="mt-16 md:mt-24 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-ink max-w-[24ch] mx-auto u-balance">
+              <p className="mt-4 md:mt-6 mb-14 md:mb-20 text-center font-serif text-[30px] md:text-[40px] lg:text-[46px] leading-[1.15] tracking-[-0.01em] text-ink max-w-[24ch] mx-auto u-balance">
                 Connection is a function of signal to noise.
               </p>
             </FadeUp>
