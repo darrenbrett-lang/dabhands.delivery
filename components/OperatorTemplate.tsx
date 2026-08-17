@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Testimonials } from './Testimonials';
 import Image from 'next/image';
 import { Layout } from './Layout';
 import { FadeUp } from './FadeUp';
@@ -81,62 +82,6 @@ const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { 
     <span aria-hidden className="text-[17px] leading-none transition-transform duration-300 group-hover:translate-x-0.5">→</span>
   </a>
 );
-
-// Testimonials on the Deep Blue-Green Trust panel: bone copy on the dark panel,
-// a thin bone left rule, no box. One quote at a time, crossfaded; rotation
-// pauses for reduced motion; the pips stay clickable.
-const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; interval?: number }) => {
-  const reduce = useReducedMotion();
-  const [active, setActive] = useState(0);
-  useEffect(() => {
-    if (reduce || items.length <= 1) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % items.length), interval);
-    return () => clearInterval(id);
-  }, [active, reduce, items.length, interval]);
-  return (
-    <div>
-      {/* All quotes share one grid cell so the block is always the height of the
-          tallest testimonial — the pips below never jump as the quote changes,
-          and the left rule keeps a constant height. */}
-      <div className="grid border-l-2 border-bone/25 pl-6 md:pl-8">
-        {items.map((item, i) => (
-          <motion.figure
-            key={i}
-            aria-hidden={i !== active}
-            initial={false}
-            animate={{ opacity: i === active ? 1 : 0 }}
-            transition={{ duration: reduce ? 0 : 0.45, ease: 'easeInOut' }}
-            style={{ gridArea: '1 / 1' }}
-            className={i === active ? '' : 'pointer-events-none'}
-          >
-            <blockquote className="font-serif text-[18px] md:text-[20px] leading-[1.6] text-bone">“{item.quote}”</blockquote>
-            <figcaption className="mt-5 not-italic">
-              <span className="block text-[15px] font-medium text-bone">{item.name}</span>
-              <span className="block text-[13px] text-bone/85">{item.role}</span>
-            </figcaption>
-          </motion.figure>
-        ))}
-      </div>
-      <div className="mt-6 flex gap-0.5">
-        {items.map((_, i) => (
-          /* 24px+ touch target (WCAG target-size); the visible pip is the inner span. */
-          <button
-            key={i}
-            type="button"
-            onClick={() => setActive(i)}
-            aria-label={`Show testimonial ${i + 1}`}
-            className="flex h-6 min-w-6 items-center justify-center"
-          >
-            <span
-              aria-hidden
-              className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'w-7 bg-bone' : 'w-2 bg-bone/30 hover:bg-bone/55'}`}
-            />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
   const c = content;

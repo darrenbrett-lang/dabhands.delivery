@@ -5,10 +5,52 @@ import { Layout } from '@/components/Layout';
 import { FadeUp } from '@/components/FadeUp';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
+import { Testimonials } from '@/components/Testimonials';
 import { PathwayPicker } from '@/components/PathwayPicker';
 import { SlatPortrait } from '@/components/SlatPortrait';
 import { mailto } from '@/lib/mailto';
 import { withBreaks, withSoftBreaks } from '@/lib/softBreaks';
+
+// The master testimonial carousel: every voice from the three rooms, one
+// rotation, above How I work. Joel Sinnott leads (current tenure); the rest
+// carry "Former" where tenure is past.
+const MASTER_TESTIMONIALS = [
+  {
+    quote: 'Darren brings control to complex situations quickly. He aligns teams, simplifies decisions, and gets the work moving again without losing what made it strong.',
+    name: 'Joel Sinnott',
+    role: 'Senior Digital Lead, Nike',
+  },
+  {
+    quote: 'Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it. That’s a capability I’ve always admired.',
+    name: 'Neil Munn',
+    role: 'Former Global CEO, BBH',
+  },
+  {
+    quote: 'Darren walked into a really difficult situation and made sense of it remarkably quickly. Within a few weeks, there was a plan, people understood what they were doing again, and the temperature had dropped considerably. He brings a calmness and momentum that’s incredibly valuable when projects start to drift.',
+    name: 'Dave Wallace',
+    role: 'Former Global COO, Mirum',
+  },
+  {
+    quote: 'Darren’s influence extended far beyond the delivery function. He created and implemented Tribal’s first agency-wide ways-of-working framework, helping teams align around a common approach while strengthening consistency, accountability and performance across the business.',
+    name: 'Tom Roberts',
+    role: 'Former CEO, Tribal Worldwide London',
+  },
+  {
+    quote: 'Darren combines operational rigour with a deep understanding of people and creative work. He can bring structure to complexity without losing sight of what the organisation is trying to achieve. It’s a rare combination, and one that makes him particularly effective in environments where change, growth and execution need to happen at the same time.',
+    name: 'Gary Shannon',
+    role: 'Former Managing Partner, Tribal Worldwide London',
+  },
+  {
+    quote: 'He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.',
+    name: 'Anthony Mahon',
+    role: 'Former Global Membership Director, HUGO BOSS',
+  },
+  {
+    quote: 'A calm, experienced operator who knows how to step into complexity, align people, and make things work under pressure.',
+    name: 'Meher Mumtaz',
+    role: 'Former Digital Brand Director, Western Union',
+  },
+];
 
 // "Where I help" — three editorial doorway rows on the grid: a third-width image
 // (cols 1–4) with the audience label over it, the conceptual line as the headline,
@@ -242,6 +284,24 @@ export default function Home() {
             <FadeUp delay={0.06}>
               <LogoTicker ariaLabel="Brands I’ve worked with" />
             </FadeUp>
+          </div>
+        </section>
+
+        {/* ── IN THEIR WORDS: the master testimonial carousel — every voice
+            from the three rooms, one rotation, on bone above How I work. ── */}
+        <section data-spine="In their words" className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
+          <div className="u-container">
+            <div className="u-grid gap-y-8">
+              <FadeUp className="col-span-4 md:col-span-4">
+                <p className="eyebrow text-graphite mb-4">In Their Words</p>
+                <h2 className="font-serif text-[30px] md:text-[36px] leading-[1.12] tracking-[-0.01em] max-w-[14ch] u-balance">
+                  From the people I’ve worked with.
+                </h2>
+              </FadeUp>
+              <FadeUp delay={0.08} className="col-span-4 md:col-span-7 md:col-start-6">
+                <Testimonials items={MASTER_TESTIMONIALS} tone="light" interval={6000} />
+              </FadeUp>
+            </div>
           </div>
         </section>
 
