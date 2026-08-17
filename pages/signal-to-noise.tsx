@@ -371,38 +371,19 @@ export default function SafePassage() {
               <div className="col-span-4 md:col-span-6 md:col-start-7">
                 <FadeUp delay={0.08}>
                   <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Everyone can see that it happens. Almost nobody can say where.
+                    Ask what happened and you’ll get answers.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.14}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Everyone involved has a partial view. Yours is the decision and the outcome. Theirs is the
-                    fortnight in front of them. All of those views are accurate and none of them is the whole journey,
-                    and nobody’s job is to assemble them.
+                    Marketing will tell you the brief moved. The agency will tell you approvals took six weeks.
+                    Engineering will tell you the requirements landed late. Everybody will be telling you the truth.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Reports don’t help as much as they should either. When Snow and Keil studied project status
-                    reporting they found it biased six times out of ten, and optimism twice as likely as pessimism.
-                    Not dishonesty. Just what happens when the person writing the report is also the person it
-                    reflects on.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.26}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
-                    So when you ask what happened, you get honest answers from every direction and none of them adds
-                    up to one.
-                  </p>
-                  <p className="mt-5 text-[12.5px] leading-[1.6] text-graphite/85">
-                    <a
-                      href="https://www.researchgate.net/publication/220652409_The_effect_of_optimistic_and_pessimistic_biasing_on_software_project_status_reporting"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline decoration-stone underline-offset-[3px] transition-colors hover:text-ink hover:decoration-ink"
-                    >
-                      Snow and Keil, Information &amp; Management, 2007.
-                    </a>
+                    None of it is the answer, because none of them saw the whole thing. They each saw their bit, and
+                    their bit was fine.
                   </p>
                 </FadeUp>
               </div>
@@ -488,13 +469,10 @@ export default function SafePassage() {
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.06}>
+                  {/* The page ends on money. */}
                   <p className="mt-5 text-lg text-graphite max-w-[54ch] mx-auto text-balance">
-                    That’s the conversation. Not a proposal.
-                  </p>
-                  {/* The page ends on money. Never soften this. */}
-                  <p className="mt-4 text-lg text-ink max-w-[54ch] mx-auto text-balance">
                     Somewhere between the decision you made and the thing your customer got, value is going missing.
-                    You’re paying for it either way. The only question is whether it’s on a report.
+                    You’re paying for it either way.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
