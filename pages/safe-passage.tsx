@@ -185,7 +185,8 @@ export default function SafePassage() {
             </div>
             <div className="rise" style={{ '--rise-delay': '0.12s' } as CSSProperties}>
               <p className="mt-9 md:mt-11 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
-                Everyone who has worked inside a large organisation has watched this happen.
+                Everyone who has worked inside a large organisation has watched this happen. You’ll know it from the
+                moment the work came back, and it was good, and it wasn’t what you meant.
               </p>
               <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
                 Nobody did anything wrong. It just got a little smaller at every handover, for perfectly good reasons,
@@ -317,8 +318,7 @@ export default function SafePassage() {
                 <SignalToNoiseDesktop />
                 <SignalToNoiseMobile />
                 <figcaption className="mt-6 md:mt-8 text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
-                  Everyone between you and the customer is standing inside the part you can’t see. Which is why nobody
-                  can tell you where it went.
+                  Everyone in the middle is doing their job properly. None of them is watching the whole journey.
                 </figcaption>
               </figure>
             </FadeUp>
@@ -343,34 +343,33 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 4 · WHAT NOBODY CAN TELL YOU: the blindness, as a question about
-            their business rather than their competence. ── */}
+        {/* ── 4 · WHERE IT ACTUALLY GOES: a fact about the system, never a
+            comment on the reader's attention (governing rule two). ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <div className="u-grid gap-y-8">
               <FadeUp className="col-span-4 md:col-span-5">
                 <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
-                  What nobody can tell you
+                  Where it actually goes
                 </h2>
               </FadeUp>
               <div className="col-span-4 md:col-span-6 md:col-start-7">
                 <FadeUp delay={0.08}>
                   <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Everyone can see that it happens. What almost nobody can tell you is where it happens in their
-                    business.
+                    Everyone can see that it happens. Almost nobody can say where.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.14}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    You can see the decision you made and you can see what turned up. The people who report to you are
-                    standing inside the middle, which is a poor place to see it from.
+                    Everyone involved has a partial view. Yours is the decision and the outcome. Theirs is the
+                    fortnight in front of them. All of those views are accurate and none of them is the whole journey,
+                    and nobody’s job is to assemble them.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    That isn’t anybody failing. It’s what the seat does. The further you sit from the work, the more of
-                    it you take on trust, and every handover between you and it costs you something you never find out
-                    about.
+                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
+                    So when you ask what happened, you get honest answers from every direction and none of them adds
+                    up to one.
                   </p>
                 </FadeUp>
               </div>
@@ -387,8 +386,9 @@ export default function SafePassage() {
               </h2>
               {/* The only definition of the term on the whole page. Set apart
                   from the line beneath: a definition, not a run-on. */}
-              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[46ch]">
-                Safe Passage is how I keep an idea whole between the decision and the customer.
+              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[48ch]">
+                Safe Passage is a discipline. It organises work around intent rather than activity, so that what you
+                decided is still there when it reaches your customer.
               </p>
               <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
                 It isn’t governance and it isn’t more meetings. It’s four things.

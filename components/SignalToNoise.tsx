@@ -1,14 +1,18 @@
 /*
  * The Signal to Noise diagram, rebuilt as native SVG from the original
- * framework poster: the spine only (Idea & Intent → the two cog systems →
+ * framework poster: the spine only (Idea & intent → the two cog systems →
  * customer impact), in the house palette. Over it sits the interpretive
  * layer from the August 2026 brief: the person who said yes, two dashed
  * sight lines that stop short, and the shaded stretch between them that
  * nobody in the room can see.
  *
+ * The two end panels carry a touch of the poster's context: what the idea
+ * arrives with, and what people do when it arrives whole. Micro-type only;
+ * the diagram must stay five-second readable.
+ *
  * Two renderings: the full horizontal composition (md+) and a simplified
- * vertical one for small screens (person → system → gap → outcome), so the
- * shaded gap stays legible at 375px without zooming.
+ * vertical one for small screens whose cog labels cycle through all
+ * fourteen stages (see the sn-window keyframes in globals.css).
  */
 
 // The diagram lives on the Slate Blue panel: bone line-work, a faint bone
@@ -16,6 +20,7 @@
 // (plain gold fails AA there; see the palette notes).
 const INK = 'var(--color-bone)';
 const GRAPHITE = 'color-mix(in srgb, var(--color-bone) 72%, transparent)';
+const FAINT = 'color-mix(in srgb, var(--color-bone) 60%, transparent)';
 const GOLD = 'var(--color-gold)';
 const DEEP_GOLD = '#EBD4A8';
 const BAND_FILL = 'color-mix(in srgb, var(--color-bone) 8%, transparent)';
@@ -24,8 +29,11 @@ const STRIP_FILL = 'color-mix(in srgb, var(--color-gold) 20%, transparent)';
 const BIG_COGS = ['Strategy', 'Brand', 'Commercial', 'Product', 'Content', 'Technology', 'Operations'];
 const SMALL_COGS = ['Brief', 'Plan', 'Design', 'Produce', 'Review', 'Approve', 'Deploy'];
 
+const IDEA_CARRIES = ['Clear insight', 'Strong idea', 'Defined intent', 'Customer truth'];
+const IMPACT_ITEMS = ['Notice', 'Feel something', 'Connect', 'Return again and again', 'Convert'];
+
 const DESCRIPTION =
-  'Diagram. You, at the left, said yes to an idea. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. A dashed sight line from you, labelled what you can see, reaches only a short way into the band before it stops. A second dashed line from the customer impact panel at the right, labelled what turned up, reaches only a short way back. The stretch between the two, covering the middle cogs of both rows, is shaded and labelled you can’t see this.';
+  'Diagram. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. A dashed sight line from you, labelled what you can see, reaches only a short way into the band before it stops. A second dashed line from the customer impact panel at the right, labelled what turned up, reaches only a short way back. The stretch between the two, covering the middle cogs of both rows, is shaded and labelled nobody watches this bit. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert.';
 
 // A calm, sketch-weight cog: a circle with radial teeth and a centre dot.
 const Cog = ({ cx, cy, r, teeth }: { cx: number; cy: number; r: number; teeth: number }) => {
@@ -75,22 +83,27 @@ export const SignalToNoiseDesktop = () => (
     {/* ── The system band ── */}
     <rect x="226" y="66" width="770" height="366" rx="14" style={{ fill: BAND_FILL }} />
 
-    {/* ── The shaded stretch nobody can see (under the cogs, above the band) ── */}
+    {/* ── The shaded stretch nobody can see ── */}
     <rect x="430" y="66" width="360" height="366" style={{ fill: STRIP_FILL }} />
     <line x1="430" y1="66" x2="430" y2="432" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
     <line x1="790" y1="66" x2="790" y2="432" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
     <text x="610" y="92" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
-      YOU CAN’T SEE THIS
+      NOBODY WATCHES THIS BIT
     </text>
 
-    {/* ── You, and the idea you backed ── */}
+    {/* ── You, and the idea you backed: what it set out with ── */}
     <Figure cx={46} cy={172} />
     <text x="46" y="234" textAnchor="middle" fontSize="13" fontWeight="600" fill={INK} style={label}>You</text>
     <text x="46" y="252" textAnchor="middle" fontSize="11.5" fill={GRAPHITE} style={label}>said yes</text>
 
-    <rect x="88" y="160" width="108" height="52" rx="10" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="142" y="190" textAnchor="middle" fontSize="12" fill={INK} style={label}>Idea &amp; intent</text>
-    <line x1="196" y1="186" x2="226" y2="186" stroke={INK} strokeWidth="1.4" />
+    <rect x="84" y="118" width="120" height="140" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="144" y="142" textAnchor="middle" fontSize="12" fill={INK} style={label}>Idea &amp; intent</text>
+    {IDEA_CARRIES.map((item, i) => (
+      <text key={item} x="144" y={166 + i * 18} textAnchor="middle" fontSize="10" fill={FAINT} style={label}>
+        {item}
+      </text>
+    ))}
+    <line x1="204" y1="188" x2="226" y2="188" stroke={INK} strokeWidth="1.4" />
 
     {/* ── Business system: the big cogs ── */}
     <text x="246" y="128" fontSize="11" letterSpacing="0.14em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
@@ -120,11 +133,17 @@ export const SignalToNoiseDesktop = () => (
       );
     })}
 
-    {/* ── Customer impact ── */}
-    <line x1="996" y1="186" x2="1020" y2="186" stroke={INK} strokeWidth="1.4" />
-    <rect x="1020" y="146" width="124" height="80" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="1082" y="181" textAnchor="middle" fontSize="12.5" fontWeight="500" fill={INK} style={label}>Customer</text>
-    <text x="1082" y="199" textAnchor="middle" fontSize="12.5" fontWeight="500" fill={INK} style={label}>impact</text>
+    {/* ── Customer impact: what people do when it arrives whole ── */}
+    <line x1="996" y1="188" x2="1020" y2="188" stroke={INK} strokeWidth="1.4" />
+    <rect x="1020" y="108" width="124" height="176" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="1082" y="132" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
+    <text x="1082" y="150" textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>When it arrives</text>
+    <text x="1082" y="163" textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>whole, people:</text>
+    {IMPACT_ITEMS.map((item, i) => (
+      <text key={item} x="1082" y={186 + i * 18} textAnchor="middle" fontSize="10" fill={GRAPHITE} style={label}>
+        {item === 'Return again and again' ? 'Return again' : item}
+      </text>
+    ))}
 
     {/* ── The sight lines: they stop, they don't arrive ── */}
     <g stroke={INK} strokeWidth="1.3" opacity="0.75">
@@ -136,7 +155,7 @@ export const SignalToNoiseDesktop = () => (
     <text x="58" y="20" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
     <text x="1082" y="20" textAnchor="end" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
     <line x1="46" y1="44" x2="46" y2="150" stroke={INK} strokeWidth="1" opacity="0.25" />
-    <line x1="1082" y1="44" x2="1082" y2="134" stroke={INK} strokeWidth="1" opacity="0.25" />
+    <line x1="1082" y1="44" x2="1082" y2="100" stroke={INK} strokeWidth="1" opacity="0.25" />
   </svg>
 );
 
@@ -182,67 +201,78 @@ const CyclingLabel = ({ variants, x, y }: { variants: string[]; x: number; y: nu
 // the two sight lines stop. Labels keep clear lanes: nothing collides.
 export const SignalToNoiseMobile = () => (
   <svg
-    viewBox="0 0 360 600"
+    viewBox="0 0 360 724"
     role="img"
     aria-label={DESCRIPTION}
     className="md:hidden w-full h-auto select-none"
   >
-    {/* You and the idea */}
+    {/* You, and the idea with what it set out with */}
     <Figure cx={40} cy={26} />
     <text x="72" y="26" fontSize="13" fontWeight="600" fill={INK} style={label}>You</text>
     <text x="72" y="43" fontSize="11.5" fill={GRAPHITE} style={label}>said yes</text>
-    <rect x="216" y="8" width="128" height="44" rx="10" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="280" y="34" textAnchor="middle" fontSize="12" fill={INK} style={label}>Idea &amp; intent</text>
-
-    {/* The system band */}
-    <rect x="16" y="104" width="328" height="372" rx="12" style={{ fill: BAND_FILL }} />
+    <rect x="196" y="8" width="148" height="126" rx="10" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="270" y="30" textAnchor="middle" fontSize="12" fill={INK} style={label}>Idea &amp; intent</text>
+    {IDEA_CARRIES.map((item, i) => (
+      <text key={item} x="270" y={52 + i * 17} textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>
+        {item}
+      </text>
+    ))}
 
     {/* Sight line in: stops just inside the band's top sliver */}
-    <line x1="40" y1="68" x2="40" y2="128" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
-    <line x1="31" y1="128" x2="49" y2="128" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="58" y="132" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
+    <line x1="40" y1="68" x2="40" y2="172" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+    <line x1="31" y1="172" x2="49" y2="172" stroke={INK} strokeWidth="1.3" opacity="0.75" />
+    <text x="58" y="176" fontSize="11.5" fill={GRAPHITE} style={label}>what you can see</text>
+
+    {/* The system band */}
+    <rect x="16" y="148" width="328" height="374" rx="12" style={{ fill: BAND_FILL }} />
 
     {/* The shaded stretch: covers BOTH rows, labels and all */}
-    <rect x="16" y="142" width="328" height="294" style={{ fill: STRIP_FILL }} />
-    <line x1="16" y1="142" x2="344" y2="142" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
-    <line x1="16" y1="436" x2="344" y2="436" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
+    <rect x="16" y="188" width="328" height="294" style={{ fill: STRIP_FILL }} />
+    <line x1="16" y1="188" x2="344" y2="188" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
+    <line x1="16" y1="482" x2="344" y2="482" stroke={GOLD} strokeWidth="1" strokeDasharray="3 5" opacity="0.7" />
 
     {/* Business row: each slot cycles through its share of the seven */}
-    <text x="32" y="168" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
+    <text x="32" y="214" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE BUSINESS SYSTEM</text>
     {MOBILE_BUSINESS.map((variants, i) => {
       const cx = 76 + i * 104;
       return (
         <g key={variants[0]}>
-          <Cog cx={cx} cy={210} r={24} teeth={8} />
-          <CyclingLabel variants={variants} x={cx} y={258} />
+          <Cog cx={cx} cy={256} r={24} teeth={8} />
+          <CyclingLabel variants={variants} x={cx} y={304} />
         </g>
       );
     })}
 
     {/* The strip label sits in the clear lane between the two rows */}
-    <text x="180" y="296" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
-      YOU CAN’T SEE THIS
+    <text x="180" y="342" textAnchor="middle" fontSize="11.5" letterSpacing="0.16em" fill={DEEP_GOLD} style={label}>
+      NOBODY WATCHES THIS BIT
     </text>
 
     {/* Process row: same cycling, same beat */}
-    <text x="32" y="330" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
+    <text x="32" y="378" fontSize="10.5" letterSpacing="0.13em" fill={GRAPHITE} style={label}>THE PROCESS SYSTEM</text>
     {MOBILE_PROCESS.map((variants, i) => {
       const cx = 76 + i * 104;
       return (
         <g key={variants[0]}>
-          <Cog cx={cx} cy={372} r={16} teeth={6} />
-          <CyclingLabel variants={variants} x={cx} y={412} />
+          <Cog cx={cx} cy={420} r={16} teeth={6} />
+          <CyclingLabel variants={variants} x={cx} y={458} />
         </g>
       );
     })}
 
     {/* Sight line back: stops just inside the band's bottom sliver */}
-    <line x1="180" y1="524" x2="180" y2="452" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
-    <line x1="171" y1="452" x2="189" y2="452" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="194" y="502" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
+    <line x1="180" y1="566" x2="180" y2="498" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+    <line x1="171" y1="498" x2="189" y2="498" stroke={INK} strokeWidth="1.3" opacity="0.75" />
+    <text x="194" y="540" fontSize="11.5" fill={GRAPHITE} style={label}>what turned up</text>
 
-    {/* Customer impact */}
-    <rect x="100" y="532" width="160" height="52" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
-    <text x="180" y="563" textAnchor="middle" fontSize="12.5" fontWeight="500" fill={INK} style={label}>Customer impact</text>
+    {/* Customer impact: what people do when it arrives whole */}
+    <rect x="92" y="570" width="176" height="146" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
+    <text x="180" y="594" textAnchor="middle" fontSize="12" fontWeight="500" fill={INK} style={label}>Customer impact</text>
+    <text x="180" y="611" textAnchor="middle" fontSize="9.5" fill={FAINT} style={label}>When it arrives whole, people:</text>
+    {IMPACT_ITEMS.map((item, i) => (
+      <text key={item} x="180" y={633 + i * 17} textAnchor="middle" fontSize="10" fill={GRAPHITE} style={label}>
+        {item}
+      </text>
+    ))}
   </svg>
 );
