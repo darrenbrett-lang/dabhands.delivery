@@ -149,8 +149,10 @@ export const SignalToNoiseDesktop = () => (
       <line x1="1082" y1="34" x2="996" y2="34" strokeDasharray="6 5" />
       <line x1="996" y1="25" x2="996" y2="43" />
     </g>
-    <text x="58" y="20" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
-    <text x="1082" y="20" textAnchor="end" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
+    {/* LOS and AOS are moments, not spans: the labels sit at the inner ends,
+        against their terminator bars, naming the edges of the gap. */}
+    <text x="218" y="20" textAnchor="end" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
+    <text x="1004" y="20" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
     <line x1="46" y1="44" x2="46" y2="150" stroke={INK} strokeWidth="1" opacity="0.25" />
     <line x1="1082" y1="44" x2="1082" y2="100" stroke={INK} strokeWidth="1" opacity="0.25" />
   </svg>
@@ -217,7 +219,7 @@ export const SignalToNoiseMobile = () => (
     {/* Sight line in: contact stops at the band's top edge */}
     <line x1="40" y1="68" x2="40" y2="148" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
     <line x1="31" y1="148" x2="49" y2="148" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="58" y="122" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
+    <text x="58" y="152" fontSize="11.5" fill={GRAPHITE} style={label}>loss of signal</text>
 
     {/* The system band: shaded edge to edge, the whole journey unobserved */}
     <rect x="16" y="148" width="328" height="374" rx="12" style={{ fill: BAND_FILL }} />
@@ -250,7 +252,7 @@ export const SignalToNoiseMobile = () => (
     {/* Sight line back: contact resumes at the band's bottom edge */}
     <line x1="180" y1="566" x2="180" y2="522" stroke={INK} strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
     <line x1="171" y1="522" x2="189" y2="522" stroke={INK} strokeWidth="1.3" opacity="0.75" />
-    <text x="194" y="548" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
+    <text x="198" y="526" fontSize="11.5" fill={GRAPHITE} style={label}>acquisition of signal</text>
 
     {/* Customer impact: what people do when it arrives whole */}
     <rect x="92" y="570" width="176" height="146" rx="12" fill="none" stroke={INK} strokeWidth="1.4" />
