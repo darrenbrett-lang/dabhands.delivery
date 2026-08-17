@@ -34,7 +34,7 @@ const IDEA_CARRIES = ['Clear insight', 'Strong idea', 'Defined intent', 'Custome
 const IMPACT_ITEMS = ['Notice', 'Feel something', 'Connect', 'Return again and again', 'Convert'];
 
 const DESCRIPTION =
-  'Diagram. Two people, one at each end. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert. At the far right stands the customer, who feels something.';
+  'Diagram. Two people, one at each end. You, at the left, said yes to an idea. The idea panel lists what it set out with: clear insight, strong idea, defined intent, customer truth. The idea enters a wide band where two systems work on it at once: a business system of large cogs labelled strategy, brand, commercial, product, content, technology and operations, and a process system of small cogs labelled brief, plan, design, produce, review, approve and deploy. The entire band is shaded. A dashed sight line from you, labelled loss of signal, stops with a bar at the moment the idea enters the band. A second dashed line from the customer, labelled acquisition of signal, stops with a bar where the idea comes back out. Between those two points the whole journey is unobserved: every cog is watched closely by the person holding it, and nobody watches the idea move between them. The customer impact panel lists what people do when the idea arrives whole: notice, feel something, connect, return again and again, convert. At the far right stands the customer, at the other end of the journey.';
 
 // A calm, sketch-weight cog: a circle with radial teeth and a centre dot.
 const Cog = ({ cx, cy, r, teeth }: { cx: number; cy: number; r: number; teeth: number }) => {
@@ -144,7 +144,7 @@ export const SignalToNoiseDesktop = () => (
 
     <Figure cx={1200} cy={172} />
     <text x="1200" y="234" textAnchor="middle" fontSize="13" fontWeight="600" fill={INK} style={label}>Customer</text>
-    <text x="1200" y="252" textAnchor="middle" fontSize="11.5" fill={GRAPHITE} style={label}>feels something</text>
+    <text x="1200" y="252" textAnchor="middle" fontSize="11.5" fill={GRAPHITE} style={label}>at the other end</text>
 
     {/* ── The sight lines: contact stops at the band's edge and resumes at
         the other side, spaceflight-style. Bars, not arrowheads. ── */}
