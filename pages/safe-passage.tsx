@@ -134,7 +134,7 @@ export default function SafePassage() {
     <>
       <SeoMeta
         title="Safe Passage | DAB Hands"
-        description="The idea was good. Everybody was competent. It still arrived weaker than it left. Safe Passage is what I’ve learned about getting good ideas to the other side."
+        description="The idea was good. Everybody was competent. It still arrived weaker than it left. What I’ve learned about giving good ideas safe passage to the other side."
         path="/safe-passage"
       />
 
@@ -329,6 +329,11 @@ export default function SafePassage() {
               <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
                 What I do about it
               </h2>
+              {/* The only definition of the term on the whole page. Set apart
+                  from the line beneath: a definition, not a run-on. */}
+              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[46ch]">
+                Safe Passage is how I keep an idea whole between the decision and the customer.
+              </p>
               <p className="mt-5 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
                 It isn’t governance and it isn’t more meetings. It’s four things.
               </p>
@@ -368,14 +373,14 @@ export default function SafePassage() {
                 </FadeUp>
                 <FadeUp delay={0.14}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    I’ve watched it on a fifty million pound platform programme, on a four year redesign that ran
-                    through seven different sponsors, and on a rescue where three people had already been through it
-                    before me. Different businesses, different sectors, different decades.
+                    I’ve seen it in big businesses and small ones, in sectors that have nothing in common, over three
+                    decades. The idea was good, everybody involved was competent, and less of it arrived than should
+                    have.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.2}>
                   <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
-                    After enough of them you start to see it coming. That’s all this is.
+                    After enough of them you start to see where it goes, what’s coming, and how to avoid it.
                   </p>
                 </FadeUp>
               </div>
