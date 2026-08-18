@@ -85,26 +85,29 @@ const EVIDENCE = [
 ];
 
 // Section 6: the four moves. Numbered, separated, never prose.
+// Gates are event-driven and sit at the handovers (02); reporting is
+// time-driven and sits on a schedule (04). Those two lines used to
+// contradict each other. Do not blur them back together.
 const FOUR = [
   {
     num: '01',
-    lead: 'Everyone who could kill it is in the room before anything gets built.',
-    rest: 'Not shown it later. In it, early, while their objection is still cheap.',
+    lead: 'The people who could stop it are in the room before anything gets built.',
+    rest: 'Not many of them, and not shown it later. A room of six gets you real objections. A room of nineteen gets you agreement.',
   },
   {
     num: '02',
-    lead: 'The work gets gated at the handovers, not on the calendar.',
-    rest: 'Not every fortnight. At the specific points where the work changes hands, because that is where the reasoning gets left behind and the next person inherits the what without the why.',
+    lead: 'Nothing changes hands without the reasoning attached.',
+    rest: 'Not just what was decided, but why, and what was ruled out. The person receiving it confirms they have it. That’s the gate, and it sits at the handover rather than on the calendar.',
   },
   {
     num: '03',
-    lead: 'Somebody owns the space between teams, by name.',
+    lead: 'Somebody owns the space between teams, by name, with the authority to stop work.',
     rest: 'Not because nobody was assigned, but because everybody was, and a thing that belongs to everyone belongs to no one.',
   },
   {
     num: '04',
-    lead: 'You get told the truth on a schedule.',
-    rest: 'Including when it’s uncomfortable, and especially while it’s still early enough to act.',
+    lead: 'You get told the truth on a schedule, including when it’s uncomfortable.',
+    rest: 'And at the end, what actually arrived, measured against what you wrote down at the start.',
   },
 ];
 
@@ -395,23 +398,39 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 6 · AND WHAT I DO ABOUT IT: the disclaimer, then four flat
-            statements of certainty. Confidence without claimed originality
-            (governing rule three). ── */}
+        {/* ── 6 · AND WHAT I DO ABOUT IT: the disclaimer, the precondition
+            the four practices protect, then the four themselves, the outcome
+            line and one person on the record. Confidence without claimed
+            originality (governing rule three). ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
                 And what I do about it
               </h2>
+            </FadeUp>
+            {/* The disclaimer and the precondition run as two columns on the
+                cards' own grid: same width cap, same column gap, so each one
+                starts on the box beneath it. */}
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-6 gap-y-6 max-w-[980px] items-start">
               {/* This line does more work than any other sentence on the page.
                   Never cut or soften it. */}
-              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[52ch]">
-                None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
-                methodology for thirty years. Knowing which one your situation needs is the part that comes with
-                experience.
-              </p>
-            </FadeUp>
+              <FadeUp>
+                <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
+                  None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
+                  methodology for thirty years. Knowing which one your situation needs is the part that comes with
+                  experience.
+                </p>
+              </FadeUp>
+              {/* The condition the four depend on. Deliberately not a card and
+                  deliberately not numbered. */}
+              <FadeUp delay={0.06}>
+                <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
+                  None of it works without one thing first. Somebody writes down what the work is for and what you
+                  won’t trade away to get it. Everything below protects that one page.
+                </p>
+              </FadeUp>
+            </div>
             {/* Four moves as four squares: solid soft-grey cards, a large
                 serif numeral in deep gold, the lead as a serif statement. */}
             <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 items-stretch max-w-[980px]">
