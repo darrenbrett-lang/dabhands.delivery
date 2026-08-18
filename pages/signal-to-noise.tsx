@@ -401,7 +401,8 @@ export default function SafePassage() {
         {/* ── 4 · WHY THE FIXES DON'T HOLD: the crux, and the only part of
             the page that says why any practice is needed at all. Every job is
             a vertical, the work is not, and a promise made sideways has
-            nothing behind it. Closes on the page's one emphasised statement. ── */}
+            nothing behind it. The prose runs on bone; the turn it builds to
+            gets its own ground, immediately below. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
@@ -409,30 +410,40 @@ export default function SafePassage() {
                 Why the fixes don’t hold
               </h2>
             </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[58ch]">
-                Every job in that business is accountable upwards. The chief marketing officer answers to the chief
-                executive. The technology director answers to the CTO. The agency answers to its client lead.
-                Everybody is doing their job, and every one of those jobs is a vertical.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.1}>
-              <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[58ch]">
-                The work isn’t a vertical. It travels sideways, across all of them, and there is no line on anyone’s
-                objectives for how well it travelled.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.14}>
-              <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[58ch]">
-                That’s why the mechanisms exist and don’t hold. A promise made sideways has nothing behind it.
-                Nobody’s boss is measuring it, so the first time it collides with something they are measured on, it
-                loses. Reasonably, in good faith, every time.
-              </p>
-            </FadeUp>
-            {/* The turn. The page's single emphasised statement, so it sits
-                above the outcome line's scale and below a section heading. */}
-            <FadeUp delay={0.18}>
-              <p className="mt-12 md:mt-16 font-serif text-[28px] md:text-[34px] leading-[1.3] tracking-[-0.01em] text-ink max-w-[30ch] u-balance">
+            {/* Two columns on the practices' own grid, so this module and the
+                one beneath it share a spine: the vertical argument on the left,
+                the sideways one on the right. */}
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-5 md:gap-x-6 gap-y-5 max-w-[980px] items-start">
+              <FadeUp delay={0.06}>
+                <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
+                  Every job in that business is accountable upwards. The chief marketing officer answers to the chief
+                  executive. The technology director answers to the CTO. The agency answers to its client lead.
+                  Everybody is doing their job, and every one of those jobs is a vertical.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
+                  The work isn’t a vertical. It travels sideways, across all of them, and there is no line on
+                  anyone’s objectives for how well it travelled.
+                </p>
+                <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink">
+                  That’s why the mechanisms exist and don’t hold. A promise made sideways has nothing behind it.
+                  Nobody’s boss is measuring it, so the first time it collides with something they are measured on,
+                  it loses. Reasonably, in good faith, every time.
+                </p>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* ── THE TURN: the page's single emphasised statement, alone on the
+            darkest ground on the page. No heading, no supporting copy, one
+            sentence in the frame. Left on the container spine, because
+            centring it would make it a slogan. ── */}
+        <section className="bg-charcoal text-bone py-20 md:py-28">
+          <div className="u-container">
+            <FadeUp>
+              <p className="font-serif text-[30px] md:text-[40px] lg:text-[44px] leading-[1.22] tracking-[-0.015em] text-bone max-w-[26ch] u-balance">
                 That sideways journey is the passage. Making it safe is the job.
               </p>
             </FadeUp>
