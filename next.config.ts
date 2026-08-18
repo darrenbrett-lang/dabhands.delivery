@@ -49,6 +49,16 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Unlisted diagnostic page (/signal-to-noise). Same belt-and-braces
+        // as the other private pages: an HTTP-level noindex backing the
+        // in-page meta. Kept out of nav, sitemap and llms.txt, but the route
+        // still resolves so the link can be shared directly.
+        source: "/signal-to-noise",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/images/(.*)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },

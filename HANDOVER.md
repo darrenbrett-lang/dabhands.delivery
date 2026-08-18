@@ -13,7 +13,7 @@ Pick this up cold. The site is **LIVE in production** at `https://dabhands.deliv
 - **⚠ Vercel deploy stalls (FIVE occurrences: 2026-08-14, -16, -17, -18 x2):** a push sometimes builds but never rolls out. Symptom: the old page still serving with `x-vercel-cache: HIT` and a large `age`, new routes 404ing. Fix: `git commit --allow-empty -m "Retrigger Vercel deploy (<sha> not rolled out)"` and push to main; resolves in ~10s every time. The owner has the dashboard task; sessions have no dashboard access and no `gh`/API tokens (git push works via SSH).
 - **Always poll production after a release** (curl for a string unique to the change) — never assume the deploy landed.
 - **Build gates:** `npm run build` + `npm run lint`. Lint carries **2 pre-existing errors in `pages/for/eterna/*`** (plain `<a>`→`<Link>`) and **4 warnings** (2 in `pages/for/eterna/index.tsx`, 2 unused colour consts in `components/SignalToNoise.tsx`). Inherited, not blockers.
-- Routes: `/`, the three doorways, `/signal-to-noise`, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth via `middleware.ts`, noindex), `/for/manifesto-digital`, `/design-system`.
+- Routes: `/`, the three doorways, **`/signal-to-noise` (UNLISTED, see below)**, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth via `middleware.ts`, noindex), `/for/manifesto-digital`, `/design-system`.
 - Repo: `git@github.com:darrenbrett-lang/dabhands.delivery.git`, Vercel project `dabhands-delivery`.
 
 ## The brand direction (source of truth)
@@ -65,6 +65,8 @@ Hero → Darren intro → problem panel → turns → ticker → How I work → 
 Unchanged spine. Each room's "Typical engagements" module runs the page's doorway image full-bleed behind it at 10% opacity. Growth carries the Neil Munn trust panel. Marketing testimonials rotate at 6s (`proof.interval`).
 
 ### `/signal-to-noise` — the diagnostic page
+**⚠ UNLISTED as of 18 August 2026, by the owner's instruction.** The route still resolves and the URL can be shared directly, but there are **no links to it anywhere on the site**. Hidden in four places, all of which must be reversed together to bring it back: the two `components/Header.tsx` nav links (desktop and mobile, the mobile Contact item inherited its `border-t`), the `sitemap.xml` entry, the `llms.txt` entry, and the noindex (`SeoMeta noindex` prop plus an `X-Robots-Tag` route header in `next.config.ts`). Nothing was deleted.
+
 **The most-iterated page on the site. Read this whole section before editing it.** Briefs v1→v4 all landed on 17–18 August, and the owner repeatedly superseded his own briefs live. **The owner's live instruction always beats the brief**; implement it, then flag the divergence.
 
 **The argument, in order.** The condition → the evidence → two systems and the diagram → why the fixes don't hold → the turn → what that takes → where the value is going.
@@ -123,6 +125,7 @@ bone `#F5F1EA`, ink/charcoal `#1F1F1D`, graphite `#5C5C58`, stone `#D8D3CB`, sla
 
 ## Open items / TODO
 
+- **`/signal-to-noise` is unlisted and the owner has not said for how long.** Check before writing anything that assumes it is public, and reverse all four hiding points together if it comes back.
 - **Safe Passage, decide it properly.** The page's emphasised statement now assembles the retired name in the reader's head. Sanctioned as metaphor; if it is ever to become the offer's name again, that is a trademark and reputation decision, not a copy one.
 - **Rebase or retire `eterna-workspace`.** It is behind production and holds the unreleased carousel. Decide whether the rooms' own trust panels thin if the carousel ships.
 - **"People, mostly. Increasingly not."** is the last verbless copy on Signal to Noise. Brief v4 declared that row unchanged, so it was left; it fails v4's own writing rule if anyone audits.

@@ -7,6 +7,12 @@ import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
 
 /*
+ * UNLISTED as of 18 August 2026 (owner's call). No nav links, noindex via
+ * SeoMeta plus an X-Robots-Tag route header in next.config.ts, and out of
+ * sitemap.xml and llms.txt. The route still resolves, so the URL can be
+ * shared directly. Reverse by restoring the two Header links, the sitemap
+ * and llms.txt entries, the config header, and the noindex prop below.
+ *
  * SIGNAL TO NOISE, to the version 4 brief of 18 August 2026. The earlier
  * name for this page is retired permanently and must not come back: a UK
  * refugee charity owns the search, there is a live US trademark, and the
@@ -190,6 +196,7 @@ export default function SafePassage() {
         title="Signal to Noise | DAB Hands"
         description="The idea was good. Everybody was competent. It still arrived weaker than it left. A diagnostic that finds where it goes, what it costs, and what to fix first."
         path="/signal-to-noise"
+        noindex
       />
 
       <Layout footerVariant="none">
