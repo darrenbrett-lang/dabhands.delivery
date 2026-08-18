@@ -538,7 +538,7 @@ export default function SafePassage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} loading="lazy" decoding="async" className="block mx-auto mb-5 md:mb-6 h-9 md:h-10 w-auto select-none" />
                   <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.1] max-w-[22ch] mx-auto u-balance">
-                    Where is it going in your business?
+                    Where is the value going in your business?
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.06}>
