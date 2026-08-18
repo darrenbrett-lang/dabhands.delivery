@@ -102,7 +102,7 @@ const FOUR = [
   {
     num: '03',
     lead: 'Agree who decides when two parts of the business disagree.',
-    rest: 'It always happens. Marketing and technology, the agency and the internal team, two directors with different targets. If nobody has authority over both, the argument doesn’t get resolved, it gets absorbed, and the work quietly becomes whatever both sides could live with. Settle who breaks the tie while everyone still gets on.',
+    rest: 'If nobody has authority over both, the argument doesn’t get resolved, it gets absorbed, and the work quietly becomes whatever both sides could live with. Settle it while everyone still gets on.',
   },
   {
     num: '04',
