@@ -7,17 +7,28 @@ import { PathwayPicker } from '@/components/PathwayPicker';
 import { mailto } from '@/lib/mailto';
 
 /*
- * SAFE PASSAGE — v2 to the 17 August brief. Seven sections; the order is the
- * argument: the condition → the evidence → why it happens (+ diagram) → what
- * nobody can tell you → what I do about it → where this comes from → one
- * next step.
+ * SIGNAL TO NOISE, to the version 4 brief of 18 August 2026. The earlier
+ * name for this page is retired permanently and must not come back: a UK
+ * refugee charity owns the search, there is a live US trademark, and the
+ * phrase is a common euphemism for dying.
  *
- * The page opens on the shared condition (nobody has to admit anything to
- * agree); the blindness arrives in section 4 as a question about their
- * business, not their competence. Editorial rules: a person in every
- * sentence, no paragraph over three sentences, evidence set as figures not
- * prose, the four moves numbered, one pull statement, one disclosure, no
- * dark sections, no client names, and the page ends on a conversation.
+ * The order is the argument: the condition → the evidence → two systems and
+ * the diagram → why the fixes don't hold → the turn → what that takes →
+ * where the value is going.
+ *
+ * The page opens on a shared condition nobody has to admit to. It then shows
+ * where noise gets in, and only then explains why the mechanisms businesses
+ * already run fail to hold: every job is accountable upwards, the work
+ * travels sideways, and nothing measures the sideways journey.
+ *
+ * Editorial rules: a person in every sentence, never tell the reader what
+ * they cannot see, no claim of originality, no verbless codas, no paragraph
+ * over three sentences, evidence set as figures not prose, no client names
+ * beyond the one sanctioned attribution, and the page ends on a conversation.
+ *
+ * Colour is structural, not atmospheric: charcoal is the mechanics of the
+ * problem, slate is the proof, one black band is the turn, and everything
+ * else runs on bone.
  */
 
 const DEEP_GOLD = '#7E5E27';
@@ -97,7 +108,7 @@ const FOUR = [
   {
     num: '02',
     lead: 'Assume the person who decided it won’t be there.',
-    rest: 'The reasoning has to survive them. Not in someone’s head, not in a thread, but in something the next person reads and confirms they have read. It takes half a page and ten minutes.',
+    rest: 'The reasoning has to survive them. Someone’s head doesn’t count, and neither does a thread. It has to be in something the next person reads and confirms they have read. It takes half a page and ten minutes.',
   },
   {
     num: '03',
@@ -429,7 +440,7 @@ export default function SafePassage() {
                 <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink">
                   That’s why the mechanisms exist and don’t hold. A promise made sideways has nothing behind it.
                   Nobody’s boss is measuring it, so the first time it collides with something they are measured on,
-                  it loses. Reasonably, in good faith, every time.
+                  it loses, reasonably and in good faith, every time.
                 </p>
               </FadeUp>
             </div>
