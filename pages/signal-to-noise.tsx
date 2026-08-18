@@ -283,15 +283,13 @@ export default function SafePassage() {
             (owner call, 2026-08-17, overriding the brief's no-dark rule). ── */}
         <section className="bg-charcoal text-bone py-20 md:py-28">
           <div className="u-container">
-            {/* Headline and sub run across; the two systems sit side by side
-                beneath; the consequence copy closes the panel. */}
+            {/* The headline runs across and now carries the point on its own;
+                the two systems sit side by side beneath, and the hands holding
+                them are the ground block below that. */}
             <FadeUp>
               <h2 className="font-serif text-[42px] md:text-[54px] lg:text-[62px] leading-[1.02] tracking-[-0.02em] u-balance">
-                Two systems, one idea
+                One idea, two systems, many hands
               </h2>
-              <p className="mt-5 md:mt-6 text-lg md:text-xl leading-[1.7] text-bone/80 max-w-[44ch]">
-                Your idea moves through two systems at once.
-              </p>
             </FadeUp>
 
             {/* The business card takes a touch more of the row at xl so its
@@ -421,7 +419,7 @@ export default function SafePassage() {
                   Never cut or soften it. */}
               <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[52ch]">
                 None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
-                methodology for thirty years. Knowing which one a particular leak needs is the part that comes with
+                methodology for thirty years. Knowing which one your situation needs is the part that comes with
                 experience.
               </p>
             </FadeUp>
