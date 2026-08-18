@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { withSoftBreaks } from '@/lib/softBreaks';
@@ -8,7 +8,12 @@ import { withSoftBreaks } from '@/lib/softBreaks';
    horizontal row, charcoal on bone — an effortless shortcut into a doorway for
    a decisive visitor. Opens on hover or focus, tap-toggles on touch, closes on
    Escape / outside click / scroll. Rendered through a portal so it escapes the
-   hero's overflow. The header nav carries the fully keyboard-robust version. */
+   hero's overflow. The header nav carries the fully keyboard-robust version.
+
+   Placement is viewport-aware: the picker also closes /signal-to-noise, where
+   the trigger is the last thing on the page, so on a phone there is no room
+   beneath it. The panel flips above the trigger whenever it cannot open fully
+   into view, and stays clear of both side edges. */
 
 // The per-audience colours are retired: every item shares one hover treatment —
 // a gold block matching the header nav dropdown, with a charcoal arrow for
@@ -26,23 +31,55 @@ const PATHS = [
 const subscribeNever = () => () => {};
 const useMounted = () => useSyncExternalStore(subscribeNever, () => true, () => false);
 
+// Measuring the panel has to happen before paint, or the flip is visible.
+const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+const GAP = 12; // breathing room between the trigger and the panel
+const EDGE = 16; // the panel never comes closer than this to a viewport edge
+
+type Pos = { left: number; top?: number; bottom?: number; maxHeight?: number };
+
 export const PathwayPicker = () => {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
   const mounted = useMounted();
-  const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [pos, setPos] = useState<Pos>({ left: 0, top: 0 });
   const wrapRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
+  // Anchors the panel to whichever side of the trigger it fits on. On the first
+  // open the panel has not rendered yet, so this places it below on an assumed
+  // fit; the layout effect re-runs it with a real measurement before paint.
+  const place = useCallback(() => {
+    const t = triggerRef.current?.getBoundingClientRect();
+    if (!t) return;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const below = vh - t.bottom - GAP - EDGE;
+    const above = t.top - GAP - EDGE;
+    const h = panelRef.current?.offsetHeight ?? 0;
+    const w = panelRef.current?.offsetWidth ?? 0;
+
+    // Centred on the trigger, then pulled back inside the viewport if that
+    // would push an edge off-screen.
+    const half = w / 2;
+    const centre = t.left + t.width / 2;
+    const left = w >= vw - EDGE * 2 ? vw / 2 : Math.min(Math.max(centre, half + EDGE), vw - half - EDGE);
+
+    // Flip up only when the panel genuinely cannot fit beneath the trigger.
+    const flip = h > below && above > below;
+    const room = Math.max(flip ? above : below, 200);
+    setPos(flip ? { left, bottom: vh - t.top + GAP, maxHeight: room } : { left, top: t.bottom + GAP, maxHeight: room });
+  }, []);
+
   const show = useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    const r = triggerRef.current?.getBoundingClientRect();
-    if (r) setPos({ top: r.bottom + 12, left: r.left + r.width / 2 });
+    place();
     setOpen(true);
-  }, []);
+  }, [place]);
 
   const hideSoon = useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -53,6 +90,11 @@ export const PathwayPicker = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpen(false);
   }, []);
+
+  // The panel exists by now, so this is the pass that knows its real size.
+  useIsoLayoutEffect(() => {
+    if (open) place();
+  }, [open, place]);
 
   useEffect(() => {
     if (!open) return;
@@ -103,7 +145,7 @@ export const PathwayPicker = () => {
             {open && (
               <div
                 className="fixed z-[90] -translate-x-1/2"
-                style={{ top: pos.top, left: pos.left }}
+                style={{ top: pos.top, bottom: pos.bottom, left: pos.left }}
                 onMouseEnter={show}
                 onMouseLeave={hideSoon}
               >
@@ -111,11 +153,12 @@ export const PathwayPicker = () => {
                   ref={panelRef}
                   role="menu"
                   aria-label="Who I help"
-                  initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+                  initial={{ opacity: 0, y: reduce ? 0 : pos.bottom ? -8 : 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: reduce ? 0 : 6 }}
+                  exit={{ opacity: 0, y: reduce ? 0 : pos.bottom ? -6 : 6 }}
                   transition={{ duration: reduce ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-[min(94vw,920px)] overflow-hidden rounded-2xl border border-stone bg-bone text-left shadow-[0_24px_70px_-24px_rgba(31,31,29,0.4)]"
+                  style={{ maxHeight: pos.maxHeight }}
+                  className="w-[min(94vw,920px)] overflow-y-auto overscroll-contain rounded-2xl border border-stone bg-bone text-left shadow-[0_24px_70px_-24px_rgba(31,31,29,0.4)]"
                 >
                   <div className="grid grid-cols-1 divide-y divide-stone/60 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                     {PATHS.map((p, i) => (
