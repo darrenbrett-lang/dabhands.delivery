@@ -319,9 +319,15 @@ export default function SafePassage() {
 
             {/* The third block is not a system: it is the hands operating both
                 of them. No card, no border, no icon; kicker, statement and
-                chips sit directly on the ground the two boxes stand on. */}
-            <FadeUp delay={0.2}>
-              <div className="mt-9 md:mt-11">
+                chips sit directly on the ground the two boxes stand on.
+
+                The consequence paragraph now sits beside it rather than under
+                it, holding the same gridline it held as the wider half of the
+                old pair, top-aligned with the people it is about. The room
+                sentence that partnered it is cut, which is what makes the
+                module squat. Below md the two stack, paragraph last. */}
+            <div className="mt-9 md:mt-11 grid grid-cols-1 md:grid-cols-[1fr_1.35fr] gap-x-8 gap-y-6 items-start">
+              <FadeUp delay={0.2}>
                 <p className="eyebrow text-bone/60">Who’s holding it</p>
                 <p className="mt-1.5 text-[16px] md:text-[17px] leading-snug text-bone/90">
                   People, mostly. Increasingly not.
@@ -333,18 +339,8 @@ export default function SafePassage() {
                     </span>
                   ))}
                 </div>
-              </div>
-            </FadeUp>
-            {/* The two consequences sit as a top-aligned pair, each holding
-                two lines at desktop: the longer takes the wider column. */}
-            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-[1fr_1.35fr] gap-x-8 gap-y-6 items-start">
-              <FadeUp delay={0.26}>
-                <p className="text-[16px] xl:text-[15.5px] leading-[1.8] text-bone/80">
-                  Someone who was in the room carries the reasons without being told. Everything else carries only
-                  what was written down.
-                </p>
               </FadeUp>
-              <FadeUp delay={0.3}>
+              <FadeUp delay={0.26}>
                 <p className="text-[16px] xl:text-[15.5px] leading-[1.8] text-bone/80">
                   Both systems act on the same idea. At every point it either gets stronger, or a piece of what
                   mattered gets traded away for a perfectly good local reason.
