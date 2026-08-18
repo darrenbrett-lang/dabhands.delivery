@@ -197,7 +197,7 @@ export default function SafePassage() {
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
               <p className="mt-4 text-lg md:text-xl leading-[1.75] text-ink/80 max-w-[52ch]">
                 It gets a little smaller at every handover, always for a perfectly good reason. And nobody stops it,
-                because everything is visibly moving, and movement gets read as health.
+                because everything is visibly moving, and movement gets read as progress.
               </p>
             </div>
           </div>
@@ -448,11 +448,6 @@ export default function SafePassage() {
                 None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
                 methodology for thirty years. Knowing which one a particular leak needs is the part that comes with
                 experience.
-              </p>
-              {/* The name on the page. One sentence, no CV. */}
-              <p className="mt-4 text-[15px] leading-[1.7] text-graphite max-w-[52ch]">
-                I’m Darren Brett, twenty years inside agencies and alongside global brands, keeping work like this
-                moving.
               </p>
             </FadeUp>
             {/* Four moves as four squares: solid soft-grey cards, a large
