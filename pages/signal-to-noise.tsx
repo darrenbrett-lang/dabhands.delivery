@@ -380,6 +380,14 @@ export default function SafePassage() {
               </figure>
             </FadeUp>
 
+            {/* What it is all for. Set apart and quiet: full-strength bone
+                against the caption's 85%, no pull treatment. */}
+            <FadeUp delay={0.08}>
+              <p className="mt-10 md:mt-12 text-center mx-auto text-[17px] md:text-[19px] leading-[1.7] text-bone max-w-[46ch] u-balance">
+                More signal survives. More meaning arrives. More people connect. More often.
+              </p>
+            </FadeUp>
+
             {/* The five pre-build principles: icon-led, in daylight. */}
             <div className="mt-14 md:mt-20">
               <FadeUp>
@@ -395,39 +403,6 @@ export default function SafePassage() {
                     </div>
                   </FadeUp>
                 ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 4 · WHERE IT ACTUALLY GOES: a fact about the system, never a
-            comment on the reader's attention (governing rule two). ── */}
-        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
-          <div className="u-container">
-            <div className="u-grid gap-y-8">
-              <FadeUp className="col-span-4 md:col-span-5">
-                <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em] u-balance">
-                  Where it actually goes
-                </h2>
-              </FadeUp>
-              <div className="col-span-4 md:col-span-6 md:col-start-7">
-                <FadeUp delay={0.08}>
-                  <p className="text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Ask what happened and you’ll get answers.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.14}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[52ch]">
-                    Marketing will tell you the brief moved. The agency will tell you approvals took six weeks.
-                    Engineering will tell you the requirements landed late. Everybody will be telling you the truth.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                  <p className="mt-4 text-[16px] md:text-[17px] leading-[1.8] text-ink max-w-[52ch]">
-                    None of it is the answer, because none of them saw the whole thing. They each saw their bit, and
-                    their bit was fine.
-                  </p>
-                </FadeUp>
               </div>
             </div>
           </div>
