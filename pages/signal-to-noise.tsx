@@ -369,7 +369,8 @@ export default function SafePassage() {
                 <SignalToNoiseDesktop />
                 <SignalToNoiseMobile />
                 <figcaption className="mt-2 md:mt-3 text-center mx-auto text-[16px] md:text-[17px] leading-[1.8] text-bone/85 max-w-[56ch]">
-                  Everyone in the middle is doing their job properly. Nobody watches it move.
+                  Noise gets in at every node between systems, teams, people and agents. None of it looks like
+                  much on its own.
                 </figcaption>
               </figure>
             </FadeUp>
