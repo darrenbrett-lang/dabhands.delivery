@@ -418,8 +418,8 @@ export default function SafePassage() {
               <FadeUp>
                 <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
                   None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
-                  methodology for thirty years. Knowing which one your situation needs is the part that comes with
-                  experience.
+                  methodology for thirty years. Each one closes a place where noise gets in. Which of them you need
+                  depends on where yours is getting in.
                 </p>
               </FadeUp>
               {/* The condition the four depend on. Deliberately not a card and
