@@ -64,8 +64,10 @@ const SYSTEMS = [
 ];
 
 // Section 2: the evidence. The Gartner figure runs visible in the body (the
-// reader's own job title, and the most recent number); Harvard and Bain sit
-// behind the sourcing toggle. Verbatim from the studies; never paraphrased.
+// reader's own job title, and the most recent number); the two Harvard
+// figures sit behind the sourcing toggle. The 80/20 pair is the load-bearing
+// one: the mechanisms are already there and they already do not hold.
+// Verbatim from the studies; never paraphrased.
 const GARTNER_HREF =
   'https://www.gartner.com/en/newsroom/press-releases/2025-03-25-gartner-survey-reveals-84-percent-of-cmos-report-high-levels-of-strategic-dysfunction';
 
@@ -77,37 +79,35 @@ const EVIDENCE = [
     href: 'https://hbr.org/2015/03/why-strategy-execution-unravelsand-what-to-do-about-it',
   },
   {
-    figure: '80% vs 8%',
-    claim: 'Share of companies that believe they deliver a superior experience, against the share of their customers who agree.',
-    source: 'Bain & Company, Closing the Delivery Gap, 2005. 362 companies.',
-    href: 'https://www.bain.com/insights/closing-the-delivery-gap/',
+    figure: '80% vs 20%',
+    claim: 'More than eight in ten of those companies already had a formal mechanism for working across silos. Only two in ten thought it worked.',
+    source: 'The same study. Sull, Homkes and Sull, Why Strategy Execution Unravels, Harvard Business Review, March 2015.',
+    href: 'https://hbr.org/2015/03/why-strategy-execution-unravelsand-what-to-do-about-it',
   },
 ];
 
 // Section 6: the four moves. Numbered, separated, never prose.
-// Gates are event-driven and sit at the handovers (02); reporting is
-// time-driven and sits on a schedule (04). Those two lines used to
-// contradict each other. Do not blur them back together.
+// Written as imperatives: things somebody does, not claims about what I do.
 const FOUR = [
   {
     num: '01',
-    lead: 'The people who could stop it are in the room before anything gets built.',
-    rest: 'Not many of them, and not shown it later. A room of six gets you real objections. A room of nineteen gets you agreement.',
+    lead: 'Finish the brief before you start.',
+    rest: 'A brief arrives shaped by whoever wrote it and by what they need it to do for them. Work out which other parts of the business it lands on, what each of them needs from it, and what each of them is committing to, while it can still change shape.',
   },
   {
     num: '02',
-    lead: 'Nothing changes hands without the reasoning attached.',
-    rest: 'Not just what was decided, but why, and what was ruled out. The person receiving it confirms they have it. That’s the gate, and it sits at the handover rather than on the calendar.',
+    lead: 'Assume the person who decided it won’t be there.',
+    rest: 'The reasoning has to survive them. Not in someone’s head, not in a thread, but in something the next person reads and confirms they have read. It takes half a page and ten minutes.',
   },
   {
     num: '03',
-    lead: 'Somebody owns the space between teams, by name, with the authority to stop work.',
-    rest: 'Not because nobody was assigned, but because everybody was, and a thing that belongs to everyone belongs to no one.',
+    lead: 'Agree who decides when two parts of the business disagree.',
+    rest: 'It always happens. Marketing and technology, the agency and the internal team, two directors with different targets. If nobody has authority over both, the argument doesn’t get resolved, it gets absorbed, and the work quietly becomes whatever both sides could live with. Settle who breaks the tie while everyone still gets on.',
   },
   {
     num: '04',
-    lead: 'You get told the truth on a schedule, including when it’s uncomfortable.',
-    rest: 'And at the end, what actually arrived, measured against what you wrote down at the start.',
+    lead: 'Log every trade against the original.',
+    rest: 'When something declared non-negotiable gets given up, it gets recorded, with a name and a reason. Regulated industries call these waivers. At the end you can see exactly what the work cost on the way.',
   },
 ];
 
@@ -218,7 +218,7 @@ export default function SafePassage() {
                 corroboration on the page must not be the one thing hidden. */}
             <FadeUp delay={0.06}>
               <p className="mt-6 text-[16px] md:text-[17px] leading-[1.8] text-graphite max-w-[56ch]">
-                84% of chief marketing officers report high levels of strategic dysfunction, and 94% say translating
+                84% of chief marketing officers report high levels of strategic dysfunction. 94% say translating
                 strategy into an actionable plan is a challenge.{' '}
                 <a
                   href={GARTNER_HREF}
@@ -230,7 +230,7 @@ export default function SafePassage() {
                 </a>
               </p>
             </FadeUp>
-            {/* Harvard and Bain sit behind the sourcing toggle. */}
+            {/* Both Harvard figures sit behind the sourcing toggle. */}
             <FadeUp delay={0.1}>
             <details className="group mt-7">
               <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-[15px] font-medium text-ink [&::-webkit-details-marker]:hidden">
@@ -249,9 +249,9 @@ export default function SafePassage() {
                 <FadeUp key={e.figure} delay={i * 0.08}>
                   <div className="border-t border-stone/70 pt-6 flex h-full flex-col">
                     <p className="font-serif text-[52px] md:text-[56px] lg:text-[64px] leading-none text-ink">
-                      {e.figure === '80% vs 8%' ? (
+                      {e.figure === '80% vs 20%' ? (
                         <>
-                          80%<span className="mx-2 text-[0.42em] text-graphite align-middle">vs</span>8%
+                          80%<span className="mx-2 text-[0.42em] text-graphite align-middle">vs</span>20%
                         </>
                       ) : (
                         e.figure
@@ -398,15 +398,57 @@ export default function SafePassage() {
           </div>
         </section>
 
-        {/* ── 6 · AND WHAT I DO ABOUT IT: the disclaimer, the precondition
-            the four practices protect, then the four themselves, the outcome
-            line and one person on the record. Confidence without claimed
-            originality (governing rule three). ── */}
+        {/* ── 4 · WHY THE FIXES DON'T HOLD: the crux, and the only part of
+            the page that says why any practice is needed at all. Every job is
+            a vertical, the work is not, and a promise made sideways has
+            nothing behind it. Closes on the page's one emphasised statement. ── */}
         <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
           <div className="u-container">
             <FadeUp>
               <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
-                And what I do about it
+                Why the fixes don’t hold
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[58ch]">
+                Every job in that business is accountable upwards. The chief marketing officer answers to the chief
+                executive. The technology director answers to the CTO. The agency answers to its client lead.
+                Everybody is doing their job, and every one of those jobs is a vertical.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[58ch]">
+                The work isn’t a vertical. It travels sideways, across all of them, and there is no line on anyone’s
+                objectives for how well it travelled.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.14}>
+              <p className="mt-5 text-[17px] md:text-[19px] leading-[1.65] text-ink max-w-[58ch]">
+                That’s why the mechanisms exist and don’t hold. A promise made sideways has nothing behind it.
+                Nobody’s boss is measuring it, so the first time it collides with something they are measured on, it
+                loses. Reasonably, in good faith, every time.
+              </p>
+            </FadeUp>
+            {/* The turn. The page's single emphasised statement, so it sits
+                above the outcome line's scale and below a section heading. */}
+            <FadeUp delay={0.18}>
+              <p className="mt-12 md:mt-16 font-serif text-[28px] md:text-[34px] leading-[1.3] tracking-[-0.01em] text-ink max-w-[30ch] u-balance">
+                That sideways journey is the passage. Making it safe is the job.
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+
+        {/* ── 5 · WHAT THAT TAKES: the disclaimer, the precondition the four
+            practices protect, then the four themselves, the outcome line and
+            one person on the record. The heading is no longer first person,
+            because the practices are imperatives and "what I do" fought them.
+            Confidence without claimed originality (governing rule three). ── */}
+        <section className="bg-bone text-ink py-16 md:py-24 border-t border-stone/60">
+          <div className="u-container">
+            <FadeUp>
+              <h2 className="font-serif text-[30px] md:text-[38px] leading-[1.12] tracking-[-0.01em]">
+                What that takes
               </h2>
             </FadeUp>
             {/* The disclaimer and the precondition run as two columns on the
@@ -418,16 +460,16 @@ export default function SafePassage() {
               <FadeUp>
                 <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
                   None of this is new and I wouldn’t pretend it is. Most of it has been sitting in somebody’s
-                  methodology for thirty years. Each one closes a place where noise gets in. Which of them you need
-                  depends on where yours is getting in.
+                  methodology for thirty years. Each one closes a place where noise gets in.
                 </p>
               </FadeUp>
               {/* The condition the four depend on. Deliberately not a card and
                   deliberately not numbered. */}
               <FadeUp delay={0.06}>
                 <p className="text-[17px] md:text-[19px] leading-[1.65] text-ink">
-                  None of it works without one thing first. Somebody writes down what the work is for and what you
-                  won’t trade away to get it. Everything below protects that one page.
+                  Two things get written down before anything starts. What the work is for, which is usually the
+                  brief. And what can’t be traded away to get it, which usually isn’t written anywhere at all. The
+                  second one is the valuable half, and it travels with the work.
                 </p>
               </FadeUp>
             </div>
