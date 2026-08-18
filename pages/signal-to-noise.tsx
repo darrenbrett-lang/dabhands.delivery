@@ -375,14 +375,6 @@ export default function SafePassage() {
               </figure>
             </FadeUp>
 
-            {/* What it is all for. Set apart and quiet: full-strength bone
-                against the caption's 85%, no pull treatment. */}
-            <FadeUp delay={0.08}>
-              <p className="mt-10 md:mt-12 text-center mx-auto text-[17px] md:text-[19px] leading-[1.7] text-bone max-w-[46ch] u-balance">
-                More signal survives. More meaning arrives. More people connect. More often.
-              </p>
-            </FadeUp>
-
             {/* The five pre-build principles: icon-led, in daylight. */}
             <div className="mt-14 md:mt-20">
               <FadeUp>
@@ -437,6 +429,15 @@ export default function SafePassage() {
                 </FadeUp>
               ))}
             </div>
+
+            {/* What the four practices are for. The one statement on the
+                page carrying weight, so it gets size and air and nothing
+                else: no rule, no border, no quote marks, not centred. */}
+            <FadeUp delay={0.08}>
+              <p className="mt-14 md:mt-16 font-serif text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-ink max-w-[38ch] u-balance">
+                More signal survives. More meaning arrives. More people connect. More often.
+              </p>
+            </FadeUp>
 
             {/* One named person on the record. Quiet treatment: no card, no
                 photograph, no logo. */}
