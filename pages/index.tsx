@@ -130,17 +130,19 @@ export default function Home() {
                 {/* The career sentence: background, body scale, must not compete. */}
                 <div className="rise" style={{ '--rise-delay': '0.14s' } as CSSProperties}>
                   <p className="text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    For most of my career, I’ve worked at the point where ambition has to become reality: inside agencies, and alongside global brands and businesses in motion.
+                    For most of my career I’ve worked at the point where ambition has to become reality. Inside agencies, alongside global brands, and running my own business.
                   </p>
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    I’ve led major programmes, built operating structures from the ground up, and helped leaders close the gap between what they intend to deliver and what actually gets built.
+                    Sometimes that means setting the direction. Usually it means getting an organisation to move together. Always it means making sure what comes out performs.
                   </p>
                 </div>
+                {/* The block now lands on the cost of not speaking up, which is
+                    the same argument the problem panel below picks up. */}
                 <div className="rise" style={{ '--rise-delay': '0.26s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    My work is about creating the conditions where capable people do their best work together. That work lives at the point where direction has to become reality.
+                    Important work rarely goes wrong because the idea was weak. It goes wrong because nobody said the expensive thing out loud while there was still time.
                   </p>
                 </div>
               </div>
