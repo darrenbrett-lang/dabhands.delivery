@@ -11,22 +11,21 @@ const content: OperatorContent = {
     image: '/images/momentum/01-tracks-2.jpg',
   },
   validation: {
-    heading: 'The organisation is already capable.',
+    heading: 'You can feel it before you can name it.',
     paras: [
-      'The strategy is clear. The people are capable. The investment has been made. Everyone understands what success looks like.',
-      'The challenge is rarely deciding what to do. It’s making sure good thinking survives the journey from decision to delivery.',
+      'Decisions take longer than they used to. The same conversation happens in three separate rooms. Work that took a fortnight now takes six weeks. Everyone is busy, and nobody can say exactly where it went.',
+      'None of it shows up as a problem, because nothing is broken. It shows up as everything being slightly harder than it should be.',
     ],
-    coda: 'It’s helping the organisation\nperform at its best.',
+    coda: 'It is rarely one big thing.\nIt is the space between them.',
   },
   diagnosis: {
-    thesis: 'Capability isn’t the problem.\nPerformance is.',
+    thesis: 'Complexity quietly becomes the operating system.',
     argument: [
-      'Most organisations already have what they need to succeed.',
-      'Organisations have never had more capability. They have rarely needed better judgement.',
-      'The challenge isn’t finding more ideas, hiring more people or introducing more process. It’s creating the conditions where capable people do their best work together.',
-      'Those conditions are built through clarity, alignment and accountability. When they’re present, organisations move with confidence.',
+      'Nobody decides to run the business this way.',
+      'It arrives one reasonable decision at a time. An approval to protect quality. A meeting so nobody is surprised. A second owner, because the first was stretched.',
+      'Each is sensible. Together they become the thing the organisation runs on, and nobody built it.',
     ],
-    resolution: 'When they’re missing, complexity quietly becomes the operating system.',
+    resolution: 'The measure is not how busy you are. It is how much of your best thinking reaches the outside world.',
   },
   outcomes: {
     heading: 'I help capable organisations\nperform at their best.',
@@ -74,7 +73,7 @@ const content: OperatorContent = {
       {
         headline: 'Shared language changes organisations.',
         why: 'Every organisation develops its own way of working. Left alone, those differences become friction. Shared ways of working don’t remove flexibility. They create a common language that helps good people make better decisions together.',
-        learned: 'At Tribal Worldwide London, I designed and implemented the agency’s first organisation-wide operating framework, bringing consultancy, web development and communications together under one shared operating model.',
+        learned: 'At Tribal Worldwide London the chief executive asked me to design the agency’s first organisation-wide operating framework, bringing consultancy, web development and communications together under one shared way of working. It was written with the leadership team and the head of operations, and it outlasted my time there. A former chief executive still refers to it eight years later.',
       },
       {
         headline: 'Winning the work changes the work.',
@@ -82,9 +81,24 @@ const content: OperatorContent = {
         learned: 'Following BBH’s Audi digital win, I helped build the delivery and consultancy capability needed to support one of the agency’s most significant new client relationships. Working alongside the Business Director, we established the multidisciplinary teams, operating model and delivery discipline required to turn a successful pitch into a confident, scalable capability.',
       },
       {
+        headline: 'The price is agreed before anyone understands the work.',
+        why: 'In most organisations the commercial commitment is made at the point of least knowledge, by the people furthest from the work, and everything afterwards is an attempt to fit reality inside a number set before reality was known. Better forecasting does not fix this. What fixes it is a repeatable route from brief to scope to signed statement of work, so the gap between what was sold and what is understood gets closed deliberately rather than discovered late.',
+        learned: 'On the Volkswagen platform programme I took over a fee that had already been agreed against a three-year scope, arrived at before anyone had a plan. What I inherited as a statement of work ran to about a hundred pages without being one. I peeled the whole thing back, understood the full stack of what was actually being built, and wrote a delivery plan, a project plan and a workable statement of work that had to fit inside a number nobody could now change. Later, running my own consultancy, I built the answer into the business rather than relying on judgement: a fixed sequence of brief, then the brief rewritten back to the client with every gap we could see in it, then the proposal, with estimating models people actually used.',
+      },
+      {
         headline: 'Every complex programme needs a centre of gravity.',
         why: 'Complex programmes rarely fail because people stop caring. They fail because nobody owns the space between the teams. Decisions become disconnected. Momentum quietly disappears.',
-        learned: 'Joining a major international ecommerce programme after three previous programme directors had failed to stabilise it, I stepped into a programme that had effectively lost its centre. Client confidence had eroded, delivery teams were frustrated and no single plan existed. Within six weeks I rebuilt the operating rhythm, restored accountability and created a recovery plan the organisation could finally align behind. Although the programme came to an end for commercial reasons, the impact of that work led Mirum’s global leadership to ask me to take on further strategic delivery challenges.',
+        learned: 'I joined a multi-market ecommerce programme that had lost its centre. Client confidence had eroded, the delivery teams were frustrated, and no single plan existed that anyone believed. Others had held the role before me. I went to the delivery floor, sat with people one at a time, and rebuilt the technical picture, the backlog and the estimates with the team who would have to build it. Within six weeks there was a number nobody had been able to produce before, and the client used it to take a decision. The decision was to stop. Getting an organisation to a defensible answer is not the same as getting it to the answer it wanted, and it is often worth more. Mirum’s global leadership asked me to take on further work off the back of it.',
+      },
+      {
+        headline: 'Bad news only travels along routes you build for it.',
+        why: 'Problems inside organisations are almost never unknown. They are known at one level and unspoken at another, because no forum exists where the person who can see it and the person who can act on it are in the same room. Courage is not a system. Early warning has to be designed: the rhythms, the reconciliation and the routes that force the real position into the open on a schedule, whether or not anyone feels like raising it that week.',
+        learned: 'A year into the Volkswagen programme we were running materially over across the year and nobody was saying it out loud. I put leadership, middle management and the delivery team in one room together and made sure the conversation happened. It ruffled a lot of feathers, and by the end the exposure had come down significantly, with none of it passed to the client. Running my own business afterwards, I stopped relying on anyone’s willingness to speak up and built the routes instead. A daily production call across every project. A weekly reconciliation where project managers logged time remaining, so an overburn appeared while there was still a decision to make. A monthly profit and loss cadence. None of it required anybody to be brave.',
+      },
+      {
+        headline: 'Every long programme outlives its sponsor.',
+        why: 'Any programme running longer than about eighteen months will change client sponsors, and each new one arrives with their own view, no memory of the decisions already taken, and a reasonable instinct to reopen them. Programmes are rarely undone by the work itself. They are undone by the cost of re-arguing settled decisions with people who were not there when they were settled. The defence is a written record of why, not only what, and a fast, deliberate onboarding for every new sponsor.',
+        learned: 'On Royal Mail Group we went through seven heads of digital in four years. Each arrived from outside the business with a different view of where the work was headed, and each had to be brought up to speed quickly. The last one disagreed with what everyone before him had settled about the home page, so we replanned it from the ground up, and to his credit he paid for it. Not one of those changes was quietly absorbed. What made a four-year account survivable was onboarding fast and reducing the going back on things, by putting a clear written case forward for why things were the way they were.',
       },
       {
         headline: 'Transformation is bigger than the project.',
@@ -125,20 +139,23 @@ const content: OperatorContent = {
   product: {
     kicker: 'What you can buy',
     name: 'The Programme Read',
-    duration: 'Two weeks. One honest answer.',
-    body: [
-      'When a programme is drifting, everyone in the building already has an opinion, and most of them are compromised by having been there from the start. I come in from outside, spend two weeks with the people actually building it, and tell you what is really happening.',
-      'You get a written read on the true position, what it will genuinely cost and when it will genuinely land, and what to do in the next ninety days.',
-    ],
-    pullQuote:
-      'Sometimes the answer is that it can be saved. Occasionally the answer is that it should stop. Either way, you will be able to defend the decision.',
+    duration: 'Two weeks. Where it is breaking, and what can be done.',
+    whenToBuy:
+      'A programme is the symptom. Something in how work moves through the organisation has stopped working, and you want to know where it is breaking before you spend more against it.',
+    whatItIs:
+      'Two weeks following the work from decision to delivery, with the people actually doing it. Scope, sequencing, decision rights, capability. Diagnosis only. I am not fixing it in a fortnight and will not pretend otherwise.',
+    whatYouGet:
+      'A written read on where the system is breaking and why. What the work will genuinely cost and when it will genuinely land. What to do in the next ninety days, in order. Something you can take to a board and defend.',
+    honest: {
+      need: 'Around eight to ten conversations, access to the plan and the numbers, and an hour of your time at the end. Less than you are bracing for.',
+      after:
+        'Sometimes I take the work on. Sometimes the answer is that it should stop. Sometimes the answer is that you do not need me. All three are fine.',
+    },
     button: 'Book a Programme Read',
     enquiry: {
       subject: 'Booking a Programme Read',
       body: 'We have a programme that needs an honest read. I would like to talk.',
     },
-    footnote:
-      'Fixed scope, agreed before we start. No proposal process, and no discovery phase you pay for twice.',
   },
   close: {
     heading: 'Great organisations rarely lack ambition.',

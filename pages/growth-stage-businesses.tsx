@@ -11,20 +11,21 @@ const content: OperatorContent = {
     image: '/images/momentum/03-growth.jpg',
   },
   validation: {
-    heading: 'The growth is real.',
+    heading: 'The growth is real. So is the strain.',
     paras: [
-      'Revenue is growing. The team is expanding. Customers are arriving. The opportunities keep coming.',
-      'The challenge isn’t finding the next opportunity. It’s building a business that can keep pace with the one you’ve already created.',
+      'Revenue is up. The team is bigger. Customers keep arriving. And the week feels harder than it did a year ago.',
+      'More of the business now runs through fewer people, and most of them are in the room with you.',
     ],
-    coda: 'It’s creating the capability\nto sustain the growth.',
+    coda: 'Success did not make it simpler.\nIt made it heavier.',
   },
   diagnosis: {
     thesis: 'Growth doesn’t create the problem.\nIt reveals it.',
     argument: [
       'It happens gradually. Another hire. Another product. Another priority.',
-      'Every stage changes how the business works. Decisions slow. Priorities collide. More rides on fewer people.',
+      'Every stage changes how the business works. Decisions slow. Priorities collide. More rides on fewer people, and almost none of it is written down anywhere.',
+      'The business is still running on a design that was right when there were twelve of you. Nobody has revisited it, because it has never quite broken.',
     ],
-    resolution: 'Eventually, it outgrows the way it was built to run.',
+    resolution: 'It will not break. It will stop being able to take on anything new, and that is much harder to see.',
   },
   outcomes: {
     heading: 'I help businesses keep growing without\nlosing grip of what made them good.',
@@ -89,19 +90,22 @@ const content: OperatorContent = {
     kicker: 'What you can buy',
     name: 'The Business Read',
     duration: 'Three weeks. What breaks first.',
-    body: [
-      'Growing businesses rarely run into trouble on strategy. They run into the limits of how they were built, and the people holding it together are usually the last to see it.',
-      'Three weeks looking at how the business actually runs. Where it depends on individuals rather than systems. What breaks first at double the size.',
-    ],
-    pullQuote:
-      'You get a written picture of the operating model as it stands, the failure points in order of likelihood, and a ninety-day plan to fix the first of them.',
+    whenToBuy:
+      'Growth is not the problem. How the business was built is. Growing businesses rarely run into trouble on strategy, they run into the limits of their own design, and the people holding it together are usually the last to see it.',
+    whatItIs:
+      'Three weeks looking at how the business actually runs rather than how it is described. Where it depends on individuals rather than systems. Which decisions have no owner. What breaks first at double the size.',
+    whatYouGet:
+      'A written picture of the operating model as it stands. The failure points, in order of likelihood. A ninety-day plan to fix the first of them, with the second and third named so you know what is coming.',
+    honest: {
+      need: 'Conversations with eight to ten people across the business, sight of how the numbers are actually run, and an hour of your time at the end.',
+      after:
+        'Sometimes this becomes ongoing fractional work. Sometimes you hire the person the read tells you to hire. Sometimes you fix it yourselves. All three are fine.',
+    },
     button: 'Book a Business Read',
     enquiry: {
       subject: 'Booking a Business Read',
       body: 'Our growth has outpaced how the business was built. I would like to talk.',
     },
-    footnote:
-      'Fixed scope, agreed before we start. No proposal process, and no discovery phase you pay for twice.',
   },
   close: {
     heading: 'Growth will always create complexity.',

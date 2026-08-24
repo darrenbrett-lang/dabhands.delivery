@@ -37,7 +37,7 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
     <section
       id="operating-patterns"
       aria-labelledby={`${baseId}-heading`}
-      className={`bg-black text-bone pt-24 md:pt-32 lg:pt-40 ${single ? 'pb-12 md:pb-14 lg:pb-16' : 'pb-24 md:pb-32 lg:pb-40'}`}
+      className={`bg-black text-bone pt-20 md:pt-24 lg:pt-28 ${single ? 'pb-12 md:pb-14 lg:pb-16' : 'pb-20 md:pb-24 lg:pb-28'}`}
     >
       <div className="u-container">
         {/* The exhibit's wall text: label, one serif statement, two quiet lines. */}
@@ -58,7 +58,7 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
         </FadeUp>
 
         {/* The plaques. */}
-        <div className="mt-16 md:mt-20 border-b border-bone/15">
+        <div className="mt-10 md:mt-14 border-b border-bone/15">
           {content.items.map((item, i) => {
             const isOpen = open === i;
             const num = String(i + 1).padStart(2, '0');
@@ -98,7 +98,7 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                       aria-expanded={isOpen}
                       aria-controls={`${baseId}-panel-${i}`}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="group grid w-full grid-cols-[2.5rem_1fr_auto] md:grid-cols-[3.25rem_1fr_auto] items-start py-8 md:py-11 text-left"
+                      className="group grid w-full grid-cols-[2.5rem_1fr_auto] md:grid-cols-[3.25rem_1fr_auto] items-start py-5 md:py-6 text-left"
                     >
                       {/* The one restrained accent: a small gold numeral, in a fixed
                           column shared with the expanded panel below. */}

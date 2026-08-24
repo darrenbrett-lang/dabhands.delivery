@@ -11,19 +11,19 @@ const content: OperatorContent = {
     image: '/images/momentum/02-branding-2.jpg',
   },
   validation: {
-    heading: 'Most organisations know what good looks like.',
+    heading: 'Nobody remembers the moment it stopped being excellent.',
     paras: [
-      'The strategy is clear. The ambition is strong. The investment has already been made. Everyone knows what success looks like.',
-      'The challenge is rarely finding another idea. It’s helping the right idea survive the journey from concept to customer.',
+      'The brief was sharp. The creative was strong. The people were good. Then it went out, and it was fine.',
+      'There was no disaster and no argument. There were forty small concessions, and every one of them was reasonable.',
     ],
-    coda: 'It’s helping ambitious work arrive\nwith the force it was built to carry.',
+    coda: 'Fine is the most expensive\noutcome in marketing.',
   },
   diagnosis: {
-    thesis: 'Great ideas rarely disappear.\nThey become diluted.',
+    thesis: 'Great ideas rarely disappear. They get traded away.',
     argument: [
-      'Most organisations don’t need another advocate for the work.',
-      'They need someone who understands how ambitious work moves through complex organisations.',
-      'Someone who knows where momentum slips. Where decisions stall. Where competing priorities quietly weaken strong ideas before customers ever see them.',
+      'Every organisation has gates the work has to pass through.',
+      'Legal, brand, procurement, regional teams, production partners, the platform. At each one something is conceded to keep the work moving, and every concession is defensible. Nobody is wrong. The work is just weaker.',
+      'What protects it is deciding what cannot be traded away before the work starts, and making sure that decision travels with it.',
     ],
     resolution: 'The measure isn’t whether the work survived. It’s whether it arrived performing, and made the case for itself.',
   },
@@ -91,20 +91,23 @@ const content: OperatorContent = {
   product: {
     kicker: 'What you can buy',
     name: 'The Launch Read',
-    duration: 'One to two weeks, before it starts.',
-    body: [
-      'Big launches rarely go wrong in the middle. They go wrong in the quiet fortnight before anyone notices, when internal teams, agencies and production partners are each working to a slightly different plan.',
-      'I map the whole thing before it begins. One plan across every partner, clear decision rights, and an honest list of where it will stall.',
-    ],
-    pullQuote:
-      'You get the plan, the decision map and the risk list, in a form you can hand to everyone involved.',
+    duration: 'One to two weeks, before it starts. Making sure the work survives the journey.',
+    whenToBuy:
+      'The strategy is right and the creative is strong. What you are actually worried about is what survives. Between brief and launch, work passes through systems that quietly trade away the things that made it worth doing, and nobody ever decides to do it.',
+    whatItIs:
+      'One to two weeks before the work starts, mapping every system the work has to travel through, inside your organisation and across your partners, and finding where the friction actually sits. Then we agree what cannot be traded away to reach the end point, write it into the brief so it travels with the work, and make the decision rights explicit so nothing gets conceded by default. I call it safe passage.',
+    whatYouGet:
+      'A brief that carries its own non-negotiables. A map of every system the work passes through, and where each one applies pressure. Clear decision rights, so nobody waits on an answer that was never theirs to give, and nothing is given away by accident.',
+    honest: {
+      need: 'A conversation with each party involved, the brief and the plan in whatever state they are in, and an hour of your time to agree what cannot be traded away.',
+      after:
+        'Sometimes I stay and hold the passage while the work moves. Sometimes you have what you need and your own team carries it. Both are fine.',
+    },
     button: 'Book a Launch Read',
     enquiry: {
       subject: 'Booking a Launch Read',
       body: 'We have a launch coming and several partners who need to work as one. I would like to talk.',
     },
-    footnote:
-      'Fixed scope, agreed before we start. No proposal process, and no discovery phase you pay for twice.',
   },
   close: {
     heading: 'Great work deserves to land with its full force.',
