@@ -41,14 +41,14 @@ export default function Contact() {
               {/* Small crown above the heading (mobile only). */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} decoding="async" className="md:hidden block mb-5 h-10 w-auto select-none" />
-              <h1 className="text-[44px] md:text-[68px] lg:text-[88px] leading-[1.02] max-w-[12ch]">What’s important?</h1>
+              <h1 className="text-[44px] md:text-[68px] lg:text-[88px] leading-[1.02] max-w-[12ch]">Let’s talk.</h1>
             </div>
 
             <div className="rise" style={{ '--rise-delay': '0.12s' } as CSSProperties}>
-              <p className="mt-9 md:mt-12 text-lg md:text-xl text-graphite leading-relaxed max-w-[48ch]">
-                If you’ve got something important
-                <br className="hidden md:block" /> that needs to create real impact, let’s talk.
-              </p>
+              <div className="mt-9 md:mt-12 space-y-5 text-lg md:text-xl text-graphite leading-relaxed max-w-[52ch]">
+                <p>You do not need it worked out before you get in touch. Most of the useful conversations I have start with someone describing something that is not going the way they expected.</p>
+                <p>Tell me what is happening. I will tell you what I think, and whether I am the right person for it.</p>
+              </div>
             </div>
 
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>

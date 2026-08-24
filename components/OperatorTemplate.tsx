@@ -89,7 +89,7 @@ const Cta = ({ label = 'Start a conversation', full = false, accent, email }: { 
 // Testimonials on the Deep Blue-Green Trust panel: bone copy on the dark panel,
 // a thin bone left rule, no box. One quote at a time, crossfaded; rotation
 // pauses for reduced motion; the pips stay clickable.
-const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; interval?: number }) => {
+export const Testimonials = ({ items, interval = 6000 }: { items: { quote: string; name: string; role: string }[]; interval?: number }) => {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   useEffect(() => {

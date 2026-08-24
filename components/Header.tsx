@@ -103,6 +103,7 @@ export const Header = () => {
   };
 
   const whoActive = audiences.some((a) => router.pathname === a.href);
+  const trackActive = router.pathname === '/experience';
   const contactActive = router.pathname === '/contact';
   const room = audiences.find((a) => router.pathname === a.href) ?? null;
   const showContext = atP2 && !!room;
@@ -223,6 +224,15 @@ export const Header = () => {
             </div>
 
             <Link
+              href="/experience"
+              className={`text-[14px] tracking-[-0.01em] transition-colors ${
+                trackActive ? 'text-ink' : 'text-graphite hover:text-ink'
+              }`}
+            >
+              Experience
+            </Link>
+
+            <Link
               href="/contact"
               className={`text-[14px] tracking-[-0.01em] transition-colors ${
                 contactActive ? 'text-ink' : 'text-graphite hover:text-ink'
@@ -279,9 +289,22 @@ export const Header = () => {
                 transition={{ delay: 0.06 + audiences.length * 0.05 }}
               >
                 <Link
-                  href="/contact"
+                  href="/experience"
                   onClick={() => setMenuOpen(false)}
                   className="block font-serif text-[30px] leading-[1.18] py-1.5 border-t border-stone pt-6"
+                >
+                  Experience
+                </Link>
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.06 + (audiences.length + 1) * 0.05 }}
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block font-serif text-[30px] leading-[1.18] py-1.5"
                 >
                   Contact
                 </Link>
