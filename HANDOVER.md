@@ -54,8 +54,8 @@ A **mastery brand**: "the marks left behind by skilled hands." First person ("I"
 ### `/` — homepage
 Hero → Darren intro → problem panel → turns → ticker → How I work → doorway cards → closer.
 - **Hero cue** is "See who I help +" (PathwayPicker).
-- **Darren intro block**: "Hi, I'm Darren." small sans → the promise line, largest → career sentence at 18px body sans → two body paras closing on "That work lives at the point where direction has to become reality."
-- **Problem panel**: "The work loses strength." Turn 3 is "Important work *into* real results".
+- **Darren intro block** (rewritten 18 Aug): "Hi, I'm Darren." small sans → the promise line, largest → three 18px body paras. The career sentence now names **running his own business** alongside the agency and brand work; the block closes on "Important work rarely goes wrong because the idea was weak. It goes wrong because nobody said the expensive thing out loud while there was still time.", which hands straight into the problem panel. Sets 3/3/3 lines at 1280.
+- **Problem panel** (rewritten 18 Aug): heading "The tools are changing. / The problems aren't." and the P&Ls line are unchanged; the three paragraphs beneath now argue the AI gap — a better first draft joins the same queue, waits on the same decision, and stops with the same person who isn't sure they can say the work can go. **"The work loses strength." and "The system creates noise. That's what systems do." are retired from the homepage**: that framing belonged to Signal to Noise, which is now unlisted.
 - **How I help lead-in** stays "I work alongside leaders of agencies…" (an MDs/CEOs variant shipped 2026-07-14 and was reverted same day; don't resuggest).
 - **How I work** closes on "The team expands only when the work demands it. Never the other way around."
 - **Doorway cards** carry the overlay lines.
