@@ -88,6 +88,24 @@ const content: OperatorContent = {
       },
     ],
   },
+  product: {
+    kicker: 'What you can buy',
+    name: 'The Launch Read',
+    duration: 'One to two weeks, before it starts.',
+    body: [
+      'Big launches rarely go wrong in the middle. They go wrong in the quiet fortnight before anyone notices, when internal teams, agencies and production partners are each working to a slightly different plan.',
+      'I map the whole thing before it begins. One plan across every partner, clear decision rights, and an honest list of where it will stall.',
+    ],
+    pullQuote:
+      'You get the plan, the decision map and the risk list, in a form you can hand to everyone involved.',
+    button: 'Book a Launch Read',
+    enquiry: {
+      subject: 'Booking a Launch Read',
+      body: 'We have a launch coming and several partners who need to work as one. I would like to talk.',
+    },
+    footnote:
+      'Fixed scope, agreed before we start. No proposal process, and no discovery phase you pay for twice.',
+  },
   close: {
     heading: 'Great work deserves to land with its full force.',
     line: 'The investment is made. The ambition exists.\nI help it arrive intact, performing, and making its case.',

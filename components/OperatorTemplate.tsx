@@ -8,6 +8,7 @@ import { mailto } from '@/lib/mailto';
 import { withSoftBreaks, withBreaks } from '@/lib/softBreaks';
 import { SelectedWork, type SelectedWorkContent } from './SelectedWork';
 import { OperatingPatterns, type OperatingPatternsContent } from './OperatingPatterns';
+import { EntryProduct, type EntryProductContent } from './EntryProduct';
 import { SlatPortrait } from './SlatPortrait';
 
 /* ── Operator destination template (8-section spine) ──────────────────────────
@@ -48,6 +49,9 @@ export interface OperatorContent {
   // Optional — omit (or comment out in the page data) to hide the trust panel.
   proof?: { heading: string; quote?: string; name?: string; role?: string; statement?: string[]; testimonials?: { quote: string; name: string; role: string }[]; interval?: number };
   close: { heading: string; line?: string };
+  // Optional entry product ("The … Read"): a buyable Warm Clay module rendered
+  // after the testimonials and before the closing CTA — proof, then the ask.
+  product?: EntryProductContent;
   // Optional "Selected Work" carousel, rendered just before the closing CTA.
   work?: SelectedWorkContent;
   email?: { subject: string; body: string }; // pre-fills the CTA mailto for this room's context
@@ -484,6 +488,10 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
           </div>
         </section>
         )}
+
+        {/* 7.75 ── ENTRY PRODUCT (optional): the buyable "Read" — a mid-tone
+            Warm Clay band after the testimonials, before the closing CTA. ── */}
+        {c.product && <EntryProduct content={c.product} />}
 
         {/* 8 ── CLOSE: simple, confident invitation — always centred, bone. ── */}
         <section className="bg-bone text-ink py-14 md:py-20 lg:py-24 border-t border-stone/50">

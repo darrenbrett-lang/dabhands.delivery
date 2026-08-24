@@ -85,6 +85,24 @@ const content: OperatorContent = {
     name: 'Neil Munn',
     role: 'Former Global CEO, BBH',
   },
+  product: {
+    kicker: 'What you can buy',
+    name: 'The Business Read',
+    duration: 'Three weeks. What breaks first.',
+    body: [
+      'Growing businesses rarely run into trouble on strategy. They run into the limits of how they were built, and the people holding it together are usually the last to see it.',
+      'Three weeks looking at how the business actually runs. Where it depends on individuals rather than systems. What breaks first at double the size.',
+    ],
+    pullQuote:
+      'You get a written picture of the operating model as it stands, the failure points in order of likelihood, and a ninety-day plan to fix the first of them.',
+    button: 'Book a Business Read',
+    enquiry: {
+      subject: 'Booking a Business Read',
+      body: 'Our growth has outpaced how the business was built. I would like to talk.',
+    },
+    footnote:
+      'Fixed scope, agreed before we start. No proposal process, and no discovery phase you pay for twice.',
+  },
   close: {
     heading: 'Growth will always create complexity.',
     line: 'The businesses that keep scaling aren’t the ones with fewer opportunities.\nThey’re the ones that build the capability to turn growth into lasting advantage.',

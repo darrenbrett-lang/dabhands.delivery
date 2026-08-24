@@ -122,6 +122,24 @@ const content: OperatorContent = {
       },
     ],
   },
+  product: {
+    kicker: 'What you can buy',
+    name: 'The Programme Read',
+    duration: 'Two weeks. One honest answer.',
+    body: [
+      'When a programme is drifting, everyone in the building already has an opinion, and most of them are compromised by having been there from the start. I come in from outside, spend two weeks with the people actually building it, and tell you what is really happening.',
+      'You get a written read on the true position, what it will genuinely cost and when it will genuinely land, and what to do in the next ninety days.',
+    ],
+    pullQuote:
+      'Sometimes the answer is that it can be saved. Occasionally the answer is that it should stop. Either way, you will be able to defend the decision.',
+    button: 'Book a Programme Read',
+    enquiry: {
+      subject: 'Booking a Programme Read',
+      body: 'We have a programme that needs an honest read. I would like to talk.',
+    },
+    footnote:
+      'Fixed scope, agreed before we start. No proposal process, and no discovery phase you pay for twice.',
+  },
   close: {
     heading: 'Great organisations rarely lack ambition.',
     line: 'They create the conditions for ambition\nto become impact, again and again.',
