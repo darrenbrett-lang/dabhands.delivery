@@ -463,8 +463,6 @@ export default function TrackRecord() {
                 <div className="mt-10 md:mt-14 flex flex-col">
                   {roles.map((r, i) => {
                     const all = [...r.visible, ...r.expand];
-                    const mid = Math.ceil(all.length / 2);
-                    const cols = [all.slice(0, mid), all.slice(mid)];
                     return (
                       <div
                         key={r.org}
@@ -476,14 +474,12 @@ export default function TrackRecord() {
                           <p className="text-[12px] uppercase tracking-[0.14em] text-graphite">{r.dates} · {r.location}</p>
                         </div>
                         <p className="mt-2.5 text-[11px] uppercase tracking-[0.18em] text-blue-green">{r.title}</p>
-                        {/* The detail, split equally across two columns. */}
-                        <div className="mt-5 grid gap-x-10 gap-y-3 md:grid-cols-2">
-                          {cols.map((col, ci) => (
-                            <div key={ci} className="space-y-3 text-[15px] leading-[1.65] text-ink/85">
-                              {col.map((line, j) => (
-                                <p key={j}>{line}</p>
-                              ))}
-                            </div>
+                        {/* The detail flowed across three columns, balanced by
+                            the browser to roughly equal depth (CSS multi-column).
+                            Paragraphs stay whole. */}
+                        <div className="mt-5 text-[15px] leading-[1.65] text-ink/85 md:columns-3 md:gap-8 [&>p]:mb-3 [&>p]:break-inside-avoid [&>p:last-child]:mb-0">
+                          {all.map((line, j) => (
+                            <p key={j}>{line}</p>
                           ))}
                         </div>
                       </div>
