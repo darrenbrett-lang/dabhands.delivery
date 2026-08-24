@@ -362,8 +362,8 @@ export default function Home() {
                   </h2>
                 </FadeUp>
                 <FadeUp delay={0.06}>
-                  <p className="mt-4 text-lg text-graphite max-w-[62ch] mx-auto text-balance">
-                    {withSoftBreaks('They need their best thinking to survive the journey from concept to customer.\nWhen important work needs to land, let’s talk.')}
+                  <p className="mt-4 text-lg text-graphite max-w-[68ch] mx-auto text-balance">
+                    {withSoftBreaks('They need their best thinking to survive the journey from strategy to concept to customer.\nWhen important work needs to land, let’s talk.')}
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
