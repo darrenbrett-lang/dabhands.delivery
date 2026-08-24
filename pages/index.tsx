@@ -175,17 +175,21 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    Between ambition and execution, momentum slips. Complexity takes hold. The work loses strength.
+                    That gap isn’t about the technology. A better first draft still joins the same queue, waits on
+                    the same decision, and stops with the same person who isn’t sure they’re allowed to say the work
+                    can go.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The system creates noise. That’s what systems do.
+                    The constraint was never the tool. It’s whether an organisation knows where it’s going, and can
+                    move together to get there.
                   </p>
                 </FadeUp>
+                {/* The sign-off: the shortest line in the column, so it lands. */}
                 <FadeUp delay={0.28}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    My role is reducing noise so the right things get through.
+                    That’s the part I work on.
                   </p>
                 </FadeUp>
               </div>
