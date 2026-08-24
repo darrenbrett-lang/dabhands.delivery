@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import Image from 'next/image';
 import { Layout } from '@/components/Layout';
 import { SeoMeta } from '@/components/SeoMeta';
 import { FadeUp } from '@/components/FadeUp';
@@ -386,19 +387,39 @@ export default function TrackRecord() {
             style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
           >
             <div className="u-container">
-              <FadeUp>
-                <p className="eyebrow text-blue-green">Experience</p>
-              </FadeUp>
-              <FadeUp delay={0.06}>
-                <h1 className="mt-6 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[20ch]">
-                  Twenty years running other people’s programmes. Seven running my own business.
-                </h1>
-              </FadeUp>
-              <FadeUp delay={0.12}>
-                <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[52ch]">
-                  Below is what I ran, what I was brought in to do, and what came of each one.
-                </p>
-              </FadeUp>
+              <div className="u-grid items-center gap-y-8 lg:gap-y-0">
+                {/* The headshot: square on the right (lg), a shallow full-width
+                    sliver above the copy on smaller screens, same as the
+                    doorway heroes. */}
+                <div className="col-span-4 md:col-span-12 lg:col-span-5 lg:col-start-8 lg:row-start-1">
+                  <div className="relative aspect-[5/2] lg:aspect-square overflow-hidden rounded-2xl ring-1 ring-inset ring-ink/10">
+                    <Image
+                      src="/images/darren-brett_colour_headshot.jpeg"
+                      alt="Darren Brett"
+                      fill
+                      priority
+                      quality={82}
+                      sizes="(max-width: 1024px) 92vw, 38vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
+                  <FadeUp>
+                    <p className="eyebrow text-blue-green">Experience</p>
+                  </FadeUp>
+                  <FadeUp delay={0.06}>
+                    <h1 className="mt-6 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
+                      Twenty years running other people’s programmes. Seven running my own business.
+                    </h1>
+                  </FadeUp>
+                  <FadeUp delay={0.12}>
+                    <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
+                      Below is what I ran, what I was brought in to do, and what came of each one.
+                    </p>
+                  </FadeUp>
+                </div>
+              </div>
             </div>
           </section>
 

@@ -1,6 +1,8 @@
 # DAB Hands Website — Handover
 
-Pick this up cold. The site is **LIVE in production** at `https://dabhands.delivery`. This captures it as of **18 August 2026**, after a day of heavy iteration on the **Signal to Noise** page: brief v4 landed, the page gained the crux it was missing, and roughly half its copy changed. Read the Signal to Noise section before touching that page.
+Pick this up cold. The site is **LIVE in production** at `https://dabhands.delivery`. Updated **25 August 2026**. Since the 18 Aug Signal to Noise work, a run of doorway-page changes and a new top-level **Experience** page shipped (25 Aug) — read the Experience section below. The **Signal to Noise** page is unchanged since 18 Aug; still the most-iterated page, read its section before touching it.
+
+**Recent releases (all straight to `main` via fast-forward from branch `signal-to-noise-fixes`, which now == `main`):** `dde9052` (24 Aug) doorway batch — entry product modules, Modules 2/3 rewrite, Operating Patterns 5→8; `444600e` (25 Aug) the Experience page + Contact "Let's talk" copy; `ab4c0c7` (25 Aug) Experience full record → three balanced columns. See the relevant page sections.
 
 ---
 
@@ -13,7 +15,7 @@ Pick this up cold. The site is **LIVE in production** at `https://dabhands.deliv
 - **⚠ Vercel deploy stalls (FIVE occurrences: 2026-08-14, -16, -17, -18 x2):** a push sometimes builds but never rolls out. Symptom: the old page still serving with `x-vercel-cache: HIT` and a large `age`, new routes 404ing. Fix: `git commit --allow-empty -m "Retrigger Vercel deploy (<sha> not rolled out)"` and push to main; resolves in ~10s every time. The owner has the dashboard task; sessions have no dashboard access and no `gh`/API tokens (git push works via SSH).
 - **Always poll production after a release** (curl for a string unique to the change) — never assume the deploy landed.
 - **Build gates:** `npm run build` + `npm run lint`. Lint carries **2 pre-existing errors in `pages/for/eterna/*`** (plain `<a>`→`<Link>`) and **4 warnings** (2 in `pages/for/eterna/index.tsx`, 2 unused colour consts in `components/SignalToNoise.tsx`). Inherited, not blockers.
-- Routes: `/`, the three doorways, **`/signal-to-noise` (UNLISTED, see below)**, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth via `middleware.ts`, noindex), `/for/manifesto-digital`, `/design-system`.
+- Routes: `/`, the three doorways, **`/experience`** (in the main nav between Who I help and Contact), **`/signal-to-noise` (UNLISTED, see below)**, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth via `middleware.ts`, noindex), `/for/manifesto-digital`, `/design-system`.
 - Repo: `git@github.com:darrenbrett-lang/dabhands.delivery.git`, Vercel project `dabhands-delivery`.
 
 ## The brand direction (source of truth)
@@ -62,7 +64,14 @@ Hero → Darren intro → problem panel → turns → ticker → How I work → 
 - **In Their Words** — the master testimonial carousel is built but **NOT live**, parked on `eterna-workspace` (`fb63467`).
 
 ### The three rooms (`components/OperatorTemplate.tsx`)
-Unchanged spine. Each room's "Typical engagements" module runs the page's doorway image full-bleed behind it at 10% opacity. Growth carries the Neil Munn trust panel. Marketing testimonials rotate at 6s (`proof.interval`).
+8-section spine. Each room's "Typical engagements" module runs the page's doorway image full-bleed behind it at 10% opacity. Growth carries the Neil Munn trust panel. Marketing testimonials rotate at 6s (`proof.interval`); `Testimonials` is now **exported** for reuse on the Experience page.
+**24 Aug additions (all three rooms):** Modules 2 (Situation) and 3 (Challenge) rewritten to symptom → mechanism → a closing-line "measure" (B&A/Marketing M3 cut to two short paras; B&A close in second person; Marketing close + Growth headline preserved). A buyable **entry product module** (`components/EntryProduct.tsx`, one component + 3 copy variants: Programme/Launch/Business Read) sits after the testimonials, before the Close: Warm Clay band, Soft Grey cards three-across, collapsed "The honest bits" `<details>`, **no gold**, small text is Ink for AA on the mid-tone. Operating Patterns on B&A went **5 → 8** patterns (renumbered 01–08; eight is the ceiling; no figures, never names another's difficulty, never "failed").
+
+### `/experience` — the full career record (new, 25 Aug)
+Top-level page in the main nav (`pages/experience.tsx`), between Who I help and Contact. Header: doorway clay-wash vignette, copy left + the square **`darren-brett_colour_headshot.jpeg`** on the right (the doorway-hero treatment). Sections: a **charcoal** showcase rail of seven leadership-impact tiles (two columns each; prev/next/dots via a keyboard-navigable `ScrollRail`; each tile's outcome behind a one-way "What came of it" `<details>`) → **"The full record"** (closed-by-default disclosure of nine roles in reverse order; each a gold org heading — `#9A7735`, the AA-safe deep gold, at ≥24px — plus dates/location and a slate role title, with the detail flowed across **three balanced CSS-multi-column columns**, `md:columns-3` + `break-inside-avoid`; no "More" link) → the shared slate **"In their words"** panel (reused `Testimonials`) → the **"Trusted where the stakes are high"** `LogoTicker` → the doorway close CTA ("Recognise any of it?"). **Rules: no money figures anywhere** (scale is non-financial only), nobody else's difficulty named, no "failed", British English, no em dashes. One-way disclosures use `details[open] > summary { display:none }`; a `beforeprint` handler opens everything for print. `SeoMeta` uses `og-card-3`; route is in sitemap + llms.txt. Was `/track-record` for one build, renamed to `/experience`.
+
+### `/contact`
+Copy refreshed 25 Aug: heading **"Let's talk."**, then two paragraphs ("You do not need it worked out before you get in touch…" / "Tell me what is happening. I will tell you what I think, and whether I am the right person for it."). Clay wash + the three channels unchanged.
 
 ### `/signal-to-noise` — the diagnostic page
 **⚠ UNLISTED as of 18 August 2026, by the owner's instruction.** The route still resolves and the URL can be shared directly, but there are **no links to it anywhere on the site**. Hidden in four places, all of which must be reversed together to bring it back: the two `components/Header.tsx` nav links (desktop and mobile, the mobile Contact item inherited its `border-t`), the `sitemap.xml` entry, the `llms.txt` entry, and the noindex (`SeoMeta noindex` prop plus an `X-Robots-Tag` route header in `next.config.ts`). Nothing was deleted.
