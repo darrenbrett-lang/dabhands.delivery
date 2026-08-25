@@ -4,6 +4,7 @@ const content: OperatorContent = {
   slug: 'business-and-agency-leaders',
   navLabel: 'Business & Agency Leaders',
   eyebrow: 'For Business & Agency Leaders',
+  role: 'Fractional COO',
   accent: 'sage',
   hero: {
     headline: 'Strategy is rarely the constraint. Execution is.',

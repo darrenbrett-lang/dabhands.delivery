@@ -11,9 +11,9 @@ const NAV_TINT = 'var(--color-gold)';
 const NAV_DEEP = 'var(--color-blue-green)';
 const NAV_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', role: 'Fractional COO · Operating Partner', context: 'For Business & Agency Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
-  { href: '/marketing-leaders', label: 'Marketing Leaders', role: 'Programme & Delivery Director', context: 'For Marketing Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
-  { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', role: 'Fractional COO', context: 'For Growth-Stage Businesses', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', context: 'For Business & Agency Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/marketing-leaders', label: 'Marketing Leaders', context: 'For Marketing Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', context: 'For Growth-Stage Businesses', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
 ];
 
 export const Header = () => {
@@ -213,11 +213,7 @@ export const Header = () => {
                             className="block rounded-xl px-3 py-2.5 transition-colors duration-200"
                             style={{ backgroundColor: bg }}
                           >
-                            <span className="block text-[14.5px] leading-snug text-ink">{a.label}</span>
-                            {/* Deep accent #7E5E27 rather than --color-gold: at 11px
-                                Aged Gold clears neither the bone panel nor the gold
-                                hover fill behind it. */}
-                            <span className="eyebrow mt-1 block" style={{ color: '#7E5E27' }}>{a.role}</span>
+                            <span className="text-[14.5px] leading-snug text-ink">{a.label}</span>
                           </Link>
                         );
                       })}
@@ -280,12 +276,9 @@ export const Header = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.06 + i * 0.05 }}
                   >
-                    <Link href={a.href} onClick={() => setMenuOpen(false)} className="flex items-start gap-4 py-2">
-                      <span aria-hidden className="mt-[18px] block h-px w-6 shrink-0 rounded-full" style={{ backgroundColor: a.tint }} />
-                      <span className="block">
-                        <span className="block font-serif text-[30px] leading-[1.18]">{a.label}</span>
-                        <span className="eyebrow mt-1 block" style={{ color: '#7E5E27' }}>{a.role}</span>
-                      </span>
+                    <Link href={a.href} onClick={() => setMenuOpen(false)} className="flex items-center gap-4 py-1.5">
+                      <span aria-hidden className="block h-px w-6 shrink-0 rounded-full" style={{ backgroundColor: a.tint }} />
+                      <span className="font-serif text-[30px] leading-[1.18]">{a.label}</span>
                     </Link>
                   </motion.span>
                 ))}

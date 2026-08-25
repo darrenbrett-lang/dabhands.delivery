@@ -4,6 +4,7 @@ const content: OperatorContent = {
   slug: 'growth-stage-businesses',
   navLabel: 'Growth-Stage Businesses',
   eyebrow: 'For Growth-Stage Businesses',
+  role: 'Fractional COO',
   accent: 'lavender',
   hero: {
     headline: 'Most growing businesses have never had to write down how they run.',

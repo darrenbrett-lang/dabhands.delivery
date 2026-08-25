@@ -4,6 +4,7 @@ const content: OperatorContent = {
   slug: 'marketing-leaders',
   navLabel: 'Marketing Leaders',
   eyebrow: 'For Marketing Leaders',
+  role: 'Programme & Delivery Director',
   accent: 'peach',
   hero: {
     headline: 'Great work loses power on the journey.',

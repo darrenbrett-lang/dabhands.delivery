@@ -32,6 +32,8 @@ export interface OperatorContent {
   slug: string;
   navLabel: string;
   eyebrow: string; // "For Business & Agency Leaders"
+  /** Role clue after the middot in the hero eyebrow, e.g. "Fractional COO". */
+  role?: string;
   accent: Accent;
   hero: { headline: string; subline: string; trust?: string; image?: string };
   // Serif heading (+ optional lead), two body-copy columns (paras[0] left, the
@@ -197,7 +199,10 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                   (keeps LCP at first paint rather than JS boot). */}
               <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
                 <div className="rise">
-                  <p className={`eyebrow mb-6 ${a.text}`}>{c.eyebrow}</p>
+                  <p className={`eyebrow pt-2 mb-10 ${a.text}`}>
+                    {c.eyebrow}
+                    {c.role && <span className="font-medium text-gold"> · {c.role}</span>}
+                  </p>
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.06s' } as CSSProperties}>
                   <h1 className="font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[19ch]">{c.hero.headline}</h1>

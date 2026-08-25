@@ -408,12 +408,22 @@ export default function TrackRecord() {
                   <FadeUp>
                     <p className="eyebrow text-blue-green">Experience</p>
                   </FadeUp>
-                  <FadeUp delay={0.06}>
+                  {/* The role line, in the same deep accent as the doorway cards and
+                      the "Who I help" nav — the three must stay in step. */}
+                  <FadeUp delay={0.04}>
+                    <p className="eyebrow mt-5" style={{ color: '#7E5E27' }}>Fractional COO</p>
+                  </FadeUp>
+                  <FadeUp delay={0.08}>
+                    <p className="mt-3 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
+                      Part delivery lead, part digital operator, all entrepreneur’s engine.
+                    </p>
+                  </FadeUp>
+                  <FadeUp delay={0.12}>
                     <h1 className="mt-6 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
                       Twenty years running other people’s programmes. Seven running my own business.
                     </h1>
                   </FadeUp>
-                  <FadeUp delay={0.12}>
+                  <FadeUp delay={0.18}>
                     <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
                       Below is what I ran, what I was brought in to do, and what came of each one.
                     </p>
