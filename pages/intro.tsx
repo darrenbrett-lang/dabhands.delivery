@@ -20,8 +20,9 @@ import { FadeUp } from '@/components/FadeUp';
  * The 60-second hello. Fill both in to switch the film on: `embed` is the
  * unlisted Vimeo/YouTube player URL, `poster` an image in /public.
  *
- * While `embed` is null the section is omitted entirely rather than shipping a
- * dead frame onto a page whose whole job is to be forwarded.
+ * While `embed` is null the slot renders a labelled placeholder so the page can
+ * go out for review with the shape intact. Setting `embed` swaps the real
+ * click-to-load player in and drops the placeholder automatically.
  */
 const FILM: { embed: string | null; poster: string; alt: string } = {
   embed: null,
@@ -53,11 +54,29 @@ const Eyebrow = ({ children }: { children: string }) => (
   <p className="eyebrow text-gold mb-5">{children}</p>
 );
 
+/** Placeholder for review: the real frame, at the real size, with a static play
+ *  mark and a caption saying what is coming. Deliberately not a button, so
+ *  nobody clicks a control that cannot do anything yet. */
+const FilmPlaceholder = () => (
+  <>
+    <div className="relative aspect-video overflow-hidden rounded-xl ring-1 ring-inset ring-ink/10 bg-charcoal">
+      <Image src={FILM.poster} alt="" aria-hidden fill sizes="(max-width: 767px) 100vw, 760px" className="object-cover opacity-35" />
+      <span
+        aria-hidden
+        className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-bone/90"
+      >
+        <span className="ml-1 block h-0 w-0 border-y-[11px] border-l-[18px] border-y-transparent border-l-ink" />
+      </span>
+    </div>
+    <p className="mt-3 text-[14px] text-graphite">Film to follow.</p>
+  </>
+);
+
 /** Click-to-load façade: the poster paints immediately, the player only loads
  *  when asked, so a forwarded page stays light on a phone. */
 const Film = () => {
   const [playing, setPlaying] = useState(false);
-  if (!FILM.embed) return null;
+  if (!FILM.embed) return <FilmPlaceholder />;
   return (
     <div className="relative aspect-video overflow-hidden rounded-xl ring-1 ring-inset ring-ink/10 bg-charcoal">
       {playing ? (
@@ -136,14 +155,12 @@ export default function Intro() {
 
         {/* ── The film: the first thing a forwarded viewer engages with.
               The script is spoken, never printed on the page. ─────── */}
-        {FILM.embed && (
-          <section className="u-container pb-14 md:pb-20">
-            <div className="max-w-[46rem]">
-              <Eyebrow>A 60-second hello</Eyebrow>
-              <Film />
-            </div>
-          </section>
-        )}
+        <section className="u-container pb-14 md:pb-20">
+          <div className="max-w-[46rem]">
+            <Eyebrow>A 60-second hello</Eyebrow>
+            <Film />
+          </div>
+        </section>
 
         {/* ── Proposition ────────────────────────────────────────── */}
         <section className="u-container border-t border-stone/60 py-14 md:py-20">
