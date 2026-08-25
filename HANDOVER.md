@@ -20,10 +20,11 @@ Pick this up cold. The site is **LIVE in production** at `https://dabhands.deliv
 
 ## The brand direction (source of truth)
 
-A **mastery brand**: "the marks left behind by skilled hands." First person ("I"), calm, premium, editorial, earthy and grounded. Positioning spine: **"Keeping important work moving."** with "Most organisations don't lack good thinking. They struggle to preserve it."
+A **mastery brand**: "the marks left behind by skilled hands." First person ("I"), calm, premium, editorial, earthy and grounded. Positioning spine: **"Keeping important work moving."** with "Most organisations don't lack good thinking. They struggle to preserve its impact."
 
 - **The logo lockup is the drawn crown beside the serif "DAB Hands" wordmark.** Header: `crown-mark.webp` h-7/md:h-8 beside the 24/28px Instrument Serif wordmark. Footer: `DabHands_crown_white.png` h-[22px] beside the 19px bone wordmark on charcoal. **No dots, halos or circles, ever.** The `/for` pages carry older lockups; align only if asked.
-- **The promise line** (homepage intro block): "Hand me an ambition and I'll tell you what it actually takes, then I'll make it happen." Largest type in that block (serif 28/30/32/40px), the only sentence on the site where Darren is the subject, and it appears **exactly once sitewide**. Nowrap phrase spans pin its line endings.
+- **The promise line** (homepage intro block), extended 25 Aug: "Hand me an ambition and I'll tell you what it actually takes, then make it happen. And when the work needs more than me, I bring the senior bench behind me." Largest type in that block (serif 28/30/32/40px), the only sentence on the site where Darren is the subject, and it appears **exactly once sitewide**. Nowrap phrase spans pin its line endings, now across eight phrases. ⚠ **At 40px in the 461px column each phrase takes its own line, so the block runs eight lines / 378px at 1440** — it was four lines before the second sentence was added. If that reads too heavy, the fix is a smaller step for the promise line, not removing the spans.
+- **The opening line** is now "Hi, I'm Darren, a fractional COO for digital-first agencies and growth-stage brands." (25 Aug). This is the first time the site names a **role**; the positioning spine above it is unchanged.
 - **AI is context, not the proposition.** Two light touches only (homepage problem panel; Business page third engagement card). On Signal to Noise the word AI appears nowhere; the agentic point is carried by the "Agents" chip, deliberately last.
 - **Factual framing:** Darren worked **inside agencies** and **alongside brands**, never "inside" the brands.
 

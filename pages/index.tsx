@@ -48,7 +48,7 @@ export default function Home() {
     <>
       <SeoMeta
         title="DAB Hands | Keeping important work moving"
-        description="Most organisations don’t lack good thinking. They struggle to preserve it. DAB Hands provides senior operational leadership that keeps important work moving, led by Darren Brett."
+        description="Most organisations don’t lack good thinking. They struggle to preserve its impact. DAB Hands provides senior operational leadership that keeps important work moving, led by Darren Brett."
         path="/"
       />
 
@@ -88,7 +88,7 @@ export default function Home() {
 
             <div className="rise" style={{ '--rise-delay': '0.4s' } as CSSProperties}>
               <p className="mt-9 md:mt-11 text-lg md:text-2xl text-graphite leading-relaxed max-w-[46ch] mx-auto">
-                Most organisations don’t lack good thinking.<br />They struggle to preserve it.
+                Most organisations don’t lack good thinking.<br />They struggle to preserve its impact.
               </p>
             </div>
             <div className="rise" style={{ '--rise-delay': '0.55s' } as CSSProperties}>
@@ -112,19 +112,24 @@ export default function Home() {
                   viewport, so it must paint pre-hydration (it was the page's LCP). */}
               <div className="col-span-4 md:col-span-6 lg:col-span-5">
                 <div className="rise">
-                  <p className="text-lg md:text-xl text-ink/70 mb-5">Hi, I’m Darren.</p>
+                  <p className="text-lg md:text-xl text-ink/70 mb-5 max-w-[46ch]">Hi, I’m Darren, a fractional COO for digital-first agencies and growth-stage brands.</p>
                 </div>
                 {/* The promise line: the one sentence on the site where Darren is
                     the subject, and the largest type in this block (still under the
                     page h1). A spoken standfirst: serif, no decoration, once across
                     the whole site. The nowrap spans are load-bearing: wraps may only
-                    land after "ambition", "you" or "takes," so no line ever ends on
-                    a conjunction or pronoun; sizes are tuned so the longest phrase
-                    clears this narrow column at every breakpoint. */}
+                    land after "ambition", "you", "takes," or "happen." so no line
+                    ever ends on a conjunction or pronoun; sizes are tuned so the
+                    longest phrase clears this narrow column at every breakpoint.
+                    The second sentence answers the obvious objection to hiring one
+                    person, so it stays at the same weight rather than dropping to
+                    body scale. */}
                 <div className="rise" style={{ '--rise-delay': '0.08s' } as CSSProperties}>
                   <p className="font-serif text-[28px] md:text-[30px] lg:text-[32px] xl:text-[40px] leading-[1.18] text-ink mb-7 md:mb-8">
                     <span className="whitespace-nowrap">Hand me an ambition</span> <span className="whitespace-nowrap">and I’ll tell you</span>{' '}
-                    <span className="whitespace-nowrap">what it actually takes,</span> <span className="whitespace-nowrap">then I’ll make it happen.</span>
+                    <span className="whitespace-nowrap">what it actually takes,</span> <span className="whitespace-nowrap">then make it happen.</span>{' '}
+                    <span className="whitespace-nowrap">And when the work</span> <span className="whitespace-nowrap">needs more than me,</span>{' '}
+                    <span className="whitespace-nowrap">I bring the senior bench</span> <span className="whitespace-nowrap">behind me.</span>
                   </p>
                 </div>
                 {/* The career sentence: background, body scale, must not compete. */}
