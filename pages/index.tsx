@@ -18,6 +18,7 @@ const MOMENTUM = [
   {
     num: '01',
     label: 'Business & Agency Leaders',
+    role: 'Fractional COO · Operating Partner',
     headline: 'Keeping everything moving.',
     support: 'When the work is landing\nand the return isn’t.',
     href: '/business-and-agency-leaders',
@@ -26,6 +27,7 @@ const MOMENTUM = [
   {
     num: '02',
     label: 'Marketing Leaders',
+    role: 'Programme & Delivery Director',
     headline: 'Keeping the signal strong.',
     support: 'When great work lands\nsofter than it should.',
     href: '/marketing-leaders',
@@ -34,6 +36,7 @@ const MOMENTUM = [
   {
     num: '03',
     label: 'Growth-Stage Businesses',
+    role: 'Fractional COO',
     headline: 'Supporting greater ambition.',
     support: 'When the ambition is real but\nnothing has turned it into a plan.',
     href: '/growth-stage-businesses',
@@ -112,7 +115,10 @@ export default function Home() {
                   viewport, so it must paint pre-hydration (it was the page's LCP). */}
               <div className="col-span-4 md:col-span-6 lg:col-span-5">
                 <div className="rise">
-                  <p className="text-lg md:text-xl text-ink/70 mb-5 max-w-[46ch]">Hi, I’m Darren, a fractional COO for digital-first agencies and growth-stage brands.</p>
+                  <p className="text-lg md:text-xl text-ink/70 mb-2.5">Hi, I’m Darren.</p>
+                  <p className="font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.2] tracking-[-0.01em] text-ink mb-6 md:mb-7 max-w-[26ch]">
+                    A fractional COO for digital-first agencies and growth-stage brands.
+                  </p>
                 </div>
                 {/* The promise line: the one sentence on the site where Darren is
                     the subject, and the largest type in this block (still under the
@@ -130,17 +136,6 @@ export default function Home() {
                     <span className="whitespace-nowrap">what it actually takes,</span> <span className="whitespace-nowrap">then make it happen.</span>{' '}
                     <span className="whitespace-nowrap">And when the work</span> <span className="whitespace-nowrap">needs more than me,</span>{' '}
                     <span className="whitespace-nowrap">I bring the senior bench</span> <span className="whitespace-nowrap">behind me.</span>
-                  </p>
-                </div>
-                {/* The career sentence: background, body scale, must not compete. */}
-                <div className="rise" style={{ '--rise-delay': '0.14s' } as CSSProperties}>
-                  <p className="text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    For most of my career I’ve worked at the point where ambition has to become reality. Inside agencies, alongside global brands, and running my own business. In the delivery detail and in the boardroom.
-                  </p>
-                </div>
-                <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
-                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    Sometimes that means setting the direction. Usually it means getting an organisation to move together. Always it means making sure what comes out performs.
                   </p>
                 </div>
               </div>
@@ -330,6 +325,11 @@ export default function Home() {
                       <span className="absolute bottom-3.5 left-4 right-4 text-[13px] md:text-[14px] font-medium tracking-[-0.01em] text-bone">{row.label}</span>
                     </div>
                     <h3 className="mt-5 font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.08] tracking-[-0.01em] text-ink u-balance">{row.headline}</h3>
+                    {/* The role line, in the site's eyebrow treatment. Deep accent
+                        #7E5E27, not --color-gold: at 11px on the clay wash Aged Gold
+                        reads 2.04:1 and the #9A7735 deep gold 3.13:1, both under the
+                        4.5 AA needs at this size. This clears it at 4.51. */}
+                    <p className="eyebrow mt-2.5" style={{ color: '#7E5E27' }}>{row.role}</p>
                     <p className="mt-2.5 text-[15px] leading-relaxed text-ink/70 text-balance">{withBreaks(row.support)}</p>
                     <span className="mt-4 inline-flex items-center gap-2 border-b-2 border-gold pb-1 text-[14px] font-medium text-ink">
                       Explore
