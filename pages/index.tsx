@@ -203,7 +203,7 @@ export default function Home() {
               {[
                 { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes it is not written down at all. Either way, what counts is turning it into the decisions and initiatives people act on this quarter. I help make that turn without losing the intent behind it.' },
                 { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity compounds faster than capability, and it arrives with growth and change. Left alone, it becomes the thing the organisation runs on. I reconnect people, priorities, systems and rules so the business moves together again, and more of what you spend comes back.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about. I agree what cannot be traded, make it travel with the work, and it arrives still making its case.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about. I agree what cannot be traded, make it travel with the work, bring the people to make it brilliant so that your customers feel something and act.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it
