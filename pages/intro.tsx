@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
+import { Footer } from '@/components/Footer';
 
 /**
  * /intro — the forwardable "here's Darren" page.
@@ -358,18 +360,20 @@ export default function Intro() {
                 href="mailto:darren@dabhands.delivery?subject=Keeping%20important%20work%20moving"
                 className="intro-cta mt-8 inline-flex items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-[15px] font-medium text-bone md:mt-9"
               >
-                Start a conversation
+                Book a call
                 <span aria-hidden>→</span>
               </a>
+              <p className="intro-body mt-5">
+                <Link href="/" className="intro-link">or go to the website</Link>
+                <span aria-hidden className="ml-1.5 text-gold">→</span>
+              </p>
             </div>
           </section>
         </main>
 
-        <footer className="u-container border-t border-stone/60 py-9 text-center">
-          <p className="intro-body text-graphite">DAB Hands · Darren Brett · dabhands.delivery</p>
-          <div className="intro-rule mx-auto mt-5 w-16" aria-hidden />
-        </footer>
       </div>
+
+      <Footer variant="none" />
     </>
   );
 }
