@@ -6,63 +6,63 @@ const content: OperatorContent = {
   eyebrow: 'For Growth-Stage Businesses',
   accent: 'lavender',
   hero: {
-    headline: 'Growth creates complexity faster than capability.',
-    subline: 'I help fast-growing businesses build the structure to sustain what they’ve created.',
+    headline: 'Most growing businesses have never had to write down how they run.',
+    subline: 'I build the operating system first, then help keep it honest.',
     image: '/images/momentum/03-growth.jpg',
   },
   validation: {
     heading: 'The growth is real. So is the strain.',
     paras: [
-      'Revenue is up. The team is bigger. Customers keep arriving. And the week feels harder than it did a year ago.',
-      'More of the business now runs through fewer people, and most of them are in the room with you.',
+      'Revenue is up. The team is bigger. Customers keep arriving. The opportunities keep coming.',
+      'The challenge is not finding the next one. It is building a business that can keep pace with the one you have already created.',
     ],
     coda: 'Success did not make it simpler.\nIt made it heavier.',
   },
   diagnosis: {
-    thesis: 'Growth doesn’t create the problem.\nIt reveals it.',
+    thesis: 'The question is no longer what you could do.\nIt is what you should do.',
     argument: [
-      'It happens gradually. Another hire. Another product. Another priority.',
-      'Every stage changes how the business works. Decisions slow. Priorities collide. More rides on fewer people, and almost none of it is written down anywhere.',
-      'The business is still running on a design that was right when there were twelve of you. Nobody has revisited it, because it has never quite broken.',
+      'Early on, saying yes to everything is the strategy. It works, and it is why you are here. Then the business gets big enough that saying yes to everything is the thing holding it back, and nobody has decided what to stop.',
+      'Ask five people what the year is for and you will get five answers, all of them reasonable. There is no agreed thrust, and no scorecard anyone runs the week by.',
     ],
     resolution: 'It will not break. It will stop being able to take on anything new, and that is much harder to see.',
   },
   outcomes: {
-    heading: 'I help businesses keep growing without\nlosing grip of what made them good.',
+    heading: 'I build the operating system,\nthen help keep it honest.',
     paras: [
-      'I’ve built and scaled my own business, so I know how quickly success creates complexity.',
-      'One of the biggest shifts isn’t operational. It’s strategic. The question is no longer what the business could do. It’s what it should do.',
-      'I help leadership teams get clear on where the business is trying to create value, then build the operating rhythms and structures that help the organisation move in that direction together.',
-      'The outcome isn’t more process.',
-      'It’s a business that becomes stronger as it grows.',
+      'I have built and scaled my own business, so I know how fast success creates complexity, and how quickly a plan stops describing what is actually happening.',
+      'First the foundations. What the business is genuinely trying to achieve, the thrust behind it, the initiatives for the next few quarters in order, and a scorecard short enough that people actually look at it.',
+      'Then the harder part. An operating system decays. People arrive who were not in the room when it was agreed. The scorecard keeps measuring last year. Decisions creep back to one or two people, and nobody notices because each one is reasonable. Somebody has to keep asking whether what you built is still true.',
     ],
+    resolution: 'The outcome is not more process. It is a business that keeps its shape as it grows.',
   },
   help: {
     heading: 'Typical engagements',
     intro: 'The situations where growth-stage businesses\nusually bring me in.',
     situations: [
       {
-        heading: 'The founder can no longer\nbe the operating system',
-        body: 'The business has reached a point where too much depends on a handful of people. I help build the structure, rhythms and clarity that allow the organisation to scale beyond the founder.',
+        heading: 'The founder can no longer be the operating system.',
+        body: 'It works, right up until the point where everything routes through one or two people because nothing has been written down clearly enough to route anywhere else. I get it out of their heads and into something the business can run without them in the room.',
         enquiry: {
           subject: 'Scaling beyond the founder',
-          body: 'Too much still depends on a handful of people and we want to scale beyond the founder. I would like to talk.',
+          body: 'Too much of how we run still depends on one or two people and we want that to change. I would like to talk.',
         },
       },
       {
-        heading: 'Growth has outpaced\nthe operating model',
-        body: 'The business is winning, but delivery, decision-making and coordination haven’t kept pace. I help untangle what’s grown too complicated and build operating models that support continued growth.',
+        heading: 'Nobody can say what this quarter is for.',
+        body: 'Plenty is happening and all of it is defensible, but nothing is deciding what to stop. I establish the goal, the thrust behind it and the initiatives that move it, then a scorecard short enough to be looked at weekly.',
         enquiry: {
-          subject: 'An operating model that keeps pace with growth',
-          body: 'Our growth has outpaced our operating model and we want to untangle what has grown too complicated. I would like to talk.',
+          subject: 'Working out what the quarter is for',
+          body: 'We are busy but not clear on what we are actually driving at this quarter. I would like to talk.',
         },
       },
+      // The positive trigger, matching the Business & Agency doorway: it
+      // reaches people while the news is still good.
       {
-        heading: 'Increasing ambition needs\nstronger foundations',
-        body: 'Investment, expansion or new commercial ambitions demand stronger execution. I help build the operational foundations that let the business grow with confidence without adding bureaucracy.',
+        heading: 'Investment has arrived and the business has to be ready for it.',
+        body: 'A funding round, a new investor, an acquisition, a step change in ambition. The money is committed and the clock has started. I put the foundations in before the growth gets expensive to buy.',
         enquiry: {
-          subject: 'Stronger foundations for our ambition',
-          body: 'Our ambition is growing and we want stronger operational foundations to grow with confidence. I would like to talk.',
+          subject: 'Getting ready for what the investment expects',
+          body: 'We have investment coming in and want the foundations in place before it lands. I would like to talk.',
         },
       },
     ],
@@ -89,27 +89,27 @@ const content: OperatorContent = {
   product: {
     kicker: 'What you can buy',
     name: 'The Business Read',
-    duration: 'Three weeks. What breaks first.',
+    duration: 'Three weeks. What the business is for, and what to do about it.',
     whenToBuy:
-      'Growth is not the problem. How the business was built is. Growing businesses rarely run into trouble on strategy, they run into the limits of their own design, and the people holding it together are usually the last to see it.',
+      'The ambition is real and the growth is happening. What is missing is the line between them. No agreed thrust, no scorecard anyone runs the week by, and no clear link between what the business says it wants and what it is actually doing this quarter.',
     whatItIs:
-      'Three weeks looking at how the business actually runs rather than how it is described. Where it depends on individuals rather than systems. Which decisions have no owner. What breaks first at double the size.',
+      'A couple of weeks establishing that line. What the business is genuinely trying to achieve, what has to be true to get there, what that means for the next few quarters, and what would tell you it is working. Then how it gets run week to week, so it survives past the offsite.',
     whatYouGet:
-      'A written picture of the operating model as it stands. The failure points, in order of likelihood. A ninety-day plan to fix the first of them, with the second and third named so you know what is coming.',
+      'A goal the leadership team agrees on. The thrust behind it. The initiatives for the next two quarters, in order. And a scorecard short enough that people actually look at it.',
     honest: {
-      need: 'Conversations with eight to ten people across the business, sight of how the numbers are actually run, and an hour of your time at the end.',
+      need: 'Conversations with eight to ten people across the business, sight of how the numbers are actually run, and a half day with the leadership team to agree the goal.',
       after:
-        'Sometimes this becomes ongoing fractional work. Sometimes you hire the person the read tells you to hire. Sometimes you fix it yourselves. All three are fine.',
+        'Sometimes I stay a day or two a month to keep it honest. Sometimes you hire the person the read tells you to hire. Sometimes your own team runs it from here. All three are fine.',
     },
     button: 'Book a Business Read',
     enquiry: {
       subject: 'Booking a Business Read',
-      body: 'Our growth has outpaced how the business was built. I would like to talk.',
+      body: 'We are growing but the line between our ambition and what we are doing about it is not clear. I would like to talk.',
     },
   },
   close: {
-    heading: 'Growth will always create complexity.',
-    line: 'The businesses that keep scaling aren’t the ones with fewer opportunities.\nThey’re the ones that build the capability to turn growth into lasting advantage.',
+    heading: 'Foundations first.',
+    line: 'Then somebody to keep them honest.',
   },
   email: {
     subject: 'Building for the next stage of growth',
@@ -117,7 +117,7 @@ const content: OperatorContent = {
   },
   seo: {
     description:
-      'DAB Hands helps fast-growing businesses build the structure to sustain what they’ve created, so success creates momentum, not complexity.',
+      'DAB Hands helps growing businesses build the structure to sustain what they’ve created, so success creates momentum, not complexity.',
   },
 };
 

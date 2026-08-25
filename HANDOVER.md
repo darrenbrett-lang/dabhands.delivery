@@ -2,7 +2,7 @@
 
 Pick this up cold. The site is **LIVE in production** at `https://dabhands.delivery`. Updated **25 August 2026**. Since the 18 Aug Signal to Noise work, a run of doorway-page changes and a new top-level **Experience** page shipped (25 Aug), followed by the **master brief pass** (25 Aug) that finished the Business & Agency page — read the master brief section below. The **Signal to Noise** page is unchanged since 18 Aug; still the most-iterated page, read its section before touching it.
 
-**Recent releases (all straight to `main` via fast-forward from branch `signal-to-noise-fixes`, which now == `main`):** `dde9052` (24 Aug) doorway batch — entry product modules, Modules 2/3 rewrite, Operating Patterns 5→8; `444600e` (25 Aug) the Experience page + Contact "Let's talk" copy; `ab4c0c7` (25 Aug) Experience full record → three balanced columns; **the master brief pass** (25 Aug) — homepage intro + problem panel trimmed, the whole B&A page brought onto brief copy, Contact reply promise. See the relevant page sections.
+**Recent releases (all straight to `main` via fast-forward from branch `signal-to-noise-fixes`, which now == `main`):** `dde9052` (24 Aug) doorway batch — entry product modules, Modules 2/3 rewrite, Operating Patterns 5→8; `444600e` (25 Aug) the Experience page + Contact "Let's talk" copy; `ab4c0c7` (25 Aug) Experience full record → three balanced columns; **the master brief pass** (25 Aug) — homepage intro + problem panel trimmed, the whole B&A page brought onto brief copy, Contact reply promise; **Growth page v2 + homepage turns** (25 Aug) — the Growth doorway rebuilt to its own v2 brief and the three "How I help" turns rewritten. See the relevant page sections.
 
 ---
 
@@ -91,6 +91,36 @@ The "Master brief for Code · DAB Hands website" (24 Aug) supersedes every earli
 **Reference files the brief cites are not in the repo:** `Track_Record.html` and `LinkedIn_v3.md` were not found anywhere on the machine.
 
 **Open item — widows at 768 on Growth.** The three "Typical engagements" card headings on `/growth-stage-businesses` each end on a single word at exactly 768px, which the brief's definition of done forbids. Pre-existing, on copy the brief leaves unchanged. Cause is structural: three cards across a 768 viewport gives each a **157px** heading column. Fixing it needs two-across at that breakpoint, a smaller heading at `md`, or a copy change — an owner decision, not a quiet one. B&A and Marketing are clean at 1440/1024/768/390.
+
+### Growth-Stage Businesses v2 (25 Aug)
+
+Rebuilt to "Brief for Code · Growth-Stage Businesses page v2", which supersedes section 7 of the master brief. **The page now runs three beats:** what the business should be focused on (M3), what gets built so that happens (M4 para 2 + The Business Read), and **who keeps it honest once it exists** (M4 para 3 + the close). That third beat is the argument for a fractional arrangement rather than a project, and it was missing from every earlier draft.
+
+- **Hero** "Most growing businesses have never had to write down how they run." / "I build the operating system first, then help keep it honest." The old headline duplicated the new B&A Module 2 line; **two doorways must not open on the same sentence.**
+- **M2** reinstates "building a business that can keep pace with the one you have already created".
+- **M3** leads on "The question is no longer what you could do. / It is what you should do." — moved up from M4, where it was the best line on the page and buried.
+- **M4** opens on the peer credential ("I have built and scaled my own business"), carries the health paragraph ("An operating system decays…"), and closes on **"The outcome is not more process."** ⚠ All three are load-bearing: the credential does more work than any other sentence for a founder, and "not more process" answers the thing a founder actually fears when someone like Darren arrives.
+- **Cards** all three replaced. Card one keeps its live title. **Card three is the positive trigger** (investment has arrived), matching the B&A pattern — it reaches people while the news is still good.
+- **Close** "Foundations first. / Then somebody to keep them honest."
+- **The Business Read** re-scoped from "what breaks first" to establishing the line between ambition and this quarter. "Sometimes I stay a day or two a month to keep it honest" is **the only place on the site that says what an ongoing fractional arrangement looks like** — deliberately small and specific, because vagueness makes buyers assume it grows.
+
+**⚠ Open: the Business Read contradicts itself on duration.** The duration line says "Three weeks", the What-it-is body says "A couple of weeks". Flagged twice and shipped as-is by the owner's decision. The other two Reads agree with themselves (Execution "Two to three weeks", Launch "One to two weeks"). Resolve by setting the duration line to "Two weeks" or restoring "Three weeks" to the body — it is a pricing call, not a copy tidy.
+
+**Card titles now carry no forced `\n` breaks.** That was deliberate: at 768 these cards are ~157px wide and a hard break fights `text-balance` into a widow. It also cleared the three pre-existing 768 widows on this page.
+
+**The page must not become a strategy consulting page.** The distinction to preserve: most strategy is written by people who never have to deliver it, which is why so much of it does not survive contact. This arrives already costed, sequenced and possible. Foundations are built here in order to be run, not to be presented.
+
+**Operating Patterns on Growth is unchanged** and is now the proof for the whole page, not an aside. Leave "Growth only scales when the operating system does", the Anchor Leg story and the Neil Munn testimonial exactly where they are. (Its intro still reads "These aren't startup stories." — the same apologetic construction struck from B&A. The v2 brief said unchanged, so it stayed; worth revisiting.)
+
+### Homepage "How I help" turns (25 Aug)
+
+The three from→to turns kept their pairs and the gold italic "into"; only the bodies were rewritten, over several rounds with the owner. Final state:
+
+- **Strategic direction into operating reality** — now allows that strategy is sometimes not written down at all.
+- **System complexity into coordinated flow** — opens on "Complexity compounds faster than capability", a **deliberate echo** of the B&A Module 2 headline (homepage body previewing the doorway, not two doorways colliding). Closes on "more of what you spend comes back", the only place on the homepage that puts a return on the argument.
+- **Important work into real results** — describes the safe-passage *mechanism* in plain terms (agree what cannot be traded, make it travel with the work) while staying clear of the retired label.
+
+**Column balance** sets 5/6/5 at 1440 and 6/8/6 at 1024. The middle column runs longer because it carries more argument; two rounds of trimming got it here and further cuts would cost the return clause. Accepted as-is.
 
 ### `/experience` — the full career record (new, 25 Aug)
 Top-level page in the main nav (`pages/experience.tsx`), between Who I help and Contact. Header: doorway clay-wash vignette, copy left + the square **`darren-brett_colour_headshot.jpeg`** on the right (the doorway-hero treatment). Sections: a **charcoal** showcase rail of seven leadership-impact tiles (two columns each; prev/next/dots via a keyboard-navigable `ScrollRail`; each tile's outcome behind a one-way "What came of it" `<details>`) → **"The full record"** (closed-by-default disclosure of nine roles in reverse order; each a gold org heading — `#9A7735`, the AA-safe deep gold, at ≥24px — plus dates/location and a slate role title, with the detail flowed across **three balanced CSS-multi-column columns**, `md:columns-3` + `break-inside-avoid`; no "More" link) → the shared slate **"In their words"** panel (reused `Testimonials`) → the **"Trusted where the stakes are high"** `LogoTicker` → the doorway close CTA ("Recognise any of it?"). **Rules: no money figures anywhere** (scale is non-financial only), nobody else's difficulty named, no "failed", British English, no em dashes. One-way disclosures use `details[open] > summary { display:none }`; a `beforeprint` handler opens everything for print. `SeoMeta` uses `og-card-3`; route is in sitemap + llms.txt. Was `/track-record` for one build, renamed to `/experience`.

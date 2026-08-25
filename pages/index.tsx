@@ -201,9 +201,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page. Real impact comes from turning it into everyday decisions, priorities and action. I help organisations make that transition without losing the original intent.' },
-                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity grows with every successful organisation. Left unmanaged, it weakens momentum. I help reconnect people, priorities and systems so the organisation moves together again.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely fails because the idea was wrong. It loses strength as it moves through the organisation. I help it arrive with the clarity, conviction and performance it was built to create.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes it is not written down at all. Either way, what counts is turning it into the decisions and initiatives people act on this quarter. I help make that turn without losing the intent behind it.' },
+                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity compounds faster than capability, and it arrives with growth and change. Left alone, it becomes the thing the organisation runs on. I reconnect people, priorities, systems and rules so the business moves together again, and more of what you spend comes back.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about. I agree what cannot be traded, make it travel with the work, and it arrives still making its case.' },
               ].map((t, i) => (
                 <FadeUp key={t.key} delay={i * 0.12}>
                   {/* Each turn is a from→to statement: what they have, then what it

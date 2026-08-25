@@ -61,7 +61,7 @@ const orgJsonLd = {
             itemOffered: {
               '@type': 'Service',
               name: 'For Growth-Stage Businesses',
-              description: 'Helping fast-growing businesses build the structure to sustain what they have created.',
+              description: 'Helping growing businesses build the structure to sustain what they have created.',
               url: 'https://dabhands.delivery/growth-stage-businesses',
             },
           },
