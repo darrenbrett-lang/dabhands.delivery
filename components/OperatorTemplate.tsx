@@ -40,7 +40,7 @@ export interface OperatorContent {
   // "The Challenge", charcoal — homepage Point-of-View form: a large serif thesis
   // (left), an argument that builds (right) and resolves into a serif line.
   diagnosis: { thesis: string; argument: string[]; resolution: string };
-  outcomes: { heading: string; paras: string[] };
+  outcomes: { heading: string; paras: string[]; resolution?: string };
   transition?: { heading: string; subline?: string; paras?: string[] };
   help: { heading: string; intro?: string; situations?: { heading: string; body: string; enquiry?: { subject: string; body: string } }[]; statement?: string[] };
   // Optional "Operating Patterns" exhibit — accumulated judgement as a museum
@@ -291,7 +291,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
             <div className="u-grid gap-y-12 lg:items-start">
               {/* Left: the thesis — large, commanding, fills the column. */}
               <FadeUp className="col-span-4 md:col-span-6">
-                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">{withBreaks(c.diagnosis.thesis)}</h2>
+                <h2 className="font-serif text-[46px] sm:text-[62px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em] text-balance">{withBreaks(c.diagnosis.thesis)}</h2>
               </FadeUp>
               {/* Right: the argument that builds to the resolution. */}
               <div className="col-span-4 md:col-span-5 md:col-start-8">
@@ -359,7 +359,14 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                     ))}
                   </div>
                 </FadeUp>
-                <FadeUp delay={0.12}>
+                {c.outcomes.resolution && (
+                  <FadeUp delay={0.12}>
+                    <p className="mt-8 md:mt-10 border-t border-stone/60 pt-7 md:pt-8 font-serif text-[24px] md:text-[30px] lg:text-[32px] leading-[1.2] tracking-[-0.01em] text-ink max-w-[28ch] text-balance">
+                      {withSoftBreaks(c.outcomes.resolution)}
+                    </p>
+                  </FadeUp>
+                )}
+                <FadeUp delay={0.18}>
                   <div className="mt-8 md:mt-10">
                     <Cta accent={a.color} email={c.email} />
                   </div>

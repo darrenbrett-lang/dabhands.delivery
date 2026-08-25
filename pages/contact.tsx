@@ -49,6 +49,10 @@ export default function Contact() {
                 <p>You do not need it worked out before you get in touch. Most of the useful conversations I have start with someone describing something that is not going the way they expected.</p>
                 <p>Tell me what is happening. I will tell you what I think, and whether I am the right person for it.</p>
               </div>
+              {/* The reply promise. It removes the last unspoken barrier, so if
+                  it ever cannot be kept the wording changes rather than the
+                  line being dropped. */}
+              <p className="mt-8 text-lg text-graphite leading-relaxed">I reply the same day, or the next one.</p>
             </div>
 
             <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>

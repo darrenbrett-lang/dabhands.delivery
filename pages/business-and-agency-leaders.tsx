@@ -6,69 +6,70 @@ const content: OperatorContent = {
   eyebrow: 'For Business & Agency Leaders',
   accent: 'sage',
   hero: {
-    headline: 'As organisations grow, good thinking gets harder to land.',
-    subline: 'I help leadership teams close the gap between what they intend to deliver and what actually gets done.',
+    headline: 'Strategy is rarely the constraint. Execution is.',
+    subline: 'I help leadership teams get more from what they already have.',
     image: '/images/momentum/01-tracks-2.jpg',
   },
   validation: {
-    heading: 'You can feel it before you can name it.',
+    heading: 'Complexity compounds faster than capability.',
     paras: [
-      'Decisions take longer than they used to. The same conversation happens in three separate rooms. Work that took a fortnight now takes six weeks. Everyone is busy, and nobody can say exactly where it went.',
-      'None of it shows up as a problem, because nothing is broken. It shows up as everything being slightly harder than it should be.',
+      'Growth brings it. More clients, more people, more priorities, more decisions. Every one of them reasonable.',
+      'Nothing looks broken. It just costs more to get the same thing done.',
     ],
-    coda: 'It is rarely one big thing.\nIt is the space between them.',
+    coda: 'Execution is what\nsets the ceiling.',
   },
   diagnosis: {
-    thesis: 'Complexity quietly becomes the operating system.',
+    thesis: 'It multiplies everything you have already bought.',
     argument: [
-      'Nobody decides to run the business this way.',
-      'It arrives one reasonable decision at a time. An approval to protect quality. A meeting so nobody is surprised. A second owner, because the first was stretched.',
-      'Each is sensible. Together they become the thing the organisation runs on, and nobody built it.',
+      'Your people. Your technology. Your clients. Your pipeline. What each one gives back depends on how well the business executes.',
+      'Fix that and they all improve at once. Nothing else you buy does that.',
     ],
-    resolution: 'The measure is not how busy you are. It is how much of your best thinking reaches the outside world.',
+    resolution: 'The question is not what you have spent. It is what it is giving you back.',
   },
   outcomes: {
-    heading: 'I help capable organisations\nperform at their best.',
+    heading: 'What I actually work on.',
     paras: [
-      'I work alongside leadership teams to remove the friction that slows important work down.',
-      'Sometimes that means bringing clarity to a strategic initiative that has lost momentum. Sometimes it means helping teams work together more effectively as the organisation grows. Often it’s establishing stronger operating rhythms so progress no longer depends on a handful of people holding everything together.',
-      'The goal isn’t more governance.',
-      'It’s an organisation that’s easier to lead, quicker to respond and better at turning good thinking into delivery.',
+      'How decisions get made. How work gets scoped, committed to and resourced. Where the capacity goes and what it produces. What leadership can see, and how fast.',
+      'None of it is process for its own sake. Each one is picked because it moves a number, and it gets reported that way.',
     ],
+    resolution: 'The outcome is not better governance. It is more work landing, for the same money.',
   },
   help: {
     heading: 'Typical engagements',
     intro: 'The situations where organisations usually bring me in.',
     situations: [
       {
-        heading: 'Critical programmes need\nexperienced leadership',
-        body: 'A major transformation, product, platform or delivery programme needs someone who can create clarity, align stakeholders and keep important work moving.',
+        heading: 'The revenue is there.\nThe return is not.',
+        body: 'In an agency, a rate card that will not move and over-servicing nobody logged. In a business, platform spend that never returned what the case promised. Either way you find out afterwards. I find where it goes, and fix how it is seen.',
         enquiry: {
-          subject: 'Experienced leadership for a critical programme',
-          body: 'We have an important programme that needs experienced leadership to keep it moving. I would like to talk.',
+          subject: 'The revenue is there, the return is not',
+          body: 'Our revenue is holding up but the return on what we are spending is not, and we want to understand where it is going. I would like to talk.',
         },
       },
       {
-        heading: 'Complexity is slowing\nthe organisation',
-        body: 'Growth has created friction. Teams, priorities and decisions are no longer moving together, and the operating model needs to catch up with the ambition.',
+        heading: 'A critical programme\nhas to land.',
+        body: 'The date has moved more than once and nobody can give you the honest position. I take it over, rebuild the picture with the people doing the work, and give you a plan you can defend.',
         enquiry: {
-          subject: 'Cutting through the complexity slowing us down',
-          body: 'Complexity is slowing us down and our operating model needs to catch up with our ambition. I would like to talk.',
+          subject: 'A critical programme that has to land',
+          body: 'We have an important programme that has to land and we want an honest read on where it stands. I would like to talk.',
         },
       },
+      // Protected card: the only engagement on the site offered against good
+      // news rather than trouble, and it reaches people well before the version
+      // where they need rescuing. Backed by Falabella and Audi.
       {
-        heading: 'Growth is outpacing\nthe operating model',
-        body: 'AI, growth, restructuring or new commercial ambitions require stronger foundations so the organisation can move with confidence.',
+        heading: 'You have won something bigger than you have run before.',
+        body: 'A pitch, a funding round, an acquisition, a new market. Most confident, least experienced, same moment. I build the delivery around the win before it has to be honoured.',
         enquiry: {
-          subject: 'Stronger foundations to move with confidence',
-          body: 'Our growth is outpacing our operating model and we want stronger foundations to move with confidence. I would like to talk.',
+          subject: 'Building capability around a win',
+          body: 'We have won something larger than we have delivered before and want the capability around it built properly. I would like to talk.',
         },
       },
     ],
   },
   patterns: {
-    intro: 'Twenty years across agencies, brands and digital transformation has taught me that the same organisational patterns appear again and again.',
-    support: ['These aren’t case studies.', 'Here are just a few lessons learned through experience.'],
+    intro: 'Twenty years across agencies and global brands, and the same organisational patterns keep appearing.',
+    support: ['Eight of them, and where each one was learned.'],
     items: [
       {
         headline: 'Shared language changes organisations.',
@@ -138,28 +139,28 @@ const content: OperatorContent = {
   },
   product: {
     kicker: 'What you can buy',
-    name: 'The Programme Read',
-    duration: 'Two weeks. Where it is breaking, and what can be done.',
+    name: 'The Execution Read',
+    duration: 'Two to three weeks. Where the return is going.',
     whenToBuy:
-      'A programme is the symptom. Something in how work moves through the organisation has stopped working, and you want to know where it is breaking before you spend more against it.',
+      'You are spending well and getting back less than you should, and nobody can point at where it goes. A programme has stalled, or margin has slipped, or the last big investment has not shown up in the numbers.',
     whatItIs:
-      'Two weeks following the work from decision to delivery, with the people actually doing it. Scope, sequencing, decision rights, capability. Diagnosis only. I am not fixing it in a fortnight and will not pretend otherwise.',
+      'Two to three weeks inside the business with the people doing the work. Scope, sequencing, decision rights, capacity. Diagnosis only. I am not fixing it in three weeks and will not pretend otherwise.',
     whatYouGet:
-      'A written read on where the system is breaking and why. What the work will genuinely cost and when it will genuinely land. What to do in the next ninety days, in order. Something you can take to a board and defend.',
+      'A written read on where the return is going and what it is worth. What to do in the next ninety days, in order. Something you can take to a board and defend.',
     honest: {
       need: 'Around eight to ten conversations, access to the plan and the numbers, and an hour of your time at the end. Less than you are bracing for.',
       after:
         'Sometimes I take the work on. Sometimes the answer is that it should stop. Sometimes the answer is that you do not need me. All three are fine.',
     },
-    button: 'Book a Programme Read',
+    button: 'Book an Execution Read',
     enquiry: {
-      subject: 'Booking a Programme Read',
-      body: 'We have a programme that needs an honest read. I would like to talk.',
+      subject: 'Booking an Execution Read',
+      body: 'We are getting less back than we should and cannot say where it is going. I would like to talk.',
     },
   },
   close: {
-    heading: 'Great organisations rarely lack ambition.',
-    line: 'They create the conditions for ambition\nto become impact, again and again.',
+    heading: 'Most of what you need\nis already bought.',
+    line: 'The question is what you\nare getting back from it.',
   },
   email: {
     subject: 'Keeping important work moving',

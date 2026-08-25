@@ -130,19 +130,12 @@ export default function Home() {
                 {/* The career sentence: background, body scale, must not compete. */}
                 <div className="rise" style={{ '--rise-delay': '0.14s' } as CSSProperties}>
                   <p className="text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    For most of my career I’ve worked at the point where ambition has to become reality. Inside agencies, alongside global brands, and running my own business.
+                    For most of my career I’ve worked at the point where ambition has to become reality. Inside agencies, alongside global brands, and running my own business. In the delivery detail and in the boardroom.
                   </p>
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
                     Sometimes that means setting the direction. Usually it means getting an organisation to move together. Always it means making sure what comes out performs.
-                  </p>
-                </div>
-                {/* The block now lands on the cost of not speaking up, which is
-                    the same argument the problem panel below picks up. */}
-                <div className="rise" style={{ '--rise-delay': '0.26s' } as CSSProperties}>
-                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    Important work rarely goes wrong because the idea was weak. It goes wrong because nobody said the expensive thing out loud while there was still time.
                   </p>
                 </div>
               </div>
@@ -175,19 +168,12 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.16}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    That gap isn’t about the technology. A better first draft still joins the same queue, waits on
-                    the same decision, and stops with the same person who isn’t sure they’re allowed to say the work
-                    can go.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.22}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
                     The constraint was never the tool. It’s whether an organisation knows where it’s going, and can
                     move together to get there.
                   </p>
                 </FadeUp>
                 {/* The sign-off: the shortest line in the column, so it lands. */}
-                <FadeUp delay={0.28}>
+                <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
                     That’s the part I work on.
                   </p>
