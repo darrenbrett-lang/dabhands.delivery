@@ -118,7 +118,9 @@ The three from→to turns kept their pairs and the gold italic "into"; only the 
 
 - **Strategic direction into operating reality** — now allows that strategy is sometimes not written down at all.
 - **System complexity into coordinated flow** — opens on "Complexity compounds faster than capability", a **deliberate echo** of the B&A Module 2 headline (homepage body previewing the doorway, not two doorways colliding). Closes on "more of what you spend comes back", the only place on the homepage that puts a return on the argument.
-- **Important work into real results** — describes the safe-passage *mechanism* in plain terms (agree what cannot be traded, make it travel with the work) while staying clear of the retired label, then lands on the customer: "so that your customers feel something and act". That closing clause is the only place in the turns that names the end audience.
+- **Important work into real results** — describes the safe-passage *mechanism* in plain terms (agree what cannot be traded, make it travel with the work) while staying clear of the retired label, closing on "make sure it still moves someone when it arrives".
+
+**Columns are now exactly even** at every width (3+3 lines at 1440, 4+4 at 1024, 6+5 at 768) after the 25 Aug copy pass — worth preserving when editing these bodies.
 
 **Each turn now ends on a serif payoff line** in its own paragraph: Instrument Serif, 20/19/21px, **Ink, no gold, no italics** — the same rule as the doorway closing lines. The three payoffs **start on the same line**, via CSS subgrid: the parent grid declares three rows (`md:grid-rows-[auto_auto_auto]`) and each column is `md:grid md:grid-rows-subgrid md:row-span-3`, so heading, body and payoff each share a row height across the columns. ⚠ Internal spacing at md comes from the grid's `md:gap-y-6`, not margins (`mt-4`/`mt-5` are `md:mt-0`); `gap-y-12` only separates the columns when stacked. Do not reintroduce a wrapper `<div>` inside `FadeUp` — the three children must be direct grid items or the subgrid breaks. An earlier `flex-1` attempt bottom-aligned them instead, which misaligned the tops whenever payoff line counts differed.
 

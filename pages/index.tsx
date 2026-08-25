@@ -201,9 +201,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes it is not written down at all. Either way, what counts is turning it into the decisions and initiatives people act on this quarter.', payoff: 'I help make that turn without losing the intent behind it.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is turning it into the decisions and initiatives people act on this quarter.', payoff: 'I help make that turn without losing the intent behind it, and make sure it holds through the quarter.' },
                 { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity compounds faster than capability, and it arrives with growth and change. Left alone, it becomes the thing the organisation runs on.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again, and more of what you spend comes back.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about.', payoff: 'I agree what cannot be traded, make it travel with the work, bring the people to make it brilliant so that your customers feel something and act.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
               ].map((t, i) => (
                 // Each turn is a from→to statement: what they have, then what it
                 // becomes, pivoting on the gold italic "into". A hairline rule
