@@ -405,26 +405,28 @@ export default function TrackRecord() {
                   </div>
                 </div>
                 <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
+                  {/* One breadcrumb, matching the doorway pattern: page name in the
+                      eyebrow accent, role clue after a middot in the brand gold. */}
                   <FadeUp>
-                    <p className="eyebrow text-blue-green">Experience</p>
-                  </FadeUp>
-                  {/* The role line, in the same deep accent as the doorway cards and
-                      the "Who I help" nav — the three must stay in step. */}
-                  <FadeUp delay={0.04}>
-                    <p className="eyebrow mt-5" style={{ color: '#7E5E27' }}>Fractional COO</p>
-                  </FadeUp>
-                  <FadeUp delay={0.08}>
-                    <p className="mt-3 text-lg md:text-xl text-ink leading-relaxed max-w-[40ch]">
-                      Part delivery lead, part digital operator, all entrepreneur’s engine.
+                    <p className="eyebrow pt-2 text-blue-green">
+                      Experience
+                      <span className="font-medium text-gold"> · Fractional COO</span>
                     </p>
                   </FadeUp>
-                  <FadeUp delay={0.12}>
-                    <h1 className="mt-6 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
-                      Twenty years running other people’s programmes. Seven running my own business.
+                  {/* The one Instrument line on this page. Everything beneath it is
+                      Manrope, the same rule the homepage intro block follows. */}
+                  <FadeUp delay={0.06}>
+                    <h1 className="mt-8 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
+                      Part delivery lead, part digital operator, all entrepreneur’s engine.
                     </h1>
                   </FadeUp>
+                  <FadeUp delay={0.12}>
+                    <p className="mt-7 md:mt-8 text-lg md:text-xl text-ink leading-relaxed max-w-[46ch]">
+                      Twenty years running other people’s programmes. Seven running my own business.
+                    </p>
+                  </FadeUp>
                   <FadeUp delay={0.18}>
-                    <p className="mt-6 md:mt-7 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
+                    <p className="mt-4 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
                       Below is what I ran, what I was brought in to do, and what came of each one.
                     </p>
                   </FadeUp>
