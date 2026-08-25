@@ -139,6 +139,18 @@ Top-level page in the main nav (`pages/experience.tsx`), between Who I help and 
 ### `/contact`
 Copy refreshed 25 Aug: heading **"Let's talk."**, then two paragraphs ("You do not need it worked out before you get in touch…" / "Tell me what is happening. I will tell you what I think, and whether I am the right person for it."), then the **reply promise**: "I reply the same day, or the next one." (added 25 Aug). ⚠ If the promise ever cannot be kept, **change the wording, never drop the line** — an unkept promise on a contact page is worse than no promise. Clay wash + the three channels unchanged.
 
+### `/intro` — the forwardable intro page (new, 25 Aug)
+
+**UNLISTED**, on the same terms as `/signal-to-noise`: `SeoMeta noindex` plus an `X-Robots-Tag: noindex, nofollow, noarchive` route header in `next.config.ts`, and deliberately **absent from the nav, `sitemap.xml` and `llms.txt`**. The route resolves so the link can be shared directly.
+
+The "here's Darren" page: Ian's ICOM pre-sell, the LinkedIn Featured link, and the leave-behind for every warm introducer. One canonical shareable URL.
+
+- **Its own minimal chrome**, not the site `Layout`: the mark and "Darren Brett", no nav out, a one-line footer. A forwarded reader stays on the page they were sent.
+- Order: hero → **the film** → proposition → What I turn → When leaders bring me in → Three things about me → proof (`LogoTicker` + Neil Munn) → How we start → close.
+- **⚠ The film is not live yet.** `FILM` at the top of `pages/intro.tsx` holds `embed` (unlisted Vimeo/YouTube player URL) and `poster`. While `embed` is `null` the whole section is **omitted**, rather than shipping a dead frame onto a page whose only job is to be forwarded. Setting `embed` switches it on: a click-to-load façade, poster first, player only on demand. **The page should not be forwarded until this lands** — the film is the top of the page and the reason it exists.
+- **⚠ The script is never printed.** The reference build carried a "what the film says" caption for the owner's review only. It is spoken, not read. Do not add it.
+- The logo strip reuses the canonical `clients` list from `LogoTicker` (13 brands), not the 8 named in the brief. Single source of truth with the homepage and Experience; all 13 are already public elsewhere on the site.
+
 ### `/signal-to-noise` — the diagnostic page
 **⚠ UNLISTED as of 18 August 2026, by the owner's instruction.** The route still resolves and the URL can be shared directly, but there are **no links to it anywhere on the site**. Hidden in four places, all of which must be reversed together to bring it back: the two `components/Header.tsx` nav links (desktop and mobile, the mobile Contact item inherited its `border-t`), the `sitemap.xml` entry, the `llms.txt` entry, and the noindex (`SeoMeta noindex` prop plus an `X-Robots-Tag` route header in `next.config.ts`). Nothing was deleted.
 

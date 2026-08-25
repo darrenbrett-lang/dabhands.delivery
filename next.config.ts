@@ -53,6 +53,15 @@ const nextConfig: NextConfig = {
         // as the other private pages: an HTTP-level noindex backing the
         // in-page meta. Kept out of nav, sitemap and llms.txt, but the route
         // still resolves so the link can be shared directly.
+        // Forwardable intro page (/intro). Unlisted on the same terms as
+        // /signal-to-noise: shareable by direct link, invisible to crawlers,
+        // and absent from nav, sitemap.xml and llms.txt.
+        source: "/intro",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/signal-to-noise",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
