@@ -19,7 +19,7 @@ const MOMENTUM = [
     num: '01',
     label: 'Business & Agency Leaders',
     headline: 'Keeping everything moving.',
-    support: 'When good thinking gets lost\nbetween decision and delivery.',
+    support: 'When the work is landing\nand the return isn’t.',
     href: '/business-and-agency-leaders',
     src: '/images/momentum/01-tracks-2.jpg',
   },
@@ -35,7 +35,7 @@ const MOMENTUM = [
     num: '03',
     label: 'Growth-Stage Businesses',
     headline: 'Supporting greater ambition.',
-    support: 'When the ambition is clear but\nthe structure hasn’t caught up.',
+    support: 'When the ambition is real but\nnothing has turned it into a plan.',
     href: '/growth-stage-businesses',
     src: '/images/momentum/03-growth.jpg',
   },
@@ -199,26 +199,33 @@ export default function Home() {
                 In practice, that means turning:
               </p>
             </FadeUp>
-            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-10">
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes it is not written down at all. Either way, what counts is turning it into the decisions and initiatives people act on this quarter. I help make that turn without losing the intent behind it.' },
-                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity compounds faster than capability, and it arrives with growth and change. Left alone, it becomes the thing the organisation runs on. I reconnect people, priorities, systems and rules so the business moves together again, and more of what you spend comes back.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about. I agree what cannot be traded, make it travel with the work, bring the people to make it brilliant so that your customers feel something and act.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes it is not written down at all. Either way, what counts is turning it into the decisions and initiatives people act on this quarter.', payoff: 'I help make that turn without losing the intent behind it.' },
+                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity compounds faster than capability, and it arrives with growth and change. Left alone, it becomes the thing the organisation runs on.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again, and more of what you spend comes back.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about.', payoff: 'I agree what cannot be traded, make it travel with the work, bring the people to make it brilliant so that your customers feel something and act.' },
               ].map((t, i) => (
-                <FadeUp key={t.key} delay={i * 0.12}>
-                  {/* Each turn is a from→to statement: what they have, then what it
-                      becomes, pivoting on the gold italic "into". A hairline rule
-                      opens each column; the three arrive in sequence. */}
-                  <div className="border-t border-stone/60 pt-6 md:pt-7">
-                    <h3 className="font-serif text-[32px] md:text-[24px] lg:text-[32px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
-                      {t.from}
-                      <br />
-                      <span className="italic text-gold">into</span> {t.to}
-                    </h3>
-                    <p className="mt-4 md:mt-5 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
-                      {t.body}
-                    </p>
-                  </div>
+                // Each turn is a from→to statement: what they have, then what it
+                // becomes, pivoting on the gold italic "into". A hairline rule
+                // opens each column; the three arrive in sequence. The payoff
+                // closes each one in serif, and the three payoffs start on the
+                // same line via the shared subgrid rows.
+                <FadeUp
+                  key={t.key}
+                  delay={i * 0.12}
+                  className="border-t border-stone/60 pt-6 md:pt-7 md:grid md:grid-rows-subgrid md:row-span-3"
+                >
+                  <h3 className="font-serif text-[32px] md:text-[24px] lg:text-[32px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
+                    {t.from}
+                    <br />
+                    <span className="italic text-gold">into</span> {t.to}
+                  </h3>
+                  <p className="mt-4 md:mt-0 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
+                    {t.body}
+                  </p>
+                  <p className="mt-5 md:mt-0 font-serif text-[20px] md:text-[19px] lg:text-[21px] leading-[1.35] tracking-[-0.01em] text-ink max-w-[32ch]">
+                    {t.payoff}
+                  </p>
                 </FadeUp>
               ))}
             </div>
@@ -318,7 +325,7 @@ export default function Home() {
                       <span className="absolute bottom-3.5 left-4 right-4 text-[13px] md:text-[14px] font-medium tracking-[-0.01em] text-bone">{row.label}</span>
                     </div>
                     <h3 className="mt-5 font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.08] tracking-[-0.01em] text-ink u-balance">{row.headline}</h3>
-                    <p className="mt-2.5 text-[15px] leading-relaxed text-ink/70">{withBreaks(row.support)}</p>
+                    <p className="mt-2.5 text-[15px] leading-relaxed text-ink/70 text-balance">{withBreaks(row.support)}</p>
                     <span className="mt-4 inline-flex items-center gap-2 border-b-2 border-gold pb-1 text-[14px] font-medium text-ink">
                       Explore
                       {/* Arrow loop: glides off right while a second slides in from the left. */}
