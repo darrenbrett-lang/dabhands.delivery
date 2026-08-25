@@ -161,6 +161,36 @@ The "here's Darren" page: Ian's ICOM pre-sell, the LinkedIn Featured link, and t
 - **The Fraunces optical-sizing direction cannot be implemented.** Instrument Serif is a single-weight static face with no `opsz` axis.
 - ⚠ Known: the 10px gold eyebrows measure ~2.4:1 on cream, under AA for that size. This is the site's existing gold eyebrow pattern, not new here.
 
+### `/intro` — the v3 redesign (26 Aug)
+
+Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page_v3.html`, in `~/Claude Playground/War Room/`, **not** in the repo). The idea is **composure, not persuasion**: the page is forwarded by someone who has already vouched for Darren, so it confirms rather than sells.
+
+**The page has its own palette and type scale**, deliberately separate from the site tokens, in a page-scoped `<style>` block (`globals.css` does not hot-reload, and this page is a self-contained artefact). Cream `#F5F1EA`, paper `#FBF9F4`, charcoal `#26282B`, blue `#1B2C3F`, gold `#BA9956` / light gold `#C9A96B`, stone `#6E6A62`, line `#DCD5C8`.
+
+**Surface order is the design.** cream (masthead, hero) → charcoal (the film, the anchor) → cream (transcript, lede, the turns) → **blue** (the carousel) → cream (triptych) → paper (logos) → cream (quote) → **blue-scrimmed photograph** (the offer) → cream (close) → charcoal (site footer). Never let two dark bands touch.
+
+- **Masthead** is the crown lockup left, `FRACTIONAL COO · DARREN BRETT` right in **charcoal** (was gold; 9.2:1 against the wash).
+- **Hero** is centred with the crown above it, homepage-style, over the **site's clay wash** — the identical gradient the doorway heroes and the Experience header use. ⚠ It must sit on the hero *section*, not the page root: on the root at `100svh` it floods the hero flat on a short viewport instead of fading.
+- **The film panel** carries the portrait vignette (radial from 34% + a linear fade to full charcoal at the right edge). No visible boundary between photograph and panel.
+- **"When leaders bring me in" is a carousel** — one statement at a time at 48px, cross-fading over 0.9s, auto-advancing every 5.2s, pausing on hover/focus/touch, swipeable, and **not auto-advancing at all under `prefers-reduced-motion`**. Slides share one grid cell so the band never changes height. Pips are the site's carousel idiom (a 12px dot stretching to a 42px pill). With JS off all four stack and nothing is hidden.
+- **The triptych** is three paper panels with a 4px gold spine, the transcript sheet's device. ⚠ Headings are capped at **34px**: the text column is 288px once padding and spine are off, and "An entrepreneur's engine." needs exactly 288px at 36px.
+- **The close** is centred with the crown above it, at the **site's standard footer-CTA scale** (28/44px serif). The button is the page's blue, not the site's charcoal — an open question, see below.
+- **Link preview**: `public/og-intro.jpg`, the headshot padded onto charcoal at a true 1200×630. The square original gets cropped to a decapitated slice by LinkedIn and Slack, which frame at 1.91:1.
+- **"Shared privately. Not listed on the site."** sits above the footer, on the page rather than in the shared `Footer` component — that footer renders everywhere and the line is only true here.
+
+**⚠ Deliberate overrides of the design brief, all by the owner, all commented in the code so a later pass does not "fix" them back:**
+1. **Money figures are on the page** — `£50m` under the carousel and the `£2.2m`/markup wording that was later reverted. The master brief rules these out for the public site ("it must not be quietly reversed by a later edit"). Flagged twice, overridden twice.
+2. **The close and hero are centred**, against "left align everything, never centre anything".
+3. **The logo band is the marquee**, not the static grid. It carries a hard edge mask, which is the condition the brief sets for allowing one.
+4. **Gold does four jobs** (kickers, the quote mark, the turns' destination phrases, the carousel pips) against "one accent, spent sparingly".
+5. **The eyebrow tick was removed** — the brief specified a gold hairline before every kicker.
+
+**Known and open:**
+- The **"How we start" kicker reads 3.56:1** over the photograph, under AA for 11px. The only contrast failure left on the page.
+- The **"Book a call" button is the page's blue**, not the site's standard charcoal CTA. Owner was asked; undecided.
+- The **carousel cross-fade double-exposes** on long text — both slides visible mid-transition. Inherent to a 0.9s cross-fade of two-line statements in one cell.
+- **Copy line-lengths are load-bearing.** The carousel slides (80–83 chars) and the triptych bodies (72–85) are matched so each module sets to an even number of lines. Editing one without checking the others will make a module ragged, which the owner notices every time.
+
 ### `/signal-to-noise` — the diagnostic page
 **⚠ UNLISTED as of 18 August 2026, by the owner's instruction.** The route still resolves and the URL can be shared directly, but there are **no links to it anywhere on the site**. Hidden in four places, all of which must be reversed together to bring it back: the two `components/Header.tsx` nav links (desktop and mobile, the mobile Contact item inherited its `border-t`), the `sitemap.xml` entry, the `llms.txt` entry, and the noindex (`SeoMeta noindex` prop plus an `X-Robots-Tag` route header in `next.config.ts`). Nothing was deleted.
 

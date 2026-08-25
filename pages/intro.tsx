@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SeoMeta } from '@/components/SeoMeta';
@@ -9,25 +9,29 @@ import { Footer } from '@/components/Footer';
  * /intro — the forwardable "here's Darren" page.
  *
  * Unlisted: noindex meta via SeoMeta, an X-Robots-Tag route header in
- * next.config.ts carrying noarchive too, and deliberately absent from the nav,
- * sitemap.xml and llms.txt. The route resolves so the link can be shared, but
- * nothing on the site points at it.
+ * next.config.ts carrying noarchive, and deliberately absent from the nav,
+ * sitemap.xml and llms.txt.
  *
- * It carries its own minimal chrome rather than the site Layout: a forwarded
- * reader should stay on the page they were sent, with no nav to wander into.
+ * Design direction, 25 Aug (reference: Intro_Page_v3.html in the war room).
+ * The idea is composure, not persuasion: the page is forwarded by someone who
+ * has already vouched for Darren, so it confirms rather than sells. Composure
+ * comes from three things only — contrast of surface, a wide type scale used
+ * deliberately, and space placed around things rather than instead of them.
  *
- * Craft rules (see the build brief, section 8): restrained, premium, editorial.
- * Gold is only ever a hairline, a dot or a glyph — never a fill. No second
- * accent colour, no card chrome, no parallax, no bouncy easing.
+ * The surface order IS the design. Do not reorder, and never let two dark
+ * bands touch:
+ *   cream (nav, hero) → charcoal (the film, the anchor) → cream (transcript,
+ *   lede, three sections) → paper (logos) → cream (testimonial) → image →
+ *   clay (how we start, the one offer) → cream (close)
  */
 
 /**
  * The 60-second hello. Fill both in to switch the film on: `embed` is the
  * unlisted Vimeo/YouTube player URL, `poster` an image in /public.
  *
- * While `embed` is null the slot renders a labelled placeholder so the page can
- * go out for review with the shape intact. Setting `embed` swaps the real
- * click-to-load player in and drops the placeholder automatically.
+ * While `embed` is null the panel shows the portrait and "Film to follow." When
+ * the film exists it replaces the portrait in the same frame, with the same
+ * vignette and a play control in blue, never gold.
  */
 const FILM: { embed: string | null; poster: string; alt: string } = {
   embed: null,
@@ -36,341 +40,557 @@ const FILM: { embed: string | null; poster: string; alt: string } = {
 };
 
 const TURNS = [
-  'Strategic direction into operating reality.',
-  'System complexity into coordinated flow.',
-  'Important work into real results.',
+  { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work people can do, in an order, with someone accountable for each part.' },
+  { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that have to hand over to each other do it on time, without anyone chasing.' },
+  { from: 'Important work', to: 'real results.', note: 'The work lands with its value intact, and the business can see it in the numbers.' },
 ];
 
+// Trimmed to an even measure (78 to 81 characters) so the four columns set to
+// the same depth.
 const SITUATIONS = [
-  'A critical programme needs experienced leadership to keep it moving.',
+  'A critical programme needs experienced leadership to keep it moving and land it.',
   'Growth has outpaced the operating model and the business no longer moves together.',
-  'Multiple partners need to work as one team around a single outcome.',
-  'Or it’s the machine itself: how work moves from pitch to delivery, where the margin goes, why good thinking arrives weaker than it left.',
+  'Multiple partners and agencies need to work as one team around a single outcome.',
+  'Nobody can say where the margin goes, or why good work arrives weaker than it left.',
 ];
 
+// Trimmed to an even measure (72 to 74 characters) so the three panels set to
+// the same depth.
 const ABOUT = [
-  { lead: 'A delivery leader.', rest: 'Depth in complex, multi-track delivery built over twenty years.' },
-  { lead: 'A digital operator.', rest: 'I hold my own with strategy, creative and technology, and make the work better.' },
-  { lead: 'An entrepreneur’s engine.', rest: 'I’ve carried my own P&L, spotted opportunities and turned them into revenue.' },
+  { lead: 'A delivery leader.', rest: 'Twenty years of depth in complex, multi-track delivery that had to land.' },
+  { lead: 'A digital operator.', rest: 'I hold my own with strategy, creative and technology, and make work better.' },
+  { lead: 'An entrepreneur’s engine.', rest: 'I’ve carried my own P&L, found opportunities and turned them into meaningful revenue.' },
 ];
 
-/** Eyebrow: 10px, 0.24em tracking, gold. The leading hairline tick from the
- *  craft brief was removed by the owner: the label stands on its own. */
-const Eyebrow = ({ children }: { children: string }) => (
-  <p className="intro-ey">{children}</p>
-);
-
-/** Placeholder for review: the real frame at the real size, with a static play
- *  mark. Deliberately not a button — no dead control to click. */
-const FilmPlaceholder = () => (
-  <div className="intro-frame">
-    <Image src={FILM.poster} alt="" aria-hidden fill sizes="(max-width: 767px) 100vw, 760px" className="object-cover opacity-35" />
-    <span aria-hidden className="intro-play" />
-  </div>
-);
-
-/** Click-to-load façade: the poster paints immediately, the player loads only
- *  when asked, so a forwarded page stays light on a phone. */
-const Film = () => {
-  const [playing, setPlaying] = useState(false);
-  if (!FILM.embed) return <FilmPlaceholder />;
-  return (
-    <div className="intro-frame">
-      {playing ? (
-        <iframe
-          src={`${FILM.embed}${FILM.embed.includes('?') ? '&' : '?'}autoplay=1`}
-          title="A 60-second hello from Darren Brett"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-          className="absolute inset-0 h-full w-full"
-        />
-      ) : (
-        <button type="button" onClick={() => setPlaying(true)} aria-label="Play the 60-second hello" className="intro-playbtn">
-          <Image src={FILM.poster} alt={FILM.alt} fill sizes="(max-width: 767px) 100vw, 760px" className="object-cover" />
-          <span aria-hidden className="absolute inset-0 bg-charcoal/25 transition-colors" />
-          <span aria-hidden className="intro-play" />
-        </button>
-      )}
-    </div>
-  );
-};
+const Kicker = ({ children }: { children: string }) => <p className="i-kick">{children}</p>;
 
 export default function Intro() {
-  // One IntersectionObserver for every [data-reveal]. The `.js` class on <html>
-  // is what arms the hidden state, so with JavaScript off nothing is ever
-  // hidden. The 1.6s failsafe reveals everything regardless, in case the
-  // observer never fires — inside a non-scrolling preview pane or an embed.
+  const [playing, setPlaying] = useState(false);
+
+  // "When leaders bring me in" rotates one at a time. Auto-advance pauses on
+  // hover, on keyboard focus and while a finger is down, and does not run at
+  // all under prefers-reduced-motion — the numerals still work as navigation.
+  const [slide, setSlide] = useState(0);
+  const [held, setHeld] = useState(false);
+  const touchX = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (held) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t = window.setInterval(() => setSlide((i) => (i + 1) % SITUATIONS.length), 5200);
+    return () => window.clearInterval(t);
+  }, [held]);
+
+  const swipe = (endX: number) => {
+    const startX = touchX.current;
+    touchX.current = null;
+    if (startX === null || Math.abs(endX - startX) < 44) return;
+    setSlide((i) => (endX < startX ? (i + 1) % SITUATIONS.length : (i - 1 + SITUATIONS.length) % SITUATIONS.length));
+  };
+
+  // One IntersectionObserver for every [data-r]. The `.js` class on <html> arms
+  // the hidden state, so with JavaScript off nothing is ever hidden. The 1.6s
+  // failsafe reveals everything if the observer never fires — a non-scrolling
+  // preview pane or an embed, which is not hypothetical: it happens.
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add('js');
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
-    const revealAll = () => nodes.forEach((n) => n.classList.add('is-in'));
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-r]'));
+    const revealAll = () =>
+      document.querySelectorAll<HTMLElement>('[data-r]').forEach((n) => n.classList.add('in'));
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       revealAll();
       return () => root.classList.remove('js');
     }
-
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }),
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+      (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+      { rootMargin: '0px 0px -6% 0px', threshold: 0.04 },
     );
     nodes.forEach((n) => io.observe(n));
     const failsafe = window.setTimeout(revealAll, 1600);
-
     return () => { io.disconnect(); window.clearTimeout(failsafe); root.classList.remove('js'); };
   }, []);
 
   return (
     <>
+      {/* Link preview. og-intro.jpg is the headshot padded onto charcoal at a
+          true 1200x630 — the square original gets cropped to a slice by
+          LinkedIn and Slack, which frame at 1.91:1. */}
       <SeoMeta
-        title="Darren Brett | DAB Hands"
-        description="Fractional COO for digital-first agencies and growth-stage brands. Keeping important work moving."
+        title="An introduction to Darren Brett, fractional COO"
+        description="Keeping important work moving. Part delivery lead, part digital operator, all entrepreneur’s engine."
         path="/intro"
+        image="/og-intro.jpg"
         noindex
       />
 
-      {/* Page-scoped craft. Kept here rather than in globals.css: this page is a
-          self-contained artefact, and globals.css does not hot-reload. */}
+      {/* Page-scoped. This page has its own palette and type scale, deliberately
+          separate from the site's tokens, and globals.css does not hot-reload. */}
       <style>{`
-        .intro { --hair: color-mix(in srgb, var(--color-gold) 50%, transparent); }
-        /* Bookends: a hair-thin gold rule top and bottom, like a letterpress card. */
-        .intro-rule { height: 1px; background: var(--hair); }
+        .i {
+          --cream:#F5F1EA; --paper:#FBF9F4; --clay:#A49786;
+          --blue:#1B2C3F; --charcoal:#26282B;
+          --ink:#1A1A1A; --gold:#BA9956; --gold-lt:#C9A96B;
+          --stone:#6E6A62; --line:#DCD5C8;
+          background-color:var(--cream); color:var(--ink);
+          font-size:17px; line-height:1.62;
+        }
+        .i-herowrap {
+          background-image:linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%);
+        }
+        .i-in { max-width:1180px; margin:0 auto; padding:0 44px; }
 
-        .intro-ey {
-          font-family: var(--font-sans);
-          font-size: 10px; font-weight: 600; letter-spacing: 0.24em;
-          text-transform: uppercase; color: var(--color-gold);
-          margin-bottom: 18px;
-        }
 
-        .intro-h1 {
-          font-family: var(--font-serif);
-          line-height: 1.05; letter-spacing: -0.02em;
-        }
-        .intro-tagline { font-family: var(--font-serif); font-style: italic; font-size: 20px; line-height: 1.35; }
-        .intro-lead { font-size: 17px; line-height: 1.68; }
-        .intro-body { font-size: 15px; line-height: 1.72; }
-        .intro-h2 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; line-height: 1.28; letter-spacing: -0.01em; }
+        /* Gold is only ever a kicker or the quote mark. Never a fill, never a
+           button, never a rule longer than three pixels. */
+        .i-kick { font-size:11px; letter-spacing:2.8px; font-weight:600; color:var(--gold); text-transform:uppercase; }
 
-        .intro-frame {
-          position: relative; aspect-ratio: 16 / 9; overflow: hidden;
-          border-radius: 12px; background: var(--color-charcoal);
-          box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 10%, transparent);
-        }
-        .intro-playbtn { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
-        .intro-play {
-          position: absolute; left: 50%; top: 50%; width: 68px; height: 68px;
-          transform: translate(-50%, -50%);
-          border-radius: 999px; background: color-mix(in srgb, var(--color-bone) 92%, transparent);
-          display: flex; align-items: center; justify-content: center;
-          transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s cubic-bezier(.4,0,.2,1);
-        }
-        .intro-play::after {
-          content: ""; margin-left: 4px;
-          border-style: solid; border-width: 11px 0 11px 18px;
-          border-color: transparent transparent transparent var(--color-ink);
-        }
-        .intro-playbtn:hover .intro-play, .intro-playbtn:focus-visible .intro-play {
-          transform: translate(-50%, -50%) scale(1.06);
-          box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-gold) 32%, transparent);
-        }
+        .i-nav { display:flex; justify-content:space-between; align-items:center; padding:26px 0; }
+        .i-nav .mark { display:flex; align-items:center; gap:10px; font-family:var(--font-serif); font-size:21px; letter-spacing:-.01em; }
+        .i-nav .who { font-size:11px; letter-spacing:2.8px; font-weight:600; color:var(--charcoal); text-transform:uppercase; }
 
-        /* Pull-quote: no left border. One oversized translucent gold glyph. */
-        .intro-quote { position: relative; padding-left: 44px; }
-        .intro-quote::before {
-          content: "\\201C";
-          position: absolute; left: -4px; top: -22px;
-          font-family: var(--font-serif); font-size: 96px; line-height: 1;
-          color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+        /* The hero fills the fold, with the charcoal band showing at the bottom
+           edge. Space is placed around the headline, never left below it. */
+        .i-hero { padding:64px 0 76px; display:flex; flex-direction:column; justify-content:center; min-height:calc(100svh - 268px); text-align:center; }
+        .i-hero .crown { display:block; margin:0 auto 30px; height:60px; width:auto; user-select:none; }
+        .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:96px; line-height:.94; letter-spacing:-3px; margin:0 auto 30px; max-width:15ch; }
+        /* One line on desktop; the measure only applies once it has to wrap. */
+        .i-hero .sub { font-family:var(--font-sans); font-size:21px; line-height:1.5; color:var(--blue); max-width:44ch; margin:0 auto; }
+        @media (min-width:901px) { .i-hero .sub { max-width:none; white-space:nowrap; } }
+
+        /* The film: the darkest thing on the page and its visual anchor. */
+        .i-film { background:var(--charcoal); color:#E6E4E0; }
+        .i-filmgrid { display:grid; grid-template-columns:.85fr 1.15fr; align-items:stretch; max-width:1180px; margin:0 auto; }
+        .i-filmwrap { position:relative; overflow:hidden; min-height:440px; }
+        .i-filmwrap img { object-fit:cover; object-position:center 42%; }
+        /* The vignette dissolves the portrait into the panel: a radial darkening
+           from 34% out, plus a linear fade to full charcoal at the right edge.
+           There must be no visible boundary between photograph and panel. */
+        .i-filmwrap::after {
+          content:""; position:absolute; inset:0; pointer-events:none;
+          background:
+            radial-gradient(120% 95% at 42% 32%, rgba(38,40,43,0) 34%, rgba(38,40,43,.42) 72%, rgba(38,40,43,.88) 100%),
+            linear-gradient(90deg, rgba(38,40,43,0) 58%, rgba(38,40,43,.55) 88%, rgba(38,40,43,1) 100%);
         }
-        .intro-attrib {
-          font-family: var(--font-sans); font-size: 11px; font-weight: 600;
-          letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-graphite);
+        .i-filmtxt { padding:64px 56px; display:flex; flex-direction:column; justify-content:center; }
+        .i-filmtxt .i-kick { color:var(--gold-lt); }
+        .i-filmtxt .ph { font-family:var(--font-serif); font-size:46px; line-height:1.08; color:#fff; margin:18px 0 0; }
+        .i-play {
+          margin-top:26px; display:inline-flex; align-items:center; gap:12px; align-self:flex-start;
+          background:var(--blue); color:#E6E4E0; border-radius:40px; padding:15px 30px; font-size:16px; font-weight:500; cursor:pointer;
         }
 
-        /* Gold links draw their underline in on hover. */
-        .intro-link {
-          color: var(--color-gold);
-          background-image: linear-gradient(currentColor, currentColor);
-          background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px;
-          transition: background-size .35s cubic-bezier(.4,0,.2,1);
+        /* The transcript reads as a document, not a wall of body copy. Behind a
+           one-way disclosure, the same interaction the rest of the site uses. */
+        .i-script { padding:74px 0; }
+        .i-script summary { list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px; }
+        .i-script summary::-webkit-details-marker { display:none; }
+        .i-script summary .arw {
+          position:relative; display:inline-block; width:17px; height:17px; flex:none;
+          transition:transform .25s cubic-bezier(.4,0,.2,1);
         }
-        .intro-link:hover, .intro-link:focus-visible { background-size: 100% 1px; }
+        .i-script summary .arw::before,
+        .i-script summary .arw::after { content:""; position:absolute; background:var(--gold); border-radius:1px; }
+        .i-script summary .arw::before { left:0; right:0; top:50%; height:3px; margin-top:-1.5px; }
+        .i-script summary .arw::after { top:0; bottom:0; left:50%; width:3px; margin-left:-1.5px; }
+        .i-script[open] summary .arw { transform:rotate(45deg); }
+        @media (prefers-reduced-motion: reduce) { .i-script summary .arw { transition:none; } }
+        .i-sheet { background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--gold); padding:44px 48px; max-width:820px; margin-top:20px; }
+        .i-sheet p { font-family:var(--font-serif); font-size:19px; line-height:1.72; color:#3F312D; }
 
-        .intro a:focus-visible, .intro button:focus-visible {
-          outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px;
+        .i-lede { padding:0 0 84px; }
+        .i-lede .name { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.06; letter-spacing:-1.6px; color:var(--blue); max-width:1000px; }
+        .i-br { display:none; }
+        @media (min-width:901px) { .i-br { display:inline; } }
+        .i-lede .then { font-family:var(--font-sans); font-size:22px; line-height:1.58; color:#3F312D; max-width:820px; margin-top:30px; }
+
+        /* Lists become grids, each cell with a hairline above, so the page
+           stops being a single ribbon. */
+        .i-sec { padding:74px 0; border-top:1px solid var(--line); }
+        /* The dividers are the page ground showing through the grid gaps, so the
+           three panels read as separate objects with no drawn rule at all. */
+        .i-c3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:34px; }
+        .i-c3 .c { background:var(--paper); border-left:4px solid var(--gold); padding:34px 28px 38px; }
+        .i-c3 .lab, .i-c3 p { color:var(--ink); }
+        .i-turns { margin-top:38px; display:grid; gap:52px; }
+        .i-turns .turn { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:0 64px; align-items:end; }
+        .i-turns h3 { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.08; letter-spacing:-1.6px; }
+        .i-turns .into { font-style:italic; }
+        .i-turns .to { color:var(--gold); }
+        .i-turns .note { font-family:var(--font-sans); font-size:17px; line-height:1.62; color:#3F312D; max-width:40ch; padding-bottom:.34em; }
+        /* Matched to the lede: heading at the serif statement size, body in the
+           Manrope register beneath it. */
+        /* 42px, not the lede's 56px: "An entrepreneur's engine." needs 447px at
+           56 and the column is 335, so 56 forced it onto two lines while the
+           other two sat on one. All three stay the same size. */
+        .i-c3 .lab { font-family:var(--font-serif); font-size:34px; line-height:1.1; letter-spacing:-1px; margin-bottom:18px; }
+        .i-c3 p { font-family:var(--font-sans); font-size:19px; line-height:1.58; color:#3F312D; }
+        .i-when { background:var(--blue); color:#E6E4E0; padding:78px 0; }
+        .i-when .i-kick { color:var(--gold-lt); }
+        /* The stage is a plain grid with JavaScript off, so all four stack and
+           nothing is hidden. With JS the slides share one cell: the height is
+           always the tallest slide, so the band never jumps as it rotates. */
+        .i-stage { display:grid; margin-top:34px; gap:30px; }
+        html.js .i-stage { grid-template-areas:"s"; gap:0; min-height:5.4em; }
+        html.js .i-stage .slide { grid-area:s; opacity:0; pointer-events:none; transition:opacity .9s ease; }
+        html.js .i-stage .slide.on { opacity:1; pointer-events:auto; }
+        /* Full container width, so each statement holds two lines at this size.
+           At 22ch they ran to three and four and the band grew tall. */
+        .i-stage .slide { font-size:48px; line-height:1.22; letter-spacing:-.8px; }
+
+        .i-bips { display:flex; align-items:center; gap:14px; margin-top:46px; }
+        .i-bips button {
+          height:12px; width:12px; border-radius:999px; cursor:pointer;
+          background:color-mix(in srgb, var(--gold-lt) 30%, transparent);
+          transition:width .35s cubic-bezier(.4,0,.2,1), background-color .35s ease;
         }
+        .i-bips button:hover { background:color-mix(in srgb, var(--gold-lt) 62%, transparent); }
+        .i-bips button[aria-current="true"] { width:42px; background:var(--gold-lt); }
 
-        .intro-cta { transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1); }
-        .intro-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--color-ink) 55%, transparent); }
-
-        /* Reveals arm only when JS is present, so nothing can be stranded. */
-        html.js .intro [data-reveal] { opacity: 0; transform: translateY(12px); }
-        html.js .intro [data-reveal].is-in {
-          opacity: 1; transform: none;
-          transition: opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1);
-        }
         @media (prefers-reduced-motion: reduce) {
-          html.js .intro [data-reveal] { opacity: 1; transform: none; transition: none; }
-          .intro-play, .intro-cta, .intro-link { transition: none; }
-          .intro-cta:hover { transform: none; }
+          html.js .i-stage .slide { transition:none; }
+          .i-bips button { transition:none; }
+        }
+        .i-bips button:focus-visible { outline:2px solid var(--gold-lt); outline-offset:4px; }
+        .i-scale { margin-top:40px; padding-top:26px; border-top:1px solid rgba(230,228,224,.22); max-width:64ch; }
+        .i-scale .i-kick { color:var(--gold-lt); margin-bottom:14px; }
+        .i-scale p { font-size:18px; line-height:1.6; color:rgba(230,228,224,.82); }
+
+        /* The homepage marquee, by the owner's decision. The design brief allows
+           it only with a hard mask and even gaps, so the band fades both edges
+           into the paper: no more half-cut "D BOSS" at the boundary. */
+        .i-logos { background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:54px 0; }
+        .i-logomask {
+          margin-top:26px;
+          -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+          mask-image:linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+        }
+
+        /* A testimonial on a card looks like a review. In the open it looks
+           like a reference. */
+        .i-qt { padding:86px 0; }
+        .i-qt .qm { font-family:var(--font-serif); font-size:70px; line-height:.5; color:var(--gold); display:block; margin-bottom:26px; }
+        .i-qt blockquote { font-family:var(--font-serif); font-style:italic; font-size:38px; line-height:1.28; max-width:960px; }
+        .i-qt .who { margin-top:28px; font-size:12px; letter-spacing:2.2px; text-transform:uppercase; color:var(--stone); }
+
+        /* The offer sits over the photograph. The scrim is a blue tint rather
+           than black, so the band still belongs to the palette, and it is heavy
+           enough to hold serif copy over the bright gravel in the plate. */
+        .i-start { position:relative; padding:118px 0; text-align:center; overflow:hidden; }
+        .i-start > img { object-fit:cover; }
+        .i-scrim { position:absolute; inset:0; background:rgba(27,44,63,.78); }
+        .i-start-copy { position:relative; }
+        .i-start .i-kick { color:var(--gold-lt); }
+        /* :not(.i-kick) so the body rule cannot outrank the kicker on specificity
+           — the kicker is a <p> too. */
+        .i-start p:not(.i-kick) { font-family:var(--font-sans); font-size:23px; line-height:1.55; color:#E6E4E0; max-width:880px; margin:24px auto 0; }
+
+        /* Centred by the owner's decision (25 Aug), against the design brief's
+           "left align everything, never centre anything". */
+        .i-close { padding:100px 0 44px; text-align:center; }
+        .i-close .crown { display:block; margin:0 auto 26px; height:48px; width:auto; user-select:none; }
+        .i-close h2 { font-family:var(--font-serif); font-size:44px; line-height:1.1; font-weight:400; letter-spacing:-.8px; max-width:22ch; margin:0 auto 34px; }
+        .i-btn { display:inline-flex; align-items:center; gap:12px; background:var(--blue); color:var(--cream); padding:17px 36px; border-radius:40px; font-size:16px; font-weight:500; }
+        .i-alt { margin-top:22px; font-size:15px; color:var(--stone); }
+        .i-alt a { color:var(--blue); text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; }
+        .i-private { padding:0 0 44px; text-align:center; font-size:13px; letter-spacing:.02em; color:var(--stone); }
+
+        .i a:focus-visible, .i button:focus-visible { outline:2px solid var(--blue); outline-offset:3px; border-radius:4px; }
+
+        /* Fade and an 8px rise, once, nothing after. */
+        html.js .i [data-r] { opacity:0; transform:translateY(8px); }
+        html.js .i [data-r].in { opacity:1; transform:none; transition:opacity .2s ease, transform .2s ease; }
+        html.js .i [data-r].in > * { animation:i-rise .2s ease both; }
+        html.js .i [data-r].in > *:nth-child(2) { animation-delay:.06s; }
+        html.js .i [data-r].in > *:nth-child(3) { animation-delay:.12s; }
+        html.js .i [data-r].in > *:nth-child(4) { animation-delay:.18s; }
+        @keyframes i-rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+        @media (prefers-reduced-motion: reduce) {
+          html.js .i [data-r], html.js .i [data-r].in > * { opacity:1; transform:none; transition:none; animation:none; }
+        }
+
+        @media (max-width:900px) {
+          .i-in { padding:0 22px; }
+          .i-hero { padding:38px 0 48px; min-height:0; }
+          .i-hero .crown { height:42px; margin-bottom:22px; }
+          .i-hero h1 { font-size:46px; letter-spacing:-1.2px; margin-bottom:22px; }
+          .i-hero .sub { font-size:17px; }
+          .i-nav .who { font-size:9.5px; letter-spacing:1.8px; }
+          .i-filmgrid { grid-template-columns:1fr; }
+          .i-filmwrap { min-height:300px; }
+          .i-filmtxt { padding:34px 22px; }
+          .i-filmtxt .ph { font-size:30px; }
+          .i-sheet { padding:26px 22px; }
+          .i-sheet p { font-size:17px; }
+          .i-lede { padding-bottom:56px; }
+          .i-lede .name { font-size:30px; letter-spacing:-.7px; }
+          .i-lede .then { font-size:17px; margin-top:20px; }
+          /* Stacked, three filled gold slabs read as blocks rather than a
+             triptych. On mobile they take the transcript sheet's device
+             instead — paper with a gold spine — which is already a treatment
+             on this page, so the gold stays without the weight. */
+          .i-c3 { grid-template-columns:1fr; gap:14px; }
+          .i-c3 .c { padding:26px 22px 28px; }
+          .i-c3 .lab { font-size:30px; letter-spacing:-.7px; margin-bottom:12px; }
+          .i-c3 p { font-size:17px; }
+          .i-turns { gap:30px; }
+          .i-turns .turn { grid-template-columns:1fr; gap:0; }
+          /* 38px, not larger: the widest half ("into operating reality.") is
+             261px here, which still clears a 320px phone. */
+          .i-turns h3 { font-size:38px; letter-spacing:-1px; }
+          .i-turns .note { font-size:16px; margin-top:12px; padding-bottom:0; max-width:none; }
+          /* 30px: at 346px none of the four can hold three lines evenly (25px
+             gives 3/4/4/3), but at 30px all four set to four lines, which is
+             both bigger and even as the carousel rotates. */
+          .i-stage .slide { font-size:30px; letter-spacing:-.4px; max-width:none; }
+          html.js .i-stage { min-height:7.2em; }
+          .i-scale { margin-top:32px; padding-top:22px; }
+          .i-scale p { font-size:17px; }
+          .i-bips { gap:12px; margin-top:34px; }
+          .i-bips button { height:10px; width:10px; }
+          .i-bips button[aria-current="true"] { width:34px; }
+          .i-c2 .n { font-size:30px; margin-bottom:10px; }
+          .i-c3 .c { margin-bottom:26px; }
+          .i-c3 .lab { font-size:30px; letter-spacing:-.7px; margin-bottom:12px; }
+          .i-c3 p { font-size:17px; }
+          .i-qt { padding:56px 0; }
+          .i-qt blockquote { font-size:24px; }
+          .i-qt .qm { font-size:54px; }
+          /* :not(.i-kick) here too — the unscoped rule was outranking .i-kick
+             and rendering the "How we start" label at 20px on mobile. */
+          .i-start { padding:72px 0; }
+          .i-start p:not(.i-kick) { font-size:19px; margin-top:20px; }
+          .i-close { padding:64px 0 32px; }
+          .i-close h2 { font-size:28px; letter-spacing:-.3px; }
+          .i-close .crown { height:40px; margin-bottom:20px; }
         }
       `}</style>
 
       <a href="#top" className="skip-link">Skip to content</a>
 
-      <div className="intro bg-bone text-ink">
-        <div className="intro-rule" aria-hidden />
-
-        {/* Minimal chrome: the mark, and the name. No nav out. */}
-        <header className="u-container flex h-[68px] items-center justify-between md:h-[76px]">
-          <span className="flex items-center gap-2.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="h-6 w-auto select-none md:h-7" />
-            <span className="font-serif text-[21px] leading-none tracking-[-0.01em] md:text-[23px]">DAB Hands</span>
-          </span>
-          <span className="intro-body text-graphite">Darren Brett</span>
-        </header>
+      <div className="i">
+        <div className="i-in">
+          <div className="i-nav">
+            <span className="mark">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="h-[22px] w-auto select-none" />
+              DAB Hands
+            </span>
+            <span className="who">Fractional COO · Darren Brett</span>
+          </div>
+        </div>
 
         <main id="top">
-          {/* ── Hero: louder than everything else, and given the most air. ── */}
-          <section className="u-container pt-16 pb-11 md:pt-20 md:pb-12">
-            <div className="max-w-[44rem]">
-              <Eyebrow>Fractional COO · DAB Hands</Eyebrow>
-              <h1 className="intro-h1 text-[40px] sm:text-[52px] md:text-[60px]">Keeping important work moving.</h1>
-              <p className="intro-tagline mt-6 text-ink/80">Part delivery lead, part digital operator, all entrepreneur’s engine.</p>
+          {/* ── cream · hero, over the clay wash ─────────────────── */}
+          <section className="i-herowrap">
+            <div className="i-in">
+              <div className="i-hero">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+              <h1>Keeping important work moving.</h1>
+                <p className="sub">I’m part delivery lead, part digital operator, all entrepreneur’s engine.</p>
+              </div>
             </div>
           </section>
 
-          {/* ── The film ─────────────────────────────────────────────── */}
-          <section className="u-container pb-12 md:pb-16">
-            <div className="max-w-[44rem]" data-reveal>
-              <Eyebrow>A 60-second hello</Eyebrow>
-              <Film />
+          {/* ── charcoal · the film, the anchor ──────────────────── */}
+          <section className="i-film">
+            <div className="i-filmgrid">
+              <div className="i-filmwrap">
+                {FILM.embed && playing ? (
+                  <iframe
+                    src={`${FILM.embed}${FILM.embed.includes('?') ? '&' : '?'}autoplay=1`}
+                    title="A 60-second hello from Darren Brett"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full"
+                  />
+                ) : (
+                  <Image src={FILM.poster} alt={FILM.alt} fill sizes="(max-width: 900px) 100vw, 45vw" priority />
+                )}
+              </div>
+              <div className="i-filmtxt">
+                <Kicker>A 60-second hello</Kicker>
+                <p className="ph">{FILM.embed ? 'Sixty seconds, and you will know.' : 'Film to follow.'}</p>
+                {FILM.embed && !playing && (
+                  <button type="button" className="i-play" onClick={() => setPlaying(true)}>
+                    Play the film <span aria-hidden>→</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </section>
 
-              {/*
-                TEMPORARY — remove this whole <div class="intro-script"> block in one
-                edit once the film is recorded and approved. It exists so early
-                viewers can read and feed back on the script. Nothing else depends
-                on it; deleting it leaves the frame as the live video.
-              */}
-              <div className="intro-script mt-7 border-t border-stone/60 pt-6">
-                <Eyebrow>What the film says</Eyebrow>
-                <p className="intro-body text-graphite">
-                  “Hi, I’m Darren. Man and boy, I’ve been understanding how to make things go, and work better. I seem to be great at keeping lots of complex things in orbit and holding it all well. I bring both sides of the brain to work in equal measure, which makes me a great problem solver. I’m someone who can jump from functional and logical to visionary and conceptual in a moment. I’ve spent my working life at the point where ambition has to become reality. And the thing I keep seeing is this: organisations rarely lack good thinking, they struggle to preserve its impact on the way out, traded away in the systems and the misalignments people don’t manage. I’ve got an (un)healthy obsession with what it takes to elevate the digital work we put into the world, to make people feel something and act upon it. I believe we can cut through a lot of the noise when we help people feel first. If something important needs to land, and it isn’t, let’s talk. We can start small. Nobody has to bet on me without trying me first. A little of me goes a long way. I work to impact, not to burn hours. Let’s make things better, and make some progress and money. I’d love to hear from you.”
+          {/* ── cream · transcript, lede, the three sections ─────── */}
+          <div className="i-in">
+            {/*
+              TEMPORARY — delete this whole <div className="i-script"> block in one
+              edit once the film is recorded and approved. It exists so early
+              viewers can read and feed back on the script. Nothing else depends
+              on it.
+            */}
+            <details className="i-script" data-r>
+              <summary>
+                <span className="i-kick">Script for the film</span>
+                <span aria-hidden className="arw" />
+              </summary>
+              <div className="i-sheet">
+                <p>
+                  “Hi, I’m Darren. Man and boy, I’ve been understanding how to make things go, and work better. I seem to be great at keeping lots of complex things in orbit and holding it all well. I bring both sides of the brain to work in equal measure, which makes me a great problem solver. I’m someone who can jump from functional and logical to visionary and conceptual in a moment. I’ve spent my working life at the point where ambition has to become reality inside tier-one agencies working at scale with major brands. And the thing I keep seeing is this: organisations rarely lack good thinking, they struggle to preserve its impact on the way out, traded away in the systems and the misalignments people don’t manage. I’ve got an (un)healthy obsession with what it takes to elevate the digital work we put into the world, to make people feel something and act upon it. I believe we can cut through a lot of the noise when we help people feel first. If something important needs to land, and it isn’t, let’s talk. We can start small. Nobody has to bet on me without trying me first. A little of me goes a long way. I work to impact, not to burn hours. Let’s make things better, and make some progress and money. I’d love to hear from you.”
                 </p>
               </div>
-              {/* END TEMPORARY script block */}
-            </div>
-          </section>
+            </details>
+            {/* END TEMPORARY script block */}
 
-          {/* ── Proposition ──────────────────────────────────────────── */}
-          <section className="u-container border-t border-stone/60 py-[38px] md:py-11">
-            <div className="max-w-[44rem]" data-reveal>
-              <p className="intro-lead">
-                <strong className="font-semibold text-ink">I’m Darren, a fractional COO for digital-first agencies and growth-stage brands.</strong>{' '}
-                <span className="text-graphite">
-                  I make sure important work actually delivers: I turn strategic direction into operating reality, then hold every moving part, in the delivery detail and in the boardroom, until the business gets there and the customer feels it.
-                </span>
+            <div className="i-lede" data-r>
+              <p className="name">
+                I’m Darren, a fractional COO for digital-first{' '}
+                <br className="i-br" />
+                agencies and growth-stage brands.
+              </p>
+              <p className="then">
+                I make sure important work actually delivers. I help set the direction, then hold every moving part together, in the delivery detail and in the boardroom, until the business gets there and the customer feels it.
               </p>
             </div>
-          </section>
+          </div>
 
-          {/* ── What I turn ──────────────────────────────────────────── */}
-          <section className="u-container border-t border-stone/60 py-9 md:py-10">
-            <div className="max-w-[44rem]" data-reveal>
-              <Eyebrow>What I turn</Eyebrow>
-              <ul className="space-y-3.5">
-                {TURNS.map((t) => <li key={t} className="intro-h2">{t}</li>)}
-              </ul>
-            </div>
-          </section>
-
-          {/* ── When leaders bring me in ─────────────────────────────── */}
-          <section className="u-container border-t border-stone/60 py-9 md:py-10">
-            <div className="max-w-[44rem]" data-reveal>
-              <Eyebrow>When leaders bring me in</Eyebrow>
-              <ul className="space-y-4">
-                {SITUATIONS.map((sit) => (
-                  <li key={sit} className="intro-body flex gap-3.5 text-graphite">
-                    <span aria-hidden className="mt-[0.72em] h-px w-3.5 shrink-0 bg-gold" />
-                    <span>{sit}</span>
-                  </li>
+          <div className="i-in">
+            <section className="i-sec">
+              <Kicker>What I turn</Kicker>
+              <div className="i-turns" data-r>
+                {TURNS.map((t) => (
+                  <div className="turn" key={t.from}>
+                    <h3>
+                      {t.from}
+                      <br />
+                      <em className="into">into</em> <span className="to">{t.to}</span>
+                    </h3>
+                    <p className="note">{t.note}</p>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          </section>
+              </div>
+            </section>
 
-          {/* ── Three things about me ────────────────────────────────── */}
-          <section className="u-container border-t border-stone/60 py-9 md:py-10">
-            <div className="max-w-[44rem]" data-reveal>
-              <Eyebrow>Three things about me</Eyebrow>
-              <ul className="space-y-4">
-                {ABOUT.map((a) => (
-                  <li key={a.lead} className="intro-body flex gap-3.5">
-                    <span aria-hidden className="mt-[0.72em] h-px w-3.5 shrink-0 bg-gold" />
-                    <span>
-                      <strong className="font-semibold text-ink">{a.lead}</strong>{' '}
-                      <span className="text-graphite">{a.rest}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
+          </div>
 
-          {/* ── Proof: the strip framed as a credential lockup, then the
-                Neil Munn quote set as a print pull-quote. ───────────── */}
-          <section className="border-t border-stone/60 py-9 md:py-10">
-            <div className="u-container" data-reveal>
-              <Eyebrow>Trusted where the stakes are high</Eyebrow>
-            </div>
-            <div data-reveal>
-              <div className="intro-rule opacity-70" aria-hidden />
-              <div className="py-6"><LogoTicker ariaLabel="Brands I’ve worked with" compact /></div>
-              <div className="intro-rule opacity-70" aria-hidden />
-            </div>
-            <div className="u-container">
-              <figure className="intro-quote mt-11 max-w-[44rem] md:mt-12" data-reveal>
-                <blockquote className="font-serif text-[19px] italic leading-[1.5] md:text-[21px]">
-                  Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it.
-                </blockquote>
-                <figcaption className="intro-attrib mt-5">Neil Munn, Former Global CEO, BBH</figcaption>
-              </figure>
-            </div>
-          </section>
-
-          {/* ── How we start ─────────────────────────────────────────── */}
-          <section className="u-container border-t border-stone/60 py-9 md:py-10">
-            <div className="max-w-[44rem]" data-reveal>
-              <Eyebrow>How we start</Eyebrow>
-              <p className="intro-body text-graphite">
-                Built around the work, not the headcount. I stay accountable end to end, and bring in trusted senior specialists only when the work demands it. We can start small, a paid diagnostic or a fortnight of troubleshooting, so nobody has to bet on me without trying first.
-              </p>
-            </div>
-          </section>
-
-          {/* ── Close: given the air the hero gets. ──────────────────── */}
-          <section className="u-container border-t border-stone/60 py-16 text-center md:py-20">
-            <div data-reveal>
-              <h2 className="intro-h1 mx-auto max-w-[18ch] text-[30px] md:text-[38px]">When important work needs to land, let’s talk.</h2>
-              <a
-                href="mailto:darren@dabhands.delivery?subject=Keeping%20important%20work%20moving"
-                className="intro-cta mt-8 inline-flex items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-[15px] font-medium text-bone md:mt-9"
+          {/* ── blue · the situations ────────────────────────────── */}
+          <section className="i-when">
+            <div className="i-in">
+              <Kicker>When leaders bring me in</Kicker>
+              <div
+                data-r
+                aria-roledescription="carousel"
+                aria-label="When leaders bring me in"
+                onMouseEnter={() => setHeld(true)}
+                onMouseLeave={() => setHeld(false)}
+                onFocusCapture={() => setHeld(true)}
+                onBlurCapture={() => setHeld(false)}
+                onTouchStart={(e) => { setHeld(true); touchX.current = e.touches[0].clientX; }}
+                onTouchEnd={(e) => { swipe(e.changedTouches[0].clientX); setHeld(false); }}
               >
-                Book a call
-                <span aria-hidden>→</span>
-              </a>
-              <p className="intro-body mt-5">
-                <Link href="/" className="intro-link">or go to the website</Link>
-                <span aria-hidden className="ml-1.5 text-gold">→</span>
+                <div className="i-stage">
+                  {SITUATIONS.map((sit, i) => (
+                    <p
+                      key={sit}
+                      className={`slide${i === slide ? ' on' : ''}`}
+                      aria-hidden={i !== slide}
+                    >
+                      {sit}
+                    </p>
+                  ))}
+                </div>
+                <div className="i-bips" aria-label="Carousel navigation">
+                  {SITUATIONS.map((sit, i) => (
+                    <button
+                      key={sit}
+                      type="button"
+                      onClick={() => setSlide(i)}
+                      aria-current={i === slide}
+                      aria-label={`Show reason ${i + 1} of ${SITUATIONS.length}`}
+                    />
+                  ))}
+                </div>
+                {/* ⚠ Money figures again, ruled out by the master brief for the
+                    public site. Owner's explicit instruction, 26 Aug. */}
+                <div className="i-scale">
+                  <Kicker>What that has looked like</Kicker>
+                  <p>
+                    I’ve led delivery inside a £50m client relationship, and carried multimillion pound programmes for much of my career. I built the operations of my own agency from nothing, so I have run the machine as well as the work.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div className="i-in">
+            <section className="i-sec" style={{ borderTop: 'none' }}>
+              <Kicker>Three things that describe me</Kicker>
+              <div className="i-c3" data-r>
+                {ABOUT.map((a) => (
+                  <div className="c" key={a.lead}>
+                    <div className="lab">{a.lead}</div>
+                    <p>{a.rest}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          {/* ── paper · the logo band, a quiet lift ──────────────── */}
+          <section className="i-logos">
+            <div className="i-in">
+              <Kicker>Trusted where the stakes are high</Kicker>
+            </div>
+            <div className="i-logomask">
+              <LogoTicker ariaLabel="Brands I’ve worked with" compact />
+            </div>
+          </section>
+
+          {/* ── cream · the testimonial, in the open ─────────────── */}
+          <div className="i-in">
+            <figure className="i-qt" data-r>
+              <span className="qm" aria-hidden>“</span>
+              <blockquote>
+                Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it.
+              </blockquote>
+              <figcaption className="who">Neil Munn · Former Global CEO, BBH</figcaption>
+            </figure>
+          </div>
+
+          {/* ── the offer, over the image ────────────────────────── */}
+          <section className="i-start">
+            <Image src="/images/momentum/01-tracks-2.jpg" alt="" aria-hidden fill sizes="100vw" />
+            <div className="i-scrim" aria-hidden />
+            <div className="i-in i-start-copy">
+              <Kicker>How we start</Kicker>
+              <p>
+                When you bring me in, it’s built around the work, not the headcount. I stay accountable end to end, and bring in trusted senior specialists only when you need it and the work demands it.
+              </p>
+              <p>
+                We can start small, a paid diagnostic or a fortnight of troubleshooting, and you come away with a straight read on what’s stuck and what I’d do first, so nobody has to bet on me without trying me first.
               </p>
             </div>
           </section>
-        </main>
 
+          {/* ── cream · the close, left aligned like everything else ─ */}
+          <div className="i-in">
+            <section className="i-close" data-r>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+              <h2>When important work needs to land, let’s talk.</h2>
+              <a className="i-btn" href="mailto:darren@dabhands.delivery?subject=Keeping%20important%20work%20moving">
+                Book a call →
+              </a>
+              <p className="i-alt">
+                <Link href="/">or go to the website →</Link>
+              </p>
+            </section>
+            <p className="i-private">Shared privately. Not listed on the site.</p>
+          </div>
+        </main>
       </div>
 
       <Footer variant="none" />
