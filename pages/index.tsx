@@ -116,26 +116,31 @@ export default function Home() {
               <div className="col-span-4 md:col-span-6 lg:col-span-5">
                 <div className="rise">
                   <p className="text-lg md:text-xl text-ink/70 mb-2.5">Hi, I’m Darren.</p>
+                  {/* The one Instrument line in this block, by decree (25 Aug).
+                      Everything below it is body scale in the sans. */}
                   <p className="font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.2] tracking-[-0.01em] text-ink mb-6 md:mb-7 max-w-[26ch]">
                     A fractional COO for digital-first agencies and growth-stage brands.
                   </p>
                 </div>
+                {/* The career sentence: background, must not compete. */}
+                <div className="rise" style={{ '--rise-delay': '0.14s' } as CSSProperties}>
+                  <p className="text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                    For most of my career I’ve worked at the point where ambition has to become reality. Inside agencies, alongside global brands, and running my own business. In the delivery detail and in the boardroom.
+                  </p>
+                </div>
                 {/* The promise line: the one sentence on the site where Darren is
-                    the subject, and the largest type in this block (still under the
-                    page h1). A spoken standfirst: serif, no decoration, once across
-                    the whole site. The nowrap spans are load-bearing: wraps may only
-                    land after "ambition", "you", "takes," or "happen." so no line
-                    ever ends on a conjunction or pronoun; sizes are tuned so the
-                    longest phrase clears this narrow column at every breakpoint.
-                    The second sentence answers the obvious objection to hiring one
-                    person, so it stays at the same weight rather than dropping to
-                    body scale. */}
-                <div className="rise" style={{ '--rise-delay': '0.08s' } as CSSProperties}>
-                  <p className="font-serif text-[28px] md:text-[30px] lg:text-[32px] xl:text-[40px] leading-[1.18] text-ink mb-7 md:mb-8">
-                    <span className="whitespace-nowrap">Hand me an ambition</span> <span className="whitespace-nowrap">and I’ll tell you</span>{' '}
-                    <span className="whitespace-nowrap">what it actually takes,</span> <span className="whitespace-nowrap">then make it happen.</span>{' '}
-                    <span className="whitespace-nowrap">And when the work</span> <span className="whitespace-nowrap">needs more than me,</span>{' '}
-                    <span className="whitespace-nowrap">I bring the senior bench</span> <span className="whitespace-nowrap">behind me.</span>
+                    the subject, and it still appears exactly once sitewide. It came
+                    out of Instrument on 25 Aug, so it now sets at body scale between
+                    two body paragraphs; full Ink rather than Ink/70 is the only
+                    thing still separating it from the prose around it. */}
+                <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
+                  <p className="mt-5 text-lg text-ink leading-relaxed max-w-[42ch]">
+                    Hand me an ambition and I’ll tell you what it actually takes, then make it happen. And when the work needs more than me, I bring the senior bench behind me.
+                  </p>
+                </div>
+                <div className="rise" style={{ '--rise-delay': '0.26s' } as CSSProperties}>
+                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
+                    Sometimes that means setting the direction. Usually it means getting an organisation to move together. Always it means making sure what comes out performs.
                   </p>
                 </div>
               </div>
@@ -201,7 +206,7 @@ export default function Home() {
             </FadeUp>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is turning it into the decisions and initiatives people act on this quarter.', payoff: 'I help make that turn without losing the intent behind it, and make sure it holds through the quarter.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is turning it into the decisions and initiatives people act on this quarter.', payoff: 'I help make that turn without losing the intent behind it, and make sure it holds through the work and the duration.' },
                 { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity compounds faster than capability, and it arrives with growth and change. Left alone, it becomes the thing the organisation runs on.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again, and more of what you spend comes back.' },
                 { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
               ].map((t, i) => (
