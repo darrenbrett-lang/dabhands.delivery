@@ -68,6 +68,16 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Unlisted method deck (/feel). Same belt-and-braces as /intro: an
+        // HTTP-level noindex behind the in-page meta, absent from nav,
+        // sitemap.xml and llms.txt, but the route resolves so the link can be
+        // shared directly. The source deck is private and confidential.
+        source: "/feel",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/images/(.*)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
