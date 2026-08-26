@@ -270,17 +270,17 @@ export default function Intro() {
           .i-bips button { transition:none; }
         }
         .i-bips button:focus-visible { outline:2px solid var(--gold-lt); outline-offset:4px; }
-        .i-scale { margin-top:40px; padding-top:26px; border-top:1px solid rgba(230,228,224,.22); max-width:64ch; }
-        .i-scale .i-kick { color:var(--gold-lt); margin-bottom:14px; }
-        .i-scale p { font-size:18px; line-height:1.6; color:rgba(230,228,224,.82); }
-        .i-scale p + p { margin-top:1em; }
+        /* Sits under the proof label, above the ticker. Quiet: the logos are
+           the proof, this is the sentence that frames them. ⚠ Money figures,
+           which the master brief rules out for the public site. */
+        .i-proofnote { margin-top:16px; font-size:17px; line-height:1.62; color:#3F312D; max-width:64ch; }
 
         /* The homepage marquee, by the owner's decision. The design brief allows
            it only with a hard mask and even gaps, so the band fades both edges
            into the paper: no more half-cut "D BOSS" at the boundary. */
         .i-logos { background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:54px 0; }
         .i-logomask {
-          margin-top:26px;
+          margin-top:34px;
           -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
           mask-image:linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
         }
@@ -365,8 +365,7 @@ export default function Intro() {
              both bigger and even as the carousel rotates. */
           .i-stage .slide { font-size:30px; letter-spacing:-.4px; max-width:none; }
           html.js .i-stage { min-height:7.2em; }
-          .i-scale { margin-top:32px; padding-top:22px; }
-          .i-scale p { font-size:17px; }
+          .i-proofnote { font-size:16px; max-width:none; }
           .i-bips { gap:12px; margin-top:34px; }
           .i-bips button { height:10px; width:10px; }
           .i-bips button[aria-current="true"] { width:34px; }
@@ -533,17 +532,6 @@ export default function Intro() {
                     />
                   ))}
                 </div>
-                {/* ⚠ Money figures again, ruled out by the master brief for the
-                    public site. Owner's explicit instruction, 26 Aug. */}
-                <div className="i-scale">
-                  <Kicker>What that has looked like</Kicker>
-                  <p>
-                    I’ve led delivery inside a £50m client relationship, and carried multimillion pound programmes that performed.
-                  </p>
-                  <p>
-                    I built the operations and product of my own agency from nothing, so I have run the machine as well as the work.
-                  </p>
-                </div>
               </div>
             </div>
           </section>
@@ -566,6 +554,9 @@ export default function Intro() {
           <section className="i-logos">
             <div className="i-in">
               <Kicker>Trusted where the stakes are high</Kicker>
+              <p className="i-proofnote" data-r>
+                I’ve led delivery inside a £50m client relationship, and carried multimillion pound programmes that performed. I built the operations and product of my own agency from nothing, so I have run the machine as well as the work.
+              </p>
             </div>
             <div className="i-logomask">
               <LogoTicker ariaLabel="Brands I’ve worked with" compact />
