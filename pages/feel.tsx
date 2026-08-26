@@ -457,6 +457,7 @@ export default function Feel() {
         }
 
         /* ── The full stop ───────────────────────────────────────────────── */
+        .f-stop .f-kick { margin-bottom:30px; }
         .f-stop .crown { height:58px; width:auto; display:block; margin:0 0 34px; user-select:none; }
         .f-stop .f-h { font-size:44px; line-height:1.14; letter-spacing:-.8px; max-width:24ch; }
 
@@ -1340,10 +1341,11 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 26 · The full stop. The crown is the punctuation: one line, a mark
-              above it, and nothing else on the surface. */}
-          <section className="f-slide f-paper" data-label="Full stop">
+          {/* 26 · The full stop. The crown is the punctuation: a kicker, the
+              mark, one line, and nothing else on the surface. */}
+          <section className="f-slide f-paper">
             <div className="f-in f-stop">
+              <p className="f-kick">Simply put</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="crown" src="/images/crown-mark.webp" alt="" aria-hidden="true" />
               <p className="f-h">Experiences create feelings that enable or inhibit progress.</p>
