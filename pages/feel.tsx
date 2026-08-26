@@ -39,6 +39,29 @@ const DIMENSIONS = [
   { label: 'Distinction', nums: ['11', '12', '13', '14', '15'] },
 ];
 
+/**
+ * The Score ring. The number in the centre IS the gold arc: the score is how
+ * much of the experience carries the Required Feeling, so the three segments
+ * sum to 100 and the legend maps onto them exactly.
+ *
+ * ⚠ This is the ONLY circle allowed anywhere in the brand. The gold dot and
+ * halo were retired from the lockup twice (8 July, 17 August) and hard rule 2
+ * still stands: no circles, dots or halos. The exception holds here because
+ * the ring carries data rather than identity. It must never move nearer the
+ * mark, into the masthead or footer, or down to favicon size, where a gold
+ * circle on charcoal simply is the retired logo.
+ */
+const SCORE = 74;
+
+const SEGMENTS = [
+  { label: 'Carries', note: 'high value', value: 74, colour: 'var(--gold)' },
+  { label: 'Weakens', note: 'watch', value: 18, colour: 'var(--clay)' },
+  { label: 'Breaks', note: 'value at stake', value: 8, colour: 'var(--bone)' },
+];
+
+const RING = { r: 100, stroke: 18, gap: 4 };
+const CIRC = 2 * Math.PI * RING.r;
+
 // The example pattern the deck describes: the promise is strong, but recovery
 // breaks the feeling.
 const PATTERN: { stage: string; verdict: 'Carries' | 'Weakens' | 'Breaks' }[] = [
@@ -421,13 +444,25 @@ export default function Feel() {
         .f-verdict.v2 { border-left-color:var(--clay); }
         .f-verdict.v3 { border-left-color:var(--ink); }
 
-        /* ── Slide 14: the score ─────────────────────────────────────────── */
+        /* ── Slide 14: the Score ring ────────────────────────────────────
+           The one sanctioned circle in the brand: a gauge, not a mark. See the
+           note on SEGMENTS. Swatches in the legend stay SQUARE on purpose,
+           because three gold dots in a column is the retired device. */
         .f-score { display:grid; grid-template-columns:auto 1fr; gap:64px; align-items:center; margin:48px 0 0; }
-        .f-score .num {
-          font-family:var(--font-serif); font-size:200px; line-height:.82;
-          letter-spacing:-6px;
+        .f-ring { position:relative; width:248px; height:248px; flex:none; }
+        .f-ring svg { width:100%; height:100%; display:block; overflow:visible; }
+        .f-ring .track { fill:none; stroke:rgba(245,241,234,.16); }
+        .f-ring circle { stroke-linecap:butt; }
+        .f-ring .num {
+          position:absolute; inset:0; margin:0;
+          display:flex; flex-direction:column; align-items:center; justify-content:center;
+          font-family:var(--font-serif); font-size:76px; line-height:.9;
+          letter-spacing:-2px;
         }
-        .f-score .num small { display:block; font-family:var(--font-sans); font-size:11px; letter-spacing:2.8px; text-transform:uppercase; font-weight:600; color:var(--gold-lt); margin:18px 0 0; letter-spacing:2.8px; }
+        .f-ring .num small {
+          font-family:var(--font-sans); font-size:9.5px; letter-spacing:2.4px;
+          text-transform:uppercase; font-weight:600; color:var(--gold-lt); margin:10px 0 0;
+        }
         .f-legend { display:grid; gap:14px; }
         .f-legend div { display:grid; grid-template-columns:16px 1fr; gap:14px; align-items:baseline; font-size:16px; }
         .f-legend i { display:block; height:16px; width:16px; border-radius:2px; }
@@ -628,7 +663,8 @@ export default function Feel() {
         @media (max-width:1100px) {
           .f-cover h1 { font-size:118px; letter-spacing:-4px; }
           .f-h { font-size:44px; letter-spacing:-.9px; }
-          .f-score .num { font-size:158px; }
+          .f-ring { width:212px; height:212px; }
+          .f-ring .num { font-size:66px; }
           .f-cols.c5 { grid-template-columns:repeat(3,1fr); }
           .f-funnels { grid-template-columns:1fr; gap:36px; }
         }
@@ -671,8 +707,10 @@ export default function Feel() {
           .f-new { grid-template-columns:repeat(2,1fr); gap:12px; }
           .f-new .step { padding-top:11px; }
           .f-new .step span { font-size:13px; }
-          .f-score { grid-template-columns:1fr; gap:34px; }
-          .f-score .num { font-size:120px; letter-spacing:-3px; }
+          .f-score { grid-template-columns:1fr; gap:28px; justify-items:start; }
+          .f-ring { width:184px; height:184px; }
+          .f-ring .num { font-size:58px; letter-spacing:-1.4px; }
+          .f-ring .num small { font-size:8.5px; margin-top:8px; }
           .f-map { margin:28px 0 0; }
           .f-map-head { display:none; }
           .f-map-row { grid-template-columns:1fr; gap:9px; padding:11px 0; }
@@ -1089,11 +1127,49 @@ export default function Feel() {
                 A weighted score shows how much of the experience is carrying the Required Feeling.
               </p>
               <div className="f-score">
-                <div className="num">74<small>FEEL Score</small></div>
+                <div className="f-ring">
+                  <svg
+                    viewBox="0 0 240 240"
+                    role="img"
+                    aria-label={`FEEL Score ${SCORE} out of 100. ${SEGMENTS.map((x) => `${x.label} ${x.value} per cent`).join(', ')}.`}
+                  >
+                    <circle className="track" cx="120" cy="120" r={RING.r} strokeWidth={RING.stroke} />
+                    <g transform="rotate(-90 120 120)">
+                      {SEGMENTS.reduce<{ out: React.ReactElement[]; acc: number }>(
+                        (state, seg) => {
+                          const len = (seg.value / 100) * CIRC;
+                          const dash = Math.max(len - RING.gap, 1);
+                          state.out.push(
+                            <circle
+                              key={seg.label}
+                              cx="120"
+                              cy="120"
+                              r={RING.r}
+                              fill="none"
+                              strokeWidth={RING.stroke}
+                              strokeDasharray={`${dash} ${CIRC - dash}`}
+                              strokeDashoffset={-state.acc}
+                              // A presentation attribute cannot resolve var();
+                              // the stroke has to come through style.
+                              style={{ stroke: seg.colour }}
+                            />,
+                          );
+                          state.acc += len;
+                          return state;
+                        },
+                        { out: [], acc: 0 },
+                      ).out}
+                    </g>
+                  </svg>
+                  <p className="num" aria-hidden="true">{SCORE}<small>FEEL Score</small></p>
+                </div>
                 <div className="f-legend">
-                  <div><i style={{ background: 'var(--gold)' }} /><span><b>Carries</b> · high value</span></div>
-                  <div><i style={{ background: 'var(--clay)' }} /><span><b>Weakens</b> · watch</span></div>
-                  <div><i style={{ background: 'var(--bone)' }} /><span><b>Breaks</b> · value at stake</span></div>
+                  {SEGMENTS.map((seg) => (
+                    <div key={seg.label}>
+                      <i style={{ background: seg.colour }} />
+                      <span><b>{seg.label}</b> · {seg.note}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
               <p className="f-close-line">
