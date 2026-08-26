@@ -41,7 +41,7 @@ const FILM: { embed: string | null; poster: string; alt: string } = {
 
 const TURNS = [
   { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work people can do, in an order, with someone accountable for each part.' },
-  { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that have to hand over to each other do it on time, without anyone chasing.' },
+  { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that have to hand over to each other do it on time, effectively and without anyone chasing.' },
   { from: 'Important work', to: 'real results.', note: 'The work lands with its value intact, and the business can see it in the numbers.' },
 ];
 
