@@ -62,6 +62,14 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Temporary private rehearsal tool (/script). Behind Basic Auth in
+        // proxy.ts; this is the belt-and-braces noindex on top.
+        source: "/script",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/signal-to-noise",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
