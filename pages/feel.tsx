@@ -315,6 +315,13 @@ export default function Feel() {
           margin:0; max-width:20ch;
         }
         .f-h.wide { max-width:26ch; }
+        /* Soft returns. Every two-line secondary line breaks at a sense point
+           (a sentence, a clause, a comma) rather than wherever the measure runs
+           out. Nine used to end on a two-word stub and several split a noun
+           phrase ("from first / feeling", "employee / behaviour"). Desktop
+           only: on a phone the measure is too narrow to honour these, and
+           forcing them there strands single words instead. */
+        @media (min-width:861px) { .f-h .brk, .f-lede .brk { display:block; } }
         .f-lede {
           font-size:20px; line-height:1.55; margin:24px 0 0; max-width:62ch;
           color:var(--graphite);
@@ -746,6 +753,47 @@ export default function Feel() {
           .f-pattern { margin:32px 0 0; }
         }
 
+        /* ── Short desktops ──────────────────────────────────────────────
+           The desktop scale assumes ~900px of viewport height. A 1024x768 iPad
+           in landscape, and most laptops once the browser chrome has taken its
+           cut, have far less, and five slides ran past the fold there. Same
+           trick as the phone step-down: step by HEIGHT, since the width is
+           already desktop. */
+        @media (min-width:861px) and (max-height:850px) {
+          .f-slide { padding:76px 0 78px; }
+          .f-h { font-size:42px; letter-spacing:-.9px; }
+          .f-lede { font-size:18.5px; margin-top:18px; }
+          .f-body { font-size:16.5px; margin-top:18px; }
+          .f-kick { margin-bottom:20px; }
+          .f-cols { margin:34px 0 0; gap:24px; }
+          .f-cols.c5 { gap:18px; }
+          .f-chips { margin:32px 0 0; }
+          .f-close-line { font-size:20px; margin:30px 0 0; padding-top:18px; }
+          .f-methods { margin:32px 0 0; }
+          .f-method { padding:13px 0; }
+          .f-method .m { font-size:23px; }
+          .f-funnels { margin:32px 0 0; gap:40px; }
+          .f-old li { padding:8px 0; }
+          .f-chain { margin:34px 0 0; }
+          .f-link .t { font-size:21px; }
+          .f-map { margin:30px 0 0; }
+          .f-map-row { padding:11px 0; }
+          .f-map-cell { padding:9px 0; font-size:20px; }
+          .f-score { margin:32px 0 0; gap:52px; }
+          .f-ring { width:206px; height:206px; }
+          .f-ring .num { font-size:64px; }
+          .f-pattern { margin:34px 0 0; }
+          .f-bar .fill.Carries { height:108px; }
+          .f-bar .fill.Weakens { height:60px; }
+          .f-model { margin:34px 0 0; }
+          .f-stack { margin:34px 0 0; }
+          .f-cover h1 { font-size:124px; letter-spacing:-4.5px; }
+          .f-cover .sub { font-size:30px; }
+          .f-cover .crown { height:54px; margin-bottom:30px; }
+          .f-stop .crown { height:50px; margin-bottom:28px; }
+          .f-stop .f-h { font-size:38px; }
+        }
+
         /* ── Short phones ────────────────────────────────────────────────
            The mobile scale above is tuned for a 844px-tall screen (iPhone 14/15
            and up). On a shorter one it does not fit, so the scale steps down
@@ -932,7 +980,8 @@ export default function Feel() {
               <p className="f-kick">The immovable truth</p>
               <h2 className="f-h">Human beings do not decide and then feel.</h2>
               <p className="f-lede">
-                They feel their way toward decisions, then use reason to explain, justify and refine them.
+                They feel their way toward decisions,
+                <span className="brk">then use reason to explain, justify and refine them.</span>
               </p>
               <p className="f-body">
                 That is not a marketing belief. It is a neurological fact: when emotional signalling is
@@ -984,7 +1033,8 @@ export default function Feel() {
               <p className="f-kick">The gap</p>
               <h2 className="f-h">The missing layer is emotional performance.</h2>
               <p className="f-lede">
-                Not what people saw. Not only what they did. What the experience made possible for them to feel.
+                Not what people saw. Not only what they did.
+                <span className="brk">What the experience made possible for them to feel.</span>
               </p>
               <p className="f-close-line">Does this moment make the brand feel like itself?</p>
             </div>
@@ -996,7 +1046,8 @@ export default function Feel() {
               <p className="f-kick">Where FEEL fits</p>
               <h2 className="f-h wide">The great methods own one public question.</h2>
               <p className="f-lede">
-                Their power comes from making one invisible management problem visible enough to act on.
+                Their power comes from making one invisible management problem
+                <span className="brk">visible enough to act on.</span>
               </p>
               <div className="f-methods">
                 {[
@@ -1019,9 +1070,13 @@ export default function Feel() {
           <section className="f-slide f-paper">
             <div className="f-in">
               <p className="f-kick">The emotional funnel</p>
-              <h2 className="f-h wide">The marketing funnel is dead. There is an emotional funnel.</h2>
+              <h2 className="f-h wide">
+                The marketing funnel is dead.{' '}
+                <span className="brk">Long live the emotional funnel.</span>
+              </h2>
               <p className="f-lede">
-                People do not move neatly from awareness to conversion. They move from first feeling to lasting belief.
+                People do not move neatly from awareness to conversion.
+                <span className="brk">They move from first feeling to lasting belief.</span>
               </p>
               <div className="f-funnels">
                 <div className="f-old">
@@ -1055,7 +1110,8 @@ export default function Feel() {
               <p className="f-kick">Place in the world</p>
               <h2 className="f-h">FEEL sits between promise and performance.</h2>
               <p className="f-lede">
-                It translates brand strategy into an emotional operating standard for the lived experience.
+                It translates brand strategy into an emotional operating standard
+                <span className="brk">for the lived experience.</span>
               </p>
               <div className="f-chain">
                 {[
@@ -1099,7 +1155,8 @@ export default function Feel() {
               <p className="f-kick">The standard</p>
               <h2 className="f-h">Required Feeling is the emotional spec.</h2>
               <p className="f-lede">
-                It turns a brand idea into a testable standard for product, service, content, sales and support.
+                It turns a brand idea into a testable standard
+                <span className="brk">for product, service, content, sales and support.</span>
               </p>
               <div className="f-chips">
                 <span className="f-chip lead">trusted</span>
@@ -1144,7 +1201,8 @@ export default function Feel() {
               <p className="f-kick">How the map works</p>
               <h2 className="f-h wide">The fifteen observations ask one practical question.</h2>
               <p className="f-lede">
-                At this stage, through this dimension, does the moment carry the Required Feeling?
+                At this stage, through this dimension,
+                <span className="brk">does the moment carry the Required Feeling?</span>
               </p>
               <div className="f-cols c3">
                 {[
@@ -1178,7 +1236,8 @@ export default function Feel() {
               <p className="f-kick">FEEL Score</p>
               <h2 className="f-h">FEEL Score makes emotion discussable.</h2>
               <p className="f-lede">
-                A weighted score shows how much of the experience is carrying the Required Feeling.
+                A weighted score shows how much of the experience
+                <span className="brk">is carrying the Required Feeling.</span>
               </p>
               <div className="f-score">
                 <div className="f-ring">
@@ -1238,7 +1297,8 @@ export default function Feel() {
               <p className="f-kick">FEEL Pattern</p>
               <h2 className="f-h">FEEL Pattern shows where emotion is going.</h2>
               <p className="f-lede">
-                The score tells you how much. The pattern tells you where, why and what to do next.
+                The score tells you how much.
+                <span className="brk">The pattern tells you where, why and what to do next.</span>
               </p>
               <div className="f-pattern">
                 {PATTERN.map((p) => (
@@ -1261,7 +1321,8 @@ export default function Feel() {
               <p className="f-kick">FEEL Value</p>
               <h2 className="f-h">FEEL Value turns emotion into investment logic.</h2>
               <p className="f-lede">
-                It identifies which emotional breaks expose the most revenue, retention, margin, trust or advocacy.
+                It identifies which emotional breaks expose the most
+                <span className="brk">revenue, retention, margin, trust or advocacy.</span>
               </p>
               <div className="f-cols c5">
                 {[
@@ -1378,7 +1439,8 @@ export default function Feel() {
               <p className="f-kick">From insight to action</p>
               <h2 className="f-h wide">Interventions change the moment, not just the message.</h2>
               <p className="f-lede">
-                The work can show up in product, service, UX, content, environments, employee behaviour and operating rhythm.
+                The work can show up in product, service, UX, content,
+                <span className="brk">environments, employee behaviour and operating rhythm.</span>
               </p>
               <div className="f-chips">
                 <span className="f-chip">Remove emotional friction</span>
@@ -1442,8 +1504,9 @@ export default function Feel() {
               <p className="f-kick">Why it matters now</p>
               <h2 className="f-h wide">Optimisation has made sameness scalable.</h2>
               <p className="f-lede">
-                Automation, templates and performance systems make experiences faster to ship and easier to
-                copy. Feeling becomes the harder advantage.
+                Automation, templates and performance systems
+                <span className="brk">make experiences faster to ship and easier to copy.</span>
+                <span className="brk">Feeling becomes the harder advantage.</span>
               </p>
               <p className="f-close-line">
                 Efficiency will keep improving. Distinct emotional performance will not happen by accident.
@@ -1457,7 +1520,8 @@ export default function Feel() {
               <p className="f-kick">Why it holds up</p>
               <h2 className="f-h wide">What makes FEEL hard to dismiss.</h2>
               <p className="f-lede">
-                It is grounded in strategy, observed in reality, expressed in plain language and linked to value.
+                It is grounded in strategy, observed in reality,
+                <span className="brk">expressed in plain language and linked to value.</span>
               </p>
               <div className="f-cols c4">
                 {[
