@@ -232,6 +232,10 @@ export default function Intro() {
         .i-turns .into { font-style:italic; }
         .i-turns .to { color:var(--gold); }
         .i-turns .note { font-family:var(--font-sans); font-size:17px; line-height:1.62; color:#3F312D; max-width:40ch; padding-bottom:.34em; }
+        /* The payoff: what the three turns add up to. Serif italic, sized
+           between the notes and the statements so it closes the section
+           without competing with them. */
+        .i-payoff { margin-top:54px; font-family:var(--font-serif); font-style:italic; font-size:30px; line-height:1.34; letter-spacing:-.4px; max-width:52ch; }
         /* Matched to the lede: heading at the serif statement size, body in the
            Manrope register beneath it. */
         /* 42px, not the lede's 56px: "An entrepreneur's engine." needs 447px at
@@ -354,6 +358,7 @@ export default function Intro() {
              261px here, which still clears a 320px phone. */
           .i-turns h3 { font-size:38px; letter-spacing:-1px; }
           .i-turns .note { font-size:16px; margin-top:12px; padding-bottom:0; max-width:none; }
+          .i-payoff { margin-top:36px; font-size:21px; letter-spacing:-.2px; max-width:none; }
           /* 30px: at 346px none of the four can hold three lines evenly (25px
              gives 3/4/4/3), but at 30px all four set to four lines, which is
              both bigger and even as the carousel rotates. */
@@ -483,6 +488,9 @@ export default function Intro() {
                   </div>
                 ))}
               </div>
+              <p className="i-payoff" data-r>
+                All three pay off in the same two places. More margin in how you operate, and work that reaches the customer strong enough to sell.
+              </p>
             </section>
 
           </div>
