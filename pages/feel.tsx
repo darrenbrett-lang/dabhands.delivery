@@ -672,73 +672,127 @@ export default function Feel() {
           .f-in { padding:0 26px; }
           /* Dense slides top-align rather than centring, so a slide that has to
              run past the fold still opens on its kicker. */
-          .f-slide { padding:80px 0 92px; align-items:flex-start; }
-          .f { font-size:16px; }
-          .f-cover h1 { font-size:82px; letter-spacing:-2.5px; }
-          .f-cover .sub { font-size:25px; }
-          .f-cover .crown { height:48px; }
-          .f-h { font-size:30px; letter-spacing:-.4px; max-width:none; }
-          .f-lede { font-size:17px; margin-top:18px; }
-          .f-body { font-size:16px; margin-top:18px; }
+          .f-slide { padding:66px 0 90px; align-items:flex-start; }
+          .f { font-size:17px; }
+          .f-cover h1 { font-size:90px; letter-spacing:-2.8px; }
+          .f-cover .sub { font-size:27px; }
+          .f-cover .crown { height:52px; }
+          .f-h { font-size:33px; letter-spacing:-.45px; max-width:none; }
+          .f-lede { font-size:18.5px; margin-top:18px; }
+          .f-body { font-size:17px; margin-top:18px; }
           .f-kick { margin-bottom:18px; }
           .f-cols { gap:18px; margin:28px 0 0; }
-          .f-col { padding-top:13px; }
-          .f-col p { font-size:14px; }
-          .f-col .n { font-size:22px; margin-bottom:7px; }
+          .f-col { padding-top:14px; }
+          .f-col h3 { font-size:12.5px; }
+          .f-col p { font-size:15.5px; }
+          .f-col .n { font-size:24px; margin-bottom:7px; }
           .f-chips { gap:8px; margin:28px 0 0; }
-          .f-chip { font-size:13px; padding:7px 15px; }
+          .f-chip { font-size:14.5px; padding:8px 17px; }
           .f-cols.c3, .f-cols.c4, .f-cols.c5, .f-cols.c6 { grid-template-columns:repeat(2,1fr); }
+          /* "01 Define" on one line rather than two. Only the c4 step grid has
+             a numeral and a heading together. */
+          .f-cols.c4 .f-col .n { display:inline; margin:0 7px 0 0; font-size:19px; }
+          .f-cols.c4 .f-col h3 { display:inline; }
           .f-cols.c2 { grid-template-columns:1fr; }
           .f-chain { grid-auto-flow:row; gap:14px; margin:28px 0 0; }
           .f-link { padding:0; }
           .f-link::before { margin-bottom:11px; }
-          .f-link .t { font-size:20px; margin-bottom:5px; }
-          .f-link .d { font-size:13px; }
+          .f-link .t { font-size:22px; margin-bottom:5px; }
+          .f-link .d { font-size:14.5px; }
           .f-methods { margin:28px 0 0; }
           .f-method { grid-template-columns:1fr; gap:4px; padding:11px 0; }
-          .f-method .m { font-size:20px; }
-          .f-method .q { font-size:14px; }
-          .f-funnels { gap:18px; margin:24px 0 0; }
-          .f-lab { margin-bottom:10px; }
+          .f-method .m { font-size:22px; }
+          .f-method .q { font-size:15.5px; }
+          .f-funnels { gap:14px; margin:18px 0 0; }
+          .f-lab { margin-bottom:8px; }
           /* The retired funnel goes to one struck-through row on a phone: it is
              the thing being dismissed, so it does not deserve four rows. */
           .f-old ul { display:flex; flex-wrap:wrap; gap:0 16px; }
-          .f-old li { padding:2px 0; font-size:15px; border-bottom:0; }
-          .f-new { grid-template-columns:repeat(2,1fr); gap:12px; }
-          .f-new .step { padding-top:11px; }
-          .f-new .step span { font-size:13px; }
+          .f-old li { padding:1px 0; font-size:16px; border-bottom:0; }
+          .f-new { grid-template-columns:repeat(2,1fr); gap:10px; }
+          .f-new .step { padding-top:9px; }
+          .f-new .step span { font-size:14.5px; }
           .f-score { grid-template-columns:1fr; gap:28px; justify-items:start; }
-          .f-ring { width:184px; height:184px; }
-          .f-ring .num { font-size:58px; letter-spacing:-1.4px; }
+          .f-ring { width:200px; height:200px; }
+          .f-ring .num { font-size:63px; letter-spacing:-1.5px; }
           .f-ring .num small { font-size:8.5px; margin-top:8px; }
           .f-map { margin:28px 0 0; }
           .f-map-head { display:none; }
           .f-map-row { grid-template-columns:1fr; gap:9px; padding:11px 0; }
-          .f-map-lab { font-size:20px; }
+          .f-map-lab { font-size:22px; }
           .f-map-cells { gap:7px; }
-          .f-map-cell { padding:7px 0; font-size:16px; }
-          .f-map-cell i { display:block; font-style:normal; font-family:var(--font-sans); font-size:9px; letter-spacing:1.1px; text-transform:uppercase; opacity:.6; margin:0 0 4px; }
+          .f-map-cell { padding:8px 0; font-size:18px; }
+          .f-map-cell i { display:block; font-style:normal; font-family:var(--font-sans); font-size:9.5px; letter-spacing:1.1px; text-transform:uppercase; opacity:.6; margin:0 0 4px; }
           .f-pattern { gap:8px; }
-          .f-bar b { font-size:12px; }
-          .f-bar span { font-size:11px; }
+          .f-bar b { font-size:13.5px; }
+          .f-bar span { font-size:12.5px; }
           .f-model { display:grid; grid-template-columns:1fr; }
           .f-op { display:none; }
           .f-term { padding:14px 0 0; }
           .f-mast { padding:20px 26px; }
-          .f-mast .mark { gap:8px; font-size:17px; }
-          .f-mast .crown { height:21px; }
+          .f-mast .mark { gap:8px; font-size:18px; }
+          .f-mast .crown { height:22px; }
           .f-mast .who { display:none; }
           .f-count { left:26px; bottom:20px; }
           .f-arrows { right:26px; bottom:16px; }
           .f-conf { bottom:64px; font-size:8.5px; letter-spacing:.8px; padding:0 26px; }
           .f-pips { display:none; }
           .f-tray { display:none; }
-          .f-close-line { font-size:17px; margin:26px 0 0; padding-top:16px; }
-          .f-stop .crown { height:44px; margin-bottom:26px; }
-          .f-stop .f-h { font-size:28px; letter-spacing:-.3px; }
+          .f-close-line { font-size:18.5px; margin:22px 0 0; padding-top:14px; }
+          .f-stop .crown { height:48px; margin-bottom:26px; }
+          .f-stop .f-h { font-size:31px; letter-spacing:-.35px; }
           .f-conf .rr { display:none; }
-          .f-verdict h3 { font-size:24px; }
+          .f-verdict h3 { font-size:26px; }
           .f-pattern { margin:32px 0 0; }
+        }
+
+        /* ── Short phones ────────────────────────────────────────────────
+           The mobile scale above is tuned for a 844px-tall screen (iPhone 14/15
+           and up). On a shorter one it does not fit, so the scale steps down
+           here rather than the deck being tuned down for everybody. Width alone
+           cannot detect this: a 390x844 and a 375x667 are the same width and
+           177px apart in height. A few of the densest slides still run past the
+           fold below this and are allowed to scroll; they are top-aligned and
+           snap-stop at their own top, so nothing is lost, and crushing the type
+           on the smallest screens would be the worse trade. */
+        @media (max-width:860px) and (max-height:820px) {
+          .f-slide { padding:56px 0 82px; }
+          .f-h { font-size:29px; letter-spacing:-.35px; }
+          .f-lede { font-size:17px; margin-top:14px; }
+          .f-body { font-size:16px; margin-top:14px; }
+          .f-kick { margin-bottom:14px; }
+          .f-col p { font-size:14.5px; }
+          .f-col .n { font-size:21px; }
+          .f-cols { gap:15px; margin:22px 0 0; }
+          .f-chips { gap:7px; margin:22px 0 0; }
+          .f-chip { font-size:13.5px; padding:7px 15px; }
+          .f-close-line { font-size:17px; margin:18px 0 0; padding-top:12px; }
+          .f-cover h1 { font-size:74px; letter-spacing:-2.4px; }
+          .f-cover .sub { font-size:23px; }
+          .f-cover .crown { height:44px; margin-bottom:26px; }
+          .f-cover .say { font-size:17px; margin-top:18px; }
+          .f-stop .f-h { font-size:27px; }
+          .f-stop .crown { height:40px; margin-bottom:20px; }
+          .f-ring { width:168px; height:168px; }
+          .f-ring .num { font-size:54px; }
+          .f-score { gap:22px; }
+          .f-map { margin:22px 0 0; }
+          .f-map-row { padding:9px 0; }
+          .f-map-cell { padding:6px 0; font-size:16px; }
+          .f-map-lab { font-size:20px; }
+          .f-method { padding:9px 0; }
+          .f-method .m { font-size:20px; }
+          .f-method .q { font-size:14.5px; }
+          .f-methods { margin:22px 0 0; }
+          .f-chain { gap:12px; margin:22px 0 0; }
+          .f-link .t { font-size:20px; }
+          .f-funnels { margin:16px 0 0; }
+          .f-new .step { padding-top:8px; }
+          .f-new .step span { font-size:13.5px; }
+          .f-verdict h3 { font-size:24px; }
+          .f-pattern { margin:24px 0 0; }
+          .f-term { padding:11px 0 0; }
+          .f-conf { bottom:56px; }
         }
 
         /* ── Print: one slide per page, no chrome ────────────────────────── */
@@ -1432,6 +1486,8 @@ export default function Feel() {
           {/* 27 · Close */}
           <section className="f-slide f-charcoal" data-label="Close">
             <div className="f-in f-cover">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="crown" src="/images/DabHands_crown_white.png" alt="" aria-hidden="true" />
               <h2 className="f-h" style={{ fontSize: 'clamp(32px, 5.4vw, 60px)', maxWidth: '22ch' }}>
                 Stop asking only what happened. Start measuring what it made people feel.
               </h2>
