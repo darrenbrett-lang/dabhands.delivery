@@ -241,6 +241,7 @@ export default function Feel() {
         title="FEEL · The Emotional Experience Method | DAB Hands"
         description="A performance layer for how brands make people feel in digital. Required Feeling, the FEEL Map, the FEEL Score and the value at stake."
         path="/feel"
+        image="/og-feel.png"
         noindex
       />
 
