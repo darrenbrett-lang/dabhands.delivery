@@ -31,7 +31,7 @@ type Phase = 'setup' | 'preroll' | 'run' | 'fading' | 'black';
 const STORE_SETTINGS = 'dabhands.script.settings.v1';
 const STORE_SCORE = 'dabhands.script.score.v1';
 
-const PACES = [0.8, 0.9, 0.95, 1.0, 1.1, 1.2];
+const PACES = [0.8, 0.9, 0.95, 0.97, 1.0, 1.1, 1.2];
 /* Cross-dissolve between thoughts, in ms. 150 reads almost as a cut, 1200 is
    a slow bleed where the two thoughts overlap on screen. */
 const FADES = [150, 300, 420, 700, 1200];
@@ -307,7 +307,11 @@ export default function ScriptDirector() {
         .s-start:hover { box-shadow:inset 0 0 0 1px var(--gold); }
         .s-note { margin-top:40px; font-size:11px; letter-spacing:2.8px; text-transform:uppercase; color:#4C4A47; }
         .s-opts { margin-top:38px; display:flex; gap:22px; flex-wrap:wrap; justify-content:center; }
-        .s-opt { display:flex; gap:6px; align-items:center; }
+        /* Wraps, so a row of pace or dissolve buttons can never run off the
+           edges of a phone held under the lens. At 390px the seven pace
+           buttons measure 503px, and without this the first and last are
+           unreachable on both sides. */
+        .s-opt { display:flex; gap:6px; align-items:center; flex-wrap:wrap; justify-content:center; }
         .s-opt > span { font-size:10px; letter-spacing:2.2px; text-transform:uppercase; color:#5A5854; margin-right:4px; }
 
         /* Editor */
