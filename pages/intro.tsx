@@ -273,6 +273,7 @@ export default function Intro() {
         .i-scale { margin-top:40px; padding-top:26px; border-top:1px solid rgba(230,228,224,.22); max-width:64ch; }
         .i-scale .i-kick { color:var(--gold-lt); margin-bottom:14px; }
         .i-scale p { font-size:18px; line-height:1.6; color:rgba(230,228,224,.82); }
+        .i-scale p + p { margin-top:1em; }
 
         /* The homepage marquee, by the owner's decision. The design brief allows
            it only with a hard mask and even gaps, so the band fades both edges
@@ -537,7 +538,10 @@ export default function Intro() {
                 <div className="i-scale">
                   <Kicker>What that has looked like</Kicker>
                   <p>
-                    I’ve led delivery inside a £50m client relationship, and carried multimillion pound programmes for much of my career. I built the operations of my own agency from nothing, so I have run the machine as well as the work.
+                    I’ve led delivery inside a £50m client relationship, and carried multimillion pound programmes that performed.
+                  </p>
+                  <p>
+                    I built the operations and product of my own agency from nothing, so I have run the machine as well as the work.
                   </p>
                 </div>
               </div>
