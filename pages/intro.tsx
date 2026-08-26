@@ -56,6 +56,18 @@ const SITUATIONS = [
 
 // Trimmed to an even measure (72 to 74 characters) so the three panels set to
 // the same depth.
+// TEMPORARY — the spoken script, shown on the page for review only. Goes with
+// the .i-script disclosure when the film is recorded.
+const SCRIPT = [
+  'Hi, I’m Darren. Man and boy, I’ve been understanding how to make things go, and work better.',
+  'I’m good at keeping lots of complex things in orbit and holding it all well. I bring both sides of the brain to work in equal measure, which makes me a great problem solver. I’m someone who can jump from functional and logical to visionary and conceptual in a moment.',
+  'I’ve spent my working life at the point where ambition has to become reality inside tier-one agencies working at scale with major brands. Then I co-founded an agency of my own and ran the operation for seven years, so I’ve carried the P&L as well as the plan.',
+  'And the thing I keep seeing is this: organisations rarely lack good thinking, they struggle to preserve its impact on the way out, traded away in the systems and the misalignments people don’t manage.',
+  'I know what it takes to develop the right operating system for a business, coordinate that through an organisation, and make sure work passes through it right.',
+  'I don’t just sweat the mechanics. I’ve got a healthy obsession with elevating the digital work we put into the world, so it makes people feel something and act upon it. I believe we can cut through a lot of the noise when we help people feel first. Not because it’s nicer. Because it sells, and that’s what all of this is for.',
+  'If something important needs to land, and it isn’t, let’s talk. We can start small. Nobody has to bet on me without trying me first. A little of me goes a long way. I work to impact, not to burn hours. Let’s make things better, and make some progress and money. I’d love to hear from you.',
+];
+
 const ABOUT = [
   { lead: 'A delivery leader.', rest: 'Twenty years of depth in complex, multi-track delivery that had to land.' },
   { lead: 'A digital operator.', rest: 'I hold my own with strategy, creative and technology, and make work better.' },
@@ -198,6 +210,7 @@ export default function Intro() {
         @media (prefers-reduced-motion: reduce) { .i-script summary .arw { transition:none; } }
         .i-sheet { background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--gold); padding:44px 48px; max-width:820px; margin-top:20px; }
         .i-sheet p { font-family:var(--font-serif); font-size:19px; line-height:1.72; color:#3F312D; }
+        .i-sheet p + p { margin-top:1.05em; }
 
         .i-lede { padding:0 0 84px; }
         .i-lede .name { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.06; letter-spacing:-1.6px; color:var(--blue); max-width:1000px; }
@@ -438,9 +451,7 @@ export default function Intro() {
                 <span aria-hidden className="arw" />
               </summary>
               <div className="i-sheet">
-                <p>
-                  “Hi, I’m Darren. Man and boy, I’ve been understanding how to make things go, and work better. I seem to be great at keeping lots of complex things in orbit and holding it all well. I bring both sides of the brain to work in equal measure, which makes me a great problem solver. I’m someone who can jump from functional and logical to visionary and conceptual in a moment. I’ve spent my working life at the point where ambition has to become reality inside tier-one agencies working at scale with major brands. And the thing I keep seeing is this: organisations rarely lack good thinking, they struggle to preserve its impact on the way out, traded away in the systems and the misalignments people don’t manage. I’ve got a healthy obsession with what it takes to elevate the digital work we put into the world, to make people feel something and act upon it. I believe we can cut through a lot of the noise when we help people feel first. If something important needs to land, and it isn’t, let’s talk. We can start small. Nobody has to bet on me without trying me first. A little of me goes a long way. I work to impact, not to burn hours. Let’s make things better, and make some progress and money. I’d love to hear from you.”
-                </p>
+                {SCRIPT.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
               </div>
             </details>
             {/* END TEMPORARY script block */}
