@@ -61,7 +61,7 @@ const SITUATIONS = [
 // the .i-script disclosure when the film is recorded.
 const SCRIPT = [
   'Hi, I’m Darren. Man and boy, I’ve been understanding how to make things go, and work better.',
-  'I’m good at keeping lots of complex things in orbit and holding it all well. I bring both sides of the brain to work in equal measure, which makes me a great problem solver. I’m someone who can jump from functional and logical to visionary and conceptual in a moment.',
+  'I’m good at keeping lots of complex things in orbit and holding it all well. I bring both sides of the brain to work in equal measure; I can jump from functional and logical to visionary and conceptual in a moment, which makes me a great problem solver.',
   'I’ve spent my working life at the point where ambition has to become reality inside tier-one agencies working at scale with major brands. Then I co-founded an agency of my own and ran the operation for seven years, so I’ve carried the P&L as well as the plan.',
   'And the thing I keep seeing is this: organisations rarely lack good thinking, they struggle to preserve its impact on the way out, traded away in the systems and the misalignments people don’t manage.',
   'I know what it takes to develop the right operating system for a business, coordinate that through an organisation, and make sure work passes through it right.',
