@@ -74,31 +74,67 @@ const ABOUT = [
   { lead: 'An entrepreneur’s engine.', rest: 'I’ve carried my own P&L, found opportunities and turned them into meaningful revenue.' },
 ];
 
+const QUOTES = [
+  {
+    quote: 'Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it.',
+    name: 'Neil Munn',
+    role: 'Former Global CEO, BBH',
+  },
+  {
+    quote: 'We had spent most of the budget and nobody could tell us what finishing would cost. Six weeks after Darren arrived we had a number we trusted, and the decision we made off the back of it was worth more than the whole engagement.',
+    name: 'Dave Wallace',
+    role: 'Former Global COO, Mirum',
+  },
+  {
+    quote: 'He doesn’t just deliver. He protects the integrity of the work as it moves through the system. That’s rare.',
+    name: 'Anthony Mahon',
+    role: 'Former Global Membership Director, HUGO BOSS',
+  },
+];
+
 const Kicker = ({ children }: { children: string }) => <p className="i-kick">{children}</p>;
 
-export default function Intro() {
-  const [playing, setPlaying] = useState(false);
-
-  // "When leaders bring me in" rotates one at a time. Auto-advance pauses on
-  // hover, on keyboard focus and while a finger is down, and does not run at
-  // all under prefers-reduced-motion — the numerals still work as navigation.
-  const [slide, setSlide] = useState(0);
+/** Shared carousel behaviour: auto-advance that pauses on hover, on keyboard
+ *  focus and while a finger is down, plus swipe. Never auto-advances under
+ *  prefers-reduced-motion — the pips still work as navigation. */
+function useCarousel(count: number, interval: number) {
+  const [index, setIndex] = useState(0);
   const [held, setHeld] = useState(false);
   const touchX = useRef<number | null>(null);
 
   useEffect(() => {
     if (held) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const t = window.setInterval(() => setSlide((i) => (i + 1) % SITUATIONS.length), 5200);
+    const t = window.setInterval(() => setIndex((i) => (i + 1) % count), interval);
     return () => window.clearInterval(t);
-  }, [held]);
+  }, [held, count, interval]);
 
-  const swipe = (endX: number) => {
-    const startX = touchX.current;
-    touchX.current = null;
-    if (startX === null || Math.abs(endX - startX) < 44) return;
-    setSlide((i) => (endX < startX ? (i + 1) % SITUATIONS.length : (i - 1 + SITUATIONS.length) % SITUATIONS.length));
+  const handlers = {
+    onMouseEnter: () => setHeld(true),
+    onMouseLeave: () => setHeld(false),
+    onFocusCapture: () => setHeld(true),
+    onBlurCapture: () => setHeld(false),
+    onTouchStart: (e: React.TouchEvent) => { setHeld(true); touchX.current = e.touches[0].clientX; },
+    onTouchEnd: (e: React.TouchEvent) => {
+      const startX = touchX.current;
+      touchX.current = null;
+      setHeld(false);
+      if (startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (Math.abs(endX - startX) < 44) return;
+      setIndex((i) => (endX < startX ? (i + 1) % count : (i - 1 + count) % count));
+    },
   };
+
+  return { index, setIndex, handlers };
+}
+
+export default function Intro() {
+  const [playing, setPlaying] = useState(false);
+
+  const reasons = useCarousel(SITUATIONS.length, 5200);
+  // Quotes get longer than the reasons, so they hold a little longer.
+  const quotes = useCarousel(QUOTES.length, 6800);
 
   // One IntersectionObserver for every [data-r]. The `.js` class on <html> arms
   // the hidden state, so with JavaScript off nothing is ever hidden. The 1.6s
@@ -291,6 +327,16 @@ export default function Intro() {
         .i-qt .qm { font-family:var(--font-serif); font-size:70px; line-height:.5; color:var(--gold); display:block; margin-bottom:26px; }
         .i-qt blockquote { font-family:var(--font-serif); font-style:italic; font-size:38px; line-height:1.28; max-width:960px; }
         .i-qt .who { margin-top:28px; font-size:12px; letter-spacing:2.2px; text-transform:uppercase; color:var(--stone); }
+        .i-qstage { display:grid; gap:40px; }
+        html.js .i-qstage { grid-template-areas:"q"; gap:0; }
+        html.js .i-qstage .qslide { grid-area:q; opacity:0; pointer-events:none; transition:opacity .9s ease; }
+        html.js .i-qstage .qslide.on { opacity:1; pointer-events:auto; }
+        .i-qt .i-bips { margin-top:40px; }
+        .i-bips-light button { background:color-mix(in srgb, var(--gold) 30%, transparent); }
+        .i-bips-light button:hover { background:color-mix(in srgb, var(--gold) 62%, transparent); }
+        .i-bips-light button[aria-current="true"] { background:var(--gold); }
+        .i-bips-light button:focus-visible { outline-color:var(--gold); }
+        @media (prefers-reduced-motion: reduce) { html.js .i-qstage .qslide { transition:none; } }
 
         /* The offer sits over the photograph. The scrim is a blue tint rather
            than black, so the band still belongs to the palette, and it is heavy
@@ -499,23 +545,13 @@ export default function Intro() {
           <section className="i-when">
             <div className="i-in">
               <Kicker>When leaders bring me in</Kicker>
-              <div
-                data-r
-                aria-roledescription="carousel"
-                aria-label="When leaders bring me in"
-                onMouseEnter={() => setHeld(true)}
-                onMouseLeave={() => setHeld(false)}
-                onFocusCapture={() => setHeld(true)}
-                onBlurCapture={() => setHeld(false)}
-                onTouchStart={(e) => { setHeld(true); touchX.current = e.touches[0].clientX; }}
-                onTouchEnd={(e) => { swipe(e.changedTouches[0].clientX); setHeld(false); }}
-              >
+              <div data-r aria-roledescription="carousel" aria-label="When leaders bring me in" {...reasons.handlers}>
                 <div className="i-stage">
                   {SITUATIONS.map((sit, i) => (
                     <p
                       key={sit}
-                      className={`slide${i === slide ? ' on' : ''}`}
-                      aria-hidden={i !== slide}
+                      className={`slide${i === reasons.index ? ' on' : ''}`}
+                      aria-hidden={i !== reasons.index}
                     >
                       {sit}
                     </p>
@@ -526,8 +562,8 @@ export default function Intro() {
                     <button
                       key={sit}
                       type="button"
-                      onClick={() => setSlide(i)}
-                      aria-current={i === slide}
+                      onClick={() => reasons.setIndex(i)}
+                      aria-current={i === reasons.index}
                       aria-label={`Show reason ${i + 1} of ${SITUATIONS.length}`}
                     />
                   ))}
@@ -565,13 +601,28 @@ export default function Intro() {
 
           {/* ── cream · the testimonial, in the open ─────────────── */}
           <div className="i-in">
-            <figure className="i-qt" data-r>
+            <div className="i-qt" data-r aria-roledescription="carousel" aria-label="In their words" {...quotes.handlers}>
               <span className="qm" aria-hidden>“</span>
-              <blockquote>
-                Darren has a brilliant ability to operationalise strategy. He quickly grasps the intent behind an idea, then builds the practical ways of working that allow an organisation to deliver on it.
-              </blockquote>
-              <figcaption className="who">Neil Munn · Former Global CEO, BBH</figcaption>
-            </figure>
+              <div className="i-qstage">
+                {QUOTES.map((q, i) => (
+                  <figure key={q.name} className={`qslide${i === quotes.index ? ' on' : ''}`} aria-hidden={i !== quotes.index}>
+                    <blockquote>{q.quote}</blockquote>
+                    <figcaption className="who">{q.name} · {q.role}</figcaption>
+                  </figure>
+                ))}
+              </div>
+              <div className="i-bips i-bips-light">
+                {QUOTES.map((q, i) => (
+                  <button
+                    key={q.name}
+                    type="button"
+                    onClick={() => quotes.setIndex(i)}
+                    aria-current={i === quotes.index}
+                    aria-label={`Show testimonial ${i + 1} of ${QUOTES.length}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* ── the offer, over the image ────────────────────────── */}
