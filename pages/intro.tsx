@@ -168,7 +168,7 @@ export default function Intro() {
           LinkedIn and Slack, which frame at 1.91:1. */}
       <SeoMeta
         title="An introduction to Darren Brett, fractional COO"
-        description="Keeping important work moving. Part delivery lead, part digital operator, all entrepreneur’s engine."
+        description="Keeping important work moving. Part delivery leader, part digital operator, all entrepreneur’s engine."
         path="/intro"
         image="/og-intro.jpg"
         noindex
@@ -455,7 +455,7 @@ export default function Intro() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
               <h1>Keeping important work moving.</h1>
-                <p className="sub">I’m part delivery lead, part digital operator, all entrepreneur’s engine.</p>
+                <p className="sub">I’m part delivery leader, part digital operator, all entrepreneur’s engine.</p>
               </div>
             </div>
           </section>
