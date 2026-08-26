@@ -42,7 +42,7 @@ const FILM: { embed: string | null; poster: string; alt: string } = {
 const TURNS = [
   { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work people can do, in an order, with someone accountable for each part.' },
   { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that have to hand over to each other do it on time, effectively and without anyone chasing.' },
-  { from: 'Important work', to: 'real results.', note: 'The work reaches the customer with its power intact, and it sells the way it was meant to.' },
+  { from: 'Important work', to: 'real results.', note: 'What reaches the customer is what you decided to build, and it returns what you expected of it.' },
 ];
 
 // Trimmed to an even measure (78 to 81 characters) so the four columns set to
@@ -515,7 +515,7 @@ export default function Intro() {
                 agencies and growth-stage brands.
               </p>
               <p className="then">
-                I make sure important work actually delivers. I help set the direction, then hold every moving part together, in the delivery detail and in the boardroom, until it reaches the customer strong enough to sell.
+                I make sure important work actually delivers. I help set the direction, then hold every moving part together, in the delivery detail and in the boardroom, until what was decided is what the customer actually gets.
               </p>
             </div>
           </div>
@@ -536,7 +536,7 @@ export default function Intro() {
                 ))}
               </div>
               <p className="i-payoff" data-r>
-                All three pay off in the same two places. More margin in how you operate, and work that reaches the customer strong enough to sell.
+                All three pay off in the same two places. More margin in how you operate, and more return from what reaches the customer.
               </p>
             </section>
 
