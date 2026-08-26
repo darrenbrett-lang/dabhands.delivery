@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SeoMeta } from '@/components/SeoMeta';
@@ -58,15 +58,20 @@ const SITUATIONS = [
 // Trimmed to an even measure (72 to 74 characters) so the three panels set to
 // the same depth.
 // TEMPORARY — the spoken script, shown on the page for review only. Goes with
-// the .i-script disclosure when the film is recorded.
-const SCRIPT = [
-  'Hi, I’m Darren. Man and boy, I’ve been understanding how to make things go, and work better.',
-  'I’m good at holding a lot of moving parts at once, and knowing where every one of them is. I bring both sides of the brain to work in equal measure; I can jump from functional and logical to visionary and conceptual in a moment, which makes me a great problem solver.',
-  'I’ve spent my working life at the point where ambition has to become reality inside tier-one agencies working at scale with major brands. Then I co-founded an agency of my own and ran the operation for seven years, so I’ve carried the P&L as well as the plan.',
-  'And the thing I keep seeing is this: organisations rarely lack good thinking, they struggle to preserve its impact on the way out, traded away in the systems and the misalignments people don’t manage.',
-  'I know what it takes to develop the right operating system for a business, coordinate that through an organisation, and make sure work passes through it right.',
-  'I don’t just sweat the mechanics. I’ve got a healthy obsession with elevating the digital work we put into the world, so it makes people feel something and act upon it. I believe we can cut through a lot of the noise when we help people feel first. Not because it’s nicer. Because it sells, and that’s what all of this is for.',
-  'If something important needs to land, and it isn’t, let’s talk. We can start small. Nobody has to bet on me without trying me first. A little of me goes a long way. I work to impact, not to burn hours. Let’s make things better, and make some progress and money. I’d love to hear from you.',
+// the .i-script disclosure when the film is recorded. Each entry is a stanza,
+// each string a delivery line: the breaks are the owner's breathing marks, so
+// they are rendered rather than flattened to prose.
+const SCRIPT: string[][] = [
+  ['Hi, I’m Darren. Man and boy,', 'I’ve been understanding how to make things go,', 'and work better.'],
+  ['I’m good at holding a lot of moving parts', 'And knowing where every one of them is.'],
+  ['I bring both sides of the brain to work in equal measure', 'I move from logic to vision fast, which makes me a great problem solver.'],
+  ['I’ve spent my working life where ambition has to become reality', 'Tier-one agencies working at scale with major brands.'],
+  ['Then I co-founded an agency of my own and ran ops for seven years', 'I’ve carried the P&L as well as the plan.'],
+  ['Here’s what I notice', 'Organisations don’t lack good thinking', 'They struggle to preserve its impact on the way out', 'It gets traded away in systems and misalignments'],
+  ['I know what it takes to build the operating system of a business', 'And keep the work flowing cleanly through it'],
+  ['I don’t just sweat the mechanics.', 'I care about the work making people feel and act.', 'That’s not just nicer; it sells.'],
+  ['If something important isn’t landing, let’s talk.', 'Start small, no big bet.', 'I work for impact, not to burn hours.'],
+  ['If useful, I’d love to hear from you.'],
 ];
 
 const ABOUT = [
@@ -503,7 +508,16 @@ export default function Intro() {
                 <span aria-hidden className="arw" />
               </summary>
               <div className="i-sheet">
-                {SCRIPT.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
+                {SCRIPT.map((stanza) => (
+                  <p key={stanza[0].slice(0, 24)}>
+                    {stanza.map((line, i) => (
+                      <Fragment key={line.slice(0, 20)}>
+                        {i > 0 && <br />}
+                        {line}
+                      </Fragment>
+                    ))}
+                  </p>
+                ))}
               </div>
             </details>
             {/* END TEMPORARY script block */}
