@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import { MotionConfig } from "framer-motion";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Instrument_Serif, Manrope } from "next/font/google";
 
 // Display + quotes. Single weight (400) with a true italic for pull quotes.
@@ -41,6 +43,13 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </MotionConfig>
+      {/* Vercel's own analytics: cookieless, and it does not track individuals
+          across sites, so the site still needs no cookie banner. The only
+          cookie anywhere here remains the functional FEEL access token. Both
+          need enabling in the Vercel dashboard before they collect anything;
+          they no-op in development. */}
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }

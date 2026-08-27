@@ -55,6 +55,12 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/logos/linkedin-app-white-icon.webp" alt="" width={16} height={16} loading="lazy" decoding="async" className="block" />
             </a>
+            <Link
+              href="/privacy"
+              className="text-[11px] tracking-[0.16em] text-bone/65 hover:text-bone transition-colors"
+            >
+              Privacy
+            </Link>
             <p className="text-[11px] tracking-[0.16em] text-bone/65">© 2026 DAB Hands</p>
           </div>
         </div>

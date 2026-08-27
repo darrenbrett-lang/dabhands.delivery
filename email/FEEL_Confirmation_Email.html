@@ -1,0 +1,110 @@
+<!--
+  FEEL confirmation. Import into HubSpot Design Manager as a coded email
+  template, then set it as the FEEL Gate form's follow-up email.
+
+  Email-safe by construction: table layout, inline styles, system fonts, no
+  external stylesheet, no web font, no image beyond the small crown. Instrument
+  Serif and Manrope do not survive email clients, so the stacks fall back to
+  Georgia and Helvetica, which is the closest honest approximation.
+
+  ⚠ Three placeholders for Darren: [name of the piece], [link] (twice: href and
+  the visible text), and the link text itself. They are deliberately loud so
+  the email cannot be sent looking finished while they are still in it.
+
+  In HubSpot set: From name "Darren Brett", From and Reply-to Darren's
+  dabhands.delivery address, Subject "Here it is".
+-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="margin:0;padding:0;background-color:#F5F1EA;">
+  <tr>
+    <td align="center" style="padding:40px 20px;">
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+             style="max-width:560px;background-color:#F5F1EA;">
+
+        <!-- The mark. Small, and the only image in the email. -->
+        <tr>
+          <td style="padding:0 0 26px;">
+            <img src="https://dabhands.delivery/images/crown-mark.webp"
+                 width="34" height="27" alt="DAB Hands"
+                 style="display:block;border:0;outline:none;text-decoration:none;height:auto;" />
+          </td>
+        </tr>
+
+        <!-- One gold hairline. -->
+        <tr>
+          <td style="padding:0 0 30px;">
+            <table role="presentation" width="56" cellpadding="0" cellspacing="0" border="0">
+              <tr><td style="background-color:#C0974A;font-size:0;line-height:0;height:2px;">&nbsp;</td></tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1F1F1D;padding:0 0 20px;">
+            Hi {{ contact.firstname | default: "there" }},
+          </td>
+        </tr>
+
+        <tr>
+          <td style="font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1F1F1D;padding:0 0 20px;">
+            Thanks for asking for [name of the piece]. Here it is:
+            <a href="[link]" style="color:#7E5E27;text-decoration:underline;">[link]</a>.
+          </td>
+        </tr>
+
+        <tr>
+          <td style="font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;color:#1F1F1D;padding:0 0 26px;">
+            I make this for people running important work in agencies and growth-stage businesses.
+            If any of it lands, or misses, I&rsquo;d like to know which. Reply to this and it comes
+            straight to me.
+          </td>
+        </tr>
+
+        <!--
+          The marketing opt-in lives HERE, after the delivery, not on the form.
+          Under PECR a personal address or a sole trader is an individual
+          subscriber, who cannot be sent marketing without consent. The form no
+          longer restricts to work addresses, so the group now includes them.
+          Consent given here, by someone who has already read the piece, is real
+          rather than traded for access. The last sentence states the default
+          out loud, which is what keeps the transactional position clean.
+
+          ⚠ [Field Notes link] must point at a HubSpot subscription preferences
+          page or a subscribe form for the Field Notes subscription type, so the
+          consent is recorded against the contact. A mailto would not evidence
+          anything.
+        -->
+        <tr>
+          <td style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#5C5C58;padding:0 0 26px;">
+            Every couple of weeks I write Field Notes, a short piece for the same people. If you want
+            it, <a href="[Field Notes link]" style="color:#7E5E27;text-decoration:underline;">add
+            yourself here</a>. If not, this is the only email you will get.
+          </td>
+        </tr>
+
+        <tr>
+          <td style="font-family:Georgia,'Times New Roman',serif;font-size:19px;line-height:1.4;color:#1F1F1D;padding:0 0 30px;">
+            Darren
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:0 0 8px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr><td style="background-color:#D8D3CB;font-size:0;line-height:0;height:1px;">&nbsp;</td></tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="font-family:Helvetica,Arial,sans-serif;font-size:13px;line-height:1.6;color:#5C5C58;padding:14px 0 0;">
+            Darren Brett &middot; DAB Hands
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>

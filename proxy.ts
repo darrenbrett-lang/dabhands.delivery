@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { FEEL_COOKIE, verifyAccess } from '@/lib/feelAccess';
 
 /*
  * Basic Auth gate for the site's private documents. Without valid credentials
@@ -10,7 +11,16 @@ import { NextRequest, NextResponse } from 'next/server';
  * Two areas are gated, each with its own credentials and its own realm so a
  * login to one does not open the other:
  *   /for/eterna and everything under it — the private Eterna workspace
- *   /feel                              — the FEEL method deck
+ *
+ * /feel/method is gated differently: not by a shared password but by a signed
+ * cookie issued when someone completes the capture form on /feel. See
+ * lib/feelAccess.ts. It redirects rather than returning 401, because the
+ * visitor has somewhere to go. The check runs here, at the edge, so the deck
+ * is never rendered and then hidden.
+ *
+ * ⚠ /feel itself is NO LONGER password protected. It is the public (though
+ * unlisted and noindexed) capture page. The Basic Auth that used to sit on it
+ * was removed when the deck moved to /feel/method.
  *
  * This uses the Next 16 `proxy` file convention (the former `middleware` name
  * is deprecated in this version). Credentials can be overridden
@@ -23,7 +33,7 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 export const config = {
-  matcher: ['/for/eterna', '/for/eterna/:path*', '/feel'],
+  matcher: ['/for/eterna', '/for/eterna/:path*', '/feel/method'],
 };
 
 type Gate = {
@@ -40,15 +50,24 @@ const GATES: Gate[] = [
     pass: process.env.ETERNA_PASS || 'fillthechairs',
     covers: (p) => p === '/for/eterna' || p.startsWith('/for/eterna/'),
   },
-  {
-    realm: 'FEEL',
-    user: process.env.FEEL_USER || 'the15',
-    pass: process.env.FEEL_PASS || 'FeelingMovesValue!26',
-    covers: (p) => p === '/feel',
-  },
 ];
 
-export function proxy(req: NextRequest) {
+export async function proxy(req: NextRequest) {
+  // The FEEL method deck: a signed cookie, not a shared password.
+  if (req.nextUrl.pathname === '/feel/method') {
+    const ok = await verifyAccess(process.env.FEEL_COOKIE_SECRET, req.cookies.get(FEEL_COOKIE)?.value);
+    if (ok) return NextResponse.next();
+
+    // Send them back with a reason. Bouncing someone to an identical-looking
+    // page with no explanation is the kind of silent failure this deck is
+    // about, and the people who hit it are the ones whose cookie expired or
+    // who are on a second device: they had access and think they still do.
+    const back = req.nextUrl.clone();
+    back.pathname = '/feel';
+    back.search = '?from=method';
+    return NextResponse.redirect(back);
+  }
+
   const gate = GATES.find((g) => g.covers(req.nextUrl.pathname));
 
   // Not a gated path: the matcher should have kept us out, but never guess.

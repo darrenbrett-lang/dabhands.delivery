@@ -199,7 +199,13 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 
 `proxy.ts` now runs **two gates with separate realms**, so the FEEL login does not open Eterna and vice versa. Verified both ways at release.
 
-Built from `FEEL_Emotional_Experience_Method_Master_Deck.pdf` (owner-supplied, private and confidential), then revised to the owner's **v1.1 brief** (26 Aug). **Not a scrolling page: a 20-slide full-screen deck**, one slide per viewport on a y-axis scroll-snap track.
+Built from `FEEL_Emotional_Experience_Method_Master_Deck.pdf` (owner-supplied, private and confidential), then revised to the owner's **v1.1 brief** (26 Aug). **Not a scrolling page: a 22-slide full-screen deck**, one slide per viewport on a y-axis scroll-snap track.
+
+**⚠ v1.5 (26 Aug) rebuilt the opening as a tension sequence.** The first six slides are one uninterrupted thought and **must not be reordered or collapsed**: FEEL → the sea of sameness (the market tension) → the warning lights (where it becomes visible) → the human truth (why feeling affects choice) → the performance gap (the missing layer) → emotion is already measured (the territory FEEL actually occupies). "Optimisation has made sameness scalable" was **promoted** from a late Why Now slide to slide 02; the late slide is gone and the line must appear **once only**. ⚠ Slide 03's warning lights deliberately claim **no universal decline and no causality** — they are where a weak emotional layer *can* become commercially visible. Do not add downward arrows or decline statistics without verified evidence.
+
+**⚠ v1.4 (26 Aug) made four corrections that must not be undone.** (1) Slide 06 acknowledges that **emotion is already measured** (Forrester, Qualtrics/Temkin, KPMG, Bain, Gallup and others) and narrows FEEL's claim to moment-level performance; never let the deck imply "nobody measures emotion". (2) The FEEL Map's rows are **Effect / Attribution / Durability**, replacing Meaning / Confidence / Distinction. These are a **different structural layer** from the funnel stages: Confidence and Memory are funnel stages only, Durability is a consideration only, and the two layers must never be mixed. The memorable form is **"Did it happen? Did we get the credit? Did it last?"** (3) Slide 15 states FEEL's **own biases** and slide 16 **removes all multiplication notation** from Commercial Priority, whose output is a priority order rather than a pound value. (4) Slide 21 defines fit by **conditions, not sectors** — B2B is never called low-FEEL, and service recovery is never called emotionally unimportant. **Attribution never penalises familiarity for existing.**
+
+**⚠ Citations are verified, and new ones must be.** Slide 04 carries Binet & Field (IPA, 2013) and Damasio (1994) — **the owner should confirm these two before presenting**. Slides 15 and 16 carry four sources verified against the literature at build time: Kahneman, Fredrickson, Schreiber & Redelmeier (*Psychological Science*, 1993, peak and end); Reber, Schwarz & Winkielman (*Personality and Social Psychology Review*, 2004, processing fluency); Wood & Neal (*Psychological Review*, 2007, habit); and Cox (*Risk Analysis*, 2008), which is **why slide 16 has no arithmetic** — multiplying ordinal severity ratings can rank smaller risks above larger ones.
 
 **⚠ v1.3 (26 Aug) consolidated the deck from 32 slides to 20.** It is the **master / stage deck**, not a methodology manual: one point per slide, qualifications sitting *beneath* the argument they support rather than taking a slide each. Segmentation and emotional restraint live under Required Feeling; non-linear journey behaviour under the Emotional Funnel; the benchmark caveat under Pattern/Score; assessor consistency under How the Judgement Holds; commercial caveats under Commercial Priority; calibration under The Learning Loop. **Do not re-expand these into their own slides.** The deeper rubrics, assessor protocols and calibration mechanics belong in a future FEEL Methodology Paper, beneath this deck.
 
@@ -278,6 +284,61 @@ Built from `FEEL_Emotional_Experience_Method_Master_Deck.pdf` (owner-supplied, p
 ## Visual system — palette v6
 
 bone `#F5F1EA`, ink/charcoal `#1F1F1D`, graphite `#5C5C58`, stone `#D8D3CB`, slate blue-green `#535B68`, clay `#A49786`, gold `#C0974A`. Gold TEXT on light uses deep gold `#7E5E27`; on slate use light gold `#EBD4A8` (plain gold fails AA on both bone and slate). **White is always bone.**
+
+## Email (`email/`, 27 Aug) — HubSpot templates
+
+Branded HTML emails, added 27 Aug. **Not part of the Next build.** Nothing
+imports them, no route serves them, and `npm run build` never sees them. They
+are hand-authored files that get pasted into HubSpot's Design Manager. The only
+thing the site owns is `public/images/email/`, which hosts the two lockups
+until they are re-hosted on HubSpot's CDN.
+
+- `email/dabhands-email-master.html` — the shell, with the body in an editable
+  HubSpot rich text module so a send does not need a code change.
+- `email/asset-delivery.html` — send-ready, the "here is the thing you asked
+  for" email. Three loud placeholders: `[name of the piece]`, `[link text]`, `HREF`.
+- `email/blocks.html` — heading, eyebrow, button, pull quote, inset card,
+  hairline, spacer. A viewable reference page, **not** a comment block inside
+  the master: the button's Outlook conditional ends on a sequence that closes an
+  HTML comment early and spills the rest of the library into the email. That bug
+  was found and fixed on the way in. Do not fold it back inline.
+- `email/assets/` — three baked lockups and `build-lockups.py`. **Its geometry
+  is measured off the live site, not read off the Tailwind classes**, and it
+  renders from the browser's own per-character advances, because those carry
+  the font's kerning and the `-0.01em` tracking together and PIL applies
+  neither on its own. Truth at 1280: crown 32, gap 12, Instrument Serif 28px,
+  wordmark 103.02px, **centre aligned** (an earlier bake sat the crown on the
+  baseline and dropped tracking, which ran the wordmark 2.46px wide); footer
+  22 / 8 / 19px, 69.91px. Three files, not two: the masthead needs its own bone
+  version, because scaling the footer file up to masthead width is soft and
+  carries the footer's 22:19 ratio into a 32:28 lockup. The console snippet for
+  re-measuring is in the script header.
+- `email/preview.py` — renders all three into gitignored `.preview-email/` with
+  sample HubL values. Two sample address fields are empty on purpose, because
+  the footer must survive that without an orphan comma.
+
+**Footer (27 Aug, owner calls):** the band was **lightened** — internal hairline
+gone, padding down, legal links on one line. A 4px Slate Blue `#535B68` strip
+was added across the top of the band and then **removed the same session by the
+owner**; do not reintroduce it. Because the strip is gone, the dark-mode
+`.dh-footer { border-top }` rule is load-bearing again: in dark mode the band
+and the body are both charcoal and the footer has no edge without it. The
+footer signs **Darren Brett · Founder**, not Fractional COO. ⚠ The site still
+says Fractional COO in its three role-clue slots; the divergence was flagged
+and left standing.
+
+**The constraints differ from the site and are not negotiable.** No web fonts
+(Georgia and Helvetica stand in; the wordmark is baked PNG). **No WebP** — the
+site's `crown-mark.webp` renders as nothing in Outlook, which is what the old
+`email/FEEL_Confirmation_Email.html` got wrong. Links take deep gold `#7E5E27`,
+never `#C0974A`, which fails AA at body size. Tables and inline styles
+throughout, because Outlook renders through Word.
+
+`email/FEEL_Confirmation_Email.html` is **superseded** by `asset-delivery.html`
+(same copy, but it pointed the crown at a `.webp` and carried no unsubscribe
+link, which HubSpot will not publish). Left in place pending the owner's call.
+
+Full detail in `email/README.md`.
 
 ## Components worth knowing
 

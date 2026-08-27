@@ -43,10 +43,23 @@ type Tone = 'bone' | 'paper' | 'clay' | 'slate' | 'charcoal';
  */
 const STAGES = ['Notice', 'Relevance', 'Confidence', 'Commitment', 'Memory'];
 
+/**
+ * What each stage sounds like in the person's own voice. Parallel to STAGES by
+ * index, so the two cannot drift: the map's column heads read the stage name
+ * with the felt version beneath it.
+ */
+const STAGE_SUB = ['I noticed', 'It’s for me', 'I can go on', 'I’m ready', 'I kept it'];
+
+/**
+ * The three cross-cutting considerations. ⚠ These replaced Meaning /
+ * Confidence / Distinction in v1.4 and are a DIFFERENT STRUCTURAL LAYER from
+ * the funnel stages. Confidence and Memory are funnel stages only; Durability
+ * is a consideration only. Never mix the two layers.
+ */
 const DIMENSIONS = [
-  { label: 'Meaning', nums: ['01', '02', '03', '04', '05'] },
-  { label: 'Confidence', nums: ['06', '07', '08', '09', '10'] },
-  { label: 'Distinction', nums: ['11', '12', '13', '14', '15'] },
+  { label: 'Effect', nums: ['01', '02', '03', '04', '05'] },
+  { label: 'Attribution', nums: ['06', '07', '08', '09', '10'] },
+  { label: 'Durability', nums: ['11', '12', '13', '14', '15'] },
 ];
 
 /**
@@ -82,14 +95,16 @@ const PATTERN_VERDICTS: ('Carries' | 'Weakens' | 'Breaks')[] = [
 const PATTERN = STAGES.map((stage, i) => ({ stage, verdict: PATTERN_VERDICTS[i] }));
 
 const SLIDE_TONES: Tone[] = [
-  // 01-05  the argument: the truth, the gap, the place, the missing spec
-  'charcoal', 'bone', 'clay', 'bone', 'charcoal',
-  // 06-10  the method: the Spec, the funnel, Required Feeling, the map, the verdict
-  'bone', 'paper', 'bone', 'charcoal', 'bone',
-  // 11-16  the evidence: pattern, judgement, priority, prediction, intervention, loop
-  'slate', 'bone', 'paper', 'charcoal', 'bone', 'paper',
-  // 17-20  the offer and the close
-  'slate', 'bone', 'clay', 'charcoal',
+  // 01-06  the opening tension: sameness, the warning lights, the human truth,
+  //        the gap, and the territory FEEL actually occupies
+  'charcoal', 'bone', 'charcoal', 'bone', 'clay', 'bone',
+  // 07-13  the method: the missing spec, the Spec, the funnel, Required
+  //        Feeling, the three considerations, the map, the verdict
+  'charcoal', 'bone', 'paper', 'bone', 'bone', 'charcoal', 'bone',
+  // 14-18  the evidence: pattern, bias, priority, prediction, loop
+  'slate', 'bone', 'paper', 'charcoal', 'paper',
+  // 19-22  the offer, the fit and the close
+  'slate', 'bone', 'paper', 'charcoal',
 ];
 
 const TOTAL = SLIDE_TONES.length;
@@ -276,7 +291,7 @@ export default function Feel() {
       <SeoMeta
         title="FEEL · The Emotional Experience Method | DAB Hands"
         description="A performance layer for how brands make people feel in digital. The Emotional Spec, Required Feeling, the FEEL Map, the FEEL Score and the value at stake."
-        path="/feel"
+        path="/feel/method"
         image="/og-feel.png"
         noindex
       />
@@ -602,7 +617,7 @@ export default function Feel() {
 
         /* A footnote. Small, quiet, properly attributed. */
         .f-cite {
-          font-size:12.5px; line-height:1.5; margin:26px 0 0; max-width:70ch;
+          font-size:12.5px; line-height:1.45; margin:22px 0 0; max-width:78ch;
           color:var(--graphite); padding-top:12px; border-top:1px solid var(--stone);
         }
         .f-slate .f-cite, .f-charcoal .f-cite { color:rgba(245,241,234,.62); border-top-color:rgba(245,241,234,.2); }
@@ -638,23 +653,77 @@ export default function Feel() {
         .f-ps .f-ring .num { font-size:52px; letter-spacing:-1.2px; }
         .f-ps .f-ring .num small { font-size:8.5px; margin-top:8px; }
 
+        /* v1.4. The three questions, made memorable. */
+        .f-triad {
+          font-family:var(--font-serif); font-size:36px; line-height:1.2;
+          margin:26px 0 0; color:var(--gold-deep); letter-spacing:-.5px; max-width:26ch;
+        }
+        .f-slate .f-triad, .f-charcoal .f-triad { color:var(--gold-lt); }
+        .f-clay .f-triad { color:#3F312D; }
+
+        /* The three considerations carry the method's core vocabulary, so their
+           headings are set as names rather than as the small tracked labels the
+           other column grids use. Scoped: .f-col h3 is shared across every
+           column grid in the deck and must not change globally. */
+        .f-considerations .f-col h3 {
+          font-family:var(--font-serif); font-weight:400;
+          font-size:clamp(24px,2.9vw,34px); line-height:1.1;
+          letter-spacing:-.5px; text-transform:none;
+          color:var(--ink); margin:0 0 14px;
+        }
+        .f-slate .f-considerations .f-col h3,
+        .f-charcoal .f-considerations .f-col h3 { color:var(--bone); }
+
+        /* v1.5. Three warning lights on the dashboard. */
+        .f-lights { display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin:44px 0 0; }
+        .f-light { border-top:2px solid var(--gold); padding-top:18px; }
+        .f-charcoal .f-light, .f-slate .f-light { border-top-color:var(--gold-lt); }
+        .f-light .w {
+          display:block; font-family:var(--font-serif); font-size:46px; line-height:1;
+          letter-spacing:-1px; margin:0 0 16px;
+        }
+        .f-light .q { font-size:16.5px; line-height:1.45; color:var(--graphite); display:block; }
+        .f-charcoal .f-light .q, .f-slate .f-light .q { color:rgba(245,241,234,.76); }
+
+        /* v1.4. Conditions of fit, two sides. */
+        .f-fit { display:grid; grid-template-columns:1fr 1fr; gap:46px; margin:36px 0 0; }
+        .f-fit > div { border-top:2px solid var(--stone); padding-top:18px; }
+        .f-fit > div.hardest { border-top-color:var(--gold); }
+        .f-fit .lab {
+          font-size:11px; letter-spacing:2.4px; text-transform:uppercase;
+          font-weight:600; margin:0 0 16px; color:var(--graphite);
+        }
+        .f-fit > div.hardest .lab { color:var(--gold-deep); }
+        .f-fit ul { margin:0; padding:0; list-style:none; display:grid; gap:11px; }
+        .f-fit li b { display:block; font-family:var(--font-serif); font-weight:400; font-size:19px; margin:0 0 3px; }
+        .f-fit li span { font-size:14px; line-height:1.45; color:var(--graphite); display:block; }
+
         /* ── Slide 11: the FEEL Map ──────────────────────────────────────── */
         .f-map { margin:44px 0 0; }
         .f-map-head, .f-map-row { display:grid; grid-template-columns:150px 1fr; gap:24px; align-items:center; }
-        .f-map-head { padding:0 0 12px; }
+        .f-map-head { padding:0 0 14px; align-items:end; }
         .f-map-head .cells { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
         .f-map-head .cells span {
           font-size:11px; letter-spacing:2px; text-transform:uppercase;
           font-weight:600; color:var(--gold-lt);
         }
-        .f-map-row { padding:15px 0; border-top:1px solid rgba(245,241,234,.24); }
+        /* The felt version, beneath the stage name. Sentence case and not
+           tracked out, so it reads as something a person would say rather than
+           as a second label. */
+        .f-map-head .cells span i {
+          display:block; margin-top:5px;
+          font-style:normal; font-size:11.5px; letter-spacing:0;
+          text-transform:none; font-weight:400;
+          color:rgba(245,241,234,.6);
+        }
+        .f-map-row { padding:12px 0; border-top:1px solid rgba(245,241,234,.24); }
         .f-map-row:last-child { border-bottom:1px solid rgba(245,241,234,.24); }
         .f-map-lab { font-family:var(--font-serif); font-size:24px; }
         .f-map-cells { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
         .f-map-cell {
           font-family:var(--font-serif); font-size:22px; color:rgba(245,241,234,.9);
           border:1px solid rgba(245,241,234,.2); border-radius:3px;
-          padding:12px 0; text-align:center;
+          padding:10px 0; text-align:center;
         }
         .f-map-cell i { display:none; }
 
@@ -911,6 +980,7 @@ export default function Feel() {
           .f-cols { gap:18px; margin:28px 0 0; }
           .f-col { padding-top:14px; }
           .f-col h3 { font-size:12.5px; }
+          .f-considerations .f-col h3 { font-size:21px; margin-bottom:9px; }
           .f-col p { font-size:15.5px; }
           .f-col .n { font-size:24px; margin-bottom:7px; }
           .f-chips { gap:8px; margin:28px 0 0; }
@@ -968,6 +1038,21 @@ export default function Feel() {
           .f-step .n { font-size:24px; margin-bottom:7px; }
           .f-step p { font-size:15.5px; }
 
+          .f-lights { grid-template-columns:1fr; gap:16px; margin:26px 0 0; }
+          .f-light { padding-top:12px; }
+          .f-light .w { font-size:30px; margin-bottom:8px; }
+          .f-light .q { font-size:15px; }
+          .f-triad { font-size:23px; margin:18px 0 0; max-width:none; }
+          .f-cite { line-height:1.4; }
+          .f-stack { margin:20px 0 0; gap:6px; }
+          .f-chips.tight { margin-top:16px; gap:6px; }
+          .f-col p { line-height:1.45; }
+          .f-lab-chips { margin-top:18px; }
+          .f-fit { grid-template-columns:1fr; gap:18px; margin:22px 0 0; }
+          .f-fit .lab { margin-bottom:10px; }
+          .f-fit ul { gap:8px; }
+          .f-fit li b { font-size:16px; margin-bottom:2px; }
+          .f-fit li span { font-size:13px; line-height:1.38; }
           .f-cite { font-size:11.5px; margin:20px 0 0; padding-top:10px; }
           .f-close-line.hero { font-size:24px; margin-top:28px; padding-top:18px; max-width:none; }
           .f-under { grid-template-columns:1fr; gap:11px; margin:20px 0 0; }
@@ -1052,6 +1137,22 @@ export default function Feel() {
           .f-stop-line { font-size:29px; margin-bottom:22px; }
           .f-new.f-new-wide { margin:34px 0 0; gap:18px; }
           .f-close-line.hero { font-size:28px; margin-top:32px; padding-top:20px; }
+          .f-lights { margin:32px 0 0; gap:26px; }
+          .f-light .w { font-size:38px; margin-bottom:12px; }
+          .f-light .q { font-size:15.5px; }
+          .f-triad { font-size:29px; margin:22px 0 0; }
+          .f-fit { margin:26px 0 0; gap:32px; }
+          .f-fit ul { gap:9px; }
+          .f-fit li b { font-size:18px; }
+          .f-fit li span { font-size:13.5px; }
+          .f-fit .lab { margin-bottom:12px; }
+          .f-cite { font-size:11.5px; margin:16px 0 0; }
+          .f-chips.tight { margin-top:16px; }
+          .f-cols.c4 { gap:18px; }
+          .f-chips.tight .f-chip { font-size:13.5px; padding:7px 14px; }
+          .f-col p { font-size:14.5px; }
+          .f-stack { margin:26px 0 0; }
+          .f-lab-chips { margin-top:22px; }
           .f-cite { margin:20px 0 0; }
           .f-under { margin:26px 0 0; }
           .f-ps { gap:40px; margin:32px 0 0; }
@@ -1274,7 +1375,64 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 02 · The immovable truth */}
+          {/* 02 · The sea of sameness */}
+          <section className="f-slide f-bone">
+            <div className="f-in">
+              <p className="f-kick">The sea of sameness</p>
+              <h2 className="f-h">Optimisation has made sameness scalable.</h2>
+              <p className="f-lede">
+                Digital has become extraordinarily good at producing experiences that work.
+              </p>
+              <div className="f-chips tight">
+                {['Best practice', 'Design systems', 'Templates', 'Testing', 'Automation', 'AI', 'Performance optimisation'].map((c) => (
+                  <span className="f-chip" key={c}>{c}</span>
+                ))}
+              </div>
+              <p className="f-body">
+                All of it has made competence easier to reproduce. More and more experiences can be
+                functional, frictionless, optimised and effective, and still feel remarkably similar.
+              </p>
+              <p className="f-close-line">
+                Optimisation solved an enormous amount. It also made competence easier to copy.{' '}
+                <span className="brk">
+                  When everyone gets better at the table stakes, the table stakes stop being where
+                  you win.
+                </span>
+              </p>
+            </div>
+          </section>
+
+          {/* 03 · The warning lights */}
+          <section className="f-slide f-charcoal">
+            <div className="f-in">
+              <p className="f-kick">The warning lights</p>
+              <h2 className="f-h wide">
+                When an experience works but fails to land,{' '}
+                <span className="brk">the symptoms eventually appear here.</span>
+              </h2>
+              <div className="f-lights">
+                {[
+                  ['Attention', 'Did anything make me notice?'],
+                  ['Connection', 'Did anything make me care?'],
+                  ['Conversion', 'Did anything make me move?'],
+                ].map(([w, q]) => (
+                  <div className="f-light" key={w}>
+                    <span className="w">{w}</span>
+                    <span className="q">{q}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="f-close-line">
+                Functional performance can be healthy while emotional performance weakens underneath it.{' '}
+                <span className="brk">
+                  These are not claimed to be falling everywhere, or to be caused by feeling alone.
+                  They are where a weak emotional layer becomes commercially visible.
+                </span>
+              </p>
+            </div>
+          </section>
+
+          {/* 04 · The immovable truth */}
           <section className="f-slide f-bone">
             <div className="f-in">
               <p className="f-kick">The immovable truth</p>
@@ -1312,7 +1470,7 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 03 · The performance gap */}
+          {/* 05 · The performance gap */}
           <section className="f-slide f-clay">
             <div className="f-in">
               <p className="f-kick">The performance gap</p>
@@ -1336,33 +1494,51 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 04 · Where FEEL fits */}
+          {/* 06 · Emotion is already measured */}
           <section className="f-slide f-bone">
             <div className="f-in">
-              <p className="f-kick">Where FEEL fits</p>
-              <h2 className="f-h wide">The great methods own one important question.</h2>
-              <div className="f-methods">
+              <p className="f-kick">Emotion is already measured</p>
+              <h2 className="f-h wide">Emotion is already measured. Just not here.</h2>
+              <p className="f-lede">
+                Established approaches measure emotional experience at brand, relationship{' '}
+                <span className="brk">or journey level, usually through customer research.</span>
+              </p>
+              <p className="f-lab f-lab-chips">Where emotion is measured today</p>
+              <div className="f-chips tight">
                 {[
-                  ['NPS', 'Will they recommend?'],
-                  ['MDS', 'Is the brand meaningful, different and salient?'],
-                  ['Double Diamond', 'Are we solving the right problem?'],
-                  ['HEART', 'Which product metrics reflect user goals?'],
-                ].map(([m, q]) => (
-                  <div className="f-method" key={m}><span className="m">{m}</span><span className="q">{q}</span></div>
+                  'Forrester CX Index',
+                  'Qualtrics XM and Temkin',
+                  'KPMG Six Pillars',
+                  'Bain Elements of Value',
+                  'Gallup CE11',
+                  'Emotional Signature',
+                ].map((c) => (
+                  <span className="f-chip" key={c}>{c}</span>
                 ))}
-                <div className="f-method is-feel">
-                  <span className="m">FEEL</span>
-                  <span className="q">Does the experience carry the required feeling?</span>
-                </div>
               </div>
+              <p className="f-close-line">
+                The opportunity is to move emotion from an aggregate measure{' '}
+                <span className="brk">to a moment by moment performance discipline.</span>{' '}
+                <span className="brk">
+                  FEEL starts at the moment, finds the pattern by expert diagnosis, then validates
+                  where the evidence matters most.
+                </span>
+              </p>
             </div>
           </section>
 
-          {/* 05 · The missing specification */}
+          {/* 07 · The missing specification */}
           <section className="f-slide f-charcoal">
             <div className="f-in">
               <p className="f-kick">The missing specification</p>
               <h2 className="f-h wide">We specify everything except the feeling.</h2>
+              <p className="f-lede">
+                Plenty of brands describe how they want people to feel.{' '}
+                <span className="brk">
+                  Far fewer define that intention at the level of individual moments,
+                </span>{' '}
+                <span className="brk">and return to test whether the lived experience delivered it.</span>
+              </p>
               <div className="f-cols c4">
                 {[
                   ['Brand guidelines', 'How we look and sound.', false],
@@ -1379,7 +1555,7 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 06 · The Emotional Spec */}
+          {/* 08 · The Emotional Spec */}
           <section className="f-slide f-bone">
             <div className="f-in">
               <p className="f-kick">The Emotional Spec</p>
@@ -1411,7 +1587,7 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 07 · The Emotional Funnel */}
+          {/* 09 · The Emotional Funnel */}
           <section className="f-slide f-paper">
             <div className="f-in">
               <p className="f-kick">The emotional funnel</p>
@@ -1434,7 +1610,7 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 08 · Required Feeling */}
+          {/* 10 · Required Feeling */}
           <section className="f-slide f-bone">
             <div className="f-in">
               <p className="f-kick">Required Feeling</p>
@@ -1477,7 +1653,35 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 09 · The FEEL Map */}
+          {/* 11 · The three cross-cutting considerations */}
+          <section className="f-slide f-bone">
+            <div className="f-in">
+              <p className="f-kick">Across every stage</p>
+              <h2 className="f-h wide">Three things determine whether the emotional brief survives.</h2>
+              <p className="f-triad">Did it happen? Did we get the credit? Did it last?</p>
+              <div className="f-cols c3 f-considerations">
+                {[
+                  ['Effect', 'Did it happen?', 'Did the lived experience actually create the Required Feeling? Without effect there is nothing to evaluate.'],
+                  ['Attribution', 'Did we get the credit?', 'Did the feeling attach to this brand, rather than to the category alone? Familiarity is not penalised for existing: a conventional interaction may be exactly what creates trust.'],
+                  ['Durability', 'Did it last?', 'Did the effect survive the moment? An interaction can work beautifully in the instant and leave nothing behind.'],
+                ].map(([h, q, p]) => (
+                  <div className="f-col" key={h as string}>
+                    <h3>{h}</h3>
+                    <p><b>{q}</b> {p}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="f-close-line">
+                Emotional delivery, brand attachment, emotional residue: three different questions.{' '}
+                <span className="brk">
+                  These are FEEL’s proposed diagnostic considerations, informed by established
+                  evidence and calibrated through use, not a validated pre-existing scale.
+                </span>
+              </p>
+            </div>
+          </section>
+
+          {/* 12 · The FEEL Map */}
           <section className="f-slide f-charcoal">
             <div className="f-in">
               <p className="f-kick">The FEEL Map</p>
@@ -1490,7 +1694,11 @@ export default function Feel() {
               <div className="f-map">
                 <div className="f-map-head">
                   <span />
-                  <div className="cells">{STAGES.map((st) => <span key={st}>{st}</span>)}</div>
+                  <div className="cells">
+                    {STAGES.map((st, i) => (
+                      <span key={st}>{st}<i>{STAGE_SUB[i]}</i></span>
+                    ))}
+                  </div>
                 </div>
                 {DIMENSIONS.map((d) => (
                   <div className="f-map-row" key={d.label}>
@@ -1504,13 +1712,13 @@ export default function Feel() {
                 ))}
               </div>
               <p className="f-close-line">
-                Fifteen observations per journey.{' '}
-                <span className="brk">Complex experiences run the map more than once.</span>
+                Fifteen observations per journey, or per Required Feeling profile.{' '}
+                <span className="brk">N/A is allowed where a consideration does not apply.</span>
               </p>
             </div>
           </section>
 
-          {/* 10 · The verdict */}
+          {/* 13 · The verdict */}
           <section className="f-slide f-bone">
             <div className="f-in">
               <p className="f-kick">The verdict</p>
@@ -1520,10 +1728,14 @@ export default function Feel() {
                 <div className="f-verdict v2"><h3>Weakens</h3><p>Dilutes, delays or genericises it.</p></div>
                 <div className="f-verdict v3"><h3>Breaks</h3><p>Contradicts it, or collapses the intended feeling.</p></div>
               </div>
+              <p className="f-close-line">
+                The verdict describes what happens to the emotional brief,{' '}
+                <span className="brk">not whether the experience is generically good or bad.</span>
+              </p>
             </div>
           </section>
 
-          {/* 11 · FEEL Pattern */}
+          {/* 14 · FEEL Pattern */}
           <section className="f-slide f-slate">
             <div className="f-in">
               <p className="f-kick">FEEL Pattern</p>
@@ -1584,52 +1796,70 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 12 · How the judgement holds */}
+          {/* 15 · How the judgement holds */}
           <section className="f-slide f-bone">
             <div className="f-in">
               <p className="f-kick">How the judgement holds</p>
-              <h2 className="f-h">A judgement, made the same way twice.</h2>
-              <div className="f-cols c3">
+              <h2 className="f-h">FEEL knows where it can be wrong.</h2>
+              <div className="f-cols c4">
                 {[
-                  ['Written criteria', 'Carries, Weakens and Breaks are anchored to defined thresholds and worked examples.'],
-                  ['Scored twice', 'Where the engagement allows, two assessors score independently and agreement is reported.'],
-                  ['Confidence travels with the score', 'Every FEEL Score carries a Confidence Level describing the strength of the evidence behind it.'],
+                  ['Breaks shout louder than Carries', 'Emotional failure is easier to detect than successful positive performance.'],
+                  ['Familiarity can be doing useful work', 'Category conformity can support fluency, trust and comprehension. Sameness is not automatically failure.'],
+                  ['Duration is not importance', 'A long interaction is not necessarily an important one. Peaks and endings shape what people remember.'],
+                  ['The assessor is not the customer', 'Expert judgement is a hypothesis about emotional performance, not customer evidence.'],
                 ].map(([h, p]) => (
                   <div className="f-col" key={h}><h3>{h}</h3><p>{p}</p></div>
                 ))}
               </div>
+              <p className="f-lab f-lab-chips">The discipline beneath</p>
+              <div className="f-chips tight">
+                {['Written criteria', 'Independent scoring where appropriate', 'Confidence Level', 'Audience validation where the evidence matters'].map((c) => (
+                  <span className="f-chip" key={c}>{c}</span>
+                ))}
+              </div>
               <p className="f-close-line">
                 The method is expert led.{' '}
-                <span className="brk">That is exactly why it is disciplined about how the expert decides.</span>
+                <span className="brk">That is exactly why it is explicit about how the expert can be wrong.</span>
+              </p>
+              <p className="f-cite">
+                <b>Sources.</b> Kahneman et al. 1993 (peak and end); Reber, Schwarz and Winkielman
+                2004 (processing fluency); Wood and Neal 2007 (habit).
               </p>
             </div>
           </section>
 
-          {/* 13 · Commercial priority */}
+          {/* 16 · Commercial priority */}
           <section className="f-slide f-paper">
             <div className="f-in">
               <p className="f-kick">Commercial priority</p>
               <h2 className="f-h wide">Value at Stake prioritises. It does not forecast.</h2>
-              <div className="f-model">
-                <div className="f-term"><b>Audience exposed</b><span>how many people meet the moment</span></div>
-                <div className="f-op">×</div>
-                <div className="f-term"><b>Commercial value</b><span>what sits behind that moment</span></div>
-                <div className="f-op">×</div>
-                <div className="f-term"><b>Severity</b><span>how badly the brief is missed</span></div>
-                <div className="f-op">×</div>
-                <div className="f-term"><b>Evidence confidence</b><span>how strongly it is evidenced</span></div>
-                <div className="f-op">=</div>
-                <div className="f-term total"><b>Priority</b><span>an order of work, not a forecast</span></div>
+              <p className="f-lede">
+                Four considerations inform the order of work.{' '}
+                <span className="brk">They are weighed, not multiplied.</span>
+              </p>
+              <div className="f-cols c4">
+                {[
+                  ['Audience exposure', 'how many people meet the moment'],
+                  ['Commercial significance', 'what sits behind that moment'],
+                  ['Emotional severity', 'how badly the brief is missed'],
+                  ['Evidence confidence', 'how strongly it is evidenced'],
+                ].map(([h, p]) => (
+                  <div className="f-col is-feel" key={h}><h3>{h}</h3><p>{p}</p></div>
+                ))}
               </div>
               <p className="f-close-line">
-                The output is an order of work and an honest view of where exposure is concentrated.{' '}
-                <span className="brk">Once there is enough observed calibration, ranges may follow.</span>{' '}
-                <span className="brk">Until then it prioritises, and says so.</span>
+                Where a break is rare but severe, it is flagged separately rather than averaged away.{' '}
+                <span className="brk">FEEL ranks what it can separate confidently, and says where it cannot.</span>{' '}
+                <span className="brk">The output is an order of work, not a fabricated revenue forecast.</span>
+              </p>
+              <p className="f-cite">
+                <b>Why there is no arithmetic here.</b> Multiplying ordinal severity and likelihood
+                ratings can rank smaller risks above larger ones. Cox, <i>Risk Analysis</i>, 2008.
               </p>
             </div>
           </section>
 
-          {/* 14 · The prediction */}
+          {/* 17 · The prediction */}
           <section className="f-slide f-charcoal">
             <div className="f-in">
               <p className="f-kick">Before the work starts</p>
@@ -1650,24 +1880,7 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 15 · Intervention */}
-          <section className="f-slide f-bone">
-            <div className="f-in">
-              <p className="f-kick">Intervention</p>
-              <h2 className="f-h">Fix the moments that matter.</h2>
-              <p className="f-lede">The work changes the moment, not merely the message.</p>
-              <div className="f-chips">
-                {['Product', 'Service', 'UX', 'Content', 'CRM', 'Environment', 'Employee behaviour', 'Operating process'].map((c) => (
-                  <span className="f-chip" key={c}>{c}</span>
-                ))}
-              </div>
-              <p className="f-close-line">
-                Prioritise where emotional failure and commercial exposure meet.
-              </p>
-            </div>
-          </section>
-
-          {/* 16 · The learning loop */}
+          {/* 18 · The learning loop */}
           <section className="f-slide f-paper">
             <div className="f-in">
               <p className="f-kick">The learning loop</p>
@@ -1697,24 +1910,32 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 17 · Complementary by design */}
+          {/* 19 · One emotional brief across the system */}
           <section className="f-slide f-slate">
             <div className="f-in">
-              <p className="f-kick">Complementary by design</p>
-              <h2 className="f-h wide">
-                FEEL doesn’t replace the stack.{' '}
-                <span className="brk">It gives it a shared emotional brief.</span>
-              </h2>
+              <p className="f-kick">One emotional brief</p>
+              <h2 className="f-h wide">It gives every discipline the same emotional brief.</h2>
+              <p className="f-lab f-lab-chips">The disciplines FEEL can brief</p>
               <div className="f-stack">
-                {['brand', 'CX', 'UX', 'media', 'CRM', 'retail', 'service', 'research', 'product', 'operations'].map((c) => (
+                {['brand', 'CX', 'UX', 'product', 'CRM', 'media', 'retail', 'service', 'research', 'operations'].map((c) => (
                   <span className="f-chip" key={c}>{c}</span>
                 ))}
                 <span className="core">FEEL</span>
               </div>
+              <p className="f-lab f-lab-chips">Where the intervention lands</p>
+              <div className="f-chips tight">
+                {['Product', 'Service', 'Interaction', 'Content', 'Handoffs', 'Recovery', 'Environment', 'Employee behaviour', 'Operating process'].map((c) => (
+                  <span className="f-chip" key={c}>{c}</span>
+                ))}
+              </div>
+              <p className="f-close-line">
+                FEEL does not replace the stack.{' '}
+                <span className="brk">The work changes the moment, not merely the message.</span>
+              </p>
             </div>
           </section>
 
-          {/* 18 · What brands get */}
+          {/* 20 · What brands get */}
           <section className="f-slide f-bone">
             <div className="f-in">
               <p className="f-kick">What brands get</p>
@@ -1734,24 +1955,50 @@ export default function Feel() {
             </div>
           </section>
 
-          {/* 19 · Why now */}
-          <section className="f-slide f-clay">
+          {/* 21 · Where FEEL works hardest */}
+          <section className="f-slide f-paper">
             <div className="f-in">
-              <p className="f-kick">Why now</p>
-              <h2 className="f-h wide">Optimisation has made sameness scalable.</h2>
-              <p className="f-lede">
-                AI, automation, templates and performance systems make competent experiences{' '}
-                <span className="brk">faster to create and easier to replicate.</span>
-              </p>
+              <p className="f-kick">Category and journey fit</p>
+              <h2 className="f-h">FEEL is not for every journey.</h2>
+              <div className="f-fit">
+                <div className="hardest">
+                  <p className="lab">FEEL works hardest when</p>
+                  <ul>
+                    {[
+                      ['Consequential', 'Something meaningful is at stake.'],
+                      ['Considered', 'The person is paying attention rather than acting automatically.'],
+                      ['Personal', 'Identity, trust, anxiety or aspiration influence the decision.'],
+                      ['Experience mediated', 'How it feels materially contributes to the evaluation.'],
+                      ['Agency matters', 'The individual has real discretion over what happens next.'],
+                    ].map(([t, d]) => (
+                      <li key={t}><b>{t}</b><span>{d}</span></li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="lab">FEEL requires more adaptation when</p>
+                  <ul>
+                    {[
+                      ['Habitual', 'Behaviour is cue driven and low attention.'],
+                      ['Multi-party', 'Stakeholders carry materially different requirements. Common in B2B, where the emotion is often high and the profiles differ.'],
+                      ['Mandated', 'Established compliance regimes already govern measurement.'],
+                      ['Low engagement', 'Utility, availability or routine dominate the evaluation.'],
+                      ['The decisive moment sits outside the map', 'Recovery and cancellation can be intensely emotional, but need a different framing from an acquisition journey.'],
+                    ].map(([t, d]) => (
+                      <li key={t}><b>{t}</b><span>{d}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
               <p className="f-close-line">
-                Efficiency will keep improving.{' '}
-                <span className="brk">Distinct emotional performance will not happen by accident.</span>{' '}
+                FEEL works hardest where a decision is consequential, considered and personal.{' '}
+                <span className="brk">Knowing where a method adds little is part of knowing where it adds a lot.</span>{' '}
                 <span className="brk">FEEL is a senior practitioner method, not a template.</span>
               </p>
             </div>
           </section>
 
-          {/* 20 · Close */}
+          {/* 22 · Close */}
           <section className="f-slide f-charcoal" data-label="Close">
             <div className="f-in f-cover">
               {/* eslint-disable-next-line @next/next/no-img-element */}
