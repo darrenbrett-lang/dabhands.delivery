@@ -193,7 +193,38 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 - The **carousel cross-fade double-exposes** on long text — both slides visible mid-transition. Inherent to a 0.9s cross-fade of two-line statements in one cell.
 - **Copy line-lengths are load-bearing.** The carousel slides (80–83 chars) and the triptych bodies (72–85) are matched so each module sets to an even number of lines. Editing one without checking the others will make a module ragged, which the owner notices every time.
 
-### `/feel` — the FEEL method deck (new, 26 Aug)
+### The FEEL section (new, 26 Aug) — ⚠ COMMITTED BUT NOT DEPLOYED
+
+**Commit `0373c20` is on the branch and has NOT been pushed. Do not push it without reading the blockers below.** Deploying as-is puts a visibly unfinished `/privacy` on every page and a form that returns 500.
+
+**Routes.** `/feel` is the public-but-unlisted capture page. `/feel/method` is the 22-slide deck, moved there from `/feel` and gated. `/feel/:path*` carries a noindex route header, so future FEEL routes are covered by default. Neither is in the nav, `sitemap.xml` or `llms.txt`.
+
+**The gate (`lib/feelAccess.ts` + `proxy.ts`).** A stateless HMAC token in an HttpOnly cookie, verified at the edge before the deck renders, so gated content never leaks and then redirects. Web Crypto throughout, because `proxy.ts` runs on the Edge runtime where `node:crypto` does not exist. **It fails closed**: with no `FEEL_COOKIE_SECRET` nothing verifies and the deck stays shut, which is the right direction but means the feature is inert until the variable exists.
+
+- **⚠ `Secure` is set in production only.** Hardcoding it broke every non-HTTPS test: the browser silently refused the cookie, the person saw the confirmation, clicked through and was bounced as though their access had expired. Server-side tests all passed because curl does not care. Do not "harden" this back.
+- **⚠ Links into the gate are plain `<a>`, not `<Link>`**, with the lint rule disabled and the reason recorded. The check happens on the request, so entering the gate must be a request.
+- Turned-away visitors land on `/feel?from=method` and get an explanation strip **at the top of the page**. An earlier version put the notice beside the form and auto-scrolled; measurement showed it sitting 6,059px down a 7,050px page. Do not reinstate that.
+
+**HubSpot is the database. There is deliberately no local store.** `pages/api/feel/access.ts` submits server-side to the Forms API (portal `148807599`, form `a48d9b5e-28b5-4e7b-ad68-d4f437740e96`), so the ids never reach the browser and the submission registers as a **real form submission** — which is what lets HubSpot's own reporting and its follow-up email see it. The CRM API would not. Email is the only required field; empty values are not sent, so a blank surname cannot overwrite a good one.
+
+**⚠ Consent: there is no checkbox, by decision.** Delivering something a person just asked for runs on legitimate interests. Consent for ongoing marketing lives in the **Field Notes opt-in inside the confirmation email**, which is what makes marketing lawful for anyone signing up with a personal address (under PECR an individual subscriber needs consent where a corporate subscriber does not).
+
+**The email.** `email/FEEL_Confirmation_Email.html`, to be imported into HubSpot Design Manager and set as the form's follow-up. ⚠ Option A depends on the portal having **Marketing Hub Starter or above** — check Forms → FEEL Gate → Options → "Send a follow-up email". If it is greyed out, the whole no-extra-sub-processor argument collapses and an email provider comes back. Four placeholders remain in the template.
+
+**`/privacy` (new).** Site-wide, **indexable** (unlike the FEEL routes), in the sitemap, linked from the footer of every page via `components/Footer.tsx`. Sub-processors are HubSpot (EU), Vercel (UK once `lhr1` is set) and Google Workspace (EU/US, DPF UK Extension confirmed active at build time). ⚠ Two amber `.p-gap` markers and a bordered warning box remain; the box must come out when they are filled.
+
+**Analytics.** Vercel Web Analytics and Speed Insights in `_app.tsx`, site-wide. **Cookieless**, so the site still needs no consent banner: the only cookie anywhere is `feel_access`, which is strictly necessary. Verified by polling storage for 8s while both ran — nothing written. ⚠ That was the **development debug build**; re-check in production once the dashboard toggles are on.
+
+**⚠ BLOCKERS before pushing**, in the order they bite:
+
+1. **ICO registration reference** (begins Z, A or C). ⚠ **Not** the `CSN` security number, which is a credential and must never be published.
+2. **Publication date** on `/privacy`, then remove the warning box.
+3. **`lhr1`** as the Vercel Functions region. The notice now asserts UK processing as fact, so this is a correctness dependency, not a tidy-up.
+4. **`FEEL_COOKIE_SECRET`** in Vercel, freshly generated.
+5. **The open question's HubSpot property.** Code holds `what_are_you_trying_to_fix_optional`; a later brief said the default `message`. **A wrong internal name makes HubSpot reject the entire submission**, not just that field. Overridable with `HUBSPOT_ISSUE_FIELD`.
+6. Enable Analytics and Speed Insights in the dashboard.
+
+### `/feel/method` — the FEEL method deck (new, 26 Aug)
 
 **PRIVATE.** Behind Basic Auth at the edge (`proxy.ts`), login `the15` / `FeelingMovesValue!26`, overridable per environment with `FEEL_USER` / `FEEL_PASS`. Also noindex meta plus an `X-Robots-Tag: noindex, nofollow, noarchive` route header, and absent from nav, `sitemap.xml` and `llms.txt`. ⚠ The committed fallback password is in git history; set the Vercel env vars if it ever needs to be secret from anyone with repo access.
 
