@@ -29,6 +29,11 @@ export default function Privacy() {
         title="Privacy notice | DAB Hands"
         description="How DAB Hands Delivery Ltd collects, uses and protects personal information."
         path="/privacy"
+        /* ⚠ TEMPORARY. This page is site-wide and belongs in the index, but it
+           still has unfilled gaps and a warning box. noindex until those are
+           done, then REMOVE this prop, restore the footer link in
+           components/Footer.tsx and the sitemap entry. */
+        noindex
       />
 
       <style>{`

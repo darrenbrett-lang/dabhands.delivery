@@ -52,11 +52,48 @@ const GATES: Gate[] = [
   },
 ];
 
+/**
+ * ⚠ TEMPORARY reviewer bypass for /feel/method.
+ *
+ * Lets Darren forward the deck for review without the reviewer filling the
+ * capture form, creating a HubSpot contact, or depending on
+ * FEEL_COOKIE_SECRET being set. It sits ALONGSIDE the cookie gate, so the
+ * real visitor journey is untouched.
+ *
+ * REMOVE THIS once the FEEL section is properly live and reviewers no longer
+ * need a side door. Overridable with FEEL_REVIEW_USER / FEEL_REVIEW_PASS.
+ */
+const REVIEW_USER = process.env.FEEL_REVIEW_USER || 'the15';
+const REVIEW_PASS = process.env.FEEL_REVIEW_PASS || 'FeelingMovesValue!26';
+
+const hasReviewerAuth = (header: string | null): boolean => {
+  if (!header?.startsWith('Basic ')) return false;
+  try {
+    const decoded = atob(header.slice(6));
+    const sep = decoded.indexOf(':');
+    return decoded.slice(0, sep) === REVIEW_USER && decoded.slice(sep + 1) === REVIEW_PASS;
+  } catch {
+    return false;
+  }
+};
+
 export async function proxy(req: NextRequest) {
-  // The FEEL method deck: a signed cookie, not a shared password.
+  // The FEEL method deck: a signed cookie from the form, or the reviewer
+  // password while the section is still being reviewed.
   if (req.nextUrl.pathname === '/feel/method') {
     const ok = await verifyAccess(process.env.FEEL_COOKIE_SECRET, req.cookies.get(FEEL_COOKIE)?.value);
     if (ok) return NextResponse.next();
+
+    if (hasReviewerAuth(req.headers.get('authorization'))) return NextResponse.next();
+
+    // Ask for the password rather than bouncing: a reviewer arriving on a
+    // shared link has no form to fill and no cookie to present.
+    if (req.nextUrl.searchParams.get('review') === '1') {
+      return new NextResponse('Authentication required.', {
+        status: 401,
+        headers: { 'WWW-Authenticate': 'Basic realm="FEEL review", charset="UTF-8"' },
+      });
+    }
 
     // Send them back with a reason. Bouncing someone to an identical-looking
     // page with no explanation is the kind of silent failure this deck is
