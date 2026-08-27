@@ -29,9 +29,9 @@ type Mode = 'script' | 'cue' | 'own';
 type Phase = 'setup' | 'preroll' | 'run' | 'fading' | 'black';
 
 const STORE_SETTINGS = 'dabhands.script.settings.v1';
-/* Bumped to v2 with the 23-card rewrite (27 Aug): a persisted v1 score would
+/* Bumped to v2 with the 23-card rewrite, v3 with the broader diagnosis (27 Aug): a persisted v1 score would
    otherwise shadow the new script on any device that had opened the page. */
-const STORE_SCORE = 'dabhands.script.score.v2';
+const STORE_SCORE = 'dabhands.script.score.v3';
 
 const PACES = [0.8, 0.9, 0.95, 0.97, 1.0, 1.1, 1.2];
 /* Cross-dissolve between thoughts, in ms. 150 reads almost as a cut, 1200 is

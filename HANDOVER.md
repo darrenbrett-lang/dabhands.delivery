@@ -330,6 +330,26 @@ that must be read goes near the bottom.
 - **All performance data lives in `lib/scriptScore.ts`**, never in the
   component. The page derives everything (runtime, progress, the setup
   summary) from `score.length`, so the score can grow or shrink freely.
+- **Score v3 (27 Aug, second owner brief) — the diagnosis broadened.** Cards
+  9 to 13 rewritten so the film speaks to **marketing leaders and growth-stage
+  founders at once**, without splitting into two propositions. The shared
+  territory is the gap between ambition and the organisation's present ability
+  to make it real. Card 9 softened to "rarely lack" (more thoughtful, less
+  absolute). Card 10 is now the **CORE DIAGNOSIS**: "when ambition starts
+  moving faster than the way the business works" — founders hear an operating
+  model outgrown, marketing leaders hear an organisation that cannot execute
+  at the speed of its strategy. Card 11 becomes the **CONSEQUENCE** of 10, not
+  the diagnosis itself. Card 13 gains the founder reassurance, "without
+  flattening what made it good in the first place": operating discipline is
+  not corporatisation. Cards 1 to 8, 12 and 14 to 23 untouched. Runtime
+  **1:36 at 1.0x** (96.2s).
+- ⚠ **Card 13 carries the `○` breath on the customer line, not on a line of
+  its own.** The brief wrote it standalone, but six lines of 64px type ran the
+  text to **91% of viewport height at 1280x720** and overflowed the stage,
+  breaking the page's own rule that nothing which must be read sits near the
+  bottom (the eyes visibly drop on camera). Folded in, it is five lines ending
+  at 79%, inside the stage. **Measure before adding a line to any card**: five
+  is the ceiling at 720px.
 - **Score v2 (27 Aug, owner brief):** 23 cards, replacing the original 21.
   Arc is now WARM → PRACTICAL → CREDIBLE → REFLECTIVE → DIAGNOSTIC → ASSURED →
   EVIDENCE → HUMAN → COMMERCIAL → WARM. The rewrite is more evidence-led: the
@@ -344,7 +364,7 @@ that must be read goes near the bottom.
   long holds; that is the performance, not a bug. Do not normalise them.
 - **`STORE_SCORE` is versioned.** Edits made on the page persist to
   localStorage and would otherwise shadow a new score forever, so **bump the
-  key whenever `SCORE` changes** (`…score.v1` → `v2` for the 23-card rewrite).
+  key whenever `SCORE` changes** (`v1` → `v2` for the 23-card rewrite, `v2` → `v3` for the broadened diagnosis).
 - Markup in the lines is plain text so it survives on-page editing: `**bold**`
   for the thought word, `↑ ↓ ↓↓ → ○ ○○` as coaching marks that vanish with
   VOICE GUIDES off. Three modes read the same data: Script (full lines), Cue
