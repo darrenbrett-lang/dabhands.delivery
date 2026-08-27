@@ -15,7 +15,7 @@ Pick this up cold. The site is **LIVE in production** at `https://dabhands.deliv
 - **⚠ Vercel deploy stalls (FIVE occurrences: 2026-08-14, -16, -17, -18 x2):** a push sometimes builds but never rolls out. Symptom: the old page still serving with `x-vercel-cache: HIT` and a large `age`, new routes 404ing. Fix: `git commit --allow-empty -m "Retrigger Vercel deploy (<sha> not rolled out)"` and push to main; resolves in ~10s every time. The owner has the dashboard task; sessions have no dashboard access and no `gh`/API tokens (git push works via SSH).
 - **Always poll production after a release** (curl for a string unique to the change) — never assume the deploy landed.
 - **Build gates:** `npm run build` + `npm run lint`. Lint carries **2 pre-existing errors in `pages/for/eterna/*`** (plain `<a>`→`<Link>`) and **4 warnings** (2 in `pages/for/eterna/index.tsx`, 2 unused colour consts in `components/SignalToNoise.tsx`). Inherited, not blockers.
-- Routes: `/`, the three doorways, **`/experience`** (in the main nav between Who I help and Contact), **`/signal-to-noise` (UNLISTED, see below)**, **`/feel` (PRIVATE, Basic Auth, see below)**, `/intro` (UNLISTED), `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth, noindex), `/for/manifesto-digital`, `/design-system`. ⚠ The Basic Auth gate lives in **`proxy.ts`** (Next 16 renamed the `middleware` convention to `proxy`); earlier notes in this file call it `middleware.ts`.
+- Routes: `/`, the three doorways, **`/experience`** (in the main nav between Who I help and Contact), **`/signal-to-noise` (UNLISTED, see below)**, **`/feel` (PRIVATE, Basic Auth, see below)**, `/intro` (UNLISTED), **`/script` (UNLISTED, temporary, no auth, see below)**, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth, noindex), `/for/manifesto-digital`, `/design-system`. ⚠ The Basic Auth gate lives in **`proxy.ts`** (Next 16 renamed the `middleware` convention to `proxy`); earlier notes in this file call it `middleware.ts`.
 - Repo: `git@github.com:darrenbrett-lang/dabhands.delivery.git`, Vercel project `dabhands-delivery`.
 
 ## The brand direction (source of truth)
@@ -308,6 +308,47 @@ Built from `FEEL_Emotional_Experience_Method_Master_Deck.pdf` (owner-supplied, p
 7. **The close** (bone). "Where is the value going in your business?", the money couplet with a hard return before "You're paying for it either way.", "Start a conversation", and the PathwayPicker beneath as the soft exit.
 
 **Protected lines.** Reviewers have tried to cut these; they stay: the disclaimer's opening ("None of this is new and I wouldn't pretend it is"), "a thing that belongs to everyone belongs to no one", and the 80/20 evidence pair. **Three previously protected lines were deliberately retired by the owner on 18 Aug** and must not be restored: "Everyone in the middle is doing their job properly. Nobody watches it move." (was the caption), "…the part that comes with experience." (was the disclaimer's ending), and the name line.
+
+### `/script` — the performance director (26 Aug, score rewritten 27 Aug)
+**TEMPORARY.** A rehearsal and recording aid for the 60-second film, not part of
+the site: noindex via `next.config.ts`, and absent from nav, sitemap.xml and
+llms.txt. ⚠ **No Basic Auth** — the gate was built and then REMOVED on the
+owner's instruction (26 Aug) so the tool opens on a device without a password
+mid-take. The URL resolves for anyone who has it, which puts the unrecorded
+script one link away; that is a knowing trade. **Delete `pages/script.tsx`,
+`lib/scriptScore.ts` and the `next.config.ts` entry together when the film is
+shot.**
+
+The governing idea is a director sitting under the lens, **not an autocue**.
+One thought owns the screen; nothing scrolls, nothing slides. Timing *suggests*
+rather than enforces: when a thought's speaking time is up the card stays fully
+readable and the next ghosts in underneath, so being a second slow costs
+nothing. Reading text sits in the upper-middle of the viewport, because the
+laptop lives under the lens and eye movement has to stay invisible. Nothing
+that must be read goes near the bottom.
+
+- **All performance data lives in `lib/scriptScore.ts`**, never in the
+  component. The page derives everything (runtime, progress, the setup
+  summary) from `score.length`, so the score can grow or shrink freely.
+- **Score v2 (27 Aug, owner brief):** 23 cards, replacing the original 21.
+  Arc is now WARM → PRACTICAL → CREDIBLE → REFLECTIVE → DIAGNOSTIC → ASSURED →
+  EVIDENCE → HUMAN → COMMERCIAL → WARM. The rewrite is more evidence-led: the
+  new **PROOF run (cards 14 to 16)** — walked into programmes / "Six weeks
+  later..." / a number and a decision — and a new **WHAT I DO pair (12, 13)**
+  ending on the strategy → system → customer through-line. The pivot moved
+  from card 10 to **card 8** ("Here's what I notice."), and the old
+  diagnosis split into an unfinished card 10 that hands over to card 11's
+  "nobody is managing". Runtime is unchanged at **1:30 at 1.0x** (90.7s, was
+  89.9s) and 1:53 to 1:15 across the pace range.
+- **Durations are deliberately uneven.** Cards 8, 11, 15, 16 and 19 carry the
+  long holds; that is the performance, not a bug. Do not normalise them.
+- **`STORE_SCORE` is versioned.** Edits made on the page persist to
+  localStorage and would otherwise shadow a new score forever, so **bump the
+  key whenever `SCORE` changes** (`…score.v1` → `v2` for the 23-card rewrite).
+- Markup in the lines is plain text so it survives on-page editing: `**bold**`
+  for the thought word, `↑ ↓ ↓↓ → ○ ○○` as coaching marks that vanish with
+  VOICE GUIDES off. Three modes read the same data: Script (full lines), Cue
+  (anchors only), Own It (beat and intent only).
 
 ### Private pages
 `/for/eterna` hub → Confidence Map + First Response proposals, Basic Auth + noindex + X-Robots-Tag, not in sitemap/llms.txt. Bespoke cream-and-gold house style (Fraunces/Hanken) on the Confidence Map.
