@@ -26,7 +26,7 @@ import { Footer } from '@/components/Footer';
  */
 
 /**
- * The 60-second hello. Fill both in to switch the film on: `embed` is the
+ * The film, a quick hello. Fill both in to switch the film on: `embed` is the
  * unlisted Vimeo/YouTube player URL, `poster` an image in /public.
  *
  * While `embed` is null the panel shows the portrait and "Film to follow." When
@@ -435,7 +435,7 @@ export default function Intro() {
                 {FILM.embed && playing ? (
                   <iframe
                     src={`${FILM.embed}${FILM.embed.includes('?') ? '&' : '?'}autoplay=1`}
-                    title="A 60-second hello from Darren Brett"
+                    title="A quick hello from Darren Brett"
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowFullScreen
                     loading="lazy"
@@ -446,7 +446,7 @@ export default function Intro() {
                 )}
               </div>
               <div className="i-filmtxt">
-                <Kicker>A 60-second hello</Kicker>
+                <Kicker>A quick hello</Kicker>
                 <p className="ph">{FILM.embed ? 'Sixty seconds, and you will know.' : 'Film to follow.'}</p>
                 {FILM.embed && !playing && (
                   <button type="button" className="i-play" onClick={() => setPlaying(true)}>
