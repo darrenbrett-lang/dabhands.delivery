@@ -42,7 +42,7 @@ const FILM: { embed: string | null; poster: string; alt: string } = {
 const TURNS = [
   { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work people can do, in an order, with someone accountable for each part.' },
   { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that have to hand over to each other do it on time, effectively and without anyone chasing.' },
-  { from: 'Important work', to: 'real results.', note: 'What reaches the customer is what you decided to build, and it returns what you expected of it.' },
+  { from: 'Important work', to: 'real results.', note: 'What reaches the customer is what you decided to make or build, and it returns what you expected of it.' },
 ];
 
 // Trimmed to an even measure (78 to 81 characters) so the four columns set to
@@ -223,7 +223,7 @@ export default function Intro() {
         }
 
 
-        .i-lede { padding:0 0 84px; }
+        .i-lede { padding:74px 0 84px; }
         .i-lede .name { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.06; letter-spacing:-1.6px; color:var(--blue); max-width:1000px; }
         .i-br { display:none; }
         @media (min-width:901px) { .i-br { display:inline; } }
@@ -457,7 +457,7 @@ export default function Intro() {
             </div>
           </section>
 
-          {/* ── cream · transcript, lede, the three sections ─────── */}
+          {/* ── cream · lede, the three sections ────────────────── */}
           <div className="i-in">
 
             <div className="i-lede" data-r>
