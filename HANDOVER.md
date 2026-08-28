@@ -145,6 +145,29 @@ Copy refreshed 25 Aug: heading **"Let's talk."**, then two paragraphs ("You do n
 
 The "here's Darren" page: Ian's ICOM pre-sell, the LinkedIn Featured link, and the leave-behind for every warm introducer. One canonical shareable URL.
 
+- **⚠ The reveal failsafe reveals only what is ON SCREEN (28 Aug).** It used
+  to add `.in` to every `[data-r]` on a flat 1.6s timer. Because **every
+  `[data-r]` on this page starts below the fold**, that meant the whole page
+  was revealed before the reader ever reached it, and the owner rightly called
+  the page "very static". Note the trap: "has the observer fired yet" does
+  **not** work as the test here, precisely because nothing is in view at load —
+  a dead observer and an unscrolled page look identical. Catching up on what is
+  in view distinguishes them, and still covers the case the net was written for
+  (a non-scrolling preview pane, where the viewport is the whole document). A
+  genuinely dead observer additionally gets a scroll listener. Verified by
+  scroll progression: 0 → 1 → 3 → 5 → 7 → 8.
+- **The draw-in is 20px over .62s** on `cubic-bezier(.22,1,.36,1)`, children
+  stepping at .09s. The old 8px over .2s was invisible — it finished before the
+  eye arrived. If it ever needs tuning, tune the distance before the duration.
+- **The close CTA carries the `PathwayPicker`** (28 Aug), replacing the "or go
+  to the website →" link. It takes the new **`preferAbove`** prop, which opens
+  the panel over the trigger wherever it fits, because here the trigger is the
+  last thing on the page. ⚠ The picker's own root is `inline-block`, so it
+  needs the block `.i-paths` wrapper or it sits **alongside** the Book a call
+  button instead of under it. While open, the panel covers the Book a call
+  button; that is inherent to opening upward at the foot of the page.
+- The **"Shared privately. Not listed on the site."** line was removed (28 Aug,
+  owner's call). The page is still unlisted; it simply no longer says so.
 - **No header at all (28 Aug).** The minimal masthead (mark + role line) was
   REMOVED on the owner's instruction. The page now opens straight onto the
   hero, which carries the **full lockup — crown beside the "DAB Hands" serif

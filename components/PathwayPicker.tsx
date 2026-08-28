@@ -39,7 +39,11 @@ const EDGE = 16; // the panel never comes closer than this to a viewport edge
 
 type Pos = { left: number; top?: number; bottom?: number; maxHeight?: number };
 
-export const PathwayPicker = () => {
+/** `preferAbove` opens the panel over the trigger wherever it fits, for pages
+    that put the picker at the very end of the page (/intro's close), where
+    opening downwards would push it off the bottom. It still falls back to
+    below when there is genuinely no room above. */
+export const PathwayPicker = ({ preferAbove = false }: { preferAbove?: boolean }) => {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
@@ -69,11 +73,12 @@ export const PathwayPicker = () => {
     const centre = t.left + t.width / 2;
     const left = w >= vw - EDGE * 2 ? vw / 2 : Math.min(Math.max(centre, half + EDGE), vw - half - EDGE);
 
-    // Flip up only when the panel genuinely cannot fit beneath the trigger.
-    const flip = h > below && above > below;
+    // Flip up only when the panel genuinely cannot fit beneath the trigger,
+    // or when the caller has asked for above and there is room for it.
+    const flip = preferAbove ? h <= above || above > below : h > below && above > below;
     const room = Math.max(flip ? above : below, 200);
     setPos(flip ? { left, bottom: vh - t.top + GAP, maxHeight: room } : { left, top: t.bottom + GAP, maxHeight: room });
-  }, []);
+  }, [preferAbove]);
 
   const show = useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);

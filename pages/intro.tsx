@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
 import { Footer } from '@/components/Footer';
+import { PathwayPicker } from '@/components/PathwayPicker';
 
 /**
  * /intro — the forwardable "here's Darren" page.
@@ -40,7 +40,7 @@ const FILM: { embed: string | null; poster: string; alt: string } = {
 };
 
 const TURNS = [
-  { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work people can do, in an order, with someone accountable for each part.' },
+  { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work that adds up to growth, and you can measure whether it’s working while it moves.' },
   { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that depend on each other move together, without losing time or intent on the way.' },
   { from: 'Important work', to: 'real results.', note: 'What reaches the customer is what you decided to make or build, and it returns what you expected of it.' },
 ];
@@ -127,27 +127,56 @@ export default function Intro() {
   const quotes = useCarousel(QUOTES.length, 6800);
 
   // One IntersectionObserver for every [data-r]. The `.js` class on <html> arms
-  // the hidden state, so with JavaScript off nothing is ever hidden. The 1.6s
-  // failsafe reveals everything if the observer never fires — a non-scrolling
-  // preview pane or an embed, which is not hypothetical: it happens.
+  // the hidden state, so with JavaScript off nothing is ever hidden.
+  //
+  // ⚠ The failsafe reveals only what is ALREADY ON SCREEN, never the whole
+  // page. It used to add `in` to every [data-r] on a flat 1.6s timer, so
+  // unless you scrolled within 1.6s of load — nobody does — everything below
+  // the fold was revealed before you reached it and the page read as static.
+  // Note that every [data-r] on this page starts below the fold, so "has the
+  // observer fired yet" cannot tell a dead observer from a page nobody has
+  // scrolled: catching up on what is in view is the test that works for both.
+  // In a non-scrolling preview pane or an embed the viewport is the whole
+  // document, so everything is in view and everything still reveals, which is
+  // the case the net was written for. A dead observer also gets a scroll
+  // listener, so the page can never strand content at zero opacity.
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add('js');
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-r]'));
     const revealAll = () =>
       document.querySelectorAll<HTMLElement>('[data-r]').forEach((n) => n.classList.add('in'));
+    /* Reveal anything whose top has reached the bottom of the viewport, and
+       leave everything further down to the observer. */
+    const catchUp = () =>
+      document.querySelectorAll<HTMLElement>('[data-r]').forEach((n) => {
+        if (n.getBoundingClientRect().top < window.innerHeight) n.classList.add('in');
+      });
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       revealAll();
       return () => root.classList.remove('js');
     }
+    let observed = false;
     const io = new IntersectionObserver(
-      (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
-      { rootMargin: '0px 0px -6% 0px', threshold: 0.04 },
+      (es) => es.forEach((e) => {
+        if (e.isIntersecting) { observed = true; e.target.classList.add('in'); io.unobserve(e.target); }
+      }),
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.04 },
     );
     nodes.forEach((n) => io.observe(n));
-    const failsafe = window.setTimeout(revealAll, 1600);
-    return () => { io.disconnect(); window.clearTimeout(failsafe); root.classList.remove('js'); };
+    const failsafe = window.setTimeout(() => {
+      catchUp();
+      // Nothing at all reported, and something above the fold should have:
+      // treat the observer as dead and drive the reveals off scroll instead.
+      if (!observed) window.addEventListener('scroll', catchUp, { passive: true });
+    }, 1600);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(failsafe);
+      window.removeEventListener('scroll', catchUp);
+      root.classList.remove('js');
+    };
   }, []);
 
   return (
@@ -330,21 +359,30 @@ export default function Intro() {
         .i-close { padding:100px 0 44px; text-align:center; }
         .i-close .crown { display:block; margin:0 auto 26px; height:48px; width:auto; user-select:none; }
         .i-close h2 { font-family:var(--font-serif); font-size:44px; line-height:1.1; font-weight:400; letter-spacing:-.8px; max-width:22ch; margin:0 auto 34px; }
+        .i-paths { display:block; }
         .i-btn { display:inline-flex; align-items:center; gap:12px; background:var(--blue); color:var(--cream); padding:17px 36px; border-radius:40px; font-size:16px; font-weight:500; }
-        .i-alt { margin-top:22px; font-size:15px; color:var(--stone); }
-        .i-alt a { color:var(--blue); text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; }
-        .i-private { padding:0 0 44px; text-align:center; font-size:13px; letter-spacing:.02em; color:var(--stone); }
 
         .i a:focus-visible, .i button:focus-visible { outline:2px solid var(--blue); outline-offset:3px; border-radius:4px; }
 
         /* Fade and an 8px rise, once, nothing after. */
-        html.js .i [data-r] { opacity:0; transform:translateY(8px); }
-        html.js .i [data-r].in { opacity:1; transform:none; transition:opacity .2s ease, transform .2s ease; }
-        html.js .i [data-r].in > * { animation:i-rise .2s ease both; }
-        html.js .i [data-r].in > *:nth-child(2) { animation-delay:.06s; }
-        html.js .i [data-r].in > *:nth-child(3) { animation-delay:.12s; }
-        html.js .i [data-r].in > *:nth-child(4) { animation-delay:.18s; }
-        @keyframes i-rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+        /* 8px over .2s was invisible: it arrived before the eye reached it.
+           The draw-in travels 34px over .82s on a hard ease-out, so it enters
+           with real velocity and settles rather than fading. The faint scale
+           gives the block somewhere to travel from without any bounce, which
+           would read as playful and is wrong for this page. Children step
+           .13s behind each other, far enough apart to be read as a sequence. */
+        html.js .i [data-r] { opacity:0; transform:translateY(34px) scale(.988); }
+        html.js .i [data-r].in {
+          opacity:1; transform:none;
+          transition:opacity .82s cubic-bezier(.16,1,.3,1), transform .82s cubic-bezier(.16,1,.3,1);
+        }
+        html.js .i [data-r].in > * { animation:i-rise .82s cubic-bezier(.16,1,.3,1) both; }
+        html.js .i [data-r].in > *:nth-child(2) { animation-delay:.13s; }
+        html.js .i [data-r].in > *:nth-child(3) { animation-delay:.26s; }
+        html.js .i [data-r].in > *:nth-child(4) { animation-delay:.39s; }
+        html.js .i [data-r].in > *:nth-child(5) { animation-delay:.52s; }
+        html.js .i [data-r].in > *:nth-child(6) { animation-delay:.65s; }
+        @keyframes i-rise { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:none; } }
 
         @media (prefers-reduced-motion: reduce) {
           html.js .i [data-r], html.js .i [data-r].in > * { opacity:1; transform:none; transition:none; animation:none; }
@@ -467,7 +505,7 @@ export default function Intro() {
                 agencies and growth-stage brands.
               </p>
               <p className="then">
-                I make sure important work actually delivers. I help set the direction, then hold every moving part together, in the delivery detail and in the boardroom, until what was decided is what the customer actually gets.
+                I make sure important work actually delivers. I help set the direction, then hold every moving part together, in the delivery detail and in the boardroom, until what was decided is what the business and customer actually get.
               </p>
             </div>
           </div>
@@ -602,11 +640,13 @@ export default function Intro() {
               <a className="i-btn" href="mailto:darren@dabhands.delivery?subject=Keeping%20important%20work%20moving">
                 Book a call →
               </a>
-              <p className="i-alt">
-                <Link href="/">or go to the website →</Link>
-              </p>
+              {/* The picker's own root is inline-block, so it needs a block
+                  wrapper here or it sits alongside the Book a call button
+                  instead of under it, the way the old text link did. */}
+              <div className="i-paths">
+                <PathwayPicker preferAbove />
+              </div>
             </section>
-            <p className="i-private">Shared privately. Not listed on the site.</p>
           </div>
         </main>
       </div>
