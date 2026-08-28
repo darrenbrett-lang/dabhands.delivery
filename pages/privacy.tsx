@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Layout } from '@/components/Layout';
 import { SeoMeta } from '@/components/SeoMeta';
 
@@ -12,15 +11,17 @@ import { SeoMeta } from '@/components/SeoMeta';
  * Indexable, unlike the FEEL routes. A privacy notice that search engines
  * cannot reach is not much of a notice.
  *
- * ⚠ THREE GAPS remain, marked with .p-gap so the page cannot be published
- * looking finished. Search this file for `p-gap` before going live:
- *   1. the publication date
- *   2. the ICO registration reference (the Z-format one, not the application
- *      number C2017276)
- *   3. the mailbox provider, and the Vercel Functions region
+ * Published 28 August 2026. The three gaps it shipped with are closed: the
+ * publication date, the ICO registration reference (ZC232396 — the register
+ * entry, never the CSN security number, which is a credential), and the
+ * mailbox provider plus the Vercel Functions region.
+ *
+ * ⚠ The "processed in London" claim under Who else sees it is only true while
+ * `vercel.json` pins functions to `lhr1`. If that region ever changes, this
+ * notice is wrong and must change in the same commit.
  */
 
-const UPDATED = '[date of publication]';
+const UPDATED = '28 August 2026';
 
 export default function Privacy() {
   return (
@@ -29,11 +30,6 @@ export default function Privacy() {
         title="Privacy notice | DAB Hands"
         description="How DAB Hands Delivery Ltd collects, uses and protects personal information."
         path="/privacy"
-        /* ⚠ TEMPORARY. This page is site-wide and belongs in the index, but it
-           still has unfilled gaps and a warning box. noindex until those are
-           done, then REMOVE this prop, restore the footer link in
-           components/Footer.tsx and the sitemap entry. */
-        noindex
       />
 
       <style>{`
@@ -64,17 +60,6 @@ export default function Privacy() {
         .p-table td:first-child { color:var(--color-ink); font-weight:600; width:22%; }
         .p-wrap { overflow-x:auto; }
 
-        /* Unfilled. Deliberately loud. */
-        .p-gap {
-          background:#F6E6C4; color:#5A4212; padding:1px 7px; border-radius:2px;
-          font-weight:600; box-decoration-break:clone; -webkit-box-decoration-break:clone;
-        }
-        .p-note {
-          margin:64px 0 0; padding:22px 24px; border:1px solid var(--color-gold);
-          border-radius:3px; background:rgba(192,151,74,.07);
-        }
-        .p-note p { margin:0; font-size:15.5px; max-width:none; }
-
         @media (max-width:860px) {
           .p-doc p, .p-doc li { font-size:16px; }
           .p-doc h2 { margin-top:46px; padding-top:22px; }
@@ -88,7 +73,7 @@ export default function Privacy() {
           <p className="text-[11px] tracking-[0.18em] uppercase font-semibold text-graphite mb-6">Privacy notice</p>
           <h1>How we handle your information.</h1>
           <p className="p-lede">
-            Last updated: <span className="p-gap">{UPDATED}</span>
+            Last updated: {UPDATED}
           </p>
 
           <h2>Who we are</h2>
@@ -97,8 +82,7 @@ export default function Privacy() {
             <strong>DAB Hands Delivery Ltd</strong><br />
             Company number 17209121<br />
             4 Bray Road, Maidenhead, England, SL6 1UE<br />
-            Registered with the Information Commissioner’s Office, reference{' '}
-            <span className="p-gap">[ICO registration reference]</span>
+            Registered with the Information Commissioner’s Office, reference ZC232396
           </address>
           <p>
             If you have a question about this notice, or you want to exercise any of the rights
@@ -288,16 +272,6 @@ export default function Privacy() {
             the date at the top. If the change is significant and we hold your details, we will tell
             you.
           </p>
-
-          <div className="p-note">
-            <p>
-              <strong>Not ready to publish.</strong> Two things are still unfilled, marked in
-              amber above: the publication date and the ICO registration reference. The Vercel
-              Functions region must also be set to <code>lhr1</code> before the transfer wording
-              above is true. Remove this box once they are done.{' '}
-              <Link href="/feel">The FEEL form</Link> already links here.
-            </p>
-          </div>
         </div>
       </section>
     </Layout>

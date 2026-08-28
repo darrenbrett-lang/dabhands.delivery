@@ -298,7 +298,7 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 
 ### The FEEL section (new, 26 Aug) — ⚠ COMMITTED BUT NOT DEPLOYED
 
-**Commit `0373c20` is on the branch and has NOT been pushed. Do not push it without reading the blockers below.** Deploying as-is puts a visibly unfinished `/privacy` on every page and a form that returns 500.
+**Not pushed. Do not push without reading the blockers below.** `/privacy` is now finished and publishable (28 Aug), but the FEEL form still returns 500 until `FEEL_COOKIE_SECRET` exists and the HubSpot field name is confirmed. Deploying now would put a live form that fails on a page people are being sent to.
 
 **Routes.** `/feel` is the public-but-unlisted capture page. `/feel/method` is the 22-slide deck, moved there from `/feel` and gated. `/feel/:path*` carries a noindex route header, so future FEEL routes are covered by default. Neither is in the nav, `sitemap.xml` or `llms.txt`.
 
@@ -314,18 +314,28 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 
 **The email.** `email/FEEL_Confirmation_Email.html`, to be imported into HubSpot Design Manager and set as the form's follow-up. ⚠ Option A depends on the portal having **Marketing Hub Starter or above** — check Forms → FEEL Gate → Options → "Send a follow-up email". If it is greyed out, the whole no-extra-sub-processor argument collapses and an email provider comes back. Four placeholders remain in the template.
 
-**`/privacy` (new).** Site-wide, **indexable** (unlike the FEEL routes), in the sitemap, linked from the footer of every page via `components/Footer.tsx`. Sub-processors are HubSpot (EU), Vercel (UK once `lhr1` is set) and Google Workspace (EU/US, DPF UK Extension confirmed active at build time). ⚠ Two amber `.p-gap` markers and a bordered warning box remain; the box must come out when they are filled.
+**`/privacy` — FINISHED 28 Aug.** Site-wide, **indexable** (unlike the FEEL routes), in the sitemap, linked from the footer of every page via `components/Footer.tsx`. Sub-processors are HubSpot (EU), Vercel (UK, pinned) and Google Workspace (EU/US, DPF UK Extension confirmed active at build time).
+
+The three-part holdback from 27 Aug is **fully reversed**, all in one commit as intended: the `noindex` prop is gone, the footer link is back, and the sitemap entry is back with `lastmod 2026-08-28`. Both amber `.p-gap` markers and the "Not ready to publish" box are gone, along with their CSS; the `next/link` import went with the box.
+
+- **ICO registration reference is `ZC232396`**, owner-supplied 28 Aug, set in the `<address>` block. ⚠ This is the **register entry**, which is public by design. It is **not** the `CSN` security number, which is a credential and must never appear on the page or in the repo.
+- **Published date is `28 August 2026`**, in the `UPDATED` const at the top of the file. Change it whenever the notice's substance changes, per its own "Changes to this notice" section.
+- **⚠ `vercel.json` is new and load-bearing.** It pins `"regions": ["lhr1"]` so Vercel Functions run in London. The notice asserts *"Your form submission is processed in the United Kingdom"* as **fact**, so that file is not configuration tidy-up: it is what makes a published legal statement true. If the region ever changes, the notice is wrong and must change in the same commit. There was no `vercel.json` before this; a project-settings Function Region would also work, but code is versioned and a dashboard toggle is not. ⚠ **Confirm on the first deploy** that the functions actually report `lhr1`.
 
 **Analytics.** Vercel Web Analytics and Speed Insights in `_app.tsx`, site-wide. **Cookieless**, so the site still needs no consent banner: the only cookie anywhere is `feel_access`, which is strictly necessary. Verified by polling storage for 8s while both ran — nothing written. ⚠ That was the **development debug build**; re-check in production once the dashboard toggles are on.
 
 **⚠ BLOCKERS before pushing**, in the order they bite:
 
-1. **ICO registration reference** (begins Z, A or C). ⚠ **Not** the `CSN` security number, which is a credential and must never be published.
-2. **Publication date** on `/privacy`, then remove the warning box.
-3. **`lhr1`** as the Vercel Functions region. The notice now asserts UK processing as fact, so this is a correctness dependency, not a tidy-up.
-4. **`FEEL_COOKIE_SECRET`** in Vercel, freshly generated.
-5. **The open question's HubSpot property.** Code holds `what_are_you_trying_to_fix_optional`; a later brief said the default `message`. **A wrong internal name makes HubSpot reject the entire submission**, not just that field. Overridable with `HUBSPOT_ISSUE_FIELD`.
+~~1. **ICO registration reference**~~ **DONE 28 Aug**, `ZC232396`.
+~~2. **Publication date**~~ **DONE 28 Aug**, and the warning box is out.
+~~3. **`lhr1`**~~ **DONE 28 Aug** in `vercel.json`; verify it reports London on the first deploy.
+
+**Still blocking, and all four are the owner's to do — none can be done from the repo:**
+
+4. **`FEEL_COOKIE_SECRET`** in Vercel, freshly generated. Until it exists the gate **fails closed**: the form appears to work and the deck never opens.
+5. **The open question's HubSpot property.** Code holds `what_are_you_trying_to_fix_optional`; a later brief said the default `message`. **A wrong internal name makes HubSpot reject the entire submission**, not just that field, so the form 500s for everyone. Overridable with `HUBSPOT_ISSUE_FIELD` — check the real internal name in HubSpot before pushing.
 6. Enable Analytics and Speed Insights in the dashboard.
+7. **The `/feel` indexing decision, deliberately still open.** The brief (§2, §9) makes `/feel` the first **indexed** public page in the practice. It is currently `noindex, nofollow` in both the `SeoMeta` prop and the `next.config.ts` route header, and absent from nav, `sitemap.xml` and `llms.txt`. That was right while the notice was unfinished; it is now only gated on the form actually working. **Flipping it is four coordinated edits** — the `noindex` prop in `pages/feel/index.tsx`, the `/feel` route header (leave `/feel/:path*` noindexed so the deck stays shut), a `sitemap.xml` entry, and `llms.txt` — plus the `og:type` `article` and `Article` JSON-LD the brief asks for. **Do not flip it until 4 and 5 are green**, or the first indexed page in the practice is one whose only action returns 500.
 
 ### `/feel/method` — the FEEL method deck (new, 26 Aug)
 
