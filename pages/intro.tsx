@@ -488,7 +488,7 @@ export default function Intro() {
                 ))}
               </div>
               <p className="i-payoff" data-r>
-                All three pay off in the same two places. More margin in how you operate, and more return from what reaches the customer.
+                All three pay off in the same place: the bottom line. More margin in how you operate, and more return from what reaches the customer.
               </p>
             </section>
 
