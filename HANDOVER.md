@@ -145,6 +145,70 @@ Copy refreshed 25 Aug: heading **"Let's talk."**, then two paragraphs ("You do n
 
 The "here's Darren" page: Ian's ICOM pre-sell, the LinkedIn Featured link, and the leave-behind for every warm introducer. One canonical shareable URL.
 
+### The film player (`components/FilmPlayer.tsx`, new 28 Aug)
+**Built and verified, but DORMANT: `FILM.src` is `null` until the film exists.**
+While it is null the panel renders exactly what it does today, the portrait and
+"Film to follow." Set `src` and the panel switches to a 16:9 stage with the
+player, because a 16:9 film cropped into the portrait's tall column is
+unwatchable.
+
+- **Dependency-free by choice.** A native `<video>` with its chrome hidden and
+  ours on top. The film is meant to be **owned**: no YouTube or Vimeo, no
+  third-party script, no branding, no recommendations, no tracking.
+- **Hosting is still undecided.** Recommendation on the table: a self-hosted
+  H.264 MP4 on object storage behind a CDN (Cloudflare R2 with a custom domain,
+  or Vercel Blob for least friction). **Do not put the file in `/public`** — it
+  bloats the repo and every deploy.
+- ⚠ **Do not add `crossOrigin` to the `<video>`.** It was there and was removed:
+  the attribute forces CORS on the *media* resource too, which would break a
+  cross-origin MP4 whose bucket sends no CORS headers — exactly where the film
+  is going. The captions are same-origin, so it buys nothing.
+- **Captions: `public/captions/intro-en.vtt`.** CC is **off by default
+  and driven ONLY by the CC button.** The track is `hidden`, never `disabled`,
+  so cues are parsed and the first press is instant.
+- ⚠ **Mute and CC are deliberately INDEPENDENT.** The first build turned
+  captions on automatically when the film was muted (the reasoning: forwarded
+  links get opened with the sound down). In use the owner read it as the volume
+  control toggling the captions, and rejected it — correctly: one button
+  silently changing another reads as a bug however good the intent. **Do not
+  re-add the coupling** thinking it is a missing feature.
+- **Fullscreen hides the controls on inactivity even when PAUSED**, and hides
+  the cursor with them (`.fp-full:not(.fp-wake) { cursor:none }`); windowed, a
+  pause holds them open. `wake()` reads fullscreen from `fullRef`, not state,
+  because it is memoised with no deps. The shell takes focus on entering
+  fullscreen, or the keyboard shortcuts have nothing focused to fire against.
+- ⚠ **REGENERATE THE VTT WHENEVER THE SCORE CHANGES.** This was missed once
+  already: the 28 Aug close removed "Start small. No big bet." from the score,
+  and the captions kept saying it until a grep caught it. The captions are a
+  second copy of the script and do not follow the score on their own.
+- ⚠ **The VTT is a FIRST DRAFT generated from `lib/scriptScore.ts`.** The cue
+  *text* is exact; the *timings* are derived from the score's speak and hold
+  durations, so they follow the rehearsed pace, not the recorded one.
+  **Re-time them against the actual film before the captions go live.** The
+  generator split each card's speaking time across its lines by character
+  count. Currently 51 cues, 96.65s, matching the score.
+- Keyboard: space/k play, arrows seek, m mute, c captions, f fullscreen, and
+  keys only fire while focus is inside the player so the page keeps its own.
+- **Verification note:** there is no ffmpeg on this machine. A 12s placeholder
+  MP4 was generated with **AVFoundation via `swift`** (the script is in the
+  session scratchpad; CoreText attribute keys must be used directly, as
+  `NSAttributedString.Key` needs AppKit). Verified: play, pause, seek, progress
+  fill, captions independent of mute in every combination, cue activation, the
+  keyboard, and the windowed chrome timings. ⚠ **The preview pane blocks
+  `requestFullscreen`**, so fullscreen cannot be tested there — the owner
+  confirmed it by hand in a normal tab.
+- **Phones get a PORTRAIT CUT (`portraitSrc`), not the landscape film cropped.**
+  Below 640px the player switches file and goes to a 9:16 stage capped at
+  78svh; tablets keep the landscape cut, because at 768px a 16:9 film is still
+  a real watch. Only one file is ever loaded for a given viewport. The `key` on
+  the `<video>` forces a fresh element when the cut changes. This means **the
+  film needs shooting or mastering twice**, landscape and portrait.
+- ⚠ **Supply `portraitPoster` too.** Without it the portrait stage falls back
+  to the landscape headshot and crops to a tight band across the eyes.
+- ⚠ **`public/film/placeholder.mp4` and `placeholder-portrait.mp4` are TEMPORARY**, for looking at the player
+  only, and `FILM.src` currently points at it. **Delete both files and set `src` and
+  `portraitSrc` back to `null` (or to the real CDN urls) before this ships.**
+
 - **⚠ The reveal failsafe reveals only what is ON SCREEN (28 Aug).** It used
   to add `.in` to every `[data-r]` on a flat 1.6s timer. Because **every
   `[data-r]` on this page starts below the fold**, that meant the whole page

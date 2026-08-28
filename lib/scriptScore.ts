@@ -17,6 +17,10 @@
  * The arrows and circles are coaching marks, not script: they render small and
  * dim, and disappear entirely with VOICE GUIDES off.
  *
+ * ⚠ Editing the words here does NOT update the film's captions.
+ * public/captions/intro-en.vtt is generated from this file; regenerate it on
+ * any script change or the captions will speak lines that no longer exist.
+ *
  * ⚠ Five lines is the ceiling for fullText. Six lines of 64px type runs the
  * reading text to 91% of viewport height at 1280x720, past the point where the
  * eyes visibly drop on camera. Split the thought across two cards instead.
@@ -283,12 +287,12 @@ export const SCORE: Card[] = [
   {
     id: 23,
     beat: 'VALUE',
-    intent: 'RELAXED',
-    fullText: ['**Start small**. ↓ ○', '**No big bet**. ↓ ○', 'I work for **impact** →', 'not to **burn hours**. ↓↓ ○○'],
-    cueText: ['START SMALL · NO BIG BET', 'IMPACT → NOT HOURS'],
+    intent: 'QUIETLY CERTAIN',
+    fullText: ['I work for **impact** →', 'not to burn **hours**. ↓↓ ○○'],
+    cueText: ['IMPACT → NOT HOURS'],
     voiceDirection:
-      '“Start small. No big bet.” removes the risk. A tiny natural smile is okay. Then slightly firmer for “I work for impact, not to burn hours.” Not an attack on consultants or hourly billing. Simply a statement about how you work.',
-    speakDuration: 5.0,
+      'Quiet certainty. Not aggressive, and not a criticism of consultants or time-based billing. Simply a statement about how you approach an engagement. Land on “impact” as the important idea: “not to burn hours” is the contrast, not the punchline.',
+    speakDuration: 3.0,
     holdDuration: 1.2,
   },
   {

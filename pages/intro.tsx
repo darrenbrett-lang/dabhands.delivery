@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
 import { Footer } from '@/components/Footer';
+import { FilmPlayer } from '@/components/FilmPlayer';
 import { PathwayPicker } from '@/components/PathwayPicker';
 
 /**
@@ -33,10 +34,29 @@ import { PathwayPicker } from '@/components/PathwayPicker';
  * the film exists it replaces the portrait in the same frame, with the same
  * vignette and a play control in blue, never gold.
  */
-const FILM: { embed: string | null; poster: string; alt: string } = {
-  embed: null,
+/* The film. `src` is a self-hosted H.264 MP4 on object storage behind a CDN —
+   deliberately not YouTube or Vimeo, so the film stays owned: no third-party
+   player, no branding, no recommendations, no tracking. Set `src` and the panel
+   switches from the portrait to the player; leave it null and the page reads
+   "Film to follow." exactly as it does today.
+   `captions` is a WebVTT file. Drop it to null and the player hides its CC
+   button entirely rather than offering an empty track. */
+const FILM: {
+  src: string | null;
+  poster: string;
+  alt: string;
+  captions: string | null;
+  /* A portrait CUT for phones, not the landscape film cropped. Leave null and
+     phones get the landscape cut at 16:9, which is correct but small. */
+  portraitSrc: string | null;
+  portraitPoster: string | null;
+} = {
+  src: null,
   poster: '/images/darren-brett_colour_headshot.jpeg',
   alt: 'Darren Brett',
+  captions: '/captions/intro-en.vtt',
+  portraitSrc: null,
+  portraitPoster: null,
 };
 
 const TURNS = [
@@ -120,7 +140,6 @@ function useCarousel(count: number, interval: number) {
 }
 
 export default function Intro() {
-  const [playing, setPlaying] = useState(false);
 
   const reasons = useCarousel(SITUATIONS.length, 5200);
   // Quotes get longer than the reasons, so they hold a little longer.
@@ -246,9 +265,15 @@ export default function Intro() {
         .i-filmtxt { padding:64px 56px; display:flex; flex-direction:column; justify-content:center; }
         .i-filmtxt .i-kick { color:var(--gold-lt); }
         .i-filmtxt .ph { font-family:var(--font-serif); font-size:46px; line-height:1.08; color:#fff; margin:18px 0 0; }
-        .i-play {
-          margin-top:26px; display:inline-flex; align-items:center; gap:12px; align-self:flex-start;
-          background:var(--blue); color:#E6E4E0; border-radius:40px; padding:15px 30px; font-size:16px; font-weight:500; cursor:pointer;
+        /* The film's own stage, used only once there is a film. */
+        .i-filmstage { max-width:1180px; margin:0 auto; padding:64px 44px 72px; }
+        .i-filmhead { margin-bottom:30px; }
+        .i-filmhead .i-kick { color:var(--gold-lt); }
+        .i-filmhead .ph { font-family:var(--font-serif); font-size:46px; line-height:1.08; color:var(--cream); margin:18px 0 0; }
+        @media (max-width:900px) {
+          .i-filmstage { padding:44px 22px 50px; }
+          .i-filmhead { margin-bottom:22px; }
+          .i-filmhead .ph { font-size:30px; }
         }
 
 
@@ -447,9 +472,6 @@ export default function Intro() {
       <a href="#top" className="skip-link">Skip to content</a>
 
       <div className="i">
-        <div className="i-in">
-        </div>
-
         <main id="top">
           {/* ── cream · hero, over the clay wash ─────────────────── */}
           <section className="i-herowrap">
@@ -468,31 +490,34 @@ export default function Intro() {
 
           {/* ── charcoal · the film, the anchor ──────────────────── */}
           <section className="i-film">
-            <div className="i-filmgrid">
-              <div className="i-filmwrap">
-                {FILM.embed && playing ? (
-                  <iframe
-                    src={`${FILM.embed}${FILM.embed.includes('?') ? '&' : '?'}autoplay=1`}
-                    title="A quick hello from Darren Brett"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full"
-                  />
-                ) : (
+            {FILM.src ? (
+              /* With a film to show, it gets the whole panel at 16:9 rather
+                 than being cropped into the portrait's tall column. */
+              <div className="i-filmstage">
+                <div className="i-filmhead">
+                  <Kicker>A quick hello</Kicker>
+                  <p className="ph">Ninety seconds to get to know me.</p>
+                </div>
+                <FilmPlayer
+                  src={FILM.src}
+                  poster={FILM.poster}
+                  portraitSrc={FILM.portraitSrc}
+                  portraitPoster={FILM.portraitPoster}
+                  captions={FILM.captions}
+                  title="A quick hello from Darren Brett"
+                />
+              </div>
+            ) : (
+              <div className="i-filmgrid">
+                <div className="i-filmwrap">
                   <Image src={FILM.poster} alt={FILM.alt} fill sizes="(max-width: 900px) 100vw, 45vw" priority />
-                )}
+                </div>
+                <div className="i-filmtxt">
+                  <Kicker>A quick hello</Kicker>
+                  <p className="ph">Film to follow.</p>
+                </div>
               </div>
-              <div className="i-filmtxt">
-                <Kicker>A quick hello</Kicker>
-                <p className="ph">{FILM.embed ? 'Sixty seconds, and you will know.' : 'Film to follow.'}</p>
-                {FILM.embed && !playing && (
-                  <button type="button" className="i-play" onClick={() => setPlaying(true)}>
-                    Play the film <span aria-hidden>→</span>
-                  </button>
-                )}
-              </div>
-            </div>
+            )}
           </section>
 
           {/* ── cream · lede, the three sections ────────────────── */}
