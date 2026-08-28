@@ -145,10 +145,26 @@ Copy refreshed 25 Aug: heading **"Let's talk."**, then two paragraphs ("You do n
 
 The "here's Darren" page: Ian's ICOM pre-sell, the LinkedIn Featured link, and the leave-behind for every warm introducer. One canonical shareable URL.
 
-- **Its own minimal header**, not the site `Layout`: the mark and "Darren Brett", no nav. The **site's standard `Footer` (`variant="none"`)** closes the page (25 Aug) — charcoal bar, crown lockup, LinkedIn, copyright; the plum contact module is suppressed because the page has its own CTA. ⚠ Note this softens the original "no nav out" rule: the footer links home, and there is now an explicit **"or go to the website →"** link under the CTA, both by the owner's decision.
+- **No header at all (28 Aug).** The minimal masthead (mark + role line) was
+  REMOVED on the owner's instruction. The page now opens straight onto the
+  hero, which carries the **full lockup — crown beside the "DAB Hands" serif
+  wordmark — above the h1**. The lockup keeps the old masthead's proportions
+  (crown 22 : gap 10 : serif 21) scaled to the hero's 60px crown, so it is
+  57px type / 27px gap on desktop and 40 / 19 at ≤900px; **size the wordmark
+  off the crown, never by eye**. The hero's `min-height` dropped from
+  `100svh - 268px` to `100svh - 188px` to reclaim the space the masthead used,
+  so the fold and the sliver of charcoal below it are unchanged. The role line
+  under the h1 reads **"Darren Brett · Fractional COO"** (name first, owner's
+  call the same day), and it is now the page's only role clue. The **site's standard `Footer` (`variant="none"`)** closes the page (25 Aug) — charcoal bar, crown lockup, LinkedIn, copyright; the plum contact module is suppressed because the page has its own CTA. ⚠ Note this softens the original "no nav out" rule: the footer links home, and there is now an explicit **"or go to the website →"** link under the CTA, both by the owner's decision.
 - Order: hero → **the film** → proposition → What I turn → When leaders bring me in → Three things about me → proof (`LogoTicker` + Neil Munn) → How we start → close. The close CTA reads **"Book a call"** (25 Aug, was "Start a conversation") and still opens a `mailto` with subject "Keeping important work moving".
 - **⚠ The film is not live yet.** `FILM` at the top of `pages/intro.tsx` holds `embed` (unlisted Vimeo/YouTube player URL) and `poster`. While `embed` is `null` the slot renders a **labelled placeholder** — the real 16:9 frame, the headshot dimmed behind a static play mark, and a "Film to follow." caption — so the page can go out for review with its shape intact. It is deliberately **not a button**: no dead control to click. Setting `embed` swaps in the click-to-load façade (poster first, player only on demand) and drops the placeholder automatically. Shipped in this state 25 Aug for Ian's review.
-- **⚠ The script is never printed.** The reference build carried a "what the film says" caption for the owner's review only. It is spoken, not read. Do not add it.
+- **⚠ The script is never printed. The disclosure is GONE (28 Aug).** The
+  page carried a "Script for the film" `<details>` holding the spoken script,
+  for the owner's review only. It was removed on release, as always intended —
+  data, markup and CSS together, plus the now-unused `Fragment` import and the
+  `.i-sheet` rules. The script is spoken, not read. **Do not reinstate it**,
+  and note the live script now lives only in `lib/scriptScore.ts` for
+  `/script`.
 - The logo strip reuses the canonical `clients` list from `LogoTicker` (13 brands), not the 8 named in the brief. Single source of truth with the homepage and Experience; all 13 are already public elsewhere on the site. It now sits between two gold hairlines as a credential lockup.
 
 **Craft pass (25 Aug).** The page carries its own scoped `<style>` block rather than anything in `globals.css` — it is a self-contained artefact, and `globals.css` does not hot-reload. Type scale is deliberately tighter than the rest of the site: body 15px, lead 17px, section headings 24px/400, tagline serif italic 20px.
@@ -167,7 +183,7 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 
 **The page has its own palette and type scale**, deliberately separate from the site tokens, in a page-scoped `<style>` block (`globals.css` does not hot-reload, and this page is a self-contained artefact). Cream `#F5F1EA`, paper `#FBF9F4`, charcoal `#26282B`, blue `#1B2C3F`, gold `#BA9956` / light gold `#C9A96B`, stone `#6E6A62`, line `#DCD5C8`.
 
-**Surface order is the design.** cream (masthead, hero) → charcoal (the film, the anchor) → cream (transcript, lede, the turns) → **blue** (the carousel) → cream (triptych) → paper (logos) → cream (quote) → **blue-scrimmed photograph** (the offer) → cream (close) → charcoal (site footer). Never let two dark bands touch.
+**Surface order is the design.** cream (hero, no masthead) → charcoal (the film, the anchor) → cream (lede, the turns) → **blue** (the carousel) → cream (triptych) → paper (logos) → cream (quote) → **blue-scrimmed photograph** (the offer) → cream (close) → charcoal (site footer). Never let two dark bands touch.
 
 - **Masthead** is the crown lockup left, `FRACTIONAL COO · DARREN BRETT` right in **charcoal** (was gold; 9.2:1 against the wash).
 - **Hero** is centred with the crown above it, homepage-style, over the **site's clay wash** — the identical gradient the doorway heroes and the Experience header use. ⚠ It must sit on the hero *section*, not the page root: on the root at `100svh` it floods the hero flat on a short viewport instead of fading.
@@ -175,7 +191,7 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 - **Two carousels share one `useCarousel` hook** — reasons at 5.2s, quotes at 6.8s. The hook is where the guarantees live: pause on hover, on keyboard focus and while a finger is down, swipe on touch, no auto-advance under `prefers-reduced-motion`, and slides stacked in a single grid cell so the block never changes height. Change behaviour there, not in a copy.
 - **The testimonial is a three-up carousel** (Neil Munn, Dave Wallace, Anthony Mahon) with gold pips. ⚠ The three quotes are 193/242/145px at full measure, so the block sizes to the tallest and Anthony Mahon's leaves ~97px of slack beneath it. Matching character counts cannot fix this one — only one quote shows at a time. ⚠ Dave Wallace is also quoted on the Business & Agency page with **different** copy; both need to be real.
 - **"When leaders bring me in" is a carousel** — one statement at a time at 48px, cross-fading over 0.9s, auto-advancing every 5.2s, pausing on hover/focus/touch, swipeable, and **not auto-advancing at all under `prefers-reduced-motion`**. Slides share one grid cell so the band never changes height. Pips are the site's carousel idiom (a 12px dot stretching to a 42px pill). With JS off all four stack and nothing is hidden.
-- **The triptych** is three paper panels with a 4px gold spine, the transcript sheet's device. ⚠ Headings are capped at **34px**: the text column is 288px once padding and spine are off, and "An entrepreneur's engine." needs exactly 288px at 36px.
+- **The triptych** is three paper panels with a 4px gold spine (originally the transcript sheet's device, which has since been removed; the triptych owns it now). ⚠ Headings are capped at **34px**: the text column is 288px once padding and spine are off, and "An entrepreneur's engine." needs exactly 288px at 36px.
 - **The close** is centred with the crown above it, at the **site's standard footer-CTA scale** (28/44px serif). The button is the page's blue, not the site's charcoal — an open question, see below.
 - **Link preview**: `public/og-intro.jpg`, the headshot padded onto charcoal at a true 1200×630. The square original gets cropped to a decapitated slice by LinkedIn and Slack, which frame at 1.91:1.
 - **"Shared privately. Not listed on the site."** sits above the footer, on the page rather than in the shared `Footer` component — that footer renders everywhere and the line is only true here.

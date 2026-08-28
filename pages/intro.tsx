@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SeoMeta } from '@/components/SeoMeta';
@@ -20,8 +20,8 @@ import { Footer } from '@/components/Footer';
  *
  * The surface order IS the design. Do not reorder, and never let two dark
  * bands touch:
- *   cream (nav, hero) → charcoal (the film, the anchor) → cream (transcript,
- *   lede, three sections) → paper (logos) → cream (testimonial) → image →
+ *   cream (nav, hero) → charcoal (the film, the anchor) → cream (lede,
+ *   three sections) → paper (logos) → cream (testimonial) → image →
  *   clay (how we start, the one offer) → cream (close)
  */
 
@@ -57,22 +57,6 @@ const SITUATIONS = [
 
 // Trimmed to an even measure (72 to 74 characters) so the three panels set to
 // the same depth.
-// TEMPORARY — the spoken script, shown on the page for review only. Goes with
-// the .i-script disclosure when the film is recorded. Each entry is a stanza,
-// each string a delivery line: the breaks are the owner's breathing marks, so
-// they are rendered rather than flattened to prose.
-const SCRIPT: string[][] = [
-  ['Hi, I’m Darren. Man and boy,', 'I’ve been understanding how to make things go,', 'and work better.'],
-  ['I’m good at holding a lot of moving parts', 'And knowing where every one of them is.'],
-  ['I bring both sides of the brain to work in equal measure', 'I move from logic to vision fast, which makes me a great problem solver.'],
-  ['I’ve spent my working life where ambition has to become reality', 'Tier-one agencies working at scale with major brands.'],
-  ['Then I co-founded an agency of my own and ran ops for seven years', 'I’ve carried the P&L as well as the plan.'],
-  ['Here’s what I notice', 'Organisations don’t lack good thinking', 'They struggle to preserve its impact on the way out', 'It gets traded away in systems and misalignments'],
-  ['I know what it takes to build the operating system of a business', 'And keep the work flowing cleanly through it'],
-  ['I don’t just sweat the mechanics.', 'I care about the work making people feel and act.', 'That’s not just nicer; it sells.'],
-  ['If something important isn’t landing, let’s talk.', 'Start small, no big bet.', 'I work for impact, not to burn hours.'],
-  ['If useful, I’d love to hear from you.'],
-];
 
 const ABOUT = [
   { lead: 'A delivery leader.', rest: 'Twenty years of depth in complex, multi-track delivery that had to land.' },
@@ -173,7 +157,7 @@ export default function Intro() {
           LinkedIn and Slack, which frame at 1.91:1. */}
       <SeoMeta
         title="An introduction to Darren Brett, fractional COO"
-        description="Keeping important work moving. Delivery leader, Digital operator, all entrepreneur’s engine."
+        description="Keeping important work moving. Darren Brett · Fractional COO."
         path="/intro"
         image="/og-intro.jpg"
         noindex
@@ -200,14 +184,17 @@ export default function Intro() {
            button, never a rule longer than three pixels. */
         .i-kick { font-size:11px; letter-spacing:2.8px; font-weight:600; color:var(--gold); text-transform:uppercase; }
 
-        .i-nav { display:flex; justify-content:space-between; align-items:center; padding:26px 0; }
-        .i-nav .mark { display:flex; align-items:center; gap:10px; font-family:var(--font-serif); font-size:21px; letter-spacing:-.01em; }
-        .i-nav .who { font-size:11px; letter-spacing:2.8px; font-weight:600; color:var(--charcoal); text-transform:uppercase; }
+        /* The lockup carries the page on its own now the masthead is gone. It
+           keeps the header's proportions (crown 22 : gap 10 : serif 21) scaled
+           up to the hero crown, so the wordmark grows with the crown rather
+           than being sized by eye. */
+        .i-hero .lockup { display:flex; align-items:center; justify-content:center; gap:27px; margin:0 auto 30px; }
+        .i-hero .wordmark { font-family:var(--font-serif); font-size:57px; line-height:1; letter-spacing:-.01em; color:var(--charcoal); }
 
         /* The hero fills the fold, with the charcoal band showing at the bottom
            edge. Space is placed around the headline, never left below it. */
-        .i-hero { padding:64px 0 76px; display:flex; flex-direction:column; justify-content:center; min-height:calc(100svh - 268px); text-align:center; }
-        .i-hero .crown { display:block; margin:0 auto 30px; height:60px; width:auto; user-select:none; }
+        .i-hero { padding:64px 0 76px; display:flex; flex-direction:column; justify-content:center; min-height:calc(100svh - 188px); text-align:center; }
+        .i-hero .crown { display:block; height:60px; width:auto; user-select:none; }
         .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:96px; line-height:.94; letter-spacing:-3px; margin:0 auto 30px; max-width:15ch; }
         /* One line on desktop; the measure only applies once it has to wrap. */
         .i-hero .sub { font-family:var(--font-sans); font-size:21px; line-height:1.5; color:var(--blue); max-width:44ch; margin:0 auto; }
@@ -235,24 +222,6 @@ export default function Intro() {
           background:var(--blue); color:#E6E4E0; border-radius:40px; padding:15px 30px; font-size:16px; font-weight:500; cursor:pointer;
         }
 
-        /* The transcript reads as a document, not a wall of body copy. Behind a
-           one-way disclosure, the same interaction the rest of the site uses. */
-        .i-script { padding:74px 0; }
-        .i-script summary { list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px; }
-        .i-script summary::-webkit-details-marker { display:none; }
-        .i-script summary .arw {
-          position:relative; display:inline-block; width:17px; height:17px; flex:none;
-          transition:transform .25s cubic-bezier(.4,0,.2,1);
-        }
-        .i-script summary .arw::before,
-        .i-script summary .arw::after { content:""; position:absolute; background:var(--gold); border-radius:1px; }
-        .i-script summary .arw::before { left:0; right:0; top:50%; height:3px; margin-top:-1.5px; }
-        .i-script summary .arw::after { top:0; bottom:0; left:50%; width:3px; margin-left:-1.5px; }
-        .i-script[open] summary .arw { transform:rotate(45deg); }
-        @media (prefers-reduced-motion: reduce) { .i-script summary .arw { transition:none; } }
-        .i-sheet { background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--gold); padding:44px 48px; max-width:820px; margin-top:20px; }
-        .i-sheet p { font-family:var(--font-serif); font-size:19px; line-height:1.72; color:#3F312D; }
-        .i-sheet p + p { margin-top:1.05em; }
 
         .i-lede { padding:0 0 84px; }
         .i-lede .name { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.06; letter-spacing:-1.6px; color:var(--blue); max-width:1000px; }
@@ -384,16 +353,15 @@ export default function Intro() {
         @media (max-width:900px) {
           .i-in { padding:0 22px; }
           .i-hero { padding:38px 0 48px; min-height:0; }
-          .i-hero .crown { height:42px; margin-bottom:22px; }
+          .i-hero .lockup { gap:19px; margin-bottom:22px; }
+          .i-hero .crown { height:42px; }
+          .i-hero .wordmark { font-size:40px; }
           .i-hero h1 { font-size:46px; letter-spacing:-1.2px; margin-bottom:22px; }
           .i-hero .sub { font-size:17px; }
-          .i-nav .who { font-size:9.5px; letter-spacing:1.8px; }
           .i-filmgrid { grid-template-columns:1fr; }
           .i-filmwrap { min-height:300px; }
           .i-filmtxt { padding:34px 22px; }
           .i-filmtxt .ph { font-size:30px; }
-          .i-sheet { padding:26px 22px; }
-          .i-sheet p { font-size:17px; }
           .i-lede { padding-bottom:56px; }
           .i-lede .name { font-size:30px; letter-spacing:-.7px; }
           .i-lede .then { font-size:17px; margin-top:20px; }
@@ -442,14 +410,6 @@ export default function Intro() {
 
       <div className="i">
         <div className="i-in">
-          <div className="i-nav">
-            <span className="mark">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="h-[22px] w-auto select-none" />
-              DAB Hands
-            </span>
-            <span className="who">Fractional COO · Darren Brett</span>
-          </div>
         </div>
 
         <main id="top">
@@ -457,10 +417,13 @@ export default function Intro() {
           <section className="i-herowrap">
             <div className="i-in">
               <div className="i-hero">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+              <span className="lockup">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+                <span className="wordmark">DAB Hands</span>
+              </span>
               <h1>Keeping important work moving.</h1>
-                <p className="sub">Delivery leader, Digital operator, all entrepreneur’s engine.</p>
+              <p className="sub">Darren Brett · Fractional COO</p>
               </div>
             </div>
           </section>
@@ -496,31 +459,6 @@ export default function Intro() {
 
           {/* ── cream · transcript, lede, the three sections ─────── */}
           <div className="i-in">
-            {/*
-              TEMPORARY — delete this whole <div className="i-script"> block in one
-              edit once the film is recorded and approved. It exists so early
-              viewers can read and feed back on the script. Nothing else depends
-              on it.
-            */}
-            <details className="i-script" data-r>
-              <summary>
-                <span className="i-kick">Script for the film</span>
-                <span aria-hidden className="arw" />
-              </summary>
-              <div className="i-sheet">
-                {SCRIPT.map((stanza) => (
-                  <p key={stanza[0].slice(0, 24)}>
-                    {stanza.map((line, i) => (
-                      <Fragment key={line.slice(0, 20)}>
-                        {i > 0 && <br />}
-                        {line}
-                      </Fragment>
-                    ))}
-                  </p>
-                ))}
-              </div>
-            </details>
-            {/* END TEMPORARY script block */}
 
             <div className="i-lede" data-r>
               <p className="name">
