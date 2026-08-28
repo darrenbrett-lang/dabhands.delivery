@@ -330,6 +330,26 @@ that must be read goes near the bottom.
 - **All performance data lives in `lib/scriptScore.ts`**, never in the
   component. The page derives everything (runtime, progress, the setup
   summary) from `score.length`, so the score can grow or shrink freely.
+- **Score v4 (28 Aug) — THE MASTER BRIEF. This is the source of truth.** 24
+  cards. The owner's brief supersedes every earlier script brief; do not layer
+  the older ones back on. It serves **marketing leaders and growth-stage
+  founders at once**, on the shared territory of the gap between what a
+  business wants to make happen and its present ability to make it happen.
+  Changes from v3: card 02 is now **INSTINCT** ("I've always had a thing for
+  making things go, and work better"), replacing the "man and boy" origin; the
+  through-line **split into 13 THROUGH-LINE and 14 REASSURANCE**, which is why
+  the breath mark is back on its own (the card break is the breath, and it
+  clears the six-line ceiling); and the old single belief card became the
+  three-card argument **19 QUALITY → 20 CUSTOMER EFFECT → 21 COMMERCIAL
+  EFFECT** (best work → feel and act → it has to sell), which must play as one
+  connected argument, not three statements. **Runtime 1:38 at 1.0x** (98.65s).
+- ⚠ **Card 16's hold is 0.55s**, the only two-decimal value in the score. The
+  owner halved it (28 Aug) so "Six weeks later..." hands straight over to the
+  number: a beat, not a wait. Do not round it back to 1.1.
+- The arc line wraps to two lines on the setup screen at 1280px, because v4
+  runs to twelve stages. Cosmetic, and the owner has seen it.
+- **Every card is measured to fit:** none overflow the stage, none wrap, the
+  tallest (23 VALUE, four lines) reaches 68% of viewport height at 1280x720.
 - **Score v3 (27 Aug, second owner brief) — the diagnosis broadened.** Cards
   9 to 13 rewritten so the film speaks to **marketing leaders and growth-stage
   founders at once**, without splitting into two propositions. The shared
@@ -364,7 +384,7 @@ that must be read goes near the bottom.
   long holds; that is the performance, not a bug. Do not normalise them.
 - **`STORE_SCORE` is versioned.** Edits made on the page persist to
   localStorage and would otherwise shadow a new score forever, so **bump the
-  key whenever `SCORE` changes** (`v1` → `v2` for the 23-card rewrite, `v2` → `v3` for the broadened diagnosis).
+  key whenever `SCORE` changes** (`v1` → `v2` for the 23-card rewrite, `v2` → `v3` for the broadened diagnosis, `v3` → `v4` for the 24-card master).
 - Markup in the lines is plain text so it survives on-page editing: `**bold**`
   for the thought word, `↑ ↓ ↓↓ → ○ ○○` as coaching marks that vanish with
   VOICE GUIDES off. Three modes read the same data: Script (full lines), Cue
