@@ -177,10 +177,15 @@ export default function Home() {
                     move together to get there.
                   </p>
                 </FadeUp>
-                {/* The sign-off: the shortest line in the column, so it lands. */}
                 <FadeUp delay={0.22}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    That’s the part I work on.
+                    AI will make you faster at whatever you already do. Better faster, or worse faster.
+                  </p>
+                </FadeUp>
+                {/* The sign-off: the shortest line in the column, so it lands. */}
+                <FadeUp delay={0.28}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    I work on making the systems and the work better.
                   </p>
                 </FadeUp>
               </div>
