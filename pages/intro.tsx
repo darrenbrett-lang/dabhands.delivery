@@ -343,14 +343,16 @@ export default function Intro() {
 
   return (
     <>
-      {/* Link preview. og-intro.jpg is the headshot padded onto charcoal at a
-          true 1200x630 — the square original gets cropped to a slice by
-          LinkedIn and Slack, which frame at 1.91:1. */}
+      {/* Link preview. og-intro-2.jpg is cut from the studio portrait to
+          1200x630 — a crop, not the old padded card, which showed grey bars
+          either side where the padding met the photograph. Versioned filename
+          because the social platforms cache these hard and will not re-fetch
+          the same name. */}
       <SeoMeta
         title="An introduction to Darren Brett, fractional COO"
         description="Keeping important work moving. Darren Brett · Fractional COO."
         path="/intro"
-        image="/og-intro.jpg"
+        image="/og-intro-2.jpg"
         noindex
       />
 
