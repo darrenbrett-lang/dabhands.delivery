@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useSyncExternalStore } from 'react';
 import { Layout } from '@/components/Layout';
 import { SeoMeta } from '@/components/SeoMeta';
 
@@ -23,7 +25,38 @@ import { SeoMeta } from '@/components/SeoMeta';
 
 const UPDATED = '28 August 2026';
 
+/**
+ * Where a visitor may have arrived from, and how to send them back.
+ *
+ * ⚠ An ALLOWLIST, deliberately. `?from=` comes off the URL, so mapping it to a
+ * href rather than using it as one is what stops the parameter being turned
+ * into an open redirect to any address someone cares to append.
+ *
+ * The unlisted pages are the ones that need this: their visitors were sent a
+ * direct link, so tapping Privacy in the footer otherwise strands them in the
+ * main site with no way back to what they were reading.
+ */
+const RETURNS: Record<string, { href: string; label: string }> = {
+  intro: { href: '/intro', label: 'Back to the introduction' },
+};
+
+/* ⚠ Reads the URL, NOT useRouter().query. This page is auto-exported
+   (__NEXT_DATA__ reports autoExport: true), so `query` starts empty and only
+   fills once the router reports ready — which did not reliably re-render here,
+   and the back link silently failed to appear. useSyncExternalStore keeps it
+   SSR-safe without setting state in an effect: the server snapshot is null, the
+   client reads location, and the link appears on hydration with nothing below
+   it to shift. The URL cannot change without a navigation, so nothing to
+   subscribe to. */
+const subscribeNever = () => () => {};
+const readFrom = () => new URLSearchParams(window.location.search).get('from');
+const noFrom = () => null;
+const useFromParam = () => useSyncExternalStore(subscribeNever, readFrom, noFrom);
+
 export default function Privacy() {
+  const key = useFromParam();
+  const from = key ? RETURNS[key] : undefined;
+
   return (
     <Layout footerVariant="none">
       <SeoMeta
@@ -60,6 +93,18 @@ export default function Privacy() {
         .p-table td:first-child { color:var(--color-ink); font-weight:600; width:22%; }
         .p-wrap { overflow-x:auto; }
 
+        /* The way back to an unlisted page, top and bottom. */
+        .p-back {
+          display:inline-flex; align-items:center; gap:9px;
+          font-size:13px; letter-spacing:.02em; color:var(--color-ink);
+          text-decoration:none; transition:gap .25s cubic-bezier(.16,1,.3,1);
+        }
+        .p-back:hover { gap:14px; }
+        .p-back .arw { color:var(--color-gold); }
+        .p-backtop { margin-bottom:30px; }
+        .p-backfoot { margin-top:64px; padding-top:26px; border-top:1px solid var(--color-stone); }
+        @media (prefers-reduced-motion: reduce) { .p-back { transition:none; } }
+
         @media (max-width:860px) {
           .p-doc p, .p-doc li { font-size:16px; }
           .p-doc h2 { margin-top:46px; padding-top:22px; }
@@ -70,6 +115,13 @@ export default function Privacy() {
 
       <section className="u-container py-20 md:py-28 lg:py-32">
         <div className="p-doc">
+          {from && (
+            <div className="p-backtop">
+              <Link href={from.href} className="p-back">
+                <span aria-hidden className="arw">←</span> {from.label}
+              </Link>
+            </div>
+          )}
           <p className="text-[11px] tracking-[0.18em] uppercase font-semibold text-graphite mb-6">Privacy notice</p>
           <h1>How we handle your information.</h1>
           <p className="p-lede">
@@ -272,6 +324,14 @@ export default function Privacy() {
             the date at the top. If the change is significant and we hold your details, we will tell
             you.
           </p>
+
+          {from && (
+            <div className="p-backfoot">
+              <Link href={from.href} className="p-back">
+                <span aria-hidden className="arw">←</span> {from.label}
+              </Link>
+            </div>
+          )}
         </div>
       </section>
     </Layout>

@@ -43,15 +43,26 @@ const SKIP = 5; // seconds per arrow press
    still a real watch, and a 9:16 one would be enormous. */
 const PHONE = '(max-width: 640px)';
 
-const subscribe = (q: string) => (cb: () => void) => {
-  const m = window.matchMedia(q);
-  m.addEventListener('change', cb);
-  return () => m.removeEventListener('change', cb);
-};
 /* SSR-safe: the server snapshot is false, so the markup always renders the
-   landscape cut and the client corrects it, rather than mismatching hydration. */
-const useMedia = (q: string) =>
-  useSyncExternalStore(subscribe(q), () => window.matchMedia(q).matches, () => false);
+   landscape cut and the client corrects it, rather than mismatching hydration.
+   ⚠ `subscribe` and `getSnapshot` MUST be stable. Building them inline gave a
+   fresh identity on every render, so React tore the subscription down and
+   rebuilt it on each commit and could miss the media-query change altogether —
+   which showed up as the phone sometimes getting the landscape cut. A race, so
+   it passed under test more often than it failed. useCallback fixes it. */
+const alwaysFalse = () => false;
+const useMedia = (q: string) => {
+  const subscribe = useCallback(
+    (cb: () => void) => {
+      const m = window.matchMedia(q);
+      m.addEventListener('change', cb);
+      return () => m.removeEventListener('change', cb);
+    },
+    [q],
+  );
+  const getSnapshot = useCallback(() => window.matchMedia(q).matches, [q]);
+  return useSyncExternalStore(subscribe, getSnapshot, alwaysFalse);
+};
 
 const fmt = (s: number) => {
   if (!Number.isFinite(s) || s < 0) return '0:00';
@@ -71,6 +82,11 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
   /* wake() is memoised with no deps, so it reads fullscreen from a ref
      rather than closing over stale state. */
   const fullRef = useRef(false);
+  /* Whether the pointer is over the player. Windowed, the chrome stays up the
+     whole time it is — otherwise a still pointer hovering the player still
+     loses the controls after 2.6s, which reads as the play/pause button not
+     toggling at all: it does toggle, but the bar has gone by the time you look. */
+  const hovering = useRef(false);
 
   const [started, setStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -98,10 +114,11 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
   const wake = useCallback(() => {
     setChrome(true);
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
-    // Playing: the chrome is in the way. Fullscreen: in the way even paused.
-    if (!video.current?.paused || fullRef.current) {
-      hideTimer.current = window.setTimeout(() => setChrome(false), 2600);
-    }
+    // Fullscreen always fades on inactivity — the pointer is always "inside"
+    // there, so hovering cannot mean anything. Windowed, the chrome only fades
+    // once the pointer has left the player.
+    const fade = fullRef.current || (!video.current?.paused && !hovering.current);
+    if (fade) hideTimer.current = window.setTimeout(() => setChrome(false), 2600);
   }, []);
 
   const toggle = useCallback(() => {
@@ -156,18 +173,39 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
   useEffect(() => {
     const v = video.current;
     if (!v) return;
+    /* ⚠ Seed from the element before subscribing. `loadedmetadata` can fire
+       BEFORE this effect runs — a cached or fast-starting file resolves while
+       React is still committing — and the event is then missed for good. That
+       left `duration` at 0, which set the seek input's max to 0, so the thumb
+       could never move and the bar sat at zero while the film played. It only
+       showed up with a real file; the small placeholder always lost the race
+       the other way. */
+    if (v.readyState >= 1) { setDuration(v.duration); setMuted(v.muted); setVolume(v.volume); }
+
     const onPlay = () => { setPlaying(true); wake(); };
     // wake() decides for itself whether a pause should hold the chrome open:
     // windowed it does, fullscreen it still fades.
     const onPause = () => { setPlaying(false); wake(); };
     const onTime = () => setCurrent(v.currentTime);
     const onMeta = () => setDuration(v.duration);
-    const onEnd = () => { setPlaying(false); setChrome(true); };
+    /* Back to the poster when it finishes. A <video> holds its last frame
+       after playing, which leaves the reader looking at a stilled mid-blink
+       frame; load() is what restores the poster, and clearing `started`
+       brings the Watch affordance back so it can be played again. */
+    const onEnd = () => {
+      setPlaying(false);
+      setChrome(true);
+      setStarted(false);
+      setCurrent(0);
+      v.load();
+    };
     const onVol = () => { setMuted(v.muted); setVolume(v.volume); };
     v.addEventListener('play', onPlay);
     v.addEventListener('pause', onPause);
     v.addEventListener('timeupdate', onTime);
     v.addEventListener('loadedmetadata', onMeta);
+    // duration can arrive later than loadedmetadata on some encodes
+    v.addEventListener('durationchange', onMeta);
     v.addEventListener('ended', onEnd);
     v.addEventListener('volumechange', onVol);
     return () => {
@@ -175,10 +213,17 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
       v.removeEventListener('pause', onPause);
       v.removeEventListener('timeupdate', onTime);
       v.removeEventListener('loadedmetadata', onMeta);
+      v.removeEventListener('durationchange', onMeta);
       v.removeEventListener('ended', onEnd);
       v.removeEventListener('volumechange', onVol);
     };
-  }, [wake]);
+    /* ⚠ `file` is in the deps because the <video> carries key={file}: when the
+       cut switches (landscape ↔ portrait at the 640px breakpoint, which happens
+       on every phone right after hydration) React replaces the element, and
+       without re-running this the listeners stay bound to the discarded one.
+       The player then looks alive — it plays — but no state ever updates, so
+       the scrubber and the clock sit at zero. */
+  }, [wake, file]);
 
   useEffect(() => {
     const onFs = () => {
@@ -222,8 +267,9 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
     <div
       ref={shell}
       className={`fp${chrome || !playing ? ' fp-wake' : ''}${full ? ' fp-full' : ''}${portrait ? ' fp-portrait' : ''}`}
+      onMouseEnter={() => { hovering.current = true; wake(); }}
       onMouseMove={wake}
-      onMouseLeave={() => playing && setChrome(false)}
+      onMouseLeave={() => { hovering.current = false; if (!video.current?.paused) setChrome(false); }}
       onKeyDown={onKeyDown}
       onFocus={wake}
       tabIndex={-1}
@@ -325,7 +371,12 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
 
         /* The scrubber is a real range input, restyled. Keyboard and screen
            readers get the native behaviour for free. */
-        .fp-seek { flex:1 1 auto; -webkit-appearance:none; appearance:none; background:transparent; height:22px; cursor:pointer; }
+        /* ⚠ min-width:0 is load-bearing. A range input has an intrinsic
+           minimum width and flex items default to min-width:auto, so without
+           this the seek bar refuses to shrink and pushes CC and fullscreen off
+           the edge of a narrow stage — which is exactly what happened on the
+           9:16 phone player. */
+        .fp-seek { flex:1 1 auto; min-width:0; -webkit-appearance:none; appearance:none; background:transparent; height:22px; cursor:pointer; }
         .fp-seek::-webkit-slider-runnable-track { height:3px; border-radius:3px; background:var(--fp-track); }
         .fp-seek::-moz-range-track { height:3px; border-radius:3px; background:var(--fp-track); }
         .fp-seek::-webkit-slider-thumb {
@@ -340,8 +391,14 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
         @media (max-width:640px) {
           .fp-bar { padding:44px 14px 14px; }
           .fp-row { gap:11px; }
-          .fp-disc { font-size:12px; gap:11px; }
-          .fp-tri { width:52px; height:52px; }
+          /* On a portrait stage there is no room for both times: elapsed is
+             the useful one, so the total steps aside. */
+          .fp-dur { display:none; }
+          /* On the portrait stage the disc and its label side by side push the
+             disc off centre. Stacked, the disc sits dead centre with the word
+             beneath it. */
+          .fp-disc { flex-direction:column; font-size:12px; gap:14px; }
+          .fp-tri { width:56px; height:56px; }
         }
         @media (prefers-reduced-motion: reduce) {
           .fp-bar, .fp-tri, .fp-open::after, .fp-seek::-webkit-slider-thumb { transition:none; }
@@ -404,7 +461,7 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
             aria-valuetext={`${fmt(current)} of ${fmt(duration)}`}
           />
 
-          <span className="fp-time">{fmt(duration)}</span>
+          <span className="fp-time fp-dur">{fmt(duration)}</span>
 
           <div className="fp-vol">
             <button type="button" className="fp-btn" onClick={toggleMute} aria-label={silent ? 'Unmute' : 'Mute'}>

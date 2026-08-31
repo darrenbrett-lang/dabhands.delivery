@@ -4,7 +4,13 @@ import { mailto } from '@/lib/mailto';
 
 export type FooterVariant = 'default' | 'minimal' | 'none';
 
-export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => (
+/**
+ * `from` marks which UNLISTED page the visitor is on, and is carried into the
+ * privacy link as ?from=… so that page can offer a way back. Without it a
+ * visitor sent a hidden URL taps Privacy and lands in the main site with no
+ * route back to the page they were actually reading.
+ */
+export const Footer = ({ variant = 'default', from }: { variant?: FooterVariant; from?: string }) => (
   <>
     {/* Plum contact module. Pages with their own in-content CTA use variant="none". */}
     {variant !== 'none' && (
@@ -56,7 +62,7 @@ export const Footer = ({ variant = 'default' }: { variant?: FooterVariant }) => 
               <img src="/images/logos/linkedin-app-white-icon.webp" alt="" width={16} height={16} loading="lazy" decoding="async" className="block" />
             </a>
             <Link
-              href="/privacy"
+              href={from ? `/privacy?from=${encodeURIComponent(from)}` : '/privacy'}
               className="text-[11px] tracking-[0.16em] text-bone/65 hover:text-bone transition-colors"
             >
               Privacy

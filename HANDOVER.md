@@ -155,10 +155,61 @@ unwatchable.
 - **Dependency-free by choice.** A native `<video>` with its chrome hidden and
   ours on top. The film is meant to be **owned**: no YouTube or Vimeo, no
   third-party script, no branding, no recommendations, no tracking.
-- **Hosting is still undecided.** Recommendation on the table: a self-hosted
-  H.264 MP4 on object storage behind a CDN (Cloudflare R2 with a custom domain,
-  or Vercel Blob for least friction). **Do not put the file in `/public`** — it
-  bloats the repo and every deploy.
+- **Hosting: Vercel Blob** (owner's decision, 29 Aug). **Never put the film in
+  `/public`** — it bloats the repo and every deploy.
+
+  ⚠ **Cloudflare R2 was chosen first and then rejected, for a good reason.**
+  R2's custom domains only work when the whole zone is on Cloudflare DNS, and
+  `dabhands.delivery` runs on GoDaddy (`domaincontrol.com`) carrying
+  **Google Workspace MX** and an SPF record that *includes*
+  `dc-aa8e722993._spfm.dabhands.delivery` — a GoDaddy-managed subdomain that
+  only resolves while GoDaddy runs the DNS. Moving nameservers to Cloudflare
+  would break SPF, and with **DMARC at `p=quarantine`** the mail would start
+  being filtered, quietly, days later. Do not move the zone to host a video.
+  If the move is ever made deliberately, mirror every record first: 5 Google
+  MX, the SPF include, `google-site-verification=3tEwamtu…`, `_dmarc`
+  (p=quarantine, rua to onsecureserver.net), `www` CNAME to apex, apex A to
+  Vercel.
+
+  **Runbook, one-off** (the owner does these; sessions cannot sign in):
+  `npx vercel login`, then `npx vercel link` to the dabhands-delivery project.
+
+  **Runbook, per film:**
+  1. `swift scripts/prepare-film.swift <camera file> film/hello 2.5`
+     → a network-optimised MP4 plus a poster JPEG. Repeat for the portrait cut.
+  2. `scripts/upload-film.sh film/hello.mp4 film/hello-poster.jpg`
+  3. Put the returned URLs into `FILM` in `pages/intro.tsx` (`src`, `poster`,
+     `portraitSrc`, `portraitPoster`), delete `public/film/placeholder*.mp4`,
+     regenerate and re-time the captions.
+
+  ⚠ **Version the filename on every re-cut** (`hello-2.mp4`), never overwrite.
+  Uploads are immutable for a year, so overwriting leaves a year of caches
+  serving the old film. `--allow-overwrite` is deliberately not passed, so an
+  accidental overwrite fails loudly rather than silently.
+
+  ⚠ **The host must serve HTTP Range requests** or the scrubber cannot seek.
+  **Proven end to end on 29 Aug** with a throwaway clip, since deleted: upload
+  returns 200 `video/mp4`, `cache-control: public, max-age=31536000`,
+  `accept-ranges: bytes`, a Range request answers **206** with the right
+  `content-range`, and it is served from `lhr1`.
+
+  ⚠ **Two traps found doing it, both now guarded in the script:**
+  `vercel env pull` returns the token as literally `[SENSITIVE]`, and the OIDC
+  fallback fails with *"OIDC is enabled for this project, but not for the
+  development environment"* — the store is connected to Production and Preview
+  only. The token must be copied from the dashboard into `.env.local`.
+  And **`--add-random-suffix false` is read as TRUE** when space-separated,
+  which produced `film/hello-pwTQxjlNKNsl….mp4`; the flag is simply not passed,
+  as the CLI already defaults to no suffix.
+
+  **The dashboard's Upload button is a perfectly good alternative** for one or
+  two files and needs no token at all; it just takes Vercel's default cache
+  headers rather than the year set here.
+
+  Tooling note: **no ffmpeg on this machine**, so `scripts/prepare-film.swift`
+  uses AVFoundation. That trades fine bitrate control for zero setup; if a file
+  comes out too large, install ffmpeg and re-encode with an explicit bitrate —
+  nothing else in the pipeline changes.
 - ⚠ **Do not add `crossOrigin` to the `<video>`.** It was there and was removed:
   the attribute forces CORS on the *media* resource too, which would break a
   cross-origin MP4 whose bucket sends no CORS headers — exactly where the film
@@ -203,6 +254,32 @@ unwatchable.
   a real watch. Only one file is ever loaded for a given viewport. The `key` on
   the `<video>` forces a fresh element when the cut changes. This means **the
   film needs shooting or mastering twice**, landscape and portrait.
+- **Posters are cut per shape from `Darren_Ben.jpg` (6000x4000, 31 Aug):**
+  `darren-ben-16x9-1.jpg` (1920x1080) and `darren-ben-9x16-2.jpg` (1080x1920).
+  ⚠ **Centre the portrait crop on the FACIAL MIDLINE, found with Vision, not
+  on brightness.** He sits slightly left of frame, so a centred crop was
+  visibly off. The first correction used a luminance centroid, which put his
+  face at x=2721 — but the key light falls from his left, so the bright-pixel
+  centre is not the face centre, and that crop then read as too far RIGHT.
+  `VNDetectFaceLandmarksRequest` gives medianLine/noseCrest at **x=2925 of
+  6000**; cropping from x=1800 puts the nose at 50.0%, confirmed by re-running
+  the detector on the finished file (noseCrest 50.1%). The swift snippet is in
+  the session scratchpad. The 16:9 crop keeps the full width, where the 1.2%
+  lean is imperceptible, and the owner approved it. **Never assume centred, and
+  do not use brightness as a proxy for a face.** Each matches its stage exactly, so nothing is
+  cropped again by CSS. The no-film column uses the **portrait** crop, since
+  that column is tall. ⚠ The 3MB original still sits at `public/Darren_Ben.jpg`
+  and should be moved out of `public/` — it ships on every deploy and is
+  publicly reachable.
+- **The player returns to its poster when the film ends** (owner's ask): a
+  `<video>` otherwise holds its last frame, which strands the reader on a
+  stilled mid-blink. `load()` restores the poster, clearing `started` brings
+  the Watch affordance back, and pressing it replays from the beginning.
+- ⚠ **`.fp-seek` needs `min-width:0`.** A range input has an intrinsic minimum
+  width and flex items default to `min-width:auto`, so without it the seek bar
+  refuses to shrink and pushes CC and fullscreen clean off a narrow stage —
+  which is what happened on the 9:16 phone player (controls ran 70px past the
+  edge). The total duration also hides below 640px.
 - ⚠ **Supply `portraitPoster` too.** Without it the portrait stage falls back
   to the landscape headshot and crops to a tight band across the eyes.
 - ⚠ **`public/film/placeholder.mp4` and `placeholder-portrait.mp4` are TEMPORARY**, for looking at the player

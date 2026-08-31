@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
@@ -51,12 +51,15 @@ const FILM: {
   portraitSrc: string | null;
   portraitPoster: string | null;
 } = {
-  src: null,
-  poster: '/images/darren-brett_colour_headshot.jpeg',
+  src: 'https://uuirqhndrdzr472x.public.blob.vercel-storage.com/darren-hello-hd.mp4',
+  /* Cut from Darren_Ben.jpg (6000x4000) to each shape rather than letting CSS
+     crop a single file: at 16:9 a centred crop puts the eyeline about a third
+     down, and at 9:16 he is already centred so the sides crop away cleanly. */
+  poster: '/images/darren-ben-16x9-1.jpg',
   alt: 'Darren Brett',
   captions: '/captions/intro-en.vtt',
-  portraitSrc: null,
-  portraitPoster: null,
+  portraitSrc: 'https://uuirqhndrdzr472x.public.blob.vercel-storage.com/darren-hello-vertical.mp4',
+  portraitPoster: '/images/darren-ben-9x16-3.jpg',
 };
 
 const TURNS = [
@@ -67,12 +70,152 @@ const TURNS = [
 
 // Trimmed to an even measure (78 to 81 characters) so the four columns set to
 // the same depth.
+/* prefers-reduced-motion, SSR-safe: the server snapshot is false, so the
+   markup renders the moving version and the client corrects it rather than
+   mismatching hydration. */
+const subscribeMotion = (cb: () => void) => {
+  const m = window.matchMedia('(prefers-reduced-motion: reduce)');
+  m.addEventListener('change', cb);
+  return () => m.removeEventListener('change', cb);
+};
+const useReducedMotion = () =>
+  useSyncExternalStore(
+    subscribeMotion,
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false,
+  );
+
+const ROLL_EVERY = 6000; // how long a face is held before it turns
+
+/**
+ * The turns as a tumbler: one block that rolls towards the reader on its
+ * horizontal axis, each turn arriving from behind the last. Two faces are
+ * enough — the far one is re-dressed with the next turn while it is out of
+ * sight, so it reads as an endless solid rather than a two-sided card.
+ *
+ * A hidden sizer holds all three turns in a single grid cell, so the block is
+ * always as tall as the longest of them and the roll never changes height.
+ *
+ * The tumbler is aria-hidden and the three turns are also rendered flat for
+ * screen readers, because a rotating block is a visual device, not content.
+ */
+const Tumbler = () => {
+  const [step, setStep] = useState(0);
+  const [held, setHeld] = useState(false); // hover/focus holds the current face
+  /* ⚠ The two faces hold their own content, and ONLY the face that is turning
+     away from the reader is ever re-dressed. Deriving both faces from `step`
+     looks tidier and is wrong: on each advance the outgoing face is still in
+     full view for the length of the roll, so re-dressing it flashes the next
+     turn's words before the block has moved. */
+  const [faces, setFaces] = useState<[typeof TURNS[number], typeof TURNS[number]]>([TURNS[0], TURNS[1]]);
+  const stepRef = useRef(0);
+  const reduce = useReducedMotion();
+
+  /* Advance to the next step, or forward to a chosen turn. The incoming face
+     is dressed in the same commit as the transform changes — it is facing away
+     at that moment, so the change cannot be seen. */
+  const advance = useCallback((toIndex?: number) => {
+    let next = stepRef.current + 1;
+    if (toIndex !== undefined) while (next % TURNS.length !== toIndex) next += 1;
+    stepRef.current = next;
+    setFaces((f) => {
+      const dressed: [typeof TURNS[number], typeof TURNS[number]] = [f[0], f[1]];
+      dressed[next % 2] = TURNS[next % TURNS.length];
+      return dressed;
+    });
+    setStep(next);
+  }, []);
+
+  /* `step` is in the deps so the dwell restarts on EVERY advance, including a
+     manual one from the pips. Without it the interval keeps its original
+     rhythm, so choosing a turn could show it for a moment before the timer
+     fired and rolled it away. */
+  useEffect(() => {
+    if (held || reduce) return;
+    const t = window.setInterval(() => advance(), ROLL_EVERY);
+    return () => window.clearInterval(t);
+  }, [held, reduce, advance, step]);
+
+  /* Pips jump FORWARD to the next occurrence of the chosen turn, never
+     backwards: the block only ever rolls one way, so a jump reads as the
+     tumbler hurrying on rather than reversing. */
+  const goTo = (i: number) => advance(i);
+
+  const body = (t: (typeof TURNS)[number]) => (
+    <div className="turn">
+      <h3>
+        {t.from}
+        <br />
+        <em className="into">into</em> <span className="to">{t.to}</span>
+      </h3>
+      <p className="note">{t.note}</p>
+    </div>
+  );
+
+  if (reduce) {
+    // No rolling: the turns simply sit one under another, all readable at once.
+    return (
+      <div className="i-turns i-turns-flat" data-r>
+        {TURNS.map((t) => (
+          <div className="turn" key={t.from}>
+            <h3>
+              {t.from}
+              <br />
+              <em className="into">into</em> <span className="to">{t.to}</span>
+            </h3>
+            <p className="note">{t.note}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="i-tumbwrap" data-r>
+      <div className="i-tumb-pips" aria-label="Which turn is showing">
+        {TURNS.map((t, i) => (
+          <button
+            key={t.from}
+            type="button"
+            onClick={() => goTo(i)}
+            aria-current={i === step % TURNS.length}
+            aria-label={`Show: ${t.from} into ${t.to}`}
+          />
+        ))}
+      </div>
+      <div
+        className="i-tumb"
+        onMouseEnter={() => setHeld(true)}
+        onMouseLeave={() => setHeld(false)}
+        onFocus={() => setHeld(true)}
+        onBlur={() => setHeld(false)}
+        aria-hidden
+      >
+        {/* sets the height to the tallest turn, so the roll never jumps */}
+        <div className="i-tumb-sizer">{TURNS.map((t) => <div key={t.from}>{body(t)}</div>)}</div>
+        <div className="i-tumb-box" style={{ transform: `rotateX(${step * -180}deg)` }}>
+          <div className="i-tumb-face">{body(faces[0])}</div>
+          <div className="i-tumb-face i-tumb-back">{body(faces[1])}</div>
+        </div>
+      </div>
+      <div className="sr-only">
+        {TURNS.map((t) => (
+          <p key={t.from}>{t.from} into {t.to} {t.note}</p>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const SITUATIONS = [
-  'A critical programme needs experienced leadership to keep it moving and land it.',
+  'A critical programme has slipped and nobody can give a straight answer on where it stands.',
   'Growth has outpaced the operating model and the business no longer moves together.',
-  'Multiple partners and agencies need to work as one team around a single outcome.',
+  'Several partners and agencies need to work as one team, and nobody is holding it together.',
   'Nobody can say where the margin goes, or why good work arrives weaker than it left.',
-  'I want to grow my business and need the strategy, insight and structure to get it moving.',
+  'Something has been won that’s bigger than anything the business has run before.',
+  'A permanent hire hasn’t happened and someone at the top is doing the job instead.',
+  'Too much still depends on one or two people, and they can’t step away from it.',
+  'An acquisition or investment has landed, and there’s a value plan to hit.',
 ];
 
 // Trimmed to an even measure (72 to 74 characters) so the three panels set to
@@ -81,7 +224,7 @@ const SITUATIONS = [
 const ABOUT = [
   { lead: 'A delivery leader.', rest: 'Twenty years of depth in complex, multi-track delivery that had to land.' },
   { lead: 'A digital operator.', rest: 'I hold my own with strategy, creative and technology, and make work better.' },
-  { lead: 'An entrepreneur’s engine.', rest: 'I’ve carried my own P&L, found opportunities and turned them into meaningful revenue.' },
+  { lead: 'An entrepreneur’s engine.', rest: 'I’ve carried my own P&L, found opportunities and turned them into revenue.' },
 ];
 
 const QUOTES = [
@@ -278,9 +421,13 @@ export default function Intro() {
 
 
         .i-lede { padding:74px 0 84px; }
-        .i-lede .name { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.06; letter-spacing:-1.6px; color:var(--blue); max-width:1000px; }
-        .i-br { display:none; }
-        @media (min-width:901px) { .i-br { display:inline; } }
+        .i-lede .name {
+          font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.06;
+          letter-spacing:-1.6px; color:var(--blue); max-width:1000px;
+          /* The longer lede ran three lines with only two words on the last.
+             Balanced, the three set to an even measure instead. */
+          text-wrap:balance;
+        }
         .i-lede .then { font-family:var(--font-sans); font-size:22px; line-height:1.58; color:#3F312D; max-width:820px; margin-top:30px; }
 
         /* Lists become grids, each cell with a hairline above, so the page
@@ -291,12 +438,85 @@ export default function Intro() {
         .i-c3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:34px; }
         .i-c3 .c { background:var(--paper); border-left:4px solid var(--gold); padding:34px 28px 38px; }
         .i-c3 .lab, .i-c3 p { color:var(--ink); }
+        /* ── the tumbler ──────────────────────────────────────────────
+           One block rolling towards the reader on its horizontal axis. Two
+           faces are enough: the far one is re-dressed while it is out of
+           sight, so it reads as an endless solid rather than a card flipping
+           back and forth.
+
+           The perspective is deliberately long (1600px). Short perspective
+           gives a fairground spin; long keeps the block calm and makes the
+           near edge only just larger than the far one, which is what reads as
+           weight rather than trickery. */
+        .i-tumbwrap { margin-top:38px; display:flex; align-items:center; gap:20px; position:relative; }
+        .i-tumb { flex:1 1 auto; }
+        /* From the wide breakpoint the pips hang OUTSIDE the measure, in the
+           page gutter, so the turn's headline starts on the same left edge as
+           the kicker above it and the payoff below. The gutter is 44px here,
+           so -38px keeps them inside the page. Narrower than that there is no
+           gutter to hang into, and they sit inline instead. */
+        @media (min-width:901px) {
+          .i-tumbwrap { display:block; }
+          /* ⚠ Centred with flex, NOT translateY(-50%). The reveal puts an
+             i-rise animation, with fill mode both, on every direct child of a
+             revealed [data-r], and its end state is transform:none — which
+             silently wipes a transform used for centring. Anything positioned
+             inside a [data-r] has to centre without transforms.
+             (No backticks in this block: the whole style tag is a template
+             literal, and one would end the string and break the build.) */
+          .i-tumb-pips {
+            position:absolute; left:-38px; top:0; bottom:0;
+            justify-content:center;
+          }
+        }
+        /* The carousel pips, stood upright beside the block: same 12px dot,
+           same elongation on the active one, but growing in height rather
+           than width. Deep gold, because this sits on cream. */
+        .i-tumb-pips { display:flex; flex-direction:column; align-items:center; gap:14px; flex:none; }
+        .i-tumb-pips button {
+          /* 6px of visible pip, but the padding keeps the tap target a usable
+             24px wide; background-clip stops the padding taking the colour. */
+          /* content-box on purpose: the global border-box would let the 9px
+             padding swallow the 6px width entirely and paint nothing. */
+          box-sizing:content-box;
+          width:6px; height:14px; padding:0 9px; background-clip:content-box;
+          border-radius:999px; cursor:pointer;
+          background-color:color-mix(in srgb, var(--gold) 30%, transparent);
+          transition:height .35s cubic-bezier(.4,0,.2,1), background-color .35s ease;
+        }
+        .i-tumb-pips button:hover { background-color:color-mix(in srgb, var(--gold) 62%, transparent); }
+        .i-tumb-pips button[aria-current="true"] { height:46px; background-color:var(--gold); }
+        .i-tumb-pips button:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
+        @media (prefers-reduced-motion: reduce) { .i-tumb-pips button { transition:none; } }
+        .i-tumb { position:relative; perspective:1600px; perspective-origin:50% 42%; }
+        /* All three stacked in one grid cell: the block is always as tall as
+           the longest turn, so the roll never changes the page height. */
+        .i-tumb-sizer { display:grid; visibility:hidden; pointer-events:none; }
+        .i-tumb-sizer > * { grid-area:1/1; }
+        .i-tumb-box {
+          position:absolute; inset:0; transform-style:preserve-3d;
+          /* Weighted easing: it leaves slowly, carries through the middle and
+             settles without a bounce. A symmetrical ease reads as a card; this
+             reads as something with mass. */
+          transition:transform 1.15s cubic-bezier(.76,0,.14,1);
+        }
+        .i-tumb-face {
+          position:absolute; inset:0;
+          backface-visibility:hidden; -webkit-backface-visibility:hidden;
+        }
+        .i-tumb-back { transform:rotateX(180deg); }
+        /* The turns sit flat inside a face, so the shared .turn typography is
+           reused unchanged and the grid columns still apply. */
+        .i-tumb-face .turn, .i-tumb-sizer .turn { margin:0; }
+
         .i-turns { margin-top:38px; display:grid; gap:52px; }
-        .i-turns .turn { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:0 64px; align-items:end; }
-        .i-turns h3 { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.08; letter-spacing:-1.6px; }
-        .i-turns .into { font-style:italic; }
-        .i-turns .to { color:var(--gold); }
-        .i-turns .note { font-family:var(--font-sans); font-size:17px; line-height:1.62; color:#3F312D; max-width:40ch; padding-bottom:.34em; }
+        /* reduced motion: no roll, the three simply stack and all read at once */
+        .i-turns-flat { margin-top:38px; }
+        .i-turns .turn, .i-tumb .turn { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:0 64px; align-items:end; }
+        .i-turns h3, .i-tumb h3 { font-family:var(--font-serif); font-weight:400; font-size:56px; line-height:1.08; letter-spacing:-1.6px; }
+        .i-turns .into, .i-tumb .into { font-style:italic; }
+        .i-turns .to, .i-tumb .to { color:var(--gold); }
+        .i-turns .note, .i-tumb .note { font-family:var(--font-sans); font-size:17px; line-height:1.62; color:#3F312D; max-width:40ch; padding-bottom:.34em; }
         /* The payoff: what the three turns add up to. Serif italic, sized
            between the notes and the statements so it closes the section
            without competing with them. */
@@ -377,7 +597,14 @@ export default function Intro() {
         .i-start .i-kick { color:var(--gold-lt); }
         /* :not(.i-kick) so the body rule cannot outrank the kicker on specificity
            — the kicker is a <p> too. */
-        .i-start p:not(.i-kick) { font-family:var(--font-sans); font-size:23px; line-height:1.55; color:#E6E4E0; max-width:880px; margin:24px auto 0; }
+        .i-start p:not(.i-kick) {
+          font-family:var(--font-sans); font-size:23px; line-height:1.55; color:#E6E4E0;
+          max-width:880px; margin:24px auto 0;
+          /* Centred text over a photograph shows a short last line badly — the
+             second paragraph was orphaning "do first." Balanced, the lines set
+             to an even measure and the orphan goes. */
+          text-wrap:balance;
+        }
 
         /* Centred by the owner's decision (25 Aug), against the design brief's
            "left align everything, never centre anything". */
@@ -436,12 +663,13 @@ export default function Intro() {
           .i-c3 .c { padding:26px 22px 28px; }
           .i-c3 .lab { font-size:30px; letter-spacing:-.7px; margin-bottom:12px; }
           .i-c3 p { font-size:17px; }
+          .i-tumbwrap { gap:20px; }
           .i-turns { gap:30px; }
-          .i-turns .turn { grid-template-columns:1fr; gap:0; }
+          .i-turns .turn, .i-tumb .turn { grid-template-columns:1fr; gap:0; }
           /* 38px, not larger: the widest half ("into operating reality.") is
              261px here, which still clears a 320px phone. */
-          .i-turns h3 { font-size:38px; letter-spacing:-1px; }
-          .i-turns .note { font-size:16px; margin-top:12px; padding-bottom:0; max-width:none; }
+          .i-turns h3, .i-tumb h3 { font-size:38px; letter-spacing:-1px; }
+          .i-turns .note, .i-tumb .note { font-size:16px; margin-top:12px; padding-bottom:0; max-width:none; }
           .i-payoff { margin-top:36px; font-size:21px; letter-spacing:-.2px; max-width:none; }
           /* 30px: at 346px none of the four can hold three lines evenly (25px
              gives 3/4/4/3), but at 30px all four set to four lines, which is
@@ -510,7 +738,8 @@ export default function Intro() {
             ) : (
               <div className="i-filmgrid">
                 <div className="i-filmwrap">
-                  <Image src={FILM.poster} alt={FILM.alt} fill sizes="(max-width: 900px) 100vw, 45vw" priority />
+                  {/* the tall column wants the portrait crop, not the 16:9 one */}
+                  <Image src={FILM.portraitPoster || FILM.poster} alt={FILM.alt} fill sizes="(max-width: 900px) 100vw, 45vw" priority />
                 </div>
                 <div className="i-filmtxt">
                   <Kicker>A quick hello</Kicker>
@@ -525,36 +754,12 @@ export default function Intro() {
 
             <div className="i-lede" data-r>
               <p className="name">
-                I’m Darren, a fractional COO for digital-first{' '}
-                <br className="i-br" />
-                agencies and growth-stage brands.
+                I’m Darren. Agencies, brands and growth-stage businesses call me when something important has to land.
               </p>
               <p className="then">
-                I make sure important work actually delivers. I help set the direction, then hold every moving part together, in the delivery detail and in the boardroom, until what was decided is what the business and customer actually get.
+                I make sure it does. I help set the direction, then hold every moving part together, in the detail and in the boardroom, until what you decided is what your business and your customers actually get.
               </p>
             </div>
-          </div>
-
-          <div className="i-in">
-            <section className="i-sec">
-              <Kicker>What I turn</Kicker>
-              <div className="i-turns" data-r>
-                {TURNS.map((t) => (
-                  <div className="turn" key={t.from}>
-                    <h3>
-                      {t.from}
-                      <br />
-                      <em className="into">into</em> <span className="to">{t.to}</span>
-                    </h3>
-                    <p className="note">{t.note}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="i-payoff" data-r>
-                All three pay off in the same place: the bottom line. More margin in how you operate, and more return from what reaches the customer.
-              </p>
-            </section>
-
           </div>
 
           {/* ── blue · the situations ────────────────────────────── */}
@@ -588,6 +793,33 @@ export default function Intro() {
             </div>
           </section>
 
+          {/* ── cream · the testimonial, in the open ─────────────── */}
+          <div className="i-in">
+            <div className="i-qt" data-r aria-roledescription="carousel" aria-label="In their words" {...quotes.handlers}>
+              <span className="qm" aria-hidden>“</span>
+              <div className="i-qstage">
+                {QUOTES.map((q, i) => (
+                  <figure key={q.name} className={`qslide${i === quotes.index ? ' on' : ''}`} aria-hidden={i !== quotes.index}>
+                    <blockquote>{q.quote}</blockquote>
+                    <figcaption className="who">{q.name} · {q.role}</figcaption>
+                  </figure>
+                ))}
+              </div>
+              <div className="i-bips i-bips-light">
+                {QUOTES.map((q, i) => (
+                  <button
+                    key={q.name}
+                    type="button"
+                    onClick={() => quotes.setIndex(i)}
+                    aria-current={i === quotes.index}
+                    aria-label={`Show testimonial ${i + 1} of ${QUOTES.length}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+
           <div className="i-in">
             <section className="i-sec" style={{ borderTop: 'none' }}>
               <Kicker>Three things that describe me</Kicker>
@@ -615,30 +847,15 @@ export default function Intro() {
             </div>
           </section>
 
-          {/* ── cream · the testimonial, in the open ─────────────── */}
           <div className="i-in">
-            <div className="i-qt" data-r aria-roledescription="carousel" aria-label="In their words" {...quotes.handlers}>
-              <span className="qm" aria-hidden>“</span>
-              <div className="i-qstage">
-                {QUOTES.map((q, i) => (
-                  <figure key={q.name} className={`qslide${i === quotes.index ? ' on' : ''}`} aria-hidden={i !== quotes.index}>
-                    <blockquote>{q.quote}</blockquote>
-                    <figcaption className="who">{q.name} · {q.role}</figcaption>
-                  </figure>
-                ))}
-              </div>
-              <div className="i-bips i-bips-light">
-                {QUOTES.map((q, i) => (
-                  <button
-                    key={q.name}
-                    type="button"
-                    onClick={() => quotes.setIndex(i)}
-                    aria-current={i === quotes.index}
-                    aria-label={`Show testimonial ${i + 1} of ${QUOTES.length}`}
-                  />
-                ))}
-              </div>
-            </div>
+            <section className="i-sec">
+              <Kicker>What I turn</Kicker>
+              <Tumbler />
+              <p className="i-payoff" data-r>
+                All three pay off in the same place: the bottom line. More margin in how you operate, and more return from what reaches the customer.
+              </p>
+            </section>
+
           </div>
 
           {/* ── the offer, over the image ────────────────────────── */}
@@ -648,10 +865,10 @@ export default function Intro() {
             <div className="i-in i-start-copy">
               <Kicker>How we start</Kicker>
               <p>
-                When you bring me in, it’s built around the work, not the headcount. I stay accountable end to end, and bring in trusted senior specialists only when you need it and the work demands it.
+                When you bring me in, it’s built around the work, not the headcount. I stay accountable end to end, and bring in trusted senior specialists only when the work demands it, so you get senior judgement without carrying a big fixed team.
               </p>
               <p>
-                We can start small, a paid diagnostic or a fortnight of troubleshooting, and you come away with a straight read on what’s stuck and what I’d do first, so nobody has to bet on me without trying me first.
+                We can start small, a paid diagnostic or a fortnight of troubleshooting, and you come away with a straight read on where value or confidence is leaking and what I’d do first.
               </p>
             </div>
           </section>
@@ -676,7 +893,7 @@ export default function Intro() {
         </main>
       </div>
 
-      <Footer variant="none" />
+      <Footer variant="none" from="intro" />
     </>
   );
 }
