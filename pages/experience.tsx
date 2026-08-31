@@ -393,14 +393,29 @@ export default function TrackRecord() {
                     doorway heroes. */}
                 <div className="col-span-4 md:col-span-12 lg:col-span-5 lg:col-start-8 lg:row-start-1">
                   <div className="relative aspect-[5/2] lg:aspect-square overflow-hidden rounded-2xl ring-1 ring-inset ring-ink/10">
+                    {/* Two crops cut to shape from the studio frame rather than
+                        letting object-cover decide: the square holds the head
+                        with headroom at lg, and the 5:2 band keeps it whole in
+                        the shallow sliver below it. One accessible name for the
+                        pair; the other is hidden from assistive tech. */}
                     <Image
-                      src="/images/darren-brett_colour_headshot.jpeg"
+                      src="/images/darren-headshot-studio-wide-1.jpg"
+                      alt=""
+                      aria-hidden
+                      fill
+                      priority
+                      quality={82}
+                      sizes="92vw"
+                      className="object-cover lg:hidden"
+                    />
+                    <Image
+                      src="/images/darren-headshot-studio-1.jpg"
                       alt="Darren Brett"
                       fill
                       priority
                       quality={82}
-                      sizes="(max-width: 1024px) 92vw, 38vw"
-                      className="object-cover"
+                      sizes="38vw"
+                      className="hidden object-cover lg:block"
                     />
                   </div>
                 </div>
