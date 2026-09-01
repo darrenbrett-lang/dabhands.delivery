@@ -867,7 +867,7 @@ export default function Intro() {
             <div className="i-in i-start-copy">
               <Kicker>How we start</Kicker>
               <p>
-                We can start small. A paid diagnostic, or a fortnight of troubleshooting. You come away with a straight read on where value or confidence is leaking and what I’d do first. Nobody has to bet on me without trying me first.
+                We can start small. A paid diagnostic, or a fortnight of troubleshooting. You come away with a straight read on where value or confidence is leaking and what I’d do first.
               </p>
               <p>
                 You’re hiring me, and I stay accountable end to end. If the work needs more than me, and you want it, I bring exceptional specialists to the party; you get senior people shaping the outcomes without the usual agency overheads.
