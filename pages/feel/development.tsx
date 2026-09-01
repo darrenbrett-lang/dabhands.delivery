@@ -191,7 +191,6 @@ export default function FeelDevelopment() {
         }
         .fd-body strong { color:var(--color-ink); font-weight:600; }
         .fd-group { margin-top:26px; border-top:1px solid var(--color-stone); }
-        .fd-sign { color:var(--color-ink); }
 
         .fd-back { display:inline-flex; align-items:center; gap:9px; font-size:13px; color:var(--color-ink); text-decoration:none; margin-bottom:30px; }
         .fd-back .arw { color:var(--color-gold); }
@@ -271,25 +270,6 @@ export default function FeelDevelopment() {
           <div className="fd-group">
             {NEXT.map((p) => <Disclosure key={p.lead} p={p} />)}
           </div>
-
-          <h2>One thing I’ve been thinking since</h2>
-          <p className="fd-prose">
-            The strongest argument for the panel isn’t that it produces better data. It’s that it
-            changes what the method <em>is</em>.
-          </p>
-          <p className="fd-prose">
-            <strong>Expert diagnosis is a hypothesis. Audience evidence is a test.</strong> One
-            expert reviewing a journey is an opinion, however good, and an opinion invites a client
-            to feel clever disagreeing with it. Real people reporting how a moment made them feel is
-            something else entirely, and you can’t argue with ninety per cent of them without looking
-            foolish, which was your point.
-          </p>
-          <p className="fd-prose">
-            That distinction is what separates a point of view from a product. It’s worth building
-            towards even if the first few engagements are done the cheap way, because it’s the thing
-            that decides whether this is a business or a very good conversation opener.
-          </p>
-          <p className="fd-prose fd-sign">Tell me what I’ve missed.</p>
         </div>
       </section>
     </Layout>

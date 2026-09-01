@@ -409,10 +409,13 @@ opacity, not a grey.
 **`/feel/development` gained (1 Sep):** a "What changes in the method as a
 result" section between what is hanging and what happens next, stating expert
 diagnosis as hypothesis and audience evidence as the test; a 23rd open point
-("there is currently nothing concrete to buy"); and a fuller closing thought
-ending "Tell me what I've missed." ⚠ **The standfirst was removed by the owner**
-("Notes back to Gary after our call…"): the page carries no addressee above the
-fold, and the h1 runs straight into the date. `Point.body` now takes a
+("there is currently nothing concrete to buy"). ⚠ **Two owner cuts, same session, both about the page addressing a
+reader:** the standfirst ("Notes back to Gary after our call…") and the whole
+closing section ("One thing I've been thinking since", ending "Tell me what I've
+missed"). The page now opens on the h1 and the date and ends on Next steps: no
+addressee, no sign-off, and its argument for the panel lives in the
+method-changes section rather than being restated at the close. Do not
+reinstate either. `Point.body` now takes a
 `ReactNode` so a point can emphasise a phrase.
 `/feel/:path*` carries a noindex route header, so future FEEL routes are
 covered by default. None are in the nav, `sitemap.xml` or `llms.txt`.
