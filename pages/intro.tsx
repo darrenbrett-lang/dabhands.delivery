@@ -349,8 +349,8 @@ export default function Intro() {
           because the social platforms cache these hard and will not re-fetch
           the same name. */}
       <SeoMeta
-        title="An introduction to Darren Brett, fractional COO"
-        description="Keeping important work moving. Darren Brett · Fractional COO."
+        title="An introduction to Darren Brett, fractional COO and digital operator"
+        description="Keeping important work moving. Darren Brett · Fractional COO &amp; Digital Operator."
         path="/intro"
         image="/og-intro-2.jpg"
         noindex
@@ -713,7 +713,7 @@ export default function Intro() {
                 <span className="wordmark">DAB Hands</span>
               </span>
               <h1>Keeping important work moving.</h1>
-              <p className="sub">Darren Brett · Fractional COO</p>
+              <p className="sub">Darren Brett · Fractional COO &amp; Digital Operator</p>
               </div>
             </div>
           </section>
@@ -867,10 +867,10 @@ export default function Intro() {
             <div className="i-in i-start-copy">
               <Kicker>How we start</Kicker>
               <p>
-                When you bring me in, it’s built around the work, not the headcount. I stay accountable end to end, and bring in trusted senior specialists only when the work demands it, so you get senior judgement without carrying a big fixed team.
+                We can start small. A paid diagnostic, or a fortnight of troubleshooting. You come away with a straight read on where value or confidence is leaking and what I’d do first. Nobody has to bet on me without trying me first.
               </p>
               <p>
-                We can start small, a paid diagnostic or a fortnight of troubleshooting, and you come away with a straight read on where value or confidence is leaking and what I’d do first.
+                You’re hiring me, and I stay accountable end to end. If the work needs more than me, and you want it, I bring exceptional specialists to the party; you get senior people shaping the outcomes without the usual agency overheads.
               </p>
             </div>
           </section>

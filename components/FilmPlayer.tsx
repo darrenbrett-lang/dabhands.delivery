@@ -225,6 +225,26 @@ export const FilmPlayer = ({ src, poster, portraitSrc, portraitPoster, captions,
        the scrubber and the clock sit at zero. */
   }, [wake, file]);
 
+  /* Scrolling the player out of view pauses it. Deliberately a pause and
+     nothing more: `started` is left alone so the controls stay rather than the
+     Watch poster returning, currentTime is untouched so it resumes where it
+     stopped, and coming back into view does NOT restart it. Sound following a
+     reader down a page they have moved on from is the thing being avoided; a
+     film that restarts itself when glanced at is the other. */
+  useEffect(() => {
+    const el = shell.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && video.current && !video.current.paused) video.current.pause();
+      },
+      // threshold 0: fires the moment the last pixel of the player leaves.
+      { threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   useEffect(() => {
     const onFs = () => {
       const on = Boolean(document.fullscreenElement);

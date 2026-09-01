@@ -17,8 +17,8 @@ import { SCORE, ARC, type Card } from '@/lib/scriptScore';
  * The governing idea is a director sitting under the lens, not an autocue.
  * One thought owns the screen; nothing scrolls; nothing slides. Timing
  * *suggests* rather than enforces: when a thought's speaking time is up the
- * card stays fully readable and the next one ghosts in underneath, so being a
- * second slow costs nothing.
+ * card stays fully readable and the next one is already underneath it, so
+ * being a second slow costs nothing.
  *
  * Reading text is kept in the upper-middle of the viewport so that with the
  * laptop under the lens, eye movement is minimal. Nothing that must be read
@@ -31,13 +31,13 @@ type Phase = 'setup' | 'preroll' | 'run' | 'fading' | 'black';
 const STORE_SETTINGS = 'dabhands.script.settings.v1';
 /* Bumped to v2 with the 23-card rewrite, v3 broader diagnosis, v4 the 24-card master, v5 the cleaner close (28 Aug): a persisted v1 score would
    otherwise shadow the new script on any device that had opened the page. */
-const STORE_SCORE = 'dabhands.script.score.v5';
+const STORE_SCORE = 'dabhands.script.score.v6';
 
 const PACES = [0.8, 0.9, 0.95, 0.97, 1.0, 1.1, 1.2];
 /* Cross-dissolve between thoughts, in ms. 150 reads almost as a cut, 1200 is
    a slow bleed where the two thoughts overlap on screen. */
-const FADES = [150, 300, 420, 700, 1200];
-const ENDING_MS = 1800; // the slow fade to black after the last hold
+const FADES = [120, 180, 250]; // quick and soft: never a blank screen between thoughts
+const ENDING_MS = 700; // a gentle fade after the last hold, not a long goodbye
 
 interface Settings {
   mode: Mode;
@@ -46,12 +46,11 @@ interface Settings {
   fade: number;
   guides: boolean;
   timing: boolean;
-  fadeWords: boolean;
 }
 
 const fmtPace = (p: number) => (Number.isInteger(p * 10) ? p.toFixed(1) : String(p));
 
-const DEFAULT_SETTINGS: Settings = { mode: 'script', pace: 1.0, fade: 420, guides: true, timing: false, fadeWords: false };
+const DEFAULT_SETTINGS: Settings = { mode: 'script', pace: 1.0, fade: 180, guides: true, timing: false };
 
 const fmtFade = (ms: number) => `${String(ms / 1000).replace(/0$/, '')}s`;
 
@@ -76,7 +75,6 @@ export default function ScriptDirector() {
   const [phase, setPhase] = useState<Phase>('setup');
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
-  const [ghost, setGhost] = useState(false); // next thought easing into view
   const [count, setCount] = useState(3); // pre-roll
   const [chromeOn, setChromeOn] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -127,9 +125,9 @@ export default function ScriptDirector() {
   );
 
   // ── the conductor ───────────────────────────────────────────────────────
-  // Two timers per card. The first only *ghosts* the next thought in — the
-  // current one stays fully legible. The second makes the move. Being late
-  // costs nothing because nothing is removed at the speaking mark.
+  // One timer per card. There is no ghost step any more: the next thought is
+  // on screen the whole time, so nothing needs revealing. The card simply
+  // changes when its speaking time plus its (tiny) hold is up.
   useEffect(() => {
     if (phase !== 'run' || !playing || !card) return;
     clearTimers();
@@ -137,10 +135,8 @@ export default function ScriptDirector() {
     const speak = (card.speakDuration * 1000) / settings.pace;
     const hold = (card.holdDuration * 1000) / settings.pace;
 
-    if (!reduced.current) later(() => setGhost(true), speak);
     later(() => {
       if (index < score.length - 1) {
-        setGhost(false);
         setIndex((i) => i + 1);
       } else {
         setPhase('fading');
@@ -158,25 +154,23 @@ export default function ScriptDirector() {
     later(() => setCount(2), 1000);
     later(() => setCount(1), 2000);
     later(() => setCount(0), 3000); // numbers gone, clean lens contact
-    later(() => setPhase('run'), 3850);
+    later(() => setPhase('run'), 3500); // 3-2-1 then ~0.5s of clean lens, not a long silence
     return clearTimers;
   }, [phase]);
 
   const start = useCallback(() => {
     clearTimers();
     setIndex(0);
-    setGhost(false);
     setPlaying(true);
     setEditing(false);
     setCount(3);
     setPhase('preroll');
   }, []);
 
-  const restart = useCallback(() => { clearTimers(); setPhase('setup'); setIndex(0); setGhost(false); }, []);
+  const restart = useCallback(() => { clearTimers(); setPhase('setup'); setIndex(0); }, []);
 
   const step = useCallback((delta: number) => {
     clearTimers();
-    setGhost(false);
     setPhase('run');
     setIndex((i) => Math.min(score.length - 1, Math.max(0, i + delta)));
   }, [score.length]);
@@ -248,38 +242,48 @@ export default function ScriptDirector() {
         }
         .s-root *:focus-visible { outline:2px solid var(--gold); outline-offset:4px; border-radius:3px; }
 
-        /* Reading text sits high: the laptop is under the lens, so the eye
-           should barely move. Nothing that must be read goes near the floor. */
+        /* ⚠ EYE-LINE IS THE WHOLE DESIGN. The laptop camera sits at the top
+           centre of the screen, so the words live directly under it: looking
+           from lens to text should barely move the eyes, and a viewer should
+           never see them drop. Hence pinned near the top, NOT vertically
+           centred, and a narrow measure so the eyes do not scan sideways
+           either. Optimise for the resulting video, not page composition. */
         .s-stage {
-          position:absolute; left:0; right:0; top:13vh; bottom:20vh;
-          display:flex; align-items:flex-start; justify-content:center;
-          padding:0 7vw; text-align:center;
+          position:absolute; left:0; right:0; top:clamp(40px, 6vh, 70px);
+          display:flex; flex-direction:column; align-items:center;
+          padding:0 24px; text-align:center;
         }
-        .s-card { position:absolute; width:92vw; max-width:1500px; transition:opacity var(--s-fade, 420ms) ease; }
+        .s-now, .s-next, .s-card { width:100%; max-width:700px; transition:opacity var(--s-fade, 180ms) ease; }
+        /* The next thought is ALWAYS there, directly beneath, dim enough to
+           ignore and bright enough to read ahead into. Knowing where the
+           sentence goes is what stops the visible search for the next card. */
+        .s-next { margin-top:30px; opacity:.26; }
         .s-card.out { opacity:0; }
-        .s-card.in { opacity:1; }
-        .s-card.ghosting { opacity:.13; }
 
         .s-meta { font-size:15px; letter-spacing:3.4px; text-transform:uppercase; color:var(--dim); }
-        .s-beat { margin-bottom:36px; }
+        .s-beat { margin-bottom:20px; }
         .s-lines {
           font-family:var(--font-serif); font-weight:400;
-          font-size:clamp(26px, 5vw, 66px); line-height:1.3; letter-spacing:-.015em;
-          transition:opacity var(--fade-words, 0ms) linear;
+          /* Big enough to read at arm's length, small enough that a whole
+             thought is one glance rather than a scan across the screen. */
+          font-size:clamp(24px, 3.1vw, 40px); line-height:1.34; letter-spacing:-.015em;
         }
         .s-lines .ln { display:block; }
-        .s-lines.faded { opacity:.06; }
         .s-em { font-weight:400; color:#fff; }
         .s-mark { color:var(--gold); opacity:.42; font-size:.42em; vertical-align:.22em; margin:0 .12em; font-family:var(--font-sans); }
 
         .s-cue { font-family:var(--font-sans); }
-        .s-cue .lead { font-size:clamp(26px, 4.4vw, 58px); letter-spacing:-.015em; line-height:1.22; }
+        .s-cue .lead { font-size:clamp(24px, 3.1vw, 40px); letter-spacing:-.015em; line-height:1.28; }
         .s-cue .anchor { display:block; margin-top:18px; font-size:clamp(20px,2.7vw,34px); color:var(--dim); }
 
-        .s-own .i1 { font-family:var(--font-serif); font-size:clamp(40px,6.4vw,88px); line-height:1.08; }
+        .s-own .i1 { font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); line-height:1.12; }
         .s-own .i2 { margin-top:22px; font-size:18px; letter-spacing:4px; text-transform:uppercase; color:var(--dim); }
 
-        .s-time { margin-top:38px; font-size:14px; letter-spacing:3px; text-transform:uppercase; color:#5A5854; }
+        /* At the floor on purpose: rehearsal information must not sit near the lens. */
+        .s-time {
+          position:absolute; left:0; right:0; bottom:16px; margin:0;
+          font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#4A4844;
+        }
         .s-count { position:absolute; left:0; right:0; top:32vh; text-align:center;
                    font-family:var(--font-serif); font-size:96px; color:#5A5854; transition:opacity 300ms ease; }
 
@@ -332,7 +336,7 @@ export default function ScriptDirector() {
           .s-card, .s-lines, .s-count, .s-chrome, .s-prog { transition:none; }
         }
         @media (max-width:820px) {
-          .s-stage { top:12vh; bottom:22vh; padding:0 6vw; }
+          .s-stage { top:clamp(28px, 5vh, 52px); padding:0 18px; }
           .s-row { grid-template-columns:1fr; }
           .s-idx { padding-top:0; }
         }
@@ -386,7 +390,6 @@ export default function ScriptDirector() {
               <div className="s-opt">
                 <button type="button" className="s-btn" aria-pressed={settings.guides} onClick={() => set('guides', !settings.guides)}>Voice guides</button>
                 <button type="button" className="s-btn" aria-pressed={settings.timing} onClick={() => set('timing', !settings.timing)}>Timing</button>
-                <button type="button" className="s-btn" aria-pressed={settings.fadeWords} onClick={() => set('fadeWords', !settings.fadeWords)}>Fade words</button>
                 <button type="button" className="s-btn" onClick={() => setEditing(true)}>Edit</button>
               </div>
             </div>
@@ -404,12 +407,9 @@ export default function ScriptDirector() {
               <div className="s-row" key={c.id}>
                 <div className="s-idx">{String(i + 1).padStart(2, '0')}</div>
                 <div>
-                  <label htmlFor={`beat-${c.id}`}>Beat</label>
+                  <label htmlFor={`beat-${c.id}`}>Own it label</label>
                   <input id={`beat-${c.id}`} className="s-in" value={c.beat}
                     onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, beat: e.target.value } : x))} />
-                  <label htmlFor={`intent-${c.id}`} style={{ marginTop: 8 }}>Intent</label>
-                  <input id={`intent-${c.id}`} className="s-in" value={c.intent}
-                    onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, intent: e.target.value } : x))} />
                 </div>
                 <div>
                   <label htmlFor={`full-${c.id}`}>Script — one line per delivery line</label>
@@ -448,66 +448,57 @@ export default function ScriptDirector() {
           <>
             <div className="s-prog" style={{ width: `${((index + 1) / score.length) * 100}%`, opacity: phase === 'run' ? 0.5 : 0 }} />
 
+            {phase === 'run' && card && settings.timing && (
+              <p className="s-time">
+                {card.beat} · {(card.speakDuration / settings.pace).toFixed(1)}s · {index + 1} / {score.length}
+              </p>
+            )}
+
             <div className="s-stage" ref={stage} aria-live="polite">
               {phase === 'run' && card && (
-                <div className={`s-card in${ghost && settings.mode !== 'own' ? '' : ''}`} key={card.id}>
-                  <p className="s-meta s-beat">{card.beat} · {card.intent}</p>
+                <>
+                  {/* The thought being spoken. Nothing sits above it: the space
+                      between here and the lens is kept empty on purpose. */}
+                  <div className="s-now" key={card.id}>
+                    {settings.mode === 'script' && (
+                      <div className="s-lines">
+                        {card.fullText.map((line, i) => (
+                          <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
+                        ))}
+                      </div>
+                    )}
+                    {settings.mode === 'cue' && (
+                      <div className="s-cue">
+                        <p className="lead">{card.cueText[0]}</p>
+                        {card.cueText.slice(1).map((a, i) => <span className="anchor" key={i}>{a}</span>)}
+                      </div>
+                    )}
+                    {settings.mode === 'own' && (
+                      <div className="s-own"><p className="i1">{card.beat}</p></div>
+                    )}
+                  </div>
 
-                  {settings.mode === 'script' && (
-                    <div
-                      className={`s-lines${settings.fadeWords && ghost ? ' faded' : ''}`}
-                      style={{ ['--fade-words' as string]: `${(card.speakDuration * 1000) / settings.pace}ms` }}
-                    >
-                      {card.fullText.map((line, i) => (
-                        <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
-                      ))}
+                  {/* Where the sentence is going, always present and dim. */}
+                  {next && (
+                    <div className="s-next" aria-hidden key={`n${next.id}`}>
+                      {settings.mode === 'script' && (
+                        <div className="s-lines">
+                          {next.fullText.map((line, i) => (
+                            <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
+                          ))}
+                        </div>
+                      )}
+                      {settings.mode === 'cue' && <div className="s-cue"><p className="lead">{next.cueText[0]}</p></div>}
+                      {settings.mode === 'own' && <div className="s-own"><p className="i1">{next.beat}</p></div>}
                     </div>
                   )}
-
-                  {settings.mode === 'cue' && (
-                    <div className="s-cue">
-                      <p className="lead">{card.cueText[0]}</p>
-                      {card.cueText.slice(1).map((a, i) => <span className="anchor" key={i}>{a}</span>)}
-                    </div>
-                  )}
-
-                  {settings.mode === 'own' && (
-                    <div className="s-own">
-                      <p className="i1">{card.beat}</p>
-                      <p className="i2">{card.intent}</p>
-                    </div>
-                  )}
-
-                  {settings.timing && (
-                    <p className="s-time">
-                      Speak {(card.speakDuration / settings.pace).toFixed(1)}s · Hold {(card.holdDuration / settings.pace).toFixed(1)}s · {index + 1} / {score.length}
-                    </p>
-                  )}
-                </div>
+                </>
               )}
 
-              {/* The next thought eases in underneath as the current one's time
-                  runs out. It suggests the move; it never forces it. */}
-              {phase === 'run' && ghost && next && (
-                <div className="s-card ghosting" aria-hidden>
-                  <p className="s-meta s-beat">{next.beat} · {next.intent}</p>
-                  {settings.mode === 'script' && (
-                    <div className="s-lines">
-                      {next.fullText.map((line, i) => (
-                        <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
-                      ))}
-                    </div>
-                  )}
-                  {settings.mode === 'cue' && <div className="s-cue"><p className="lead">{next.cueText[0]}</p></div>}
-                  {settings.mode === 'own' && <div className="s-own"><p className="i1">{next.beat}</p></div>}
-                </div>
-              )}
-
-              {/* Last hold done: the words leave slowly and nothing replaces
-                  them. No end screen, so the eye stays in the lens. */}
+              {/* Last hold done: the words leave and nothing replaces them, so
+                  the eye stays in the lens. */}
               {phase === 'fading' && card && (
                 <div className="s-card out" style={{ transitionDuration: `${ENDING_MS}ms` }}>
-                  <p className="s-meta s-beat">{card.beat} · {card.intent}</p>
                   {settings.mode === 'script' && (
                     <div className="s-lines">
                       {card.fullText.map((line, i) => (

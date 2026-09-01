@@ -520,7 +520,38 @@ that must be read goes near the bottom.
 - **All performance data lives in `lib/scriptScore.ts`**, never in the
   component. The page derives everything (runtime, progress, the setup
   summary) from `score.length`, so the score can grow or shrink freely.
-- **Score v4 (28 Aug) — THE MASTER BRIEF. This is the source of truth.** 24
+- **Score v6 (1 Sep) — THE 45-SECOND CONVERSATIONAL CUT. Source of truth.**
+  12 thoughts, ~48s at 1.0x. This **supersedes every earlier script brief** and
+  inverts the old design: the 24-card version was built for a 90-second
+  deliberate performance with engineered pauses, and this film is a person
+  talking to one person. Do not reintroduce the performance rhythm.
+  - **`intent` was REMOVED from the Card type.** Emotional direction is gone on
+    purpose: holding an expression is what makes someone look like they are
+    performing. `beat` is now simply the Own It label.
+  - **Holds are ~0.2s, not 1s.** Punctuation sets the rhythm. Card 7 holds
+    **0.0s** because it is one spoken sentence with card 8 — the card break is
+    only there to keep the text near the lens. Only three moments get any
+    space at all: after "Here's what I notice" (0.5), after "than the way they
+    work" (0.4), and after "it has to sell" (0.4).
+  - **Speak times are set deliberately SHORT** (~159 wpm against natural speech
+    of ~140), so the page stays slightly ahead of him. He should never wait for
+    a card.
+  - ⚠ **The stated 40–45s target is not reachable at the stated 130–145 wpm.**
+    The script is 118 words, which is ~50–55s at that pace. The score is set at
+    ~48s. The brief says natural delivery beats the stopwatch, so this was left
+    honest rather than compressed.
+- **⚠ EYE-LINE IS THE LAYOUT.** The camera sits top-centre of a laptop, so the
+  text is pinned near the top (`top: clamp(40px, 6vh, 70px)`), **never
+  vertically centred**, at `max-width: 700px` and `clamp(24px, 3.1vw, 40px)` so
+  the eyes neither drop nor scan sideways. The **next thought is always on
+  screen beneath the current one at 0.26 opacity** — it is no longer revealed
+  by a timer, so there is no "ghost" step and no movement to catch the eye.
+  The rehearsal readout was moved to the floor of the screen, away from the
+  lens. Optimise for the resulting video, not page composition.
+- The `ghost` state and the "fade words" setting were **deleted**, not disabled:
+  both existed to animate the handover, which is exactly what pulls the eye.
+  Dissolves are now 120/180/250ms and the ending fade is 700ms after a 0.9s hold.
+- ⚠ **Score v4 (28 Aug) — the 24-card master, SUPERSEDED by v6 above.** 24
   cards. The owner's brief supersedes every earlier script brief; do not layer
   the older ones back on. It serves **marketing leaders and growth-stage
   founders at once**, on the shared territory of the gap between what a

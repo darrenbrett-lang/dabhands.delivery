@@ -425,7 +425,7 @@ export default function TrackRecord() {
                   <FadeUp>
                     <p className="eyebrow pt-2 text-blue-green">
                       Experience
-                      <span className="font-medium text-gold"> · Fractional COO</span>
+                      <span className="font-medium text-gold"> · Fractional COO &amp; Digital Operator</span>
                     </p>
                   </FadeUp>
                   {/* The one Instrument line on this page. Everything beneath it is
