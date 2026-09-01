@@ -16,7 +16,14 @@ export const audiences = [
   { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', context: 'For Growth-Stage Businesses', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
 ];
 
-export const Header = () => {
+interface HeaderProps {
+  /** Lockup only: no nav links, no mobile menu. Used by the private FEEL
+      surfaces, which are shared as standalone documents rather than as pages
+      of the site. */
+  bare?: boolean;
+}
+
+export const Header = ({ bare = false }: HeaderProps) => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false); // mobile sheet
   const [whoOpen, setWhoOpen] = useState(false); // desktop dropdown
@@ -156,109 +163,113 @@ export const Header = () => {
             </AnimatePresence>
           </div>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-9 lg:gap-11">
-            <div className="relative" onMouseEnter={openWho} onMouseLeave={closeWhoDelayed}>
-              <button
-                type="button"
-                aria-haspopup="true"
-                aria-expanded={whoOpen}
-                onClick={() => setWhoOpen((v) => !v)}
-                className={`inline-flex items-center gap-1.5 text-[14px] tracking-[-0.01em] transition-colors ${
-                  whoActive ? 'text-ink' : 'text-graphite hover:text-ink'
+          {!bare && (
+            <>
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-9 lg:gap-11">
+              <div className="relative" onMouseEnter={openWho} onMouseLeave={closeWhoDelayed}>
+                <button
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded={whoOpen}
+                  onClick={() => setWhoOpen((v) => !v)}
+                  className={`inline-flex items-center gap-1.5 text-[14px] tracking-[-0.01em] transition-colors ${
+                    whoActive ? 'text-ink' : 'text-graphite hover:text-ink'
+                  }`}
+                >
+                  Who I help
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className={`transition-transform duration-300 ${whoOpen ? 'rotate-180' : ''}`}
+                    aria-hidden
+                  >
+                    <path d="M3 4.5 L6 7.5 L9 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <AnimatePresence>
+                  {whoOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute right-0 top-full pt-3"
+                      role="menu"
+                    >
+                      <div className="w-[300px] rounded-2xl border border-stone/70 bg-bone/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
+                        {audiences.map((a) => {
+                          const active = router.pathname === a.href;
+                          const hovered = hoveredWho === a.href;
+                          // The current page sits in a soft grey "you are here"; the
+                          // option under the cursor lights up gold (the live selection).
+                          const bg = active
+                            ? 'color-mix(in srgb, var(--color-stone) 60%, transparent)'
+                            : hovered
+                              ? 'color-mix(in srgb, var(--color-gold) 38%, transparent)'
+                              : undefined;
+                          return (
+                            <Link
+                              key={a.href}
+                              href={a.href}
+                              role="menuitem"
+                              aria-current={active ? 'page' : undefined}
+                              onMouseEnter={() => setHoveredWho(a.href)}
+                              onMouseLeave={() => setHoveredWho(null)}
+                              className="block rounded-xl px-3 py-2.5 transition-colors duration-200"
+                              style={{ backgroundColor: bg }}
+                            >
+                              <span className="text-[14.5px] leading-snug text-ink">{a.label}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <Link
+                href="/experience"
+                className={`text-[14px] tracking-[-0.01em] transition-colors ${
+                  trackActive ? 'text-ink' : 'text-graphite hover:text-ink'
                 }`}
               >
-                Who I help
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  className={`transition-transform duration-300 ${whoOpen ? 'rotate-180' : ''}`}
-                  aria-hidden
-                >
-                  <path d="M3 4.5 L6 7.5 L9 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+                Experience
+              </Link>
 
-              <AnimatePresence>
-                {whoOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 6 }}
-                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute right-0 top-full pt-3"
-                    role="menu"
-                  >
-                    <div className="w-[300px] rounded-2xl border border-stone/70 bg-bone/95 backdrop-blur-md p-3 shadow-[0_22px_55px_-34px_rgba(31,31,29,0.4)]">
-                      {audiences.map((a) => {
-                        const active = router.pathname === a.href;
-                        const hovered = hoveredWho === a.href;
-                        // The current page sits in a soft grey "you are here"; the
-                        // option under the cursor lights up gold (the live selection).
-                        const bg = active
-                          ? 'color-mix(in srgb, var(--color-stone) 60%, transparent)'
-                          : hovered
-                            ? 'color-mix(in srgb, var(--color-gold) 38%, transparent)'
-                            : undefined;
-                        return (
-                          <Link
-                            key={a.href}
-                            href={a.href}
-                            role="menuitem"
-                            aria-current={active ? 'page' : undefined}
-                            onMouseEnter={() => setHoveredWho(a.href)}
-                            onMouseLeave={() => setHoveredWho(null)}
-                            className="block rounded-xl px-3 py-2.5 transition-colors duration-200"
-                            style={{ backgroundColor: bg }}
-                          >
-                            <span className="text-[14.5px] leading-snug text-ink">{a.label}</span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+              <Link
+                href="/contact"
+                className={`text-[14px] tracking-[-0.01em] transition-colors ${
+                  contactActive ? 'text-ink' : 'text-graphite hover:text-ink'
+                }`}
+              >
+                Contact
+              </Link>
+            </nav>
 
-            <Link
-              href="/experience"
-              className={`text-[14px] tracking-[-0.01em] transition-colors ${
-                trackActive ? 'text-ink' : 'text-graphite hover:text-ink'
-              }`}
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Menu"
+              aria-expanded={menuOpen}
+              className="md:hidden w-9 h-9 flex flex-col items-end justify-center gap-[6px] text-ink"
             >
-              Experience
-            </Link>
-
-            <Link
-              href="/contact"
-              className={`text-[14px] tracking-[-0.01em] transition-colors ${
-                contactActive ? 'text-ink' : 'text-graphite hover:text-ink'
-              }`}
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Menu"
-            aria-expanded={menuOpen}
-            className="md:hidden w-9 h-9 flex flex-col items-end justify-center gap-[6px] text-ink"
-          >
-            <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'w-7 rotate-45 translate-y-[7px]' : 'w-7'}`} />
-            <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'opacity-0 w-7' : 'w-5'}`} />
-            <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'w-7 -rotate-45 -translate-y-[7px]' : 'w-7'}`} />
-          </button>
+              <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'w-7 rotate-45 translate-y-[7px]' : 'w-7'}`} />
+              <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'opacity-0 w-7' : 'w-5'}`} />
+              <span className={`block h-px bg-ink transition-all duration-300 ${menuOpen ? 'w-7 -rotate-45 -translate-y-[7px]' : 'w-7'}`} />
+            </button>
+            </>
+          )}
         </div>
       </header>
 
       {/* Mobile sheet */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen && !bare && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

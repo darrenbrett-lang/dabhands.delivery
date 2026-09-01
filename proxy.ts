@@ -11,6 +11,7 @@ import { FEEL_COOKIE, verifyAccess } from '@/lib/feelAccess';
  * Two areas are gated, each with its own credentials and its own realm so a
  * login to one does not open the other:
  *   /for/eterna and everything under it — the private Eterna workspace
+ *   /feel and /feel/development — the FEEL hub and the working notes
  *
  * /feel/method is gated differently: not by a shared password but by a signed
  * cookie issued when someone completes the capture form on /feel — plus the
@@ -19,9 +20,13 @@ import { FEEL_COOKIE, verifyAccess } from '@/lib/feelAccess';
  * visitor has somewhere to go. The check runs here, at the edge, so the deck
  * is never rendered and then hidden.
  *
- * ⚠ /feel itself is NO LONGER password protected. It is the public (though
- * unlisted and noindexed) capture page. The Basic Auth that used to sit on it
- * was removed when the deck moved to /feel/method.
+ * ⚠ /feel and /feel/development ARE password protected again (owner's call,
+ * 1 Sep): the hub indexes work in progress and the notes carry open commercial
+ * thinking, so neither should rest on the URL being obscure. The capture page
+ * /feel/intro is deliberately NOT gated: it is the page people are sent to,
+ * and it is where the deck redirects a visitor whose cookie has expired.
+ * Gating it would close the funnel and turn that redirect into a 401.
+ * (Careful with comments here: a literal double-star-slash ends this block.)
  *
  * This uses the Next 16 `proxy` file convention (the former `middleware` name
  * is deprecated in this version). Credentials can be overridden
@@ -34,7 +39,7 @@ import { FEEL_COOKIE, verifyAccess } from '@/lib/feelAccess';
  */
 
 export const config = {
-  matcher: ['/for/eterna', '/for/eterna/:path*', '/feel/method'],
+  matcher: ['/for/eterna', '/for/eterna/:path*', '/feel', '/feel/development', '/feel/method'],
 };
 
 type Gate = {
@@ -50,6 +55,14 @@ const GATES: Gate[] = [
     user: process.env.ETERNA_USER || 'eternagrowth',
     pass: process.env.ETERNA_PASS || 'fillthechairs',
     covers: (p) => p === '/for/eterna' || p.startsWith('/for/eterna/'),
+  },
+  {
+    // The hub and the working notes. Deliberately NOT /feel/:path*: /feel/intro
+    // stays open, and /feel/method keeps its own cookie gate above.
+    realm: 'FEEL',
+    user: process.env.FEEL_USER || 'feels',
+    pass: process.env.FEEL_PASS || 'gad',
+    covers: (p) => p === '/feel' || p === '/feel/development',
   },
 ];
 
@@ -74,7 +87,7 @@ export async function proxy(req: NextRequest) {
     // about, and the people who hit it are the ones whose cookie expired or
     // who are on a second device: they had access and think they still do.
     const back = req.nextUrl.clone();
-    back.pathname = '/feel';
+    back.pathname = '/feel/intro'; // the capture form, not the hub
     back.search = '?from=method';
     return NextResponse.redirect(back);
   }

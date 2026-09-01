@@ -633,6 +633,27 @@ export default function Feel() {
         /* A qualification that sits beneath its argument rather than taking a
            slide of its own. The consolidation rule, expressed as a component. */
         .f-under { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin:34px 0 0; }
+        /* Three sources side by side on slide 04; one full-width note on slide 15.
+           Both carry higher specificity than the base rule, so the responsive
+           stacking below has to name them explicitly or they stay in columns. */
+        .f-under.three { grid-template-columns:repeat(3,1fr); gap:26px; }
+        .f-under.one { grid-template-columns:1fr; margin-top:28px; }
+        .f-under.one span { max-width:82ch; }
+        /* Slide 15 carries four limitations, the discipline chips, the two-depths
+           note and a source line. Adding the note pushed it 64px past a 900px
+           fold, so this one slide takes a tighter vertical rhythm rather than the
+           whole deck being tuned down for it. Scoped to desktop heights, and
+           repeated inside the short-desktop step-down, because .f-tight beats a
+           single-class responsive rule on specificity whatever the source order:
+           unscoped, it would hand phones the desktop rhythm back. */
+        @media (min-width:861px) and (min-height:851px) {
+          .f-tight .f-kick { margin-bottom:18px; }
+          .f-tight .f-cols { margin-top:38px; }
+          .f-tight .f-lab-chips { margin-top:30px; }
+          .f-tight .f-under.one { margin-top:22px; }
+          .f-tight .f-close-line { margin-top:30px; padding-top:20px; }
+          .f-tight .f-cite { margin-top:16px; }
+        }
         .f-under > div { border-top:1px solid var(--stone); padding-top:14px; }
         .f-slate .f-under > div, .f-charcoal .f-under > div { border-top-color:rgba(245,241,234,.24); }
         .f-clay .f-under > div { border-top-color:rgba(63,49,45,.3); }
@@ -962,6 +983,7 @@ export default function Feel() {
           .f-ring { width:212px; height:212px; }
           .f-ring .num { font-size:66px; }
           .f-cols.c5 { grid-template-columns:repeat(3,1fr); }
+          .f-under.three { gap:20px; }
           .f-funnels { grid-template-columns:1fr; gap:36px; }
         }
         @media (max-width:860px) {
@@ -1055,7 +1077,7 @@ export default function Feel() {
           .f-fit li span { font-size:13px; line-height:1.38; }
           .f-cite { font-size:11.5px; margin:20px 0 0; padding-top:10px; }
           .f-close-line.hero { font-size:24px; margin-top:28px; padding-top:18px; max-width:none; }
-          .f-under { grid-template-columns:1fr; gap:11px; margin:20px 0 0; }
+          .f-under, .f-under.three, .f-under.one { grid-template-columns:1fr; gap:11px; margin:20px 0 0; }
           .f-under b { font-size:9.5px; letter-spacing:1.6px; margin-bottom:5px; }
           .f-under span { font-size:13.5px; line-height:1.42; }
           .f-ps { grid-template-columns:1fr; gap:26px; margin:26px 0 0; justify-items:start; }
@@ -1133,6 +1155,12 @@ export default function Feel() {
           .f-cols { margin:34px 0 0; gap:24px; }
           .f-cols.c5 { gap:18px; }
           .f-chips { margin:32px 0 0; }
+          .f-tight .f-kick { margin-bottom:12px; }
+          .f-tight .f-cols { margin-top:22px; }
+          .f-tight .f-lab-chips { margin-top:18px; }
+          .f-tight .f-under.one { margin-top:14px; }
+          .f-tight .f-close-line { margin-top:18px; padding-top:12px; }
+          .f-tight .f-cite { margin-top:12px; }
           .f-close-line { font-size:20px; margin:24px 0 0; padding-top:14px; }
           .f-stop-line { font-size:29px; margin-bottom:22px; }
           .f-new.f-new-wide { margin:34px 0 0; gap:18px; }
@@ -1441,21 +1469,28 @@ export default function Feel() {
                 Feeling is not something that happens after a decision.{' '}
                 <span className="brk">It is part of how decisions are made.</span>
               </p>
-              <div className="f-under">
+              <div className="f-under three">
+                <div>
+                  <b>What the experience research shows</b>
+                  <span>
+                    Across designed experiences, most design elements were found to affect loyalty
+                    only through the emotional response they produced, rather than directly.
+                  </span>
+                </div>
                 <div>
                   <b>What the effectiveness data shows</b>
                   <span>
-                    Analysis of the IPA Effectiveness Databank found emotionally led campaigns
-                    delivered substantially stronger long term business effects than rationally
-                    led ones.
+                    Analysis of advertising effectiveness data found emotionally led campaigns
+                    delivered stronger long term business effects than rationally led ones. The
+                    dataset is drawn from award submissions and has been criticised on that basis.
                   </span>
                 </div>
                 <div>
                   <b>What the neuroscience suggests</b>
                   <span>
                     Patients whose emotional signalling was damaged kept their reasoning largely
-                    intact while real world decision making deteriorated. The mechanism is still
-                    debated. The direction is not.
+                    intact while real world decision making deteriorated. The interpretation is
+                    debated. The observation is not.
                   </span>
                 </div>
               </div>
@@ -1464,8 +1499,11 @@ export default function Feel() {
                 <span className="brk">It is part of what moves it.</span>
               </p>
               <p className="f-cite">
-                <b>Sources.</b> Les Binet and Peter Field, <i>The Long and the Short of It</i>,
-                IPA, 2013. Antonio Damasio, <i>Descartes’ Error</i>, 1994.
+                <b>Sources.</b> Madeleine Pullman and Michael Gross, ‘Ability of Experience
+                Design Elements to Elicit Emotions and Loyalty Behaviors’,{' '}
+                <i>Decision Sciences</i> 35(3), 2004. Les Binet and Peter Field,{' '}
+                <i>The Long and the Short of It</i>, IPA, 2013. Antonio Damasio,{' '}
+                <i>Descartes’ Error</i>, 1994.
               </p>
             </div>
           </section>
@@ -1520,9 +1558,9 @@ export default function Feel() {
                 The opportunity is to move emotion from an aggregate measure{' '}
                 <span className="brk">to a moment by moment performance discipline.</span>{' '}
                 <span className="brk">
-                  FEEL starts at the moment, finds the pattern by expert diagnosis, then validates
-                  where the evidence matters most.
-                </span>
+                  FEEL starts at the moment. Expert diagnosis finds the pattern;
+                </span>{' '}
+                <span className="brk">audience evidence tests it where the stakes justify the cost.</span>
               </p>
             </div>
           </section>
@@ -1798,7 +1836,7 @@ export default function Feel() {
 
           {/* 15 · How the judgement holds */}
           <section className="f-slide f-bone">
-            <div className="f-in">
+            <div className="f-in f-tight">
               <p className="f-kick">How the judgement holds</p>
               <h2 className="f-h">FEEL knows where it can be wrong.</h2>
               <div className="f-cols c4">
@@ -1806,16 +1844,26 @@ export default function Feel() {
                   ['Breaks shout louder than Carries', 'Emotional failure is easier to detect than successful positive performance.'],
                   ['Familiarity can be doing useful work', 'Category conformity can support fluency, trust and comprehension. Sameness is not automatically failure.'],
                   ['Duration is not importance', 'A long interaction is not necessarily an important one. Peaks and endings shape what people remember.'],
-                  ['The assessor is not the customer', 'Expert judgement is a hypothesis about emotional performance, not customer evidence.'],
+                  ['The assessor is not the customer', 'Expert judgement is a hypothesis about emotional performance. It is tested against audience evidence, not asserted over it.'],
                 ].map(([h, p]) => (
                   <div className="f-col" key={h}><h3>{h}</h3><p>{p}</p></div>
                 ))}
               </div>
               <p className="f-lab f-lab-chips">The discipline beneath</p>
               <div className="f-chips tight">
-                {['Written criteria', 'Independent scoring where appropriate', 'Confidence Level', 'Audience validation where the evidence matters'].map((c) => (
+                {['Written criteria', 'Independent scoring where appropriate', 'Confidence Level', 'Two depths of evidence'].map((c) => (
                   <span className="f-chip" key={c}>{c}</span>
                 ))}
+              </div>
+              <div className="f-under one">
+                <div>
+                  <b>Two depths, chosen deliberately</b>
+                  <span>
+                    Desk diagnosis alone carries most of the value for a single engagement. Audience
+                    evidence adds confidence where the commercial exposure or the disagreement
+                    justifies it. FEEL says which depth a finding rests on.
+                  </span>
+                </div>
               </div>
               <p className="f-close-line">
                 The method is expert led.{' '}
@@ -1912,7 +1960,7 @@ export default function Feel() {
 
           {/* 19 · One emotional brief across the system */}
           <section className="f-slide f-slate">
-            <div className="f-in">
+            <div className="f-in f-tight">
               <p className="f-kick">One emotional brief</p>
               <h2 className="f-h wide">It gives every discipline the same emotional brief.</h2>
               <p className="f-lab f-lab-chips">The disciplines FEEL can brief</p>
@@ -1930,7 +1978,10 @@ export default function Feel() {
               </div>
               <p className="f-close-line">
                 FEEL does not replace the stack.{' '}
-                <span className="brk">The work changes the moment, not merely the message.</span>
+                <span className="brk">The work changes the moment, not merely the message.</span>{' '}
+                <span className="brk">
+                  It does not ask for new budget. It improves the return on budget already committed.
+                </span>
               </p>
             </div>
           </section>
@@ -1952,6 +2003,12 @@ export default function Feel() {
                   <div className="f-col" key={h}><h3>{h}</h3><p>{p}</p></div>
                 ))}
               </div>
+              <p className="f-close-line">
+                The diagnostic does not depend on winning the work that follows.{' '}
+                <span className="brk">
+                  Findings that recommend nothing, or recommend somebody else, are findings.
+                </span>
+              </p>
             </div>
           </section>
 

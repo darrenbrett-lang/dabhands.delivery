@@ -1,6 +1,6 @@
 # DAB Hands Website — Handover
 
-Pick this up cold. The site is **LIVE in production** at `https://dabhands.delivery`. Updated **26 August 2026**. The newest thing is **`/feel`**, the FEEL method deck: a private, Basic Auth full-screen slide deck, unlike anything else in the repo. Read its section before touching it, and note that `proxy.ts` now runs two auth gates, not one. Since the 18 Aug Signal to Noise work, a run of doorway-page changes and a new top-level **Experience** page shipped (25 Aug), followed by the **master brief pass** (25 Aug) that finished the Business & Agency page — read the master brief section below. The **Signal to Noise** page is unchanged since 18 Aug; still the most-iterated page, read its section before touching it.
+Pick this up cold. The site is **LIVE in production** at `https://dabhands.delivery`. Updated **1 September 2026**. The newest thing is **`/feel`**, the FEEL method deck: a private, Basic Auth full-screen slide deck, unlike anything else in the repo. Read its section before touching it, and note that `proxy.ts` now runs two auth gates, not one. Since the 18 Aug Signal to Noise work, a run of doorway-page changes and a new top-level **Experience** page shipped (25 Aug), followed by the **master brief pass** (25 Aug) that finished the Business & Agency page — read the master brief section below. The **Signal to Noise** page is unchanged since 18 Aug; still the most-iterated page, read its section before touching it.
 
 **Recent releases (all straight to `main` via fast-forward from branch `signal-to-noise-fixes`, which now == `main`):** `dde9052` (24 Aug) doorway batch — entry product modules, Modules 2/3 rewrite, Operating Patterns 5→8; `444600e` (25 Aug) the Experience page + Contact "Let's talk" copy; `ab4c0c7` (25 Aug) Experience full record → three balanced columns; **the master brief pass** (25 Aug) — homepage intro + problem panel trimmed, the whole B&A page brought onto brief copy, Contact reply promise; **Growth page v2 + homepage turns** (25 Aug) — the Growth doorway rebuilt to its own v2 brief and the three "How I help" turns rewritten. See the relevant page sections.
 
@@ -15,7 +15,7 @@ Pick this up cold. The site is **LIVE in production** at `https://dabhands.deliv
 - **⚠ Vercel deploy stalls (FIVE occurrences: 2026-08-14, -16, -17, -18 x2):** a push sometimes builds but never rolls out. Symptom: the old page still serving with `x-vercel-cache: HIT` and a large `age`, new routes 404ing. Fix: `git commit --allow-empty -m "Retrigger Vercel deploy (<sha> not rolled out)"` and push to main; resolves in ~10s every time. The owner has the dashboard task; sessions have no dashboard access and no `gh`/API tokens (git push works via SSH).
 - **Always poll production after a release** (curl for a string unique to the change) — never assume the deploy landed.
 - **Build gates:** `npm run build` + `npm run lint`. Lint carries **2 pre-existing errors in `pages/for/eterna/*`** (plain `<a>`→`<Link>`) and **4 warnings** (2 in `pages/for/eterna/index.tsx`, 2 unused colour consts in `components/SignalToNoise.tsx`). Inherited, not blockers.
-- Routes: `/`, the three doorways, **`/experience`** (in the main nav between Who I help and Contact), **`/signal-to-noise` (UNLISTED, see below)**, **`/feel` (PRIVATE, Basic Auth, see below)**, `/intro` (UNLISTED), **`/script` (UNLISTED, temporary, no auth, see below)**, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth, noindex), `/for/manifesto-digital`, `/design-system`. ⚠ The Basic Auth gate lives in **`proxy.ts`** (Next 16 renamed the `middleware` convention to `proxy`); earlier notes in this file call it `middleware.ts`.
+- Routes: `/`, the three doorways, **`/experience`** (in the main nav between Who I help and Contact), **`/signal-to-noise` (UNLISTED, see below)**, **`/feel` (Basic Auth hub) → `/feel/intro` (open capture page), `/feel/method` (signed cookie + open `?review=1`), `/feel/development` (Basic Auth) (see below)**, `/intro` (UNLISTED), **`/script` (UNLISTED, temporary, no auth, see below)**, `/contact`, `/404`, private `/for/eterna` (hub) → `/for/eterna/confidence-map` + `/for/eterna/first-response` (Basic Auth, noindex), `/for/manifesto-digital`, `/design-system`. ⚠ The Basic Auth gate lives in **`proxy.ts`** (Next 16 renamed the `middleware` convention to `proxy`); earlier notes in this file call it `middleware.ts`.
 - Repo: `git@github.com:darrenbrett-lang/dabhands.delivery.git`, Vercel project `dabhands-delivery`.
 
 ## The brand direction (source of truth)
@@ -146,7 +146,7 @@ Copy refreshed 25 Aug: heading **"Let's talk."**, then two paragraphs ("You do n
 The "here's Darren" page: Ian's ICOM pre-sell, the LinkedIn Featured link, and the leave-behind for every warm introducer. One canonical shareable URL.
 
 ### The film player (`components/FilmPlayer.tsx`, new 28 Aug)
-**Built and verified, but DORMANT: `FILM.src` is `null` until the film exists.**
+**LIVE (1 Sep).** `darren-hello-hd.mp4` on desktop and `darren-hello-vertical.mp4` on phones, both on Vercel Blob, 1920x1080 / 1080x1920, 96.6s. Posters are the studio-portrait crops. **They are web encodes at ~35MB and ~30MB, not the masters** — the 180MB/113MB masters would have stalled on ordinary connections and burned the 10GB monthly transfer in ~55 views.
 While it is null the panel renders exactly what it does today, the portrait and
 "Film to follow." Set `src` and the panel switches to a 16:9 stage with the
 player, because a 16:9 film cropped into the portrait's tall column is
@@ -175,12 +175,16 @@ unwatchable.
   `npx vercel login`, then `npx vercel link` to the dabhands-delivery project.
 
   **Runbook, per film:**
-  1. `swift scripts/prepare-film.swift <camera file> film/hello 2.5`
-     → a network-optimised MP4 plus a poster JPEG. Repeat for the portrait cut.
-  2. `scripts/upload-film.sh film/hello.mp4 film/hello-poster.jpg`
+  1. `swift scripts/prepare-film.swift <master> <out-base> 2.5 3`
+     → a web-encoded MP4 at an explicit bitrate plus a poster JPEG. 3 Mbps for
+     the landscape cut, 2.5 for the vertical. **Feed it the MASTER**, never a
+     file that has already been compressed. This took 180MB → 35MB and 113MB →
+     30MB on the real film with no visible loss on a talking head.
+  2. `scripts/upload-film.sh <out-base>.mp4 <out-base>-poster.jpg`, or simply
+     drag the files into **Manage Blobs** in the Vercel dashboard, which needs
+     no token at all and is easier for one or two files.
   3. Put the returned URLs into `FILM` in `pages/intro.tsx` (`src`, `poster`,
-     `portraitSrc`, `portraitPoster`), delete `public/film/placeholder*.mp4`,
-     regenerate and re-time the captions.
+     `portraitSrc`, `portraitPoster`), then regenerate and re-time the captions.
 
   ⚠ **Version the filename on every re-cut** (`hello-2.mp4`), never overwrite.
   Uploads are immutable for a year, so overwriting leaves a year of caches
@@ -282,9 +286,10 @@ unwatchable.
   edge). The total duration also hides below 640px.
 - ⚠ **Supply `portraitPoster` too.** Without it the portrait stage falls back
   to the landscape headshot and crops to a tight band across the eyes.
-- ⚠ **`public/film/placeholder.mp4` and `placeholder-portrait.mp4` are TEMPORARY**, for looking at the player
-  only, and `FILM.src` currently points at it. **Delete both files and set `src` and
-  `portraitSrc` back to `null` (or to the real CDN urls) before this ships.**
+- The generated placeholder films and the dev-only `PREVIEW` switch were
+  **deleted** when the real film landed; `public/film/` no longer exists. If a
+  stand-in is ever wanted again, the AVFoundation generator is in the session
+  scratchpad.
 
 - **⚠ The reveal failsafe reveals only what is ON SCREEN (28 Aug).** It used
   to add `.in` to every `[data-r]` on a flat 1.6s timer. Because **every
@@ -357,7 +362,7 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 - **"When leaders bring me in" is a carousel** — one statement at a time at 48px, cross-fading over 0.9s, auto-advancing every 5.2s, pausing on hover/focus/touch, swipeable, and **not auto-advancing at all under `prefers-reduced-motion`**. Slides share one grid cell so the band never changes height. Pips are the site's carousel idiom (a 12px dot stretching to a 42px pill). With JS off all four stack and nothing is hidden.
 - **The triptych** is three paper panels with a 4px gold spine (originally the transcript sheet's device, which has since been removed; the triptych owns it now). ⚠ Headings are capped at **34px**: the text column is 288px once padding and spine are off, and "An entrepreneur's engine." needs exactly 288px at 36px.
 - **The close** is centred with the crown above it, at the **site's standard footer-CTA scale** (28/44px serif). The button is the page's blue, not the site's charcoal — an open question, see below.
-- **Link preview**: `public/og-intro.jpg`, the headshot padded onto charcoal at a true 1200×630. The square original gets cropped to a decapitated slice by LinkedIn and Slack, which frame at 1.91:1.
+- **Link preview**: `public/og-intro-2.jpg` — a 1200×630 **crop** of the studio portrait, replacing the old padded card whose grey bars showed at preview size. ⚠ **Version the filename on any change**: the platforms cache these hard and will not re-fetch the same name. `og-intro.jpg` is kept for links already shared.
 - **"Shared privately. Not listed on the site."** sits above the footer, on the page rather than in the shared `Footer` component — that footer renders everywhere and the line is only true here.
 
 **⚠ Deliberate overrides of the design brief, all by the owner, all commented in the code so a later pass does not "fix" them back:**
@@ -373,11 +378,67 @@ Rebuilt to "Design direction · dabhands.delivery/intro" (reference: `Intro_Page
 - The **carousel cross-fade double-exposes** on long text — both slides visible mid-transition. Inherent to a 0.9s cross-fade of two-line statements in one cell.
 - **Copy line-lengths are load-bearing.** The carousel slides (80–83 chars) and the triptych bodies (72–85) are matched so each module sets to an even number of lines. Editing one without checking the others will make a module ragged, which the owner notices every time.
 
-### The FEEL section (new, 26 Aug) — ⚠ COMMITTED BUT NOT DEPLOYED
+### The FEEL section (new, 26 Aug) — LIVE, with the form still owner-blocked
 
-**Not pushed. Do not push without reading the blockers below.** `/privacy` is now finished and publishable (28 Aug), but the FEEL form still returns 500 until `FEEL_COOKIE_SECRET` exists and the HubSpot field name is confirmed. Deploying now would put a live form that fails on a page people are being sent to.
+**Deployed 1 Sep**, including the hub restructure. ⚠ The header here used to read
+"COMMITTED BUT NOT DEPLOYED"; that was stale by the time it was read. Check
+production before believing a claim like that: `curl -o /dev/null -w "%{http_code}"`
+against the route settles it in a second.
 
-**Routes.** `/feel` is the public-but-unlisted capture page. `/feel/method` is the 22-slide deck, moved there from `/feel` and gated. `/feel/:path*` carries a noindex route header, so future FEEL routes are covered by default. Neither is in the nav, `sitemap.xml` or `llms.txt`.
+⚠ **The capture form is still owner-blocked and this did not change.** It returns
+500 until `FEEL_COOKIE_SECRET` exists in Vercel and the HubSpot property name is
+confirmed (blockers 4 and 5 below, both dashboard work, neither doable from the
+repo). That was already true of the live form before the restructure; moving it
+from `/feel` to `/feel/intro` neither fixed nor worsened it.
+
+**Routes (restructured 1 Sep).** `/feel` is now a **hub** linking the three
+surfaces. `/feel/intro` is the capture page, **moved from `/feel`** — the proxy
+redirect for a missing deck cookie points there, not at the hub, and any link
+previously shared as `/feel` now lands on the hub instead of the form.
+`/feel/method` is the 22-slide deck. `/feel/development` is the live working
+note ("where we got to"), now 23 points behind native `<details>`.
+
+**The hub and the notes page carry a BARE masthead** (`Layout headerVariant="bare"`
+→ `Header bare`): the lockup alone, no nav links and no mobile menu, because
+these are shared as standalone documents rather than as pages of the site. The
+prop is opt-in, so every other page is untouched. **The hub's body copy is
+charcoal, not graphite** (owner's call, 1 Sep): grey body made a contents page
+read at a glance recede. The note line keeps its subordinate weight through
+opacity, not a grey.
+
+**`/feel/development` gained (1 Sep):** a "What changes in the method as a
+result" section between what is hanging and what happens next, stating expert
+diagnosis as hypothesis and audience evidence as the test; a 23rd open point
+("there is currently nothing concrete to buy"); and a fuller closing thought
+ending "Tell me what I've missed." ⚠ **The standfirst was removed by the owner**
+("Notes back to Gary after our call…"): the page carries no addressee above the
+fold, and the h1 runs straight into the date. `Point.body` now takes a
+`ReactNode` so a point can emphasise a phrase.
+`/feel/:path*` carries a noindex route header, so future FEEL routes are
+covered by default. None are in the nav, `sitemap.xml` or `llms.txt`.
+
+**⚠ `/feel` and `/feel/development` are BASIC AUTH as of 1 Sep** (owner's call),
+login **`feels`** / **`gad`**, realm `FEEL`, overridable with `FEEL_USER` /
+`FEEL_PASS`. This closes the open-strategy hole the previous note flagged: the
+hub indexes work in progress and the notes carry the doorway-or-business
+question, the budget problem and whether anyone would invest, and neither should
+have rested on the URL being obscure.
+
+**⚠ `/feel/intro` is deliberately NOT gated, and must stay that way.** It is the
+capture page people are sent to, and it is where `proxy.ts` redirects a visitor
+whose deck cookie has expired: gating it closes the funnel and turns that
+redirect into a 401. `/feel/method` keeps its own signed-cookie gate plus the
+open `?review=1` door. So the section now runs **three different access models
+across four routes** — password, open, cookie, password. Check which one you are
+touching before you change `proxy.ts`.
+
+⚠ **Anyone holding the old `/feel` link now meets a password**, because that URL
+used to be the form. Send prospects `/feel/intro`.
+
+**⚠ Do not write `**/` inside a block comment in `proxy.ts`.** Writing a bold
+`/feel/intro` in the file header closed the comment early, the whole site
+returned 500 through a shared dev server, and the parse error named a line four
+below the real one.
 
 **The gate (`lib/feelAccess.ts` + `proxy.ts`).** A stateless HMAC token in an HttpOnly cookie, verified at the edge before the deck renders, so gated content never leaks and then redirects. Web Crypto throughout, because `proxy.ts` runs on the Edge runtime where `node:crypto` does not exist. **It fails closed**: with no `FEEL_COOKIE_SECRET` nothing verifies and the deck stays shut, which is the right direction but means the feature is inert until the variable exists.
 
@@ -416,11 +477,72 @@ The three-part holdback from 27 Aug is **fully reversed**, all in one commit as 
 
 ### `/feel/method` — the FEEL method deck (new, 26 Aug)
 
-**PRIVATE, with one open door.** The deck is gated at the edge (`proxy.ts`) by a **signed cookie** issued when someone completes the capture form on `/feel`. ⚠ **`?review=1` is now an OPEN share link with no password** (owner's call, 1 Sep): anyone holding `/feel/method?review=1` reads the deck without the form or a HubSpot contact. The link IS the credential. The reviewer Basic Auth (`the15` / `FeelingMovesValue!26`, `FEEL_REVIEW_USER`/`FEEL_REVIEW_PASS`) was deleted. Remove the `?review=1` branch when FEEL goes properly live. Also noindex meta plus an `X-Robots-Tag: noindex, nofollow, noarchive` route header, and absent from nav, `sitemap.xml` and `llms.txt`. ⚠ The committed fallback password is in git history; set the Vercel env vars if it ever needs to be secret from anyone with repo access.
+**PRIVATE, with one open door.** The deck is gated at the edge (`proxy.ts`) by a **signed cookie** issued when someone completes the capture form on `/feel/intro`. ⚠ **`?review=1` is now an OPEN share link with no password** (owner's call, 1 Sep): anyone holding `/feel/method?review=1` reads the deck without the form or a HubSpot contact. The link IS the credential. The reviewer Basic Auth (`the15` / `FeelingMovesValue!26`, `FEEL_REVIEW_USER`/`FEEL_REVIEW_PASS`) was deleted. Remove the `?review=1` branch when FEEL goes properly live. Also noindex meta plus an `X-Robots-Tag: noindex, nofollow, noarchive` route header, and absent from nav, `sitemap.xml` and `llms.txt`. ⚠ The committed fallback password is in git history; set the Vercel env vars if it ever needs to be secret from anyone with repo access.
 
 `proxy.ts` now runs **two gates with separate realms**, so the FEEL login does not open Eterna and vice versa. Verified both ways at release.
 
 Built from `FEEL_Emotional_Experience_Method_Master_Deck.pdf` (owner-supplied, private and confidential), then revised to the owner's **v1.1 brief** (26 Aug). **Not a scrolling page: a 22-slide full-screen deck**, one slide per viewport on a y-axis scroll-snap track.
+
+**⚠ v1.6 (1 Sep) is the evidence and architecture pass. Five changes, four of them edits.**
+
+1. **Slide 04's evidence block runs three sources, service research first.** The
+   founding claim used to rest on advertising effectiveness data and a contested
+   piece of neuroscience, **neither of which is about lived experience** — the one
+   place a well-read sceptic could get a grip. **Pullman and Gross (2004),
+   *Decision Sciences* 35(3), 551–578** now leads: peer-reviewed, in the service
+   and experience domain, and it found most design elements affect loyalty only
+   through the emotional response they produce. Verified against Wiley before it
+   was set. The Binet and Field line now **carries its own caveat** ("drawn from
+   award submissions and has been criticised on that basis") — naming the
+   criticism yourself is worth more than having it named at you, and it costs one
+   line. Byron Sharp is on record calling the dataset "a very weird data set".
+2. **"The interpretation is debated. The observation is not."** was "The mechanism
+   is still debated. The direction is not." Direction overreached: the
+   reversal-learning account challenges the direction too. That these patients
+   deteriorate is what nobody disputes.
+3. **Audience evidence is architecture, not an optional extra.** It used to appear
+   twice as a conditional ("where the evidence matters most") while "the assessor
+   is not the customer" sat in the limitations as a confession — the weakest
+   version of the method, with the best answer to the hardest objection buried in
+   a footnote. The structure is now **expert diagnosis forms the hypothesis,
+   audience evidence tests it**: slide 06 closes "Expert diagnosis finds the
+   pattern; audience evidence tests it where the stakes justify the cost", slide
+   15's assessor item ends "It is tested against audience evidence, not asserted
+   over it", and a **two-depths note** names desk diagnosis and audience evidence
+   and says FEEL states which depth a finding rests on. ⚠ This claims no
+   capability FEEL does not have; it describes how the method is built. Do not
+   let it drift back into a caveat.
+4. **The budget line, on slide 19:** "It does not ask for new budget. It improves
+   the return on budget already committed." A logical claim, not an empirical one,
+   and the answer to the hardest commercial objection: nine in ten agree and do
+   not buy, because there is rarely new money.
+5. **Neutrality, stated on slide 20:** "The diagnostic does not depend on winning
+   the work that follows. Findings that recommend nothing, or recommend somebody
+   else, are findings." A commitment rather than a claim about the world, so
+   nothing can falsify it.
+
+**⚠ The engagement slide (23) is deliberately NOT BUILT.** The brief asks for one
+slide after "What brands get" saying what a first engagement is: duration,
+outputs as objects, what the client supplies, what happens afterwards including
+the do-nothing outcome, and that price and end date are fixed before starting.
+**It needs the owner to settle the shape first.** An invented engagement shape is
+worse than no slide, because it is the one thing on the page a buyer will hold
+you to. The deck is **22 slides** until then. This is the "nothing concrete to
+buy" gap named on `/feel/development`.
+
+**⚠ `.f-tight` is a per-slide vertical rhythm, on slides 15 and 19 only.** The
+two-depths note pushed slide 15 64px past a 900px fold, so that slide takes
+tighter margins rather than the whole deck being tuned down for it. It is scoped
+to `(min-width:861px) and (min-height:851px)` and repeated inside the
+short-desktop step-down, because **`.f-tight .f-cols` beats `.f-cols` on
+specificity whatever the source order** — unscoped, it hands phones the desktop
+rhythm back. Verified at 1440x900, 1280x800, 1024x768, 430x932, 390x844, 375x667
+and 360x780: every slide fits its fold at every one.
+
+**⚠ Measure the deck only after `document.fonts.ready`.** Measuring during the
+font swap reported seven slides overflowing by up to 550px, including slides
+nothing had touched, and sent a whole round of tightening after a phantom. The
+fallback metrics are much wider than Manrope's. Wait for the fonts, then measure.
 
 **⚠ v1.5 (26 Aug) rebuilt the opening as a tension sequence.** The first six slides are one uninterrupted thought and **must not be reordered or collapsed**: FEEL → the sea of sameness (the market tension) → the warning lights (where it becomes visible) → the human truth (why feeling affects choice) → the performance gap (the missing layer) → emotion is already measured (the territory FEEL actually occupies). "Optimisation has made sameness scalable" was **promoted** from a late Why Now slide to slide 02; the late slide is gone and the line must appear **once only**. ⚠ Slide 03's warning lights deliberately claim **no universal decline and no causality** — they are where a weak emotional layer *can* become commercially visible. Do not add downward arrows or decline statistics without verified evidence.
 
@@ -712,6 +834,25 @@ Full detail in `email/README.md`.
 - **Sitemap**: keep `lastmod` discipline per release for `/signal-to-noise`.
 - **Signal to Noise sources** — the page carries linked sources for Gartner and Harvard. Bain is gone, so the count changed; check nothing else references it.
 - The `/for` pages still use older logo lockups; align only if asked.
+- **⚠ `/feel/development` is ungated and holds open strategy** (doorway-or-
+  business, the budget problem, whether anyone would invest). Unlisted and
+  noindexed, but the URL is guessable from `/feel`. Owner has been told; gate it
+  behind the deck's cookie if that stops being acceptable.
+- **`public/Darren_Ben.jpg`** — the 3MB studio original, untracked in `public/`,
+  publicly reachable and only needed as the source for the crops. Owner asked
+  twice, not yet answered. Move it out of `public/`.
+- **`/feel/method?review=1` is an open door** with no password. Remove that
+  branch in `proxy.ts` when FEEL goes properly live.
+- **The 45-second film script is ~47s, not 40–45.** 118 words cannot be said in
+  45s at the brief's own 130–145 wpm. Cutting ~15 words is the fix, not faster
+  speaking.
+- **The `/script` eye-line has never been checked on a real laptop.** It is the
+  brief's main acceptance criterion and needs doing in fullscreen at recording
+  distance before a take.
+- **The preview pane intermittently collapses** — whole document reports 900px,
+  nothing hydrates, measurements return 0. It is the pane, not the site: a
+  production build of the same commit is fine. Closing and reopening the pane,
+  or restarting dev, usually clears it. Do not chase it as a site bug.
 
 ## Working style
 
