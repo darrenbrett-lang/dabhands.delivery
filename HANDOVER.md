@@ -416,7 +416,7 @@ The three-part holdback from 27 Aug is **fully reversed**, all in one commit as 
 
 ### `/feel/method` — the FEEL method deck (new, 26 Aug)
 
-**PRIVATE.** Behind Basic Auth at the edge (`proxy.ts`), login `the15` / `FeelingMovesValue!26`, overridable per environment with `FEEL_USER` / `FEEL_PASS`. Also noindex meta plus an `X-Robots-Tag: noindex, nofollow, noarchive` route header, and absent from nav, `sitemap.xml` and `llms.txt`. ⚠ The committed fallback password is in git history; set the Vercel env vars if it ever needs to be secret from anyone with repo access.
+**PRIVATE, with one open door.** The deck is gated at the edge (`proxy.ts`) by a **signed cookie** issued when someone completes the capture form on `/feel`. ⚠ **`?review=1` is now an OPEN share link with no password** (owner's call, 1 Sep): anyone holding `/feel/method?review=1` reads the deck without the form or a HubSpot contact. The link IS the credential. The reviewer Basic Auth (`the15` / `FeelingMovesValue!26`, `FEEL_REVIEW_USER`/`FEEL_REVIEW_PASS`) was deleted. Remove the `?review=1` branch when FEEL goes properly live. Also noindex meta plus an `X-Robots-Tag: noindex, nofollow, noarchive` route header, and absent from nav, `sitemap.xml` and `llms.txt`. ⚠ The committed fallback password is in git history; set the Vercel env vars if it ever needs to be secret from anyone with repo access.
 
 `proxy.ts` now runs **two gates with separate realms**, so the FEEL login does not open Eterna and vice versa. Verified both ways at release.
 

@@ -13,7 +13,8 @@ import { FEEL_COOKIE, verifyAccess } from '@/lib/feelAccess';
  *   /for/eterna and everything under it — the private Eterna workspace
  *
  * /feel/method is gated differently: not by a shared password but by a signed
- * cookie issued when someone completes the capture form on /feel. See
+ * cookie issued when someone completes the capture form on /feel — plus the
+ * open ?review=1 share link described below. See
  * lib/feelAccess.ts. It redirects rather than returning 401, because the
  * visitor has somewhere to go. The check runs here, at the edge, so the deck
  * is never rendered and then hidden.
@@ -52,31 +53,6 @@ const GATES: Gate[] = [
   },
 ];
 
-/**
- * ⚠ TEMPORARY reviewer bypass for /feel/method.
- *
- * Lets Darren forward the deck for review without the reviewer filling the
- * capture form, creating a HubSpot contact, or depending on
- * FEEL_COOKIE_SECRET being set. It sits ALONGSIDE the cookie gate, so the
- * real visitor journey is untouched.
- *
- * REMOVE THIS once the FEEL section is properly live and reviewers no longer
- * need a side door. Overridable with FEEL_REVIEW_USER / FEEL_REVIEW_PASS.
- */
-const REVIEW_USER = process.env.FEEL_REVIEW_USER || 'the15';
-const REVIEW_PASS = process.env.FEEL_REVIEW_PASS || 'FeelingMovesValue!26';
-
-const hasReviewerAuth = (header: string | null): boolean => {
-  if (!header?.startsWith('Basic ')) return false;
-  try {
-    const decoded = atob(header.slice(6));
-    const sep = decoded.indexOf(':');
-    return decoded.slice(0, sep) === REVIEW_USER && decoded.slice(sep + 1) === REVIEW_PASS;
-  } catch {
-    return false;
-  }
-};
-
 export async function proxy(req: NextRequest) {
   // The FEEL method deck: a signed cookie from the form, or the reviewer
   // password while the section is still being reviewed.
@@ -84,16 +60,14 @@ export async function proxy(req: NextRequest) {
     const ok = await verifyAccess(process.env.FEEL_COOKIE_SECRET, req.cookies.get(FEEL_COOKIE)?.value);
     if (ok) return NextResponse.next();
 
-    if (hasReviewerAuth(req.headers.get('authorization'))) return NextResponse.next();
-
-    // Ask for the password rather than bouncing: a reviewer arriving on a
-    // shared link has no form to fill and no cookie to present.
-    if (req.nextUrl.searchParams.get('review') === '1') {
-      return new NextResponse('Authentication required.', {
-        status: 401,
-        headers: { 'WWW-Authenticate': 'Basic realm="FEEL review", charset="UTF-8"' },
-      });
-    }
+    /* ⚠ ?review=1 is now an OPEN share link — no password (owner's call,
+       1 Sep). Anyone holding the link reads the deck without filling the form
+       or creating a HubSpot contact. The plain /feel/method URL still requires
+       the signed cookie, so the visitor journey is unchanged; this is a side
+       door for people Darren sends it to directly.
+       There is no secret in it any more: treat the link itself as the
+       credential, and REMOVE this branch when FEEL goes properly live. */
+    if (req.nextUrl.searchParams.get('review') === '1') return NextResponse.next();
 
     // Send them back with a reason. Bouncing someone to an identical-looking
     // page with no explanation is the kind of silent failure this deck is
