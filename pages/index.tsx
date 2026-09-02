@@ -119,7 +119,7 @@ export default function Home() {
                   {/* The one Instrument line in this block, by decree (25 Aug).
                       Everything below it is body scale in the sans. */}
                   <p className="font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.2] tracking-[-0.01em] text-ink mb-6 md:mb-7 max-w-[26ch]">
-                    A fractional COO for digital-first agencies and growth-stage brands.
+                    A fractional COO and digital operator for digital-focused brands, growth-stage businesses and agencies.
                   </p>
                 </div>
                 {/* The career sentence: background, must not compete. */}
@@ -201,7 +201,7 @@ export default function Home() {
             <FadeUp>
               <p className="eyebrow text-graphite mb-5">How I help</p>
               <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
-                I work alongside leaders of agencies, brands and growth-stage businesses, bringing the scar tissue and the instinct to keep important work moving.
+                I work alongside leaders of brands, growth-stage businesses and agencies, bringing the scar tissue and the instinct to keep important work moving.
               </h2>
             </FadeUp>
             <FadeUp delay={0.08}>
