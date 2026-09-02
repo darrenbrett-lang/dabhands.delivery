@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { SeoMeta } from '@/components/SeoMeta';
 import { LogoTicker } from '@/components/LogoTicker';
 import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
 import { FilmPlayer } from '@/components/FilmPlayer';
 import { PathwayPicker } from '@/components/PathwayPicker';
 
@@ -392,29 +393,15 @@ export default function Intro() {
            Everything is expressed against the wordmark's font size so the
            whole mark scales from one number: crown 1.06x, gap 0.27x, and the
            strapline sized so its width matches the brand row's. */
-        /* The whole mark scales from one number: the lockup carries the
-           wordmark's size and everything else is expressed in em against it.
-           Crown geometry, measured off the asset: the right spike's tip sits
-           at .1935 of the file's height and the bottom-right swoosh at .9292,
-           so the span between them is .7357 of the box. Instrument's caps are
-           .74 of the em, so to make that span equal the cap height the crown
-           must be .74 / .7357 = 1.006em tall. The top offset then drops it
-           so the spike tip lands on the cap line and the swoosh on the
-           baseline. Verified by measurement, not by eye. */
-        .i-hero .lockup { display:inline-flex; align-items:flex-end; justify-content:center; gap:.268em; margin:0 auto 12px; font-size:34px; }
-        .i-hero .crown { display:block; height:1.006em; width:auto; user-select:none; position:relative; top:.0535em; }
-        .i-hero .wordmark { font-family:var(--font-serif); font-weight:400; font-size:1em; line-height:1; letter-spacing:-.01em; color:var(--charcoal); }
-        /* The page's own gold eyebrow, sat under the finished lockup. */
+        /* P1 is the homepage hero: crown mark, then the headline at the same
+           44/60/78/96 scale on the same 15ch measure, crown 48/56/64. The
+           wordmark lives in the global nav above, exactly as on the homepage. */
+        .i-hero .crown { display:block; margin:0 auto 24px; height:48px; width:auto; user-select:none; }
+        .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:44px; line-height:1.03; letter-spacing:-1.4px; color:var(--charcoal); margin:0 auto; max-width:15ch; }
         .i-hero .i-kick { margin:26px 0 0; }
-        .i-hero h1 { font-family:var(--font-sans); font-weight:400; font-size:12.5px; line-height:1.3; letter-spacing:0; color:var(--charcoal); margin:0 auto; max-width:none; }
-        @media (min-width:641px) {
-          .i-hero .lockup { margin-bottom:15px; font-size:45px; }
-          .i-hero h1 { font-size:16.5px; }
-        }
-        @media (min-width:1101px) {
-          .i-hero .lockup { margin-bottom:19px; font-size:56px; }
-          .i-hero h1 { font-size:20.5px; }
-        }
+        @media (min-width:641px)  { .i-hero .crown { height:56px; } .i-hero h1 { font-size:60px; letter-spacing:-1.9px; } }
+        @media (min-width:901px)  { .i-hero h1 { font-size:78px; letter-spacing:-2.4px; } }
+        @media (min-width:1101px) { .i-hero .crown { height:64px; margin-bottom:30px; } .i-hero h1 { font-size:96px; letter-spacing:-3px; } }
         /* The lede's eyebrow, carrying the credit that used to sit in P1. */
         .i-credit { color:var(--stone); margin:0 0 18px; }
 
@@ -423,7 +410,7 @@ export default function Intro() {
         /* No min-height: the block sits at its own density and the film
            follows straight on, rather than the hero being padded out to fill
            the fold. */
-        .i-hero { padding:72px 44px 66px; text-align:center; }
+        .i-hero { padding:136px 44px 72px; text-align:center; }
 
         /* The film: the darkest thing on the page and its visual anchor. */
         .i-film { background:var(--charcoal); color:#E6E4E0; }
@@ -449,7 +436,7 @@ export default function Intro() {
         .i-filmhead .ph { font-family:var(--font-serif); font-size:46px; line-height:1.08; color:var(--cream); margin:18px 0 0; }
         /* The promise steps down in four; the break after "Keeping" only
            arrives at 840, and is forced rather than left to the browser. */
-        @media (max-width:560px) { .i-hero { padding:52px 22px 46px; } }
+        @media (max-width:560px) { .i-hero { padding:112px 22px 48px; } }
 
         @media (max-width:900px) {
           .i-filmstage { padding:44px 22px 50px; }
@@ -732,21 +719,20 @@ export default function Intro() {
 
       <a href="#top" className="skip-link">Skip to content</a>
 
+      <a href="#top" className="skip-link">Skip to content</a>
+      {/* The nav without its audience flyout: this page carries the pathway
+          picker at the close, and should not offer the same choice twice. */}
+      <Header hideAudiences />
+
       <div className="i">
         <main id="top">
           {/* ── cream · hero, over the clay wash ─────────────────── */}
           <section className="i-herowrap">
             <div className="i-in">
               <div className="i-hero">
-              <span className="lockup">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
-                <span className="wordmark">DAB Hands</span>
-              </span>
-              {/* The strapline, in the sans and without a full stop. It is set
-                  to the same width as the brand row above it, which is what
-                  makes the two read as one drawn lockup. */}
-              <h1>Keeping important work moving</h1>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+              <h1>Keeping important work moving.</h1>
               <Kicker>An introduction</Kicker>
               </div>
             </div>

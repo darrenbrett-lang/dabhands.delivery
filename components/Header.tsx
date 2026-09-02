@@ -21,9 +21,13 @@ interface HeaderProps {
       surfaces, which are shared as standalone documents rather than as pages
       of the site. */
   bare?: boolean;
+  /** Drops just the "Who I help" flyout, keeping the rest of the nav. For
+      pages that carry their own pathway picker further down and do not want
+      the same choice offered twice. */
+  hideAudiences?: boolean;
 }
 
-export const Header = ({ bare = false }: HeaderProps) => {
+export const Header = ({ bare = false, hideAudiences = false }: HeaderProps) => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false); // mobile sheet
   const [whoOpen, setWhoOpen] = useState(false); // desktop dropdown
@@ -167,7 +171,7 @@ export const Header = ({ bare = false }: HeaderProps) => {
             <>
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-9 lg:gap-11">
-              <div className="relative" onMouseEnter={openWho} onMouseLeave={closeWhoDelayed}>
+              <div className={`relative ${hideAudiences ? 'hidden' : ''}`} onMouseEnter={openWho} onMouseLeave={closeWhoDelayed}>
                 <button
                   type="button"
                   aria-haspopup="true"
