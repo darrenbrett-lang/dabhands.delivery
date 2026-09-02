@@ -216,6 +216,7 @@ const SITUATIONS = [
   'A permanent hire hasn’t happened and someone at the top is doing the job instead.',
   'Too much still depends on one or two people, and they can’t step away from it.',
   'An acquisition or investment has landed, and there’s a value plan to hit.',
+  'A big idea was approved, and something smaller reached the customer.',
 ];
 
 // Trimmed to an even measure (72 to 74 characters) so the three panels set to
@@ -756,7 +757,7 @@ export default function Intro() {
 
             <div className="i-lede" data-r>
               <p className="name">
-                I’m Darren. Agencies, brands and growth-stage businesses call me when something important has to land.
+                I’m Darren. Digital-forward growth-stage businesses, brands and agencies call me when something important has to land.
               </p>
               <p className="then">
                 I make sure it does. I help set the direction, then hold every moving part together, in the detail and in the boardroom, until what you decided is what your business and your customers actually get.
