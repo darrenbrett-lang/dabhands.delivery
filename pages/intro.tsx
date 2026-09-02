@@ -387,13 +387,18 @@ export default function Intro() {
            160px of top padding and 128px below; this sits at 96/76, which is
            the whole of the difference. The credit line has moved down to be
            the lede's eyebrow. */
-        .i-hero .crown { display:block; margin:0 auto 24px; height:48px; width:auto; user-select:none; }
+        .i-hero .lockup { display:flex; align-items:center; justify-content:center; gap:12px; margin:0 auto 26px; }
+        .i-hero .crown { display:block; height:32px; width:auto; user-select:none; }
+        .i-hero .wordmark { font-family:var(--font-serif); font-weight:400; font-size:28px; line-height:1; letter-spacing:-.01em; color:var(--charcoal); }
         .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:44px; line-height:1.03; letter-spacing:-1.4px; color:var(--charcoal); margin:0 auto; max-width:15ch; }
-        /* "important work moving." never splits across a line. */
-        .i-hero .promise-tail { white-space:nowrap; }
-        @media (min-width:641px)  { .i-hero .crown { height:56px; } .i-hero h1 { font-size:60px; letter-spacing:-1.9px; } }
+        @media (min-width:641px)  { .i-hero h1 { font-size:60px; letter-spacing:-1.9px; } }
         @media (min-width:901px)  { .i-hero h1 { font-size:78px; letter-spacing:-2.4px; } }
-        @media (min-width:1101px) { .i-hero .crown { height:64px; margin-bottom:30px; } .i-hero h1 { font-size:96px; letter-spacing:-3px; } }
+        @media (min-width:1101px) {
+          .i-hero .lockup { gap:15px; margin-bottom:34px; }
+          .i-hero .crown { height:41px; }
+          .i-hero .wordmark { font-size:36px; }
+          .i-hero h1 { font-size:96px; letter-spacing:-3px; }
+        }
         /* The lede's eyebrow, carrying the credit that used to sit in P1. */
         .i-credit { color:var(--stone); margin:0 0 18px; }
 
@@ -717,14 +722,12 @@ export default function Intro() {
           <section className="i-herowrap">
             <div className="i-in">
               <div className="i-hero">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
-              <h1>
-                Keeping{' '}
-                {/* "important work" is the pair the line is built on and must
-                    never split; the break, when it comes, is after "Keeping". */}
-                <span className="promise-tail">important work moving.</span>
-              </h1>
+              <span className="lockup">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+                <span className="wordmark">DAB Hands</span>
+              </span>
+              <h1>Keeping important work moving.</h1>
               </div>
             </div>
           </section>
@@ -878,10 +881,13 @@ export default function Intro() {
             <div className="i-in i-start-copy">
               <Kicker>How we start</Kicker>
               <p>
-                We can start small. A paid diagnostic, or a fortnight of troubleshooting. You come away with a straight read on where value or confidence is leaking and what I’d do first.
+                DAB Hands is me, plus the senior people a piece of work needs.
               </p>
               <p>
-                You’re hiring me, and I stay accountable end to end. If the work needs more than me, and you want it, I bring exceptional specialists to the party; you get senior people shaping the outcomes without the usual agency overheads.
+                It’s built around the work, not the headcount. I stay accountable end to end, so you get senior judgement without carrying a big fixed team.
+              </p>
+              <p>
+                We can start small, a paid diagnostic or a fortnight of troubleshooting, and you come away with a straight read on where value or confidence is leaking and what I’d do first, so nobody has to bet on me without trying me first.
               </p>
             </div>
           </section>
