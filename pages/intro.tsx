@@ -381,36 +381,28 @@ export default function Intro() {
            button, never a rule longer than three pixels. */
         .i-kick { font-size:11px; letter-spacing:2.8px; font-weight:600; color:var(--gold); text-transform:uppercase; }
 
-        /* ── THE LOCKUP ──────────────────────────────────────────────────
-           The signature block, to its own brief. Identity first, promise last:
-           the promise is a resolution, not a hook, so it lands after the name.
-           Its own tokens, because the brief's ink and stone sit apart from the
-           page's. Gold appears exactly once, on the full stop. */
-        .i-hero { --lk-ink:#17181A; --lk-stone:#8A8378; --lk-gold:#BA9956; --lk-hair:rgba(23,24,26,.16); }
-        .i-hero .lockup { display:flex; align-items:flex-end; justify-content:center; gap:22px; margin:0 auto; }
-        /* Baseline-aligned, never centred: the crown sits on the wordmark's
-           baseline. Sized by width, since the brief specifies the stroke
-           against a 38px width. */
-        .i-hero .wordmark { font-family:var(--font-serif); font-weight:400; font-size:46px; line-height:1; letter-spacing:-.7px; color:var(--lk-ink); }
-        .i-hero .credit { font-family:var(--font-sans); font-weight:500; font-size:12px; line-height:1; letter-spacing:.19em; text-transform:uppercase; color:var(--lk-stone); margin:14px 0 0; max-width:none; }
-        /* The tick now connects rather than separates. At 20px with 20px of
-           air either side it sits inside the block; the brief's 52/26/30 put
-           108px between the credit and the promise, which is more than twice
-           the promise's cap height and read as two objects on one page. */
-        .i-hero .tick { display:block; width:1px; height:20px; background:var(--lk-hair); margin:20px auto 20px; }
-        .i-hero .promise { font-family:var(--font-serif); font-weight:400; font-size:40px; line-height:1.02; letter-spacing:-1.6px; color:var(--lk-ink); margin:0; max-width:none; white-space:nowrap; }
+        /* ── P1: the homepage hero, tighter ──────────────────────────────
+           Same composition as the homepage: crown mark centred, then the
+           headline at the same scale and 15ch measure. The homepage runs
+           160px of top padding and 128px below; this sits at 96/76, which is
+           the whole of the difference. The credit line has moved down to be
+           the lede's eyebrow. */
+        .i-hero .crown { display:block; margin:0 auto 24px; height:48px; width:auto; user-select:none; }
+        .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:44px; line-height:1.03; letter-spacing:-1.4px; color:var(--charcoal); margin:0 auto; max-width:15ch; }
+        /* "important work moving." never splits across a line. */
         .i-hero .promise-tail { white-space:nowrap; }
-        .i-hero .promise-brk { display:none; }
-        .i-hero .dot { color:var(--lk-gold); }
+        @media (min-width:641px)  { .i-hero .crown { height:56px; } .i-hero h1 { font-size:60px; letter-spacing:-1.9px; } }
+        @media (min-width:901px)  { .i-hero h1 { font-size:78px; letter-spacing:-2.4px; } }
+        @media (min-width:1101px) { .i-hero .crown { height:64px; margin-bottom:30px; } .i-hero h1 { font-size:96px; letter-spacing:-3px; } }
+        /* The lede's eyebrow, carrying the credit that used to sit in P1. */
+        .i-credit { color:var(--stone); margin:0 0 18px; }
 
         /* The hero fills the fold, with the charcoal band showing at the bottom
            edge. Space is placed around the headline, never left below it. */
-        /* No min-height. The lockup is a signature block and its own padding is
-           what defines it; forcing it to fill the fold left a dense composition
-           adrift in ~800px of empty ground. It now sits at the density the
-           brief's spacing was written for, and the film follows straight on. */
-        .i-hero { padding:60px 44px 66px; display:flex; flex-direction:column; text-align:center; }
-        .i-hero .crown { display:block; width:65px; height:auto; user-select:none; }
+        /* No min-height: the block sits at its own density and the film
+           follows straight on, rather than the hero being padded out to fill
+           the fold. */
+        .i-hero { padding:96px 44px 76px; text-align:center; }
 
         /* The film: the darkest thing on the page and its visual anchor. */
         .i-film { background:var(--charcoal); color:#E6E4E0; }
@@ -436,24 +428,7 @@ export default function Intro() {
         .i-filmhead .ph { font-family:var(--font-serif); font-size:46px; line-height:1.08; color:var(--cream); margin:18px 0 0; }
         /* The promise steps down in four; the break after "Keeping" only
            arrives at 840, and is forced rather than left to the browser. */
-        @media (max-width:1040px) {
-          .i-hero .promise { font-size:36px; letter-spacing:-1.44px; }
-        }
-        @media (max-width:840px) {
-          .i-hero .promise { font-size:32px; letter-spacing:-1.28px; white-space:normal; }
-          .i-hero .promise-brk { display:block; }
-          .i-hero .crown { width:52px; }
-          .i-hero .wordmark { font-size:37px; letter-spacing:-.6px; }
-          .i-hero .lockup { gap:18px; }
-        }
-        @media (max-width:560px) {
-          .i-hero { padding:40px 22px 44px; }
-          .i-hero .promise { font-size:26px; letter-spacing:-1.04px; }
-          .i-hero .credit { font-size:10px; letter-spacing:.15em; }
-          .i-hero .crown { width:42px; }
-          .i-hero .wordmark { font-size:30px; letter-spacing:-.45px; }
-          .i-hero .lockup { gap:14px; }
-        }
+        @media (max-width:560px) { .i-hero { padding:64px 22px 52px; } }
 
         @media (max-width:900px) {
           .i-filmstage { padding:44px 22px 50px; }
@@ -742,22 +717,13 @@ export default function Intro() {
           <section className="i-herowrap">
             <div className="i-in">
               <div className="i-hero">
-              <span className="lockup">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
-                <span className="wordmark">DAB Hands</span>
-              </span>
-              <p className="credit">Darren Brett&#160;·&#160;Fractional COO &amp; Digital Operator</p>
-              <span aria-hidden className="tick" />
-              <h1 className="promise">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
+              <h1>
                 Keeping{' '}
-                {/* The break is forced, not left to the browser, and only from
-                    840px down. The tail is nowrap so "important work" can never
-                    be split, which is the pair the line is built on. */}
-                <br aria-hidden className="promise-brk" />
-                <span className="promise-tail">
-                  important work moving<span className="dot">.</span>
-                </span>
+                {/* "important work" is the pair the line is built on and must
+                    never split; the break, when it comes, is after "Keeping". */}
+                <span className="promise-tail">important work moving.</span>
               </h1>
               </div>
             </div>
@@ -799,6 +765,7 @@ export default function Intro() {
           <div className="i-in">
 
             <div className="i-lede" data-r>
+              <p className="i-kick i-credit">Darren Brett&#160;·&#160;Fractional COO &amp; Digital Operator</p>
               <p className="name">
                 I’m Darren. Digital-forward brands, agencies and growth-stage businesses call me when something important has to land.
               </p>
