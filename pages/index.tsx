@@ -147,71 +147,61 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── THE PROBLEM (dark card on bone): the argument in one contained
-            panel, composed as a left-right-left rhythm rather than a column of
-            prose. The headline and the opening paragraph sit left, the callout
-            and the two paragraphs that follow it are pushed right, and the
-            closing statement returns left. No rules, no sticky: the shape of
-            the block does the work the lines were doing. ── */}
-        <section data-spine="The problem" data-spine-tone="dark" className="bg-bone pb-12 md:pb-16 lg:pb-20">
+        {/* ── THE PROBLEM (full-bleed charcoal): the route, and what happens
+            along it. Composed left, right, left: the headline and the account
+            of the losses on the left margin, the reason they were all
+            reasonable plus what has made it worse pushed right, and the
+            finding returning left. No rules; the offset does that work.
+
+            "that isn't what we meant" is set in italic because it is reported
+            speech, and reads as a sentence fragment without it. ── */}
+        <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <div className="rounded-[24px] md:rounded-[28px] bg-charcoal text-bone px-6 py-12 sm:px-10 md:px-14 md:py-16 lg:px-16 lg:py-20">
-              <FadeUp>
-                <p className="eyebrow text-gold">The problem</p>
-              </FadeUp>
+            <FadeUp>
+              <p className="eyebrow text-gold">The problem</p>
+            </FadeUp>
 
-              {/* The headline enacts itself: the changing half recedes, the
-                  unchanging half holds full strength. */}
-              <FadeUp delay={0.06}>
-                <h2 className="mt-8 md:mt-10 font-serif text-[38px] sm:text-[48px] md:text-[58px] lg:text-[62px] leading-[1.04] tracking-[-0.02em]">
-                  <span className="block text-bone/40">The tools are changing.</span>
-                  <span className="block">The problems aren&rsquo;t.</span>
-                </h2>
-              </FadeUp>
+            <FadeUp delay={0.06}>
+              <h2 className="mt-8 md:mt-10 font-serif text-[38px] sm:text-[48px] md:text-[58px] lg:text-[64px] leading-[1.04] tracking-[-0.02em] max-w-[16ch]">
+                Things get lost on the way.
+              </h2>
+            </FadeUp>
 
-              <FadeUp delay={0.1}>
-                <p className="mt-8 md:mt-10 max-w-[52ch] text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
-                  Making things has never been faster. Getting them to a customer has not. There are more systems,
-                  more partners and more approvals than there were, and every concession along the way is reasonable.
+            <FadeUp delay={0.1}>
+              <p className="mt-8 md:mt-10 max-w-[54ch] text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
+                You decided one thing and something else arrived. Nobody got it wrong. The brief flattened it, the
+                estimate trimmed it, legal took the claim, the platform couldn&rsquo;t quite do it, and by month six
+                nobody in the meeting had been in the original meeting.
+              </p>
+            </FadeUp>
+
+            {/* Pushed right: why none of that was anybody's fault, and what has
+                made it worse since. The offset is the panel's turn. */}
+            <div className="mt-12 md:mt-16 lg:ml-auto lg:w-[58%] lg:max-w-[600px]">
+              <FadeUp delay={0.14}>
+                <p className="border-l-2 border-gold pl-6 md:pl-8 font-serif text-[24px] md:text-[30px] leading-[1.25] tracking-[-0.01em] text-bone">
+                  Every one of those was a reasonable decision, made by someone who couldn&rsquo;t see the whole
+                  route.
                 </p>
               </FadeUp>
 
-              {/* Pushed right: the cost of all those reasonable concessions, and
-                  what follows from it. The offset is what gives the panel its
-                  turn, now that the rules have gone. */}
-              <div className="mt-12 md:mt-16 lg:ml-auto lg:w-[58%] lg:max-w-[560px]">
-                <FadeUp delay={0.14}>
-                  <p className="border-l-2 border-gold pl-6 md:pl-8 font-serif text-[24px] md:text-[30px] leading-[1.25] tracking-[-0.01em] text-bone">
-                    What arrives is a worn-down version of what you decided, and nobody chose that.
-                  </p>
-                </FadeUp>
-
-                <FadeUp delay={0.18}>
-                  <p className="mt-8 md:mt-10 text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
-                    It lands in a market where most things already look the same. Worn-down work doesn&rsquo;t move
-                    anyone.
-                  </p>
-                </FadeUp>
-
-                {/* The objection, handled: this is not an argument against the
-                    tools, which is what the headline promised to settle. */}
-                <FadeUp delay={0.22}>
-                  <p className="mt-5 text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
-                    None of this is an argument against the tools. AI sits in every boardroom conversation and very
-                    few P&amp;Ls. It makes production cheap, which moves the bottleneck to judgement. It will make
-                    you faster at whatever you already do, and judgement decides whether that&rsquo;s better or
-                    worse.
-                  </p>
-                </FadeUp>
-              </div>
-
-              {/* Back to the left margin, and the panel ends on the finding. */}
-              <FadeUp delay={0.26}>
-                <p className="mt-14 md:mt-20 font-serif text-[30px] sm:text-[36px] md:text-[42px] lg:text-[46px] leading-[1.1] tracking-[-0.02em] text-bone">
-                  Usually, it doesn&rsquo;t hold.
+              <FadeUp delay={0.18}>
+                <p className="mt-8 md:mt-10 text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
+                  It has got harder, too. One agency became five specialists and nobody owns the seams between them.
+                  Hybrid working removed the corridor conversation where somebody used to say{' '}
+                  <em className="italic">that isn&rsquo;t what we meant</em>. Producing got cheap and reviewing
+                  didn&rsquo;t, so there is more to check and the same number of people checking.
                 </p>
               </FadeUp>
             </div>
+
+            {/* Back to the left margin. The antithesis takes a line each. */}
+            <FadeUp delay={0.22}>
+              <p className="mt-14 md:mt-20 font-serif text-[30px] sm:text-[36px] md:text-[42px] lg:text-[46px] leading-[1.14] tracking-[-0.02em] text-bone">
+                <span className="block">Everyone owns a piece.</span>
+                <span className="block">Nobody owns the journey.</span>
+              </p>
+            </FadeUp>
           </div>
         </section>
 
@@ -223,7 +213,7 @@ export default function Home() {
             <FadeUp>
               <p className="eyebrow text-graphite mb-5">How I help</p>
               <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] leading-[1.14] tracking-[-0.01em] text-ink max-w-[860px]">
-                I work alongside leaders of brands, growth-stage businesses and agencies, and I have the scar tissue to keep important work moving.
+                Leaders of brands, growth-stage businesses and agencies bring me in to keep important work moving.
               </h2>
             </FadeUp>
             <FadeUp delay={0.08}>
@@ -233,9 +223,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is the decisions and initiatives people act on this quarter.', payoff: 'I make that turn without losing the intent, and I keep it intact for as long as the work takes.' },
-                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity arrives with growth. Left alone, it becomes the thing the organisation runs on.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again. More of what you spend comes back.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is the work people act on this quarter.', payoff: 'I make that turn without losing the intent, and I keep it intact for as long as the work takes.' },
+                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity arrives with growth. It slows everything without ever showing up as a decision.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again. More of what you spend comes back.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Nobody ever decides to trade away the thing that made the work worth doing. It goes because nobody named it as the part that couldn’t go.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
               ].map((t, i) => (
                 // Each turn is a from→to statement: what they have, then what it
                 // becomes, pivoting on the gold italic "into". A hairline rule
