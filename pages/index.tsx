@@ -147,61 +147,50 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── THE PROBLEM (full-bleed charcoal): the route, and what happens
-            along it. Composed left, right, left: the headline and the account
-            of the losses on the left margin, the reason they were all
-            reasonable plus what has made it worse pushed right, and the
-            finding returning left. No rules; the offset does that work.
-
-            "that isn't what we meant" is set in italic because it is reported
-            speech, and reads as a sentence fragment without it. ── */}
+        {/* ── PROBLEM PANEL (dark): the live point-of-view layout — a commanding
+            statement left, three paragraphs of prose and the sign-off right. ── */}
         <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
           <div className="u-container">
-            <FadeUp>
-              <p className="eyebrow text-gold">The problem</p>
-            </FadeUp>
-
-            <FadeUp delay={0.06}>
-              <h2 className="mt-8 md:mt-10 font-serif text-[38px] sm:text-[48px] md:text-[58px] lg:text-[64px] leading-[1.04] tracking-[-0.02em] max-w-[16ch]">
-                Things get lost on the way.
-              </h2>
-            </FadeUp>
-
-            <FadeUp delay={0.1}>
-              <p className="mt-8 md:mt-10 max-w-[54ch] text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
-                You decided one thing and something else arrived. Nobody got it wrong. The brief flattened it, the
-                estimate trimmed it, legal took the claim, the platform couldn&rsquo;t quite do it, and by month six
-                nobody in the meeting had been in the original meeting.
-              </p>
-            </FadeUp>
-
-            {/* Pushed right: why none of that was anybody's fault, and what has
-                made it worse since. The offset is the panel's turn. */}
-            <div className="mt-12 md:mt-16 lg:ml-auto lg:w-[58%] lg:max-w-[600px]">
-              <FadeUp delay={0.14}>
-                <p className="border-l-2 border-gold pl-6 md:pl-8 font-serif text-[24px] md:text-[30px] leading-[1.25] tracking-[-0.01em] text-bone">
-                  Every one of those was a reasonable decision, made by someone who couldn&rsquo;t see the whole
-                  route.
-                </p>
+            <div className="u-grid gap-y-12 lg:items-start">
+              {/* Left: the thesis — large, commanding, fills the column */}
+              <FadeUp className="col-span-4 md:col-span-6">
+                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
+                  The tools are changing.<br />The problems aren’t.
+                </h2>
               </FadeUp>
 
-              <FadeUp delay={0.18}>
-                <p className="mt-8 md:mt-10 text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
-                  It has got harder, too. One agency became five specialists and nobody owns the seams between them.
-                  Hybrid working removed the corridor conversation where somebody used to say{' '}
-                  <em className="italic">that isn&rsquo;t what we meant</em>. Producing got cheap and reviewing
-                  didn&rsquo;t, so there is more to check and the same number of people checking.
-                </p>
-              </FadeUp>
+              {/* Right: the argument building to the sign-off */}
+              <div className="col-span-4 md:col-span-5 md:col-start-8">
+                <FadeUp delay={0.1}>
+                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    AI is in every boardroom conversation. It’s in very few P&Ls.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.16}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    The older problem hasn&rsquo;t moved. You decided one thing and something else arrived, and every
+                    step that wore it down was reasonable.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.22}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    The constraint was never the tool. It’s whether an organisation knows where it’s going, and can
+                    move together to get there.
+                  </p>
+                </FadeUp>
+                <FadeUp delay={0.28}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    AI will make you faster at whatever you already do. Better faster, or worse faster.
+                  </p>
+                </FadeUp>
+                {/* The sign-off: the shortest line in the column, so it lands. */}
+                <FadeUp delay={0.34}>
+                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
+                    I work on making direction, the systems and the work better.
+                  </p>
+                </FadeUp>
+              </div>
             </div>
-
-            {/* Back to the left margin. The antithesis takes a line each. */}
-            <FadeUp delay={0.22}>
-              <p className="mt-14 md:mt-20 font-serif text-[30px] sm:text-[36px] md:text-[42px] lg:text-[46px] leading-[1.14] tracking-[-0.02em] text-bone">
-                <span className="block">Everyone owns a piece.</span>
-                <span className="block">Nobody owns the journey.</span>
-              </p>
-            </FadeUp>
           </div>
         </section>
 
