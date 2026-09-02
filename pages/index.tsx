@@ -163,7 +163,7 @@ export default function Home() {
               <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
                   <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    AI is in every boardroom conversation. It’s in very few P&Ls.
+                    AI is in every boardroom conversation. It’s in very few P&Ls. It’s in a lot of pilots that stayed pilots.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
