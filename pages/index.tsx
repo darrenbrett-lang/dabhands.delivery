@@ -214,7 +214,7 @@ export default function Home() {
               {[
                 { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy is the thing everything else should answer to. Which comes down to two questions: where the energy goes, and which initiatives pay it out.', payoff: 'I define where the energy goes, and I stay with those initiatives until they deliver what they were meant to.' },
                 { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity is rife in modern workflows. I have years of making complex systems healthy and functioning well.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together better. With more of what you spend coming back.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Nobody ever decides to trade away the thing that made the work worth doing. It goes because nobody named it as the part that couldn’t go.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Trading away the thing that makes a customer feel something was never anyone’s goal. It happens anyway, a little at each handover.', payoff: 'I establish what cannot be traded and I hold it, so it travels with the work. What ships still carries what you meant by it, and it performs.' },
               ].map((t, i) => (
                 // Each turn is a from→to statement: what they have, then what it
                 // becomes, pivoting on the gold italic "into". A hairline rule
