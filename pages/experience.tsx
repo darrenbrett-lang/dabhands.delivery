@@ -435,7 +435,7 @@ export default function TrackRecord() {
                       Manrope, the same rule the homepage intro block follows. */}
                   <FadeUp delay={0.06}>
                     <h1 className="mt-8 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
-                      Part delivery lead, part digital operator, all entrepreneur’s engine.
+                      Delivery leader, digital operator and entrepreneur’s engine.
                     </h1>
                   </FadeUp>
                   <FadeUp delay={0.12}>
@@ -457,7 +457,7 @@ export default function TrackRecord() {
           <section className="bg-charcoal text-bone pb-16 md:pb-24 pt-16 md:pt-24">
             <div className="u-container">
               <FadeUp>
-                <p className="eyebrow text-gold mb-8 md:mb-10">Selected leadership impact · seven of them</p>
+                <p className="eyebrow text-gold mb-8 md:mb-10">Selected leadership impact</p>
               </FadeUp>
               <ScrollRail ariaLabel="Selected leadership impact" dark>
                 {tiles.map((t) => (
