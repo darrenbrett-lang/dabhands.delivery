@@ -119,7 +119,7 @@ export default function Home() {
                   {/* The one Instrument line in this block, by decree (25 Aug).
                       Everything below it is body scale in the sans. */}
                   <p className="font-serif text-[24px] md:text-[26px] lg:text-[28px] leading-[1.2] tracking-[-0.01em] text-ink mb-6 md:mb-7 max-w-[26ch]">
-                    A fractional COO and digital operator for digital-forward brands, growth-stage businesses and agencies.
+                    A fractional COO and digital operator for brands, agencies and growth-stage businesses.
                   </p>
                 </div>
                 {/* The career sentence: background, must not compete. */}
