@@ -26,7 +26,7 @@ interface Tile {
   role: string;
   stats: { k: string; v: string }[];
   body: string;
-  outcome: string;
+  outcome: string | string[];
 }
 
 const tiles: Tile[] = [
@@ -80,15 +80,18 @@ const tiles: Tile[] = [
   },
   {
     source: 'Win · Falabella · Tribal Worldwide London',
-    headline: 'Delivered a commerce platform across a continent, with the client eight thousand miles away.',
-    role: 'Led the delivery side of the competitive pitch and the resulting programme. Around 20 people across London and Santiago.',
+    headline: 'Won a nine-month pitch, built the platform, and left them able to run it.',
+    role: 'Led the delivery side of the competitive pitch and the resulting programme. Around twenty of us in London, with the client in Santiago.',
     stats: [
-      { k: 'Pitch', v: '5 agencies' },
+      { k: 'Pitch', v: '9 months' },
       { k: 'Team', v: '20' },
-      { k: 'Continents', v: '2' },
+      { k: 'Where it ended', v: 'In-house' },
     ],
-    body: 'The agency won it off a nine-month competitive pitch against five London agencies, and I led the delivery side of that pitch. It was its first ecommerce build. I planned the whole programme sprint by sprint on a wall, across every workstream, with the risks and dependencies on it, and we negotiated the contract standing in front of it. A complete new commerce platform across several markets and languages, integrating research, twenty-one personas, two rounds of desirability testing, design and front-end build. The client sat in Santiago, which meant a different language, a different continent and a working day that only partly overlapped with ours. The discipline had to carry that distance. One plan that both sides worked from and could see at any time, decisions taken inside the hours we shared, and travel spent only on the conversations that genuinely needed a room.',
-    outcome: 'The site shipped, was well received, and the client took it in house and ran it themselves. It put the agency on the map in ecommerce for the first time. Their head of digital flew to London afterwards to apologise for how his own project manager had behaved.',
+    body: 'Six London agencies were invited. What won it, I think, is that we kept turning up. I planned the whole programme sprint by sprint on a wall, every workstream with the risks and dependencies on it, and when they came over after we’d won we negotiated the contract standing in front of it. A complete new commerce platform across several markets and languages, with research, two rounds of desirability testing, design and front-end build. The client sat eight thousand miles away in Santiago, a different language and a working day that only partly overlapped with ours. Day one on site they had most of the business in a room, and it dawned on us that what we’d won was not only a build. It was upskilling their business through the process. That turned out to be the whole engagement, and they took the work in-house afterwards because by then they could run it.',
+    outcome: [
+      'We scoped the work before we had picked the technical framework. The estimate came back at a quarter of what the build actually needed. We went back to the client, held our hands up and repriced it, recovered about two thirds through a change request and carried the rest ourselves in reduced margin. The project still made money, and it put the agency into ecommerce properly for the first time.',
+      'The lesson is one line and I have not broken it since. Don’t scope a build before you have chosen the framework.',
+    ],
   },
   {
     source: 'Sustain · Royal Mail Group · Proximity London · 2010 to 2014',
@@ -483,7 +486,13 @@ export default function TrackRecord() {
                             <span aria-hidden className="text-[13px] leading-none">&darr;</span>
                           </summary>
                           <div className="mt-4 border-l-2 border-gold pl-5 text-[15px] md:text-[16px] leading-[1.7] text-bone/85">
-                            {t.outcome}
+                            {Array.isArray(t.outcome)
+                              ? t.outcome.map((para, i) => (
+                                  <p key={para.slice(0, 24)} className={i ? 'mt-3' : undefined}>
+                                    {para}
+                                  </p>
+                                ))
+                              : t.outcome}
                           </div>
                         </details>
                       </div>
