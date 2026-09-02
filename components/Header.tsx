@@ -11,9 +11,9 @@ const NAV_TINT = 'var(--color-gold)';
 const NAV_DEEP = 'var(--color-blue-green)';
 const NAV_BLOCK = 'color-mix(in srgb, var(--color-blue-green) 12%, transparent)';
 export const audiences = [
-  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', context: 'For Business & Agency Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
-  { href: '/marketing-leaders', label: 'Marketing Leaders', context: 'For Marketing Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
   { href: '/growth-stage-businesses', label: 'Growth-Stage Businesses', context: 'For Growth-Stage Businesses', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/marketing-leaders', label: 'Marketing Leaders', context: 'For Marketing Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
+  { href: '/business-and-agency-leaders', label: 'Business & Agency Leaders', context: 'For Business & Agency Leaders', tint: NAV_TINT, deep: NAV_DEEP, block: NAV_BLOCK },
 ];
 
 interface HeaderProps {

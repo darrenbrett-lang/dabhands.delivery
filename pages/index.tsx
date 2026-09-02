@@ -17,12 +17,12 @@ import { withBreaks, withSoftBreaks } from '@/lib/softBreaks';
 const MOMENTUM = [
   {
     num: '01',
-    label: 'Business & Agency Leaders',
+    label: 'Growth-Stage Businesses',
     role: 'Fractional COO · Operating Partner',
-    headline: 'Keeping everything moving.',
-    support: 'When the work is landing\nand the return isn’t.',
-    href: '/business-and-agency-leaders',
-    src: '/images/momentum/01-tracks-2.jpg',
+    headline: 'Supporting greater ambition.',
+    support: 'When the ambition is real but\nnothing has turned it into a plan.',
+    href: '/growth-stage-businesses',
+    src: '/images/momentum/03-growth.jpg',
   },
   {
     num: '02',
@@ -35,12 +35,12 @@ const MOMENTUM = [
   },
   {
     num: '03',
-    label: 'Growth-Stage Businesses',
+    label: 'Business & Agency Leaders',
     role: 'Fractional COO',
-    headline: 'Supporting greater ambition.',
-    support: 'When the ambition is real but\nnothing has turned it into a plan.',
-    href: '/growth-stage-businesses',
-    src: '/images/momentum/03-growth.jpg',
+    headline: 'Keeping everything moving.',
+    support: 'When the work is landing\nand the return isn’t.',
+    href: '/business-and-agency-leaders',
+    src: '/images/momentum/01-tracks-2.jpg',
   },
 ];
 
