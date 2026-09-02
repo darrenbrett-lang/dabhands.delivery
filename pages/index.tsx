@@ -135,12 +135,7 @@ export default function Home() {
                     thing still separating it from the prose around it. */}
                 <div className="rise" style={{ '--rise-delay': '0.2s' } as CSSProperties}>
                   <p className="mt-5 text-lg text-ink leading-relaxed max-w-[42ch]">
-                    Hand me an ambition and I’ll tell you what it actually takes, then make it happen. And when the work needs more than me, I bring the senior bench behind me.
-                  </p>
-                </div>
-                <div className="rise" style={{ '--rise-delay': '0.26s' } as CSSProperties}>
-                  <p className="mt-5 text-lg text-ink/70 leading-relaxed max-w-[42ch]">
-                    Sometimes that means setting the direction. Usually it means getting an organisation to move together. Always it means making sure what comes out performs.
+                    Hand me an ambition and I’ll tell you what it actually takes, then make it happen.
                   </p>
                 </div>
               </div>
@@ -152,43 +147,100 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── PROBLEM PANEL (dark): the live point-of-view layout — a commanding
-            statement left, three paragraphs of prose and the sign-off right. ── */}
-        <section data-spine="The problem" data-spine-tone="dark" className="bg-charcoal text-bone py-20 md:py-28 lg:py-32">
+        {/* ── THE PROBLEM (dark card on bone): the argument in one
+            contained block. The order is the argument: the enduring problem
+            (making is fast, delivering is not, every concession reasonable),
+            the pull that names what that costs, the market that punishes it,
+            then the objection handled (the new tools do not touch it), and
+            only then the job.
+
+            Two columns from lg: the headline sits in a sticky left column and
+            holds while the argument scrolls past it, so the claim stays on
+            screen the whole time its evidence is being read. That is also what
+            uses the card's right-hand width, which a single measure left dead.
+            No overflow-hidden anywhere up the tree, or the sticky dies. ── */}
+        <section data-spine="The problem" data-spine-tone="dark" className="bg-bone pb-12 md:pb-16 lg:pb-20">
           <div className="u-container">
-            <div className="u-grid gap-y-12 lg:items-start">
-              {/* Left: the thesis — large, commanding, fills the column */}
-              <FadeUp className="col-span-4 md:col-span-6">
-                <h2 className="font-serif text-[46px] sm:text-[62px] md:text-[72px] lg:text-[76px] xl:text-[88px] leading-[0.98] tracking-[-0.02em]">
-                  The tools are changing.<br />The problems aren’t.
-                </h2>
+            <div className="rounded-[24px] md:rounded-[28px] bg-charcoal text-bone px-6 py-12 sm:px-10 md:px-14 md:py-16 lg:px-16 lg:py-20">
+              {/* Eyebrow and rule: sets the card's full width before the copy
+                  narrows to its measure. */}
+              <FadeUp>
+                <div className="flex items-center gap-5">
+                  <p className="eyebrow shrink-0 text-gold">The problem</p>
+                  <span aria-hidden className="h-px flex-1 bg-bone/15" />
+                </div>
               </FadeUp>
 
-              {/* Right: the argument building to the sign-off */}
-              <div className="col-span-4 md:col-span-5 md:col-start-8">
-                <FadeUp delay={0.1}>
-                  <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    AI is in every boardroom conversation. It’s in very few P&Ls.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.16}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    The constraint was never the tool. It’s whether an organisation knows where it’s going, and can
-                    move together to get there.
-                  </p>
-                </FadeUp>
-                <FadeUp delay={0.22}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    AI will make you faster at whatever you already do. Better faster, or worse faster.
-                  </p>
-                </FadeUp>
-                {/* The sign-off: the shortest line in the column, so it lands. */}
-                <FadeUp delay={0.28}>
-                  <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    I work on making the systems and the work better.
-                  </p>
-                </FadeUp>
+              <div className="mt-9 md:mt-12 grid grid-cols-1 gap-y-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-x-12 xl:gap-x-16">
+                {/* Left, and sticky from lg: the headline enacts itself, the
+                    changing half receding, the unchanging half at full strength. */}
+                <div className="lg:sticky lg:top-24 lg:self-start">
+                  <FadeUp delay={0.06}>
+                    <h2 className="font-serif text-[38px] sm:text-[48px] md:text-[56px] lg:text-[44px] xl:text-[50px] leading-[1.04] tracking-[-0.02em]">
+                      <span className="block text-bone/40">The tools are changing.</span>
+                      <span className="block">The problems aren&rsquo;t.</span>
+                    </h2>
+                  </FadeUp>
+                </div>
+
+                {/* Right: the argument, in one measure, scrolling past the claim. */}
+                <div className="max-w-[54ch]">
+                  <FadeUp delay={0.1}>
+                    <p className="text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
+                      Making things has never been faster. Getting them to a customer has not. There are more
+                      systems, more partners and more approvals than there were, and every concession along the way
+                      is reasonable.
+                    </p>
+                  </FadeUp>
+
+                  {/* The cost of all those reasonable concessions, said once. */}
+                  <FadeUp delay={0.14}>
+                    <p className="mt-9 md:mt-10 border-l-2 border-gold pl-6 md:pl-8 font-serif text-[24px] md:text-[30px] leading-[1.25] tracking-[-0.01em] text-bone">
+                      What arrives is a worn-down version of what you decided, and nobody chose that.
+                    </p>
+                  </FadeUp>
+
+                  <FadeUp delay={0.18}>
+                    <p className="mt-9 md:mt-10 text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
+                      It lands in a market where most things already look the same. Worn-down work doesn&rsquo;t move
+                      anyone.
+                    </p>
+                  </FadeUp>
+
+                  {/* The objection, handled: this is not an argument against the
+                      tools, which is what the headline promised to settle. */}
+                  <FadeUp delay={0.22}>
+                    <p className="mt-5 text-[17px] md:text-[19px] leading-[1.75] text-bone/75">
+                      None of this is an argument against the tools. AI sits in every boardroom conversation and very
+                      few P&amp;Ls. It makes production cheap, which moves the bottleneck to judgement. It will make
+                      you faster at whatever you already do, and judgement decides whether that&rsquo;s better or
+                      worse.
+                    </p>
+                  </FadeUp>
+                </div>
               </div>
+
+              {/* The turn. Label in the gutter so it never enters the reading
+                  column; the claim in bone, the offer in gold. */}
+              <FadeUp delay={0.26}>
+                <div className="mt-12 md:mt-16 border-t border-bone/15 pt-10 md:pt-12 grid grid-cols-1 gap-y-4 md:grid-cols-[7rem_1fr] md:gap-x-10 md:items-baseline">
+                  <p className="eyebrow text-gold md:pt-2">The job</p>
+                  <p className="font-serif text-[28px] md:text-[36px] lg:text-[40px] leading-[1.15] tracking-[-0.01em] u-balance">
+                    <span className="block text-bone">Somebody has to hold the whole thing.</span>
+                    <span className="block text-gold">That&rsquo;s what I do.</span>
+                  </p>
+                </div>
+              </FadeUp>
+
+              {/* The card closes on a line that keeps going rather than stopping:
+                  the momentum promise made visually instead of stated. */}
+              <FadeUp delay={0.3}>
+                <span
+                  aria-hidden
+                  className="mt-10 md:mt-12 block h-px w-full"
+                  style={{ backgroundImage: 'linear-gradient(to right, var(--color-gold) 0%, color-mix(in srgb, var(--color-gold) 45%, transparent) 45%, transparent 100%)' }}
+                />
+              </FadeUp>
             </div>
           </div>
         </section>
