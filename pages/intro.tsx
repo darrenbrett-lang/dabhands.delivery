@@ -63,9 +63,9 @@ const FILM: {
 };
 
 const TURNS = [
-  { from: 'Strategic direction', to: 'operating reality.', note: 'The plan becomes work that adds up to growth, and you can measure whether it’s working while it moves.' },
+  { from: 'Strategic direction', to: 'operating reality.', note: 'The direction shows up in what people work on and what gets funded, not only in what was agreed.' },
   { from: 'System complexity', to: 'coordinated flow.', note: 'The parts that depend on each other move together, without losing time or intent on the way.' },
-  { from: 'Important work', to: 'real results.', note: 'What reaches the customer is what you decided to make or build, and it returns what you expected of it.' },
+  { from: 'Important work', to: 'real results.', note: 'What reaches the customer still carries the thing that made it worth doing, and it performs.' },
 ];
 
 // Trimmed to an even measure (78 to 81 characters) so the four columns set to
