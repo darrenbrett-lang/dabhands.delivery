@@ -213,7 +213,7 @@ export default function Home() {
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
                 { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy is the thing everything else should answer to. Which comes down to two questions: where the energy goes, and which initiatives pay it out.', payoff: 'I define where the energy goes, and I stay with those initiatives until they deliver what they were meant to.' },
-                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity is rife in modern workflows. I have years of making complex systems healthy and functioning well.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together better. With more of what you spend coming back.' },
+                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity arrives with growth and nobody signs it off. It accumulates until the business is working around its systems rather than with them.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again. More of what you spend comes back.' },
                 { key: 'impact', from: 'Important work', to: 'real results', body: 'Trading away the thing that makes a customer feel something was never anyone’s goal. It happens anyway, a little at each handover.', payoff: 'I establish what cannot be traded and I hold it, so it travels with the work. What ships still carries what you meant by it, and it performs.' },
               ].map((t, i) => (
                 // Each turn is a from→to statement: what they have, then what it
@@ -234,7 +234,11 @@ export default function Home() {
                   <p className="mt-4 md:mt-0 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
                     {t.body}
                   </p>
-                  <p className="mt-5 md:mt-0 font-serif text-[20px] md:text-[19px] lg:text-[21px] leading-[1.35] tracking-[-0.01em] text-ink max-w-[32ch]">
+                  {/* No max-width: the 32ch cap was 20px narrower than the
+                      column at lg and pushed every payoff onto a fourth line.
+                      Letting it fill the column holds all three at three lines
+                      without shrinking the type. */}
+                  <p className="mt-5 md:mt-0 font-serif text-[20px] md:text-[19px] lg:text-[21px] leading-[1.35] tracking-[-0.01em] text-ink">
                     {t.payoff}
                   </p>
                 </FadeUp>
