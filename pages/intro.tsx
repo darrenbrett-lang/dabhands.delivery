@@ -387,17 +387,33 @@ export default function Intro() {
            160px of top padding and 128px below; this sits at 96/76, which is
            the whole of the difference. The credit line has moved down to be
            the lede's eyebrow. */
-        .i-hero .lockup { display:flex; align-items:center; justify-content:center; gap:12px; margin:0 auto 26px; }
-        .i-hero .crown { display:block; height:32px; width:auto; user-select:none; }
-        .i-hero .wordmark { font-family:var(--font-serif); font-weight:400; font-size:28px; line-height:1; letter-spacing:-.01em; color:var(--charcoal); }
-        .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:44px; line-height:1.03; letter-spacing:-1.4px; color:var(--charcoal); margin:0 auto; max-width:15ch; }
-        @media (min-width:641px)  { .i-hero h1 { font-size:60px; letter-spacing:-1.9px; } }
-        @media (min-width:901px)  { .i-hero h1 { font-size:78px; letter-spacing:-2.4px; } }
+        /* ── THE LOCKUP ──────────────────────────────────────────────────
+           Crown and wordmark on one row, the strapline beneath in the sans.
+           Everything is expressed against the wordmark's font size so the
+           whole mark scales from one number: crown 1.06x, gap 0.27x, and the
+           strapline sized so its width matches the brand row's. */
+        /* The whole mark scales from one number: the lockup carries the
+           wordmark's size and everything else is expressed in em against it.
+           Crown geometry, measured off the asset: the right spike's tip sits
+           at .1935 of the file's height and the bottom-right swoosh at .9292,
+           so the span between them is .7357 of the box. Instrument's caps are
+           .74 of the em, so to make that span equal the cap height the crown
+           must be .74 / .7357 = 1.006em tall. The top offset then drops it
+           so the spike tip lands on the cap line and the swoosh on the
+           baseline. Verified by measurement, not by eye. */
+        .i-hero .lockup { display:inline-flex; align-items:flex-end; justify-content:center; gap:.268em; margin:0 auto 12px; font-size:34px; }
+        .i-hero .crown { display:block; height:1.006em; width:auto; user-select:none; position:relative; top:.0535em; }
+        .i-hero .wordmark { font-family:var(--font-serif); font-weight:400; font-size:1em; line-height:1; letter-spacing:-.01em; color:var(--charcoal); }
+        /* The page's own gold eyebrow, sat under the finished lockup. */
+        .i-hero .i-kick { margin:26px 0 0; }
+        .i-hero h1 { font-family:var(--font-sans); font-weight:400; font-size:12.5px; line-height:1.3; letter-spacing:0; color:var(--charcoal); margin:0 auto; max-width:none; }
+        @media (min-width:641px) {
+          .i-hero .lockup { margin-bottom:15px; font-size:45px; }
+          .i-hero h1 { font-size:16.5px; }
+        }
         @media (min-width:1101px) {
-          .i-hero .lockup { gap:15px; margin-bottom:34px; }
-          .i-hero .crown { height:41px; }
-          .i-hero .wordmark { font-size:36px; }
-          .i-hero h1 { font-size:96px; letter-spacing:-3px; }
+          .i-hero .lockup { margin-bottom:19px; font-size:56px; }
+          .i-hero h1 { font-size:20.5px; }
         }
         /* The lede's eyebrow, carrying the credit that used to sit in P1. */
         .i-credit { color:var(--stone); margin:0 0 18px; }
@@ -407,7 +423,7 @@ export default function Intro() {
         /* No min-height: the block sits at its own density and the film
            follows straight on, rather than the hero being padded out to fill
            the fold. */
-        .i-hero { padding:96px 44px 76px; text-align:center; }
+        .i-hero { padding:72px 44px 66px; text-align:center; }
 
         /* The film: the darkest thing on the page and its visual anchor. */
         .i-film { background:var(--charcoal); color:#E6E4E0; }
@@ -433,7 +449,7 @@ export default function Intro() {
         .i-filmhead .ph { font-family:var(--font-serif); font-size:46px; line-height:1.08; color:var(--cream); margin:18px 0 0; }
         /* The promise steps down in four; the break after "Keeping" only
            arrives at 840, and is forced rather than left to the browser. */
-        @media (max-width:560px) { .i-hero { padding:64px 22px 52px; } }
+        @media (max-width:560px) { .i-hero { padding:52px 22px 46px; } }
 
         @media (max-width:900px) {
           .i-filmstage { padding:44px 22px 50px; }
@@ -727,7 +743,11 @@ export default function Intro() {
                 <img src="/images/crown-mark.webp" alt="" aria-hidden width={467} height={367} className="crown" />
                 <span className="wordmark">DAB Hands</span>
               </span>
-              <h1>Keeping important work moving.</h1>
+              {/* The strapline, in the sans and without a full stop. It is set
+                  to the same width as the brand row above it, which is what
+                  makes the two read as one drawn lockup. */}
+              <h1>Keeping important work moving</h1>
+              <Kicker>An introduction</Kicker>
               </div>
             </div>
           </section>
@@ -770,10 +790,10 @@ export default function Intro() {
             <div className="i-lede" data-r>
               <p className="i-kick i-credit">Darren Brett&#160;·&#160;Fractional COO &amp; Digital Operator</p>
               <p className="name">
-                I’m Darren. Digital-forward brands, agencies and growth-stage businesses call me when something important has to land.
+                Digital-forward brands, agencies and growth-stage businesses call me when something important has to land.
               </p>
               <p className="then">
-                I make sure it does. I help set the direction, then hold every moving part together, in the detail and in the boardroom, until what you decided is what your business and your customers actually get.
+                I make sure it does. I set the direction with you, then hold every moving part together, in the detail and in the boardroom, until what you decided is what your business and your customers actually get.
               </p>
             </div>
           </div>
