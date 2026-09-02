@@ -378,20 +378,20 @@ export default function Intro() {
            button, never a rule longer than three pixels. */
         .i-kick { font-size:11px; letter-spacing:2.8px; font-weight:600; color:var(--gold); text-transform:uppercase; }
 
-        /* The lockup now signs the page off rather than announcing it, so it
-           sits under the statement at a subordinate size. The crown is sized to
-           the wordmark's cap height rather than its font size (Instrument's caps
-           are .74 of the em, so 36px type caps at ~27px) and aligned flex-end so
-           it sits on the baseline instead of floating over it. At 57px, centred,
-           it stood 1.42x the cap height and hung below the baseline. */
+        /* The lockup signs the page off rather than announcing it, so it sits
+           under the statement at a subordinate size. Its proportions are the
+           masthead's, measured off the live header rather than set by eye:
+           crown 1.143x the wordmark's font size, gap 0.429x, centred. At 36px
+           that is a 41px crown and a 15px gap. Keep that relationship if the
+           size changes. */
         .i-hero .rule { display:block; width:84px; height:1px; background:var(--line); margin:34px auto 30px; }
-        .i-hero .lockup { display:flex; align-items:flex-end; justify-content:center; gap:14px; margin:0 auto 12px; }
+        .i-hero .lockup { display:flex; align-items:center; justify-content:center; gap:15px; margin:0 auto 12px; }
         .i-hero .wordmark { font-family:var(--font-serif); font-size:36px; line-height:1; letter-spacing:-.01em; color:var(--charcoal); }
 
         /* The hero fills the fold, with the charcoal band showing at the bottom
            edge. Space is placed around the headline, never left below it. */
         .i-hero { padding:64px 0 76px; display:flex; flex-direction:column; justify-content:center; min-height:calc(100svh - 188px); text-align:center; }
-        .i-hero .crown { display:block; height:31px; width:auto; user-select:none; }
+        .i-hero .crown { display:block; height:41px; width:auto; user-select:none; }
         .i-hero h1 { font-family:var(--font-serif); font-weight:400; font-size:96px; line-height:.94; letter-spacing:-3px; margin:0 auto; max-width:15ch; }
         /* One line on desktop; the measure only applies once it has to wrap. */
         .i-hero .sub { font-family:var(--font-sans); font-size:18px; line-height:1.5; color:var(--stone); max-width:44ch; margin:0 auto; }
@@ -650,8 +650,8 @@ export default function Intro() {
           .i-in { padding:0 22px; }
           .i-hero { padding:38px 0 48px; min-height:0; }
           .i-hero .rule { width:64px; margin:26px auto 22px; }
-          .i-hero .lockup { gap:11px; margin-bottom:10px; }
-          .i-hero .crown { height:25px; }
+          .i-hero .lockup { gap:12px; margin-bottom:10px; }
+          .i-hero .crown { height:33px; }
           .i-hero .wordmark { font-size:29px; }
           .i-hero h1 { font-size:46px; letter-spacing:-1.2px; margin-bottom:0; }
           .i-hero .sub { font-size:16px; }
@@ -732,7 +732,6 @@ export default function Intro() {
               <div className="i-filmstage">
                 <div className="i-filmhead">
                   <Kicker>A quick hello</Kicker>
-                  <p className="ph">Ninety seconds to get to know me.</p>
                 </div>
                 <FilmPlayer
                   src={FILM.src}

@@ -450,7 +450,12 @@ export default function TrackRecord() {
                   </FadeUp>
                   <FadeUp delay={0.12}>
                     <p className="mt-7 md:mt-8 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
-                      What I ran, what I was brought in to do, and what came of each one.
+                      What I ran, what I was brought in to do,{' '}
+                      {/* Mobile-only break: the inverse of lib/softBreaks, which
+                          shows from md up. The space stays so the sentence still
+                          reads as one line once the break is hidden. */}
+                      <br className="md:hidden" />
+                      and what came of each one.
                     </p>
                   </FadeUp>
                 </div>
