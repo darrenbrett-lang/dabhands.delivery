@@ -366,13 +366,16 @@ export default function TrackRecord() {
 
       <style>{`
         /* One-way disclosures: once open, the trigger is gone (no "Less"). */
-        .tr-more[open] > summary, .tr-outcome[open] > summary { display: none; }
-        /* The section toggle stays two-way; its plus rotates when open. */
+        .tr-more[open] > summary { display: none; }
+        /* Two-way toggles signal their state by turning: the section's plus
+           becomes a cross, the outcome's arrow points back up. */
         .tr-record[open] .tr-record-plus { transform: rotate(45deg); }
+        .tr-outcome-arrow { transition: transform .2s ease; }
+        .tr-outcome[open] .tr-outcome-arrow { transform: rotate(180deg); }
         .tr-more > div, .tr-outcome > div { animation: tr-reveal .2s ease both; }
         @keyframes tr-reveal { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
         @media (prefers-reduced-motion: reduce) {
-          .tr-more > div, .tr-outcome > div, .tr-record-plus { animation: none; transition: none; }
+          .tr-more > div, .tr-outcome > div, .tr-record-plus, .tr-outcome-arrow { animation: none; transition: none; }
         }
         @media print {
           .tr-rail { display: block !important; overflow: visible !important; }
@@ -423,11 +426,12 @@ export default function TrackRecord() {
                   </div>
                 </div>
                 <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
-                  {/* One breadcrumb, matching the doorway pattern: page name in the
-                      eyebrow accent, role clue after a middot in the brand gold. */}
+                  {/* The masthead line: the name in the eyebrow accent, role
+                      clue after a middot in the brand gold. It names the person
+                      rather than the page, which the nav already does. */}
                   <FadeUp>
                     <p className="eyebrow pt-2 text-blue-green">
-                      Experience
+                      Darren Brett
                       <span className="font-medium text-gold"> · Fractional COO &amp; Digital Operator</span>
                     </p>
                   </FadeUp>
@@ -435,7 +439,7 @@ export default function TrackRecord() {
                       Manrope, the same rule the homepage intro block follows. */}
                   <FadeUp delay={0.06}>
                     <h1 className="mt-8 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
-                      Delivery leader, digital operator and entrepreneur’s engine.
+                      Operations and delivery leader, digital specialist and entrepreneur’s engine.
                     </h1>
                   </FadeUp>
                   <FadeUp delay={0.12}>
@@ -483,7 +487,7 @@ export default function TrackRecord() {
                         <details className="tr-outcome mt-6 border-t border-bone/20 pt-4">
                           <summary className="flex cursor-pointer list-none items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-gold [&::-webkit-details-marker]:hidden">
                             What came of it
-                            <span aria-hidden className="text-[13px] leading-none">&darr;</span>
+                            <span aria-hidden className="tr-outcome-arrow inline-block text-[13px] leading-none">&darr;</span>
                           </summary>
                           <div className="mt-4 border-l-2 border-gold pl-5 text-[15px] md:text-[16px] leading-[1.7] text-bone/85">
                             {Array.isArray(t.outcome)
