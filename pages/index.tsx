@@ -233,9 +233,9 @@ export default function Home() {
             </FadeUp>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'A strategy is a document until somebody acts on it. What counts is the decisions people take this quarter.', payoff: 'I turn the direction into those decisions without losing what it was for, and keep it that way while the work runs.' },
-                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Growth adds systems, partners and approvals faster than it adds capability. Left alone, running them becomes the job.', payoff: 'I get people, priorities and systems pointed the same way, so the business moves together instead of past itself.' },
-                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely fails because the idea was wrong. It gets traded away at handovers nobody is watching.', payoff: 'I name what cannot be traded, put it in writing, and make sure it survives all the way to your customer.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is the decisions and initiatives people act on this quarter.', payoff: 'I make that turn without losing the intent, and I keep it intact for as long as the work takes.' },
+                { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity arrives with growth. Left alone, it becomes the thing the organisation runs on.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again. More of what you spend comes back.' },
+                { key: 'impact', from: 'Important work', to: 'real results', body: 'Important work rarely comes unstuck because the idea was wrong. It gets traded away passing through systems nobody talks about.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
               ].map((t, i) => (
                 // Each turn is a from→to statement: what they have, then what it
                 // becomes, pivoting on the gold italic "into". A hairline rule
