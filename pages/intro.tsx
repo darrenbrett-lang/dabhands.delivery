@@ -745,7 +745,7 @@ export default function Intro() {
                  than being cropped into the portrait's tall column. */
               <div className="i-filmstage">
                 <div className="i-filmhead">
-                  <Kicker>A quick hello</Kicker>
+                  <Kicker>A quick hello from Darren</Kicker>
                 </div>
                 <FilmPlayer
                   src={FILM.src}
@@ -763,7 +763,7 @@ export default function Intro() {
                   <Image src={FILM.portraitPoster || FILM.poster} alt={FILM.alt} fill sizes="(max-width: 900px) 100vw, 45vw" priority />
                 </div>
                 <div className="i-filmtxt">
-                  <Kicker>A quick hello</Kicker>
+                  <Kicker>A quick hello from Darren</Kicker>
                   <p className="ph">Film to follow.</p>
                 </div>
               </div>
