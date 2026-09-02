@@ -393,19 +393,33 @@ export default function TrackRecord() {
             style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
           >
             <div className="u-container">
-              <div className="u-grid items-center gap-y-8 lg:gap-y-0">
-                {/* The headshot: square on the right (lg), a shallow full-width
-                    sliver above the copy on smaller screens, same as the
-                    doorway heroes. */}
-                <div className="col-span-4 md:col-span-12 lg:col-span-5 lg:col-start-8 lg:row-start-1">
-                  <div className="relative aspect-[5/2] lg:aspect-square overflow-hidden rounded-2xl ring-1 ring-inset ring-ink/10">
+              <div className="u-grid items-center gap-y-6 lg:gap-y-0">
+                {/* The masthead line: the name in the eyebrow accent, role clue
+                    after a middot in the brand gold. It names the person rather
+                    than the page, which the nav already does. Its own grid child
+                    so it leads the column on mobile, above the portrait; at lg
+                    explicit placement returns it to the top of the left column,
+                    which is why the copy block sits in row 2. */}
+                <div className="col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:self-end lg:pb-6">
+                  <FadeUp>
+                    <p className="eyebrow text-blue-green">
+                      Darren Brett
+                      <span className="font-medium text-gold"> · Fractional COO &amp; Digital Operator</span>
+                    </p>
+                  </FadeUp>
+                </div>
+                {/* The headshot: square on the right (lg), a 16:9 band on
+                    smaller screens, spanning both copy rows at lg. */}
+                <div className="col-span-4 md:col-span-12 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2 lg:self-center">
+                  <div className="relative aspect-[16/9] lg:aspect-square overflow-hidden rounded-2xl ring-1 ring-inset ring-ink/10">
                     {/* Two crops cut to shape from the studio frame rather than
                         letting object-cover decide: the square holds the head
-                        with headroom at lg, and the 5:2 band keeps it whole in
-                        the shallow sliver below it. One accessible name for the
-                        pair; the other is hidden from assistive tech. */}
+                        with headroom at lg, and the 16:9 band below it stays
+                        wide enough to keep the shoulders in shot rather than
+                        cropping to the face. One accessible name for the pair;
+                        the other is hidden from assistive tech. */}
                     <Image
-                      src="/images/darren-headshot-studio-wide-1.jpg"
+                      src="/images/darren-headshot-studio-wide-2.jpg"
                       alt=""
                       aria-hidden
                       fill
@@ -425,31 +439,18 @@ export default function TrackRecord() {
                     />
                   </div>
                 </div>
-                <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-1">
-                  {/* The masthead line: the name in the eyebrow accent, role
-                      clue after a middot in the brand gold. It names the person
-                      rather than the page, which the nav already does. */}
-                  <FadeUp>
-                    <p className="eyebrow pt-2 text-blue-green">
-                      Darren Brett
-                      <span className="font-medium text-gold"> · Fractional COO &amp; Digital Operator</span>
-                    </p>
-                  </FadeUp>
-                  {/* The one Instrument line on this page. Everything beneath it is
+                <div className="relative col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:self-start">
+                  {/* The one Instrument line on this page, and it is the h1:
+                      the career in two sentences. Everything beneath it is
                       Manrope, the same rule the homepage intro block follows. */}
                   <FadeUp delay={0.06}>
-                    <h1 className="mt-8 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[18ch]">
-                      Operations and delivery leader, digital specialist and entrepreneur’s engine.
+                    <h1 className="mt-8 font-serif text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] max-w-[22ch]">
+                      Twenty years running other people’s programmes. Seven running my own business.
                     </h1>
                   </FadeUp>
                   <FadeUp delay={0.12}>
-                    <p className="mt-7 md:mt-8 text-lg md:text-xl text-ink leading-relaxed max-w-[46ch]">
-                      Twenty years running other people’s programmes. Seven running my own business.
-                    </p>
-                  </FadeUp>
-                  <FadeUp delay={0.18}>
-                    <p className="mt-4 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
-                      Below is what I ran, what I was brought in to do, and what came of each one.
+                    <p className="mt-7 md:mt-8 text-lg md:text-xl text-graphite leading-relaxed max-w-[46ch]">
+                      What I ran, what I was brought in to do, and what came of each one.
                     </p>
                   </FadeUp>
                 </div>
