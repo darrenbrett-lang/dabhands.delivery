@@ -212,7 +212,7 @@ export default function Home() {
             </FadeUp>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_auto_auto] gap-y-12 md:gap-y-6 gap-x-10">
               {[
-                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy starts on a page, and sometimes nowhere at all. What counts is the work people act on this quarter.', payoff: 'I make that turn without losing the intent, and I keep it intact for as long as the work takes.' },
+                { key: 'strategy', from: 'Strategic direction', to: 'operating reality', body: 'Strategy is the thing everything else should answer to. Which comes down to two questions: where the energy goes, and which initiatives pay it out.', payoff: 'I define where the energy goes, and I stay with those initiatives until they deliver what they were meant to.' },
                 { key: 'complexity', from: 'System complexity', to: 'coordinated flow', body: 'Complexity arrives with growth. It slows everything without ever showing up as a decision.', payoff: 'I reconnect people, priorities, systems and rules so the business moves together again. More of what you spend comes back.' },
                 { key: 'impact', from: 'Important work', to: 'real results', body: 'Nobody ever decides to trade away the thing that made the work worth doing. It goes because nobody named it as the part that couldn’t go.', payoff: 'I agree what cannot be traded, make it travel with the work, and make sure it still moves someone when it arrives.' },
               ].map((t, i) => (
