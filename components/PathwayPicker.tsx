@@ -60,9 +60,18 @@ export const PathwayPicker = ({ preferAbove = false }: { preferAbove?: boolean }
   const place = useCallback(() => {
     const t = triggerRef.current?.getBoundingClientRect();
     if (!t) return;
+    // Two different heights, deliberately. The panel is position:fixed, so its
+    // `bottom` coordinate is measured against the LAYOUT viewport. But on iOS
+    // Safari window.innerHeight includes the strip behind the bottom toolbar,
+    // so deciding whether the panel fits by that number opens it downwards
+    // into chrome and the last pathway lands off screen. The VISUAL viewport
+    // is what the reader can actually see, so the fit test and the height cap
+    // use that instead.
+    const vv = window.visualViewport;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const below = vh - t.bottom - GAP - EDGE;
+    const visibleH = vv ? vv.height : vh;
+    const below = visibleH - t.bottom - GAP - EDGE;
     const above = t.top - GAP - EDGE;
     const h = panelRef.current?.offsetHeight ?? 0;
     const w = panelRef.current?.offsetWidth ?? 0;
@@ -76,7 +85,10 @@ export const PathwayPicker = ({ preferAbove = false }: { preferAbove?: boolean }
     // Flip up only when the panel genuinely cannot fit beneath the trigger,
     // or when the caller has asked for above and there is room for it.
     const flip = preferAbove ? h <= above || above > below : h > below && above > below;
-    const room = Math.max(flip ? above : below, 200);
+    // No floor on the room: a floor taller than the space is exactly how the
+    // panel used to bleed off the bottom. If the chosen side is short the
+    // panel caps to it and scrolls inside itself instead.
+    const room = Math.max(flip ? above : below, 0);
     setPos(flip ? { left, bottom: vh - t.top + GAP, maxHeight: room } : { left, top: t.bottom + GAP, maxHeight: room });
   }, [preferAbove]);
 
@@ -115,11 +127,13 @@ export const PathwayPicker = ({ preferAbove = false }: { preferAbove?: boolean }
     window.addEventListener('keydown', onKey);
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize);
+    window.visualViewport?.addEventListener('resize', onScrollOrResize);
     document.addEventListener('pointerdown', onPointerDown);
     return () => {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('scroll', onScrollOrResize);
       window.removeEventListener('resize', onScrollOrResize);
+      window.visualViewport?.removeEventListener('resize', onScrollOrResize);
       document.removeEventListener('pointerdown', onPointerDown);
     };
   }, [open, hideNow]);

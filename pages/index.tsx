@@ -163,7 +163,7 @@ export default function Home() {
               <div className="col-span-4 md:col-span-5 md:col-start-8">
                 <FadeUp delay={0.1}>
                   <p className="text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    AI is in every boardroom conversation. It’s in very few P&Ls. It’s in a lot of pilots that stayed pilots.
+                    Coordination was already hard. Now AI is in every boardroom conversation. It’s in very few P&Ls.
                   </p>
                 </FadeUp>
                 <FadeUp delay={0.16}>
@@ -186,7 +186,7 @@ export default function Home() {
                 {/* The sign-off: the shortest line in the column, so it lands. */}
                 <FadeUp delay={0.34}>
                   <p className="mt-5 text-lg md:text-xl leading-relaxed text-bone/80 max-w-[42ch]">
-                    I work on making direction, the systems and the work better.
+                    I work on making the direction, the systems and the work better.
                   </p>
                 </FadeUp>
               </div>
