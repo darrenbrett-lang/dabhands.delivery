@@ -229,7 +229,10 @@ export default function Home() {
                   <h3 className="font-serif text-[32px] md:text-[24px] lg:text-[32px] xl:text-[40px] leading-[1.15] tracking-[-0.01em] text-ink">
                     {t.from}
                     <br />
-                    <span className="italic text-gold">into</span> {t.to}
+                    {/* Deep gold #7E5E27, not --color-gold: Aged Gold on bone measures
+                        2.40 against the 3.0 bar for large text. Deep gold is 5.30.
+                        Same reason the doorway role lines use it below. */}
+                    <span className="italic" style={{ color: '#7E5E27' }}>into</span> {t.to}
                   </h3>
                   <p className="mt-4 md:mt-0 text-[15px] leading-[1.7] text-graphite max-w-[46ch]">
                     {t.body}
