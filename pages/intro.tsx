@@ -364,7 +364,7 @@ export default function Intro() {
         .i {
           --cream:#F5F1EA; --paper:#FBF9F4; --clay:#A49786;
           --blue:#1B2C3F; --charcoal:#26282B;
-          --ink:#1A1A1A; --gold:#BA9956; --gold-lt:#C9A96B;
+          --ink:#1A1A1A; --gold:#7E5E27; --gold-lt:#C9A96B;
           --stone:#6E6A62; --line:#DCD5C8;
           background-color:var(--cream); color:var(--ink);
           font-size:17px; line-height:1.62;

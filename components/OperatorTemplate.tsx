@@ -201,7 +201,7 @@ export const OperatorTemplate = ({ content }: { content: OperatorContent }) => {
                 <div className="rise">
                   <p className={`eyebrow pt-2 mb-10 ${a.text}`}>
                     {c.eyebrow}
-                    {c.role && <span className="font-medium text-gold"> · {c.role}</span>}
+                    {c.role && <span className="font-medium" style={{ color: '#7E5E27' }}> · {c.role}</span>}
                   </p>
                 </div>
                 <div className="rise" style={{ '--rise-delay': '0.06s' } as CSSProperties}>

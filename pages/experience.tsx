@@ -404,7 +404,7 @@ export default function TrackRecord() {
                   <FadeUp>
                     <p className="eyebrow text-blue-green">
                       Darren Brett
-                      <span className="font-medium text-gold"> · Fractional COO &amp; Digital Operator</span>
+                      <span className="font-medium" style={{ color: '#7E5E27' }}> · Fractional COO &amp; Digital Operator</span>
                     </p>
                   </FadeUp>
                 </div>
