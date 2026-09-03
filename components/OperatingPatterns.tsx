@@ -69,18 +69,18 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                 <FadeUp key={i}>
                   <article className="border-t border-bone/15 pt-8 md:pt-11 pb-10 md:pb-14">
                     <div>
-                      <p className="eyebrow text-bone/45">Operating Pattern</p>
+                      <p className="eyebrow text-bone/55">Operating Pattern</p>
                       <h3 className="mt-3 font-serif text-[26px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone/90">
                         {item.headline}
                       </h3>
                     </div>
                     <div className="mt-8 md:mt-10 grid grid-cols-1 gap-y-8 gap-x-10 md:grid-cols-2 md:pr-24">
                       <div>
-                        <p className="eyebrow text-bone/45">Why it matters</p>
+                        <p className="eyebrow text-bone/55">Why it matters</p>
                         <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.why}</p>
                       </div>
                       <div>
-                        <p className="eyebrow text-bone/45">Where I learned it</p>
+                        <p className="eyebrow text-bone/55">Where I learned it</p>
                         <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.learned}</p>
                       </div>
                     </div>
@@ -106,7 +106,7 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                         {num}
                       </span>
                       <span>
-                        <span className="eyebrow block text-bone/45">Operating Pattern</span>
+                        <span className="eyebrow block text-bone/55">Operating Pattern</span>
                         <span className="mt-3 block font-serif text-[26px] md:text-[36px] lg:text-[40px] leading-[1.12] tracking-[-0.01em] text-bone/90 transition-colors duration-300 group-hover:text-bone">
                           {item.headline}
                         </span>
@@ -148,11 +148,11 @@ export const OperatingPatterns = ({ content }: { content: OperatingPatternsConte
                           }`}
                         >
                           <div>
-                            <p className="eyebrow text-bone/45">Why it matters</p>
+                            <p className="eyebrow text-bone/55">Why it matters</p>
                             <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.why}</p>
                           </div>
                           <div>
-                            <p className="eyebrow text-bone/45">Where I learned it</p>
+                            <p className="eyebrow text-bone/55">Where I learned it</p>
                             <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-bone/80 max-w-[46ch]">{item.learned}</p>
                           </div>
                         </div>

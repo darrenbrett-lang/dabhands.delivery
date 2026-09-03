@@ -373,7 +373,7 @@ export default function Intro() {
            Contact and Experience. The brief's radial gradient was written for a
            standalone card, not for a page that has to sit in the set. */
         .i-herowrap {
-          background-image:linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%);
+          background-image:linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 18%, transparent), color-mix(in srgb, var(--color-clay) 9%, transparent) 55%, transparent 100%);
         }
         .i-in { max-width:1180px; margin:0 auto; padding:0 44px; }
 

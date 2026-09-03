@@ -68,7 +68,7 @@ const ROOM = {
   text: 'text-blue-green',
   border: 'border-blue-green/40',
   color: 'var(--color-blue-green)',
-  wash: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)',
+  wash: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 18%, transparent), color-mix(in srgb, var(--color-clay) 9%, transparent) 55%, transparent 100%)',
 };
 const ACCENT: Record<Accent, typeof ROOM> = { moss: ROOM, lavender: ROOM, peach: ROOM, sage: ROOM };
 

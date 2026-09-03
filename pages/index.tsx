@@ -107,7 +107,7 @@ export default function Home() {
         <section
           data-spine="Darren"
           className="bg-bone text-ink py-20 md:py-28 lg:py-32"
-          style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
+          style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 18%, transparent), color-mix(in srgb, var(--color-clay) 9%, transparent) 55%, transparent 100%)' }}
         >
           <div className="u-container">
             <div className="u-grid items-start gap-y-12 md:gap-y-16">

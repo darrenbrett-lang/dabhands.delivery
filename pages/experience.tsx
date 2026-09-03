@@ -390,7 +390,7 @@ export default function TrackRecord() {
               and Contact (this is now a top-level page too). ─────────────── */}
           <section
             className="relative isolate overflow-hidden bg-bone text-ink pt-32 md:pt-40 pb-14 md:pb-16"
-            style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
+            style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 18%, transparent), color-mix(in srgb, var(--color-clay) 9%, transparent) 55%, transparent 100%)' }}
           >
             <div className="u-container">
               <div className="u-grid items-center gap-y-6 lg:gap-y-0">

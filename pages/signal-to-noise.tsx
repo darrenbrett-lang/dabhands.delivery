@@ -276,7 +276,7 @@ export default function SafePassage() {
                       )}
                     </p>
                     <p className="mt-4 text-[15.5px] leading-[1.65] text-graphite max-w-[40ch]">{e.claim}</p>
-                    <p className="mt-auto pt-5 text-[12.5px] leading-[1.6] text-graphite/85 max-w-[42ch]">
+                    <p className="mt-auto pt-5 text-[12.5px] leading-[1.6] text-graphite max-w-[42ch]">
                       <a
                         href={e.href}
                         target="_blank"

@@ -22,7 +22,7 @@ export default function Contact() {
         {/* Warm stone + a soft Clay wash — the same hero vignette as the doorways. */}
         <section
           className="relative overflow-hidden bg-bone text-ink pt-36 md:pt-48 pb-24 md:pb-40 min-h-[78vh]"
-          style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 42%, transparent), color-mix(in srgb, var(--color-clay) 20%, transparent) 55%, transparent 100%)' }}
+          style={{ backgroundImage: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-clay) 18%, transparent), color-mix(in srgb, var(--color-clay) 9%, transparent) 55%, transparent 100%)' }}
         >
           {/* Big crown set jauntily in the right negative space (desktop). */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
