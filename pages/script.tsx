@@ -1,32 +1,52 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Manrope } from 'next/font/google';
 import { SeoMeta } from '@/components/SeoMeta';
 import { SCORE } from '@/lib/scriptScore';
 
 /**
- * /script — the cue cards. Private rehearsal surface, noindex.
+ * /script — the memory cards. Private rehearsal surface, noindex.
  *
- * ⚠ NOT a teleprompter. It does not pace, it does not auto-advance and it does
- * not scroll. Darren moves it himself, one idea at a time:
+ * ⚠ NOT a teleprompter and NOT headline-plus-body. Each screen holds ALL the
+ * talking points for one set piece, large enough to take in from a few feet:
  *
- *     LOOK AT THE IDEA → REMEMBER WHAT I MEAN → TALK
+ *     GLANCE AT THE WHOLE CARD → LOAD THE THOUGHT → LOOK AWAY → TALK
  *
- * The heading is the idea. The paragraph underneath is a prompt to reconnect
- * with what he means, deliberately more expansive than anything he would say,
- * and never read aloud. See lib/scriptScore.ts before touching the words.
+ * Nothing paces, nothing advances itself, nothing scrolls. See
+ * lib/scriptScore.ts before touching the words.
+ *
+ * ⚠ THE CONTENT IS FIXED, THE TYPE IS NOT. Every line has to stay on the card,
+ * so the type is measured and scaled to fit (see `fit` below) rather than the
+ * content being cut to make the type bigger. A card of nine lines simply sets
+ * smaller than a card of five.
  *
  * ⚠ EYE-LINE IS THE DESIGN. The laptop camera sits top-centre, so the card
  * lives directly beneath it: looking from lens to card should barely move the
- * eyes, and a viewer should never see them drop. Hence pinned near the top
- * rather than vertically centred, and a narrow measure so the eyes do not scan
- * sideways either. Optimise for the resulting video, not page composition.
+ * eyes, and a viewer should never see them drop. Optimise for the resulting
+ * video, not page composition.
  */
 
+// Bold and ExtraBold, loaded only on this route. The site-wide Manrope stops
+// at 600, and these two cuts exist for the cards alone — adding them globally
+// would put two more font files on every page for one private tool.
+const cue = Manrope({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-cue',
+  display: 'swap',
+});
+
 const CHROME_MS = 2600;
+
+/** Type-size search bounds, in px. */
+const FS_MIN = 13;
+const FS_MAX = 108;
 
 export default function ScriptCards() {
   const [index, setIndex] = useState(0);
   const [chromeOn, setChromeOn] = useState(true);
   const chromeTimer = useRef<number | undefined>(undefined);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const card = SCORE[index];
   const next = SCORE[index + 1];
@@ -37,8 +57,40 @@ export default function ScriptCards() {
     setIndex((i) => Math.min(Math.max(i + delta, 0), SCORE.length - 1));
   }, []);
 
+  // Largest type at which the whole card still fits its box. Binary search,
+  // because the answer depends on line count, line length and viewport all at
+  // once, and no clamp() can know all three.
+  const fit = useCallback(() => {
+    const box = boxRef.current;
+    const el = cardRef.current;
+    if (!box || !el) return;
+    let lo = FS_MIN;
+    let hi = FS_MAX;
+    for (let i = 0; i < 14; i += 1) {
+      const mid = (lo + hi) / 2;
+      el.style.setProperty('--fs', `${mid}px`);
+      const fits = el.scrollHeight <= box.clientHeight && el.scrollWidth <= box.clientWidth;
+      if (fits) lo = mid;
+      else hi = mid;
+    }
+    el.style.setProperty('--fs', `${lo}px`);
+  }, []);
+
+  // Before paint, so the card never appears at the wrong size first.
+  useLayoutEffect(() => { fit(); }, [fit, index]);
+
+  useEffect(() => {
+    // Measured again once the real weights land: swapped fallback metrics
+    // would otherwise size the card against the wrong font.
+    if (typeof document !== 'undefined' && document.fonts) {
+      document.fonts.ready.then(fit).catch(() => {});
+    }
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  }, [fit]);
+
   // The chrome shows on any input and gets out of the way again on its own,
-  // so nothing but the card is on screen while he is talking.
+  // so nothing but the words is on screen while he is talking.
   const wake = useCallback(() => {
     setChromeOn(true);
     if (chromeTimer.current) window.clearTimeout(chromeTimer.current);
@@ -75,84 +127,101 @@ export default function ScriptCards() {
 
       <style>{`
         .s-root {
-          --ink:#F2F0EC; --dim:#8B8983; --gold:#BA9956;
+          --ink:#EDEAE4; --dim:#8B8983; --gold:#BA9956;
           position:fixed; inset:0; background:#000; color:var(--ink);
-          font-family:var(--font-sans); overflow:hidden;
-          -webkit-font-smoothing:antialiased;
+          font-family:var(--font-cue), var(--font-sans);
+          overflow:hidden; -webkit-font-smoothing:antialiased;
         }
         .s-root *:focus-visible { outline:2px solid var(--gold); outline-offset:4px; border-radius:3px; }
 
         /* Pinned near the top, under the lens. Never vertically centred. */
         .s-stage {
-          position:absolute; left:0; right:0; top:clamp(40px, 6vh, 70px); bottom:96px;
+          position:absolute; left:0; right:0; top:clamp(30px, 5vh, 58px); bottom:100px;
           display:flex; flex-direction:column; align-items:center;
-          padding:0 24px; text-align:center;
+          padding:0 clamp(18px, 3vw, 40px); text-align:center;
         }
-        .s-card { width:100%; max-width:760px; }
+        /* The box the type is fitted to. Overflow hidden is a backstop only:
+           the fitter should never leave anything outside it. */
+        .s-box {
+          flex:1 1 auto; width:100%; max-width:1440px; overflow:hidden;
+          display:flex; justify-content:center; align-items:flex-start;
+        }
+        .s-card { --fs:40px; width:100%; }
 
-        /* The idea. Large, because this is the thing he looks at. */
-        .s-head {
-          font-family:var(--font-serif); font-weight:400;
-          font-size:clamp(30px, 4.4vw, 60px); line-height:1.08; letter-spacing:-.01em;
-          color:#fff;
-        }
-        /* The prompt. Smaller and quieter: it is there to provoke the thought,
-           not to be performed. Measure kept narrow so it is one glance. */
-        .s-para {
-          margin:clamp(20px, 3vh, 34px) auto 0; max-width:46ch;
-          font-size:clamp(15px, 1.55vw, 20px); line-height:1.62; color:var(--dim);
+        /* Section name. Orientation, not a talking point, so it is the one
+           quiet thing on the card. */
+        .s-label {
+          font-weight:800; text-transform:uppercase;
+          font-size:calc(var(--fs) * .34); line-height:1; letter-spacing:.18em;
+          color:rgba(237,234,228,.42);
+          margin-bottom:calc(var(--fs) * .72);
         }
 
-        /* Where he is going next, dim and always present, so there is never a
-           visible search for the next card. */
-        .s-next { margin-top:clamp(34px, 6vh, 64px); opacity:.3; }
-        .s-next .lbl {
-          font-size:11px; letter-spacing:2.6px; text-transform:uppercase; color:var(--dim);
+        /* One continuous thought. Lines inside sit tight; groups get air. */
+        .s-group + .s-group { margin-top:calc(var(--fs) * .62); }
+
+        /* The talking points. Bold, big, high contrast, no body copy anywhere. */
+        .s-line {
+          font-weight:700; text-transform:uppercase;
+          font-size:var(--fs); line-height:1.14; letter-spacing:-.005em;
+          color:var(--ink);
         }
-        .s-next .h {
-          margin-top:8px; font-family:var(--font-serif);
-          font-size:clamp(18px, 2vw, 26px); line-height:1.2; color:var(--ink);
-        }
+        /* The line that carries the card. Heavier and larger — hierarchy by
+           size and weight, not by colour. */
+        .s-line.anchor { font-weight:800; font-size:calc(var(--fs) * 1.14); color:#FFF; }
+
+        /* Above tablet the lines never wrap: a wrapped trigger takes two
+           glances instead of one, so the fitter trades size for wholeness. */
+        @media (min-width:700px) { .s-line { white-space:nowrap; } }
 
         .s-chrome {
-          position:absolute; left:0; right:0; bottom:0; padding:20px 22px 24px;
+          position:absolute; left:0; right:0; bottom:0; padding:18px 22px 22px;
           display:flex; align-items:center; justify-content:space-between; gap:18px;
           transition:opacity .3s ease;
         }
         .s-chrome.off { opacity:0; pointer-events:none; }
-        .s-count { font-size:12px; letter-spacing:2.4px; color:var(--dim); font-variant-numeric:tabular-nums; }
+        .s-meta { display:flex; align-items:baseline; gap:14px; min-width:0; }
+        .s-count { font-size:12px; font-weight:700; letter-spacing:2.4px; color:var(--dim); font-variant-numeric:tabular-nums; }
+        .s-next {
+          font-size:12px; font-weight:700; letter-spacing:2.4px; text-transform:uppercase;
+          color:rgba(139,137,131,.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
         .s-btns { display:flex; gap:8px; }
         .s-btn {
-          appearance:none; background:transparent; border:1px solid #37363300;
-          border-color:#373633; color:var(--ink); border-radius:999px;
+          appearance:none; background:transparent; border:1px solid #373633;
+          color:var(--ink); border-radius:999px; font-weight:700;
           padding:9px 18px; font-size:13px; letter-spacing:.3px; cursor:pointer;
         }
         .s-btn:hover:not(:disabled) { border-color:var(--gold); color:var(--gold); }
         .s-btn:disabled { opacity:.3; cursor:default; }
 
         /* One tick per card, so position is felt rather than counted. */
-        .s-prog { position:absolute; left:22px; right:22px; bottom:70px; display:flex; gap:5px; }
+        .s-prog { position:absolute; left:22px; right:22px; bottom:64px; display:flex; gap:5px; }
         .s-prog i { flex:1; height:2px; background:#2C2B28; border-radius:2px; }
         .s-prog i.on { background:var(--gold); }
 
-        @media (prefers-reduced-motion: reduce) {
-          .s-chrome { transition:none; }
-        }
+        @media (prefers-reduced-motion: reduce) { .s-chrome { transition:none; } }
       `}</style>
 
-      <div className="s-root" onPointerMove={wake} onPointerDown={wake}>
+      <div className={`s-root ${cue.variable}`} onPointerMove={wake} onPointerDown={wake}>
         <div className="s-stage">
-          <div className="s-card" key={card.id}>
-            <h1 className="s-head">{card.heading}</h1>
-            <p className="s-para">{card.paragraph}</p>
-          </div>
-
-          {next && (
-            <div className="s-next" aria-hidden>
-              <p className="lbl">Next</p>
-              <p className="h">{next.heading}</p>
+          <div className="s-box" ref={boxRef}>
+            <div className="s-card" ref={cardRef} key={card.id}>
+              <p className="s-label">{card.label}</p>
+              {card.groups.map((group, g) => (
+                <div className="s-group" key={g}>
+                  {group.map((line) => (
+                    <p
+                      key={line}
+                      className={`s-line${line === card.anchor ? ' anchor' : ''}`}
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              ))}
             </div>
-          )}
+          </div>
         </div>
 
         <div className="s-prog" aria-hidden>
@@ -160,7 +229,10 @@ export default function ScriptCards() {
         </div>
 
         <div className={`s-chrome${chromeOn ? '' : ' off'}`}>
-          <span className="s-count">{String(index + 1).padStart(2, '0')} / {String(SCORE.length).padStart(2, '0')}</span>
+          <span className="s-meta">
+            <span className="s-count">{String(index + 1).padStart(2, '0')} / {String(SCORE.length).padStart(2, '0')}</span>
+            {next && <span className="s-next">Next · {next.label}</span>}
+          </span>
           <span className="s-btns">
             <button type="button" className="s-btn" onClick={() => { go(-1); wake(); }} disabled={atStart}>
               Back
