@@ -1,123 +1,100 @@
 /**
- * The memory cards for /script.
+ * The script for /script, in two forms.
  *
  * ⚠ DO NOT rewrite, tighten, polish, shorten or make this language more
- * presentational. These are not slogans and not a script. Each card carries
- * ALL the talking points for one set piece, so that a single glance loads the
- * whole thought and Darren can then look away from the screen and say it in
- * his own words:
+ * presentational. `paragraph` is the full thought, read once in DIGEST to load
+ * the meaning. `flow` is the same thought reduced to a cue, shown enormous in
+ * FLOW while filming. The words spoken on camera are neither: they are his.
  *
- *     GLANCE AT THE WHOLE CARD → LOAD THE THOUGHT → LOOK AWAY → TALK
+ *     DIGEST THE MEANING FIRST → THEN FLOW THROUGH THE IDEAS
  *
- * Because of that, every line has to stay on the card. If a card will not fit,
- * the type gets smaller (the page measures and scales it automatically) — the
- * content is never cut to make the type bigger.
- *
- * `label` is the section name, used for orientation and in the next-card
- * preview. `groups` are the talking points: lines inside a group belong to one
- * continuous thought and sit tight together, groups are separated by air.
- * `anchor` names the one line that carries the card, set larger and heavier.
+ * FLOW must never show `paragraph`. The moment it does it is a teleprompter
+ * again, and he is reading rather than talking.
  */
 
 export interface Card {
   id: number;
-  /** Section name. Orientation, not a talking point. */
+  /** Section heading. Set large above the paragraph in DIGEST. */
   label: string;
-  /** Talking points. Each inner array is one continuous thought. */
-  groups: string[][];
-  /** The line, or lines, that carry the card. Set largest and heaviest. */
-  anchor: string | string[];
-  /** Secondary triggers, set a step smaller. Still bold, still readable. */
-  quiet?: string[];
+  /** The full thought. DIGEST only, never shown in FLOW. */
+  paragraph: string;
+  /** The thought as a cue. Set enormous in FLOW. */
+  flow: string;
+  /** Seconds into the take at which this cue arrives. */
+  at: number;
 }
+
+/**
+ * Length of the take. The last cue lands at 0:42 and holds for the remaining
+ * eight seconds — the clock stops there rather than pushing him off the end.
+ * Starting long on purpose: if he gets ahead of the cards, shorten it; if they
+ * drag him, lengthen it. The software should not dictate the performance.
+ */
+export const RUN_SECONDS = 50;
 
 export const SCORE: Card[] = [
   {
     id: 1,
-    label: 'Open',
-    groups: [
-      ['THANKS FOR CHECKING IN'],
-      ['EASIEST WAY TO EXPLAIN WHAT I DO'],
-      ['ALWAYS HAD A THING FOR', 'MAKING THINGS GO', 'AND WORK BETTER'],
-    ],
-    anchor: 'MAKING THINGS GO',
+    label: 'OPEN',
+    flow: 'THANKS FOR CHECKING IN',
+    at: 0,
+    paragraph:
+      'Thanks for checking in. I suppose the easiest way to explain what I do is…',
   },
   {
     id: 2,
-    label: 'How I’m wired',
-    groups: [
-      ['MESSY · STUCK · COMPLICATED'],
-      ['I WANT TO UNDERSTAND IT', 'WHAT’S ACTUALLY GOING ON?', 'GET IT MOVING'],
-      ['THAT’S JUST HOW MY BRAIN WORKS'],
-    ],
-    anchor: 'WHAT’S ACTUALLY GOING ON?',
+    label: 'HOW I’M WIRED',
+    flow: 'HOW I’M WIRED',
+    at: 4,
+    paragraph:
+      'I’ve always had a thing for making things go and work better. When something is messy, stuck or complicated, I naturally want to understand what’s really going on, work out what matters, and get it moving. That’s just how my brain works.',
   },
   {
     id: 3,
-    label: 'Been around',
-    groups: [
-      ['SOMEBODY HAS AN AMBITION', 'PEOPLE HAVE TO MAKE IT REAL'],
-      ['BIG AGENCIES', 'MAJOR BRANDS', 'BUILT + RAN MY OWN', 'SEVEN YEARS'],
-      ['SEEN IT FROM BOTH SIDES'],
-    ],
-    anchor: 'SEEN IT FROM BOTH SIDES',
+    label: 'BEEN AROUND',
+    flow: 'BEEN AROUND',
+    at: 9,
+    paragraph:
+      'I’ve spent my working life in that place where somebody has an ambition and a bunch of people have to somehow make it real. I’ve done that inside big agencies, with major brands, and then I co-founded an agency of my own and ran it for seven years. So I’ve seen what it takes from both sides.',
   },
   {
     id: 4,
-    label: 'Ambition outruns it',
-    groups: [
-      ['BUSINESSES DON’T RUN OUT OF GOOD IDEAS'],
-      ['WHAT THEY’RE TRYING TO DO GETS BIGGER + FASTER', 'THAN THE WAY THE BUSINESS ACTUALLY WORKS'],
-      ['THE OLD INFORMAL WAYS STOP BEING ENOUGH'],
-      ['THAT’S THE MOMENT I RECOGNISE'],
-    ],
-    anchor: 'THAT’S THE MOMENT I RECOGNISE',
+    label: 'AMBITION OUTRUNS IT',
+    flow: 'AMBITION OUTRUNS IT',
+    at: 15,
+    paragraph:
+      'Businesses don’t generally run out of good ideas. What happens is that the ambition gets bigger, the business gets more complicated, and eventually what they’re trying to do starts moving faster than the way the place actually works. Things that used to happen naturally or informally stop being enough. That’s the moment I recognise.',
   },
   {
     id: 5,
-    label: 'Get it moving',
-    groups: [
-      ['HAND ME AN AMBITION', 'I’LL TELL YOU WHAT IT ACTUALLY TAKES', 'THEN MAKE IT HAPPEN'],
-      [
-        'WHAT’S REALLY HAPPENING',
-        'WHAT’S STUCK / UNCLEAR',
-        'WHO NEEDS TO ALIGN',
-        'CREATE MOVEMENT',
-      ],
-    ],
-    // The heart of the card: the whole of the first thought, not one line of it.
-    anchor: ['HAND ME AN AMBITION', 'I’LL TELL YOU WHAT IT ACTUALLY TAKES', 'THEN MAKE IT HAPPEN'],
-    quiet: ['WHAT’S REALLY HAPPENING', 'WHAT’S STUCK / UNCLEAR', 'WHO NEEDS TO ALIGN', 'CREATE MOVEMENT'],
+    label: 'GET IT MOVING',
+    flow: 'GET IT MOVING',
+    at: 22,
+    paragraph:
+      'Hand me an ambition and I’ll tell you what it actually takes, then make it happen. That means getting underneath what’s really going on, finding what’s stuck or unclear, working out what needs to change, getting the right people aligned, and staying close enough to the work to actually create movement. I’m not really interested in the theory of it. I want to make the thing go.',
   },
   {
     id: 6,
-    label: 'Don’t kill the good bit',
-    groups: [
-      ['BETTER ORGANISED ≠ CORPORATE', 'NOT SLOW', 'NOT BLAND'],
-      ['MAKE THE BUSINESS MORE CAPABLE', 'WITHOUT FLATTENING'],
-      ['THE INSTINCT', 'THE ENERGY', 'THE CHARACTER'],
-      ['WHAT MADE IT GOOD IN THE FIRST PLACE'],
-    ],
-    anchor: 'WITHOUT FLATTENING',
+    label: 'DON’T KILL THE GOOD BIT',
+    flow: 'DON’T KILL THE GOOD BIT',
+    at: 30,
+    paragraph:
+      'The thing I care about is that making a business more capable shouldn’t mean making it more corporate, slower or blander. There’s usually something instinctive and energetic that made the business good in the first place. I want to put enough structure around that to let it grow, without flattening the very thing that made people care about it.',
   },
   {
     id: 7,
-    label: 'The work has to work',
-    groups: [
-      ['NOT EFFICIENT MACHINERY FOR ITS OWN SAKE'],
-      ['GET THE BEST WORK OUT', 'REACH THE CUSTOMER', 'MAKE THEM FEEL SOMETHING', 'MAKE THEM ACT'],
-      ['ULTIMATELY', 'IT HAS TO SELL'],
-    ],
-    anchor: 'IT HAS TO SELL',
+    label: 'THE WORK HAS TO WORK',
+    flow: 'THE WORK HAS TO WORK',
+    at: 36,
+    paragraph:
+      'I’m not interested in operations or efficient machinery for its own sake. All of that exists to get the best work out into the world. I want the good idea to survive the journey through the business and actually reach the customer, make them feel something and make them act. Because ultimately, however much we dress it up, it has to sell.',
   },
   {
     id: 8,
-    label: 'Close',
-    groups: [
-      ['SO YEAH', 'THAT’S KIND OF WHERE I COME IN'],
-      ['SOMETHING IMPORTANT', 'YOU’RE TRYING TO GET MOVING'],
-      ['I’D LOVE TO HAVE A CHAT'],
-    ],
-    anchor: 'THAT’S KIND OF WHERE I COME IN',
+    label: 'CLOSE',
+    flow: 'THAT’S WHERE I COME IN',
+    at: 42,
+    paragraph:
+      'So yeah, that’s kind of where I come in. If you’ve got something important you’re trying to get moving, I’d love to have a chat.',
   },
 ];

@@ -1,33 +1,33 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Manrope } from 'next/font/google';
 import { SeoMeta } from '@/components/SeoMeta';
-import { SCORE } from '@/lib/scriptScore';
+import { SCORE, RUN_SECONDS } from '@/lib/scriptScore';
 
 /**
- * /script — the memory cards. Private rehearsal surface, noindex.
+ * /script — the filming surface. Private, noindex. Two modes:
  *
- * ⚠ NOT a teleprompter and NOT headline-plus-body. Each screen holds ALL the
- * talking points for one set piece, large enough to take in from a few feet:
+ *   DIGEST  the full thought, one card at a time, moved by hand. Read once to
+ *           load the meaning.
+ *   FLOW    the same thoughts as enormous cues, arriving on a clock, for
+ *           filming the whole piece as one take.
  *
- *     GLANCE AT THE WHOLE CARD → LOAD THE THOUGHT → LOOK AWAY → TALK
+ *     DIGEST THE MEANING FIRST → THEN FLOW THROUGH THE IDEAS
  *
- * Nothing paces, nothing advances itself, nothing scrolls. See
- * lib/scriptScore.ts before touching the words.
+ * ⚠ FLOW NEVER SHOWS THE PARAGRAPHS. It gives him only where he is and where
+ * he is going. The words are his. The moment the paragraph appears in FLOW it
+ * is a teleprompter again: READ → RECITE, instead of THINK → TALK → GLANCE.
  *
- * ⚠ THE CONTENT IS FIXED, THE TYPE IS NOT. Every line has to stay on the card,
- * so the type is measured and scaled to fit (see `fit` below) rather than the
- * content being cut to make the type bigger. A card of nine lines simply sets
- * smaller than a card of five.
+ * ⚠ THE CONTENT IS FIXED, THE TYPE IS NOT. Nothing is ever clipped to make the
+ * type bigger; the type is measured and fitted to the space (see `fit`), so a
+ * long paragraph simply sets smaller than a short one.
  *
- * ⚠ EYE-LINE IS THE DESIGN. The laptop camera sits top-centre, so the card
- * lives directly beneath it: looking from lens to card should barely move the
- * eyes, and a viewer should never see them drop. Optimise for the resulting
- * video, not page composition.
+ * ⚠ EYE-LINE IS THE DESIGN. The laptop camera sits top-centre and this is read
+ * from a filming position, not a desk. Everything is pinned near the top and
+ * set as large as it will go. Optimise for the resulting video.
  */
 
 // Bold and ExtraBold, loaded only on this route. The site-wide Manrope stops
-// at 600, and these two cuts exist for the cards alone — adding them globally
-// would put two more font files on every page for one private tool.
+// at 600, and these two cuts exist for this page alone.
 const cue = Manrope({
   subsets: ['latin'],
   weight: ['700', '800'],
@@ -35,42 +35,50 @@ const cue = Manrope({
   display: 'swap',
 });
 
+type Mode = 'digest' | 'flow';
+type FlowState = 'idle' | 'counting' | 'running' | 'paused';
+
 const CHROME_MS = 2600;
+const FS_MIN = 12;
+const FS_MAX = 200;
+const TICK_MS = 100;
 
-/** Type-size search bounds, in px. */
-const FS_MIN = 13;
-const FS_MAX = 108;
+/** Which cue is live at `t` seconds into the take. */
+const cueAt = (t: number) => {
+  let i = 0;
+  for (let n = 0; n < SCORE.length; n += 1) if (SCORE[n].at <= t) i = n;
+  return i;
+};
 
-export default function ScriptCards() {
+export default function ScriptPage() {
+  const [mode, setMode] = useState<Mode>('digest');
   const [index, setIndex] = useState(0);
   const [chromeOn, setChromeOn] = useState(true);
+  const [flowState, setFlowState] = useState<FlowState>('idle');
+  const [count, setCount] = useState(3);
+
+  // The clock: milliseconds already banked, plus time since the last resume.
+  const bankedRef = useRef(0);
+  const startedRef = useRef(0);
   const chromeTimer = useRef<number | undefined>(undefined);
   const boxRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const card = SCORE[index];
   const next = SCORE[index + 1];
-  // A card's heart may be one line or several, and it may push the rest of its
-  // triggers down a step.
-  const anchors = Array.isArray(card.anchor) ? card.anchor : [card.anchor];
-  const quiet = card.quiet ?? [];
   const atStart = index === 0;
   const atEnd = index === SCORE.length - 1;
 
-  const go = useCallback((delta: number) => {
-    setIndex((i) => Math.min(Math.max(i + delta, 0), SCORE.length - 1));
-  }, []);
-
   // Largest type at which the whole card still fits its box. Binary search,
-  // because the answer depends on line count, line length and viewport all at
-  // once, and no clamp() can know all three.
+  // because the answer depends on length, mode and viewport at once, and no
+  // clamp() can know all three.
   const fit = useCallback(() => {
     const box = boxRef.current;
     const el = cardRef.current;
     if (!box || !el) return;
     let lo = FS_MIN;
     let hi = FS_MAX;
-    for (let i = 0; i < 14; i += 1) {
+    for (let i = 0; i < 15; i += 1) {
       const mid = (lo + hi) / 2;
       el.style.setProperty('--fs', `${mid}px`);
       const fits = el.scrollHeight <= box.clientHeight && el.scrollWidth <= box.clientWidth;
@@ -80,8 +88,8 @@ export default function ScriptCards() {
     el.style.setProperty('--fs', `${lo}px`);
   }, []);
 
-  // Before paint, so the card never appears at the wrong size first.
-  useLayoutEffect(() => { fit(); }, [fit, index]);
+  // Before paint, so a card never appears at the wrong size first.
+  useLayoutEffect(() => { fit(); }, [fit, index, mode, flowState]);
 
   useEffect(() => {
     // Measured again once the real weights land: swapped fallback metrics
@@ -101,29 +109,127 @@ export default function ScriptCards() {
     chromeTimer.current = window.setTimeout(() => setChromeOn(false), CHROME_MS);
   }, []);
 
-  // The chrome starts visible, so this only has to schedule the hide. Calling
-  // wake() here would set state synchronously inside the effect body.
+  // The chrome starts visible, so this only has to schedule the hide.
   useEffect(() => {
     chromeTimer.current = window.setTimeout(() => setChromeOn(false), CHROME_MS);
     return () => { if (chromeTimer.current) window.clearTimeout(chromeTimer.current); };
   }, []);
 
+  /** Put the clock at the head of card `i`, so a hand-moved card gets its full run. */
+  const seek = useCallback((i: number) => {
+    bankedRef.current = SCORE[i].at * 1000;
+    startedRef.current = Date.now();
+    setIndex(i);
+  }, []);
+
+  const step = useCallback((delta: number) => {
+    setIndex((i) => {
+      const n = Math.min(Math.max(i + delta, 0), SCORE.length - 1);
+      if (mode === 'flow') {
+        bankedRef.current = SCORE[n].at * 1000;
+        startedRef.current = Date.now();
+      }
+      return n;
+    });
+  }, [mode]);
+
+  const startFlow = useCallback(() => {
+    setIndex(0);
+    setCount(3);
+    setFlowState('counting');
+  }, []);
+
+  const restart = useCallback(() => {
+    bankedRef.current = 0;
+    startedRef.current = 0;
+    startFlow();
+  }, [startFlow]);
+
+  const toggleRun = useCallback(() => {
+    setFlowState((s) => {
+      if (s === 'running') {
+        bankedRef.current += Date.now() - startedRef.current;
+        return 'paused';
+      }
+      if (s === 'paused') {
+        startedRef.current = Date.now();
+        return 'running';
+      }
+      return s;
+    });
+  }, []);
+
+  // 3 · 2 · 1, then straight into the first cue. No animation.
+  useEffect(() => {
+    if (flowState !== 'counting') return undefined;
+    const t = window.setTimeout(() => {
+      if (count > 1) setCount((c) => c - 1);
+      else {
+        bankedRef.current = 0;
+        startedRef.current = Date.now();
+        setFlowState('running');
+      }
+    }, 1000);
+    return () => window.clearTimeout(t);
+  }, [flowState, count]);
+
+  // The clock. Derives the live cue from elapsed time, so a hand-moved card
+  // and an auto-advanced one leave the sequence in the same state.
+  useEffect(() => {
+    if (flowState !== 'running') return undefined;
+    const id = window.setInterval(() => {
+      const t = (bankedRef.current + (Date.now() - startedRef.current)) / 1000;
+      if (t >= RUN_SECONDS) {
+        bankedRef.current = RUN_SECONDS * 1000;
+        setIndex(SCORE.length - 1);
+        setFlowState('paused');
+        return;
+      }
+      setIndex(cueAt(t));
+    }, TICK_MS);
+    return () => window.clearInterval(id);
+  }, [flowState]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const k = e.key;
-      if (k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'Enter' || k === 'PageDown') {
-        e.preventDefault(); go(1); wake();
-      } else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'Backspace' || k === 'PageUp') {
-        e.preventDefault(); go(-1); wake();
-      } else if (k === 'Home') {
-        e.preventDefault(); setIndex(0); wake();
-      } else if (k === 'End') {
-        e.preventDefault(); setIndex(SCORE.length - 1); wake();
+      const fwd = k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown';
+      const back = k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp' || k === 'Backspace';
+
+      if (mode === 'flow') {
+        if (k === ' ') {
+          e.preventDefault();
+          if (flowState === 'idle') startFlow(); else toggleRun();
+          wake(); return;
+        }
+        if (k === 'r' || k === 'R') { e.preventDefault(); restart(); wake(); return; }
+      } else if (k === ' ' || k === 'Enter') {
+        e.preventDefault(); step(1); wake(); return;
+      }
+
+      if (fwd) { e.preventDefault(); step(1); wake(); }
+      else if (back) { e.preventDefault(); step(-1); wake(); }
+      else if (k === 'Home') { e.preventDefault(); if (mode === 'flow') seek(0); else setIndex(0); wake(); }
+      else if (k === 'End') {
+        e.preventDefault();
+        if (mode === 'flow') seek(SCORE.length - 1); else setIndex(SCORE.length - 1);
+        wake();
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, wake]);
+  }, [mode, flowState, step, seek, wake, startFlow, toggleRun, restart]);
+
+  const pickMode = (m: Mode) => {
+    setMode(m);
+    setIndex(0);
+    setFlowState('idle');
+    bankedRef.current = 0;
+    startedRef.current = 0;
+    wake();
+  };
+
+  const counting = mode === 'flow' && flowState === 'counting';
 
   return (
     <>
@@ -138,48 +244,67 @@ export default function ScriptCards() {
         }
         .s-root *:focus-visible { outline:2px solid var(--gold); outline-offset:4px; border-radius:3px; }
 
+        /* Mode switch. Quiet, and it hides with the rest of the chrome. */
+        .s-modes {
+          position:absolute; top:0; left:0; right:0; padding:14px 22px;
+          display:flex; justify-content:center; gap:6px;
+          transition:opacity .3s ease; z-index:2;
+        }
+        .s-modes.off { opacity:0; pointer-events:none; }
+        .s-mode {
+          appearance:none; background:transparent; border:0; cursor:pointer;
+          font-family:inherit; font-weight:800; font-size:12px; letter-spacing:2.6px;
+          text-transform:uppercase; color:var(--dim); padding:6px 12px; border-radius:999px;
+        }
+        .s-mode.on { color:#000; background:var(--ink); }
+        .s-sep { align-self:center; color:#3A3936; font-size:12px; }
+
         /* Pinned near the top, under the lens. Never vertically centred. */
         .s-stage {
-          position:absolute; left:0; right:0; top:clamp(30px, 5vh, 58px); bottom:100px;
+          position:absolute; left:0; right:0; top:clamp(46px, 7vh, 72px); bottom:92px;
           display:flex; flex-direction:column; align-items:center;
           padding:0 clamp(18px, 3vw, 40px); text-align:center;
         }
-        /* The box the type is fitted to. Overflow hidden is a backstop only:
-           the fitter should never leave anything outside it. */
+        /* The box the type is fitted to. Overflow hidden is a backstop only. */
         .s-box {
           flex:1 1 auto; width:100%; max-width:1440px; overflow:hidden;
           display:flex; justify-content:center; align-items:flex-start;
         }
         .s-card { --fs:40px; width:100%; }
 
-        /* Section name. Orientation, not a talking point, so it is the one
-           quiet thing on the card. */
-        .s-label {
+        /* Arrival, not a transition: the new thought is simply there. No exit
+           fade, so the screen is never blank between thoughts. */
+        @keyframes s-arrive { from { opacity:.55; } to { opacity:1; } }
+        .s-card { animation:s-arrive .16s ease-out; }
+
+        /* DIGEST — the full thought. Both parts large; nothing is body copy. */
+        .d-head {
+          font-weight:800; text-transform:uppercase; color:#FFF;
+          font-size:calc(var(--fs) * 1.5); line-height:1.06; letter-spacing:-.01em;
+          margin-bottom:calc(var(--fs) * .62);
+        }
+        .d-para {
+          font-weight:700; color:var(--ink);
+          font-size:var(--fs); line-height:1.36; letter-spacing:-.005em;
+          max-width:32ch; margin:0 auto; text-wrap:pretty;
+        }
+
+        /* FLOW — where he is, and where he is going. Nothing else. */
+        .f-head {
+          font-weight:800; text-transform:uppercase; color:#FFF;
+          font-size:var(--fs); line-height:1.04; letter-spacing:-.015em;
+        }
+        .f-next {
+          margin-top:calc(var(--fs) * .42);
           font-weight:800; text-transform:uppercase;
-          font-size:calc(var(--fs) * .34); line-height:1; letter-spacing:.18em;
-          color:rgba(237,234,228,.42);
-          margin-bottom:calc(var(--fs) * .72);
+          font-size:calc(var(--fs) * .3); line-height:1.12; letter-spacing:.02em;
+          color:rgba(237,234,228,.5);
         }
+        /* Above tablet the cue never wraps: a wrapped cue takes two glances. */
+        @media (min-width:700px) { .f-head, .f-next { white-space:nowrap; } }
 
-        /* One continuous thought. Lines inside sit tight; groups get air. */
-        .s-group + .s-group { margin-top:calc(var(--fs) * .62); }
-
-        /* The talking points. Bold, big, high contrast, no body copy anywhere. */
-        .s-line {
-          font-weight:700; text-transform:uppercase;
-          font-size:var(--fs); line-height:1.14; letter-spacing:-.005em;
-          color:var(--ink);
-        }
-        /* The line that carries the card. Heavier and larger — hierarchy by
-           size and weight, not by colour. */
-        .s-line.anchor { font-weight:800; font-size:calc(var(--fs) * 1.14); color:#FFF; }
-        /* Secondary triggers. A clear step down in size, but still bold and
-           still meant to be read from across the room. */
-        .s-line.quiet { font-size:calc(var(--fs) * .8); color:rgba(237,234,228,.88); }
-
-        /* Above tablet the lines never wrap: a wrapped trigger takes two
-           glances instead of one, so the fitter trades size for wholeness. */
-        @media (min-width:700px) { .s-line { white-space:nowrap; } }
+        .f-count { font-weight:800; font-size:var(--fs); line-height:1; color:#FFF; }
+        .f-idle { font-weight:800; text-transform:uppercase; font-size:calc(var(--fs) * .34); letter-spacing:.1em; color:var(--dim); }
 
         .s-chrome {
           position:absolute; left:0; right:0; bottom:0; padding:18px 22px 22px;
@@ -188,45 +313,59 @@ export default function ScriptCards() {
         }
         .s-chrome.off { opacity:0; pointer-events:none; }
         .s-meta { display:flex; align-items:baseline; gap:14px; min-width:0; }
-        .s-count { font-size:12px; font-weight:700; letter-spacing:2.4px; color:var(--dim); font-variant-numeric:tabular-nums; }
-        .s-next {
-          font-size:12px; font-weight:700; letter-spacing:2.4px; text-transform:uppercase;
-          color:rgba(139,137,131,.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-        }
+        .s-count, .s-clock { font-size:12px; font-weight:700; letter-spacing:2.4px; color:var(--dim); font-variant-numeric:tabular-nums; }
         .s-btns { display:flex; gap:8px; }
         .s-btn {
           appearance:none; background:transparent; border:1px solid #373633;
-          color:var(--ink); border-radius:999px; font-weight:700;
+          color:var(--ink); border-radius:999px; font-family:inherit; font-weight:700;
           padding:9px 18px; font-size:13px; letter-spacing:.3px; cursor:pointer;
         }
         .s-btn:hover:not(:disabled) { border-color:var(--gold); color:var(--gold); }
         .s-btn:disabled { opacity:.3; cursor:default; }
 
-        /* One tick per card, so position is felt rather than counted. */
-        .s-prog { position:absolute; left:22px; right:22px; bottom:64px; display:flex; gap:5px; }
+        /* One tick per cue, so position is felt rather than counted. */
+        .s-prog { position:absolute; left:22px; right:22px; bottom:66px; display:flex; gap:5px; }
         .s-prog i { flex:1; height:2px; background:#2C2B28; border-radius:2px; }
         .s-prog i.on { background:var(--gold); }
 
-        @media (prefers-reduced-motion: reduce) { .s-chrome { transition:none; } }
+        @media (prefers-reduced-motion: reduce) {
+          .s-chrome, .s-modes { transition:none; }
+          .s-card { animation:none; }
+        }
       `}</style>
 
       <div className={`s-root ${cue.variable}`} onPointerMove={wake} onPointerDown={wake}>
+        <div className={`s-modes${chromeOn ? '' : ' off'}`}>
+          <button type="button" className={`s-mode${mode === 'digest' ? ' on' : ''}`} onClick={() => pickMode('digest')}>
+            Digest
+          </button>
+          <span className="s-sep" aria-hidden>|</span>
+          <button type="button" className={`s-mode${mode === 'flow' ? ' on' : ''}`} onClick={() => pickMode('flow')}>
+            Flow
+          </button>
+        </div>
+
         <div className="s-stage">
           <div className="s-box" ref={boxRef}>
-            <div className="s-card" ref={cardRef} key={card.id}>
-              <p className="s-label">{card.label}</p>
-              {card.groups.map((group, g) => (
-                <div className="s-group" key={g}>
-                  {group.map((line) => (
-                    <p
-                      key={line}
-                      className={`s-line${anchors.includes(line) ? ' anchor' : ''}${quiet.includes(line) ? ' quiet' : ''}`}
-                    >
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              ))}
+            <div className="s-card" ref={cardRef} key={`${mode}-${counting ? `c${count}` : card.id}`}>
+              {mode === 'digest' && (
+                <>
+                  <h1 className="d-head">{card.label}</h1>
+                  <p className="d-para">{card.paragraph}</p>
+                </>
+              )}
+
+              {mode === 'flow' && counting && <p className="f-count">{count}</p>}
+
+              {mode === 'flow' && !counting && (
+                <>
+                  <h1 className="f-head">{card.flow}</h1>
+                  {next
+                    ? <p className="f-next">Next: {next.flow}</p>
+                    : <p className="f-next">Last one</p>}
+                  {flowState === 'idle' && <p className="f-idle">Press start, or space</p>}
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -238,15 +377,27 @@ export default function ScriptCards() {
         <div className={`s-chrome${chromeOn ? '' : ' off'}`}>
           <span className="s-meta">
             <span className="s-count">{String(index + 1).padStart(2, '0')} / {String(SCORE.length).padStart(2, '0')}</span>
-            {next && <span className="s-next">Next · {next.label}</span>}
+            {mode === 'flow' && <span className="s-clock">{flowState === 'running' ? 'Running' : flowState === 'paused' ? 'Paused' : 'Ready'} · {RUN_SECONDS}s</span>}
           </span>
+
           <span className="s-btns">
-            <button type="button" className="s-btn" onClick={() => { go(-1); wake(); }} disabled={atStart}>
-              Back
-            </button>
-            <button type="button" className="s-btn" onClick={() => { go(1); wake(); }} disabled={atEnd}>
-              Next
-            </button>
+            {mode === 'digest' ? (
+              <>
+                <button type="button" className="s-btn" onClick={() => { step(-1); wake(); }} disabled={atStart}>Back</button>
+                <button type="button" className="s-btn" onClick={() => { step(1); wake(); }} disabled={atEnd}>Next</button>
+              </>
+            ) : (
+              <>
+                <button type="button" className="s-btn" onClick={() => { step(-1); wake(); }} disabled={atStart}>Back</button>
+                <button type="button" className="s-btn" onClick={() => { step(1); wake(); }} disabled={atEnd}>Next</button>
+                {flowState === 'idle'
+                  ? <button type="button" className="s-btn" onClick={() => { startFlow(); wake(); }}>Start</button>
+                  : <button type="button" className="s-btn" onClick={() => { toggleRun(); wake(); }} disabled={counting}>
+                      {flowState === 'running' ? 'Pause' : 'Resume'}
+                    </button>}
+                <button type="button" className="s-btn" onClick={() => { restart(); wake(); }}>Restart</button>
+              </>
+            )}
           </span>
         </div>
       </div>
