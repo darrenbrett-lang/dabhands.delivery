@@ -1,15 +1,19 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import { Manrope } from 'next/font/google';
 import { SeoMeta } from '@/components/SeoMeta';
 import { SCORE, RUN_SECONDS } from '@/lib/scriptScore';
 
 /**
- * /script — the filming surface. Private, noindex. Two modes:
+ * /script — the filming surface. Private, noindex. Three modes, one per way
+ * of shooting:
  *
- *   DIGEST  the full thought, one card at a time, moved by hand. Read once to
- *           load the meaning.
- *   FLOW    the same thoughts as enormous cues, arriving on a clock, for
- *           filming the whole piece as one take.
+ *   DIGEST  the full thought, one card at a time, moved by hand. For prep:
+ *           read it once to load the meaning.
+ *   CLICK   the same full thought, headed by its cue. For filming a section
+ *           at a time: read, look away, talk, move on when ready. Untimed.
+ *   FLOW    the cues alone, arriving on a clock, for filming the whole piece
+ *           as one continuous take.
  *
  *     DIGEST THE MEANING FIRST → THEN FLOW THROUGH THE IDEAS
  *
@@ -35,7 +39,7 @@ const cue = Manrope({
   display: 'swap',
 });
 
-type Mode = 'digest' | 'flow';
+type Mode = 'digest' | 'click' | 'flow';
 type FlowState = 'idle' | 'counting' | 'running' | 'paused';
 
 const CHROME_MS = 2600;
@@ -220,6 +224,17 @@ export default function ScriptPage() {
     return () => window.removeEventListener('keydown', onKey);
   }, [mode, flowState, step, seek, wake, startFlow, toggleRun, restart]);
 
+  // Click-through can also be driven by clicking the page: right half
+  // forward, left half back. Only in that mode, so DIGEST and FLOW behave
+  // exactly as they did.
+  const onStageClick = useCallback((e: ReactMouseEvent<HTMLDivElement>) => {
+    if (mode !== 'click') return;
+    const t = e.target as HTMLElement;
+    if (t.closest('.s-chrome') || t.closest('.s-modes')) return;
+    step(e.clientX > window.innerWidth / 2 ? 1 : -1);
+    wake();
+  }, [mode, step, wake]);
+
   const pickMode = (m: Mode) => {
     setMode(m);
     setIndex(0);
@@ -334,10 +349,14 @@ export default function ScriptPage() {
         }
       `}</style>
 
-      <div className={`s-root ${cue.variable}`} onPointerMove={wake} onPointerDown={wake}>
+      <div className={`s-root ${cue.variable}`} onPointerMove={wake} onPointerDown={wake} onClick={onStageClick}>
         <div className={`s-modes${chromeOn ? '' : ' off'}`}>
           <button type="button" className={`s-mode${mode === 'digest' ? ' on' : ''}`} onClick={() => pickMode('digest')}>
             Digest
+          </button>
+          <span className="s-sep" aria-hidden>|</span>
+          <button type="button" className={`s-mode${mode === 'click' ? ' on' : ''}`} onClick={() => pickMode('click')}>
+            Click through
           </button>
           <span className="s-sep" aria-hidden>|</span>
           <button type="button" className={`s-mode${mode === 'flow' ? ' on' : ''}`} onClick={() => pickMode('flow')}>
@@ -348,9 +367,9 @@ export default function ScriptPage() {
         <div className="s-stage">
           <div className="s-box" ref={boxRef}>
             <div className="s-card" ref={cardRef} key={`${mode}-${counting ? `c${count}` : card.id}`}>
-              {mode === 'digest' && (
+              {mode !== 'flow' && (
                 <>
-                  <h1 className="d-head">{card.label}</h1>
+                  <h1 className="d-head">{mode === 'click' ? card.flow : card.label}</h1>
                   <p className="d-para">{card.paragraph}</p>
                 </>
               )}
@@ -381,7 +400,7 @@ export default function ScriptPage() {
           </span>
 
           <span className="s-btns">
-            {mode === 'digest' ? (
+            {mode !== 'flow' ? (
               <>
                 <button type="button" className="s-btn" onClick={() => { step(-1); wake(); }} disabled={atStart}>Back</button>
                 <button type="button" className="s-btn" onClick={() => { step(1); wake(); }} disabled={atEnd}>Next</button>
