@@ -25,8 +25,10 @@ export interface Card {
   label: string;
   /** Talking points. Each inner array is one continuous thought. */
   groups: string[][];
-  /** The line that carries the card. Must match a line in `groups` exactly. */
-  anchor: string;
+  /** The line, or lines, that carry the card. Set largest and heaviest. */
+  anchor: string | string[];
+  /** Secondary triggers, set a step smaller. Still bold, still readable. */
+  quiet?: string[];
 }
 
 export const SCORE: Card[] = [
@@ -75,17 +77,17 @@ export const SCORE: Card[] = [
     id: 5,
     label: 'Get it moving',
     groups: [
-      ['THAT’S WHERE I’M USEFUL'],
+      ['HAND ME AN AMBITION', 'I’LL TELL YOU WHAT IT ACTUALLY TAKES', 'THEN MAKE IT HAPPEN'],
       [
-        'COME INTO SOMETHING COMPLICATED',
-        'UNDERSTAND WHAT’S REALLY HAPPENING',
-        'FIND WHAT’S STUCK OR UNCLEAR',
-        'GET PEOPLE ALIGNED',
+        'WHAT’S REALLY HAPPENING',
+        'WHAT’S STUCK / UNCLEAR',
+        'WHO NEEDS TO ALIGN',
         'CREATE MOVEMENT',
       ],
-      ['NOT THEORY', 'MAKE THE THING GO'],
     ],
-    anchor: 'MAKE THE THING GO',
+    // The heart of the card: the whole of the first thought, not one line of it.
+    anchor: ['HAND ME AN AMBITION', 'I’LL TELL YOU WHAT IT ACTUALLY TAKES', 'THEN MAKE IT HAPPEN'],
+    quiet: ['WHAT’S REALLY HAPPENING', 'WHAT’S STUCK / UNCLEAR', 'WHO NEEDS TO ALIGN', 'CREATE MOVEMENT'],
   },
   {
     id: 6,

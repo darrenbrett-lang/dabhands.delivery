@@ -50,6 +50,10 @@ export default function ScriptCards() {
 
   const card = SCORE[index];
   const next = SCORE[index + 1];
+  // A card's heart may be one line or several, and it may push the rest of its
+  // triggers down a step.
+  const anchors = Array.isArray(card.anchor) ? card.anchor : [card.anchor];
+  const quiet = card.quiet ?? [];
   const atStart = index === 0;
   const atEnd = index === SCORE.length - 1;
 
@@ -169,6 +173,9 @@ export default function ScriptCards() {
         /* The line that carries the card. Heavier and larger — hierarchy by
            size and weight, not by colour. */
         .s-line.anchor { font-weight:800; font-size:calc(var(--fs) * 1.14); color:#FFF; }
+        /* Secondary triggers. A clear step down in size, but still bold and
+           still meant to be read from across the room. */
+        .s-line.quiet { font-size:calc(var(--fs) * .8); color:rgba(237,234,228,.88); }
 
         /* Above tablet the lines never wrap: a wrapped trigger takes two
            glances instead of one, so the fitter trades size for wholeness. */
@@ -213,7 +220,7 @@ export default function ScriptCards() {
                   {group.map((line) => (
                     <p
                       key={line}
-                      className={`s-line${line === card.anchor ? ' anchor' : ''}`}
+                      className={`s-line${anchors.includes(line) ? ' anchor' : ''}${quiet.includes(line) ? ' quiet' : ''}`}
                     >
                       {line}
                     </p>
