@@ -1,152 +1,44 @@
 /**
- * The score for /script — the 45-second conversational cut.
+ * The cue cards for /script.
  *
- * ⚠ This is NOT the old performance score. The 24-card version was built for a
- * 90-second deliberate delivery with engineered pauses. This film is a person
- * talking to one person, so the software's job changed: keep the words next to
- * the lens, keep the next thought available, and get out of the way.
+ * ⚠ These are LEARNING cards, not a teleprompter script. The paragraph under
+ * each heading exists to put Darren back in contact with the idea before he
+ * speaks freely. It is NOT meant to be read aloud, and it is deliberately more
+ * expansive and reflective than anything that would be said on camera.
  *
- * Line breaks are reading aids, not breathing marks — they exist to keep each
- * block narrow and close to the camera. Several thoughts run straight into the
- * next with no pause at all; see holdDuration.
+ * ⚠ DO NOT rewrite, tighten, polish or make this language more presentational.
+ * It was corrected back to this form on purpose: declarative, finished copy
+ * tells him what to say, where this gives him somewhere to go. The heading can
+ * be punchy; the paragraph should not be.
  *
- * `beat` is the Own It label. There is no `intent`: emotional direction was
- * removed on purpose, because holding an expression is what makes someone look
- * like they are performing.
+ * The principle: LOOK AT THE IDEA → REMEMBER WHAT I MEAN → TALK.
  *
- * ⚠ Editing the words here does NOT update the film's captions.
- * public/captions/intro-en.vtt is generated from this file; regenerate it on
- * any script change or the captions will speak lines that no longer exist.
+ * Advance is manual only. There is no pacing, no auto-advance and no
+ * teleprompter behaviour, so the old speakDuration/holdDuration fields are
+ * gone with it.
+ *
+ * ⚠ public/captions/intro-en.vtt belongs to the film on /intro and is a
+ * separate, static file. It is no longer related to this score.
  */
 
 export interface Card {
   id: number;
-  /** The Own It label — what this thought is, in three or four words. */
-  beat: string;
-  /** Delivery lines. Breaks keep the block narrow, they are not pauses. */
-  fullText: string[];
-  /** Anchors only — enough to find the thought, not to read it. */
-  cueText: string[];
-  /** A short plain note. Kept deliberately sparse. */
-  voiceDirection: string;
-  /** Seconds of speech, set slightly SHORT so the page stays ahead of him. */
-  speakDuration: number;
-  /** Seconds of silence after. Cut by a third on 1 Sep — he was having to
-   *  wait between lines. Mostly ~0.13 now: a breath, not a beat. */
-  holdDuration: number;
+  /** The idea, in three or four words. Set large. */
+  heading: string;
+  /** The reflective prompt underneath. Set smaller. Never spoken verbatim. */
+  paragraph: string;
 }
 
 export const SCORE: Card[] = [
-  {
-    id: 1,
-    beat: 'HELLO',
-    fullText: ['Hi, I’m Darren.'],
-    cueText: ['HI · DARREN'],
-    voiceDirection: 'Just say hello to the person behind the camera.',
-    speakDuration: 1.2,
-    holdDuration: 0.13,
-  },
-  {
-    id: 2,
-    beat: 'HOW I’M WIRED',
-    fullText: ['I’ve always had a thing for making things go,', 'and work better.'],
-    cueText: ['THING → GO → BETTER'],
-    voiceDirection: 'Throwaway. This is how you have always been, not a claim.',
-    speakDuration: 4.4,
-    holdDuration: 0.13,
-  },
-  {
-    id: 3,
-    beat: 'WHERE I’VE WORKED',
-    fullText: ['I’ve spent my working life where ambition has to become reality,', 'inside tier-one agencies, with major brands.'],
-    cueText: ['AMBITION → REALITY', 'TIER-ONE · MAJOR BRANDS'],
-    voiceDirection: 'Runs straight on into the next thought. No pause at the card change.',
-    speakDuration: 6.6,
-    holdDuration: 0.07,
-  },
-  {
-    id: 4,
-    beat: 'I’VE RUN ONE TOO',
-    fullText: ['Then I co-founded an agency of my own', 'and ran it for seven years.'],
-    cueText: ['CO-FOUNDED', 'SEVEN YEARS'],
-    voiceDirection: 'Matter of fact.',
-    speakDuration: 5.6,
-    holdDuration: 0.17,
-  },
-  {
-    id: 5,
-    beat: 'WHAT I’VE NOTICED',
-    fullText: ['Here’s what I notice.'],
-    cueText: ['HERE’S WHAT I NOTICE'],
-    voiceDirection: 'The small beat a person makes when they change subject. Not dramatic.',
-    speakDuration: 1.5,
-    holdDuration: 0.33,
-  },
-  {
-    id: 6,
-    beat: 'THE PROBLEM',
-    fullText: ['Businesses get into trouble', 'when ambition starts moving faster', 'than the way they work.'],
-    cueText: ['AMBITION MOVING FASTER', 'THAN THE BUSINESS WORKS'],
-    voiceDirection: 'Finish the thought. A normal full stop, nothing more.',
-    speakDuration: 5.2,
-    holdDuration: 0.27,
-  },
-  {
-    id: 7,
-    beat: 'WHAT PEOPLE BRING ME IN FOR',
-    fullText: ['People bring me in', 'to get important work moving again,'],
-    cueText: ['BRING ME IN', 'MOVING AGAIN'],
-    voiceDirection: '⚠ One sentence with the next card. There must be no audible pause here.',
-    speakDuration: 3.7,
-    holdDuration: 0.0,
-  },
-  {
-    id: 8,
-    beat: 'DON’T KILL THE MAGIC',
-    fullText: ['without flattening what made the business good', 'in the first place.'],
-    cueText: ['WITHOUT FLATTENING', 'WHAT MADE IT GOOD'],
-    voiceDirection: 'The second half of the sentence you started on the last card.',
-    speakDuration: 4.0,
-    holdDuration: 0.17,
-  },
-  {
-    id: 9,
-    beat: 'GET THE BEST WORK OUT',
-    fullText: ['I care about getting the best work out.'],
-    cueText: ['BEST WORK OUT'],
-    voiceDirection: 'One argument runs from here to “it has to sell”. Keep it moving.',
-    speakDuration: 3.0,
-    holdDuration: 0.1,
-  },
-  {
-    id: 10,
-    beat: 'MAKE PEOPLE FEEL + ACT',
-    fullText: ['Work that makes customers feel something', 'and act.'],
-    cueText: ['CUSTOMERS', 'FEEL → ACT'],
-    voiceDirection: 'Still the same argument. Not a separate statement.',
-    speakDuration: 3.0,
-    holdDuration: 0.1,
-  },
-  {
-    id: 11,
-    beat: 'IT HAS TO SELL',
-    fullText: ['Because ultimately,', 'it has to sell.'],
-    cueText: ['ULTIMATELY', 'HAS TO SELL'],
-    voiceDirection: 'Let the sentence finish. No theatrical silence after it.',
-    speakDuration: 2.3,
-    holdDuration: 0.27,
-  },
-  {
-    id: 12,
-    beat: 'INVITATION',
-    fullText: ['If something important isn’t landing,', 'I’d love to hear from you.'],
-    cueText: ['IMPORTANT NOT LANDING', 'LOVE TO HEAR FROM YOU'],
-    voiceDirection:
-      'Then stay with them for about a second. Not a pose, not a nod, no finished expression — just still there. Then it fades.',
-    speakDuration: 4.1,
-    holdDuration: 0.9,
-  },
+  { id: 1, heading: 'THANKS FOR CHECKING IN', paragraph: 'I suppose the easiest way to explain what I do is... I’ve always had this thing about making things go, and making them work better.' },
+  { id: 2, heading: 'HOW I’M WIRED', paragraph: 'I’ve always had a thing for making things go and work better. When something is messy, stuck or complicated, I naturally want to understand it and get it moving. That’s just how my brain works.' },
+  { id: 3, heading: 'BEEN AROUND', paragraph: 'I’ve spent my career where somebody has an ambition and people have to make it real. Big agencies, major brands, then building and running my own agency for seven years. I’ve seen this from both sides.' },
+  { id: 4, heading: 'AMBITION OUTRUNS IT', paragraph: 'Businesses rarely run out of good ideas. They reach a point where what they’re trying to do has become bigger or faster than the way the business actually works. The old informal ways stop being enough. That’s the moment I recognise.' },
+  { id: 5, heading: 'GET IT MOVING', paragraph: 'That’s where I’m useful. I can come into something complicated, understand what’s really happening, find what’s stuck or unclear, get people aligned and create movement. Not theory. Make the thing go.' },
+  { id: 6, heading: 'DON’T KILL THE GOOD BIT', paragraph: 'I don’t believe becoming better organised should mean becoming corporate, slow or bland. The job is to make the business more capable without flattening the instinct, energy and character that made it good in the first place.' },
+  { id: 7, heading: 'THE WORK HAS TO WORK', paragraph: 'I’m not interested in efficient machinery for its own sake. I want that machinery to produce the best work possible. Work that reaches customers, makes them feel something and makes them act. Ultimately, it has to sell.' },
+  { id: 8, heading: 'THAT’S WHERE I COME IN', paragraph: 'So yeah, that’s kind of where I come in. If you’ve got something important you’re trying to get moving, I’d love to have a chat.' },
 ];
 
-/** Shown on the setup screen. */
-export const ARC = 'TALK TO ONE PERSON';
+/** Kept for the page's section rail. */
+export const ARC = SCORE.map((c) => c.heading);

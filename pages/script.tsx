@@ -1,543 +1,175 @@
-import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SeoMeta } from '@/components/SeoMeta';
-import { SCORE, ARC, type Card } from '@/lib/scriptScore';
+import { SCORE } from '@/lib/scriptScore';
 
 /**
- * /script — the performance director.
+ * /script — the cue cards. Private rehearsal surface, noindex.
  *
- * TEMPORARY. A rehearsal and recording aid for the 60-second film, not part of
- * the site: noindex, and absent from nav, sitemap.xml and llms.txt. The URL
- * resolves for anyone who has it. ⚠ The Basic Auth gate was REMOVED on the
- * owner's instruction (26 Aug) so the tool opens on a device without a
- * password mid-take; note this puts the unrecorded script one link away, and
- * HANDOVER's rule is that the script is spoken, never printed. Delete the
- * page, lib/scriptScore.ts and the next.config entry together when the film
- * is shot.
+ * ⚠ NOT a teleprompter. It does not pace, it does not auto-advance and it does
+ * not scroll. Darren moves it himself, one idea at a time:
  *
- * The governing idea is a director sitting under the lens, not an autocue.
- * One thought owns the screen; nothing scrolls; nothing slides. Timing
- * *suggests* rather than enforces: when a thought's speaking time is up the
- * card stays fully readable and the next one is already underneath it, so
- * being a second slow costs nothing.
+ *     LOOK AT THE IDEA → REMEMBER WHAT I MEAN → TALK
  *
- * Reading text is kept in the upper-middle of the viewport so that with the
- * laptop under the lens, eye movement is minimal. Nothing that must be read
- * lives near the bottom.
+ * The heading is the idea. The paragraph underneath is a prompt to reconnect
+ * with what he means, deliberately more expansive than anything he would say,
+ * and never read aloud. See lib/scriptScore.ts before touching the words.
+ *
+ * ⚠ EYE-LINE IS THE DESIGN. The laptop camera sits top-centre, so the card
+ * lives directly beneath it: looking from lens to card should barely move the
+ * eyes, and a viewer should never see them drop. Hence pinned near the top
+ * rather than vertically centred, and a narrow measure so the eyes do not scan
+ * sideways either. Optimise for the resulting video, not page composition.
  */
 
-type Mode = 'script' | 'cue' | 'own';
-type Phase = 'setup' | 'preroll' | 'run' | 'fading' | 'black';
+const CHROME_MS = 2600;
 
-const STORE_SETTINGS = 'dabhands.script.settings.v1';
-/* Bumped to v2 with the 23-card rewrite, v3 broader diagnosis, v4 the 24-card master, v5 the cleaner close (28 Aug): a persisted v1 score would
-   otherwise shadow the new script on any device that had opened the page. */
-const STORE_SCORE = 'dabhands.script.score.v6';
-
-const PACES = [0.8, 0.9, 0.95, 0.97, 1.0, 1.1, 1.2];
-/* Cross-dissolve between thoughts, in ms. 150 reads almost as a cut, 1200 is
-   a slow bleed where the two thoughts overlap on screen. */
-const FADES = [120, 180, 250]; // quick and soft: never a blank screen between thoughts
-const ENDING_MS = 700; // a gentle fade after the last hold, not a long goodbye
-
-interface Settings {
-  mode: Mode;
-  pace: number;
-  /** Cross-dissolve duration between thoughts, in ms. */
-  fade: number;
-  guides: boolean;
-  timing: boolean;
-}
-
-const fmtPace = (p: number) => (Number.isInteger(p * 10) ? p.toFixed(1) : String(p));
-
-const DEFAULT_SETTINGS: Settings = { mode: 'script', pace: 1.0, fade: 180, guides: true, timing: false };
-
-const fmtFade = (ms: number) => `${String(ms / 1000).replace(/0$/, '')}s`;
-
-/** Split a line into emphasis, coaching marks and plain text. */
-const TOKENS = /(\*\*[^*]+\*\*|↓↓|↑|↓|→|○○|○)/g;
-
-function renderLine(line: string, guides: boolean) {
-  return line.split(TOKENS).filter(Boolean).map((tok, i) => {
-    if (tok.startsWith('**') && tok.endsWith('**')) {
-      return <b key={i} className="s-em">{tok.slice(2, -2)}</b>;
-    }
-    if (/^(↓↓|↑|↓|→|○○|○)$/.test(tok)) {
-      return guides ? <span key={i} className="s-mark" aria-hidden>{tok}</span> : null;
-    }
-    return <Fragment key={i}>{tok}</Fragment>;
-  });
-}
-
-export default function ScriptDirector() {
-  const [score, setScore] = useState<Card[]>(SCORE);
-  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
-  const [phase, setPhase] = useState<Phase>('setup');
+export default function ScriptCards() {
   const [index, setIndex] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const [count, setCount] = useState(3); // pre-roll
   const [chromeOn, setChromeOn] = useState(true);
-  const [editing, setEditing] = useState(false);
+  const chromeTimer = useRef<number | undefined>(undefined);
 
-  const reduced = useRef(false);
-  const chromeTimer = useRef<number | null>(null);
-  const timers = useRef<number[]>([]);
-  const stage = useRef<HTMLDivElement | null>(null);
+  const card = SCORE[index];
+  const next = SCORE[index + 1];
+  const atStart = index === 0;
+  const atEnd = index === SCORE.length - 1;
 
-  const clearTimers = () => { timers.current.forEach(window.clearTimeout); timers.current = []; };
-  const later = (fn: () => void, ms: number) => { timers.current.push(window.setTimeout(fn, ms)); };
-
-  // ── settings + edited score persist for the session and beyond ──────────
-  useEffect(() => {
-    reduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    /* Restoring persisted settings requires an effect: localStorage does not
-       exist during SSR, so a lazy initialiser throws on the server and a
-       render-time read mismatches hydration. Runs once, on mount. */
-    /* eslint-disable react-hooks/set-state-in-effect */
-    try {
-      const s = localStorage.getItem(STORE_SETTINGS);
-      if (s) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(s) });
-      const sc = localStorage.getItem(STORE_SCORE);
-      if (sc) setScore(JSON.parse(sc));
-    } catch { /* corrupt or unavailable storage: defaults are fine */ }
-    /* eslint-enable react-hooks/set-state-in-effect */
+  const go = useCallback((delta: number) => {
+    setIndex((i) => Math.min(Math.max(i + delta, 0), SCORE.length - 1));
   }, []);
 
-  useEffect(() => {
-    try { localStorage.setItem(STORE_SETTINGS, JSON.stringify(settings)); } catch {}
-  }, [settings]);
-
-  const saveScore = (next: Card[]) => {
-    setScore(next);
-    try { localStorage.setItem(STORE_SCORE, JSON.stringify(next)); } catch {}
-  };
-
-  const resetScore = () => {
-    setScore(SCORE);
-    try { localStorage.removeItem(STORE_SCORE); } catch {}
-  };
-
-  const card = score[index];
-  const next = score[index + 1];
-  const total = useMemo(
-    () => score.reduce((n, c) => n + c.speakDuration + c.holdDuration, 0) / settings.pace,
-    [score, settings.pace],
-  );
-
-  // ── the conductor ───────────────────────────────────────────────────────
-  // One timer per card. There is no ghost step any more: the next thought is
-  // on screen the whole time, so nothing needs revealing. The card simply
-  // changes when its speaking time plus its (tiny) hold is up.
-  useEffect(() => {
-    if (phase !== 'run' || !playing || !card) return;
-    clearTimers();
-
-    const speak = (card.speakDuration * 1000) / settings.pace;
-    const hold = (card.holdDuration * 1000) / settings.pace;
-
-    later(() => {
-      if (index < score.length - 1) {
-        setIndex((i) => i + 1);
-      } else {
-        setPhase('fading');
-        later(() => setPhase('black'), reduced.current ? 0 : ENDING_MS);
-      }
-    }, speak + hold);
-
-    return clearTimers;
-  }, [phase, playing, index, card, settings.pace, score.length]);
-
-  // ── pre-roll: 3, 2, 1, a clean beat, then the first thought ─────────────
-  useEffect(() => {
-    if (phase !== 'preroll') return;
-    clearTimers();
-    later(() => setCount(2), 1000);
-    later(() => setCount(1), 2000);
-    later(() => setCount(0), 3000); // numbers gone, clean lens contact
-    later(() => setPhase('run'), 3500); // 3-2-1 then ~0.5s of clean lens, not a long silence
-    return clearTimers;
-  }, [phase]);
-
-  const start = useCallback(() => {
-    clearTimers();
-    setIndex(0);
-    setPlaying(true);
-    setEditing(false);
-    setCount(3);
-    setPhase('preroll');
-  }, []);
-
-  const restart = useCallback(() => { clearTimers(); setPhase('setup'); setIndex(0); }, []);
-
-  const step = useCallback((delta: number) => {
-    clearTimers();
-    setPhase('run');
-    setIndex((i) => Math.min(score.length - 1, Math.max(0, i + delta)));
-  }, [score.length]);
-
-  const toggleFullscreen = useCallback(() => {
-    const el = document.documentElement;
-    if (!document.fullscreenElement) el.requestFullscreen?.().catch(() => {});
-    else document.exitFullscreen?.().catch(() => {});
-  }, []);
-
-  // ── chrome hides itself while performing ────────────────────────────────
-  const revealChrome = useCallback(() => {
+  // The chrome shows on any input and gets out of the way again on its own,
+  // so nothing but the card is on screen while he is talking.
+  const wake = useCallback(() => {
     setChromeOn(true);
     if (chromeTimer.current) window.clearTimeout(chromeTimer.current);
-    chromeTimer.current = window.setTimeout(() => setChromeOn(false), 2600);
+    chromeTimer.current = window.setTimeout(() => setChromeOn(false), CHROME_MS);
   }, []);
 
-  // ── keyboard ────────────────────────────────────────────────────────────
+  // The chrome starts visible, so this only has to schedule the hide. Calling
+  // wake() here would set state synchronously inside the effect body.
+  useEffect(() => {
+    chromeTimer.current = window.setTimeout(() => setChromeOn(false), CHROME_MS);
+    return () => { if (chromeTimer.current) window.clearTimeout(chromeTimer.current); };
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement | null;
-      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
-      switch (e.key) {
-        case ' ':
-          e.preventDefault();
-          if (phase === 'setup') start();
-          else setPlaying((p) => !p);
-          break;
-        case 'ArrowRight': e.preventDefault(); step(1); break;
-        case 'ArrowLeft': e.preventDefault(); step(-1); break;
-        case 'r': case 'R': restart(); break;
-        case 'f': case 'F': toggleFullscreen(); break;
-        case 'Escape': if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {}); break;
-        default: return;
+      const k = e.key;
+      if (k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'Enter' || k === 'PageDown') {
+        e.preventDefault(); go(1); wake();
+      } else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'Backspace' || k === 'PageUp') {
+        e.preventDefault(); go(-1); wake();
+      } else if (k === 'Home') {
+        e.preventDefault(); setIndex(0); wake();
+      } else if (k === 'End') {
+        e.preventDefault(); setIndex(SCORE.length - 1); wake();
       }
-      revealChrome();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [phase, start, step, restart, toggleFullscreen, revealChrome]);
-
-  useEffect(() => {
-    if (phase === 'setup') return;
-    const onMove = () => revealChrome();
-    window.addEventListener('mousemove', onMove);
-    if (chromeTimer.current) window.clearTimeout(chromeTimer.current);
-    chromeTimer.current = window.setTimeout(() => setChromeOn(false), 2600);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [phase, revealChrome]);
-
-  const performing = phase === 'run' || phase === 'fading' || phase === 'black';
-  const set = <K extends keyof Settings>(k: K, v: Settings[K]) => setSettings((s) => ({ ...s, [k]: v }));
+  }, [go, wake]);
 
   return (
     <>
-      <SeoMeta
-        title="Script"
-        description="Private rehearsal tool."
-        path="/script"
-        noindex
-      />
+      <SeoMeta title="Script" description="Private rehearsal tool." path="/script" noindex />
 
       <style>{`
         .s-root {
-          --ink:#F2F0EC; --dim:#7C7A75; --faint:#48474400; --gold:#BA9956;
+          --ink:#F2F0EC; --dim:#8B8983; --gold:#BA9956;
           position:fixed; inset:0; background:#000; color:var(--ink);
           font-family:var(--font-sans); overflow:hidden;
           -webkit-font-smoothing:antialiased;
         }
         .s-root *:focus-visible { outline:2px solid var(--gold); outline-offset:4px; border-radius:3px; }
 
-        /* ⚠ EYE-LINE IS THE WHOLE DESIGN. The laptop camera sits at the top
-           centre of the screen, so the words live directly under it: looking
-           from lens to text should barely move the eyes, and a viewer should
-           never see them drop. Hence pinned near the top, NOT vertically
-           centred, and a narrow measure so the eyes do not scan sideways
-           either. Optimise for the resulting video, not page composition. */
+        /* Pinned near the top, under the lens. Never vertically centred. */
         .s-stage {
-          position:absolute; left:0; right:0; top:clamp(40px, 6vh, 70px);
+          position:absolute; left:0; right:0; top:clamp(40px, 6vh, 70px); bottom:96px;
           display:flex; flex-direction:column; align-items:center;
           padding:0 24px; text-align:center;
         }
-        .s-now, .s-next, .s-card { width:100%; max-width:700px; transition:opacity var(--s-fade, 180ms) ease; }
-        /* The next thought is ALWAYS there, directly beneath, dim enough to
-           ignore and bright enough to read ahead into. Knowing where the
-           sentence goes is what stops the visible search for the next card. */
-        .s-next { margin-top:30px; opacity:.26; }
-        .s-card.out { opacity:0; }
+        .s-card { width:100%; max-width:760px; }
 
-        .s-meta { font-size:15px; letter-spacing:3.4px; text-transform:uppercase; color:var(--dim); }
-        .s-beat { margin-bottom:20px; }
-        .s-lines {
+        /* The idea. Large, because this is the thing he looks at. */
+        .s-head {
           font-family:var(--font-serif); font-weight:400;
-          /* Big enough to read at arm's length, small enough that a whole
-             thought is one glance rather than a scan across the screen. */
-          font-size:clamp(24px, 3.1vw, 40px); line-height:1.34; letter-spacing:-.015em;
+          font-size:clamp(30px, 4.4vw, 60px); line-height:1.08; letter-spacing:-.01em;
+          color:#fff;
         }
-        .s-lines .ln { display:block; }
-        .s-em { font-weight:400; color:#fff; }
-        .s-mark { color:var(--gold); opacity:.42; font-size:.42em; vertical-align:.22em; margin:0 .12em; font-family:var(--font-sans); }
-
-        .s-cue { font-family:var(--font-sans); }
-        .s-cue .lead { font-size:clamp(24px, 3.1vw, 40px); letter-spacing:-.015em; line-height:1.28; }
-        .s-cue .anchor { display:block; margin-top:18px; font-size:clamp(20px,2.7vw,34px); color:var(--dim); }
-
-        .s-own .i1 { font-family:var(--font-serif); font-size:clamp(28px,4vw,52px); line-height:1.12; }
-        .s-own .i2 { margin-top:22px; font-size:18px; letter-spacing:4px; text-transform:uppercase; color:var(--dim); }
-
-        /* At the floor on purpose: rehearsal information must not sit near the lens. */
-        .s-time {
-          position:absolute; left:0; right:0; bottom:16px; margin:0;
-          font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#4A4844;
+        /* The prompt. Smaller and quieter: it is there to provoke the thought,
+           not to be performed. Measure kept narrow so it is one glance. */
+        .s-para {
+          margin:clamp(20px, 3vh, 34px) auto 0; max-width:46ch;
+          font-size:clamp(15px, 1.55vw, 20px); line-height:1.62; color:var(--dim);
         }
-        .s-count { position:absolute; left:0; right:0; top:32vh; text-align:center;
-                   font-family:var(--font-serif); font-size:96px; color:#5A5854; transition:opacity 300ms ease; }
 
-        /* Progress: a hairline, not a bar. It is information, not decoration. */
-        .s-prog { position:absolute; left:0; top:0; height:2px; background:var(--gold); opacity:.5; transition:width 240ms linear; }
+        /* Where he is going next, dim and always present, so there is never a
+           visible search for the next card. */
+        .s-next { margin-top:clamp(34px, 6vh, 64px); opacity:.3; }
+        .s-next .lbl {
+          font-size:11px; letter-spacing:2.6px; text-transform:uppercase; color:var(--dim);
+        }
+        .s-next .h {
+          margin-top:8px; font-family:var(--font-serif);
+          font-size:clamp(18px, 2vw, 26px); line-height:1.2; color:var(--ink);
+        }
 
-        .s-chrome { position:absolute; left:0; right:0; bottom:0; padding:22px 26px;
-                    display:flex; align-items:center; justify-content:space-between; gap:18px;
-                    transition:opacity 400ms ease; }
-        .s-chrome.hidden { opacity:0; pointer-events:none; }
-        .s-btns { display:flex; gap:6px; flex-wrap:wrap; }
-        .s-btn { font-size:13px; letter-spacing:1.8px; text-transform:uppercase; color:var(--dim);
-                 background:none; padding:9px 13px; cursor:pointer; border-radius:3px; }
-        .s-btn:hover { color:var(--ink); }
-        .s-btn[aria-pressed="true"] { color:var(--gold); }
+        .s-chrome {
+          position:absolute; left:0; right:0; bottom:0; padding:20px 22px 24px;
+          display:flex; align-items:center; justify-content:space-between; gap:18px;
+          transition:opacity .3s ease;
+        }
+        .s-chrome.off { opacity:0; pointer-events:none; }
+        .s-count { font-size:12px; letter-spacing:2.4px; color:var(--dim); font-variant-numeric:tabular-nums; }
+        .s-btns { display:flex; gap:8px; }
+        .s-btn {
+          appearance:none; background:transparent; border:1px solid #37363300;
+          border-color:#373633; color:var(--ink); border-radius:999px;
+          padding:9px 18px; font-size:13px; letter-spacing:.3px; cursor:pointer;
+        }
+        .s-btn:hover:not(:disabled) { border-color:var(--gold); color:var(--gold); }
+        .s-btn:disabled { opacity:.3; cursor:default; }
 
-        /* Setup */
-        .s-setup { position:absolute; inset:0; display:flex; flex-direction:column;
-                   align-items:center; justify-content:center; padding:6vh 7vw; text-align:center; gap:0; }
-        .s-title { font-family:var(--font-serif); font-size:clamp(28px,3.6vw,44px); line-height:1.15; }
-        .s-sub { margin-top:16px; font-size:13px; letter-spacing:2.4px; text-transform:uppercase; color:var(--dim); }
-        .s-facts { margin-top:34px; display:flex; gap:26px; flex-wrap:wrap; justify-content:center;
-                   font-size:11px; letter-spacing:1.8px; text-transform:uppercase; color:var(--dim); }
-        .s-start { margin-top:46px; font-family:var(--font-serif); font-size:26px; letter-spacing:.01em;
-                   color:var(--ink); background:none; cursor:pointer; padding:12px 34px;
-                   box-shadow:inset 0 0 0 1px #2E2C29; border-radius:999px; transition:box-shadow .3s ease; }
-        .s-start:hover { box-shadow:inset 0 0 0 1px var(--gold); }
-        .s-note { margin-top:40px; font-size:11px; letter-spacing:2.8px; text-transform:uppercase; color:#4C4A47; }
-        .s-opts { margin-top:38px; display:flex; gap:22px; flex-wrap:wrap; justify-content:center; }
-        /* Wraps, so a row of pace or dissolve buttons can never run off the
-           edges of a phone held under the lens. At 390px the seven pace
-           buttons measure 503px, and without this the first and last are
-           unreachable on both sides. */
-        .s-opt { display:flex; gap:6px; align-items:center; flex-wrap:wrap; justify-content:center; }
-        .s-opt > span { font-size:10px; letter-spacing:2.2px; text-transform:uppercase; color:#5A5854; margin-right:4px; }
-
-        /* Editor */
-        .s-edit { position:absolute; inset:0; background:#000; overflow-y:auto; padding:40px 6vw 90px; }
-        .s-edit h2 { font-family:var(--font-serif); font-size:26px; margin-bottom:6px; }
-        .s-row { display:grid; grid-template-columns:34px 1fr 1fr 78px 78px; gap:10px;
-                 align-items:start; padding:14px 0; border-top:1px solid #1C1B19; }
-        .s-row:first-of-type { border-top:none; }
-        .s-row label { display:block; font-size:9.5px; letter-spacing:1.8px; text-transform:uppercase; color:#5A5854; margin-bottom:4px; }
-        .s-in, .s-ta { width:100%; background:#0B0B0A; color:var(--ink); border:1px solid #232220;
-                       border-radius:4px; padding:7px 9px; font-size:13px; font-family:var(--font-sans); }
-        .s-ta { min-height:64px; resize:vertical; line-height:1.5; }
-        .s-idx { font-family:var(--font-serif); font-size:19px; color:#5A5854; padding-top:20px; }
+        /* One tick per card, so position is felt rather than counted. */
+        .s-prog { position:absolute; left:22px; right:22px; bottom:70px; display:flex; gap:5px; }
+        .s-prog i { flex:1; height:2px; background:#2C2B28; border-radius:2px; }
+        .s-prog i.on { background:var(--gold); }
 
         @media (prefers-reduced-motion: reduce) {
-          .s-card, .s-lines, .s-count, .s-chrome, .s-prog { transition:none; }
-        }
-        @media (max-width:820px) {
-          .s-stage { top:clamp(28px, 5vh, 52px); padding:0 18px; }
-          .s-row { grid-template-columns:1fr; }
-          .s-idx { padding-top:0; }
+          .s-chrome { transition:none; }
         }
       `}</style>
 
-      <div
-        className="s-root"
-        style={{ ['--s-fade' as string]: `${settings.fade}ms` }}
-        onMouseMove={performing ? revealChrome : undefined}
-      >
-        {/* ── Setup ────────────────────────────────────────────────────── */}
-        {phase === 'setup' && !editing && (
-          <div className="s-setup">
-            <p className="s-title">Don’t act. Think the thought.</p>
-            <p className="s-sub">{ARC}</p>
-
-            <div className="s-facts">
-              <span>{score.length} thoughts</span>
-              <span>{Math.floor(total / 60)}m {String(Math.round(total % 60)).padStart(2, '0')}s at {fmtPace(settings.pace)}x</span>
-              <span>{settings.mode === 'script' ? 'Script' : settings.mode === 'cue' ? 'Cue' : 'Own it'}</span>
-              <span>Voice guides {settings.guides ? 'on' : 'off'}</span>
-            </div>
-
-            <button type="button" className="s-start" onClick={start}>Start</button>
-
-            <div className="s-opts">
-              <div className="s-opt">
-                <span>Mode</span>
-                {(['script', 'cue', 'own'] as Mode[]).map((m) => (
-                  <button key={m} type="button" className="s-btn" aria-pressed={settings.mode === m} onClick={() => set('mode', m)}>
-                    {m === 'own' ? 'Own it' : m}
-                  </button>
-                ))}
-              </div>
-              <div className="s-opt">
-                <span>Pace</span>
-                {PACES.map((p) => (
-                  <button key={p} type="button" className="s-btn" aria-pressed={settings.pace === p} onClick={() => set('pace', p)}>
-                    {fmtPace(p)}x
-                  </button>
-                ))}
-              </div>
-              <div className="s-opt">
-                <span>Dissolve</span>
-                {FADES.map((f) => (
-                  <button key={f} type="button" className="s-btn" aria-pressed={settings.fade === f} onClick={() => set('fade', f)}>
-                    {fmtFade(f)}
-                  </button>
-                ))}
-              </div>
-              <div className="s-opt">
-                <button type="button" className="s-btn" aria-pressed={settings.guides} onClick={() => set('guides', !settings.guides)}>Voice guides</button>
-                <button type="button" className="s-btn" aria-pressed={settings.timing} onClick={() => set('timing', !settings.timing)}>Timing</button>
-                <button type="button" className="s-btn" onClick={() => setEditing(true)}>Edit</button>
-              </div>
-            </div>
-
-            <p className="s-note">Space start · ← → move · R restart · F fullscreen</p>
+      <div className="s-root" onPointerMove={wake} onPointerDown={wake}>
+        <div className="s-stage">
+          <div className="s-card" key={card.id}>
+            <h1 className="s-head">{card.heading}</h1>
+            <p className="s-para">{card.paragraph}</p>
           </div>
-        )}
 
-        {/* ── Editor ───────────────────────────────────────────────────── */}
-        {phase === 'setup' && editing && (
-          <div className="s-edit">
-            <h2>Score</h2>
-            <p className="s-note" style={{ marginTop: 0, marginBottom: 22 }}>Changes are kept in this browser.</p>
-            {score.map((c, i) => (
-              <div className="s-row" key={c.id}>
-                <div className="s-idx">{String(i + 1).padStart(2, '0')}</div>
-                <div>
-                  <label htmlFor={`beat-${c.id}`}>Own it label</label>
-                  <input id={`beat-${c.id}`} className="s-in" value={c.beat}
-                    onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, beat: e.target.value } : x))} />
-                </div>
-                <div>
-                  <label htmlFor={`full-${c.id}`}>Script — one line per delivery line</label>
-                  <textarea id={`full-${c.id}`} className="s-ta" value={c.fullText.join('\n')}
-                    onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, fullText: e.target.value.split('\n') } : x))} />
-                  <label htmlFor={`cue-${c.id}`} style={{ marginTop: 8 }}>Cue</label>
-                  <textarea id={`cue-${c.id}`} className="s-ta" value={c.cueText.join('\n')}
-                    onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, cueText: e.target.value.split('\n') } : x))} />
-                </div>
-                <div>
-                  <label htmlFor={`speak-${c.id}`}>Speak</label>
-                  <input id={`speak-${c.id}`} className="s-in" type="number" step="0.1" min="0" value={c.speakDuration}
-                    onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, speakDuration: Number(e.target.value) } : x))} />
-                </div>
-                <div>
-                  <label htmlFor={`hold-${c.id}`}>Hold</label>
-                  <input id={`hold-${c.id}`} className="s-in" type="number" step="0.1" min="0" value={c.holdDuration}
-                    onChange={(e) => saveScore(score.map((x) => x.id === c.id ? { ...x, holdDuration: Number(e.target.value) } : x))} />
-                </div>
-              </div>
-            ))}
-            <div className="s-btns" style={{ marginTop: 26 }}>
-              <button type="button" className="s-btn" onClick={() => setEditing(false)}>Done</button>
-              <button type="button" className="s-btn" onClick={resetScore}>Reset to default script</button>
+          {next && (
+            <div className="s-next" aria-hidden>
+              <p className="lbl">Next</p>
+              <p className="h">{next.heading}</p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
-        {/* ── Pre-roll ─────────────────────────────────────────────────── */}
-        {phase === 'preroll' && (
-          <div className="s-count" style={{ opacity: count === 0 ? 0 : 1 }}>{count || ''}</div>
-        )}
+        <div className="s-prog" aria-hidden>
+          {SCORE.map((c, i) => <i key={c.id} className={i <= index ? 'on' : undefined} />)}
+        </div>
 
-        {/* ── The take ─────────────────────────────────────────────────── */}
-        {performing && (
-          <>
-            <div className="s-prog" style={{ width: `${((index + 1) / score.length) * 100}%`, opacity: phase === 'run' ? 0.5 : 0 }} />
-
-            {phase === 'run' && card && settings.timing && (
-              <p className="s-time">
-                {card.beat} · {(card.speakDuration / settings.pace).toFixed(1)}s · {index + 1} / {score.length}
-              </p>
-            )}
-
-            <div className="s-stage" ref={stage} aria-live="polite">
-              {phase === 'run' && card && (
-                <>
-                  {/* The thought being spoken. Nothing sits above it: the space
-                      between here and the lens is kept empty on purpose. */}
-                  <div className="s-now" key={card.id}>
-                    {settings.mode === 'script' && (
-                      <div className="s-lines">
-                        {card.fullText.map((line, i) => (
-                          <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
-                        ))}
-                      </div>
-                    )}
-                    {settings.mode === 'cue' && (
-                      <div className="s-cue">
-                        <p className="lead">{card.cueText[0]}</p>
-                        {card.cueText.slice(1).map((a, i) => <span className="anchor" key={i}>{a}</span>)}
-                      </div>
-                    )}
-                    {settings.mode === 'own' && (
-                      <div className="s-own"><p className="i1">{card.beat}</p></div>
-                    )}
-                  </div>
-
-                  {/* Where the sentence is going, always present and dim. */}
-                  {next && (
-                    <div className="s-next" aria-hidden key={`n${next.id}`}>
-                      {settings.mode === 'script' && (
-                        <div className="s-lines">
-                          {next.fullText.map((line, i) => (
-                            <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
-                          ))}
-                        </div>
-                      )}
-                      {settings.mode === 'cue' && <div className="s-cue"><p className="lead">{next.cueText[0]}</p></div>}
-                      {settings.mode === 'own' && <div className="s-own"><p className="i1">{next.beat}</p></div>}
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* Last hold done: the words leave and nothing replaces them, so
-                  the eye stays in the lens. */}
-              {phase === 'fading' && card && (
-                <div className="s-card out" style={{ transitionDuration: `${ENDING_MS}ms` }}>
-                  {settings.mode === 'script' && (
-                    <div className="s-lines">
-                      {card.fullText.map((line, i) => (
-                        <span className="ln" key={i}>{renderLine(line, settings.guides)}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <div className={`s-chrome${chromeOn ? '' : ' hidden'}`}>
-              <div className="s-btns">
-                <button type="button" className="s-btn" onClick={() => setPlaying((p) => !p)}>{playing ? 'Pause' : 'Play'}</button>
-                <button type="button" className="s-btn" onClick={() => step(-1)}>Prev</button>
-                <button type="button" className="s-btn" onClick={() => step(1)}>Next</button>
-                <button type="button" className="s-btn" onClick={restart}>Restart</button>
-                <button type="button" className="s-btn" onClick={toggleFullscreen}>Fullscreen</button>
-              </div>
-              <div className="s-btns">
-                {PACES.map((p) => (
-                  <button key={p} type="button" className="s-btn" aria-pressed={settings.pace === p} onClick={() => set('pace', p)}>{fmtPace(p)}x</button>
-                ))}
-                {(['script', 'cue', 'own'] as Mode[]).map((m) => (
-                  <button key={m} type="button" className="s-btn" aria-pressed={settings.mode === m} onClick={() => set('mode', m)}>
-                    {m === 'own' ? 'Own it' : m}
-                  </button>
-                ))}
-              </div>
-              <div className="s-btns">
-                {FADES.map((f) => (
-                  <button key={f} type="button" className="s-btn" aria-pressed={settings.fade === f} onClick={() => set('fade', f)}>
-                    {fmtFade(f)}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
+        <div className={`s-chrome${chromeOn ? '' : ' off'}`}>
+          <span className="s-count">{String(index + 1).padStart(2, '0')} / {String(SCORE.length).padStart(2, '0')}</span>
+          <span className="s-btns">
+            <button type="button" className="s-btn" onClick={() => { go(-1); wake(); }} disabled={atStart}>
+              Back
+            </button>
+            <button type="button" className="s-btn" onClick={() => { go(1); wake(); }} disabled={atEnd}>
+              Next
+            </button>
+          </span>
+        </div>
       </div>
     </>
   );
